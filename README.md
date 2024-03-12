@@ -1,6 +1,6 @@
-# 🌟 Cugola 🌟
+# 🌟 🌟
 
-Benvenuti nel repository Cugola! Questo progetto è dedicato a...
+Benvenuti nel repository! Questo progetto è dedicato a...
 
 [Inserire una breve descrizione del progetto qui]
 
