@@ -76,7 +76,7 @@ public class GameField {
     }
 
     public void insertCard(PlayCard card, int x, int y){
-        if( !checkPlacing( x, y) ) System.out.println("ERROR: YOU CANT PLACE THE CARD HERE");
+        if( !checkPlacing( x, y ) ) System.out.println("ERROR: YOU CANT PLACE THE CARD HERE");
 
     }
 
@@ -88,14 +88,9 @@ public class GameField {
     }
 
     public boolean checkPlacing(int x, int y){
-        if ( !field[x][y].isEmpty() ){
-            AnglesEnum cell_value = field[x][y].getValue();
-            switch (cell_value) {
-                case "NONE":
-                    return 0;
-                case ""
-
-            }
+        if ( (!field[x][y].isEmpty() && field[x][y].getValue().equals(AnglesEnum.NONE)) &&
+             (!field[x][y].isEmpty() && field[x][y].getValue().equals(AnglesEnum.NONE))
+                ) return false;
         }
     }
 }

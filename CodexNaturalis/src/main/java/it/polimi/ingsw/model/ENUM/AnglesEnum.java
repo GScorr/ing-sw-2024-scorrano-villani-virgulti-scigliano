@@ -1,8 +1,13 @@
 package it.polimi.ingsw.model.ENUM;
-import it.polimi.ingsw.model.ENUM.CentralEnum;
 
 
-public enum AnglesEnum  {
+
+public enum AnglesEnum{
+    ANIMAL,
+    MUSHROOMS,
+    INSECTS,
+    PLANT,
+    NONE,
     EMPTY,
     PAPER,
     PEN,
