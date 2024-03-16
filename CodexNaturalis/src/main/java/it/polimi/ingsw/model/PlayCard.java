@@ -20,31 +20,28 @@ public class PlayCard {
         this.central_resources = central_resources;
     }
 
-    /*
-    * flipped = false => abilito getFrontSide
-    * flipped = true => abilito getBackSide*/
+
     public void flipCard(boolean flipped){
         this.flipped = flipped;
     }
 
-    /*
-    * flipped = false => result.contains(front_side)
-    * flipped = true => result=null
-    * throw new Error
-    * */
-    public Side getFrontSide() {
+
+    private Side getFrontSide() {
         return front_side;
     }
 
-    /*
-     * flipped = true => result.contains(back_side)
-     * flipped = false => result=null
-     * throw new Error
-     * */
-    public Side getBackSide() {
+
+    private Side getBackSide() {
         return back_side;
     }
-
+    public  Side getSide(){
+        if( !flipped){
+            return getFrontSide();
+        }
+        else{
+            return getBackSide();
+        }
+    }
     public CentralEnum getCentralResources() {
         return central_resources;
     }
