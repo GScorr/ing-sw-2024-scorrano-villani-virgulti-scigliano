@@ -5,7 +5,7 @@ public class Game {
 
     private int numero2;
 
-    private int numero52;
+    private int numero3;
 
-
+    private int numero4;
 }
