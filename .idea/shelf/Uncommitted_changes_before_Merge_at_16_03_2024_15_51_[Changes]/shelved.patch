@@ -1,0 +1,8 @@
+Index: prova.txt
+===================================================================
+diff --git a/prova.txt b/prova.txt
+deleted file mode 100644
+--- a/prova.txt	(revision 590d22ef7ebac50431cab276a0b07791ef3eaef2)
++++ /dev/null	(revision 590d22ef7ebac50431cab276a0b07791ef3eaef2)
+@@ -1,1 +0,0 @@
+-prova
