@@ -21,22 +21,26 @@ public class PlayCard {
     }
 
     /*
-    * flipped = true => abilito getFrontSide
-    * flipped = false => abilito getBackSide*/
+    * flipped = false => abilito getFrontSide
+    * flipped = true => abilito getBackSide*/
     public void flipCard(boolean flipped){
         this.flipped = flipped;
     }
 
     /*
-    * flipped = true => result.contains(front_side)
-    * flipped = false => result=null
+    * flipped = false => result.contains(front_side)
+    * flipped = true => result=null
     * throw new Error
     * */
-
     public Side getFrontSide() {
         return front_side;
     }
 
+    /*
+     * flipped = true => result.contains(back_side)
+     * flipped = false => result=null
+     * throw new Error
+     * */
     public Side getBackSide() {
         return back_side;
     }
