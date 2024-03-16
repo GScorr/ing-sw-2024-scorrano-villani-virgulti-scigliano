@@ -21,12 +21,28 @@ public class Player {
     private List<PlayCard> cards_in_hand = new ArrayList<>();
     private PlayerState player_state;
 
-    public Player(boolean isFirst, ColorsEnum color, List<PlayCard> cards_in_hand, PlayerState player_state) {
+    public Player(boolean isFirst, ColorsEnum color, List<PlayCard> cards_in_hand) {
         this.isFirst = isFirst;
         this.color = color;
         this.cards_in_hand = cards_in_hand;
-        this.player_state = player_state;
+        this.player_state = PlayerState.NOT_INITIALIZED;
     }
 
+    public Player nextPlayerState(){
+        switch(player_state){
+            case NOT_INITIALIZED:
+                this.player_state = PlayerState.PLACE_CARD;
+            case BEGIN :
+                if(this.isFirst){
+                    this.player_state = PlayerState.PLACE_CARD;
+                }else {
+                    this.player_state = PlayerState.WAIT_TURN;
+                }
+            case PLACE_CARD:
+                    this.player_state = PlayerState.DRAW_CARD;
+            case DRAW_CARD:
+                this.player_state = PlayerState.WAIT_TURN;
+        }
+    }
 
 }
