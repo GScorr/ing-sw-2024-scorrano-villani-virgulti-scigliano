@@ -7,4 +7,8 @@ public class Player {
     private int num(){
         return 1;
     }
+
+    private int num2(){
+        return 1;
+    }
 }
