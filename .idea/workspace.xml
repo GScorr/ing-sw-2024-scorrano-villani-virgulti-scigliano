@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df77a2ab-11ed-43bd-a487-90746771f142" name="Changes" comment="Prova da Franci testo">
+    <list default="true" id="df77a2ab-11ed-43bd-a487-90746771f142" name="Changes" comment="Elimina prova">
+      <change afterPath="$PROJECT_DIR$/CodexNaturalis/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +31,6 @@
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">
@@ -61,6 +62,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Francesco-Virgulti&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/francescovirgulti/Desktop/progetto_ingegneriaSoftware/ing-sw-2024-scorrano-villani-virgulti-scigliano&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -69,6 +71,14 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ing-sw-2024-scorrano-villani-virgulti-scigliano" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -80,7 +90,9 @@
       <workItem from="1710256691143" duration="517000" />
       <workItem from="1710257327443" duration="300000" />
       <workItem from="1710258853231" duration="526000" />
-      <workItem from="1710599442047" duration="1689000" />
+      <workItem from="1710599442047" duration="1984000" />
+      <workItem from="1710601707199" duration="72000" />
+      <workItem from="1710601783776" duration="40000" />
     </task>
     <task id="LOCAL-00001" summary="sergio">
       <option name="closed" value="true" />
@@ -130,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710600756897</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Elimina prova">
+      <option name="closed" value="true" />
+      <created>1710601303476</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1710601303476</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,7 +182,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -180,6 +200,7 @@
     <MESSAGE value="yyyyyyyyyyaaaaaaa" />
     <MESSAGE value="Prova da Franci" />
     <MESSAGE value="Prova da Franci testo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Prova da Franci testo" />
+    <MESSAGE value="Elimina prova" />
+    <option name="LAST_COMMIT_MESSAGE" value="Elimina prova" />
   </component>
 </project>
