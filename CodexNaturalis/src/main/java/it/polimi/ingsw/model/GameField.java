@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.Card.PlayCard;
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
 import it.polimi.ingsw.model.ENUM.CentralEnum;
 
@@ -178,12 +179,19 @@ public class GameField {
         return false;
     }
     public void resourceCountChange(PlayCard card, int x, int y){
+
+        //Add for each side and for the central resource(if it exist) their counter
         addOne( card.getCentralResources() );
         addOne( card.getSide().getAngleLeftUp() );
         addOne( card.getSide().getAngleLeftDown() );
         addOne( card.getSide().getAngleRightDown() );
         addOne( card.getSide().getAngleRightUp() );
 
+        // sub 1 to each \old field if they are not empty --> the sub function doesn't sub anything if the value is NONE or EMPTY
+        if( !field[x][y].isEmpty() )     subOne( field[x][y].getValue() );
+        if( !field[x+1][y].isEmpty() )   subOne( field[x+1][y].getValue() );
+        if( !field[x][y+1].isEmpty() )   subOne( field[x][y+1].getValue() );
+        if( !field[x+1][y+1].isEmpty() ) subOne( field[x+1][y+1].getValue() );
     }
 }
 
