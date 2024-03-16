@@ -75,5 +75,22 @@ public class GameField {
         return field[x][y].getCard();
     }
 
+    public void insertCard(PlayCard card, int x, int y){
+        if( !checkPlacing( x, y ) ) System.out.println("ERROR: YOU CANT PLACE THE CARD HERE");
 
+    }
+
+    public int addOne(int val){
+        return val+1;
+    }
+    public int subOne(int val){
+        return val-1;
+    }
+
+    public boolean checkPlacing(int x, int y){
+        if ( (!field[x][y].isEmpty() && field[x][y].getValue().equals(AnglesEnum.NONE)) &&
+             (!field[x][y].isEmpty() && field[x][y].getValue().equals(AnglesEnum.NONE))
+                ) return false;
+        }
+    }
 }
