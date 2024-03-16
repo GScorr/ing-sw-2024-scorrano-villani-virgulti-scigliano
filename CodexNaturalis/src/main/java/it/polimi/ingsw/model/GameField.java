@@ -91,19 +91,19 @@ public class GameField {
 
         field[x][y].setFilled(true);
         field[x][y].setCard(card);
-        field[x][y].setValue( card.getSide().angle_left_up );
+        field[x][y].setValue( card.getSide().getAngleLeftUp() );
 
         field[x+1][y].setFilled(true);
         field[x+1][y].setCard(card);
-        field[x+1][y].setValue( card.getSide().angle_right_up );
+        field[x+1][y].setValue( card.getSide().getAngleRightUp() );
 
         field[x][y+1].setFilled(true);
         field[x][y+1].setCard(card);
-        field[x][y+1].setValue( card.getSide().angle_left_down );
+        field[x][y+1].setValue( card.getSide().getAngleLeftDown() );
 
         field[x+1][y+1].setFilled(true);
         field[x+1][y+1].setCard(card);
-        field[x+1][y+1].setValue( card.getSide().angle_right_down );
+        field[x+1][y+1].setValue( card.getSide().getAngleRightDown() );
 
     }
 
