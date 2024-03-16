@@ -1,8 +1,7 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.ENUM.ColorsEnum;
 import it.polimi.ingsw.model.ENUM.PlayerState;
-import it.polimi.ingsw.model.PlayCard;
-import it.polimi.ingsw.model.GameField;
+import it.polimi.ingsw.model.Card.PlayCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +67,8 @@ public class Player {
             System.out.println("ERROR: IT'S NOT YOUR TURN");
         }
     }
+
+
 
 
 

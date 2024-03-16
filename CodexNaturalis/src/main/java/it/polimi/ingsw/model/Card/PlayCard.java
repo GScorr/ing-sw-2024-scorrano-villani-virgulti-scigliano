@@ -1,5 +1,4 @@
-package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.Side;
+package it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.ENUM.CentralEnum;
 
 /*
@@ -13,7 +12,10 @@ public class PlayCard {
     private boolean flipped;
     private final CentralEnum central_resources;
 
+
+
     public PlayCard(Side front_side, Side back_side, boolean flipped, CentralEnum central_resources) {
+        // Chiamo il costruttore di default per inizializzare le variabili
         this.front_side = front_side;
         this.back_side = back_side;
         flipCard(flipped);
@@ -42,7 +44,10 @@ public class PlayCard {
             return getBackSide();
         }
     }
+
     public CentralEnum getCentralResources() {
-        return central_resources;
+        if(flipped){
+        return central_resources;}
+        else{return null;}
     }
 }

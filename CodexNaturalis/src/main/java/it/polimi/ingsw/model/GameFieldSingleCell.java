@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.Card.PlayCard;
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
 
 //@Davide

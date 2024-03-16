@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.ENUM.AnglesEnum;
+import it.polimi.ingsw.model.Card.PlayCard;
 
 //Class for the matrix field of each player
 /*@Davide

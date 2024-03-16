@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
 
 /*
