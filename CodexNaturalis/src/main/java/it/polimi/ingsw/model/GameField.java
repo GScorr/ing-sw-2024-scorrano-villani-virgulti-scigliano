@@ -5,11 +5,12 @@ import it.polimi.ingsw.model.ENUM.AnglesEnum;
 import it.polimi.ingsw.model.ENUM.CentralEnum;
 
 //Class for the matrix field of each player
-/*@Davide
+/*@Davide   XXX= DONE
 * TODO:
-*  - implementa metodo check placeable
-*  - implementa metodo add e sub risorse
+*  - finisci metodo check placeable
+*  - implementa metodo add e sub risorse  XXX
 *  - gestione errori
+*  - implementa gestione punti per carte risorsa e non
 * */
 public class GameField {
     private GameFieldSingleCell[][] field;
