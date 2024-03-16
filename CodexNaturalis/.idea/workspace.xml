@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Modifica classe Player -prova">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Modifica classe Game - prova">
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +41,6 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
@@ -84,13 +83,13 @@
       <option name="project" value="LOCAL" />
       <updated>1710604736560</updated>
     </task>
-    <task id="LOCAL-00002" summary="Modifica classe Player -prova">
+    <task id="LOCAL-00002" summary="Modifica classe Game - prova">
       <option name="closed" value="true" />
-      <created>1710605060964</created>
+      <created>1710604974768</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1710605060964</updated>
+      <updated>1710604974768</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
@@ -108,8 +107,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commit di prova" />
-    <MESSAGE value="Crezione classe Player -prova" />
-    <MESSAGE value="Modifica classe Player -prova" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifica classe Player -prova" />
+    <MESSAGE value="Modifica classe Game - prova" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifica classe Game - prova" />
   </component>
 </project>
