@@ -1,0 +1,10 @@
+package it.polimi.ingsw.model.ENUM;
+
+public enum PlayerState {
+    WAIT_TURN,
+    PLACE_CARD,
+    DRAW_CARD,
+    CHOOSE_FIRST_CARD,
+    CHOOSE_GOAL
+
+}
