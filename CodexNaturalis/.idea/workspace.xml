@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiunta commento &#10;classe PlayCard">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiunta enumerazione AnglesEnum&#10;modifica classe Player =&gt; inizializzazione stato giocatore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/ENUM/AnglesEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/ENUM/AnglesEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/ENUM/PlayerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/ENUM/PlayerState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/PlayerStateEnum.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1710604170089</updated>
-      <workItem from="1710609432407" duration="6798000" />
+      <workItem from="1710609432407" duration="7704000" />
     </task>
     <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
       <option name="closed" value="true" />
@@ -158,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710615064770</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="aggiunta enumerazione AnglesEnum&#10;modifica classe Player =&gt; inizializzazione stato giocatore">
+      <option name="closed" value="true" />
+      <created>1710616293732</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1710616293733</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +202,7 @@
     <MESSAGE value="creazione Classi ENUMERAZIONE" />
     <MESSAGE value="creazione&#10;Class PlayCard&#10;Class Side&#10;Class Player&#10;class Goal" />
     <MESSAGE value="aggiunta commento &#10;classe PlayCard" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunta commento &#10;classe PlayCard" />
+    <MESSAGE value="aggiunta enumerazione AnglesEnum&#10;modifica classe Player =&gt; inizializzazione stato giocatore" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunta enumerazione AnglesEnum&#10;modifica classe Player =&gt; inizializzazione stato giocatore" />
   </component>
 </project>
