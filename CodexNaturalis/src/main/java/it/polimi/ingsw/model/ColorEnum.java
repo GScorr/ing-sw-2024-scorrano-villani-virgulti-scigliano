@@ -1,4 +1,4 @@
 package it.polimi.ingsw.model;
 
-public enum Color_Enum {
+public enum ColorEnum {
 }
