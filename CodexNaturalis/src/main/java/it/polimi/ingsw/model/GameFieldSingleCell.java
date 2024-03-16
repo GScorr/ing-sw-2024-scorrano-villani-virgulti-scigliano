@@ -15,7 +15,7 @@ public class GameFieldSingleCell {
         this.value = value;
     }
     public boolean isEmpty() {
-        return filled;
+        return !filled;
     }
     public void setFilled(boolean filled) {
         this.filled = filled;

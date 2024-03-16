@@ -7,8 +7,8 @@ public enum AnglesEnum{
     MUSHROOMS,
     INSECTS,
     PLANT,
-    NONE,
-    EMPTY,
+    NONE,    //The angle doesn't exist, you can't put a card on top of here
+    EMPTY,  // angle exist but it's empty, it doesn't have any resources or bonus
     PAPER,
     PEN,
     FEATHER

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
+import it.polimi.ingsw.model.ENUM.CentralEnum;
 
 //Class for the matrix field of each player
 /*@Davide
@@ -87,7 +88,7 @@ public class GameField {
 
         if( !checkPlacing( x, y ) ) System.out.println("ERROR: YOU CANT PLACE THE CARD HERE");
 
-        resourceCountChange(x, y);
+        resourceCountChange(card, x, y);
 
         field[x][y].setFilled(true);
         field[x][y].setCard(card);
@@ -106,21 +107,99 @@ public class GameField {
         field[x+1][y+1].setValue( card.getSide().getAngleRightDown() );
 
     }
-
-    public int addOne(int val){
-        return val+1;
-    }
-    public int subOne(int val){
-        return val-1;
-    }
-
-
-    /*
-    * */
-    public boolean checkPlacing(int x, int y){
-        return false;
+    public void addOne(CentralEnum val){
+        switch ( val ){
+            case ANIMAL:
+                num_of_animal++; break;
+            case MUSHROOMS:
+                num_of_mushroom++; break;
+            case PLANT:
+                num_of_plant++; break;
+            case INSECTS:
+                num_of_insect++; break;
+            case NONE:
+                break;
         }
-    public void resourceCountChange(int x, int y){
-        return ;
+    }
+    public void addOne(AnglesEnum val){
+        switch ( val ){
+            case ANIMAL:
+                num_of_animal++; break;
+            case MUSHROOMS:
+                num_of_mushroom++; break;
+            case PLANT:
+                num_of_plant++; break;
+            case INSECTS:
+                num_of_insect++; break;
+            case PEN:
+                num_of_pen++; break;
+            case PAPER:
+                num_of_paper++; break;
+            case FEATHER:
+                num_of_feather++; break;
+            case NONE:
+            case EMPTY:
+                break;
+        }
+    }
+    public void subOne(AnglesEnum val){
+        switch ( val ){
+            case ANIMAL:
+                num_of_animal--; break;
+            case MUSHROOMS:
+                num_of_mushroom--; break;
+            case PLANT:
+                num_of_plant--; break;
+            case INSECTS:
+                num_of_insect--; break;
+            case PEN:
+                num_of_pen--; break;
+            case PAPER:
+                num_of_paper--; break;
+            case FEATHER:
+                num_of_feather--; break;
+        }
+    }
+
+
+    // Function to check if the card can be placed, Return false if you can't, true if you can
+    public boolean checkPlacing(int x, int y){
+        //TODO: Check that you have the requirements to put the card
+        //Check that the card we are trying to place doesn't completely cover another card
+        if( field[x][y].getCard().equals( field[x+1][y+1].getCard() )) return false;
+        // Check that there is at least one card in the space
+        if( !field[x][y].isEmpty() || !field[x+1][y].isEmpty() || !field[x][y+1].isEmpty() || !field[x+1][y+1].isEmpty()) {
+            //Check if the card(s) that exist(s) have a valid angle that is not NONE --> check what is NONE in AnglesEnum  (if you don't understand this there is an equivalent if in the end**)
+            return (field[x][y].isEmpty() || !field[x][y].getValue().equals(AnglesEnum.NONE)) &&
+                    (field[x + 1][y].isEmpty() || !field[x + 1][y].getValue().equals(AnglesEnum.NONE)) &&
+                    (field[x][y + 1].isEmpty() || !field[x][y + 1].getValue().equals(AnglesEnum.NONE)) &&
+                    (field[x + 1][y + 1].isEmpty() || !field[x + 1][y + 1].getValue().equals(AnglesEnum.NONE));
+        }
+        return false;
+    }
+    public void resourceCountChange(PlayCard card, int x, int y){
+        addOne( card.getCentralResources() );
+        addOne( card.getSide().getAngleLeftUp() );
+        addOne( card.getSide().getAngleLeftDown() );
+        addOne( card.getSide().getAngleRightDown() );
+        addOne( card.getSide().getAngleRightUp() );
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+/* Equivalent if
+if( ( !field[x][y].isEmpty() && field[x][y].getValue().equals( AnglesEnum.NONE) ) ||
+        ( !field[x+1][y].isEmpty() && field[x+1][y].getValue().equals( AnglesEnum.NONE) ) ||
+        ( !field[x][y+1].isEmpty() && field[x][y+1].getValue().equals( AnglesEnum.NONE) ) ||
+        ( !field[x+1][y+1].isEmpty() && field[x+1][y+1].getValue().equals( AnglesEnum.NONE) ) ) return false;
+        return true;
+ */
