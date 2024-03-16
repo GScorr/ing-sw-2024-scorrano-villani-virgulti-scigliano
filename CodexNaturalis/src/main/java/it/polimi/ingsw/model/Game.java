@@ -6,4 +6,6 @@ public class Game {
     private int numero2;
 
     private int numero52;
+
+
 }

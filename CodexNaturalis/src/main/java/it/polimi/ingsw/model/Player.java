@@ -11,4 +11,8 @@ public class Player {
     private int num2(){
         return 1;
     }
+
+    private int num3(){
+        return 1;
+    }
 }
