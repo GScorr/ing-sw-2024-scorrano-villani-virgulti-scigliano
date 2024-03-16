@@ -5,5 +5,8 @@ import java.util.Deque;
 abstract class Deck {
     Deque<PlayCard> cards = new ArrayDeque<>();
 
+    public Deck(Deque<PlayCard> cards){
+        this.cards = cards;
+    }
 
 }
