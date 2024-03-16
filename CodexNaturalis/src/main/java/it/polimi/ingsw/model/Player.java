@@ -12,7 +12,6 @@ import java.util.List;
 * TODO:
 *   - al costruttore passo una lista, questa lista può essere direttamente copiata nella mia variabile oppure devo prima
 *    copiarla in una lista ausiliaria ?
-*   - impostare il metodo place()
 *   - impostare il metodo peach()
 *   - impostare il metodo peakGoal()
 *   - impostare il metodo chooseSideFirstSide()
@@ -69,6 +68,9 @@ public class Player {
             System.out.println("ERROR: IT'S NOT YOUR TURN");
         }
     }
+
+
+
 
 
 
