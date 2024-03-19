@@ -26,6 +26,7 @@ public class Goal {
     public GoalStrategy getGoalType() {
         return goalType;
     }
+    //
 
     public int numPoints(GameField field){
         return goalType.totalPoints(field,points);
