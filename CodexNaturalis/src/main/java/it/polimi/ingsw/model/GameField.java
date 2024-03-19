@@ -92,6 +92,7 @@ public class GameField {
 
         resourceCountChange(card, x, y);
 
+        //insert card in the 4 cells
         field[x][y].setFilled(true);
         field[x][y].setCard(card);
         field[x][y].setValue( card.getSide().getAngleLeftUp() );
@@ -167,8 +168,8 @@ public class GameField {
     // Function to check if the card can be placed, Return false if you can't, true if you can
     public boolean checkPlacing(int x, int y){
         //TODO: Check that you have the requirements to put the card
-        //Check that the card we are trying to place doesn't completely cover another card
-        if( field[x][y].getCard().equals( field[x+1][y+1].getCard() )) return false;
+        //Check that the card we are trying to place doesn't completely cover another card TODO: aggiungi check 2 angoli alto e basso
+        if( field[x][y].getCard().equals( field[x+1][y+1].getCard() ) ) return false;
         // Check that there is at least one card in the space
         if( !field[x][y].isEmpty() || !field[x+1][y].isEmpty() || !field[x][y+1].isEmpty() || !field[x+1][y+1].isEmpty()) {
             //Check if the card(s) that exist(s) have a valid angle that is not NONE --> check what is NONE in AnglesEnum  (if you don't understand this there is an equivalent if in the end**)

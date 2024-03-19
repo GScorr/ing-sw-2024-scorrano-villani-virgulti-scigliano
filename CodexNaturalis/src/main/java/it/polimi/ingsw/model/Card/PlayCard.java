@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.ENUM.CentralEnum;
 * @Francesco_Virgulti
 * TODO: - se flipp = true =>  getFrontalSide || flipp = false => getBackSide
 *       - implementare metodo place()
+*       - implementa il central enum tramite side => su front_side sarà sempre ANGLE_ENUM.NULL se sarà back_side allora sarà  ANGLE_ENUM...
 */
 public class PlayCard {
     private final Side front_side ;

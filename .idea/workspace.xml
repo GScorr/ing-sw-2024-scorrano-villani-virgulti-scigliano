@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df77a2ab-11ed-43bd-a487-90746771f142" name="Changes" comment="creazione CodexNaturalis">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodexNaturalis/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CodexNaturalis/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +34,7 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="ecc20fb7-c1b0-4603-a39b-46d0c1734f8f" />
+        <option name="accountId" value="3a259a6d-dbc4-4e87-a710-6c6481997434" />
         <option name="url" value="https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git" />
       </UrlAndAccount>
     </option>
@@ -60,9 +60,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/mirko/Desktop/ING-SW/CodexNaturalis",
+    "last_opened_file_path": "/Users/francescovirgulti/Desktop/progetto_ingegneriaSoftware/ing-sw-2024-scorrano-villani-virgulti-scigliano",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -105,8 +104,6 @@
       <workItem from="1710602283024" duration="35000" />
       <workItem from="1710602326098" duration="505000" />
       <workItem from="1710603366860" duration="226000" />
-      <workItem from="1710839683965" duration="415000" />
-      <workItem from="1710840122428" duration="30000" />
     </task>
     <task id="LOCAL-00001" summary="sergio">
       <option name="closed" value="true" />
