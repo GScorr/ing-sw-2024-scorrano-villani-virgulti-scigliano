@@ -20,8 +20,8 @@ public class Player {
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand = new ArrayList<>();
     private PlayerState player_state;
-
     private GameField game_field;
+
 
     public Player(boolean isFirst, ColorsEnum color, List<PlayCard> cards_in_hand, GameField game_field) {
         this.isFirst = isFirst;
@@ -57,7 +57,7 @@ public class Player {
 
     /*
     *if (player_state != PLACE_CARD*/
-    public void placeCard(int index,boolean flipped, int x, int y){
+    public void placeCard(int index, boolean flipped, int x, int y){
         if(player_state == PlayerState.PLACE_CARD){
             PlayCard playing_card =  cards_in_hand.get(index);
             playing_card.flipCard(flipped);
