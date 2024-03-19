@@ -10,12 +10,16 @@ import it.polimi.ingsw.model.ENUM.Costraint;
 * */
 public class GoldCard extends ResourceCard{
     private final Costraint costraint;
-    public GoldCard(Side front_side, Side back_side, boolean flipped, CentralEnum central_resources, int point, Costraint costraint){
-        super( front_side, back_side ,flipped,  central_resources,  point);
+    public GoldCard(Side front_side, Side back_side, boolean flipped, int point, Costraint costraint){
+        super( front_side, back_side ,flipped,  point);
         this.costraint = costraint;
     }
+
+    public  String getType(){return "Gold";}
+
 
     public Costraint getCostraint() {
         return costraint;
     }
+
 }

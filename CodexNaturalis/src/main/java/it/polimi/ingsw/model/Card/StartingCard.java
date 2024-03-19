@@ -1,14 +1,17 @@
 package it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.ENUM.CentralEnum;
+
 import it.polimi.ingsw.model.ENUM.Costraint;
 
 /*
-* @Francesco_Virgulti
-* TODO: - se flipp = true =>  getFrontalSide || flipp = false => getBackSide
-*       - implementare metodo place()
+* @Virgulti Francesco
 *
-*/
-public abstract class  PlayCard {
+* La StartingCard NON è trattata come una carta normale.
+* Ha comunque un BackSide e un FronSide
+* front_side è simile al front_side delle carte normali
+* il back_side è simile al back_side delle carte normali ma al suo interno è inizializzato il central_resources_list, cioè l'elenco dei central_resources
+*
+* */
+public class StartingCard {
     private final Side front_side ;
     private final  Side back_side;
     private boolean flipped;
@@ -16,7 +19,7 @@ public abstract class  PlayCard {
 
 
 
-    public PlayCard(Side front_side, Side back_side, boolean flipped) {
+    public StartingCard(Side front_side, Side back_side, boolean flipped) {
         // Chiamo il costruttore di default per inizializzare le variabili
         this.front_side = front_side;
         this.back_side = back_side;
@@ -38,6 +41,7 @@ public abstract class  PlayCard {
     private Side getBackSide() {
         return back_side;
     }
+
     public  Side getSide(){
         if( !flipped){
             return getFrontSide();
@@ -47,14 +51,10 @@ public abstract class  PlayCard {
         }
     }
 
-    //override sulle sottoclassi per il metodo
-    public abstract String getType();
 
-    //override sulle sottoclassi per il point
-    public abstract int getPoint();
 
-    //override sulle sottoclassi per il costraint -> Resource Card tornerà NONE
-    public abstract Costraint getCostraint();
+
+
 
 
 }
