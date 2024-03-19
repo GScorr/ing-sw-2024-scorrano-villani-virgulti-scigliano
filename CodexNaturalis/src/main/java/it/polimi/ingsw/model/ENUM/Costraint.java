@@ -33,5 +33,6 @@ public enum Costraint {
     THREEINS_ONEPLANT,
     THREEINT_ONEAMUSH,
     FIVEINS,
+    NONE
 
 }

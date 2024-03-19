@@ -1,30 +1,24 @@
 package it.polimi.ingsw.model.Card;
+
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
 import it.polimi.ingsw.model.ENUM.CentralEnum;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/*
-*  @Francesco_Virgulti
-* central_resources_list è passato dal main solamente se la carta è una StartingCard
-* In tutte le altre carte central_resources_list sarà nullo
-* Nel front_side della StartingCard central_resources_list sarà nullo
-* */
-public class Side {
+public class StartingCardBackSide {
     private final AnglesEnum angle_right_up;
     private final AnglesEnum angle_right_down;
     private final AnglesEnum angle_left_up;
     private final AnglesEnum angle_left_down;
-    private final CentralEnum central_resource;
     private final List<CentralEnum> central_resources_list;
 
-    public Side(AnglesEnum angle_right_up, AnglesEnum angle_right_down, AnglesEnum angle_left_up, AnglesEnum angle_left_down, CentralEnum central_resource, List<CentralEnum> central_resources_list) {
+    public StartingCardBackSide(AnglesEnum angle_right_up, AnglesEnum angle_right_down, AnglesEnum angle_left_up, AnglesEnum angle_left_down, List<CentralEnum> central_resources_list) {
         this.angle_right_up = angle_right_up;
         this.angle_right_down = angle_right_down;
         this.angle_left_up = angle_left_up;
         this.angle_left_down = angle_left_down;
-        this.central_resource= central_resource;
-        this.central_resources_list = central_resources_list;
+        this.central_resources_list= central_resources_list;
     }
 
     public AnglesEnum getAngleRightUp() {
@@ -43,7 +37,8 @@ public class Side {
         return angle_left_down;
     }
 
-    public CentralEnum getCentral_resource() {
-        return central_resource;
+    public List<CentralEnum> getCentral_resource() {
+        return central_resources_list;
     }
+
 }

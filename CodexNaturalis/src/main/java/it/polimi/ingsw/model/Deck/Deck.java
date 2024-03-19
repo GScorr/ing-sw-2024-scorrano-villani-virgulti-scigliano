@@ -7,16 +7,24 @@ import java.util.Deque;
 * @Francesco Virgulti
 * TODO:
 *  -getNumber()
-*  -drawFromDeck()
 *  - Implementa anche le sottoclassi
 * */
 abstract class Deck {
     Deque<PlayCard> cards;
 
+    //il deck
     public Deck(Deque<PlayCard> cards){
         this.cards = cards;
     }
 
-    public abstract PlayCard getStack();
+
+    public PlayCard drawCard(){
+        return cards.pop();
+    };
+
+    public int getNumber(){
+        return cards.toArray().length;
+    }
+
 
 }
