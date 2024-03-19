@@ -19,7 +19,9 @@ public class GoldCard extends ResourceCard{
 
 
     public Costraint getCostraint() {
-        return costraint;
+
+        if(!super.flipped)return costraint;
+        else return Costraint.NONE;
     }
 
 }
