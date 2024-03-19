@@ -1,7 +1,7 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.MODEL;
 
-import it.polimi.ingsw.model.Card.PlayCard;
-import it.polimi.ingsw.model.ENUM.AnglesEnum;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 
 //@Davide
 // Class for the single cell present in the matrix of GameField

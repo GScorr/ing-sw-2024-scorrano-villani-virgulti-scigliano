@@ -1,6 +1,5 @@
-package it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.ENUM.CentralEnum;
-import it.polimi.ingsw.model.ENUM.Costraint;
+package it.polimi.ingsw.MODEL.Card;
+import it.polimi.ingsw.MODEL.ENUM.Costraint;
 
 /*
 * @Virgulti Francesco

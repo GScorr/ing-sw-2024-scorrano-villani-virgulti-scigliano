@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model.Deck;
+package it.polimi.ingsw.MODEL.DeckPackage;
 
-import it.polimi.ingsw.model.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 
 import java.util.List;
 
