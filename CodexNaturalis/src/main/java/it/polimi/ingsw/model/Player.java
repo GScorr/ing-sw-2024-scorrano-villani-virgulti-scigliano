@@ -1,4 +1,6 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.model.Card.GoldCard;
+import it.polimi.ingsw.model.Card.ResourceCard;
 import it.polimi.ingsw.model.Card.Side;
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
 import it.polimi.ingsw.model.ENUM.CentralEnum;
@@ -30,9 +32,9 @@ public class Player {
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
-    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY);
-    private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY);
-    private final PlayCard tc = new PlayCard(tc_front_side, tc_back_side,false, CentralEnum.NONE);
+    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    private final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
