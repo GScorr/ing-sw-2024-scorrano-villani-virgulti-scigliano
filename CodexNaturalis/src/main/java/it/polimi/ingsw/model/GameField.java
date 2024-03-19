@@ -94,7 +94,9 @@ public class GameField {
         resourceCountChange(card, x, y);
 
         //add the points to the player, based on the points of the card
-        if ( card instanceof ResourceCard ) player.addPoints(card.getPoint());
+        if ( card instanceof GoldCard ) {   }
+        else if ( card instanceof ResourceCard ) { player.addPoints(card.getPoint() ); }
+
 
 
         //insert card in the 4 cells
