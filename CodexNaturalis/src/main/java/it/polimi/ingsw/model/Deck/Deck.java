@@ -11,7 +11,7 @@ import java.util.Deque;
 *  - Implementa anche le sottoclassi
 * */
 abstract class Deck {
-    Deque<PlayCard> cards = new ArrayDeque<>();
+    Deque<PlayCard> cards;
 
     public Deck(Deque<PlayCard> cards){
         this.cards = cards;
