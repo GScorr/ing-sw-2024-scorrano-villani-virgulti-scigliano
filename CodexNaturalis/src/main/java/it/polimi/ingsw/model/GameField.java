@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.Card.GoldCard;
 import it.polimi.ingsw.model.Card.PlayCard;
+import it.polimi.ingsw.model.Card.ResourceCard;
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
 import it.polimi.ingsw.model.ENUM.CentralEnum;
 import it.polimi.ingsw.model.ENUM.Costraint;
@@ -93,6 +94,8 @@ public class GameField {
         resourceCountChange(card, x, y);
 
         //add the points to the player, based on the points of the card
+        if ( card instanceof ResourceCard ) player.addPoints(card.getPoint());
+
 
         //insert card in the 4 cells
         field[x][y].setFilled(true);
@@ -192,7 +195,7 @@ public class GameField {
     public void resourceCountChange(PlayCard card, int x, int y){
 
         //Add for each side and for the central resource(if it exist) their counter
-        addOne( card.getCentralResources() );
+        addOne( card.getSide().getCentral_resource() );
         addOne( card.getSide().getAngleLeftUp() );
         addOne( card.getSide().getAngleLeftDown() );
         addOne( card.getSide().getAngleRightDown() );
