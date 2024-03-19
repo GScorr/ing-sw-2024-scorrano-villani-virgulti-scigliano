@@ -16,15 +16,19 @@ public class Side {
     private final AnglesEnum angle_left_up;
     private final AnglesEnum angle_left_down;
     private final CentralEnum central_resource;
-    private final List<CentralEnum> central_resources_list;
+    private final CentralEnum central_resource2;
+    private final CentralEnum central_resource3;
 
-    public Side(AnglesEnum angle_right_up, AnglesEnum angle_right_down, AnglesEnum angle_left_up, AnglesEnum angle_left_down, CentralEnum central_resource, List<CentralEnum> central_resources_list) {
+
+    public Side(AnglesEnum angle_right_up, AnglesEnum angle_right_down, AnglesEnum angle_left_up, AnglesEnum angle_left_down, CentralEnum central_resource, CentralEnum central_resource2, CentralEnum central_resource3) {
         this.angle_right_up = angle_right_up;
         this.angle_right_down = angle_right_down;
         this.angle_left_up = angle_left_up;
         this.angle_left_down = angle_left_down;
         this.central_resource= central_resource;
-        this.central_resources_list = central_resources_list;
+        this.central_resource2= central_resource2;
+        this.central_resource3= central_resource3;
+
     }
 
     public AnglesEnum getAngleRightUp() {
