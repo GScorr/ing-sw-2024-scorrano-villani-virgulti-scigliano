@@ -17,7 +17,8 @@ public class ResourceCard extends PlayCard {
     public  String getType(){return "Resource";}
 
     public int getPoint() {
-        return point;
+        if(!super.flipped) return point;
+        else return 0;
     }
     public Costraint getCostraint(){
         return Costraint.NONE;

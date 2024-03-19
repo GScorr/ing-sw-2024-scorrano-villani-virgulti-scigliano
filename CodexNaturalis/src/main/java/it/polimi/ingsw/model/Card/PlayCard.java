@@ -11,7 +11,7 @@ import it.polimi.ingsw.model.ENUM.Costraint;
 public abstract class  PlayCard {
     private final Side front_side ;
     private final  Side back_side;
-    private boolean flipped;
+    protected boolean flipped;
 
 
 
