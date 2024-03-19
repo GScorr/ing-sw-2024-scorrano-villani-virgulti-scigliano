@@ -4,5 +4,6 @@ public enum BonusEnum {
     ANGLE,
     PAPER,
     PEN,
-    FEATHER
+    FEATHER,
+    NONE
 }
