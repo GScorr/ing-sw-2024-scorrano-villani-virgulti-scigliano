@@ -1,9 +1,9 @@
 package it.polimi.ingsw.CONTROLLER;
 
-import it.polimi.ingsw.model.Card.PlayCard;
-import it.polimi.ingsw.model.ENUM.AnglesEnum;
-import it.polimi.ingsw.model.ENUM.Costraint;
-import it.polimi.ingsw.model.GameField;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
+import it.polimi.ingsw.MODEL.ENUM.Costraint;
+import it.polimi.ingsw.MODEL.GameField;
 
 public class GameFieldController {
     private GameField player_field;
