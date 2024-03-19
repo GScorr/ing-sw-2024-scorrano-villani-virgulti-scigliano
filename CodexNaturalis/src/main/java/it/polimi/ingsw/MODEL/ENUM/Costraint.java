@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.ENUM;
+package it.polimi.ingsw.MODEL.ENUM;
 
 public enum Costraint {
     TWOMUSH_ONEANIM,

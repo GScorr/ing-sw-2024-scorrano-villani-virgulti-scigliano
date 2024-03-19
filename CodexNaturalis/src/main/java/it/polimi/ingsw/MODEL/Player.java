@@ -1,14 +1,12 @@
-package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.Card.GoldCard;
-import it.polimi.ingsw.model.Card.ResourceCard;
-import it.polimi.ingsw.model.Card.Side;
-import it.polimi.ingsw.model.ENUM.AnglesEnum;
-import it.polimi.ingsw.model.ENUM.CentralEnum;
-import it.polimi.ingsw.model.ENUM.ColorsEnum;
-import it.polimi.ingsw.model.ENUM.PlayerState;
-import it.polimi.ingsw.model.Card.PlayCard;
+package it.polimi.ingsw.MODEL;
+import it.polimi.ingsw.MODEL.Card.ResourceCard;
+import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
+import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*
