@@ -8,27 +8,34 @@ public class GoalDiagonal implements GoalStrategy{
         switch (resource){
             case AnglesEnum.INSECTS:
                 for (int i = 0; i < field.MATRIXDIM; i++) {
+                    for(int j = 0; j < field.MATRIXDIM; j++){
+                        if (field.getCell(i, j, MATRIXDIM).) {
 
+                        }
+                    }
                 }
                 break;
             case AnglesEnum.PLANT:
                 for (int i = 0; i < field.MATRIXDIM; i++) {
+                    for(int j = 0; j < field.MATRIXDIM; j++){
 
+                    }
                 }
                 break;
             case AnglesEnum.MUSHROOMS:
                 for (int i = 0; i < field.MATRIXDIM; i++) {
+                    for(int j = 0; j < field.MATRIXDIM; j++){
 
+                    }
                 }
                 break;
             case AnglesEnum.ANIMAL:
                 for (int i = 0; i < field.MATRIXDIM; i++) {
-                    
+                    for(int j = 0; j < field.MATRIXDIM; j++){
+
+                    }
                 }
                 break;
-
-        }
-        else if(resource == AnglesEnum.ANIMAL || resource == AnglesEnum.MUSHROOMS) {
 
         }
     }
