@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.ENUM;
 
 public enum BonusEnum {
-    ANGLE
+    ANGLE,
+    PAPER,
+    PEN,
+    FEATHER
 }
