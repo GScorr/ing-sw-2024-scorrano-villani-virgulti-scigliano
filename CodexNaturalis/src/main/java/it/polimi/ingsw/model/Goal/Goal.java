@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.Goal;
 
+import it.polimi.ingsw.model.GameField;
+
 public class Goal {
     private GoalStrategy goalType;
     private int points;
@@ -24,8 +26,9 @@ public class Goal {
     public GoalStrategy getGoalType() {
         return goalType;
     }
+    //
 
-    public int numPoints(){
-        return goalType.totalPoints(points);
+    public int numPoints(GameField field){
+        return goalType.totalPoints(field,points);
     }
 }
