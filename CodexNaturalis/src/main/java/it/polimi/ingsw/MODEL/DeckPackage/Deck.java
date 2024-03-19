@@ -9,7 +9,7 @@ import java.util.Deque;
 *  -getNumber()
 *  - Implementa anche le sottoclassi
 * */
- class Deck {
+public class Deck {
     Deque<PlayCard> cards;
 
     //il deck
@@ -21,10 +21,10 @@ import java.util.Deque;
     public PlayCard drawCard(){
         return cards.pop();
     };
+    public PlayCard seeFirstCard(){return cards.getFirst();}
 
     public int getNumber(){
         return cards.toArray().length;
     }
-
 
 }
