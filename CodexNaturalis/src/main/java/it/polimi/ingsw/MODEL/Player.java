@@ -1,11 +1,13 @@
 package it.polimi.ingsw.MODEL;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 
 import java.util.List;
 
@@ -14,15 +16,6 @@ import java.util.List;
 @Mirko 19/03
 @Francesco 19/03
 * TODO:
-*   - impostare il metodo peach() -> gestito da FSA ?
-*   - impostare il metodo peakGoal() -> gestito da FSA ?
-*   - impostare il metodo chooseSideFirstSide()
-    - creare un metodo viewCard()
-    -scrivi tutti i getter() e i setter()
-    -scrivere commento su placeCard() DONE
-    -placeCard() funziona passandogli la carta()
-    - la lista deve avere al suo interno anche i flipped della carta()
-    -metodo rimuovi DONE
 *   -*/
 public class Player {
     private final boolean isFirst;
@@ -37,14 +30,20 @@ public class Player {
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
     private GameField game_field;
+    private StartingCard starting_car;
+
+    private Goal[] initial_goal_cards;
+    private Goal goal_card;
     private int player_points = 0;
 
-    public Player(boolean isFirst, ColorsEnum color, List<PlayCard> cards_in_hand, GameField game_field) {
+    public Player(boolean isFirst, ColorsEnum color, List<PlayCard> cards_in_hand, GameField game_field,Goal[] initial_goal_cards, StartingCard starting_car) {
         this.isFirst = isFirst;
         this.color = color;
         this.cards_in_hand = cards_in_hand;
         this.player_state = PlayerState.NOT_INITIALIZED;
         this.game_field = game_field;
+        this.initial_goal_cards = initial_goal_cards;
+        this.starting_car = starting_car;
     }
     /*
     getter:
@@ -64,15 +63,28 @@ public class Player {
     public List<PlayCard> getCardsInHand() {
         return cards_in_hand;
     }
+
+    public StartingCard getStarting_car() {
+        return starting_car;
+    }
+
+    public Goal getGoal_card() {
+        return goal_card;
+    }
+
     /*
-    setter:
-     */
+        setter:
+         */
     public void setPlayer_state(Player p, PlayerState state){
         p.player_state=state;
     }
 
     public void setCards_in_hand(PlayCard card, int index_removed_card) {
         this.cards_in_hand.set(index_removed_card, card);
+    }
+
+    public void setGoal_card(Goal goal_card) {
+        this.goal_card = goal_card;
     }
 
     /*
@@ -109,14 +121,14 @@ public class Player {
             PlayCard playing_card =  cards_in_hand.get(index);
             playing_card.flipCard(flipped);
             if(game_field.insertCard(playing_card, x, y)){
-                rimuoviCartaMano(playing_card, index);
+                removeHandCard(playing_card, index);
             }
         }
         else{
             System.out.println("ERROR: IT'S NOT YOUR TURN");
         }
     }
-    private void rimuoviCartaMano(PlayCard card, int index){
+    private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
         cards_in_hand.set(index, tc);
     }
@@ -126,9 +138,31 @@ public class Player {
     }
 
 
-    public void inserctCard(PlayCard card){
+    public void insertCard(PlayCard card){
         setCards_in_hand(card, this.index_removed_card);
     }
+
+
+    public void selectGoal(int i){
+        this.goal_card = initial_goal_cards[i];
+    }
+
+    //this metod select the first side of the starting_card and put it on the field
+    public void selectFirstCard(boolean flipped){
+        if(player_state==PlayerState.CHOOSE_SIDE_FIRST_CARD) {
+            this.starting_car.flipCard(flipped);
+            game_field.insertCard(this.starting_car, 0, 0);
+        }else{
+            System.out.println("ERROR: IT'S NOT YOUR TURN");
+        }
+}
+
+
+
+
+
+
+
 
 
 
