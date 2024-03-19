@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model.Deck;
+package it.polimi.ingsw.MODEL.DeckPackage;
 
-import it.polimi.ingsw.model.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 
 import java.util.List;
 
@@ -42,10 +42,12 @@ public class CenterCards {
         return tmp;
     }
 
+    //If a GoldCard has been took from drawGoldCard a Card has to be drawed from the GoldDeck
     public void insertFromGoldDeck(PlayCard card){
         gold_list.add(card);
     }
 
+    //If a Resourced Card has been took from drawGoldCard a Card has to be drawed from the ResourceDeck
     public void insertFromResourcesDeck(PlayCard card){
         resource_list.add(card);
     }

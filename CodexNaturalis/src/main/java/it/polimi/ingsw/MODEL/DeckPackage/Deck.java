@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model.Deck;
-import it.polimi.ingsw.model.Card.PlayCard;
-import java.util.ArrayDeque;
+package it.polimi.ingsw.MODEL.DeckPackage;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+
 import java.util.Deque;
 
 /*
@@ -9,7 +9,7 @@ import java.util.Deque;
 *  -getNumber()
 *  - Implementa anche le sottoclassi
 * */
-abstract class Deck {
+public class Deck {
     Deque<PlayCard> cards;
 
     //il deck
@@ -21,10 +21,10 @@ abstract class Deck {
     public PlayCard drawCard(){
         return cards.pop();
     };
+    public PlayCard seeFirstCard(){return cards.getFirst();}
 
     public int getNumber(){
         return cards.toArray().length;
     }
-
 
 }

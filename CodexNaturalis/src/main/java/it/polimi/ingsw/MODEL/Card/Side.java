@@ -1,8 +1,6 @@
-package it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.ENUM.AnglesEnum;
-import it.polimi.ingsw.model.ENUM.CentralEnum;
-
-import java.util.List;
+package it.polimi.ingsw.MODEL.Card;
+import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 
 /*
 *  @Francesco_Virgulti

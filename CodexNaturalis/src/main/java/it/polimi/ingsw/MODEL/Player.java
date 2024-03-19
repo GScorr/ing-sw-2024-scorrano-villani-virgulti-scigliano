@@ -1,22 +1,19 @@
-package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.Card.GoldCard;
-import it.polimi.ingsw.model.Card.ResourceCard;
-import it.polimi.ingsw.model.Card.Side;
-import it.polimi.ingsw.model.ENUM.AnglesEnum;
-import it.polimi.ingsw.model.ENUM.CentralEnum;
-import it.polimi.ingsw.model.ENUM.ColorsEnum;
-import it.polimi.ingsw.model.ENUM.PlayerState;
-import it.polimi.ingsw.model.Card.PlayCard;
+package it.polimi.ingsw.MODEL;
+import it.polimi.ingsw.MODEL.Card.ResourceCard;
+import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
+import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*
 @Francesco Virgulti 16/03
 @Mirko 19/03
+@Francesco 19/03
 * TODO:
-*   - al costruttore passo una lista, questa lista può essere direttamente copiata nella mia variabile oppure devo prima
-*    copiarla in una lista ausiliaria ?
 *   - impostare il metodo peach() -> gestito da FSA ?
 *   - impostare il metodo peakGoal() -> gestito da FSA ?
 *   - impostare il metodo chooseSideFirstSide()
@@ -58,13 +55,13 @@ public class Player {
     public ColorsEnum getColor() {
         return color;
     }
-    public PlayerState getPlayer_state() {
+    public PlayerState getPlayerState() {
         return player_state;
     }
-    public GameField getGame_field() {
+    public GameField getGameField() {
         return game_field;
     }
-    public List<PlayCard> getCards_in_hand() {
+    public List<PlayCard> getCardsInHand() {
         return cards_in_hand;
     }
     /*
