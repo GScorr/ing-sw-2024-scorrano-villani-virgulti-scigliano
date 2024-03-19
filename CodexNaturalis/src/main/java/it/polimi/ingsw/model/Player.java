@@ -18,7 +18,7 @@ import java.util.List;
 *   - al costruttore passo una lista, questa lista può essere direttamente copiata nella mia variabile oppure devo prima
 *    copiarla in una lista ausiliaria ?
 *   - impostare il metodo peach() -> gestito da FSA ?
-*   - impostare il metodo peakGoal()
+*   - impostare il metodo peakGoal() -> gestito da FSA ?
 *   - impostare il metodo chooseSideFirstSide()
     - creare un metodo viewCard()
     -scrivi tutti i getter() e i setter()
@@ -29,6 +29,7 @@ import java.util.List;
 *   -*/
 public class Player {
     private final boolean isFirst;
+    private int index_removed_card;
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
@@ -73,6 +74,10 @@ public class Player {
         p.player_state=state;
     }
 
+    public void setCards_in_hand(PlayCard card, int index_removed_card) {
+        this.cards_in_hand.set(index_removed_card, card);
+    }
+
     /*
     * STATE MACHINE
     * Costructor iniziatialized all the player to NOT_INITIALIZED
@@ -115,6 +120,7 @@ public class Player {
         }
     }
     private void rimuoviCartaMano(PlayCard card, int index){
+        this.index_removed_card=index;
         cards_in_hand.set(index, tc);
     }
 
@@ -122,6 +128,10 @@ public class Player {
         this.player_points=this.player_points+point;
     }
 
+
+    public void inserctCard(PlayCard card){
+        setCards_in_hand(card, this.index_removed_card);
+    }
 
 
 

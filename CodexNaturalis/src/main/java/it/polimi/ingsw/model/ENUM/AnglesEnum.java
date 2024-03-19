@@ -11,5 +11,6 @@ public enum AnglesEnum{
     EMPTY,  // angle exist but it's empty, it doesn't have any resources or bonus
     PAPER,
     PEN,
-    FEATHER
+    FEATHER,
+    MIX // special enumeration for the management of goals
 }
