@@ -14,11 +14,15 @@ import java.util.List;
 *   - impostare il metodo peach()
 *   - impostare il metodo peakGoal()
 *   - impostare il metodo chooseSideFirstSide()
+    - creare un metodo viewCard(), scrivi tutti i getter() e i setter()
+    -scrivere commento su placeCard()
+    -placeCard() funziona passandogli la carta()
+    - la lista deve avere al suo interno anche i flipped della carta()
 *   -*/
 public class Player {
-    private boolean isFirst;
+    private final boolean isFirst;
     private final ColorsEnum color;
-    private List<PlayCard> cards_in_hand = new ArrayList<>();
+    private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
 
     private GameField game_field;
@@ -34,7 +38,7 @@ public class Player {
     * STATE MACHINE
     * Costructor iniziatialized all the player to NOT_INITIALIZED
     */
-    public void nextPlayerState(){
+    public void nextStatePlayer(){
         switch(player_state){
             case NOT_INITIALIZED:
                 this.player_state = PlayerState.CHOOSE_SIDE_FIRST_CARD;
@@ -56,7 +60,8 @@ public class Player {
     }
 
     /*
-    *if (player_state != PLACE_CARD*/
+    *if (player_state != PLACE_CARD
+    * */
     public void placeCard(int index,boolean flipped, int x, int y){
         if(player_state == PlayerState.PLACE_CARD){
             PlayCard playing_card =  cards_in_hand.get(index);
