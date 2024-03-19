@@ -1,7 +1,9 @@
 package it.polimi.ingsw.model.Goal;
 
+import it.polimi.ingsw.model.GameField;
+
 public class GoalDoubleFeather implements GoalStrategy{
-    public int totalPoints(int points) {
-        return 0;
+    public int totalPoints(GameField field, int points) {
+
     }
 }
