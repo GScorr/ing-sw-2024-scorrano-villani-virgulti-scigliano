@@ -5,6 +5,6 @@ import it.polimi.ingsw.MODEL.GameField;
 
 public class GoalTriple implements GoalStrategy{
     public int totalPoints(GameField field, int points, AnglesEnum resource) {
-        return 0;
+        return (int) (points*Math.floor(field.getNumOf(resource)/3));
     }
 }
