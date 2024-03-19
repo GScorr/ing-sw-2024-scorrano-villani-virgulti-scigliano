@@ -1,9 +1,11 @@
 package it.polimi.ingsw.model.Goal;
 
+import it.polimi.ingsw.model.ENUM.AnglesEnum;
 import it.polimi.ingsw.model.GameField;
 
 public class Goal {
     private GoalStrategy goalType;
+    private AnglesEnum resource;
     private int points;
 
     public Goal(GoalStrategy goalType,int points) {
@@ -29,6 +31,6 @@ public class Goal {
     //
 
     public int numPoints(GameField field){
-        return goalType.totalPoints(field,points);
+        return goalType.totalPoints(field,points,resource);
     }
 }
