@@ -190,7 +190,7 @@ public class GameField {
     }
 
 
-    // MESSA NEL CONTROLLER
+    // Function to check if the card can be placed, Return false if you can't, true if you can
     public boolean checkPlacing(int x, int y){
         //Check that the card we are trying to place doesn't completely cover another card and that the sides of the cards aren't completely covered (all 4 of them)
         if   (  field[x][y].getCard().equals( field[x+1][y+1].getCard() )   ||
@@ -210,7 +210,7 @@ public class GameField {
         return false;
     }
 
-    //MESSA IN CONTROLLER
+    //check all the resources num that the field will have after putting the card, given the card and the position
     public void resourceCountChange(PlayCard card, int x, int y){
 
         //Add for each side and for the central resource(if it exist) their counter
@@ -227,7 +227,7 @@ public class GameField {
         if( !field[x+1][y+1].isEmpty() ) subOne( field[x+1][y+1].getValue() );
     }
 
-    //MESSO IN CONTROLLER
+    //check for all constraints of Gold Card, given a value of the constraint
     public boolean checkConstraints(Costraint val){
         switch ( val ){
             case FIVEINS:
