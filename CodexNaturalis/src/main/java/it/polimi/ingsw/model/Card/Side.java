@@ -50,4 +50,12 @@ public class Side {
     public CentralEnum getCentral_resource() {
         return central_resource;
     }
+
+    public CentralEnum getCentral_resource2() {
+        return central_resource2;
+    }
+
+    public CentralEnum getCentral_resource3() {
+        return central_resource3;
+    }
 }
