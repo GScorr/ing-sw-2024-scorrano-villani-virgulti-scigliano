@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Card.GoldCard;
 import it.polimi.ingsw.model.Card.PlayCard;
 import it.polimi.ingsw.model.Card.ResourceCard;
 import it.polimi.ingsw.model.ENUM.AnglesEnum;
+import it.polimi.ingsw.model.ENUM.BonusEnum;
 import it.polimi.ingsw.model.ENUM.CentralEnum;
 import it.polimi.ingsw.model.ENUM.Costraint;
 
@@ -40,6 +41,25 @@ public class GameField {
         return field[x][y];
     }
 
+    public int getNumOf(AnglesEnum val){
+        switch ( val ){
+            case ANIMAL:
+                return num_of_animal;
+            case MUSHROOMS:
+                return num_of_mushroom;
+            case PLANT:
+                return num_of_plant;
+            case INSECTS:
+                return num_of_insect;
+            case PEN:
+                return num_of_pen;
+            case PAPER:
+                return num_of_paper;
+            case FEATHER:
+                return num_of_feather;
+
+        }return 0;
+    }
     public void setNumOfAnimal(int num_of_animal) {
         this.num_of_animal = num_of_animal;
     }
@@ -94,10 +114,8 @@ public class GameField {
         resourceCountChange(card, x, y);
 
         //add the points to the player, based on the points of the card
-        if ( card instanceof GoldCard ) {   }
-        else if ( card instanceof ResourceCard ) { player.addPoints(card.getPoint() ); }
-
-
+        if ( card instanceof GoldCard )          { player.addPoints( checkGoldPoints( (GoldCard)card ) );  }
+        else if ( card instanceof ResourceCard ) { player.addPoints( card.getPoint() ); }
 
         //insert card in the 4 cells
         field[x][y].setFilled(true);
@@ -313,6 +331,18 @@ public class GameField {
         return true;
     }
 
+    public int checkGoldPoints(GoldCard card){
+        switch ( card.getPointBonus() ){
+            case NONE:
+            case PEN:
+            case ANGLE:
+            case PAPER:
+            case FEATHER:
+        }
+
+
+        return 0;
+    }
 }
 
 
