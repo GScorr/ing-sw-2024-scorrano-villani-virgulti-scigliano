@@ -29,6 +29,7 @@ public class Game {
     private Player player2;
     private Player player3;
     private Player player4;
+    Map<Integer,Player> get_player_index;
 
     Goal goal1;
     Goal goal2;
@@ -37,7 +38,7 @@ public class Game {
     private Deck gold_deck, resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
-    Map<Integer,Player> get_player_index;
+
 
     public int getNumPlayer() {
         return num_player;
@@ -69,12 +70,14 @@ public class Game {
         return resources_deck;
     }
 
+    // At the beginnig , starting_cards has to be distributed to the player
     public void distributeStartingCard(){
         for(int i=0; i<num_player;i++){
-            get_player_index.get(i).setStartingCar(starting_cards_deck.drawCard());
+            get_player_index.get(i).setStartingCard(starting_cards_deck.drawCard());
         }
     }
 
+    //4 cards at the center has to be initialized
     public void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
@@ -119,7 +122,28 @@ public class Game {
 
     }
 
+    public Game(int num_player, Player player1, Player player2, Player player3, Player player4, Map<Integer, Player> get_player_index, Goal goal1, Goal goal2, CenterCards cards_in_center, Deck gold_deck, Deck resources_deck, Deck starting_cards_deck, DeckGoalCard goal_deck) {
+        this.num_player = num_player;
+        this.player1 = player1;
+        get_player_index.put(0,player1);
+
+        this.player2 = player2;
+        get_player_index.put(1,player2);
+
+        if(num_player>2) {
+            this.player3 = player3;
+            get_player_index.put(2,player2);
+            if(num_player>3) {
+                this.player4 = player4;
+                get_player_index.put(2,player2);
+            }
+        }
+
+        this.gold_deck = gold_deck;
+        this.resources_deck = resources_deck;
+        this.starting_cards_deck = starting_cards_deck;
+        this.goal_deck = goal_deck;
 
 
-
+    }
 }
