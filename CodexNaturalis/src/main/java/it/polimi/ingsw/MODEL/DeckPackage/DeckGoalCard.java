@@ -7,7 +7,7 @@ import java.util.Deque;
 
 public class DeckGoalCard {
 
-    Deque<Goal> cards;
+    private Deque<Goal> cards;
 
     //il deck
     public DeckGoalCard(Deque<Goal> cards){
