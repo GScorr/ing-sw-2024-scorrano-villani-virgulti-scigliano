@@ -1,4 +1,5 @@
 package it.polimi.ingsw.CONTROLLER;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 public class DeckController {
@@ -12,8 +13,11 @@ public class DeckController {
         this.center_cards = center_cards;
     }
 
-    public boolean checkDeckNotEmpty(){
+    public boolean checkDeckNotEmpty(Deck d){
+        return d.getNumber()!=0;
 
+    public void replaceCard(PlayCard){{
+        if()
     }
 
 
