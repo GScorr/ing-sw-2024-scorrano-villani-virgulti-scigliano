@@ -31,7 +31,7 @@ public class Player {
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
     private GameField game_field;
-    private PlayCard starting_car;
+    private PlayCard starting_card;
 
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
@@ -62,8 +62,8 @@ public class Player {
         return cards_in_hand;
     }
 
-    public PlayCard getStartingCar() {
-        return starting_car;
+    public PlayCard getStartingCard() {
+        return starting_card;
     }
 
     public Goal getGoalCard() {
@@ -77,8 +77,8 @@ public class Player {
     /*
             setter:
              */
-    public void setPlayer_state(Player p, PlayerState state){
-        p.player_state=state;
+    public void setPlayer_state( PlayerState state){
+        this.player_state=state;
     }
     public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
         this.cards_in_hand = cards_in_hand;
@@ -91,8 +91,8 @@ public class Player {
         this.cards_in_hand.set(index_removed_card, card);
     }
 
-    public void setStartingCar(PlayCard starting_car) {
-        this.starting_car = starting_car;
+    public void setStartingCard(PlayCard starting_card) {
+        this.starting_card = starting_card;
     }
 
     public void setGoal_card(Goal goal_card) {
@@ -106,21 +106,21 @@ public class Player {
     public void nextStatePlayer(){
         switch(player_state){
             case NOT_INITIALIZED:
-                setPlayer_state(this, PlayerState.CHOOSE_SIDE_FIRST_CARD);
+                setPlayer_state( PlayerState.CHOOSE_SIDE_FIRST_CARD);
             case CHOOSE_SIDE_FIRST_CARD:
-                setPlayer_state(this, PlayerState.CHOOSE_GOAL);
+                setPlayer_state( PlayerState.CHOOSE_GOAL);
             case CHOOSE_GOAL:
-                setPlayer_state(this, PlayerState.BEGIN);
+                setPlayer_state( PlayerState.BEGIN);
             case BEGIN :
             if(this.isFirst){ // only when the state of player is begin
-                setPlayer_state(this, PlayerState.PLACE_CARD);
+                setPlayer_state( PlayerState.PLACE_CARD);
             }else {
-                setPlayer_state(this, PlayerState.WAIT_TURN);
+                setPlayer_state( PlayerState.WAIT_TURN);
             }
             case PLACE_CARD:
-                setPlayer_state(this, PlayerState.DRAW_CARD);
+                setPlayer_state( PlayerState.DRAW_CARD);
             case DRAW_CARD:
-                setPlayer_state(this, PlayerState.WAIT_TURN);
+                setPlayer_state( PlayerState.WAIT_TURN);
         }
     }
 
@@ -167,8 +167,8 @@ public class Player {
     //this metod select the first side of the starting_card and put it on the field
     public void selectFirstCard(boolean flipped){
         if(player_state==PlayerState.CHOOSE_SIDE_FIRST_CARD) {
-            this.starting_car.flipCard(flipped);
-            game_field.insertCard(this.starting_car, 0, 0);
+            this.starting_card.flipCard(flipped);
+            game_field.insertCard(this.starting_card, 0, 0);
         }else{
             System.out.println("ERROR: IT'S NOT YOUR TURN");
         }
