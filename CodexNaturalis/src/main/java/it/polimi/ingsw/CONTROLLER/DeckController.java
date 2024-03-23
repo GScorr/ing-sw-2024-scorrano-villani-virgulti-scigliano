@@ -1,4 +1,5 @@
 package it.polimi.ingsw.CONTROLLER;
+import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
@@ -16,10 +17,19 @@ public class DeckController {
     public boolean checkDeckNotEmpty(Deck d){
         return d.getNumber()!=0;
 
-    public void replaceCard(PlayCard){{
-        if()
-    }
+        //supposed that in the message there is the index of the card and a Card c, obtained through the view
+   /* public void replaceCard(Message m){
+        int index;
+        PlayCard c;
+        if(c instanceof GoldCard){
+            drawResourceCard(index);
+        }
+        else {
+            drawGoldCard(index);
+        }
 
+    }
+*/
 
 
 

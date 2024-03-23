@@ -6,7 +6,7 @@ import java.util.Deque;
 /*
 * @Francesco Virgulti
 * TODO:
-*  -getNumber()
+*  - getNumber()
 *  - Implementa anche le sottoclassi
 * */
 public class Deck {
