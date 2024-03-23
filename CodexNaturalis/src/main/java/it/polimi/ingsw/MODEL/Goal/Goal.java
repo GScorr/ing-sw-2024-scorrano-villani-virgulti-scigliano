@@ -25,11 +25,7 @@ public class Goal {
         return points;
     }
 
-    public GoalStrategy getGoalType() {
-        return goalType;
-    }
-    //
-
+    //returns the total number of points achieved from the player with the GameField field
     public int numPoints(GameField field){
         return goalType.totalPoints(field,points,resource);
     }
