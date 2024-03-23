@@ -3,6 +3,7 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
+import it.polimi.ingsw.MODEL.ENUM.GameState;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -29,8 +30,9 @@ public class Game {
     private Player player2;
     private Player player3;
     private Player player4;
-    Map<Integer,Player> get_player_index;
 
+    Map<Integer,Player> get_player_index;
+    public GameState game_state;
     Goal goal1;
     Goal goal2;
 
