@@ -94,5 +94,6 @@ public class GoalLFigure implements GoalStrategy {
                 }
                 break;
         }
+        return points*counter;
     }
 }
