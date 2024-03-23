@@ -1,31 +1,29 @@
 package it.polimi.ingsw.CONTROLLER;
 
+import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
 import it.polimi.ingsw.MODEL.GameField;
 
+import javax.smartcardio.Card;
+
 public class GameFieldController {
     private GameField player_field;
 
-    //check all the resources num that the field will have after putting the card, given the card and the position
-    public void resourceCountChange(PlayCard card, int x, int y){
 
-        //Add for each side and for the central resource(if it exist) their counter
-        player_field.addOne( card.getSide().getCentral_resource() );
-        player_field.addOne( card.getSide().getAngleLeftUp() );
-        player_field.addOne( card.getSide().getAngleLeftDown() );
-        player_field.addOne( card.getSide().getAngleRightDown() );
-        player_field.addOne( card.getSide().getAngleRightUp() );
+    // TODO capire come collegare a MODEL
+    public void onPlaceCardReceived(){
+        Card card;
+        int x,y;
 
-        // sub 1 to each \old field if they are not empty --> the sub function doesn't sub anything if the value is NONE or EMPTY
-        if( !player_field.getField()[x][y].isEmpty() )     player_field.subOne( player_field.getField()[x][y].getValue() );
-        if( !player_field.getField()[x+1][y].isEmpty() )   player_field.subOne( player_field.getField()[x+1][y].getValue() );
-        if( !player_field.getField()[x][y+1].isEmpty() )   player_field.subOne( player_field.getField()[x][y+1].getValue() );
-        if( !player_field.getField()[x+1][y+1].isEmpty() ) player_field.subOne( player_field.getField()[x+1][y+1].getValue() );
+
+
     }
 
-    // Function to check if the card can be placed, Return false if you can't, true if you can
+    // Function to check if the card can be placed,
+    // Return false if you can't, true if you can
     public boolean checkPlacing(int x, int y){
         //Check that the card we are trying to place doesn't completely cover another card and that the sides of the cards aren't completely covered (all 4 of them)
         if   (  player_field.getField()[x][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() )   ||
@@ -48,10 +46,9 @@ public class GameFieldController {
         }
         return false;
     }
-
-
-    //check for all constraints of Gold Card, given a value of the constraint
-    public boolean checkConstraints(Costraint val){
+    //check for all constraints of Gold Card,
+    // given a value of the constraint
+    public boolean checkGoldConstraints(Costraint val){
         switch ( val ){
             case FIVEINS:
                 return player_field.getNumOfInsect() >= 5;
@@ -120,8 +117,46 @@ public class GameFieldController {
         }
         return true;
     }
+    //count number of points if the card is Gold and has bonus related to number of stuff
+    public int goldPointsCount(GoldCard card, int x, int y){
+        switch ( card.getPointBonus() ){
+            case NONE: return 0;
+            case PEN: return player_field.getNumOfPen();
+            case ANGLE: {
+                int num_of_touch=0;
+                //check how many cards i'll cover
+                for(int i=x; i<x+2; i++)
+                    for(int j=y; j<y+2; j++)
+                        if( !player_field.getCell(i, j, 45).isEmpty() ) num_of_touch++;
 
+                return num_of_touch * card.getPoint();
+            }
+            case PAPER: return player_field.getNumOfPaper();
+            case FEATHER: return player_field.getNumOfFeather();
+        }
+        return 0;
+    }
+    //count number of points for resource cards
+    public int resourcePointsCount(ResourceCard card){
+        return card.getPoint();
+    }
+    //check all the resources num that the field will have after putting the card,
+    // given the card and the position
+    public void resourcePointsChange(PlayCard card, int x, int y){
 
+        //Add for each side and for the central resource(if it exist) their counter
+        player_field.addOne( card.getSide().getCentral_resource() );
+        player_field.addOne( card.getSide().getAngleLeftUp() );
+        player_field.addOne( card.getSide().getAngleLeftDown() );
+        player_field.addOne( card.getSide().getAngleRightDown() );
+        player_field.addOne( card.getSide().getAngleRightUp() );
+
+        // sub 1 to each \old field if they are not empty --> the sub function doesn't sub anything if the value is NONE or EMPTY
+        if( !player_field.getField()[x][y].isEmpty() )     player_field.subOne( player_field.getField()[x][y].getValue() );
+        if( !player_field.getField()[x+1][y].isEmpty() )   player_field.subOne( player_field.getField()[x+1][y].getValue() );
+        if( !player_field.getField()[x][y+1].isEmpty() )   player_field.subOne( player_field.getField()[x][y+1].getValue() );
+        if( !player_field.getField()[x+1][y+1].isEmpty() ) player_field.subOne( player_field.getField()[x+1][y+1].getValue() );
+    }
 
 }
 
