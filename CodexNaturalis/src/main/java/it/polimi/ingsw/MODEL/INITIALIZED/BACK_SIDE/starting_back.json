@@ -1,0 +1,42 @@
+[
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "PLANT",
+      "angle_left_down": "INSECTS",
+      "angle_right_down": "ANIMAL"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "PLANT",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "MUSHROOMS",
+      "angle_right_down": "INSECTS"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "INSECTS",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "MUSHROOMS",
+      "angle_right_down": "PLANT"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "PLANT",
+      "angle_right_up": "INSECTS",
+      "angle_left_down": "ANIMAL",
+      "angle_right_down": "MUSHROOMS"
+    },
+    "isGold": false
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+  "central_enum":"MUSHROOMS",
+  "angles_enum":{
+    "angle_right_up": "EMPTY",
+    "angle_right_down": "EMPTY",
+    "angle_left_up": "EMPTY",
+    "angle_left_down": "EMPTY"
+  },
+  "isGold": false
+  },
+  {
+  "central_enum":"ANIMAL",
+  "angles_enum":{
+    "angle_right_up": "EMPTY",
+    "angle_right_down": "EMPTY",
+    "angle_left_up": "EMPTY",
+    "angle_left_down": "EMPTY"
+  },
+  "isGold": false
+  },
+  {
+  "central_enum":"INSECTS",
+  "angles_enum":{
+    "angle_right_up": "EMPTY",
+    "angle_right_down": "EMPTY",
+    "angle_left_up": "EMPTY",
+    "angle_left_down": "EMPTY"
+  },
+  "isGold": false
+  },
+  {
+  "central_enum":"PLANT",
+  "angles_enum":{
+    "angle_right_up": "EMPTY",
+    "angle_right_down": "EMPTY",
+    "angle_left_up": "EMPTY",
+    "angle_left_down": "EMPTY"
+  },
+  "isGold": false
+  }
+]

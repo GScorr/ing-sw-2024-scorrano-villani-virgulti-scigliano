@@ -9,6 +9,7 @@ import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -30,20 +31,17 @@ public class Player {
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
     private GameField game_field;
-    private StartingCard starting_car;
+    private PlayCard starting_car;
 
-    private Goal[] initial_goal_cards;
+    private List<Goal> initial_goal_cards;
     private Goal goal_card;
     private int player_points = 0;
 
-    public Player(boolean isFirst, ColorsEnum color, List<PlayCard> cards_in_hand, GameField game_field,Goal[] initial_goal_cards, StartingCard starting_car) {
+    public Player(boolean isFirst, ColorsEnum color, GameField game_field) {
         this.isFirst = isFirst;
         this.color = color;
-        this.cards_in_hand = cards_in_hand;
         this.player_state = PlayerState.NOT_INITIALIZED;
         this.game_field = game_field;
-        this.initial_goal_cards = initial_goal_cards;
-        this.starting_car = starting_car;
     }
     /*
     getter:
@@ -64,23 +62,37 @@ public class Player {
         return cards_in_hand;
     }
 
-    public StartingCard getStarting_car() {
+    public PlayCard getStartingCar() {
         return starting_car;
     }
 
-    public Goal getGoal_card() {
+    public Goal getGoalCard() {
         return goal_card;
     }
 
+    public int getPlayerPoints() {
+        return player_points;
+    }
+
     /*
-        setter:
-         */
+            setter:
+             */
     public void setPlayer_state(Player p, PlayerState state){
         p.player_state=state;
     }
+    public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
+        this.cards_in_hand = cards_in_hand;
+    }
+    public void setInitialGoalCards(List<Goal> initial_goal_cards){
+        this.initial_goal_cards = initial_goal_cards;
+    }
 
-    public void setCards_in_hand(PlayCard card, int index_removed_card) {
+    public void setCardsInHand(PlayCard card, int index_removed_card) {
         this.cards_in_hand.set(index_removed_card, card);
+    }
+
+    public void setStartingCar(PlayCard starting_car) {
+        this.starting_car = starting_car;
     }
 
     public void setGoal_card(Goal goal_card) {
@@ -139,17 +151,18 @@ public class Player {
 
 
     public void insertCard(PlayCard card){
-        setCards_in_hand(card, this.index_removed_card);
+        setCardsInHand(card, this.index_removed_card);
     }
 
 
     public void selectGoal(int i){
         if(player_state==PlayerState.CHOOSE_GOAL) {
-            this.goal_card = initial_goal_cards[i];
+            this.goal_card = initial_goal_cards.get(i);
         }else{
             System.out.println("ERROR: IT'S NOT YOUR TURN");
         }
     }
+
 
     //this metod select the first side of the starting_card and put it on the field
     public void selectFirstCard(boolean flipped){
