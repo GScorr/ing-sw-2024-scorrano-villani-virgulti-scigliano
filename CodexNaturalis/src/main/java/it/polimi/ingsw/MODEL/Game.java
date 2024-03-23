@@ -124,7 +124,7 @@ public class Game {
 
     }
 
-    public Game(int num_player, Player player1, Player player2, Player player3, Player player4, Map<Integer, Player> get_player_index, Goal goal1, Goal goal2, CenterCards cards_in_center, Deck gold_deck, Deck resources_deck, Deck starting_cards_deck, DeckGoalCard goal_deck) {
+    public Game(int num_player, Player player1, Player player2, Player player3, Player player4, Deck gold_deck, Deck resources_deck, Deck starting_cards_deck, DeckGoalCard goal_deck) {
         this.num_player = num_player;
         this.player1 = player1;
         get_player_index.put(0,player1);
@@ -145,7 +145,10 @@ public class Game {
         this.resources_deck = resources_deck;
         this.starting_cards_deck = starting_cards_deck;
         this.goal_deck = goal_deck;
-
-
+        initializedCenterCard();
+        distributeStartingCard();
+        distributeThreeCards();
+        selectGoals();
+        distributeTwoGoalsToPlayer();
     }
 }
