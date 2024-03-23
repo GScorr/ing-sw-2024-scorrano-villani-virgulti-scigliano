@@ -118,13 +118,8 @@ public class Game {
             get_player_index.get(i).setInitialGoalCards(tmp);
         }
     }
-    //Setter of points, one for 2 player and one for 4 players
-    public void setPoints(int points_player1, int points_player2 ) {
 
-    }
-    public void setPoints(int points_player1, int points_player2, int points_player3, int points_player4 ) {
 
-    }
 
     public Game(int num_player, Player player1, Player player2, Player player3, Player player4, Deck gold_deck, Deck resources_deck, Deck starting_cards_deck, DeckGoalCard goal_deck) {
         this.num_player = num_player;
