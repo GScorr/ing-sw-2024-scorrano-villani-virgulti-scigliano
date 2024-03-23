@@ -116,6 +116,12 @@ public class GameField {
         if ( card instanceof GoldCard )          { player.addPoints( checkGoldPoints( (GoldCard)card ) );  }
         else if ( card instanceof ResourceCard ) { player.addPoints( card.getPoint() ); }
 
+
+        field[x][y].setCardDown(field[x][y].getCard());
+        field[x+1][y].setCardDown(field[x][y].getCard());
+        field[x][y+1].setCardDown(field[x][y].getCard());
+        field[x+1][y+1].setCardDown(field[x][y].getCard());
+
         //insert card in the 4 cells
         field[x][y].setFilled(true);
         field[x][y].setCard(card);

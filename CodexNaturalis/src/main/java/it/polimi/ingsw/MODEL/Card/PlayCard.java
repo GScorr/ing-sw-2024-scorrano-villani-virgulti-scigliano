@@ -1,4 +1,5 @@
 package it.polimi.ingsw.MODEL.Card;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
 
 /*
@@ -12,6 +13,7 @@ public abstract class  PlayCard {
     private final  Side back_side;
     protected boolean flipped;
 
+    public final CentralEnum colore;
 
 
 
@@ -20,7 +22,7 @@ public abstract class  PlayCard {
         this.front_side = front_side;
         this.back_side = back_side;
         flipCard(flipped);
-
+        this.colore = back_side.getCentral_resource();
     }
 
 
@@ -55,5 +57,7 @@ public abstract class  PlayCard {
     //override sulle sottoclassi per il costraint -> Resource Card tornerà NONE
     public abstract Costraint getCostraint();
 
-
+    public CentralEnum getColore() {
+        return colore;
+    }
 }
