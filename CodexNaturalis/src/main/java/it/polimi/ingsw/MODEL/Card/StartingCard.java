@@ -26,7 +26,7 @@ public class StartingCard extends PlayCard{
     public  int getPoint(){return 0;}
 
     //override sulle sottoclassi per il costraint -> Resource Card tornerà NONE
-    public Costraint getCostraint(){return Costraint.NONE};
+    public Costraint getCostraint(){return Costraint.NONE;};
 
 
 

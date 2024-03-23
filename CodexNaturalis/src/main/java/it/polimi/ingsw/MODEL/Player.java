@@ -48,7 +48,7 @@ public class Player {
     /*
     getter:
      */
-    public boolean getisFirst() {
+    public boolean getIsFirst() {
         return isFirst;
     }
     public ColorsEnum getColor() {
@@ -144,7 +144,11 @@ public class Player {
 
 
     public void selectGoal(int i){
-        this.goal_card = initial_goal_cards[i];
+        if(player_state==PlayerState.CHOOSE_GOAL) {
+            this.goal_card = initial_goal_cards[i];
+        }else{
+            System.out.println("ERROR: IT'S NOT YOUR TURN");
+        }
     }
 
     //this metod select the first side of the starting_card and put it on the field
