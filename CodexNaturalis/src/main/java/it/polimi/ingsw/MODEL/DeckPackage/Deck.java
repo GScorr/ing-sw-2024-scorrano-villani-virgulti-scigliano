@@ -10,7 +10,7 @@ import java.util.Deque;
 *  - Implementa anche le sottoclassi
 * */
 public class Deck {
-    Deque<PlayCard> cards;
+    public Deque<PlayCard> cards;
 
     //il deck
     public Deck(Deque<PlayCard> cards){
