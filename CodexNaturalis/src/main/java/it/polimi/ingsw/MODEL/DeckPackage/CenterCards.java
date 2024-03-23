@@ -37,12 +37,14 @@ public class CenterCards {
     public PlayCard drawGoldCard(int index){
         PlayCard tmp = gold_list.get(index);
         gold_list.remove(index);
+        gold_list.add(insertFromGoldDeck(index));
         return tmp;
     }
 
     public PlayCard drawResourceCard(int index){
         PlayCard tmp = resource_list.get(index);
         resource_list.remove(index);
+        resource_list.add(insertFromResourcesDeck(index));
         return tmp;
     }
 
