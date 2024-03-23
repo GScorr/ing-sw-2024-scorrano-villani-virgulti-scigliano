@@ -1,0 +1,313 @@
+[
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "EMPTY",
+      "angle_left_down": "MUSHROOMS",
+      "angle_right_down": "NONE"
+
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "MUSHROOMS",
+      "angle_left_down": "NONE",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "NONE",
+      "angle_left_down": "MUSHROOMS",
+      "angle_right_down": "MUSHROOMS"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "MUSHROOMS",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "MUSHROOMS"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "FEATHER",
+      "angle_left_down": "PLANT",
+      "angle_right_down": "MUSHROOMS"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "PEN",
+      "angle_right_up": "MUSHROOMS",
+      "angle_left_down": "NONE",
+      "angle_right_down": "ANIMAL"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "INSECTS",
+      "angle_left_down": "PAPER",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "MUSHROOMS",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "NONE"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "NONE",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "EMPTY",
+      "angle_left_down": "MUSHROOMS",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+
+
+
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "PLANT",
+      "angle_right_up": "EMPTY",
+      "angle_left_down": "PLANT",
+      "angle_right_down": "NONE"
+
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "PLANT",
+      "angle_right_up": "PLANT",
+      "angle_left_down": "NONE",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "NONE",
+      "angle_left_down": "PLANT",
+      "angle_right_down": "PLANT"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "PLANT",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "PLANT"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "INSECTS",
+      "angle_left_down": "FEATHER",
+      "angle_right_down": "PLANT"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "PLANT",
+      "angle_left_down": "NONE",
+      "angle_right_down": "PEN"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "PAPER",
+      "angle_right_up": "NONE",
+      "angle_left_down": "PLANT",
+      "angle_right_down": "ANIMAL"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "EMPTY",
+      "angle_left_down": "PLANT",
+      "angle_right_down": "NONE"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "EMPTY",
+      "angle_left_down": "NONE",
+      "angle_right_down": "PLANT"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "PLANT",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+
+
+
+
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "ANIMAL",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "NONE"
+
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "EMPTY",
+      "angle_left_down": "ANIMAL",
+      "angle_right_down": "ANIMAL"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "ANIMAL",
+      "angle_right_up": "NONE",
+      "angle_left_down": "ANIMAL",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "NONE",
+      "angle_right_down": "ANIMAL"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "INSECTS",
+      "angle_left_down": "PEN",
+      "angle_right_down": "ANIMAL"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "PLANT",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "NONE",
+      "angle_right_down": "PAPER"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "FEATHER",
+      "angle_right_up": "NONE",
+      "angle_left_down": "ANIMAL",
+      "angle_right_down": "MUSHROOMS"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "NONE",
+      "angle_right_up": "EMPTY",
+      "angle_left_down": "ANIMAL",
+      "angle_right_down": "EMPTY"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "NONE",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "ANIMAL"
+    },
+    "isGold": false
+  },
+  {
+    "central_enum":"NONE",
+    "angles_enum":{
+      "angle_left_up": "EMPTY",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "EMPTY",
+      "angle_right_down": "NONE"
+    },
+    "isGold": false
+  }
+
+]

@@ -12,14 +12,10 @@ import java.util.Map;
 /*
 @Davide
 TODO:
-    - dopo aver fatto classe GameTable istanziarla qui dentro per ogni giocatore
-    - inserire tutti i metodi non get e set
-    - dopo aver fatto classe Goal instanziarla qui dentro per gli obiettivi pubblici
-    - altro da vedere...
-    - aggiungere costruttore
 
--MODIFICHE ESEGUITE
-Tolto int[] points perchè i punti sono già presenti dentro Players.getPlayerPoints()
+    - inserire tutti i metodi non get e set
+
+
 @Fra
 
 TODO:
@@ -31,16 +27,22 @@ public class Game {
     private Player player3;
     private Player player4;
 
-    Map<Integer,Player> get_player_index;
+    private Map<Integer,Player> get_player_index;
     public GameState game_state;
-    Goal goal1;
-    Goal goal2;
+    private Goal goal1;
+    private Goal goal2;
 
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
+    public Goal getGoal1() {
+        return goal1;
+    }
 
+    public Goal getGoal2() {
+        return goal2;
+    }
 
     public int getNumPlayer() {
         return num_player;
@@ -145,6 +147,7 @@ public class Game {
         this.resources_deck = resources_deck;
         this.starting_cards_deck = starting_cards_deck;
         this.goal_deck = goal_deck;
+
         initializedCenterCard();
         distributeStartingCard();
         distributeThreeCards();
