@@ -4,6 +4,11 @@ import java.util.Map;
 
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 
+/*
+TODO:
+    private/public sugli attributi qua sotto
+ */
+
 public class PieceField {
     Player  player1,player2,player3,player4;
     Map<Integer,ColorsEnum[]> get_colors_at_position;
