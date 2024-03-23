@@ -12,6 +12,10 @@ public class DeckController {
         this.center_cards = center_cards;
     }
 
+    public boolean checkDeckNotEmpty(){
+
+    }
+
 
 
 
