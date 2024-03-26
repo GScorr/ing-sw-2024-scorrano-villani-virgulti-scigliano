@@ -1,226 +1,484 @@
 [
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "MUSHROOMS",
       "angle_right_up": "EMPTY",
       "angle_left_down": "MUSHROOMS",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+        "angle_right_up": "EMPTY",
+        "angle_right_down": "EMPTY",
+        "angle_left_up": "EMPTY",
+        "angle_left_down": "EMPTY",
+
+        "central1": "MUSHROOMS",
+        "central2": "NONE",
+        "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "MUSHROOMS",
       "angle_right_up": "MUSHROOMS",
       "angle_left_down": "NONE",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "NONE",
       "angle_left_down": "MUSHROOMS",
-      "angle_right_down": "MUSHROOMS"
+      "angle_right_down": "MUSHROOMS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "MUSHROOMS",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "MUSHROOMS"
+      "angle_right_down": "MUSHROOMS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "FEATHER",
       "angle_left_down": "PLANT",
-      "angle_right_down": "MUSHROOMS"
+      "angle_right_down": "MUSHROOMS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "PEN",
       "angle_right_up": "MUSHROOMS",
       "angle_left_down": "NONE",
-      "angle_right_down": "ANIMAL"
+      "angle_right_down": "ANIMAL",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "MUSHROOMS",
       "angle_right_up": "INSECTS",
       "angle_left_down": "PAPER",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "MUSHROOMS",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "MUSHROOMS",
       "angle_right_up": "NONE",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"MUSHROOMS",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "EMPTY",
       "angle_left_down": "MUSHROOMS",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
 
 
-
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "PLANT",
       "angle_right_up": "EMPTY",
       "angle_left_down": "PLANT",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
 
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "PLANT",
       "angle_right_up": "PLANT",
       "angle_left_down": "NONE",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "NONE",
       "angle_left_down": "PLANT",
-      "angle_right_down": "PLANT"
+      "angle_right_down": "PLANT",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "PLANT",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "PLANT"
+      "angle_right_down": "PLANT",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "INSECTS",
       "angle_left_down": "FEATHER",
-      "angle_right_down": "PLANT"
+      "angle_right_down": "PLANT",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
-      "angle_left_up": "MUSHROOMS",
+    "color":"PLANT",
+    "front_side":{
+      "angle_left_up": "MUSHROOM",
       "angle_right_up": "PLANT",
       "angle_left_down": "NONE",
-      "angle_right_down": "PEN"
+      "angle_right_down": "PEN",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "PAPER",
       "angle_right_up": "NONE",
       "angle_left_down": "PLANT",
-      "angle_right_down": "ANIMAL"
+      "angle_right_down": "ANIMAL",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "EMPTY",
       "angle_left_down": "PLANT",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "EMPTY",
       "angle_left_down": "NONE",
-      "angle_right_down": "PLANT"
+      "angle_right_down": "PLANT",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"PLANT",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "PLANT",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "PLANT",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
 
@@ -228,228 +486,486 @@
 
 
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "ANIMAL",
       "angle_right_up": "ANIMAL",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
 
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "EMPTY",
       "angle_left_down": "ANIMAL",
-      "angle_right_down": "ANIMAL"
+      "angle_right_down": "ANIMAL",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "ANIMAL",
       "angle_right_up": "NONE",
       "angle_left_down": "ANIMAL",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "ANIMAL",
       "angle_left_down": "NONE",
-      "angle_right_down": "ANIMAL"
+      "angle_right_down": "ANIMAL",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "INSECTS",
       "angle_left_down": "PEN",
-      "angle_right_down": "ANIMAL"
+      "angle_right_down": "ANIMAL",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "PLANT",
       "angle_right_up": "ANIMAL",
       "angle_left_down": "NONE",
-      "angle_right_down": "PAPER"
+      "angle_right_down": "PAPER",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "FEATHER",
       "angle_right_up": "NONE",
       "angle_left_down": "ANIMAL",
-      "angle_right_down": "MUSHROOMS"
+      "angle_right_down": "MUSHROOMS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "EMPTY",
       "angle_left_down": "ANIMAL",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "NONE",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "ANIMAL"
+      "angle_right_down": "ANIMAL",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"ANIMAL",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "ANIMAL",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "ANIMAL",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
 
 
 
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "INSECTS",
       "angle_right_up": "INSECTS",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
 
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "EMPTY",
       "angle_left_down": "INSECTS",
-      "angle_right_down": "INSECTS"
+      "angle_right_down": "INSECTS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "INSECTS",
       "angle_right_up": "NONE",
       "angle_left_down": "INSECTS",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "INSECTS",
       "angle_left_down": "NONE",
-      "angle_right_down": "INSECTS"
+      "angle_right_down": "INSECTS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "FEATHER",
       "angle_left_down": "ANIMAL",
-      "angle_right_down": "INSECTS"
+      "angle_right_down": "INSECTS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "PAPER",
       "angle_right_up": "INSECTS",
       "angle_left_down": "NONE",
-      "angle_right_down": "MUSHROOMS"
+      "angle_right_down": "MUSHROOMS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "INSECTS",
       "angle_right_up": "PLANT",
       "angle_left_down": "PEN",
-      "angle_right_down": "NONE"
+      "angle_right_down": "NONE",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 0
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "INSECTS",
       "angle_right_up": "NONE",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "EMPTY",
       "angle_right_up": "EMPTY",
       "angle_left_down": "NONE",
-      "angle_right_down": "INSECTS"
+      "angle_right_down": "INSECTS",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   },
   {
-    "central_enum":"NONE",
-    "angles_enum":{
+    "color":"INSECTS",
+    "front_side":{
       "angle_left_up": "NONE",
       "angle_right_up": "INSECTS",
       "angle_left_down": "EMPTY",
-      "angle_right_down": "EMPTY"
+      "angle_right_down": "EMPTY",
+
+      "central1": "NONE",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "isGold": false,
+    "back_side": {
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
+
+      "central1": "INSECTS",
+      "central2": "NONE",
+      "central3": "NONE"
+    },
     "point": 1
   }
 

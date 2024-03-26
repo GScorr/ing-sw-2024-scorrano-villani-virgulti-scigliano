@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/FRONT_SIDE/gold.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/FRONT_SIDE/resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/FRONT_SIDE/resources.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +258,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711222446657</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Aggiornamento">
+      <option name="closed" value="true" />
+      <created>1711482120596</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1711482120596</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,8 +308,8 @@
     <MESSAGE value="modifica InsertCard di GameField" />
     <MESSAGE value="Aggiunta di ResourceCountChange e checkPlacing in insertcard" />
     <MESSAGE value="Aggiunta addPoints-rimuoviCartaMano + creazione di getter-setter in Player" />
-    <MESSAGE value="Aggiornamento" />
     <MESSAGE value="modifiche matrice aggiunta di card down (Chiedere a davide per dubbi)" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifiche matrice aggiunta di card down (Chiedere a davide per dubbi)" />
+    <MESSAGE value="Aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento" />
   </component>
 </project>
