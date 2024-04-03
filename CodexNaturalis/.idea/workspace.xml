@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/view/GestioneViewTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/view/ViewTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="FINE JSON CARD ORO">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/FRONT_SIDE/starting.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GestioneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GestioneView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/BACK_SIDE/gold_back.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/BACK_SIDE/resources.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +20,6 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
-        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -30,7 +27,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -50,12 +47,9 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mirko/Desktop/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -64,14 +58,6 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="it.polimi.ingsw.view" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="CodexNaturalis" />
@@ -90,8 +76,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-3183f394aec4-7d648f2c" />
-        <option value="jdk-21.0.2-openjdk-21.0.2-3183f394aec4-aba903c2" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -105,10 +90,6 @@
       <updated>1710604170089</updated>
       <workItem from="1710609432407" duration="6798000" />
       <workItem from="1710863138890" duration="232000" />
-      <workItem from="1711461446175" duration="49000" />
-      <workItem from="1711531436293" duration="3424000" />
-      <workItem from="1712066665449" duration="2026000" />
-      <workItem from="1712133075262" duration="1018000" />
     </task>
     <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
       <option name="closed" value="true" />
@@ -278,7 +259,31 @@
       <option name="project" value="LOCAL" />
       <updated>1711222446657</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Aggiornamento">
+      <option name="closed" value="true" />
+      <created>1711482120596</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1711482120596</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Modifica e fine file json carte risorsa, creazione json gold">
+      <option name="closed" value="true" />
+      <created>1711487100086</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1711487100086</updated>
+    </task>
+    <task id="LOCAL-00024" summary="FINE JSON CARD ORO">
+      <option name="closed" value="true" />
+      <created>1711488825160</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1711488825160</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,8 +325,10 @@
     <MESSAGE value="modifica InsertCard di GameField" />
     <MESSAGE value="Aggiunta di ResourceCountChange e checkPlacing in insertcard" />
     <MESSAGE value="Aggiunta addPoints-rimuoviCartaMano + creazione di getter-setter in Player" />
-    <MESSAGE value="Aggiornamento" />
     <MESSAGE value="modifiche matrice aggiunta di card down (Chiedere a davide per dubbi)" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifiche matrice aggiunta di card down (Chiedere a davide per dubbi)" />
+    <MESSAGE value="Aggiornamento" />
+    <MESSAGE value="Modifica e fine file json carte risorsa, creazione json gold" />
+    <MESSAGE value="FINE JSON CARD ORO" />
+    <option name="LAST_COMMIT_MESSAGE" value="FINE JSON CARD ORO" />
   </component>
 </project>
