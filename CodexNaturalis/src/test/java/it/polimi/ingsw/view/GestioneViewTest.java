@@ -1,30 +1,28 @@
 package it.polimi.ingsw.view;
 
+import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
-public class GestioneView {
+import static org.junit.jupiter.api.Assertions.*;
 
-    /*
-    in questa classe gestisco gli output
-     */
-
+class GestioneViewTest {
     private Scanner scanner;
 
-    /*
-    da questa classe leggo da input
-     */
-    public GestioneView(){
+    public scanner GestioneView(){
         this.scanner = new Scanner(System.in);
+        return this;
     }
 
-    public void getInput(){
+    @Test
+    void getInput() {
         System.out.println("inserisci un numero:");
         int scelta = scanner.nextInt();
         scegliCarta(scelta);
     }
 
-    public void scegliCarta(int scelta){
+    @Test
+    void scegliCarta(int scelta) {
         switch (scelta){
             case 1:
                 System.out.println("gira carta");
@@ -34,5 +32,4 @@ public class GestioneView {
                 System.out.println("scelta non valida");
         }
     }
-
 }
