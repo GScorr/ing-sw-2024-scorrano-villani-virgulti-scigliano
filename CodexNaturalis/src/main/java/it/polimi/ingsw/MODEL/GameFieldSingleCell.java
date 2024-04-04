@@ -10,7 +10,7 @@ public class GameFieldSingleCell {
     private PlayCard card;
     private AnglesEnum value;
     private PlayCard card_down;
-
+//card_down means the angles that the card will cover -mirko-
     public GameFieldSingleCell(boolean filled, PlayCard card, AnglesEnum value, PlayCard card_down) {
         this.filled = filled;
         this.card = card;

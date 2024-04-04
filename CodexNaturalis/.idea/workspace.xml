@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="FINE JSON CARD ORO">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/FRONT_SIDE/starting.json" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento + prova test view non funzionante">
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonalTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/PlayerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/BACK_SIDE/gold_back.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/BACK_SIDE/resources.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/GoalTest/GoalDiagonalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/GoalTest/GoalDiagonalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/view/GestioneViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/view/GestioneViewTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +25,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -42,11 +48,24 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;JUnit.GestioneViewTest.scegliCarta.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.GoalDiagonalTest.testGoalDiagonal.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.addPoints.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.getColor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getIsFirst.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getPlayerState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.insertCard.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.nextStatePlayer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.placeCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.setPlayer_state.executor&quot;: &quot;Run&quot;,
     &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -58,7 +77,96 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="it.polimi.ingsw.MODEL.Goal" />
+      <recent name="it.polimi.ingsw.MODEL" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.GoalDiagonalTest.testGoalDiagonal">
+    <configuration name="GoalDiagonalTest.testGoalDiagonal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.GoalTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.GoalTest" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.GoalTest.GoalDiagonalTest" />
+      <option name="METHOD_NAME" value="testGoalDiagonal" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoalDiagonalTest.totalPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Goal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalDiagonalTest" />
+      <option name="METHOD_NAME" value="totalPoints" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTest.addPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.PlayerTest" />
+      <option name="METHOD_NAME" value="addPoints" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTest.insertCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.PlayerTest" />
+      <option name="METHOD_NAME" value="insertCard" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTest.placeCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.PlayerTest" />
+      <option name="METHOD_NAME" value="placeCard" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="CodexNaturalis" />
       <method v="2">
@@ -72,11 +180,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.GoalDiagonalTest.testGoalDiagonal" />
+        <item itemvalue="JUnit.GoalDiagonalTest.totalPoints" />
+        <item itemvalue="JUnit.PlayerTest.insertCard" />
+        <item itemvalue="JUnit.PlayerTest.addPoints" />
+        <item itemvalue="JUnit.PlayerTest.placeCard" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-3183f394aec4-7d648f2c" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-3183f394aec4-aba903c2" />
       </set>
     </attachedChunks>
   </component>
@@ -90,6 +208,8 @@
       <updated>1710604170089</updated>
       <workItem from="1710609432407" duration="6798000" />
       <workItem from="1710863138890" duration="232000" />
+      <workItem from="1712173009113" duration="363000" />
+      <workItem from="1712223757536" duration="5935000" />
     </task>
     <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
       <option name="closed" value="true" />
@@ -330,5 +450,9 @@
     <MESSAGE value="Modifica e fine file json carte risorsa, creazione json gold" />
     <MESSAGE value="FINE JSON CARD ORO" />
     <option name="LAST_COMMIT_MESSAGE" value="FINE JSON CARD ORO" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
