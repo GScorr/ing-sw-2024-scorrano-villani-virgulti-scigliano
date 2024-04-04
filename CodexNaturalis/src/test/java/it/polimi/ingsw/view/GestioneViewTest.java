@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GestioneViewTest {
     private Scanner scanner;
 
-    public scanner GestioneView(){
+   /* public scanner GestioneView(){
         this.scanner = new Scanner(System.in);
         return this;
     }
@@ -20,16 +20,10 @@ class GestioneViewTest {
         int scelta = scanner.nextInt();
         scegliCarta(scelta);
     }
-
+    */
     @Test
-    void scegliCarta(int scelta) {
-        switch (scelta){
-            case 1:
-                System.out.println("gira carta");
-            case 2:
-                System.out.println("posiziona carta");
-            default:
-                System.out.println("scelta non valida");
-        }
+    void scegliC() {
+        int x = 1;
+
     }
 }
