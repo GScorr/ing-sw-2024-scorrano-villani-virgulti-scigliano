@@ -5,7 +5,8 @@ import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
 import it.polimi.ingsw.MODEL.ENUM.GameState;
 import it.polimi.ingsw.MODEL.Goal.Goal;
-import java.lang.reflect.Field;
+import it.polimi.ingsw.MODEL.Player.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -1,8 +1,8 @@
 package it.polimi.ingsw.MODEL;
-import java.util.HashMap;
 import java.util.Map;
 
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
+import it.polimi.ingsw.MODEL.Player.Player;
 
 /*
 TODO:
@@ -10,7 +10,7 @@ TODO:
  */
 
 public class PieceField {
-    Player  player1,player2,player3,player4;
+    Player player1,player2,player3,player4;
     Map<Integer,ColorsEnum[]> get_colors_at_position;
     Map<ColorsEnum,Integer> get_position_of_color;
     Map<Player,ColorsEnum> get_player_color;

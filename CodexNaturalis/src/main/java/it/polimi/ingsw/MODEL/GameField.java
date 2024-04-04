@@ -1,11 +1,9 @@
 package it.polimi.ingsw.MODEL;
 
-import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
-import it.polimi.ingsw.MODEL.ENUM.Costraint;
+import it.polimi.ingsw.MODEL.Player.Player;
 
 //Class for the matrix field of each player
 /*@Davide   XXX= DONE

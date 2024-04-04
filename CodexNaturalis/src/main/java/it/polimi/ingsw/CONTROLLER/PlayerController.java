@@ -1,6 +1,6 @@
 package it.polimi.ingsw.CONTROLLER;
 
-import it.polimi.ingsw.MODEL.Player;
+import it.polimi.ingsw.MODEL.Player.Player;
 
 public class PlayerController {
     Player player;
