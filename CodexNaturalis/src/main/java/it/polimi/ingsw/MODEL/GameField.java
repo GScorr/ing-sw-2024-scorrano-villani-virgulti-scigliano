@@ -26,6 +26,9 @@ public class GameField {
     private int num_of_pen;
     private int num_of_feather;
 
+    public GameField(GameFieldSingleCell[][] field) {
+        this.field = field;
+    }
 
     public void setField(GameFieldSingleCell[][] field) {
         this.field = field;

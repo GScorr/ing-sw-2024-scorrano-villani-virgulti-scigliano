@@ -12,6 +12,7 @@ public class GoldCard extends ResourceCard{
     private final Costraint costraint;
 
     private final BonusEnum point_bonus;
+
     public GoldCard(Side front_side, Side back_side, boolean flipped, int point, Costraint costraint, BonusEnum point_bonus){
         super( front_side, back_side ,flipped,  point);
         this.costraint = costraint;

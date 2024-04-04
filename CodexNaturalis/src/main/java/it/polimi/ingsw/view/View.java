@@ -12,6 +12,7 @@ public class View {
 
     public void inizio(){
         view.getInput();
+        
     }
 
 
