@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Inserimento Carte&#10;&#10;Sono state inserite tutte le carte resources">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,6 +87,7 @@
       <updated>1710604170089</updated>
       <workItem from="1710609432407" duration="6798000" />
       <workItem from="1710863138890" duration="232000" />
+      <workItem from="1711483532435" duration="2298000" />
     </task>
     <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
       <option name="closed" value="true" />
@@ -301,6 +301,7 @@
     <MESSAGE value="Aggiunta addPoints-rimuoviCartaMano + creazione di getter-setter in Player" />
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="modifiche matrice aggiunta di card down (Chiedere a davide per dubbi)" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifiche matrice aggiunta di card down (Chiedere a davide per dubbi)" />
+    <MESSAGE value="Inserimento Carte&#10;&#10;Sono state inserite tutte le carte resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inserimento Carte&#10;&#10;Sono state inserite tutte le carte resources" />
   </component>
 </project>
