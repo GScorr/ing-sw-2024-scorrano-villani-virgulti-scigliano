@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.MODEL.Player.PlayerObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +15,35 @@ import java.util.Map;
 @Davide
 TODO:
 
-    - inserire tutti i metodi non get e set
 
 
 @Fra
 
 TODO:
+    - spiega cosa hai fatto => creazione degli stati del Player (questi saranno modificati dalla classe Game)
+    - chiedi riga -170
+    - chiedi riga 196
+    - tutti i metodi devono essere chiamati dalla classe GAME => {
+        quando un player gioca, verrà chiamato Game.letPlayerPlaceCard()
+            letPlayerPlaceCard(){
+                Player.actual_state.placeCard();
+                Game.nextStatePlayer();
+            }
+            In questo modo ogni volta che un player gioca cambiano gli stati di tutti gli altri player che poi dovranno giocare
+            Per capire meglio guarda funzione nextStatePlayer() all'interno di Games
+
+    }
+    - Creazione macchina a stati per il GAME
+
 */
-public class Game {
+public class Game implements GameSubject{
+    DeckCreation creation;
     private int num_player;
     private Player player1;
     private Player player2;
     private Player player3;
     private Player player4;
-
+    private int actual_player = 0;  //tiene traccia del giocatore che sta giocando
     private Map<Integer,Player> get_player_index;
     private Goal goal1;
     private Goal goal2;
@@ -35,6 +51,10 @@ public class Game {
     private CenterCards cards_in_center;
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
+
+    private List<PlayerObserver> player_observers = new ArrayList<>();
+
+
 
     public Goal getGoal1() {
         return goal1;
@@ -109,7 +129,6 @@ public class Game {
         goal2 = goal_deck.drawCard();
     }
 
-
     public void distributeTwoGoalsToPlayer(){
         for(int i=0;i<num_player;i++){
             List<Goal> tmp = new ArrayList<Goal>();
@@ -121,32 +140,115 @@ public class Game {
 
 
 
-    public Game(int num_player, Player player1, Player player2, Player player3, Player player4, Deck gold_deck, Deck resources_deck, Deck starting_cards_deck, DeckGoalCard goal_deck) {
-        this.num_player = num_player;
-        this.player1 = player1;
-        get_player_index.put(0,player1);
-
-        this.player2 = player2;
-        get_player_index.put(1,player2);
-
-        if(num_player>2) {
-            this.player3 = player3;
-            get_player_index.put(2,player2);
-            if(num_player>3) {
-                this.player4 = player4;
-                get_player_index.put(2,player2);
-            }
-        }
-
-        this.gold_deck = gold_deck;
-        this.resources_deck = resources_deck;
-        this.starting_cards_deck = starting_cards_deck;
+    public Game( DeckGoalCard goal_deck) {
+        this.creation = new DeckCreation();
+        this.gold_deck = new Deck(creation.getMixGoldDeck());
+        this.resources_deck = new Deck(creation.getResourcesDeck());
+        this.starting_cards_deck = new Deck(creation.getStartingDeck());
         this.goal_deck = goal_deck;
 
-        initializedCenterCard();
-        distributeStartingCard();
-        distributeThreeCards();
-        selectGoals();
-        distributeTwoGoalsToPlayer();
+    }
+
+    public void InsertPlayer(Player player){
+        if(this.num_player > 4 ){
+            throw new LimitNumPlayerException("Limite giocatori già raggiunto, non è possibile entrare in questa partita");
+        }else{
+            if(num_player == 0){
+                this.player1 = player;
+                get_player_index.put(0,player1);
+            }else
+            if(num_player == 1){
+                this.player2 = player;
+                get_player_index.put(1,player2);
+            }else
+            if(num_player == 2 ){
+                this.player3 = player;
+                get_player_index.put(2,player3);
+            }else
+            if(num_player == 3){
+                this.player4 = player;
+                get_player_index.put(3,player4);
+            }
+
+            registerObserver(player);
+            this.num_player++;
+
+        }
+    }
+
+    //prima di chiamare questo metodo devo vedere se i Players sono >= 2 &&  < 4 (non possono mai essere per metodo InsertPlayer)
+    public void initializedGame(){
+        if(num_player < 2 || num_player > 4){ throw new LimitNumPlayerException("I giocatori non sono a sufficienza, non è possibile creare il gioco");}
+        else{
+                //prima di chiamare questi metodi devo dire a tutti i Player di cambiare stato
+                // chiedi se questo deve essere fatto qua oppure deve avvenire parallelamente con tutti i thread -> per ora qua
+                // ----
+                notifyObservers();
+                // ----
+                distributeStartingCard();
+                initializedCenterCard();
+                distributeThreeCards();
+                selectGoals();
+                distributeTwoGoalsToPlayer();
+            }
+    }
+
+
+    // queste funzioni saranno chiamate dalla macchina a STATI del Game
+
+    public void selectGoalForPlayers(){
+        notifyObservers();
+    }
+
+    public void insertFirstCardForPlayers(){
+        notifyObservers();
+    }
+    public void startTurnForPlayers(){
+        notifyObservers();
+    }
+
+    // tutti i giocatori devono aver posizionato la carta e tutti i giocatori devono avere scelto il goal prima di proseguire
+    // come implementarlo ???
+
+    // quando il turno del gioco effettivo sarà stato chiamato per cambiare il turno ai giocatori si userà questo metodo
+    public void nextStatePlayer(){
+        Player currentPlayer = get_player_index.get(actual_player), nextPlayer;
+        if(currentPlayer.actual_state.getNameState().equals("PLACE_CARD")){
+            currentPlayer.nextStatePlayer();
+        }else if (currentPlayer.actual_state.getNameState().equals("DRAW_CARD")){
+            if(actual_player + 1 == num_player ){
+                nextPlayer = get_player_index.get(0);}
+            else{
+                nextPlayer = get_player_index.get(actual_player + 1);
+            }
+            currentPlayer.nextStatePlayer();
+            nextPlayer.nextStatePlayer();
+            if(actual_player + 1 == num_player ){
+                actual_player = 0;
+            }
+            else{
+                actual_player ++;
+            }
+        }
+    }
+
+
+
+
+    @Override
+    public void registerObserver(PlayerObserver player_observer) {
+        this.player_observers.add(player_observer);
+    }
+
+    @Override
+    public void removeObserver(PlayerObserver player_observer) {
+        this.player_observers.remove(player_observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (PlayerObserver player_observer : player_observers) {
+            player_observer.update();
+        }
     }
 }

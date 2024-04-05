@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento + prova test view non funzionante">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/DeckCreation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/State/GameState.java" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/GameSubject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/LimitNumPlayerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/PlayerObserver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/ENUM/AnglesEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/ENUM/AnglesEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/ENUM/GameState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/gold.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/gold.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/INITIALIZED/starting.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/starting.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +23,8 @@
       <list>
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -407,7 +402,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711488825160</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json">
+      <option name="closed" value="true" />
+      <created>1712310547598</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1712310547598</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +457,8 @@
     <MESSAGE value="Modifica e fine file json carte risorsa, creazione json gold" />
     <MESSAGE value="FINE JSON CARD ORO" />
     <MESSAGE value="Creazione Design Pattern StatePlayer e relativa modifica di Player&#10;&#10;&#10;Quando si andranno a chiamare i metodi in player si devono chiamare con actual_state" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creazione Design Pattern StatePlayer e relativa modifica di Player&#10;&#10;&#10;Quando si andranno a chiamare i metodi in player si devono chiamare con actual_state" />
+    <MESSAGE value="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
