@@ -24,7 +24,7 @@ public class GestioneView {
         scegliCarta(scelta);
     }
 
-    private void scegliCarta(int scelta){
+    public void scegliCarta(int scelta){
         switch (scelta){
             case 1:
                 System.out.println("gira carta");

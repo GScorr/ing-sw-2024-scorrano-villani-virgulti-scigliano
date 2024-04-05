@@ -7,7 +7,8 @@ import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
 import it.polimi.ingsw.MODEL.GameField;
 
-import javax.smartcardio.Card;
+//import javax.smartcardio.Card;
+
 
 public class GameFieldController {
     private GameField player_field;
@@ -15,7 +16,7 @@ public class GameFieldController {
 
     // TODO capire come collegare a MODEL
     public void onPlaceCardReceived(){
-        Card card;
+        PlayCard card;
         int x,y;
 
 

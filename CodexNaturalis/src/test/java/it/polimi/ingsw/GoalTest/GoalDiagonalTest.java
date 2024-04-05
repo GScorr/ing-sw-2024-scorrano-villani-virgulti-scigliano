@@ -8,6 +8,7 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Goal.GoalDiagonal;
+import it.polimi.ingsw.MODEL.Goal.GoalStrategy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ public class GoalDiagonalTest {
     GameFieldSingleCell cell15 = new GameFieldSingleCell(true,c3,AnglesEnum.NONE,fake);
     GameFieldSingleCell cell16 = new GameFieldSingleCell(true,c3,AnglesEnum.NONE,fake);
     GameFieldSingleCell[][] campo = new GameFieldSingleCell[4][4];
-    GoalDiagonal objdiag;
+    GoalStrategy objdiag;
     Goal obj= new Goal(objdiag,1,AnglesEnum.PLANT);
 
 

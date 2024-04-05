@@ -1,12 +1,12 @@
 package it.polimi.ingsw.MODEL.ENUM;
 
 public enum PlayerState {
-    NOT_INITIALIZED,
-    BEGIN,
-    WAIT_TURN,
-    PLACE_CARD,
-    DRAW_CARD,
-    CHOOSE_SIDE_FIRST_CARD,
-    CHOOSE_GOAL
+    NOT_INITIALIZED, //ok
+    BEGIN,      //ok
+    WAIT_TURN,  //ok
+    PLACE_CARD, //ok
+    DRAW_CARD, //ok
+    CHOOSE_SIDE_FIRST_CARD, //ok
+    CHOOSE_GOAL //ok
 
 }

@@ -14,8 +14,8 @@ public class DeckController {
         this.center_cards = center_cards;
     }
 
-    public boolean checkDeckNotEmpty(Deck d){
-        return d.getNumber()!=0;
+    public boolean checkDeckNotEmpty(Deck d) {
+        return d.getNumber() != 0;
 
         //supposed that in the message there is the index of the card and a Card c, obtained through the view
    /* public void replaceCard(Message m){
@@ -32,7 +32,5 @@ public class DeckController {
 */
 
 
-
-
-
+    }
 }
