@@ -124,24 +124,24 @@ public class Player {
     */
     public void nextStatePlayer(){
         switch(actual_state.getNameState()){
-            case NOT_INITIALIZED:
+            case "NOT_INITIALIZED":
                 setPlayer_state(begin);
-            case BEGIN:
+            case "BEGIN":
                 setPlayer_state(choose_side_first_card);
-            case CHOOSE_SIDE_FIRST_CARD:
+            case "CHOOSE_SIDE_FIRST_CARD":
                 setPlayer_state(choose_goal);
-            case CHOOSE_GOAL:
+            case "CHOOSE_GOAL":
                 setPlayer_state( wait_turn);
-            case WAIT_TURN :
+            case "WAIT_TURN" :
             if(this.isFirst ){ // only when the state of player is begin
                 setPlayer_state( place_card);
             }else {
                 setPlayer_state( wait_turn);
             }
-            case PLACE_CARD:
-                setPlayer_state( );
-            case DRAW_CARD:
-                setPlayer_state( PlayerState.WAIT_TURN);
+            case "PLACE_CARD":
+                setPlayer_state( draw_card );
+            case "DRAW_CARD":
+                setPlayer_state( wait_turn);
         }
     }
 

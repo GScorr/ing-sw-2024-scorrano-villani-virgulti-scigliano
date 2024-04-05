@@ -423,7 +423,7 @@
   {
     "color":"PLANT",
     "point": 2,
-    "costraint": "THREEPLANT_ONEMUSH",
+    "costraint": "THREEPLANT_ONEAMUSH",
     "point_bonus": "ANGLE",
 
     "front_side":{
@@ -676,7 +676,7 @@
   {
     "color":"ANIMAL",
     "point": 2,
-    "costraint": "THREEANIM_ONEMUSH",
+    "costraint": "THREEANIM_ONEAMUSH",
     "point_bonus": "ANGLE",
 
     "front_side":{
@@ -985,7 +985,7 @@
   {
     "color":"INSECTS",
     "point": 2,
-    "costraint": "THREEINS_ONEMUSH",
+    "costraint": "THREEINT_ONEAMUSH",
     "point_bonus": "ANGLE",
 
     "front_side":{

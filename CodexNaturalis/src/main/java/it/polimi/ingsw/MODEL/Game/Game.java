@@ -1,9 +1,9 @@
-package it.polimi.ingsw.MODEL;
+package it.polimi.ingsw.MODEL.Game;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
-import it.polimi.ingsw.MODEL.ENUM.GameState;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 
@@ -29,12 +29,11 @@ public class Game {
     private Player player4;
 
     private Map<Integer,Player> get_player_index;
-    public GameState game_state;
     private Goal goal1;
     private Goal goal2;
 
     private CenterCards cards_in_center;
-    private Deck gold_deck, resources_deck, starting_cards_deck;
+    private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
     public Goal getGoal1() {
