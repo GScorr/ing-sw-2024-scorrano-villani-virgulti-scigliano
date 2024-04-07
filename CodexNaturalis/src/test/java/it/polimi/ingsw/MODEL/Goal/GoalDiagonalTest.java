@@ -47,22 +47,22 @@ class GoalDiagonalTest {
 /*
 inizializzo tutte le celle del gamefield con carte trasparenti, poi nel metodo totalPoint le riempio usando insert card
  */
-    GameFieldSingleCell cell1 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell2 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell3 = new GameFieldSingleCell(false, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell4 = new GameFieldSingleCell(false, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell5 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell6 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell7 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell8 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell9 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell10 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell11 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell12 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell13 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell14 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell15 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
-    GameFieldSingleCell cell16 = new GameFieldSingleCell(true, tc, AnglesEnum.MUSHROOMS, tc);
+    GameFieldSingleCell cell1 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell2 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell3 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell4 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell5 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell6 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell7 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell8 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell9 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell10 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell11 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell12 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell13 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell14 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell15 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell16 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
     GameFieldSingleCell[][] campo = new GameFieldSingleCell[4][4];
     GameField gameField = new GameField(campo);
 
