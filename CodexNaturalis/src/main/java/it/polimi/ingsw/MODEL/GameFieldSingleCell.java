@@ -26,7 +26,7 @@ public class GameFieldSingleCell {
     public PlayCard getCard() {
         if ( filled ) return card;
         else {
-        System.out.println("ERROR: THERE IS NO CARD HERE pos " + card);
+        System.out.println("ERROR: THERE IS NO CARD HERE pos " + value);
         return null;}
     }
     public void setCard(PlayCard card) {
