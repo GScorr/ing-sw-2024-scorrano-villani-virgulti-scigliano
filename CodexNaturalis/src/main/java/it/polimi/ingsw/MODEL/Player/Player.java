@@ -51,7 +51,6 @@ public class Player implements PlayerObserver {
     private PlayerState player_state;
     private GameField game_field;
     private PlayCard starting_card;
-
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
     private int player_points = 0;
