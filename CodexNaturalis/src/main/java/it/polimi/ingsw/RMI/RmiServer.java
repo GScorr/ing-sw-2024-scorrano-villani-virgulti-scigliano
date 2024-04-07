@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.rmi.RemoteException;
@@ -23,11 +24,11 @@ public class RmiServer implements VirtualServer{
         field_controller = fieldController;
     }
 
-    final BlockingQueue<GameField> updates = new ArrayBlockingQueue<>(20);
+    final BlockingQueue<GameFieldSingleCell[][]> updates = new ArrayBlockingQueue<>(20);
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
 
         while (true){
-            GameField update = updates.take();
+            GameFieldSingleCell[][] update = updates.take();
             synchronized (this.clients){
                 for(var c: this.clients){
                     c.showUpdate(update);
@@ -47,7 +48,13 @@ public class RmiServer implements VirtualServer{
     public void checkPlacingRMI(PlayCard card, int x, int y) throws RemoteException {
         System.err.println("insert request received");
         this.field_controller.checkPlacing(card, x, y);
-        GameField current_state = this.field_controller
+        GameFieldSingleCell[][] current_state = this.field_controller.getCurrent();
+        try
+        {
+            updates.put(current_state);
+        }catch (InterruptedException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
