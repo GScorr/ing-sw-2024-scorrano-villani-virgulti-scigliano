@@ -1,9 +1,6 @@
 package it.polimi.ingsw.MODEL.Goal;
 
-import CONSTANTS.Constants;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.*;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
@@ -12,18 +9,9 @@ import it.polimi.ingsw.MODEL.Game.DeckCreation;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import org.junit.jupiter.api.Test;
-import com.google.gson.*;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GoalDiagonalTest {
 

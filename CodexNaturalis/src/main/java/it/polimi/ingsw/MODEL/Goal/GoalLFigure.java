@@ -1,6 +1,6 @@
 package it.polimi.ingsw.MODEL.Goal;
 
-import CONSTANTS.Constants;
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
