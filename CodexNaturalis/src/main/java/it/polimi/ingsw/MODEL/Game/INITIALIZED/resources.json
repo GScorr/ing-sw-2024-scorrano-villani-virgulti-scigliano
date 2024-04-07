@@ -364,7 +364,7 @@
   {
     "color":"PLANT",
     "front_side":{
-      "angle_left_up": "MUSHROOM",
+      "angle_left_up": "MUSHROOMS",
       "angle_right_up": "PLANT",
       "angle_left_down": "NONE",
       "angle_right_down": "PEN",
