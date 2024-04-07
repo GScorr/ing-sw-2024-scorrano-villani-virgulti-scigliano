@@ -155,12 +155,13 @@ public class Game implements GameSubject, GameObserver{
     }
 
 
-    public Game( DeckGoalCard goal_deck) {
+    public Game( /* DeckGoalCard goal_deck */) {
         this.creation = new DeckCreation();
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getStartingDeck());
-        this.goal_deck = goal_deck;
+
+        //this.goal_deck = goal_deck;
 
     }
 

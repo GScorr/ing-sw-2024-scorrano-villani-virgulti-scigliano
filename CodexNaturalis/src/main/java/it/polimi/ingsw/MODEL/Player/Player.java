@@ -1,4 +1,5 @@
 package it.polimi.ingsw.MODEL.Player;
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Game.GameObserver;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.State.*;
 
@@ -70,11 +72,16 @@ public class Player implements PlayerObserver,PlayerSubject {
 
     GameObserver gameObserver;
 
-    public Player(boolean isFirst, ColorsEnum color, GameField game_field){
+
+
+    public Player(boolean isFirst, ColorsEnum color){
         this.isFirst = isFirst;
         this.color = color;
         this.player_state = PlayerState.NOT_INITIALIZED;
-        this.game_field = game_field;
+
+
+        /*this.game_field = */
+
         this.actual_state = not_initialized;
     }
     /*
