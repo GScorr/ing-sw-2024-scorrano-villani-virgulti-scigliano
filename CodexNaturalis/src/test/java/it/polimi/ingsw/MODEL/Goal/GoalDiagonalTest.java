@@ -66,7 +66,8 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
     GameFieldSingleCell cell16 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
     GameFieldSingleCell[][] campo = new GameFieldSingleCell[4][4];
     GameField gameField = new GameField(campo);
-    GoalStrategy colore_diagonale;
+    GoalStrategy colore_diagonale = new GoalDiagonal();
+    Goal goal = new Goal(colore_diagonale, 4, AnglesEnum.MUSHROOMS);
 
     @Test
     void totalPoints() {
@@ -170,12 +171,12 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleLeftDown());
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleRightDown());
 */
-        GoalDiagonal goalDiagonal = new GoalDiagonal();
+        //GoalDiagonal goalDiagonal = new GoalDiagonal();
 
         //Goal g = new Goal(goalDiagonal, 4,AnglesEnum.MUSHROOMS);
         //int tot = g.numPoints(gameField);
 
-        int tot = goalDiagonal.totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
+        int tot = colore_diagonale.totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
         System.err.println("risultato dell'operazione = "+tot);
         assertEquals(4, tot);
 
