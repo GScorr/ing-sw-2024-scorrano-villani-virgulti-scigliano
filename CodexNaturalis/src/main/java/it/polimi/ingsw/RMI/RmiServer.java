@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -43,8 +44,10 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public void checkPlacingRMI(int x, int y) throws RemoteException {
-
+    public void checkPlacingRMI(PlayCard card, int x, int y) throws RemoteException {
+        System.err.println("insert request received");
+        this.field_controller.checkPlacing(card, x, y);
+        GameField current_state = this.field_controller
     }
 
     @Override
@@ -66,4 +69,7 @@ public class RmiServer implements VirtualServer{
     public void resourcePointsChange(PlayCard card, int x, int y) throws RemoteException {
 
     }
+
+
+
 }

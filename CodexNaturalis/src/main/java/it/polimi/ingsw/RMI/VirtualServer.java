@@ -12,7 +12,7 @@ public interface VirtualServer extends Remote {
     public void connect(VirtualView client) throws RemoteException;
 
     //functions in GameFieldController
-    public void checkPlacingRMI(int x, int y) throws RemoteException;
+    public void checkPlacingRMI(PlayCard card, int x, int y) throws RemoteException;
     public void checkGoldConstraintsRMI(Costraint val) throws  RemoteException;
     public void goldPointsCountRMI(GoldCard card, int x, int y) throws  RemoteException;
     public void resourcePointsCountRMI(ResourceCard card) throws RemoteException;

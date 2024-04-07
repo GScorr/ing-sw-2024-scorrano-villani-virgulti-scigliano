@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/DeckCreation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/DeckCreation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonalTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/VirtualServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/VirtualServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,42 +43,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.GestioneViewTest.scegliCarta.executor": "Debug",
-    "JUnit.GoalDiagonalTest.creteResourceDeck.executor": "Run",
-    "JUnit.GoalDiagonalTest.executor": "Run",
-    "JUnit.GoalDiagonalTest.testGoalDiagonal.executor": "Run",
-    "JUnit.GoalDiagonalTest.totalPoints.executor": "Run",
-    "JUnit.PlayerTest.addPoints.executor": "Debug",
-    "JUnit.PlayerTest.getColor.executor": "Run",
-    "JUnit.PlayerTest.getIsFirst.executor": "Run",
-    "JUnit.PlayerTest.getPlayerState.executor": "Run",
-    "JUnit.PlayerTest.insertCard.executor": "Debug",
-    "JUnit.PlayerTest.nextStatePlayer.executor": "Run",
-    "JUnit.PlayerTest.placeCard.executor": "Run",
-    "JUnit.PlayerTest.setPlayer_state.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.GestioneViewTest.scegliCarta.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.GoalDiagonalTest.creteResourceDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.testGoalDiagonal.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.addPoints.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.getColor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getIsFirst.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getPlayerState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.insertCard.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.nextStatePlayer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.placeCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.setPlayer_state.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -467,7 +468,8 @@
     <MESSAGE value="Creazione Design Pattern StatePlayer e relativa modifica di Player&#10;&#10;&#10;Quando si andranno a chiamare i metodi in player si devono chiamare con actual_state" />
     <MESSAGE value="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json" />
     <MESSAGE value="aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
+    <MESSAGE value="CREAZIONE RMI / CAMBIAMENTI GESTIONE GAMEFIELD" />
+    <option name="LAST_COMMIT_MESSAGE" value="CREAZIONE RMI / CAMBIAMENTI GESTIONE GAMEFIELD" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

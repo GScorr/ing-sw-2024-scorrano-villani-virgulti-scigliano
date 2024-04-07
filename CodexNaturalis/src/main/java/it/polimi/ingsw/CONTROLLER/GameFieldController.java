@@ -5,7 +5,9 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
+import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 
 //import javax.smartcardio.Card;
 
@@ -17,7 +19,7 @@ public class GameFieldController {
     // TODO capire come collegare a MODEL
     // Function to check if the card can be placed,
     // Return false if you can't, true if you can
-    public boolean checkPlacing(PlayCard card,int x, int y){
+    public synchronized boolean checkPlacing(PlayCard card,int x, int y){
         //Check that the card we are trying to place doesn't completely cover another card and that the sides of the cards aren't completely covered (all 4 of them)
         if   (  player_field.getField()[x][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() )   ||
                 player_field.getField()[x][y].getCard().equals( player_field.getField()[x][y+1].getCard() )     ||
@@ -52,7 +54,7 @@ public class GameFieldController {
     }
     //check for all constraints of Gold Card,
     // given a value of the constraint
-    public boolean checkGoldConstraints(Costraint val){
+    public synchronized boolean checkGoldConstraints(Costraint val){
         return switch (val) {
             case FIVEINS -> player_field.getNumOfInsect() >= 5;
             case FIVEANIM -> player_field.getNumOfAnimal() >= 5;
@@ -90,7 +92,7 @@ public class GameFieldController {
         };
     }
     //count number of points if the card is Gold and has bonus related to number of stuff
-    public int goldPointsCount(GoldCard card, int x, int y){
+    public synchronized int goldPointsCount(GoldCard card, int x, int y){
         switch ( card.getPointBonus() ){
             case NONE: return 0;
             case PEN: return player_field.getNumOfPen();
@@ -109,12 +111,12 @@ public class GameFieldController {
         return 0;
     }
     //count number of points for resource cards
-    public int resourcePointsCount(ResourceCard card){
+    public synchronized int resourcePointsCount(ResourceCard card){
         return card.getPoint();
     }
     //check all the resources num that the field will have after putting the card,
     // given the card and the position
-    public void resourcePointsChange(PlayCard card, int x, int y){
+    public synchronized void resourcePointsChange(PlayCard card, int x, int y){
 
         //Add for each side and for the central resource(if it exist) their counter
         player_field.addOne( card.getSide().getCentral_resource() );
@@ -128,6 +130,10 @@ public class GameFieldController {
         if( !player_field.getField()[x+1][y].isEmpty() )   player_field.subOne( player_field.getField()[x+1][y].getValue() );
         if( !player_field.getField()[x][y+1].isEmpty() )   player_field.subOne( player_field.getField()[x][y+1].getValue() );
         if( !player_field.getField()[x+1][y+1].isEmpty() ) player_field.subOne( player_field.getField()[x+1][y+1].getValue() );
+    }
+
+    public synchronized GameFieldSingleCell[][] getCurrent(){
+        return  this.player_field.getField();
     }
 
 }
