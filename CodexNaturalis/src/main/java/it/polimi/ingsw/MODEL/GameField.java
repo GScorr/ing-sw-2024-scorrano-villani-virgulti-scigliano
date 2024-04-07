@@ -109,7 +109,6 @@ public class GameField {
     public boolean insertCard(PlayCard card, int x, int y){
 
         if( !field[x][y].isEmpty() ) field[x][y].setCardDown(field[x][y].getCard());
-
         if( !field[x+1][y].isEmpty() ) field[x+1][y].setCardDown(field[x][y].getCard());
         if( !field[x][y+1].isEmpty() ) field[x][y+1].setCardDown(field[x][y].getCard());
         if( !field[x+1][y+1].isEmpty() ) field[x+1][y+1].setCardDown(field[x][y].getCard());
