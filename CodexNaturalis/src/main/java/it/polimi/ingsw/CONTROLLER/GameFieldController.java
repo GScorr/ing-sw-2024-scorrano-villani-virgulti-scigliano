@@ -15,17 +15,9 @@ public class GameFieldController {
 
 
     // TODO capire come collegare a MODEL
-    public void onPlaceCardReceived(){
-        PlayCard card;
-        int x,y;
-
-
-
-    }
-
     // Function to check if the card can be placed,
     // Return false if you can't, true if you can
-    public boolean checkPlacing(int x, int y){
+    public boolean checkPlacing(PlayCard card,int x, int y){
         //Check that the card we are trying to place doesn't completely cover another card and that the sides of the cards aren't completely covered (all 4 of them)
         if   (  player_field.getField()[x][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() )   ||
                 player_field.getField()[x][y].getCard().equals( player_field.getField()[x][y+1].getCard() )     ||
@@ -40,83 +32,62 @@ public class GameFieldController {
                 !player_field.getField()[x+1][y+1].isEmpty())
         {
             //Check if the card(s) that exist(s) have a valid angle that is not NONE --> check what is NONE in AnglesEnum  (if you don't understand this there is an equivalent if in the end**)
-            return  (player_field.getField()[x][y].isEmpty() || !player_field.getField()[x][y].getValue().equals(AnglesEnum.NONE)) &&
-                    (player_field.getField()[x + 1][y].isEmpty() || !player_field.getField()[x + 1][y].getValue().equals(AnglesEnum.NONE)) &&
-                    (player_field.getField()[x][y + 1].isEmpty() || !player_field.getField()[x][y + 1].getValue().equals(AnglesEnum.NONE)) &&
-                    (player_field.getField()[x + 1][y + 1].isEmpty() || !player_field.getField()[x + 1][y + 1].getValue().equals(AnglesEnum.NONE));
+            if( ( !player_field.getField()[x][y].isEmpty() && player_field.getField()[x][y].getValue().equals( AnglesEnum.NONE) ) ||
+                    ( !player_field.getField()[x+1][y].isEmpty() && player_field.getField()[x+1][y].getValue().equals( AnglesEnum.NONE) ) ||
+                    ( !player_field.getField()[x][y+1].isEmpty() && player_field.getField()[x][y+1].getValue().equals( AnglesEnum.NONE) ) ||
+                    ( !player_field.getField()[x+1][y+1].isEmpty() && player_field.getField()[x+1][y+1].getValue().equals( AnglesEnum.NONE) ) ) return false;
+            else{
+                if (card instanceof GoldCard) {
+                    if ( !checkGoldConstraints( card.getCostraint()) ) return false;
+                    player_field.getPlayer().addPoints(goldPointsCount((GoldCard) card, x, y));
+                }
+                if (card instanceof ResourceCard ) player_field.getPlayer().addPoints( resourcePointsCount(((ResourceCard) card)));
+                resourcePointsChange(card, x, y);
+
+                return player_field.insertCard(card, x, y);
+
+            }
         }
         return false;
     }
     //check for all constraints of Gold Card,
     // given a value of the constraint
     public boolean checkGoldConstraints(Costraint val){
-        switch ( val ){
-            case FIVEINS:
-                return player_field.getNumOfInsect() >= 5;
-            case FIVEANIM:
-                return player_field.getNumOfAnimal() >= 5;
-            case FIVEMUSH:
-                return player_field.getNumOfMushroom() >= 5;
-            case FIVEPLANT:
-                return player_field.getNumOfPlant() >= 5;
-            case THREEINS:
-                return player_field.getNumOfInsect() >= 3;
-            case THREEANIM:
-                return player_field.getNumOfAnimal() >= 3;
-            case THREEMUSH:
-                return player_field.getNumOfMushroom() >= 3;
-            case THREEPLANT:
-                return player_field.getNumOfPlant() >= 3;
-            case TWOANIM_ONEINS:
-                return player_field.getNumOfAnimal() >= 2 && player_field.getNumOfInsect() >= 1;
-            case TWOINS_ONEANIM:
-                return player_field.getNumOfInsect() >= 2 && player_field.getNumOfAnimal() >= 1;
-            case TWOINS_ONEMUSH:
-                return player_field.getNumOfInsect() >= 2 && player_field.getNumOfMushroom() >= 1;
-            case TWOMUSH_ONEINS:
-                return player_field.getNumOfMushroom() >= 2 && player_field.getNumOfInsect() >= 1;
-            case TWOANIM_ONEMUSH:
-                return player_field.getNumOfAnimal() >= 2 && player_field.getNumOfMushroom() >= 1;
-            case TWOINS_ONEPLANT:
-                return player_field.getNumOfInsect() >= 2 && player_field.getNumOfPlant() >= 1;
-            case TWOMUSH_ONEANIM:
-                return player_field.getNumOfMushroom() >= 2 && player_field.getNumOfAnimal() >= 1;
-            case TWOPLANT_ONEINS:
-                return player_field.getNumOfPlant() >= 2 && player_field.getNumOfInsect() >= 1;
-            case THREEANIM_ONEINS:
-                return player_field.getNumOfAnimal() >= 3 && player_field.getNumOfInsect() >= 1;
-            case THREEINS_ONEANIM:
-                return player_field.getNumOfInsect() >= 3 && player_field.getNumOfAnimal() >= 1;
-            case THREEMUSH_ONEINS:
-                return player_field.getNumOfMushroom() >= 3 && player_field.getNumOfInsect() >= 1;
-            case TWOANIM_ONEPLANT:
-                return player_field.getNumOfAnimal() >= 2 && player_field.getNumOfPlant() >= 1;
-            case TWOMUSH_ONEPLANT:
-                return player_field.getNumOfMushroom() >= 2 && player_field.getNumOfPlant() >= 1;
-            case TWOPLANT_ONEANIM:
-                return player_field.getNumOfPlant() >= 2 && player_field.getNumOfAnimal() >= 1;
-            case TWOPLANT_ONEMUSH:
-                return player_field.getNumOfPlant() >= 2 && player_field.getNumOfMushroom() >= 1;
-            case THREEINS_ONEPLANT:
-                return player_field.getNumOfInsect() >= 3 && player_field.getNumOfPlant() >= 1;
-            case THREEINT_ONEAMUSH:
-                return player_field.getNumOfInsect() >= 3 && player_field.getNumOfMushroom() >= 1;
-            case THREEMUSH_ONEANIM:
-                return player_field.getNumOfMushroom() >= 3 && player_field.getNumOfAnimal() >= 1;
-            case THREEPLANT_ONEINS:
-                return player_field.getNumOfPlant() >= 3 && player_field.getNumOfInsect() >= 1;
-            case THREEANIM_ONEAMUSH:
-                return player_field.getNumOfAnimal() >= 3 && player_field.getNumOfMushroom() >= 1;
-            case THREEANIM_ONEPLANT:
-                return player_field.getNumOfAnimal() >= 3 && player_field.getNumOfPlant() >= 1;
-            case THREEMUSH_ONEPLANT:
-                return player_field.getNumOfMushroom() >= 3 && player_field.getNumOfPlant() >= 1;
-            case THREEPLANT_ONEANIM:
-                return player_field.getNumOfPlant() >= 3 && player_field.getNumOfAnimal() >= 1;
-            case THREEPLANT_ONEAMUSH:
-                return player_field.getNumOfPlant() >= 3 && player_field.getNumOfMushroom() >= 1;
-        }
-        return true;
+        return switch (val) {
+            case FIVEINS -> player_field.getNumOfInsect() >= 5;
+            case FIVEANIM -> player_field.getNumOfAnimal() >= 5;
+            case FIVEMUSH -> player_field.getNumOfMushroom() >= 5;
+            case FIVEPLANT -> player_field.getNumOfPlant() >= 5;
+            case THREEINS -> player_field.getNumOfInsect() >= 3;
+            case THREEANIM -> player_field.getNumOfAnimal() >= 3;
+            case THREEMUSH -> player_field.getNumOfMushroom() >= 3;
+            case THREEPLANT -> player_field.getNumOfPlant() >= 3;
+            case TWOANIM_ONEINS -> player_field.getNumOfAnimal() >= 2 && player_field.getNumOfInsect() >= 1;
+            case TWOINS_ONEANIM -> player_field.getNumOfInsect() >= 2 && player_field.getNumOfAnimal() >= 1;
+            case TWOINS_ONEMUSH -> player_field.getNumOfInsect() >= 2 && player_field.getNumOfMushroom() >= 1;
+            case TWOMUSH_ONEINS -> player_field.getNumOfMushroom() >= 2 && player_field.getNumOfInsect() >= 1;
+            case TWOANIM_ONEMUSH -> player_field.getNumOfAnimal() >= 2 && player_field.getNumOfMushroom() >= 1;
+            case TWOINS_ONEPLANT -> player_field.getNumOfInsect() >= 2 && player_field.getNumOfPlant() >= 1;
+            case TWOMUSH_ONEANIM -> player_field.getNumOfMushroom() >= 2 && player_field.getNumOfAnimal() >= 1;
+            case TWOPLANT_ONEINS -> player_field.getNumOfPlant() >= 2 && player_field.getNumOfInsect() >= 1;
+            case THREEANIM_ONEINS -> player_field.getNumOfAnimal() >= 3 && player_field.getNumOfInsect() >= 1;
+            case THREEINS_ONEANIM -> player_field.getNumOfInsect() >= 3 && player_field.getNumOfAnimal() >= 1;
+            case THREEMUSH_ONEINS -> player_field.getNumOfMushroom() >= 3 && player_field.getNumOfInsect() >= 1;
+            case TWOANIM_ONEPLANT -> player_field.getNumOfAnimal() >= 2 && player_field.getNumOfPlant() >= 1;
+            case TWOMUSH_ONEPLANT -> player_field.getNumOfMushroom() >= 2 && player_field.getNumOfPlant() >= 1;
+            case TWOPLANT_ONEANIM -> player_field.getNumOfPlant() >= 2 && player_field.getNumOfAnimal() >= 1;
+            case TWOPLANT_ONEMUSH -> player_field.getNumOfPlant() >= 2 && player_field.getNumOfMushroom() >= 1;
+            case THREEINS_ONEPLANT -> player_field.getNumOfInsect() >= 3 && player_field.getNumOfPlant() >= 1;
+            case THREEINT_ONEAMUSH -> player_field.getNumOfInsect() >= 3 && player_field.getNumOfMushroom() >= 1;
+            case THREEMUSH_ONEANIM -> player_field.getNumOfMushroom() >= 3 && player_field.getNumOfAnimal() >= 1;
+            case THREEPLANT_ONEINS -> player_field.getNumOfPlant() >= 3 && player_field.getNumOfInsect() >= 1;
+            case THREEANIM_ONEAMUSH -> player_field.getNumOfAnimal() >= 3 && player_field.getNumOfMushroom() >= 1;
+            case THREEANIM_ONEPLANT -> player_field.getNumOfAnimal() >= 3 && player_field.getNumOfPlant() >= 1;
+            case THREEMUSH_ONEPLANT -> player_field.getNumOfMushroom() >= 3 && player_field.getNumOfPlant() >= 1;
+            case THREEPLANT_ONEANIM -> player_field.getNumOfPlant() >= 3 && player_field.getNumOfAnimal() >= 1;
+            case THREEPLANT_ONEAMUSH -> player_field.getNumOfPlant() >= 3 && player_field.getNumOfMushroom() >= 1;
+            default -> true;
+        };
     }
     //count number of points if the card is Gold and has bonus related to number of stuff
     public int goldPointsCount(GoldCard card, int x, int y){
