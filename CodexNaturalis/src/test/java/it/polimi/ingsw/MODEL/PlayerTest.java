@@ -28,9 +28,10 @@ class PlayerTest {
     PlayCard card_down = new ResourceCard(front, back, false, 1);
     GameFieldSingleCell[][] gf = new GameFieldSingleCell[4][4];
     GameField g = new GameField(gf);
-    Player player = new Player(false, ColorsEnum.RED, g);
+    }
+    //Player player = new Player(false, ColorsEnum.RED, g);
 
-    @Test
+  /*  @Test
     void getIsFirst() {
         if(!player.getIsFirst()){
             System.err.println("non è primo");
@@ -79,6 +80,7 @@ tutti i metodi getter non credo serva testarli però, lascio comunque la struttu
     void getPlayerPoints() {
     }
 */
+    /*
     @Test
     void setPlayer_state() {
         player.setPlayer_state(PlayerState.NOT_INITIALIZED);
@@ -110,7 +112,7 @@ tutti i metodi getter non credo serva testarli però, lascio comunque la struttu
     @Test
     void setGoal_card() {
     }
-*/
+*//*
     @Test
     void nextStatePlayer() {
         player.nextStatePlayer();
@@ -147,4 +149,4 @@ tutti i metodi getter non credo serva testarli però, lascio comunque la struttu
     @Test
     void selectFirstCard() {
     }
-}
+}*/

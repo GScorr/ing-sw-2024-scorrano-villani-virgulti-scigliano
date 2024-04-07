@@ -71,6 +71,17 @@ public class DeckCreation {
 
     }
 
+    public static List<GoldCard> getDeck_gold() {
+        return deck_gold;
+    }
+
+    public static List<ResourceCard> getDeck_resources() {
+        return deck_resources;
+    }
+
+    public static List<StartingCard> getDeck_starting() {
+        return deck_starting;
+    }
 
     public void creteResourceDeck(){
         for (JsonElement element : resources_jsonArray) {
