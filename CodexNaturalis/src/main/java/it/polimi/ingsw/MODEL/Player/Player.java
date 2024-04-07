@@ -36,7 +36,7 @@ import java.util.List;
 * PLAYER_SUBJECT
 * */
 public class Player implements PlayerObserver,PlayerSubject {
-
+    private String name;
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
@@ -73,15 +73,28 @@ public class Player implements PlayerObserver,PlayerSubject {
 
 
 
-    public Player(boolean isFirst, ColorsEnum color){
-        this.isFirst = isFirst;
+    public Player( ColorsEnum color, String name ){
+        this.name = name;
         this.color = color;
         this.player_state = PlayerState.NOT_INITIALIZED;
-
-
-        /*this.game_field = */
-
+        createField();
         this.actual_state = not_initialized;
+    }
+
+    private void createField(){
+        Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+        Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+        PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+        GameFieldSingleCell[][] array_single_cell = new GameFieldSingleCell[45][45];
+        for (int i = 0; i < 45; i++) {
+            for (int j = 0; j < 45; j++) {
+                GameFieldSingleCell tmp = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+                array_single_cell[i][j] = tmp;
+            }
+        }
+
+        this.game_field = new GameField(array_single_cell);
+
     }
     /*
     getter:
