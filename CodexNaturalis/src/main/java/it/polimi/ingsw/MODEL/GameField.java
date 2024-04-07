@@ -103,14 +103,15 @@ public class GameField {
         return num_of_feather;
     }
 
+    public Player getPlayer(){return  this.player;}
     //Insert of a card, it checks if the card can be placed and updates the resources counter and
     // it changes the values of the matrix so that they are coherent with the new placed card
     public boolean insertCard(PlayCard card, int x, int y){
 
-        field[x][y].setCardDown(field[x][y].getCard());
-        field[x+1][y].setCardDown(field[x][y].getCard());
-        field[x][y+1].setCardDown(field[x][y].getCard());
-        field[x+1][y+1].setCardDown(field[x][y].getCard());
+        if( !field[x][y].isEmpty() ) field[x][y].setCardDown(field[x][y].getCard());
+        if( !field[x+1][y].isEmpty() ) field[x+1][y].setCardDown(field[x][y].getCard());
+        if( !field[x][y+1].isEmpty() ) field[x][y+1].setCardDown(field[x][y].getCard());
+        if( !field[x+1][y+1].isEmpty() ) field[x+1][y+1].setCardDown(field[x][y].getCard());
 
         //insert card in the 4 cells
         field[x][y].setFilled(true);

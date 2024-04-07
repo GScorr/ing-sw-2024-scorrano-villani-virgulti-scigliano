@@ -1,5 +1,6 @@
 package it.polimi.ingsw.MODEL.Goal;
 
+import CONSTANTS.Constants;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -26,42 +27,115 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GoalDiagonalTest {
 
-    DeckCreation creation = new DeckCreation();
-    List<ResourceCard> mazzo_risorse_list = creation.getDeck_resources();
+    DeckCreation creation = new DeckCreation(); //crea il deck
+    List<ResourceCard> mazzo_risorse_list = creation.getDeck_resources(); //deck visto come lista
 
-    PlayCard carta = mazzo_risorse_list.get(1); //prendo la carta in posizione indiex per le prove
+    PlayCard carta0 = mazzo_risorse_list.get(0); //prendo la carta in posizione indiex per le prove
+    PlayCard carta1 = mazzo_risorse_list.get(1);
+    PlayCard carta2 = mazzo_risorse_list.get(2);
+    PlayCard carta3 = mazzo_risorse_list.get(3);
+    PlayCard carta4 = mazzo_risorse_list.get(4);
     Deck resource_deck = new Deck(creation.getResourcesDeck()); //creo il deck delle carte risorce come una lista
+    /*
+    questa è la carta trasparente, potremmo anche pensare di metterla in un json a parte
+     */
+    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    private final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
 
 
-
-/*    GameFieldSingleCell gameFieldSingleCell1 = new GameFieldSingleCell(true, card1, AnglesEnum.MUSHROOMS, card2);
-    GameFieldSingleCell gameFieldSingleCell2 = new GameFieldSingleCell(true, card1, AnglesEnum.MUSHROOMS, card2);
-    GameFieldSingleCell gameFieldSingleCell3 = new GameFieldSingleCell(false, card1, AnglesEnum.MUSHROOMS, card2);
-    GameFieldSingleCell gameFieldSingleCell4 = new GameFieldSingleCell(false, card1, AnglesEnum.MUSHROOMS, card2);
-    GameFieldSingleCell gameFieldSingleCell5 = new GameFieldSingleCell(true, card1, AnglesEnum.MUSHROOMS, card2);
-    GameFieldSingleCell gameFieldSingleCell6 = new GameFieldSingleCell(true, card1, AnglesEnum.MUSHROOMS, card2);
-*/
-   // GameFieldSingleCell[][] campo = new GameFieldSingleCell[4][4];
-
-  //  GameField gameField = new GameField(campo);
+/*
+inizializzo tutte le celle del gamefield con carte trasparenti, poi nel metodo totalPoint le riempio usando insert card
+ */
+    GameFieldSingleCell cell1 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell2 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell3 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell4 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell5 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell6 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell7 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell8 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell9 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell10 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell11 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell12 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell13 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell14 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell15 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell cell16 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
+    GameFieldSingleCell[][] campo = new GameFieldSingleCell[4][4];
+    GameField gameField = new GameField(campo);
 
     @Test
     void totalPoints() {
+        Constants.MATRIXDIM=4; //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
+        //inizializzo tutte le celle del campo
+        campo[0][0] = cell1;
+        campo[0][1] = cell2;
+        campo[0][2] = cell3;
+        campo[0][3] = cell4;
+        campo[1][0] = cell5;
+        campo[1][1] = cell6;
+        campo[1][2] = cell7;
+        campo[1][3] = cell8;
+        campo[2][0] = cell9;
+        campo[2][1] = cell10;
+        campo[2][2] = cell11;
+        campo[2][3] = cell12;
+        campo[3][0] = cell13;
+        campo[3][1] = cell14;
+        campo[3][2] = cell15;
+        campo[3][3] = cell16;
+
+        gameField.insertCard(carta0, 0, 0); //inserisco la carta nel gamefield
+        gameField.insertCard(carta1, 1, 1);
+        gameField.insertCard(carta2, 2, 2);
+        //inserisco altre due carte per il controllo lungo l'altra diagonale tenendo tutte le carte insieme
+        gameField.insertCard(carta3, 2, 0);
+        gameField.insertCard(carta4, 0, 2);
+
+        //stampo tutte le carte nel campo
+        System.err.println("carta 0");
+
+        System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleLeftUp());
+        System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleRightUp());
+        System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleLeftDown());
+        System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleRightDown());
+
+        System.err.println("carta 1");
+
+        System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleLeftUp());
+        System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleRightUp());
+        System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleLeftDown());
+        System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleRightDown());
+
+        System.err.println("carta 2");
+
+        System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleLeftUp());
+        System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleRightUp());
+        System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleLeftDown());
+        System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleRightDown());
+
+        System.err.println("carta 3");
+
+        System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleLeftUp());
+        System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleRightUp());
+        System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleLeftDown());
+        System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleRightDown());
+
+        System.err.println("carta 4");
+        System.err.println(gameField.getCell(0, 2, 4).isEmpty()); //return false -> posizione non vuota probabile bug in insierimento carta
+        System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleLeftUp());
+        System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleRightUp());
+        System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleLeftDown());
+        System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleRightDown());
+
+        //GoalDiagonal goalDiagonal = new GoalDiagonal();
+
+       // int i = goalDiagonal.totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
+       // System.err.println("risultato dell'operazione = "+i);
 
 
-
-
-        //gameField.insertCard(card1, 0, 0); //inserisco la carta nel gamefield
-
-
-
-        GoalDiagonal goalDiagonal = new GoalDiagonal();
-
-        //int i = goalDiagonal.totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
-        //System.err.println("risultato dell'operazione = "+i);
-/*
-non va perche la dimensione deve essere di 44 ora devo capire come istanziare tutto
- */
 
 
     }
