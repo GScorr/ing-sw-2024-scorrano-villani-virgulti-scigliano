@@ -8,6 +8,7 @@ import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Game.GameObserver;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.State.*;
@@ -25,7 +26,14 @@ import java.util.List;
         Per questo è importante chiamare i metodi di Player direttamente da Game => non cambia solo lo stato del player attuale ma anche degli altri
         }
 *   -*/
-public class Player implements PlayerObserver {
+
+
+
+/* (concetto spiegato  nella classe GAME
+* PLAYER_OBSERVER:
+* PLAYER_SUBJECT
+* */
+public class Player implements PlayerObserver,PlayerSubject {
 
     public PState
             not_initialized = new NotInitialized(this),
@@ -58,6 +66,8 @@ public class Player implements PlayerObserver {
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
+
+    GameObserver gameObserver;
 
     public Player(boolean isFirst, ColorsEnum color, GameField game_field){
         this.isFirst = isFirst;
@@ -161,11 +171,7 @@ public class Player implements PlayerObserver {
     public void nextStatePlayer(){
         switch(actual_state.getNameState()){
             case "WAIT_TURN" :
-                if(this.isFirst ){ // only when the state of player is begin
                     setPlayer_state( place_card);
-                }else {
-                    setPlayer_state( wait_turn);
-                }
             case "PLACE_CARD":
                 setPlayer_state( draw_card );
             case "DRAW_CARD":
@@ -200,8 +206,8 @@ public class Player implements PlayerObserver {
         this.cards_in_hand.set(this.index_removed_card, card);
     }
 
-    //Una volta che il giocatore ha pescato una carta ne deve pescare una
-    //Il front end sceglierà quale metodo chiamare in base a dove uno clicca.
+    //Una volta che il giocatore ha giocato una carta ne deve pescare una
+    //Il front end sceglierà quale metodo chiamare in base a dove uno clicca
     public void peachCardFromGoldDeck(){
        insertCard(this.gold_deck.drawCard());
     }
@@ -226,6 +232,9 @@ public class Player implements PlayerObserver {
 
     public void selectGoal(int i){
             this.goal_card = initial_goal_cards.get(i);
+
+            //notifica al Game che il player ha chiamato questo metodo
+            gameObserver.updateChooseGoal();
     }
 
 
@@ -234,18 +243,25 @@ public class Player implements PlayerObserver {
 
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 0, 0);
+            //notifica al Game che il player ha chiamato questo metodo
+            gameObserver.updateChooseStartingCard();
     }
 
 
 
+    //questo metodi servo
+    @Override
+    public void registerObserver(GameObserver gameObserver) {
+        this.gameObserver = gameObserver;
+    }
 
+    @Override
+    public void removeObserver(GameObserver gameObserver) {
 
+    }
 
+    @Override
+    public void notifyObservers() {
 
-
-
-
-
-
-
+    }
 }
