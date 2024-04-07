@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiunta di due metodi get in DeckCreation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/DeckCreation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/DeckCreation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CONSTANTS/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CONSTANTS/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonalTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/PlayerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +87,7 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GoalDiagonalTest.creteResourceDeck">
+  <component name="RunManager" selected="JUnit.GoalDiagonalTest.totalPoints">
     <configuration name="DeckCreation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Game.DeckCreation" />
       <module name="PSP30" />
@@ -179,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GoalDiagonalTest.totalPoints" />
         <item itemvalue="JUnit.GoalDiagonalTest.creteResourceDeck" />
         <item itemvalue="JUnit.GoalDiagonalTest" />
         <item itemvalue="Application.DeckCreation" />
         <item itemvalue="JUnit.GoalDiagonalTest.testGoalDiagonal" />
-        <item itemvalue="JUnit.GoalDiagonalTest.totalPoints" />
       </list>
     </recent_temporary>
   </component>
@@ -208,7 +208,7 @@
       <workItem from="1712173009113" duration="363000" />
       <workItem from="1712223757536" duration="5935000" />
       <workItem from="1712487613656" duration="24000" />
-      <workItem from="1712496737462" duration="2558000" />
+      <workItem from="1712496737462" duration="9367000" />
     </task>
     <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
       <option name="closed" value="true" />
@@ -418,7 +418,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712485289198</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="aggiunta di due metodi get in DeckCreation">
+      <option name="closed" value="true" />
+      <created>1712500541925</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1712500541925</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -467,7 +475,8 @@
     <MESSAGE value="Creazione Design Pattern StatePlayer e relativa modifica di Player&#10;&#10;&#10;Quando si andranno a chiamare i metodi in player si devono chiamare con actual_state" />
     <MESSAGE value="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json" />
     <MESSAGE value="aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
+    <MESSAGE value="aggiunta di due metodi get in DeckCreation" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunta di due metodi get in DeckCreation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
