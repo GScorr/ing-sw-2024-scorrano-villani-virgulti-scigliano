@@ -41,8 +41,14 @@ public class GameFieldSingleCell {
         this.filled = filled;
     }
     public PlayCard getCard() {
-        if ( filled ) return card;
-        else {
+        if(!isFilled() && getValue().equals(AnglesEnum.EMPTY)){ //check se ho tc come carta up
+            //System.out.println("carta trasparente nel getCard");
+            return card; //non sono certo che sia da fare così
+            //ritorno di nuovo la stessa tc in modo che diventi la card_down
+        }
+        //se è filled ritorno la carta che è adesso in up per settarla come down
+        else if ( filled ) return card;
+        else { //non dovrei entrare mai in questo ramo salvo errori particolari che analizzerò quando testo questa classe
         System.out.println("ERROR: THERE IS NO CARD HERE pos " + value); //value = valore dell'angolo nella cella
         return null;}
     }
@@ -56,13 +62,12 @@ public class GameFieldSingleCell {
         this.value = value;
     }
 
-    public PlayCard getCardDown() {
-        if(card_down.equals(carta_trasparente)){
-            //bisogna trovare il modo di mettere un controllo che checka se card_down=carta trasparente
-            //se vero allora comunque posso mettere giu una carta
-            return card_down;
+    public PlayCard getCardDown() { //filled=0 angleseenum.empty
+        if(!isFilled() && getValue().equals(AnglesEnum.EMPTY)){
+            //System.out.println("carta trasparente");
+            return card_down; //non sono certo che sia da fare così
         }
-        else{
+        else{ //credo non sia nemmeno più necessario se inizializzo tutte le celle a tc
             if ( !isEmpty() ) return card_down;
             System.out.println("ERROR: THERE IS NO CARD HERE");
             return null;
