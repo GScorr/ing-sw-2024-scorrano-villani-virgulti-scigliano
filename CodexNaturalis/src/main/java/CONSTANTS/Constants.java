@@ -1,5 +1,5 @@
 package CONSTANTS;
 
 public class Constants {
-    public static final int MATRIXDIM = 45;
+    public static int MATRIXDIM = 45;
 }
