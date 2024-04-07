@@ -110,23 +110,23 @@ public class GameField {
     public boolean insertCard(PlayCard card, int x, int y){
 
         if( !field[x][y].isEmpty() ){  //ho cambiato .getCard con .getCardDown, penso che l'errore sia qua
-            field[x][y].setCardDown(field[x][y].getCardDown());
-            System.out.println("cella base");
+            field[x][y].setCardDown(field[x][y].getCard());
+            //System.out.println("cella base");
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
         if( !field[x+1][y].isEmpty() ){
-            field[x+1][y].setCardDown(field[x][y].getCardDown());
-            System.out.println("cella riga sotto");
+            field[x+1][y].setCardDown(field[x][y].getCard());
+            //System.out.println("cella riga sotto");
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
         if( !field[x][y+1].isEmpty() ){
-            field[x][y+1].setCardDown(field[x][y].getCardDown());
-            System.out.println("cella colonna a dx");
+            field[x][y+1].setCardDown(field[x][y].getCard());
+            //System.out.println("cella colonna a dx");
             //System.out.println(field[x][y].getCard().getSide().getAngleRightUp());
         }
         if( !field[x+1][y+1].isEmpty() ){
-            field[x+1][y+1].setCardDown(field[x][y].getCardDown());
-            System.out.println("cella colonna + riga +1");
+            field[x+1][y+1].setCardDown(field[x][y].getCard());
+            //System.out.println("cella colonna + riga +1");
             //System.out.println(field[x][y].getCard().getSide().getAngleRightDown());
         }
 
@@ -137,11 +137,13 @@ public class GameField {
 
         field[x+1][y].setFilled(true);
         field[x+1][y].setCard(card);
-        field[x+1][y].setValue( card.getSide().getAngleRightUp() );
+        //field[x+1][y].setValue( card.getSide().getAngleRightUp() );
+        field[x+1][y].setValue( card.getSide().getAngleLeftDown() );
 
         field[x][y+1].setFilled(true);
         field[x][y+1].setCard(card);
-        field[x][y+1].setValue( card.getSide().getAngleLeftDown() );
+        //field[x][y+1].setValue( card.getSide().getAngleLeftDown() ); erano invertiti gli angoli che salvava -mirko-
+        field[x][y+1].setValue( card.getSide().getAngleRightUp() );
 
         field[x+1][y+1].setFilled(true);
         field[x+1][y+1].setCard(card);

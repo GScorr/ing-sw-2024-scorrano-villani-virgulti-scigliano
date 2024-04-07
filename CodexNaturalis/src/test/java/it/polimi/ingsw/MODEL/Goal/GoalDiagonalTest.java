@@ -45,7 +45,8 @@ class GoalDiagonalTest {
 
 
 /*
-inizializzo tutte le celle del gamefield con carte trasparenti, poi nel metodo totalPoint le riempio usando insert card
+inizializzo tutte le celle del gamefield con carte trasparenti sia come carta up che come card_down
+poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo fare in ogni metodo in cui uso le carte, istanziandole ogni volta
  */
     GameFieldSingleCell cell1 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
     GameFieldSingleCell cell2 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
@@ -65,6 +66,7 @@ inizializzo tutte le celle del gamefield con carte trasparenti, poi nel metodo t
     GameFieldSingleCell cell16 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
     GameFieldSingleCell[][] campo = new GameFieldSingleCell[4][4];
     GameField gameField = new GameField(campo);
+    GoalStrategy colore_diagonale;
 
     @Test
     void totalPoints() {
@@ -86,67 +88,96 @@ inizializzo tutte le celle del gamefield con carte trasparenti, poi nel metodo t
         campo[3][1] = cell14;
         campo[3][2] = cell15;
         campo[3][3] = cell16;
+        /*
+        stampa di prova
+
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                System.out.println("stampo la cella "+i+" "+j+" = "+campo[i][j].getValue());
+            }
+        }
+        */
 
         if(gameField.insertCard(carta0, 0, 0)){
-            System.err.println("0 true = ha modificato la carta trasparente");
+            //System.err.println("0 true = ha modificato la carta trasparente");
         } //inserisco la carta nel gamefield
         if(gameField.insertCard(carta1, 1, 1)){
-            System.err.println("1 true = ha modificato la carta trasparente");
+           // System.err.println("1 true = ha modificato la carta trasparente");
         }
         if(gameField.insertCard(carta2, 2, 2)){
-            System.err.println("2 true = ha modificato la carta trasparente");
+            //System.err.println("2 true = ha modificato la carta trasparente");
         }
         //inserisco altre due carte per il controllo lungo l'altra diagonale tenendo tutte le carte insieme
-        if(gameField.insertCard(carta3, 2, 0)){
-            System.err.println("3 true = ha modificato la carta trasparente");
-        }
-/*        if(gameField.insertCard(carta4, 0, 2)){
-            System.err.println("true = ha modificato la carta trasparente");
-        }
-*/
+    //    if(gameField.insertCard(carta3, 2, 0)){
+            //System.err.println("3 true = ha modificato la carta trasparente");
+      //  }
+        /*
+        stampa di prova
+
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                System.out.println("stampo la cella "+i+" "+j+" = "+campo[i][j].getValue());
+            }
+        }*/
+     //   if(gameField.insertCard(carta4, 0, 2)){
+            //System.err.println("4 true = ha modificato la carta trasparente");
+       // }
+        /*
+        stampa di prova
+
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                System.out.println("stampo la cella "+i+" "+j+" = "+campo[i][j].getValue());
+            }
+        }*/
+
+
         //stampo tutte le carte nel campo
-       // System.err.println("carta 0");
+        System.err.println("carta 0 pos 0,0, colore: "+gameField.getCell(0, 0, 4).getCard().getColore());
 
-      //  System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleLeftUp());
-      //  System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleRightUp());
-      //  System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleLeftDown());
-      //  System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleRightDown());
+    /*    System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleLeftUp());
+        System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleRightUp());
+        System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleLeftDown());
+        System.err.println(gameField.getCell(0, 0, 4).getCard().getSide().getAngleRightDown());
+*/
+        System.err.println("carta 1 pos 1,1 colore: "+gameField.getCell(1, 1, 4).getCard().getColore());
 /*
-        System.err.println("carta 1");
-
         System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleLeftUp());
         System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleRightUp());
         System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleLeftDown());
         System.err.println(gameField.getCell(1, 1, 4).getCard().getSide().getAngleRightDown());
-
-        System.err.println("carta 2");
-
+*/
+        System.err.println("carta 2 pos 2,2 colore: "+gameField.getCell(2, 2, 4).getCard().getColore());
+/*
         System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleLeftUp());
         System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleRightUp());
         System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleLeftDown());
         System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleRightDown());
 */
-        System.err.println("carta 3");
+    /*    System.err.println("carta 3 pos 2,0");
 
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleLeftUp());
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleRightUp());
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleLeftDown());
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleRightDown());
-        System.err.println(gameField.getCell(2, 0, 4).isEmpty());
-        System.err.println(gameField.getCell(2, 0, 4).isFilled());
-/*
-        System.err.println("carta 4");
-        System.err.println(gameField.getCell(0, 2, 4).isEmpty()); //return false -> posizione non vuota probabile bug in insierimento carta
+        //System.err.println(gameField.getCell(2, 0, 4).isEmpty());
+        //System.err.println(gameField.getCell(2, 0, 4).isFilled());
+
+        System.err.println("carta 4 pos: 2,3");
+        //System.err.println(gameField.getCell(0, 2, 4).isEmpty()); //return false -> posizione non vuota probabile bug in insierimento carta
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleLeftUp());
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleRightUp());
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleLeftDown());
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleRightDown());
 */
-        //GoalDiagonal goalDiagonal = new GoalDiagonal();
+        GoalDiagonal goalDiagonal = new GoalDiagonal();
 
-       // int i = goalDiagonal.totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
-       // System.err.println("risultato dell'operazione = "+i);
+        //Goal g = new Goal(goalDiagonal, 4,AnglesEnum.MUSHROOMS);
+        //int tot = g.numPoints(gameField);
 
+        int tot = goalDiagonal.totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
+        System.err.println("risultato dell'operazione = "+tot);
+        assertEquals(4, tot);
 
 
 
