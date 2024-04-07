@@ -24,11 +24,11 @@ public class RmiServer implements VirtualServer{
         field_controller = fieldController;
     }
 
-    final BlockingQueue<GameFieldSingleCell[][]> updates = new ArrayBlockingQueue<>(20);
+    final BlockingQueue<GameField> updates = new ArrayBlockingQueue<>(20);
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
 
         while (true){
-            GameFieldSingleCell[][] update = updates.take();
+            GameField update = updates.take();
             synchronized (this.clients){
                 for(var c: this.clients){
                     c.showUpdate(update);
@@ -48,7 +48,7 @@ public class RmiServer implements VirtualServer{
     public void checkPlacingRMI(PlayCard card, int x, int y) throws RemoteException {
         System.err.println("insert request received");
         this.field_controller.checkPlacing(card, x, y);
-        GameFieldSingleCell[][] current_state = this.field_controller.getCurrent();
+        GameField current_state = this.field_controller.getCurrent();
         try
         {
             updates.put(current_state);

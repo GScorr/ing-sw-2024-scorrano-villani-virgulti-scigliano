@@ -132,8 +132,8 @@ public class GameFieldController {
         if( !player_field.getField()[x+1][y+1].isEmpty() ) player_field.subOne( player_field.getField()[x+1][y+1].getValue() );
     }
 
-    public synchronized GameFieldSingleCell[][] getCurrent(){
-        return  this.player_field.getField();
+    public synchronized GameField getCurrent(){
+        return  this.player_field;
     }
 
 }
