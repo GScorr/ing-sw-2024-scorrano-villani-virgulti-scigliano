@@ -24,7 +24,7 @@ public class GameFieldSingleCell {
         this.filled = filled;
     }
     public PlayCard getCard() {
-        if ( !isEmpty() ) return card;
+        if ( filled ) return card;
         else {
         System.out.print("ERROR: THERE IS NO CARD HERE");
         return null;}
