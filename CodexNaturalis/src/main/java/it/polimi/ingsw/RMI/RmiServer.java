@@ -30,7 +30,7 @@ public class RmiServer implements VirtualServer{
         while (true){
             GameField update = updates.take();
             synchronized (this.clients){
-                for(var c: this.clients){
+                for(var c : this.clients){
                     c.showUpdate(update);
                 }
             }
