@@ -103,6 +103,7 @@ public class GameField {
         return num_of_feather;
     }
 
+    public Player getPlayer(){return  this.player;}
     //Insert of a card, it checks if the card can be placed and updates the resources counter and
     // it changes the values of the matrix so that they are coherent with the new placed card
     public boolean insertCard(PlayCard card, int x, int y){

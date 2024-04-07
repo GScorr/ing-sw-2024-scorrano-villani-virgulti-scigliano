@@ -25,8 +25,9 @@ public class GameFieldSingleCell {
     }
     public PlayCard getCard() {
         if ( !isEmpty() ) return card;
+        else {
         System.out.print("ERROR: THERE IS NO CARD HERE");
-        return null;
+        return null;}
     }
     public void setCard(PlayCard card) {
         this.card = card;
