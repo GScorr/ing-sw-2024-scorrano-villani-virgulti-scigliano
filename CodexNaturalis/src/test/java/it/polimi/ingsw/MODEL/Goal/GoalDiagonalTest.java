@@ -56,7 +56,7 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
     GameFieldSingleCell cell16 = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
     GameFieldSingleCell[][] campo = new GameFieldSingleCell[4][4];
     GameField gameField = new GameField(campo);
-    GoalDiagonal colore_diagonale = new GoalDiagonal();
+    GoalStrategy colore_diagonale = new GoalDiagonal();
     Goal goal = new Goal(colore_diagonale, 4, AnglesEnum.MUSHROOMS);
 
     @Test
@@ -99,9 +99,9 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
             //System.err.println("2 true = ha modificato la carta trasparente");
         }
         //inserisco altre due carte per il controllo lungo l'altra diagonale tenendo tutte le carte insieme
-    //    if(gameField.insertCard(carta3, 2, 0)){
+        if(gameField.insertCard(carta3, 2, 0)){
             //System.err.println("3 true = ha modificato la carta trasparente");
-      //  }
+        }
         /*
         stampa di prova
 
@@ -110,9 +110,9 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
                 System.out.println("stampo la cella "+i+" "+j+" = "+campo[i][j].getValue());
             }
         }*/
-     //   if(gameField.insertCard(carta4, 0, 2)){
+        if(gameField.insertCard(carta4, 0, 2)){
             //System.err.println("4 true = ha modificato la carta trasparente");
-       // }
+        }
         /*
         stampa di prova
 
@@ -145,17 +145,20 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
         System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleLeftDown());
         System.err.println(gameField.getCell(2, 2, 4).getCard().getSide().getAngleRightDown());
 */
-    /*    System.err.println("carta 3 pos 2,0");
-
+        System.err.println("carta 3 pos 2,0 colore: "+gameField.getCell(2, 0, 4).getCard().getColore());
+/*
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleLeftUp());
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleRightUp());
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleLeftDown());
         System.err.println(gameField.getCell(2, 0, 4).getCard().getSide().getAngleRightDown());
         //System.err.println(gameField.getCell(2, 0, 4).isEmpty());
         //System.err.println(gameField.getCell(2, 0, 4).isFilled());
-
-        System.err.println("carta 4 pos: 2,3");
-        //System.err.println(gameField.getCell(0, 2, 4).isEmpty()); //return false -> posizione non vuota probabile bug in insierimento carta
+*/
+        System.err.println("carta 4 pos: 0,2 colore: "+gameField.getCell(0, 2, 4).getCard().getColore());
+        if(gameField.getCell(0,2, 4).getCard().getColore().equals(CentralEnum.MUSHROOMS)){
+            System.out.println("colore giusto");
+        }
+ /*       //System.err.println(gameField.getCell(0, 2, 4).isEmpty()); //return false -> posizione non vuota probabile bug in insierimento carta
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleLeftUp());
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleRightUp());
         System.err.println(gameField.getCell(0, 2, 4).getCard().getSide().getAngleLeftDown());
@@ -166,7 +169,7 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
         //Goal g = new Goal(goalDiagonal, 4,AnglesEnum.MUSHROOMS);
         //int tot = g.numPoints(gameField);
 
-        int tot = colore_diagonale.totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
+        int tot = goal.getGoalType().totalPoints(gameField, 4, AnglesEnum.MUSHROOMS);
         System.err.println("risultato dell'operazione = "+tot);
         assertEquals(4, tot);
 
