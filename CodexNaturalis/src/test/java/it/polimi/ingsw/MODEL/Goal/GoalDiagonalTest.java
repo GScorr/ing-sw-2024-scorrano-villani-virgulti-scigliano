@@ -71,7 +71,7 @@ poi nel metodo totalPoint le riempio usando insert card <- penso che lo devo far
 
     @Test
     void totalPoints() {
-        Constants.MATRIXDIM=5; //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
+//così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
         //inizializzo tutte le celle del campo
         campo[0][0] = cell1;
         campo[0][1] = cell2;

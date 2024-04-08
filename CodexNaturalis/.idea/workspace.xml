@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento sono gabriele">
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalLFigureTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalStrategyTest.java" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="debug goal figure goal strategy con matrice 45x45 + debug vari in strategy Goal">
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDoubleGoldTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalFeatherPenPaperTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalTripleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONSTANTS/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONSTANTS/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/Goal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/Goal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/GoalLFigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/GoalLFigure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/GoalFeatherPenPaper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Goal/GoalFeatherPenPaper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/GoalTest/GoalDiagonalTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalDiagonalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalLFigureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalLFigureTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalStrategyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Goal/GoalStrategyTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,18 +37,18 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Mirko0109"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Mirko0109&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git",
-    "accountId": "04cff0e4-987d-467b-953c-22f8f0bdbc0e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git&quot;,
+    &quot;accountId&quot;: &quot;04cff0e4-987d-467b-953c-22f8f0bdbc0e&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -68,12 +70,15 @@
     "JUnit.GoalDiagonalTest.executor": "Run",
     "JUnit.GoalDiagonalTest.testGoalDiagonal.executor": "Run",
     "JUnit.GoalDiagonalTest.totalPoints.executor": "Run",
+    "JUnit.GoalDoubleGoldTest.totalPoints.executor": "Run",
+    "JUnit.GoalFeatherPenPaperTest.totalPoints.executor": "Run",
     "JUnit.GoalLFigureTest.totalPoints.executor": "Run",
     "JUnit.GoalLFigureTest.totalPointsAnimal.executor": "Run",
     "JUnit.GoalLFigureTest.totalPointsInsect.executor": "Run",
     "JUnit.GoalLFigureTest.totalPointsMushroom.executor": "Run",
     "JUnit.GoalLFigureTest.totalPointsPlant.executor": "Run",
     "JUnit.GoalStrategyTest.totalPoints.executor": "Run",
+    "JUnit.GoalTripleTest.totalPoints.executor": "Run",
     "JUnit.PlayerTest.addPoints.executor": "Debug",
     "JUnit.PlayerTest.getColor.executor": "Run",
     "JUnit.PlayerTest.getIsFirst.executor": "Run",
@@ -113,8 +118,8 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GoalStrategyTest.totalPoints">
-    <configuration name="GoalLFigureTest.totalPointsAnimal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GoalDoubleGoldTest.totalPoints">
+    <configuration name="GoalDoubleGoldTest.totalPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -123,8 +128,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalLFigureTest" />
-      <option name="METHOD_NAME" value="totalPointsAnimal" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalDoubleGoldTest" />
+      <option name="METHOD_NAME" value="totalPoints" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoalFeatherPenPaperTest.totalPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Goal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalFeatherPenPaperTest" />
+      <option name="METHOD_NAME" value="totalPoints" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -146,38 +167,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GoalLFigureTest.totalPointsMushroom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PSP30" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Goal.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalLFigureTest" />
-      <option name="METHOD_NAME" value="totalPointsMushroom" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GoalLFigureTest.totalPointsPlant" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PSP30" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Goal.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalLFigureTest" />
-      <option name="METHOD_NAME" value="totalPointsPlant" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GoalStrategyTest.totalPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
@@ -188,6 +177,22 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalStrategyTest" />
+      <option name="METHOD_NAME" value="totalPoints" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoalTripleTest.totalPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Goal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalTripleTest" />
       <option name="METHOD_NAME" value="totalPoints" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -209,11 +214,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GoalDoubleGoldTest.totalPoints" />
+        <item itemvalue="JUnit.GoalTripleTest.totalPoints" />
+        <item itemvalue="JUnit.GoalFeatherPenPaperTest.totalPoints" />
         <item itemvalue="JUnit.GoalStrategyTest.totalPoints" />
         <item itemvalue="JUnit.GoalLFigureTest.totalPointsInsect" />
-        <item itemvalue="JUnit.GoalLFigureTest.totalPointsAnimal" />
-        <item itemvalue="JUnit.GoalLFigureTest.totalPointsMushroom" />
-        <item itemvalue="JUnit.GoalLFigureTest.totalPointsPlant" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +244,8 @@
       <workItem from="1712223757536" duration="5935000" />
       <workItem from="1712487613656" duration="24000" />
       <workItem from="1712496737462" duration="2558000" />
-      <workItem from="1712562916423" duration="12647000" />
+      <workItem from="1712562916423" duration="13121000" />
+      <workItem from="1712580056911" duration="4998000" />
     </task>
     <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
       <option name="closed" value="true" />
@@ -537,7 +543,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712567896746</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="debug goal figure goal strategy con matrice 45x45 + debug vari in strategy Goal">
+      <option name="closed" value="true" />
+      <created>1712576251903</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1712576251903</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -588,7 +602,8 @@
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="Aggiornamento sono gabriele" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento sono gabriele" />
+    <MESSAGE value="debug goal figure goal strategy con matrice 45x45 + debug vari in strategy Goal" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug goal figure goal strategy con matrice 45x45 + debug vari in strategy Goal" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

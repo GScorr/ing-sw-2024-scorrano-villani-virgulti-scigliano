@@ -70,7 +70,6 @@ class GoalStrategyTest {
         /*
         creo la matrice 45x45 e tutte le carte
          */
-        Constants.MATRIXDIM=45;
         istanzia_celle();
         List<PlayCard> carta = istanzia_carte();
         /*

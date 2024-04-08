@@ -114,7 +114,7 @@ class GoalLFigureTest {
 
     @Test
     void totalPointsAnimal() {
-        Constants.MATRIXDIM=45; //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
+//così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
         //inizializzo tutte le celle del campo
 /*
         PlayCard carta0 = mazzo_risorse_list.get(20); //prendo la carta in posizione indiex per le prove
@@ -142,7 +142,7 @@ class GoalLFigureTest {
 
     @Test
     void totalPointsMushroom() {
-        Constants.MATRIXDIM=5; //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
+ //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
         //inizializzo tutte le celle del campo
   /*      campo[0][0] = cell1;
         campo[0][1] = cell2;
@@ -193,7 +193,7 @@ class GoalLFigureTest {
 
     @Test
     void totalPointsPlant() {
-        Constants.MATRIXDIM=5; //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
+ //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
         //inizializzo tutte le celle del campo
     /*    campo[0][0] = cell1;
         campo[0][1] = cell2;
@@ -244,7 +244,7 @@ class GoalLFigureTest {
 
     @Test
     void totalPointsInsect() {
-        Constants.MATRIXDIM=5; //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
+ //così riesce ad andare perche non va a fare controlli su tutta da matrice da 45 elementi che sarebberro tutti null
         //inizializzo tutte le celle del campo
     /*    campo[0][0] = cell1;
         campo[0][1] = cell2;
