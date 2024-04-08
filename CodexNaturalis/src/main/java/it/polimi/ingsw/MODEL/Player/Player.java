@@ -35,7 +35,7 @@ import java.util.List;
 * PLAYER_OBSERVER:
 * PLAYER_SUBJECT
 * */
-public class Player implements PlayerObserver,PlayerSubject {
+public class Player implements PlayerObserver {
     private String name;
     public PState
             not_initialized = new NotInitialized(this),
@@ -69,17 +69,20 @@ public class Player implements PlayerObserver,PlayerSubject {
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
 
-    GameObserver gameObserver;
 
 
 
-    public Player( ColorsEnum color, String name ){
+
+    public Player( ColorsEnum color, String name, boolean isFirst){
         this.name = name;
         this.color = color;
         this.player_state = PlayerState.NOT_INITIALIZED;
         createField();
         this.actual_state = not_initialized;
+        this.isFirst = isFirst;
     }
+
+
 
     private void createField(){
         Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
@@ -252,36 +255,17 @@ public class Player implements PlayerObserver,PlayerSubject {
 
     public void selectGoal(int i){
             this.goal_card = initial_goal_cards.get(i);
-
-            //notifica al Game che il player ha chiamato questo metodo
-            gameObserver.updateChooseGoal();
     }
 
 
     //this metod select the first side of the starting_card and put it on the field
     public void selectStartingCard(boolean flipped){
-
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 0, 0);
-            //notifica al Game che il player ha chiamato questo metodo
-            gameObserver.updateChooseStartingCard();
-    }
-
-
-
-    //questo metodi servo
-    @Override
-    public void registerObserver(GameObserver gameObserver) {
-        this.gameObserver = gameObserver;
-    }
-
-    @Override
-    public void removeObserver(GameObserver gameObserver) {
 
     }
 
-    @Override
-    public void notifyObservers() {
 
-    }
+
+
 }
