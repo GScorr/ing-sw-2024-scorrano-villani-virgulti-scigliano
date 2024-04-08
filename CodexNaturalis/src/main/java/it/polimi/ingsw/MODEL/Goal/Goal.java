@@ -18,6 +18,10 @@ public class Goal {
         this.goalType = goalType;
     }
 
+    public GoalStrategy getGoalType() {
+        return goalType;
+    }
+
     public void setPoints(int points) {
         this.points = points;
     }

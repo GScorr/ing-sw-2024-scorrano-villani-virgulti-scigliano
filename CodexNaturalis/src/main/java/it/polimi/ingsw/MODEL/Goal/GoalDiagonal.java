@@ -5,6 +5,8 @@ import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 
+import java.sql.SQLOutput;
+
 public class GoalDiagonal implements GoalStrategy {
     public int totalPoints(GameField field, int points, AnglesEnum resource) {
         int counter = 0;
@@ -33,8 +35,10 @@ public class GoalDiagonal implements GoalStrategy {
                 }
                 break;
             case MUSHROOMS:
-                for (int i = 1; i < Constants.MATRIXDIM - 1; i++){
-                    for (int j = Constants.MATRIXDIM - 2; j >=0 ; j--) {
+                for (int i = 1; i < Constants.MATRIXDIM - 2; i++){
+                    for (int j = Constants.MATRIXDIM - 2; j >1 ; j--) {
+                        System.out.println(field.getCell(i,j,Constants.MATRIXDIM).getCard().getColore()+"sono la carta su");
+                        System.out.println(field.getCell(i,j,Constants.MATRIXDIM).getCardDown().getColore()+"sono la carta giù");
                         if (field.getCell(i, j, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS)&&field.getCell(i, j, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.MUSHROOMS)) {
                             if (field.getCell(i + 1, j - 1, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS)&&field.getCell(i+1, j-1, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.MUSHROOMS)) {
                                 counter++;
