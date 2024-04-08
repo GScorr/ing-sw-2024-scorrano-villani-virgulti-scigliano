@@ -30,15 +30,7 @@ TODO:
 
 */
 
-/*
-*       GEMESUBJECT : la classe Game comunica agli ascoltatori (i Player) di cambiare stato quando:
-*                   - si passa dallo stato NOT INITIALIZED (bisogna attendere che tutti i giocatori entrino nel game) allo stato BEGIN (si distribuiscono le carte)
-*                   - si passa dallo stato BEGIN allo stato CHOOSE GOAL (  le carte sono state distribuite (sia i deck sul tavolo, sia le carte dei giocatori) e TUTTI i player devono scegliere il loro goal
-*                   - si passa dallo stato CHOOSE GOAL allo stato CHOOSE_STARTING_CARD (tutti i player devono scegliere il side della loro carta)
-*                   - si passa dallo stato CHOOSE_STARTING_CARD allo stato di GIOCO effettivo (al momento della scrittura di questo commento non ho ancora scelto il nome)
-*                           quando per ogni observer (player) si chiama il passaggio di stato, solo uno di questi player avrà la variabile is_first = true => quel player sarà il primo giocatore
 
-* */
 public class Game  {
     DeckCreation creation;
     private int max_num_player;

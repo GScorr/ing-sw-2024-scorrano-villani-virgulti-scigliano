@@ -14,6 +14,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/*
+*       GEMESUBJECT : la classe Game comunica agli ascoltatori (i Player) di cambiare stato quando:
+*                       (per le prossime righe si considera lo stato del Player)
+*                   - si passa dallo stato NOT INITIALIZED (bisogna attendere che tutti i giocatori entrino nel game) allo stato BEGIN (si distribuiscono le carte)
+*                   - si passa dallo stato BEGIN allo stato CHOOSE GOAL (  le carte sono state distribuite (sia i deck sul tavolo, sia le carte dei giocatori) e TUTTI i player devono scegliere il loro goal
+*                   - si passa dallo stato CHOOSE GOAL allo stato CHOOSE_STARTING_CARD (tutti i player devono scegliere il side della loro carta)
+*                   - si passa dallo stato CHOOSE_STARTING_CARD allo stato di GIOCO effettivo (al momento della scrittura di questo commento non ho ancora scelto il nome)
+*                           quando per ogni observer (player) si chiama il passaggio di stato, solo uno di questi player avrà la variabile is_first = true => quel player sarà il primo giocatore
+*/
+
 public class GameController implements GameSubject {
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
