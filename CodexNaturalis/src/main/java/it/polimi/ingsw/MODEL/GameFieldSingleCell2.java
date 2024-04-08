@@ -8,7 +8,7 @@ import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 
 //@Davide
 // Class for the single cell present in the matrix of GameField
-public class GameFieldSingleCell {
+public class GameFieldSingleCell2 {
     /*
     provo a mettere la carta trasparente tc e a considerarla sempre come carta_down,
     inizio carta trasparente
@@ -22,8 +22,8 @@ public class GameFieldSingleCell {
     private PlayCard card;
     private AnglesEnum value;
     private PlayCard card_down;
-//card_down means the angles that the card will cover -mirko-
-    public GameFieldSingleCell(boolean filled, PlayCard card, AnglesEnum value, PlayCard card_down) {
+    //card_down means the angles that the card will cover -mirko-
+    public GameFieldSingleCell2(boolean filled, PlayCard card, AnglesEnum value, PlayCard card_down) {
         this.filled = filled;
         this.card = card;
         this.value = value;
@@ -49,8 +49,8 @@ public class GameFieldSingleCell {
         //se è filled ritorno la carta che è adesso in up per settarla come down
         else if ( filled ) return card;
         else { //non dovrei entrare mai in questo ramo salvo errori particolari che analizzerò quando testo questa classe
-        System.out.println("ERROR: THERE IS NO CARD HERE pos " + value); //value = valore dell'angolo nella cella
-        return null;}
+            System.out.println("ERROR: THERE IS NO CARD HERE pos " + value); //value = valore dell'angolo nella cella
+            return null;}
     }
     public void setCard(PlayCard card) {
         this.card = card;

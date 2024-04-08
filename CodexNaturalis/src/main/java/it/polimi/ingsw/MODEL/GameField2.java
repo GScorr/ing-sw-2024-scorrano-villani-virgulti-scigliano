@@ -7,13 +7,13 @@ import it.polimi.ingsw.MODEL.Player.Player;
 
 //Class for the matrix field of each player
 /*@Davide   XXX= DONE
-* TODO:
-*  - finisci metodo check placeable       XXX
-*  - implementa metodo add e sub risorse  XXX
-*  - gestione errori
-*  - implementa gestione punti per carte risorsa e non XXX
-* */
-public class GameField {
+ * TODO:
+ *  - finisci metodo check placeable       XXX
+ *  - implementa metodo add e sub risorse  XXX
+ *  - gestione errori
+ *  - implementa gestione punti per carte risorsa e non XXX
+ * */
+public class GameField2 {
     private GameFieldSingleCell[][] field;
     private Player player;
     private int num_of_animal;
@@ -24,7 +24,7 @@ public class GameField {
     private int num_of_pen;
     private int num_of_feather;
 
-    public GameField(GameFieldSingleCell[][] field) {
+    public GameField2(GameFieldSingleCell[][] field) {
         this.field = field;
     }
 
@@ -209,13 +209,6 @@ public class GameField {
 
 
 }
-
-
-
-
-
-
-
 
 
 

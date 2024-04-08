@@ -9,7 +9,7 @@ TODO:
     private/public sugli attributi qua sotto
  */
 
-public class PieceField {
+public class PieceField2 {
     Player player1,player2,player3,player4;
     Map<Integer,ColorsEnum[]> get_colors_at_position;
     Map<ColorsEnum,Integer> get_position_of_color;
@@ -17,7 +17,7 @@ public class PieceField {
 
     ColorsEnum[] colors = new ColorsEnum[4];
 
-    public PieceField(Player  player1, ColorsEnum p1, Player player2, ColorsEnum p2, Player player3, ColorsEnum p3,Player player4,ColorsEnum p4){
+    public PieceField2(Player  player1, ColorsEnum p1, Player player2, ColorsEnum p2, Player player3, ColorsEnum p3,Player player4,ColorsEnum p4){
         this.player1=player1;
         this.player2=player2;
         this.player3=player3;

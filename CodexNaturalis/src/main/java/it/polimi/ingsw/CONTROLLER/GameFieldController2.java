@@ -12,7 +12,7 @@ import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 //import javax.smartcardio.Card;
 
 
-public class GameFieldController {
+public class GameFieldController2 {
     private GameField player_field;
 
 

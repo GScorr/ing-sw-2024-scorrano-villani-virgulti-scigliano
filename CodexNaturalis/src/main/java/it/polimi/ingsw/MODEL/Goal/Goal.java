@@ -8,9 +8,10 @@ public class Goal {
     private AnglesEnum resource;
     private int points;
 
-    public Goal(GoalStrategy goalType,int points) {
+    public Goal(GoalStrategy goalType,int points,AnglesEnum resource) {
         this.goalType = goalType;
         this.points = points;
+        this.resource=resource;
     }
 
     public void setGoalType(GoalStrategy goalType) {

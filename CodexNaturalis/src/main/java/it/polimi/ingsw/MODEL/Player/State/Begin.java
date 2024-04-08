@@ -1,0 +1,64 @@
+package it.polimi.ingsw.MODEL.Player.State;
+
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Goal.Goal;
+import it.polimi.ingsw.MODEL.Player.Player;
+import java.util.List;
+
+public class Begin implements PState {
+    Player player;
+
+    public Begin(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public void setInitialCardsInHand(List<PlayCard> cards_in_hand) {
+        this.player.setInitialCardsInHand(cards_in_hand);
+    }
+
+    @Override
+    public void setInitialGoalCards(List<Goal> initial_goal_cards) {
+        this.player.setInitialGoalCards(initial_goal_cards);
+    }
+
+    @Override
+    public void setStartingCard(PlayCard starting_card) {
+        this.player.setStartingCard(starting_card);
+    }
+
+    @Override
+    public void selectGoal(int i) {
+        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    }
+
+    @Override
+    public void selectStartingCard(boolean flipped) {
+        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    }
+
+    @Override
+    public void placeCard(int index, boolean flipped, int x, int y) {
+        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    }
+
+    @Override
+    public void peachCardFromGoldDeck() {
+        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    }
+
+    @Override
+    public void peachFromResourcesDeck() {
+        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    }
+
+    @Override
+    public void peachFromCardsInCenter(int i) {
+        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    }
+
+    @Override
+    public String getNameState() {
+        return "BEGIN";
+    }
+}

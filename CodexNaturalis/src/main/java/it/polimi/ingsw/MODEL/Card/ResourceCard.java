@@ -9,7 +9,7 @@ import it.polimi.ingsw.MODEL.ENUM.Costraint;
 public class ResourceCard extends PlayCard {
     private final int point;
     public ResourceCard(Side front_side, Side back_side, boolean flipped, int point){
-        super( front_side, back_side,  flipped);
+        super(front_side, back_side,  flipped);
         this.point= point;
     }
 

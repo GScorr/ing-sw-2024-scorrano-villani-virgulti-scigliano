@@ -3,12 +3,12 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
-public class DeckController {
+public class DeckController2 {
     Deck gold_deck;
     Deck resource_deck;
     CenterCards center_cards;
 
-    public DeckController(Deck gold_deck, Deck resource_deck, CenterCards center_cards) {
+    public DeckController2(Deck gold_deck, Deck resource_deck, CenterCards center_cards) {
         this.gold_deck = gold_deck;
         this.resource_deck = resource_deck;
         this.center_cards = center_cards;
