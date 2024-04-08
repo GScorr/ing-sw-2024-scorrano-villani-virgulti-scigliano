@@ -21,8 +21,8 @@ public class GoalLFigure implements GoalStrategy {
                                     ( field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j-3, Constants.MATRIXDIM).getCard()) && field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT) )||
                                     ( field.getCell(i, j-2, Constants.MATRIXDIM).getCard().equals(field.getCell(i+1, j-3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j-2, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.PLANT) )||
                                     (field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j-3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT))) {
-                                if ((field.getCell(i, j - 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.MUSHROOMS) && field.getCell(i, j - 3, Constants.MATRIXDIM).getCardDown().equals(CentralEnum.PLANT)) ||
-                                        (field.getCell(i, j - 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.PLANT) && field.getCell(i, j - 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.MUSHROOMS))) {
+                                if ((field.getCell(i, j - 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS) && field.getCell(i, j - 3, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT)) ||
+                                        (field.getCell(i, j - 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.PLANT) && field.getCell(i, j - 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS))) {
                                     counter++;
                                 }
                             }
@@ -42,8 +42,8 @@ public class GoalLFigure implements GoalStrategy {
                                     ( field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j+3, Constants.MATRIXDIM).getCard()) && field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT) )||
                                     ( field.getCell(i, j+2, Constants.MATRIXDIM).getCard().equals(field.getCell(i+1, j+3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j+2, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.PLANT) )||
                                     (field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j+3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT))) {
-                                if ((field.getCell(i, j + 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.INSECTS) && field.getCell(i, j + 3, Constants.MATRIXDIM).getCardDown().equals(CentralEnum.PLANT)) ||
-                                        (field.getCell(i, j + 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.PLANT) && field.getCell(i, j + 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.INSECTS))) {
+                                if ((field.getCell(i, j + 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.INSECTS) && field.getCell(i, j + 3, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT)) ||
+                                        (field.getCell(i, j + 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.PLANT) && field.getCell(i, j + 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.INSECTS))) {
                                     counter++;
                                 }
                             }
@@ -63,8 +63,8 @@ public class GoalLFigure implements GoalStrategy {
                                     ( field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j+3, Constants.MATRIXDIM).getCard()) && field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.MUSHROOMS) )||
                                     ( field.getCell(i, j+2, Constants.MATRIXDIM).getCard().equals(field.getCell(i+1, j+3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j+2, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS) )||
                                     (field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j+3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j+2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.MUSHROOMS))) {
-                                if ((field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.MUSHROOMS) && field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCardDown().equals(CentralEnum.PLANT)) ||
-                                        (field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.PLANT) && field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.MUSHROOMS))) {
+                                if ((field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS) && field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT)) ||
+                                        (field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.PLANT) && field.getCell(i + 1, j + 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS))) {
                                     counter++;
                                 }
                             }
@@ -84,8 +84,8 @@ public class GoalLFigure implements GoalStrategy {
                                     ( field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j-3, Constants.MATRIXDIM).getCard()) && field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.ANIMAL) )||
                                     ( field.getCell(i, j-2, Constants.MATRIXDIM).getCard().equals(field.getCell(i+1, j-3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j-2, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.ANIMAL) )||
                                     (field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().equals(field.getCell(i+1, j-3, Constants.MATRIXDIM).getCardDown()) && field.getCell(i, j-2, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.ANIMAL))) {
-                                if ((field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.MUSHROOMS) && field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCardDown().equals(CentralEnum.PLANT)) ||
-                                        (field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.PLANT) && field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCard().equals(CentralEnum.MUSHROOMS))) {
+                                if ((field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS) && field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCardDown().getColore().equals(CentralEnum.PLANT)) ||
+                                        (field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.PLANT) && field.getCell(i+1, j - 3, Constants.MATRIXDIM).getCard().getColore().equals(CentralEnum.MUSHROOMS))) {
                                     counter++;
                                 }
                             }
