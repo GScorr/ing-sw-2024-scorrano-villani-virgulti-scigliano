@@ -2,6 +2,7 @@ package it.polimi.ingsw.MODEL.Game;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +38,7 @@ class GameTest {
 
     @Test
     void initializedGame() {
-        game.insertPlayer(player1);
+        /*game.insertPlayer(player1);
         game.insertPlayer(player2);
         game.insertPlayer(player3);
         game.distributeStartingCard();
@@ -62,9 +63,24 @@ class GameTest {
                 System.out.println(c + "sono il player " + i);
             }
         }
+        game.selectGoals();
+        System.out.println(game.getGoal1() + " " + game.getGoal1().getResource());
+        System.out.println(game.getGoal2() + " " + game.getGoal2().getResource());
+        game.distributeTwoGoalsToPlayer();
+        for(int i=0;i<3;i++){
+            game.getGet_player_index().get(i).selectGoal(1);
+            System.out.println(game.getGet_player_index().get(i).getGoalCard().getGoalType());
+            System.out.println(game.getGet_player_index().get(i).getGoalCard().getResource());
+            }*/ //tutto commentato perchè i metodi sono stati rimessi a private
     }
 
     @Test
     void gameNextState() {
+
+        System.out.println(game.getActual_state().getNameState());
+        game.gameNextState();
+        System.out.println(game.getActual_state().getNameState());
+        game.gameNextState();
+        System.out.println(game.getActual_state().getNameState());
     }
 }
