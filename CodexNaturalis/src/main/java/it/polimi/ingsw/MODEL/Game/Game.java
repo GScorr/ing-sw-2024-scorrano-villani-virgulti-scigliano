@@ -39,7 +39,7 @@ public class Game  {
     private Player player2;
     private Player player3;
     private Player player4;
-    private int actual_player = 0;  //tiene traccia del giocatore che sta giocando
+
 
     private Map<Integer,Player> get_player_index;
     private Goal goal1;
@@ -49,7 +49,7 @@ public class Game  {
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
-    private List<PlayerObserver> player_observers = new ArrayList<>();
+
 
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
