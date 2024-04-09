@@ -160,14 +160,14 @@ public class Game  {
     }
 
     // At the beginnig , starting_cards has to be distributed to the player
-    public void distributeStartingCard(){
+    private void distributeStartingCard(){
         for(int i=0; i<num_player;i++){
             get_player_index.get(i).setStartingCard(starting_cards_deck.drawCard());
         }
     }
 
     //4 cards at the center has to be initialized
-    public void initializedCenterCard(){
+    private void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
         gold_list.add(gold_deck.drawCard());
@@ -179,7 +179,7 @@ public class Game  {
         this.cards_in_center = tmp;
     }
 
-    public void distributeThreeCards(){
+    private void distributeThreeCards(){
         for (int i = 0; i<num_player;i++){
             List<PlayCard> tmp = new ArrayList<PlayCard>();
             tmp.add(gold_deck.drawCard());
@@ -189,7 +189,7 @@ public class Game  {
         }
     }
 
-    public void selectGoals(){
+    private void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
     }
