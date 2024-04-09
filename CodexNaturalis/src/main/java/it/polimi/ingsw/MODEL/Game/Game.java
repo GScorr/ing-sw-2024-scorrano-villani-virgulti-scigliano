@@ -114,9 +114,10 @@ public class Game  {
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
+        this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
-        //this.goal_deck = goal_deck;
+
 
     }
 
