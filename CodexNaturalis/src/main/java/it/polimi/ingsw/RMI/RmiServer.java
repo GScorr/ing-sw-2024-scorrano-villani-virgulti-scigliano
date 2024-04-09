@@ -26,6 +26,10 @@ public class RmiServer implements VirtualServer{
     }
 
     final BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
+
+
+
+
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
         while (true){
             Integer[] update = updates.take();
@@ -60,7 +64,21 @@ public class RmiServer implements VirtualServer{
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
-    };
+    }
+
+    @Override
+    public boolean gamesIsEmpty() {
+        return this.games.isEmpty();
+    }
+
+    @Override
+    public Giocatore createPlayer(String name, RmiClient client) {
+        Giocatore p = controller.createPlayer(name);
+        mappa.put(client, p );
+        return p;
+    }
+
+    ;
 
 
     public static void main(String[] args) throws RemoteException {

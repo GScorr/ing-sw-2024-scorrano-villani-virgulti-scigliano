@@ -1,8 +1,13 @@
 package it.polimi.ingsw.RMI;
 
+import it.polimi.ingsw.MODEL.Player.Player;
+
+import java.util.ArrayList;
+
 public class GiocoController {
      private Gioco game;
 
+    private Giocatore player;
 
     public Giocatore getStatus1(){
         return game.getPlayer1();
@@ -16,4 +21,9 @@ public class GiocoController {
         player.putValue(index, value);
          return true;
     }
+
+    public Giocatore createPlayer(String name){
+        return player = new Giocatore(name);
+    }
+
 }
