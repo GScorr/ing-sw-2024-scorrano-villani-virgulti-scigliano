@@ -67,7 +67,7 @@ public class DeckCreation {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(starting_filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(goal_filePath))) {
             StringBuilder jsonStringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -83,7 +83,7 @@ public class DeckCreation {
         creteResourceDeck();
         creteGoldDeck();
         creteStartingDeck();
-        creteGoalDeck();
+        //creteGoalDeck();
 
     }
 
