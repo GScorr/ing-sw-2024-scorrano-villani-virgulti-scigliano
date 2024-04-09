@@ -22,30 +22,42 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
     private void runCli() throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        VirtualView curr_client = (VirtualView) this;
-        String player_name = "";
+        VirtualView curr_client =  this;
+        String player_name ;
         Giocatore curr_player;
-        System.out.print("\n Scegli nome Player > ");
-        player_name = scan.nextLine();
-
-        /*controllo che la partita sia non vuota
-        if ( server.gamesIsEmpty() ) {
-
-        }*/
-        System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
 
         //creo giocatore
+        System.out.print("\n Scegli nome Player > ");
+        player_name = scan.nextLine();
         curr_player = server.createPlayer( player_name , curr_client );
+
+
+        //controllo che la partita sia non vuota
+        if ( server.gamesIsEmpty() ) {
+            //creo partita e inserisco come player 2
+            System.out.print("\n Scegli nome Partita > ");
+            String game_name = scan.nextLine();
+            server.createGame(game_name, curr_player);
+            System.out.print("\n Giocatore " + server.getLisGames().getFirst().getGame().getPlayer1().getName() +  " Ha creato a una nuova Partita  ");
+        }
+        else {
+            //inserisco player come player 2 in game
+            Gioco existing_game = server.getLisGames().getFirst().getGame();
+            server.addPlayer(existing_game, curr_player);
+            System.out.print("\n Giocatore "+ curr_player.getName() + " "+ existing_game.getPlayer2() +  " Aggiunto a partita esistente");
+        }
+
+        /*System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
+
+
         System.out.print("...creazione Player andata a buon fine");
         System.out.print("\nCONTIENE: " + server.getMap().size() );
 
         // for (Giocatore g : server.getMap().values() ) System.out.print(" " +  g.getName() );
         //server.getMap().values().forEach(giocatore -> System.out.println(giocatore.getName()));
+        //System.out.print("\nche giocatore sono ?" + server.getPlayerFromClient(this).getName() );
 
-
-        System.out.print("\ncontiene?" + server.getMap().containsKey(curr_client) );
-
-    /*
+        /*
         while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
