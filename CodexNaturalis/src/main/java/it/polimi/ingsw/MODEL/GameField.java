@@ -115,17 +115,17 @@ public class GameField {
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
         if( !field[x+1][y].isEmpty() ){
-            field[x+1][y].setCardDown(field[x][y].getCard());
+            field[x+1][y].setCardDown(field[x+1][y].getCard());
             //System.out.println("cella riga sotto");
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
         if( !field[x][y+1].isEmpty() ){
-            field[x][y+1].setCardDown(field[x][y].getCard());
+            field[x][y+1].setCardDown(field[x][y+1].getCard());
             //System.out.println("cella colonna a dx");
             //System.out.println(field[x][y].getCard().getSide().getAngleRightUp());
         }
         if( !field[x+1][y+1].isEmpty() ){
-            field[x+1][y+1].setCardDown(field[x][y].getCard());
+            field[x+1][y+1].setCardDown(field[x+1][y+1].getCard());
             //System.out.println("cella colonna + riga +1");
             //System.out.println(field[x][y].getCard().getSide().getAngleRightDown());
         }
@@ -139,6 +139,7 @@ public class GameField {
         field[x+1][y].setCard(card);
         //field[x+1][y].setValue( card.getSide().getAngleRightUp() );
         field[x+1][y].setValue( card.getSide().getAngleLeftDown() );
+
 
         field[x][y+1].setFilled(true);
         field[x][y+1].setCard(card);

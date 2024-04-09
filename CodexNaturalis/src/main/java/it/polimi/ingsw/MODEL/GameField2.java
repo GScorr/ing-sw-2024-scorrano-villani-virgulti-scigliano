@@ -14,7 +14,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
  *  - implementa gestione punti per carte risorsa e non XXX
  * */
 public class GameField2 {
-    private GameFieldSingleCell[][] field;
+    private GameFieldSingleCell2[][] field;
     private Player player;
     private int num_of_animal;
     private int num_of_mushroom;
@@ -24,19 +24,19 @@ public class GameField2 {
     private int num_of_pen;
     private int num_of_feather;
 
-    public GameField2(GameFieldSingleCell[][] field) {
+    public GameField2(GameFieldSingleCell2[][] field) {
         this.field = field;
     }
 
-    public void setField(GameFieldSingleCell[][] field) {
+    public void setField(GameFieldSingleCell2[][] field) {
         this.field = field;
     }
-    public GameFieldSingleCell[][] getField() {
+    public GameFieldSingleCell2[][] getField() {
         return field;
     }
 
     //Get a single cell given index X,Y and dimension of the Matrix
-    public GameFieldSingleCell getCell(int x, int y, int dim){
+    public GameFieldSingleCell2 getCell(int x, int y, int dim){
         if( ( x < 0 || x > dim ) || ( y < 0 || y > dim ) ) {System.out.print("ERROR: INDEX EXCEED MATRIX DIMENSION"); return null;}
         return field[x][y];
     }
@@ -107,8 +107,11 @@ public class GameField2 {
 
     //Insert of a card, it checks if the card can be placed and updates the resources counter and
     // it changes the values of the matrix so that they are coherent with the new placed card
-    public boolean insertCard(PlayCard card, int x, int y){
-
+    public boolean insertCard2(PlayCard card, int x, int y){
+        System.out.println(field[x][y].isEmpty());
+        System.out.println(field[x+1][y].isEmpty());
+        System.out.println(field[x][y+1].isEmpty());
+        System.out.println(field[x+1][y+1].isEmpty());
         if( !field[x][y].isEmpty() ){  //ho cambiato .getCard con .getCardDown, penso che l'errore sia qua
             field[x][y].setCardDown(field[x][y].getCard());
             //System.out.println("cella base");
@@ -116,6 +119,7 @@ public class GameField2 {
         }
         if( !field[x+1][y].isEmpty() ){
             field[x+1][y].setCardDown(field[x][y].getCard());
+            System.out.println(field[x+1][y].getCardDown().getColore()+" sposto giù");
             //System.out.println("cella riga sotto");
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
@@ -144,6 +148,8 @@ public class GameField2 {
         field[x][y+1].setCard(card);
         //field[x][y+1].setValue( card.getSide().getAngleLeftDown() ); erano invertiti gli angoli che salvava -mirko-
         field[x][y+1].setValue( card.getSide().getAngleRightUp() );
+        System.out.println(field[x][y+1].getCard().getColore()+" inserim su");
+        System.out.println(field[x][y+1].getCardDown().getColore()+" inserim giù");
 
         field[x+1][y+1].setFilled(true);
         field[x+1][y+1].setCard(card);
