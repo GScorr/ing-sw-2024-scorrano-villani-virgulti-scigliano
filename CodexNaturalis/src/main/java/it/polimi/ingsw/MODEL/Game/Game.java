@@ -178,7 +178,7 @@ public class Game  {
         this.cards_in_center = tmp;
     }
 
-    private void distributeThreeCards(){
+    public void distributeThreeCards(){
         for (int i = 0; i<num_player;i++){
             List<PlayCard> tmp = new ArrayList<PlayCard>();
             tmp.add(gold_deck.drawCard());
@@ -188,7 +188,7 @@ public class Game  {
         }
     }
 
-    private void selectGoals(){
+    public void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
     }

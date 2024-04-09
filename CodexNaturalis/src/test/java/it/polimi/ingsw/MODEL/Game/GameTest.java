@@ -45,7 +45,7 @@ class GameTest {
         System.out.println(game.getGet_player_index().get(1).getStartingCard().getColore());
         System.out.println(game.getGet_player_index().get(2).getStartingCard().getColore());
         //controllo che venga data una carta randomica iniziale differente
-        //
+        //sto rendendo public temporaneamente i singoli metodi private N.B: questo test non funzionerà in futuro se i metodi rimangono private
         //
         //
         game.initializedCenterCard();
@@ -56,6 +56,12 @@ class GameTest {
             System.out.println(c);
         }
         //in combo con drawcard testata, la gestione delle carte in mezzo è ottimale
+        game.distributeThreeCards();
+        for(int i=0;i<3;i++){
+            for(PlayCard c:game.getGet_player_index().get(i).getCardsInHand()){
+                System.out.println(c + "sono il player " + i);
+            }
+        }
     }
 
     @Test
