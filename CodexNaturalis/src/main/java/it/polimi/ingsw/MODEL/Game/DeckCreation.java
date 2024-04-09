@@ -265,7 +265,7 @@ public class DeckCreation {
         }
     }
 
-    public void creteGoalDeck(){
+    /*public void creteGoalDeck(){
         for (JsonElement element : goal_jsonArray) {
             JsonObject singlegoal = element.getAsJsonObject();
             String resource = singlegoal.get("resource").getAsString();
@@ -293,7 +293,7 @@ public class DeckCreation {
             Goal tmp = new Goal(strategy,point,enum_resource);
             deck_goal.add(tmp);
         }
-    }
+    }*/
     public void mixUpGoalDeck(){
         Collections.shuffle(deck_goal);
     }
