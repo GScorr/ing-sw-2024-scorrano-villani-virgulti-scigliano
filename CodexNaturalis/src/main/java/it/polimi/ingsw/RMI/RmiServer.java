@@ -1,82 +1,76 @@
 package it.polimi.ingsw.RMI;
 
-import it.polimi.ingsw.CONTROLLER.GameFieldController;
-import it.polimi.ingsw.MODEL.Card.GoldCard;
-import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Card.ResourceCard;
-import it.polimi.ingsw.MODEL.ENUM.Costraint;
-import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.MODEL.GameFieldSingleCell;
-import it.polimi.ingsw.MODEL.Player.Player;
-
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class RmiServer implements VirtualServer{
 
-    final GameFieldController field_controller;
+    final GiocoController controller;
+
     final List<VirtualView> clients = new ArrayList<>();
 
-    public RmiServer(GameFieldController fieldController) {
-        field_controller = fieldController;
+    private Map<VirtualView, Giocatore> mappa = new HashMap<>();
+    private List<GiocoController> games = new ArrayList<>();
+
+    public RmiServer(GiocoController controller) {
+        this.controller = controller;
     }
 
-    final BlockingQueue<GameField> updates = new ArrayBlockingQueue<>(20);
+    final BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
-
         while (true){
-            GameField update = updates.take();
+            Integer[] update = updates.take();
             synchronized (this.clients){
-                for(var c : this.clients){
+                for(var c: this.clients){
                     c.showUpdate(update);
                 }
             }
+
         }
     }
 
-    @Override
-    public void connect(VirtualView client) throws RemoteException {
-            System.err.println("NEW CLIENT CONNECTED");
-            //todo data race ??
+
+    public void connect(VirtualView client)throws RemoteException{
+        synchronized (this.clients){
             this.clients.add(client);
+        }
     }
 
+
     @Override
-    public void checkPlacingRMI(PlayCard card, int x, int y) throws RemoteException {
-        System.err.println("insert request received");
-        this.field_controller.checkPlacing(card, x, y);
-        GameField current_state = this.field_controller.getCurrent();
+    public void put(int index, Integer number, Giocatore player) throws RemoteException{
+        Integer[] currentState;
+        System.err.println("add request received");
+        this.controller.putInArray(index, number, player);
+        if ( player == controller.getStatus1() ) currentState = this.controller.getStatus1().getCampo();
+        else currentState = this.controller.getStatus2().getCampo();
+
         try
         {
-            updates.put(current_state);
+            updates.put(currentState);
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
-    }
+    };
 
-    @Override
-    public void checkGoldConstraintsRMI(Costraint val) throws RemoteException {
 
-    }
-
-    @Override
-    public void goldPointsCountRMI(GoldCard card, int x, int y) throws RemoteException {
-
-    }
-
-    @Override
-    public void resourcePointsCountRMI(ResourceCard card) throws RemoteException {
+    public static void main(String[] args) throws RemoteException {
+        final String serverName = "AdderServer";
+        VirtualServer server = new RmiServer(new GiocoController());
+        VirtualServer stub = (VirtualServer) UnicastRemoteObject.exportObject(server,0);
+        Registry registry = LocateRegistry.createRegistry(1234);
+        registry.rebind(serverName,stub);
+        System.out.println("server bound. ");
 
     }
-
-    @Override
-    public void resourcePointsChange(PlayCard card, int x, int y) throws RemoteException {
-
-    }
-
-
 
 }
