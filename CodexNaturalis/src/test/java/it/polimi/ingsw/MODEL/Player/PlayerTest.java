@@ -131,6 +131,13 @@ class PlayerTest {
             p.actual_state.setInitialGoalCards(tmp);
 
     }
+    private void initializedCard(Player p){
+        distributeStartingCard(p);
+        initializedCenterCard();
+        distributeThreeCards(p);
+        distributeTwoGoalsToPlayer(p);
+    }
+
 
     @Test
     public void main(){
@@ -154,6 +161,14 @@ class PlayerTest {
             distributeStartingCard(p1);
             distributeThreeCards(p1);
             distributeTwoGoalsToPlayer(p1);
+            p1.actual_state.peachFromCardsInCenter(0);
+            p1.actual_state.peachCardFromGoldDeck();
+            p1.actual_state.peachFromResourcesDeck();
+            p1.actual_state.peachFromCardsInCenter(0);
+            p1.actual_state.selectStartingCard(true);
+            p1.actual_state.selectGoal(0);
+            p1.actual_state.placeCard(0,true,15,15);
+
          }catch(InvalidStateException e){
             System.out.println(e.getMessage());
         }
@@ -161,9 +176,54 @@ class PlayerTest {
         System.out.println("2° TEST: cambio lo stato al Player-> vedo se effettivamente lo stato è cambiato:");
         p1.InitialNextStatePlayer();
         try{assertEquals("BEGIN",p1.actual_state.getNameState());
-            System.out.println("prova");}catch(AssertionError e){
+           }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
+
+        System.out.println("3° TEST: inserisco le carte al Player:");
+        try{initializedCard(p1); }catch(InvalidStateException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("4° Test: Il Player è nello Stato BEGIN, da questo stato non è possibile chiamare i prossimi metodi");
+        try{
+            p1.actual_state.peachFromCardsInCenter(0);
+            p1.actual_state.peachCardFromGoldDeck();
+            p1.actual_state.peachFromResourcesDeck();
+            p1.actual_state.peachFromCardsInCenter(0);
+            p1.actual_state.selectStartingCard(true);
+            p1.actual_state.selectGoal(0);
+            p1.actual_state.placeCard(0,true,15,15);
+
+        }catch(InvalidStateException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("5° Test: Cambio stato al player, -> vedo se effettivamente lo stato è cambiato: ");
+        p1.InitialNextStatePlayer();
+        try{assertEquals("CHOOSE_GOAL",p1.actual_state.getNameState());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("7° Test: Il Player deve selezionare il suo obbiettivo, vedo se lo seleziona bene ");
+        int choose = 0;
+        p1.actual_state.selectGoal(choose);
+        try{assertEquals(p1.getInitial_goal_cards().get(choose), p1.getGoalCard());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+
+        System.out.println("8° Test: Il Player deve selezionare il suo obbiettivo, vedo se lo seleziona bene ");
+
+        p1.actual_state.selectGoal(choose);
+        try{assertEquals(p1.getInitial_goal_cards().get(choose), p1.getGoalCard());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+
 
     }
 }

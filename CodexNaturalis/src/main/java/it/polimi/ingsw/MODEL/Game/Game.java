@@ -207,6 +207,10 @@ public class Game  {
         this.actual_state = state;
     }
 
+    public GameState getActual_state() {
+        return actual_state;
+    }
+
     public Map<Integer, Player> getGet_player_index() {
         return get_player_index;
     }
@@ -215,11 +219,14 @@ public class Game  {
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setGame_state(begin);
+                break;
             case "BEGIN":
                 setGame_state(turn);
+                break;
             //bisogna definire un END_GAME state
             case "TURN":
                 setGame_state( actual_state);
+                break;
 
 
         }

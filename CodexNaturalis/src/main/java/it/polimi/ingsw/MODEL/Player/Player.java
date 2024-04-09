@@ -126,6 +126,10 @@ public class Player implements PlayerObserver {
         return goal_card;
     }
 
+    public List<Goal> getInitial_goal_cards() {
+        return initial_goal_cards;
+    }
+
     public int getPlayerPoints() {
         return player_points;
     }
@@ -215,6 +219,9 @@ public class Player implements PlayerObserver {
     * index -> posizione nella lista delle carte in mano
     * */
     public void placeCard(int index,boolean flipped, int x, int y){
+        if(index< 0 || index > 2){
+            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
+        }
             PlayCard playing_card =  cards_in_hand.get(index);
             playing_card.flipCard(flipped);
             if(game_field.insertCard(playing_card, x, y)){
@@ -245,6 +252,11 @@ public class Player implements PlayerObserver {
         insertCard(this.resources_deck.drawCard());
     }
     public void peachFromCardsInCenter(int i){
+
+        if(i< 0 || i > 3){
+            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<4");
+        }
+
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));
         }else if(i==1){
@@ -261,7 +273,11 @@ public class Player implements PlayerObserver {
 
 
     public void selectGoal(int i){
-            this.goal_card = initial_goal_cards.get(i);
+        if(i< 0 || i > 2){
+            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<3");
+        }
+
+        this.goal_card = initial_goal_cards.get(i);
     }
 
 
