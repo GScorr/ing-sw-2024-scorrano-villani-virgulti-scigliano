@@ -39,7 +39,7 @@ class DeckTest {
             test effettivo draw_card, pesco 3 carte e controllo che abbia in mano tre carte e che nel resource_deck ci siano 37 carte
          */
         //System.err.println(resource_deck.getNumber());
-        card_in_hands.add(resource_deck.drawCard()); //pesco
+       card_in_hands.add(resource_deck.drawCard()); //pesco
         System.out.println("carta 1 ");
         System.err.println(card_in_hands.get(0).getSide().getAngleLeftUp()+ " " + card_in_hands.get(0).getSide().getAngleRightUp());
         System.err.println("    " + card_in_hands.get(0).getSide().getCentral_resource());
@@ -78,6 +78,13 @@ class DeckTest {
             System.err.println(card_in_hands.get(i).getSide().getAngleLeftDown() + " " + card_in_hands.get(i).getSide().getAngleRightDown());
         }
 
+ /*
+    test sull'errore di deck vuoto
+
+        for(int i=0; i<= 45; i++){
+            carte_oro_in_mano.add(gold_deck.drawCard());
+        }
+*/
         assertEquals(3, card_in_hands.size());
         assertEquals(37, resource_deck.getNumber());
         assertEquals(3, carte_oro_in_mano.size());

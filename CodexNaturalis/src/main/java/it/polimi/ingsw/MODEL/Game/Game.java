@@ -160,14 +160,14 @@ public class Game  {
     }
 
     // At the beginnig , starting_cards has to be distributed to the player
-    public void distributeStartingCard(){
+    private void distributeStartingCard(){
         for(int i=0; i<num_player;i++){
             get_player_index.get(i).setStartingCard(starting_cards_deck.drawCard());
         }
     }
 
     //4 cards at the center has to be initialized
-    public void initializedCenterCard(){
+    private void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
         gold_list.add(gold_deck.drawCard());
@@ -179,7 +179,7 @@ public class Game  {
         this.cards_in_center = tmp;
     }
 
-    public void distributeThreeCards(){
+    private void distributeThreeCards(){
         for (int i = 0; i<num_player;i++){
             List<PlayCard> tmp = new ArrayList<PlayCard>();
             tmp.add(gold_deck.drawCard());
@@ -189,7 +189,7 @@ public class Game  {
         }
     }
 
-    public void selectGoals(){
+    private void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
     }
@@ -207,6 +207,10 @@ public class Game  {
         this.actual_state = state;
     }
 
+    public GameState getActual_state() {
+        return actual_state;
+    }
+
     public Map<Integer, Player> getGet_player_index() {
         return get_player_index;
     }
@@ -215,11 +219,14 @@ public class Game  {
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setGame_state(begin);
+                break;
             case "BEGIN":
                 setGame_state(turn);
+                break;
             //bisogna definire un END_GAME state
             case "TURN":
                 setGame_state( actual_state);
+                break;
 
 
         }
