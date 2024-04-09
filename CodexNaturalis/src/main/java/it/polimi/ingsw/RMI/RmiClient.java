@@ -22,21 +22,23 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
     private void runCli() throws RemoteException {
         Scanner scan = new Scanner(System.in);
-
+        Giocatore curr_player;
         System.out.print("\n Scegli nome Player > ");
-        String userInput = scan.nextLine();
+        String player_name = scan.nextLine();
 
-        if ( server.checkGames()
+        /*controllo che la partita sia non vuota
+        if ( server.gamesIsEmpty() ) {
+
+        }*/
+
+        //creo giocatore
+        curr_player = server.createPlayer(player_name, this );
 
         while (true) {
-            System.out.print("> ");
-            int command = scan.nextInt();
-
-            if (command == 0) {
-                server.reset();
-            } else {
-                server.add(command);
-            }
+            System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
+            int index = scan.nextInt();
+            int value = scan.nextInt();
+            server.put(index, value, curr_player );
         }
     }
 
