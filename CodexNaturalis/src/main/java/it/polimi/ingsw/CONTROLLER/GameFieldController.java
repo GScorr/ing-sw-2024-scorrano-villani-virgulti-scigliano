@@ -8,13 +8,19 @@ import it.polimi.ingsw.MODEL.ENUM.Costraint;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
+import it.polimi.ingsw.MODEL.Player.Player;
 
 //import javax.smartcardio.Card;
 
 
 public class GameFieldController {
     private GameField player_field;
+    private Player player;
 
+    public GameFieldController(Player player) {
+        this.player = player;
+        this.player_field = player.getGameField();
+    }
 
     public GameField getPlayer_field() {
         return player_field;
@@ -28,9 +34,9 @@ public class GameFieldController {
         if   (  (player_field.getField()[x][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() )&& player_field.getField()[x][y].isFilled())||
                 (player_field.getField()[x][y].getCard().equals( player_field.getField()[x][y+1].getCard() ) && player_field.getField()[x][y].isFilled())     ||
                 (player_field.getField()[x][y].getCard().equals( player_field.getField()[x+1][y].getCard() ) && player_field.getField()[x][y].isFilled())    ||
-                (player_field.getField()[x+1][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() ) && player_field.getField()[x][y].isFilled()) ||
-                (player_field.getField()[x][y+1].getCard().equals( player_field.getField()[x+1][y+1].getCard() )&& player_field.getField()[x][y].isFilled())){
-            //System.out.println("1");
+                (player_field.getField()[x+1][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() ) && player_field.getField()[x+1][y].isFilled()) ||
+                (player_field.getField()[x][y+1].getCard().equals( player_field.getField()[x+1][y+1].getCard() )&& player_field.getField()[x][y+1].isFilled())){
+            //System.out.println("a");
             return false;}
 
         // Check that there is at least one card in the space ( you can't place a card in an empty space )
@@ -38,22 +44,21 @@ public class GameFieldController {
                 !player_field.getField()[x+1][y].isEmpty() ||
                 !player_field.getField()[x][y+1].isEmpty() ||
                 !player_field.getField()[x+1][y+1].isEmpty()) {
-            //System.out.println("2");
+            //System.out.println("b");
             //Check if the card(s) that exist(s) have a valid angle that is not NONE --> check what is NONE in AnglesEnum  (if you don't understand this there is an equivalent if in the end**)
             if ((!player_field.getField()[x][y].isEmpty() && player_field.getField()[x][y].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x + 1][y].isEmpty() && player_field.getField()[x + 1][y].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x][y + 1].isEmpty() && player_field.getField()[x][y + 1].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x + 1][y + 1].isEmpty() && player_field.getField()[x + 1][y + 1].getValue().equals(AnglesEnum.NONE))){
-                //System.out.println("3");
+                //System.out.println("c");
                 return false;}
             else {
-                    //System.out.println("4");
                 if (card instanceof GoldCard) {
                     if (!checkGoldConstraints(card.getCostraint())) return false;
-                    player_field.getPlayer().addPoints(goldPointsCount((GoldCard) card, x, y));
+                    player.addPoints(goldPointsCount((GoldCard) card, x, y));
                 }
                 if (card instanceof ResourceCard)
-                    player_field.getPlayer().addPoints(resourcePointsCount(((ResourceCard) card)));
+                    player.addPoints(resourcePointsCount(((ResourceCard) card)));
                 resourcePointsChange(card, x, y);
 
                 return player_field.insertCard(card, x, y);
