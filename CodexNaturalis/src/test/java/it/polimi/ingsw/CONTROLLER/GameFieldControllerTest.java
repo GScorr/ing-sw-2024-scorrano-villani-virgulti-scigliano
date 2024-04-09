@@ -5,9 +5,11 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
+import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.Game.DeckCreation;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
+import it.polimi.ingsw.MODEL.Player.Player;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,27 +19,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameFieldControllerTest {
 
+    Player player = new Player(ColorsEnum.BLU,"aaa",true);
+    GameFieldController controller = new GameFieldController(player);
+    List<PlayCard> cards = new ArrayList<>();
     DeckCreation creation = new DeckCreation();
     List<ResourceCard> mazzo_risorse_list = creation.getDeck_resources();
-    public final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    public final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    public final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
-    GameFieldController controller = new GameFieldController();
+
     @Test
     void checkPlacing() {
-        istanzia_celle(controller.getField_cell());
-        List<PlayCard> carte = istanzia_carte();
-        controller.getPlayer_field().insertCard(carte.get(1),0,0);
-        System.out.println(controller.getPlayer_field().getField()[1][1].getValue());
-        Boolean bool = controller.checkPlacing(carte.get(0),1,1);
+        cards = istanzia_carte();
+        player.getGameField().insertCard(cards.get(1),0,0);
+        Boolean bool= controller.checkPlacing(cards.get(0),1,1);
         assertTrue(bool);
-    }
-    void istanzia_celle(GameFieldSingleCell[][] campo){
-        for (int i = 0; i < 45; i++) {
-            for (int j = 0; j < 45; j++) {
-                campo[i][j] = new GameFieldSingleCell(false, tc, AnglesEnum.EMPTY, tc);
-            }
-        }
+        Boolean bool2= controller.checkPlacing(cards.get(2),0,2);
+        assertTrue(bool2);
     }
 
     List<PlayCard> istanzia_carte(){
