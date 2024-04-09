@@ -1,0 +1,98 @@
+[
+  {
+    "goalType": "GoalDiagonal"  ,
+    "resource": "MUSHROOMS" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalDiagonal"  ,
+    "resource": "PLANT" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalDiagonal"  ,
+    "resource": "ANIMAL" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalDiagonal"  ,
+    "resource": "INSECTS" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "MUSHROOMS" ,
+    "points": 3
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "PLANT" ,
+    "points": 3
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "ANIMAL" ,
+    "points": 3
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "INSECTS" ,
+    "points": 3
+
+  },
+  {
+    "goalType": "GoalTriple"  ,
+    "resource": "MUSHROOMS" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "PLANT" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "ANIMAL" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "INSECTS" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalFeatherPenPaper"  ,
+    "resource": "MIX" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalDoubleGold"  ,
+    "resource": "FEATHER" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "PEN" ,
+    "points": 2
+
+  },
+  {
+    "goalType": "GoalLFigure"  ,
+    "resource": "PAPER" ,
+    "points": 2
+
+  }
+]
