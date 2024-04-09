@@ -272,7 +272,7 @@ public class DeckCreation {
             AnglesEnum enum_resource = AnglesEnum.fromString(resource);
             int point = singlegoal.get("point").getAsInt();
             String strategyString = singlegoal.get("goalType").getAsString();
-            GoalStrategy strategy;
+            GoalStrategy strategy = new GoalDiagonal();
             switch(strategyString){
                 case "GoalDiagonal":
                     strategy = new GoalDiagonal();
