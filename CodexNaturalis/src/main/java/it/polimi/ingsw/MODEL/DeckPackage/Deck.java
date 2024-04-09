@@ -2,6 +2,7 @@ package it.polimi.ingsw.MODEL.DeckPackage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 
 import java.util.Deque;
+import java.util.EmptyStackException;
 
 /*
 * @Francesco Virgulti
@@ -19,8 +20,11 @@ public class Deck {
 
 
     public PlayCard drawCard(){
-        return cards.pop();
-    };
+        if(cards.size()>0){
+            return cards.pop();
+        }
+        else throw new EmptyDeckException("errore mazzo vuoto");
+    }
     public PlayCard seeFirstCard(){return cards.getFirst();}
 
     public int getNumber(){

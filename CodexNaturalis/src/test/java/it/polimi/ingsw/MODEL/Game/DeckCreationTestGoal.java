@@ -13,6 +13,6 @@ class DeckCreationTestGoal {
     @Test
     void creteGoalDeck() {
 
-        deck.getGoalDeck()
+        deck.getGoalDeck();
     }
 }
