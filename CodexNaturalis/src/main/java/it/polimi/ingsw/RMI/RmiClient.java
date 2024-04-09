@@ -31,22 +31,22 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         player_name = scan.nextLine();
         curr_player = server.createPlayer( player_name , curr_client );
 
+        synchronized (this) {
 
-        //controllo che la partita sia non vuota
-        if ( server.gamesIsEmpty() ) {
-            //creo partita e inserisco come player 2
-            System.out.print("\n Scegli nome Partita > ");
-            String game_name = scan.nextLine();
-            server.createGame(game_name, curr_player);
-            System.out.print("\n Giocatore " + server.getLisGames().getFirst().getGame().getPlayer1().getName() +  " Ha creato a una nuova Partita  ");
+            //controllo che la partita sia non vuota
+            if (server.gamesIsEmpty()) {
+                //creo partita e inserisco come player 2
+                System.out.print("\n Scegli nome Partita > ");
+                String game_name = scan.nextLine();
+                server.createGame(game_name, curr_player);
+                System.out.print("\n Giocatore " + server.getLisGames().getFirst().getGame().getPlayer1().getName() + " Ha creato a una nuova Partita  ");
+            } else {
+                //inserisco player come player 2 in game todo correzione bug inserimento giocatore 2____
+                Gioco existing_game = server.getLisGames().getFirst().getGame();
+                server.addPlayer(existing_game, curr_player);
+                System.out.print("\n Giocatore " + curr_player.getName() + " " + existing_game.getPlayer2() + " Aggiunto a partita esistente");
+            }
         }
-        else {
-            //inserisco player come player 2 in game
-            Gioco existing_game = server.getLisGames().getFirst().getGame();
-            server.addPlayer(existing_game, curr_player);
-            System.out.print("\n Giocatore "+ curr_player.getName() + " "+ existing_game.getPlayer2() +  " Aggiunto a partita esistente");
-        }
-
         /*System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
 
 
