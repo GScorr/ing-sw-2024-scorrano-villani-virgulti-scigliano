@@ -42,8 +42,16 @@ public class GameController implements GameSubject {
             this.game = new Game(max_num_player);}
         catch (LimitNumPlayerException e){
             System.out.println(e.getMessage());
+        }
+
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public Player createPlayer(String nome, boolean isFirst){
@@ -68,6 +76,12 @@ public class GameController implements GameSubject {
             game.gameNextState();
             // 1° notifyObservers: playerState from NOT_INITIALIZED to BEGIN
             notifyObservers();
+            /*
+            for(int i = 0; i<game.getNum_player(); i++){
+                System.err.println(game.getGet_player_index().get(i).actual_state.getNameState());
+            }
+
+             */
             game.actual_state.initializedGame();
             // 2° notifyObservers: playerState from BEGIN to CHOOSE_GOAL
             notifyObservers();
@@ -93,7 +107,11 @@ public class GameController implements GameSubject {
         }
     }
 
-    public void playerSelectStartingcard(Player p, boolean flipped){
+    public HashMap<Player, Boolean> getChoosed_goal() {
+        return choosed_goal;
+    }
+
+    public void playerSelectStartingCard(Player p, boolean flipped){
         try{
             if (this.choosed_starting_card.get(p) == false){
                 p.actual_state.selectStartingCard(flipped);

@@ -7,8 +7,9 @@
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameFieldControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameFieldControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Player/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Player/PlayerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +109,7 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameFieldControllerTest.checkPlacing">
+  <component name="RunManager" selected="JUnit.DeckCreationTestGoal.creteGoalDeck">
     <configuration name="DeckCreationTestGoal.creteGoalDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
@@ -120,22 +121,6 @@
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Game" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Game.DeckCreationTestGoal" />
       <option name="METHOD_NAME" value="creteGoalDeck" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameFieldControllerTest.checkPlacing" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PSP30" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameFieldControllerTest" />
-      <option name="METHOD_NAME" value="checkPlacing" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -173,6 +158,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameTest.insertPlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Game" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Game.GameTest" />
+      <option name="METHOD_NAME" value="insertPlayer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PlayerTest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
@@ -204,11 +205,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameFieldControllerTest.checkPlacing" />
         <item itemvalue="JUnit.GameTest.gameNextState" />
         <item itemvalue="JUnit.GameTest.initializedGame" />
         <item itemvalue="JUnit.DeckCreationTestGoal.creteGoalDeck" />
         <item itemvalue="JUnit.PlayerTest.main" />
+        <item itemvalue="JUnit.GameTest.insertPlayer" />
       </list>
     </recent_temporary>
   </component>
@@ -611,6 +612,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Commit di prova" />
     <MESSAGE value="Modifica classe Game - prova" />
     <MESSAGE value="Modifica classe Game - prova2" />
     <MESSAGE value="Modifica classe Game - prova fetch" />
@@ -635,8 +637,7 @@
     <MESSAGE value="test su game e fix game" />
     <MESSAGE value="test su centercards distribuite da game" />
     <MESSAGE value="test su inizializzazione game finiti" />
-    <MESSAGE value="comm" />
-    <option name="LAST_COMMIT_MESSAGE" value="comm" />
+    <option name="LAST_COMMIT_MESSAGE" value="test su inizializzazione game finiti" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
