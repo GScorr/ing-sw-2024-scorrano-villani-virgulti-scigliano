@@ -13,6 +13,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /*
@@ -39,9 +40,9 @@ public class Game  {
     private Player player2;
     private Player player3;
     private Player player4;
-    private int actual_player = 0;  //tiene traccia del giocatore che sta giocando
 
-    private Map<Integer,Player> get_player_index;
+
+    private Map<Integer,Player> get_player_index = new HashMap<>();
     private Goal goal1;
     private Goal goal2;
 
@@ -49,7 +50,7 @@ public class Game  {
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
-    private List<PlayerObserver> player_observers = new ArrayList<>();
+
 
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
@@ -158,7 +159,7 @@ public class Game  {
     }
 
     // At the beginnig , starting_cards has to be distributed to the player
-    private void distributeStartingCard(){
+    public void distributeStartingCard(){
         for(int i=0; i<num_player;i++){
             get_player_index.get(i).setStartingCard(starting_cards_deck.drawCard());
         }
@@ -204,6 +205,11 @@ public class Game  {
     private void setGame_state(GameState state){
         this.actual_state = state;
     }
+
+    public Map<Integer, Player> getGet_player_index() {
+        return get_player_index;
+    }
+
     public void gameNextState(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
@@ -216,6 +222,7 @@ public class Game  {
 
 
         }
+
     }
 
 
