@@ -1,8 +1,9 @@
 package it.polimi.ingsw.RMI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Giocatore {
+public class Giocatore implements Serializable {
     private final String name;
 
     private Integer[] campo;

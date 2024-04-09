@@ -2,9 +2,10 @@ package it.polimi.ingsw.RMI;
 
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GiocoController {
+public class GiocoController implements Serializable {
      private Gioco game;
 
     private Giocatore player;
