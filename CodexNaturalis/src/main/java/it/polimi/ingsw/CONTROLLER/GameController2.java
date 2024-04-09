@@ -7,9 +7,10 @@ public class GameController2 {
     private Game game;
 
 
-    public GameController2(){
+   /* public GameController2(){
         this.game = new Game();
     }
+    */
 /*
     public Player createPlayer(String nome){
         Player player = new Player()
