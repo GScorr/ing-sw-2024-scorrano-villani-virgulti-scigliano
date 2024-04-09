@@ -1,9 +1,13 @@
 package it.polimi.ingsw.MODEL.Player;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.ResourceCard;
+import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
+import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.Game.DeckCreation;
 import it.polimi.ingsw.MODEL.Goal.Goal;
@@ -19,6 +23,9 @@ class PlayerTest {
     private CenterCards cards_in_center;
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
+    private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    private final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
 
     @Test
     void getPlayerState() {
@@ -175,15 +182,31 @@ class PlayerTest {
 
         System.out.println("2° TEST: cambio lo stato al Player-> vedo se effettivamente lo stato è cambiato:");
         p1.InitialNextStatePlayer();
+        p2.InitialNextStatePlayer();
         try{assertEquals("BEGIN",p1.actual_state.getNameState());
            }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
 
         System.out.println("3° TEST: inserisco le carte al Player:");
-        try{initializedCard(p1); }catch(InvalidStateException e){
+        try{
+            initializedCard(p1);
+            initializedCard(p2);
+        }catch(InvalidStateException e){
             System.out.println(e.getMessage());
         }
+
+        System.out.println("3° parte 2: controllo che le carte siano effettivamente inserite:");
+        try{assertEquals(3,p1.getCardsInHand().size());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+        try{assertEquals(2,p1.getInitial_goal_cards().size());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println("la carta centrale è: " + p1.getStartingCard().colore.toString());
+
 
         System.out.println("4° Test: Il Player è nello Stato BEGIN, da questo stato non è possibile chiamare i prossimi metodi");
         try{
@@ -201,6 +224,7 @@ class PlayerTest {
 
         System.out.println("5° Test: Cambio stato al player, -> vedo se effettivamente lo stato è cambiato: ");
         p1.InitialNextStatePlayer();
+        p2.InitialNextStatePlayer();
         try{assertEquals("CHOOSE_GOAL",p1.actual_state.getNameState());
         }catch(AssertionError e){
             System.out.println(e.getMessage());
@@ -209,19 +233,105 @@ class PlayerTest {
         System.out.println("7° Test: Il Player deve selezionare il suo obbiettivo, vedo se lo seleziona bene ");
         int choose = 0;
         p1.actual_state.selectGoal(choose);
+        p2.actual_state.selectGoal(choose);
         try{assertEquals(p1.getInitial_goal_cards().get(choose), p1.getGoalCard());
         }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
 
 
-        System.out.println("8° Test: Il Player deve selezionare il suo obbiettivo, vedo se lo seleziona bene ");
-
+        System.out.println("8 parte 2° Test: Il Player deve selezionare il suo obbiettivo, vedo se lo seleziona bene ");
+        choose = 1;
         p1.actual_state.selectGoal(choose);
         try{assertEquals(p1.getInitial_goal_cards().get(choose), p1.getGoalCard());
         }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
+
+
+        System.out.println("8 parte 3° Test: se il Player inserisce un Index non valido deve essere lanciata un'eccezione (bound right):  ");
+        choose = 2;
+        try{
+        p1.actual_state.selectGoal(choose);
+        }catch(InvalidBoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("8 parte 4° Test: se il Player inserisce un Index non valido deve essere lanciata un'eccezione (bound left):  ");
+        choose = -1;
+        try{
+            p1.actual_state.selectGoal(choose);
+        }catch(InvalidBoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("9° test : cambio lo stato del Player:  ");
+        p1.InitialNextStatePlayer();
+        p2.InitialNextStatePlayer();
+        try{assertEquals("CHOOSE_SIDE_FIRST_CARD",p1.actual_state.getNameState());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+
+
+        System.out.println("10° test : il Player mette la prima carta Starting:  ");
+        p1.actual_state.selectStartingCard(true);
+        p1.InitialNextStatePlayer();
+        p2.actual_state.selectStartingCard(true);
+        p2.InitialNextStatePlayer();
+
+        System.out.println("11° test parte 1: Quando il player P1 mette questa carta il suo stato deve essere = Place Card  ");
+        try{assertEquals(p1.actual_state.getNameState(), "PLACE_CARD");
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("11° test parte 2: Quando il player P2 mette questa carta il suo stato deve essere = Wait  ");
+        try{assertEquals(p1.actual_state.getNameState(), "PLACE_CARD");
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("12°: PlaceCard  ");
+        try{assertEquals(3,p1.getCardsInHand().size());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+        p1.actual_state.placeCard(0,true,1,1);
+        System.out.println("controllo che la carta si sia tolta dal deck in mano");
+        try{assertEquals(p1.tc,p1.getCardsInHand().get(0));
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("12 parte 1°: PlaceCard Bound Exception (left)  ");
+        try{p1.actual_state.placeCard(-1,true,1,1);}
+        catch (InvalidBoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("12 parte 2°: PlaceCard Bound Exception (right)  ");
+        try{p1.actual_state.placeCard(3,true,1,1);}
+        catch (InvalidBoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("13 STATE: PLACE_CARD -> DRAW_CARD ");
+        p1.nextStatePlayer();
+        try{assertEquals("DRAW_CARD",p1.actual_state.getNameState());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("14 DrawCard");
+        PlayCard gold_deck_upper_card = gold_deck.seeFirstCard();
+        p1.actual_state.peachCardFromGoldDeck();
+        try{assertEquals(gold_deck_upper_card,p1.getCardsInHand().get(0));
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
 
 
 

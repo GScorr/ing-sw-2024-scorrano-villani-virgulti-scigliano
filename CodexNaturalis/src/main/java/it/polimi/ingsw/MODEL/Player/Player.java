@@ -53,9 +53,10 @@ public class Player implements PlayerObserver {
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
-    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    private final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    //rendi questo private, mi serviva per i test renderlo pubblico
+    public final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
@@ -64,6 +65,7 @@ public class Player implements PlayerObserver {
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
     private int player_points = 0;
+
 
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
@@ -155,6 +157,12 @@ public class Player implements PlayerObserver {
         this.goal_card = goal_card;
     }
 
+    public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
+        this.resources_deck = resources_deck;
+        this.gold_deck = gold_deck;
+        this.cards_in_center = cards_in_center;
+    }
+
     /*
     * STATE MACHINE
     * Costructor iniziatialized all the player to NOT_INITIALIZED
@@ -224,9 +232,9 @@ public class Player implements PlayerObserver {
         }
             PlayCard playing_card =  cards_in_hand.get(index);
             playing_card.flipCard(flipped);
-            if(game_field.insertCard(playing_card, x, y)){
-                removeHandCard(playing_card, index);
-            }
+            game_field.insertCard(playing_card, x, y);
+            removeHandCard(playing_card, index);
+
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
@@ -273,8 +281,8 @@ public class Player implements PlayerObserver {
 
 
     public void selectGoal(int i){
-        if(i< 0 || i > 2){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<3");
+        if(i< 0 || i > 1){
+            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
         }
 
         this.goal_card = initial_goal_cards.get(i);
