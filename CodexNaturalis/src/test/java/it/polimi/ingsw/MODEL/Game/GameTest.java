@@ -1,5 +1,6 @@
 package it.polimi.ingsw.MODEL.Game;
 
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.Player.Player;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,21 @@ class GameTest {
         game.insertPlayer(player2);
         game.insertPlayer(player3);
         game.distributeStartingCard();
-        assertEquals(game.getGet_player_index().get(0).);
+        System.out.println(game.getGet_player_index().get(0).getStartingCard().getColore());
+        System.out.println(game.getGet_player_index().get(1).getStartingCard().getColore());
+        System.out.println(game.getGet_player_index().get(2).getStartingCard().getColore());
+        //controllo che venga data una carta randomica iniziale differente
+        //
+        //
+        //
+        game.initializedCenterCard();
+        for(PlayCard c:game.getCars_in_center().getGold_list()){
+            System.out.println(c);
+        }
+        for(PlayCard c:game.getCars_in_center().getResource_list()){
+            System.out.println(c);
+        }
+        //in combo con drawcard testata, la gestione delle carte in mezzo è ottimale
     }
 
     @Test

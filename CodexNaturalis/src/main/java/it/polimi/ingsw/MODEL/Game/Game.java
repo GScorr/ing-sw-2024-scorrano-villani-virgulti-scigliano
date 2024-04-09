@@ -166,7 +166,7 @@ public class Game  {
     }
 
     //4 cards at the center has to be initialized
-    private void initializedCenterCard(){
+    public void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
         gold_list.add(gold_deck.drawCard());
