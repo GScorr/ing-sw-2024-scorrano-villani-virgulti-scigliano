@@ -157,6 +157,10 @@ public class Game  {
                 selectGoals();
                 distributeTwoGoalsToPlayer();
 
+                for(int i=0; i<num_player;i++){
+                    get_player_index.get(i).setDeck(resources_deck,gold_deck,cards_in_center);
+                }
+
     }
 
     // At the beginnig , starting_cards has to be distributed to the player
