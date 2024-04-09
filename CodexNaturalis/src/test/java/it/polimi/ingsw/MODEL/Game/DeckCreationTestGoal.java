@@ -12,6 +12,7 @@ class DeckCreationTestGoal {
     DeckCreation deck = new DeckCreation();
     @Test
     void creteGoalDeck() {
-        deck.creteGoldDeck();
+
+        deck.getGoalDeck()
     }
 }
