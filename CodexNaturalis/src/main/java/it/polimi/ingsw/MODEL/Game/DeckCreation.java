@@ -7,6 +7,7 @@ import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.BonusEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
+import it.polimi.ingsw.MODEL.Goal.*;
 
 import java.util.*;
 import java.io.BufferedReader;
@@ -17,15 +18,18 @@ public class DeckCreation {
     private String resources_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json";
     private String gold_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/gold.json";
     private String starting_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/starting.json";
+    private String goal_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/goals.json";
 
-    private JsonArray resources_jsonArray, gold_jsonArray,starting_jsonArray;
+    private JsonArray resources_jsonArray, gold_jsonArray,starting_jsonArray, goal_jsonArray;
     public static List<ResourceCard> deck_resources = new ArrayList<>();
     public static List<GoldCard> deck_gold = new ArrayList<>();
     public static List<StartingCard> deck_starting = new ArrayList<>();
+    public static List<Goal> deck_goal = new ArrayList<>();
 
     public static int getSizeResourcesDeck(){ return deck_resources.size();}
     public static int getSizeGoldDeck(){ return deck_gold.size();}
     public static int getSizeStartingDeck(){ return deck_starting.size();}
+    public static int getSizeGoalDeck(){ return deck_goal.size();}
 
     public DeckCreation() {
         try (BufferedReader reader = new BufferedReader(new FileReader(resources_filePath))) {
@@ -63,11 +67,23 @@ public class DeckCreation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try (BufferedReader reader = new BufferedReader(new FileReader(goal_filePath))) {
+            StringBuilder jsonStringBuilder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonStringBuilder.append(line);
+            }
+            String jsonString = jsonStringBuilder.toString();
+            goal_jsonArray = JsonParser.parseString(jsonString).getAsJsonArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         creteResourceDeck();
         creteGoldDeck();
         creteStartingDeck();
+        //creteGoalDeck();
 
     }
 
@@ -81,6 +97,9 @@ public class DeckCreation {
 
     public static List<StartingCard> getDeck_starting() {
         return deck_starting;
+    }
+    public static List<Goal> getDeck_goal() {
+        return deck_goal;
     }
 
     public void creteResourceDeck(){
@@ -245,15 +264,59 @@ public class DeckCreation {
             deck_starting.add(tmp);
         }
     }
+
+    public void creteGoalDeck(){
+        for (JsonElement element : goal_jsonArray) {
+            JsonObject singlegoal = element.getAsJsonObject();
+            String resource = singlegoal.get("resource").getAsString();
+            AnglesEnum enum_resource = AnglesEnum.fromString(resource);
+            int point = singlegoal.get("point").getAsInt();
+            String strategyString = singlegoal.get("goalType").getAsString();
+            GoalStrategy strategy = new GoalDiagonal(); //inizializzata per evitare errori
+            switch(strategyString){
+                case "GoalDiagonal":
+                    strategy = new GoalDiagonal();
+                    break;
+                case "GoalDoubleGold":
+                    strategy = new GoalDoubleGold();
+                    break;
+                case "GoalLFigure":
+                    strategy = new GoalLFigure();
+                    break;
+                case "GoalTriple":
+                    strategy = new GoalTriple();
+                    break;
+                case "GoalFeatherPenPaper":
+                    strategy = new GoalFeatherPenPaper();
+                    break;
+            }
+            Goal tmp = new Goal(strategy,point,enum_resource);
+            deck_goal.add(tmp);
+        }
+    }
+    public void mixUpGoalDeck(){
+        Collections.shuffle(deck_goal);
+    }
     public void mixUpStartingDeck(){
         Collections.shuffle(deck_starting);
     }
-
+    public Deque<Goal> getGoalDeck(){
+        Deque<Goal> g_deck = new ArrayDeque<Goal>();
+        g_deck.addAll(deck_goal);
+        return g_deck;
+    }
+    public Deque<Goal> getMixGoalDeck(){
+        Deque<Goal> g_deck = new ArrayDeque<Goal>();
+        mixUpGoalDeck();
+        g_deck.addAll(deck_goal);
+        return g_deck;
+    }
     public Deque<PlayCard> getResourcesDeck(){
         Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
         res_deck.addAll(deck_resources);
         return res_deck;
     }
+
 
     public Deque<PlayCard> getMixResourcesDeck(){
         Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
@@ -261,6 +324,8 @@ public class DeckCreation {
         res_deck.addAll(deck_resources);
         return res_deck;
     }
+
+
 
     public Deque<PlayCard> getGoldDeck(){
         Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
@@ -299,6 +364,7 @@ public class DeckCreation {
         System.out.println(getSizeResourcesDeck());
         System.out.println(getSizeGoldDeck());
         System.out.println(getSizeStartingDeck());
+        System.out.println(getSizeGoalDeck());
 
     }
 

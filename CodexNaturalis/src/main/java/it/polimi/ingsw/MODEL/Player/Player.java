@@ -9,7 +9,7 @@ import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Game.GameObserver;
+
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;

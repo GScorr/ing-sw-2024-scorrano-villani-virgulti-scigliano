@@ -13,6 +13,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /*
@@ -39,9 +40,9 @@ public class Game  {
     private Player player2;
     private Player player3;
     private Player player4;
-    private int actual_player = 0;  //tiene traccia del giocatore che sta giocando
 
-    private Map<Integer,Player> get_player_index;
+
+    private Map<Integer,Player> get_player_index = new HashMap<>();
     private Goal goal1;
     private Goal goal2;
 
@@ -49,7 +50,7 @@ public class Game  {
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
-    private List<PlayerObserver> player_observers = new ArrayList<>();
+
 
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
@@ -113,9 +114,10 @@ public class Game  {
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
+        this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
-        //this.goal_deck = goal_deck;
+
 
     }
 
@@ -158,14 +160,14 @@ public class Game  {
     }
 
     // At the beginnig , starting_cards has to be distributed to the player
-    private void distributeStartingCard(){
+    public void distributeStartingCard(){
         for(int i=0; i<num_player;i++){
             get_player_index.get(i).setStartingCard(starting_cards_deck.drawCard());
         }
     }
 
     //4 cards at the center has to be initialized
-    private void initializedCenterCard(){
+    public void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
         gold_list.add(gold_deck.drawCard());
@@ -177,7 +179,7 @@ public class Game  {
         this.cards_in_center = tmp;
     }
 
-    private void distributeThreeCards(){
+    public void distributeThreeCards(){
         for (int i = 0; i<num_player;i++){
             List<PlayCard> tmp = new ArrayList<PlayCard>();
             tmp.add(gold_deck.drawCard());
@@ -187,7 +189,7 @@ public class Game  {
         }
     }
 
-    private void selectGoals(){
+    public void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
     }
@@ -204,6 +206,11 @@ public class Game  {
     private void setGame_state(GameState state){
         this.actual_state = state;
     }
+
+    public Map<Integer, Player> getGet_player_index() {
+        return get_player_index;
+    }
+
     public void gameNextState(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
@@ -216,6 +223,7 @@ public class Game  {
 
 
         }
+
     }
 
 
