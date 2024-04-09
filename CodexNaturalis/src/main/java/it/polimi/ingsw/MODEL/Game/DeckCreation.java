@@ -83,7 +83,7 @@ public class DeckCreation {
         creteResourceDeck();
         creteGoldDeck();
         creteStartingDeck();
-        creteGoalDeck();
+        //creteGoalDeck();
 
     }
 
