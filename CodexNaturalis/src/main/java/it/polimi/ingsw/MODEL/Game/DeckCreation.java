@@ -67,7 +67,7 @@ public class DeckCreation {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(starting_filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(goal_filePath))) {
             StringBuilder jsonStringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -270,7 +270,7 @@ public class DeckCreation {
             JsonObject singlegoal = element.getAsJsonObject();
             String resource = singlegoal.get("resource").getAsString();
             AnglesEnum enum_resource = AnglesEnum.fromString(resource);
-            int point = singlegoal.get("point").getAsInt();
+            int point = singlegoal.get("points").getAsInt();
             String strategyString = singlegoal.get("goalType").getAsString();
             GoalStrategy strategy = new GoalDiagonal(); //inizializzata per evitare errori
             switch(strategyString){
