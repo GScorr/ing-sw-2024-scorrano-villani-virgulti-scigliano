@@ -215,12 +215,14 @@ public class Game  {
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setGame_state(begin);
+                return;
             case "BEGIN":
                 setGame_state(turn);
+                return;
             //bisogna definire un END_GAME state
             case "TURN":
                 setGame_state( actual_state);
-
+                return;
 
         }
 
