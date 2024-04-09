@@ -169,7 +169,7 @@ public class Player implements PlayerObserver {
     //questi cambiamenti vengono chiamati su tutti i player, perchè contemporaneamente devono eseguire i comandi
     // Es: tutti  i player devono scegliere "contemporaneamente" (sullo stesso stato di Game)  il loro obbiettivo prima di proseguire il gioco
     // tutti i  plater devono piazzare la loro starting_car prima di proseguire il gioco con il prossimo stato
-    private void InitialNextStatePlayer(){
+    public void InitialNextStatePlayer(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setPlayer_state(begin);

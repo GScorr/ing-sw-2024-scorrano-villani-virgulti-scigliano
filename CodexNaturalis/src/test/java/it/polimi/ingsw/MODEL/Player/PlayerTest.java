@@ -3,9 +3,11 @@ package it.polimi.ingsw.MODEL.Player;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
+import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.Game.DeckCreation;
 import it.polimi.ingsw.MODEL.Goal.Goal;
+import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerTest {
     private CenterCards cards_in_center;
     private Deck gold_deck,resources_deck, starting_cards_deck;
+    private DeckGoalCard goal_deck;
 
     @Test
     void getPlayerState() {
@@ -120,7 +123,7 @@ class PlayerTest {
 
     }
 
-/*
+
     private void distributeTwoGoalsToPlayer(Player p){
             List<Goal> tmp = new ArrayList<Goal>();
             tmp.add(goal_deck.drawCard());
@@ -128,21 +131,34 @@ class PlayerTest {
             p.actual_state.setInitialGoalCards(tmp);
 
     }
- */
 
+    @Test
     public void main(){
         DeckCreation creation = new DeckCreation();
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
+        this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
 
         Player p1 = new Player(ColorsEnum.BLU, "nome_1",true);
         Player p2 = new Player(ColorsEnum.BLU, "nome_2",false);
 
         System.out.println("1° TEST: i Player sono inizialmente sullo stato NOT INITIALIZED, non dovrebbe essere possibile chiamare nessun metodo:");
 
-        //try{}catch(){}
+        try{
+            distributeStartingCard(p1);
+            distributeThreeCards(p1);
+            distributeTwoGoalsToPlayer(p1);
+         }catch(InvalidStateException e){
+            System.out.println(e.getMessage());
+        }
 
+        System.out.println("2° TEST: cambio lo stato al Player-> vedo se effettivamente lo stato è cambiato:");
+        p1.InitialNextStatePlayer();
+        try{assertEquals("BEGIN",p1.actual_state.getNameState());
+            System.out.println("prova");}catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
 
     }
 }
