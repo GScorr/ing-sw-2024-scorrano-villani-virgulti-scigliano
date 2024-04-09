@@ -83,7 +83,7 @@ public class DeckCreation {
         creteResourceDeck();
         creteGoldDeck();
         creteStartingDeck();
-        //creteGoalDeck();
+        creteGoalDeck();
 
     }
 
@@ -270,7 +270,7 @@ public class DeckCreation {
             JsonObject singlegoal = element.getAsJsonObject();
             String resource = singlegoal.get("resource").getAsString();
             AnglesEnum enum_resource = AnglesEnum.fromString(resource);
-            int point = singlegoal.get("point").getAsInt();
+            int point = singlegoal.get("points").getAsInt();
             String strategyString = singlegoal.get("goalType").getAsString();
             GoalStrategy strategy = new GoalDiagonal(); //inizializzata per evitare errori
             switch(strategyString){
