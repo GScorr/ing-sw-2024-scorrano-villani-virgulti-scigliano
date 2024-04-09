@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Modifica Macchina a stati Player e Game">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/InvalidBoundException.java" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Player/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Player/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Game/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Game/GameTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,11 +106,8 @@
       <recent name="it.polimi.ingsw.MODEL.Goal" />
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="it.polimi.ingsw.MODEL.Player" />
-    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.GameTest.gameNextState">
     <configuration name="DeckCreationTestGoal.creteGoalDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
@@ -124,6 +119,22 @@
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Game" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Game.DeckCreationTestGoal" />
       <option name="METHOD_NAME" value="creteGoalDeck" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.gameNextState" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Game" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Game.GameTest" />
+      <option name="METHOD_NAME" value="gameNextState" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -161,22 +172,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GoalStrategyTest.totalPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PSP30" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Goal.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalStrategyTest" />
-      <option name="METHOD_NAME" value="totalPoints" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PlayerTest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
@@ -208,11 +203,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PlayerTest.main" />
-        <item itemvalue="JUnit.DeckCreationTestGoal.creteGoalDeck" />
+        <item itemvalue="JUnit.GameTest.gameNextState" />
         <item itemvalue="JUnit.GameTest.initializedGame" />
+        <item itemvalue="JUnit.DeckCreationTestGoal.creteGoalDeck" />
+        <item itemvalue="JUnit.PlayerTest.main" />
         <item itemvalue="JUnit.GameTest.insertPlayer" />
-        <item itemvalue="JUnit.GoalStrategyTest.totalPoints" />
       </list>
     </recent_temporary>
   </component>
@@ -577,13 +572,13 @@
       <option name="project" value="LOCAL" />
       <updated>1712668818794</updated>
     </task>
-    <task id="LOCAL-00043" summary="Modifica Macchina a stati Player e Game">
+    <task id="LOCAL-00043" summary="test su inizializzazione game finiti">
       <option name="closed" value="true" />
-      <created>1712670118023</created>
+      <created>1712672313400</created>
       <option name="number" value="00043" />
       <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1712670118024</updated>
+      <updated>1712672313400</updated>
     </task>
     <option name="localTasksCounter" value="44" />
     <servers />
@@ -639,8 +634,8 @@
     <MESSAGE value="Aggiunta commenti" />
     <MESSAGE value="test su game e fix game" />
     <MESSAGE value="test su centercards distribuite da game" />
-    <MESSAGE value="Modifica Macchina a stati Player e Game" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifica Macchina a stati Player e Game" />
+    <MESSAGE value="test su inizializzazione game finiti" />
+    <option name="LAST_COMMIT_MESSAGE" value="test su inizializzazione game finiti" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
