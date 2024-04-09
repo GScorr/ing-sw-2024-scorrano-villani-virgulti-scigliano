@@ -22,24 +22,35 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
     private void runCli() throws RemoteException {
         Scanner scan = new Scanner(System.in);
+        VirtualView curr_client = (VirtualView) this;
+        String player_name = "";
         Giocatore curr_player;
         System.out.print("\n Scegli nome Player > ");
-        String player_name = scan.nextLine();
+        player_name = scan.nextLine();
 
         /*controllo che la partita sia non vuota
         if ( server.gamesIsEmpty() ) {
 
         }*/
-
+        System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
         //creo giocatore
-        curr_player = server.createPlayer(player_name, this );
+        curr_player = server.createPlayer( player_name , curr_client );
+        System.out.print("...creazione Player andata a buon fine");
+        System.out.print("\nCONTIENE: " + server.getMap().size() );
+        // for (Giocatore g : server.getMap().values() ) System.out.print(" " +  g.getName() );
+        //server.getMap().values().forEach(giocatore -> System.out.println(giocatore.getName()));
 
+
+        System.out.print("\ncontiene?" + server.getMap().containsKey(curr_client) );
+
+    /*
         while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
             int value = scan.nextInt();
             server.put(index, value, curr_player );
-        }
+        }*/
+
     }
 
     @Override
@@ -57,7 +68,11 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
     }
 
     public static void main(String[] args) throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(args[0], 1234);
+        /*if (args.length == 0) {
+            System.err.println("Usage: java RmiClient <server_address>");
+            System.exit(1);
+        }*/
+        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
         VirtualServer server = (VirtualServer) registry.lookup("VirtualServer");
 
         new RmiClient(server).run();

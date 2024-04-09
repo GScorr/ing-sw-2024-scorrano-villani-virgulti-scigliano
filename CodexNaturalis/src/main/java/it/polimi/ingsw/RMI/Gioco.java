@@ -1,8 +1,9 @@
 package it.polimi.ingsw.RMI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Gioco {
+public class Gioco implements Serializable {
     final private String name;
 
     final private Giocatore player1;

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.RMI;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -43,6 +42,7 @@ public class RmiServer implements VirtualServer{
     }
 
 
+
     public void connect(VirtualView client)throws RemoteException{
         synchronized (this.clients){
             this.clients.add(client);
@@ -72,17 +72,30 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public Giocatore createPlayer(String name, RmiClient client) {
+    public synchronized Giocatore createPlayer(String name, VirtualView client) {
         Giocatore p = controller.createPlayer(name);
         mappa.put(client, p );
         return p;
     }
 
-    ;
+    @Override
+    public Map<VirtualView, Giocatore> getMap() {
+        return mappa;
+    }
+
+    @Override
+    public synchronized void  clearMap(){
+        mappa.clear();
+    }
+
+    @Override
+    public synchronized List<VirtualView> getListClients() throws RemoteException {
+        return clients;
+    }
 
 
     public static void main(String[] args) throws RemoteException {
-        final String serverName = "AdderServer";
+        final String serverName = "VirtualServer";
         VirtualServer server = new RmiServer(new GiocoController());
         VirtualServer stub = (VirtualServer) UnicastRemoteObject.exportObject(server,0);
         Registry registry = LocateRegistry.createRegistry(1234);
