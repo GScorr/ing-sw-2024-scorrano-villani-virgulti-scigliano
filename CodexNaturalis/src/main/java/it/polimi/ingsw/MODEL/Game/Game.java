@@ -166,7 +166,7 @@ public class Game  {
     }
 
     //4 cards at the center has to be initialized
-    private void initializedCenterCard(){
+    public void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
         gold_list.add(gold_deck.drawCard());
@@ -178,7 +178,7 @@ public class Game  {
         this.cards_in_center = tmp;
     }
 
-    private void distributeThreeCards(){
+    public void distributeThreeCards(){
         for (int i = 0; i<num_player;i++){
             List<PlayCard> tmp = new ArrayList<PlayCard>();
             tmp.add(gold_deck.drawCard());
@@ -188,7 +188,7 @@ public class Game  {
         }
     }
 
-    private void selectGoals(){
+    public void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
     }
