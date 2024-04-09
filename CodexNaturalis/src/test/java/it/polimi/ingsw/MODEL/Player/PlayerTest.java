@@ -143,6 +143,11 @@ class PlayerTest {
         Player p1 = new Player(ColorsEnum.BLU, "nome_1",true);
         Player p2 = new Player(ColorsEnum.BLU, "nome_2",false);
 
+        try{assertEquals("NOT_INITIALIZED",p1.actual_state.getNameState());}
+        catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("1° TEST: i Player sono inizialmente sullo stato NOT INITIALIZED, non dovrebbe essere possibile chiamare nessun metodo:");
 
         try{

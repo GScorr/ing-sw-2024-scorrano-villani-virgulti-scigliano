@@ -173,10 +173,13 @@ public class Player implements PlayerObserver {
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setPlayer_state(begin);
+                return;
             case "BEGIN":
                 setPlayer_state(choose_goal);
+                return;
             case "CHOOSE_GOAL":
                 setPlayer_state( choose_side_first_card);
+                return;
             case "CHOOSE_SIDE_FIRST_CARD":
                 if(this.isFirst){
                     setPlayer_state( place_card);
@@ -184,6 +187,7 @@ public class Player implements PlayerObserver {
                 else {
                     setPlayer_state(wait_turn);
                 }
+                return;
 
         }
     }
@@ -195,10 +199,13 @@ public class Player implements PlayerObserver {
         switch(actual_state.getNameState()){
             case "WAIT_TURN" :
                     setPlayer_state( place_card);
+                    return;
             case "PLACE_CARD":
                 setPlayer_state( draw_card );
+                return;
             case "DRAW_CARD":
                 setPlayer_state( wait_turn);
+                return;
         }
     }
 
