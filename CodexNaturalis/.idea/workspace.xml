@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameFieldControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameFieldControllerTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Inizio gestione di partite multiple" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,49 +50,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.GestioneViewTest.scegliCarta.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.GoalDiagonalTest.creteResourceDeck.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalDiagonalTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalDiagonalTest.testGoalDiagonal.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalDiagonalTest.totalPoints.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPoints.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsAnimal.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsInsect.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsMushroom.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsPlant.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalStrategyTest.totalPoints.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.addPoints.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PlayerTest.getColor.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.getIsFirst.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.getPlayerState.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.insertCard.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PlayerTest.nextStatePlayer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.placeCard.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.setPlayer_state.executor&quot;: &quot;Run&quot;,
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mirko/IdeaProjects/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.RmiClient.executor": "Run",
+    "Application.RmiServer.executor": "Run",
+    "JUnit.DeckCreationTestGoal.creteGoalDeck.executor": "Run",
+    "JUnit.GestioneViewTest.scegliCarta.executor": "Debug",
+    "JUnit.GoalDiagonalTest.creteResourceDeck.executor": "Run",
+    "JUnit.GoalDiagonalTest.executor": "Run",
+    "JUnit.GoalDiagonalTest.testGoalDiagonal.executor": "Run",
+    "JUnit.GoalDiagonalTest.totalPoints.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPoints.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsAnimal.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsInsect.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsMushroom.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsPlant.executor": "Run",
+    "JUnit.GoalStrategyTest.totalPoints.executor": "Run",
+    "JUnit.PlayerTest.addPoints.executor": "Debug",
+    "JUnit.PlayerTest.getColor.executor": "Run",
+    "JUnit.PlayerTest.getIsFirst.executor": "Run",
+    "JUnit.PlayerTest.getPlayerState.executor": "Run",
+    "JUnit.PlayerTest.insertCard.executor": "Debug",
+    "JUnit.PlayerTest.nextStatePlayer.executor": "Run",
+    "JUnit.PlayerTest.placeCard.executor": "Run",
+    "JUnit.PlayerTest.setPlayer_state.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Mirko/IdeaProjects/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -107,50 +106,44 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameFieldControllerTest.resourcePointsChange">
-    <configuration name="GameFieldControllerTest.checkPlacing" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.RmiClient">
+    <configuration name="RmiClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiClient" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameFieldControllerTest" />
-      <option name="METHOD_NAME" value="checkPlacing" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameFieldControllerTest.goldPointsCount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RmiServer" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiServer" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameFieldControllerTest" />
-      <option name="METHOD_NAME" value="goldPointsCount" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameFieldControllerTest.resourcePointsChange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeckCreationTestGoal.creteGoalDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Game.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameFieldControllerTest" />
-      <option name="METHOD_NAME" value="resourcePointsChange" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Game" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Game.DeckCreationTestGoal" />
+      <option name="METHOD_NAME" value="creteGoalDeck" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -201,11 +194,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.RmiClient" />
+      <item itemvalue="Application.RmiServer" />
+      <item itemvalue="JUnit.GameTest.gameNextState" />
+      <item itemvalue="JUnit.DeckCreationTestGoal.creteGoalDeck" />
+      <item itemvalue="JUnit.GameTest.initializedGame" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameFieldControllerTest.resourcePointsChange" />
-        <item itemvalue="JUnit.GameFieldControllerTest.goldPointsCount" />
-        <item itemvalue="JUnit.GameFieldControllerTest.checkPlacing" />
+        <item itemvalue="Application.RmiClient" />
+        <item itemvalue="Application.RmiServer" />
+        <item itemvalue="JUnit.DeckCreationTestGoal.creteGoalDeck" />
         <item itemvalue="JUnit.GameTest.gameNextState" />
         <item itemvalue="JUnit.GameTest.initializedGame" />
       </list>
@@ -580,15 +580,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712672313400</updated>
     </task>
-    <task id="LOCAL-00044" summary="comm">
+    <task id="LOCAL-00044" summary="prove rmi">
       <option name="closed" value="true" />
-      <created>1712684232017</created>
+      <created>1712684448799</created>
       <option name="number" value="00044" />
       <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1712684232017</updated>
+      <updated>1712684448799</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Inizio gestione di partite multiple">
+      <option name="closed" value="true" />
+      <created>1712688250952</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1712688250952</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,10 +626,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Commit di prova" />
-    <MESSAGE value="Modifica classe Game - prova" />
-    <MESSAGE value="Modifica classe Game - prova2" />
-    <MESSAGE value="Modifica classe Game - prova fetch" />
     <MESSAGE value="Creazione classe PlayCard" />
     <MESSAGE value="creazione Classi ENUMERAZIONE" />
     <MESSAGE value="creazione&#10;Class PlayCard&#10;Class Side&#10;Class Player&#10;class Goal" />
@@ -643,7 +647,11 @@
     <MESSAGE value="test su game e fix game" />
     <MESSAGE value="test su centercards distribuite da game" />
     <MESSAGE value="test su inizializzazione game finiti" />
-    <option name="LAST_COMMIT_MESSAGE" value="test su inizializzazione game finiti" />
+    <MESSAGE value="PROVE RMI" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;CodexNaturalis/.idea/workspace.xml" />
+    <MESSAGE value="prove rmi" />
+    <MESSAGE value="Inizio gestione di partite multiple" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inizio gestione di partite multiple" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

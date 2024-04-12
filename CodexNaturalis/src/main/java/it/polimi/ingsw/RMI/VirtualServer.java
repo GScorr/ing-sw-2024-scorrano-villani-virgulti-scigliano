@@ -20,4 +20,12 @@ public interface VirtualServer extends Remote {
     public void clearMap() throws  RemoteException;
 
     public List<VirtualView> getListClients() throws RemoteException;
+    public List<GiocoController> getLisGames() throws RemoteException;
+
+    public Giocatore getPlayerFromClient(VirtualView client ) throws RemoteException;
+
+    public void createGame(String name, Giocatore player ) throws  RemoteException;
+
+    public void addPlayer(Gioco game, Giocatore player) throws  RemoteException;
+
 }
