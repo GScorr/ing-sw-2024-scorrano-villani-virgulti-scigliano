@@ -17,6 +17,10 @@ public class GameFieldController {
     private GameField player_field;
     private Player player;
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public GameFieldController(Player player) {
         this.player = player;
         this.player_field = player.getGameField();
