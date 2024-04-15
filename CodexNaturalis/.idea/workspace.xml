@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Player/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Player/PlayerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +115,7 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameControllerTest.gioco">
+  <component name="RunManager">
     <configuration name="GameControllerTest.gioco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
@@ -621,7 +620,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713018696397</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller">
+      <option name="closed" value="true" />
+      <created>1713190089702</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1713190089703</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +658,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Creazione classe PlayCard" />
     <MESSAGE value="creazione Classi ENUMERAZIONE" />
     <MESSAGE value="creazione&#10;Class PlayCard&#10;Class Side&#10;Class Player&#10;class Goal" />
     <MESSAGE value="aggiunta commento &#10;classe PlayCard" />
@@ -676,7 +682,8 @@
     <MESSAGE value="prove rmi" />
     <MESSAGE value="Inizio gestione di partite multiple" />
     <MESSAGE value="Aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento" />
+    <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
