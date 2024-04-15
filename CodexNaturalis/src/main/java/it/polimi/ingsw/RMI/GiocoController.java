@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public class GiocoController implements Serializable {
      private Gioco game;
 
-    private Giocatore player;
+    public GiocoController(String name, Giocatore player1) {
+        this.game = new Gioco(name, player1);
+    }
 
     public Giocatore getStatus1(){
         return game.getPlayer1();
@@ -24,7 +26,16 @@ public class GiocoController implements Serializable {
     }
 
     public Giocatore createPlayer(String name){
-        return player = new Giocatore(name);
+        Giocatore player;
+        return  player = new Giocatore(name);
     }
+
+    public Gioco getGame() {
+        return game;
+    }
+
+
+
+
 
 }

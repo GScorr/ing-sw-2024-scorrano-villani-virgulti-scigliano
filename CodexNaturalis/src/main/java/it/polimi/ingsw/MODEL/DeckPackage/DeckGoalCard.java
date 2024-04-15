@@ -16,8 +16,12 @@ public class DeckGoalCard {
 
 
     public Goal drawCard(){
-        return cards.pop();
-    };
+        if(cards.size()>0){
+            return cards.pop();
+        }
+        else throw new EmptyDeckException("errore mazzo vuoto in drawCard in DeckGoalCard");
+    }
+
     public Goal seeFirstCard(){return cards.getFirst();}
 
     public int getNumber(){
