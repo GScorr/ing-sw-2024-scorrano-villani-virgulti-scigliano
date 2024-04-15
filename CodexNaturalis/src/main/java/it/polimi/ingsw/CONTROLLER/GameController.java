@@ -1,5 +1,7 @@
 package it.polimi.ingsw.CONTROLLER;
 
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Game.GameSubject;
@@ -29,6 +31,7 @@ public class GameController implements GameSubject {
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
     private HashMap<Player,Boolean> choosed_goal = new HashMap<Player, Boolean>();
+    private HashMap<Player,GameFieldController> field_controller = new HashMap<>();
     private int goal_count = 0;
     private HashMap<Player,Boolean> choosed_starting_card = new HashMap<Player, Boolean>();
     private int starting_card_count = 0;
@@ -57,6 +60,8 @@ public class GameController implements GameSubject {
     public Player createPlayer(String nome, boolean isFirst){
         Player player = new Player(ColorsEnum.GREEN, nome, isFirst);
         try {
+            GameFieldController field = new GameFieldController(player);
+            this.field_controller.put(player,field);
             this.game.actual_state.insertPlayer(player);
             this.choosed_goal.put(player,false);
             this.choosed_starting_card.put(player,false);
@@ -153,8 +158,15 @@ public class GameController implements GameSubject {
 
     public void playerPlaceCard(Player player, int index,boolean flipped, int x, int y){
             try {
-                player.actual_state.placeCard(index, flipped, x, y);
-                nextStatePlayer();
+                GameFieldController field_controller_player = field_controller.get(player);
+                PlayCard card_played = player.getCardsInHand().get(index);
+                if(field_controller_player.checkPlacing(card_played,x,y)) {
+                    player.actual_state.placeCard(index, flipped, x, y);
+                    nextStatePlayer();
+                }else{
+                    System.out.println("non è possibile aggiungere la carta in questa posizione");
+                }
+
             }catch(InvalidStateException e){
                 System.out.println(e.getMessage());
             }
