@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="fine test GameController">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -633,7 +632,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713190089703</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="fine test GameController">
+      <option name="closed" value="true" />
+      <created>1713259729204</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1713259729204</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +670,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="creazione Classi ENUMERAZIONE" />
     <MESSAGE value="creazione&#10;Class PlayCard&#10;Class Side&#10;Class Player&#10;class Goal" />
     <MESSAGE value="aggiunta commento &#10;classe PlayCard" />
     <MESSAGE value="Inizio codice/modifica InsertCard di GameField" />
@@ -688,7 +694,8 @@
     <MESSAGE value="Inizio gestione di partite multiple" />
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
+    <MESSAGE value="fine test GameController" />
+    <option name="LAST_COMMIT_MESSAGE" value="fine test GameController" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
