@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiunta stato End Game Player">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiunta stato End Game su classe Game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,16 +65,12 @@
     "Application.RmiClient.executor": "Run",
     "Application.RmiServer.executor": "Run",
     "JUnit.DeckCreationTestGoal.creteGoalDeck.executor": "Run",
-    "JUnit.GameControllerTest.PlaceCard.executor": "Run",
-    "JUnit.GameControllerTest.checkNumPlayer.executor": "Coverage",
-    "JUnit.GameControllerTest.createPlayer.executor": "Coverage",
-    "JUnit.GameControllerTest.playerChooseGoal.executor": "Coverage",
-    "JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor": "Coverage",
+    "JUnit.GameControllerTest.checkNumPlayer.executor": "Run",
+    "JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor": "Run",
     "JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor": "Run",
     "JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor": "Run",
     "JUnit.GameControllerTest.playerPlaceCard.executor": "Run",
-    "JUnit.GameControllerTest.playerSelectStartingCard.executor": "Coverage",
-    "JUnit.GameControllerTest.statePlaceCard.executor": "Debug",
+    "JUnit.GameControllerTest.playerSelectStartingCard.executor": "Run",
     "JUnit.GestioneViewTest.scegliCarta.executor": "Debug",
     "JUnit.GoalDiagonalTest.creteResourceDeck.executor": "Run",
     "JUnit.GoalDiagonalTest.executor": "Run",
@@ -114,7 +108,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -131,8 +125,34 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameControllerTest.statePlaceCard">
-    <configuration name="GameControllerTest.checkNumPlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.RmiClient">
+    <configuration name="RmiClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiClient" />
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RmiServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiServer" />
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameControllerTest.playerPeachCardFromGoldDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -142,13 +162,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="checkNumPlayer" />
+      <option name="METHOD_NAME" value="playerPeachCardFromGoldDeck" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.createPlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameControllerTest.playerPeachCardFromResourcesDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -158,13 +178,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="createPlayer" />
+      <option name="METHOD_NAME" value="playerPeachCardFromResourcesDeck" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerChooseGoal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameControllerTest.playerPeachFromCardsInCenter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -174,39 +194,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerChooseGoal" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameControllerTest.playerSelectStartingCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PSP30" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerSelectStartingCard" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameControllerTest.statePlaceCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PSP30" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="statePlaceCard" />
+      <option name="METHOD_NAME" value="playerPeachFromCardsInCenter" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -226,19 +214,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.GameControllerTest.checkNumPlayer" />
-      <item itemvalue="JUnit.GameControllerTest.createPlayer" />
-      <item itemvalue="JUnit.GameControllerTest.playerChooseGoal" />
-      <item itemvalue="JUnit.GameControllerTest.playerSelectStartingCard" />
-      <item itemvalue="JUnit.GameControllerTest.statePlaceCard" />
+      <item itemvalue="Application.RmiClient" />
+      <item itemvalue="Application.RmiServer" />
+      <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
+      <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
+      <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameControllerTest.statePlaceCard" />
-        <item itemvalue="JUnit.GameControllerTest.playerSelectStartingCard" />
-        <item itemvalue="JUnit.GameControllerTest.playerChooseGoal" />
-        <item itemvalue="JUnit.GameControllerTest.checkNumPlayer" />
-        <item itemvalue="JUnit.GameControllerTest.createPlayer" />
+        <item itemvalue="Application.RmiClient" />
+        <item itemvalue="Application.RmiServer" />
+        <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
+        <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
+        <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
       </list>
     </recent_temporary>
   </component>
@@ -266,14 +254,6 @@
       <workItem from="1712562916423" duration="12647000" />
       <workItem from="1712653919101" duration="2285000" />
       <workItem from="1713018449356" duration="10906000" />
-    </task>
-    <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
-      <option name="closed" value="true" />
-      <created>1710604736560</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1710604736560</updated>
     </task>
     <task id="LOCAL-00002" summary="Modifica classe Game - prova">
       <option name="closed" value="true" />
@@ -659,7 +639,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713269717722</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Aggiunta stato End Game su classe Game">
+      <option name="closed" value="true" />
+      <created>1713270270407</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1713270270408</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -689,7 +677,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="aggiunta commento &#10;classe PlayCard" />
     <MESSAGE value="Inizio codice/modifica InsertCard di GameField" />
     <MESSAGE value="modifica InsertCard di GameField" />
     <MESSAGE value="Aggiunta di ResourceCountChange e checkPlacing in insertcard" />
@@ -714,46 +701,11 @@
     <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
     <MESSAGE value="fine test GameController" />
     <MESSAGE value="Aggiunta stato End Game Player" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta stato End Game Player" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java</url>
-          <line>172</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java</url>
-          <line>176</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Aggiunta stato End Game su classe Game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta stato End Game su classe Game" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromGoldDeck.ic" NAME="GameControllerTest.playerPeachCardFromGoldDeck Coverage Results" MODIFIED="1713272359559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_statePlaceCard.ic" NAME="GameControllerTest.statePlaceCard Coverage Results" MODIFIED="1713272585536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_checkNumPlayer.ic" NAME="GameControllerTest.checkNumPlayer Coverage Results" MODIFIED="1713272531642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerSelectStartingCard.ic" NAME="GameControllerTest.playerSelectStartingCard Coverage Results" MODIFIED="1713272558414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerChooseGoal.ic" NAME="GameControllerTest.playerChooseGoal Coverage Results" MODIFIED="1713272545604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
   </component>
 </project>
