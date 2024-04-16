@@ -299,7 +299,7 @@ public class Player implements PlayerObserver {
     //this metod select the first side of the starting_card and put it on the field
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
-            game_field.insertCard(this.starting_card, 0, 0);
+            game_field.insertCard(this.starting_card, 22, 22);
 
     }
 
