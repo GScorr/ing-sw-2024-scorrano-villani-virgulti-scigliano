@@ -84,7 +84,9 @@ public class Player implements PlayerObserver {
         this.isFirst = isFirst;
     }
 
-
+    public String getName() {
+        return name;
+    }
 
     private void createField(){
         Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);

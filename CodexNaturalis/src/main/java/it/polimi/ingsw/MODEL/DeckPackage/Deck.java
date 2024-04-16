@@ -23,7 +23,7 @@ public class Deck {
         if(cards.size()>0){
             return cards.pop();
         }
-        else throw new EmptyDeckException("errore mazzo vuoto");
+        else throw new EmptyDeckException("errore mazzo vuoto in DrawCard in Deck");
     }
     public PlayCard seeFirstCard(){return cards.getFirst();}
 
