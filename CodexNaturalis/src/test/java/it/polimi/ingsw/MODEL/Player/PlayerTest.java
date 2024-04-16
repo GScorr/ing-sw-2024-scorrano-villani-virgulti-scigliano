@@ -157,6 +157,9 @@ class PlayerTest {
         Player p1 = new Player(ColorsEnum.BLU, "nome_1",true);
         Player p2 = new Player(ColorsEnum.BLU, "nome_2",false);
 
+        p1.setDeck(resources_deck,gold_deck,cards_in_center);
+        p2.setDeck(resources_deck,gold_deck,cards_in_center);
+
         try{assertEquals("NOT_INITIALIZED",p1.actual_state.getNameState());}
         catch(AssertionError e){
             System.out.println(e.getMessage());
@@ -317,21 +320,43 @@ class PlayerTest {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("13 STATE: PLACE_CARD -> DRAW_CARD ");
+        System.out.println("13 : PLACE_CARD -> DRAW_CARD ");
         p1.nextStatePlayer();
         try{assertEquals("DRAW_CARD",p1.actual_state.getNameState());
         }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
 
-        System.out.println("14 DrawCard");
+        /*
+        System.out.println("14 DrawCard: Gold-deck");
         PlayCard gold_deck_upper_card = gold_deck.seeFirstCard();
         p1.actual_state.peachCardFromGoldDeck();
         try{assertEquals(gold_deck_upper_card,p1.getCardsInHand().get(0));
         }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
+        */
+        System.out.println("14 DrawCard: Resources-deck");
+        PlayCard resources_deck_upper_card = resources_deck.seeFirstCard();
+        p1.actual_state.peachFromResourcesDeck();
+        try{assertEquals(resources_deck_upper_card,p1.getCardsInHand().get(0));
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
 
+
+        System.out.println("15: una volta che il player pesca la carta gli stati del player si devono aggiornare correttamente:");
+        p1.nextStatePlayer();
+        p2.nextStatePlayer();
+        try{assertEquals("WAIT_TURN",p1.actual_state.getNameState());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
+
+        try{assertEquals("PLACE_CARD",p2.actual_state.getNameState());
+        }catch(AssertionError e){
+            System.out.println(e.getMessage());
+        }
 
 
 
