@@ -7,6 +7,8 @@ import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Game.GameSubject;
 import it.polimi.ingsw.MODEL.Game.LimitNumPlayerException;
 import it.polimi.ingsw.MODEL.Game.State.GameInvalidStateException;
+import it.polimi.ingsw.MODEL.Goal.Goal;
+import it.polimi.ingsw.MODEL.Player.InvalidBoundException;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
 import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
@@ -36,6 +38,13 @@ public class GameController implements GameSubject {
     private HashMap<Player,Boolean> choosed_starting_card = new HashMap<Player, Boolean>();
     private int starting_card_count = 0;
     private int actual_player = 0;  //tiene traccia del giocatore che sta giocando
+     /*
+     attributi per fine game
+      */
+    private boolean is_final_state = false;
+    private boolean tmp_final_state = false;
+
+    private int final_counter = 0;
 
     private Game game;
 
@@ -100,11 +109,16 @@ public class GameController implements GameSubject {
     public void playerChooseGoal(Player p, int i){
         try{
             if (this.choosed_goal.get(p) == false){
-                p.actual_state.selectGoal(i);
-                goal_count++;
-                this.choosed_goal.put(p,true);
-                if(goal_count == game.getMax_num_player()){
-                    notifyObservers();
+                try{
+                    p.actual_state.selectGoal(i);
+                    goal_count++;
+                    this.choosed_goal.put(p,true);
+                    if(goal_count == game.getMax_num_player()){
+                        notifyObservers();
+                    }
+                }
+                catch (InvalidBoundException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         }catch(InvalidStateException e){
@@ -156,21 +170,69 @@ public class GameController implements GameSubject {
     }
 
 
-    public void playerPlaceCard(Player player, int index,boolean flipped, int x, int y){
-            try {
-                GameFieldController field_controller_player = field_controller.get(player);
-                PlayCard card_played = player.getCardsInHand().get(index);
-                if(field_controller_player.checkPlacing(card_played,x,y)) {
-                    player.actual_state.placeCard(index, flipped, x, y);
-                    nextStatePlayer();
-                }else{
-                    System.out.println("non è possibile aggiungere la carta in questa posizione");
-                }
-
-            }catch(InvalidStateException e){
-                System.out.println(e.getMessage());
+    public void statePlaceCard(Player player, int index, boolean flipped, int x, int y){ //cambiare nome al metodo
+        if(is_final_state){
+            placeCard(player, index, flipped, x, y);
+            final_counter++;
+            if(final_counter == game.getMax_num_player()){
+                finalPointEndGame(); //conta i punti di ogni giocatore
             }
+        }
+        else{
+            if(tmp_final_state){
+                placeCard(player, index, flipped, x, y);
+                if(player.getIsFirst()){
+                    is_final_state = true;
+                    final_counter=1;
+                }
+            }
+            else{
+                placeCard(player, index, flipped, x, y);
+                if(player.getPlayerPoints() >= 20) {
+                    if(player.getIsFirst()){
+                        is_final_state=true;
+                        final_counter=1;
+                    }
+                    else{
+                        tmp_final_state = true;
+                    }
+                }
+            }
+        }
     }
+
+    private void placeCard(Player player, int index,boolean flipped, int x, int y){
+        try{
+            if(index>2 || index < 0){
+                System.out.println("carta non esistente, index sbagliato"); //da convertire in errore
+                return;
+            }
+            GameFieldController field_controller_player = field_controller.get(player);
+            PlayCard card_played = player.getCardsInHand().get(index);
+
+            if(field_controller_player.checkPlacing(card_played,x,y)) {
+                player.actual_state.placeCard(index, flipped, x, y);
+                nextStatePlayer();
+            }else{
+                System.out.println("non è possibile aggiungere la carta in questa posizione");
+            }
+        }
+        catch(InvalidStateException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void finalPointEndGame(){
+        for(Player p: player_list){ //forall player inside player_list
+            p.setEndGame(); //tutti i player sono in stato finale e non possono fare nulla
+            Goal goal = p.getGoalCard();
+            p.addPoints(goal.numPoints(p.getGameField())); //aggiungo i punti del goal singolo
+            p.addPoints(game.getGoal1().numPoints(p.getGameField()));
+            p.addPoints(game.getGoal2().numPoints(p.getGameField()));
+        }
+
+    }
+
 
     public void playerPeachCardFromGoldDeck(Player player){
             try {
