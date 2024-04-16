@@ -65,7 +65,7 @@ public class GameFieldController {
                     player.addPoints(resourcePointsCount(((ResourceCard) card)));
                 resourcePointsChange(card, x, y);
 
-                return player_field.insertCard(card, x, y);
+                return true;
 
             }
         }

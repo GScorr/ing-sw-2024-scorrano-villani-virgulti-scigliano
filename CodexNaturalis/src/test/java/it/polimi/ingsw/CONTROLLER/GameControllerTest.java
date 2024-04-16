@@ -174,11 +174,38 @@ class GameControllerTest {
         System.err.println("stampa dopo chiamata a funzione");
         System.err.println(gioco.getGet_player_index().get(0).actual_state.getNameState());
 
+        System.err.println("stampa carta iniziale");
 
+        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleLeftUp()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightUp());
+
+
+        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource());
+        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource2());
+        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource3());
+
+        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleLeftDown()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightDown());
+
+
+        System.out.println("stampa carte in mano");
+
+        for(PlayCard c: p1.getCardsInHand()){
+            System.out.println("carta:");
+            System.out.println(c.getSide().getAngleLeftUp()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightUp());
+
+
+            System.out.println(c.getSide().getCentral_resource());
+            System.out.println(c.getSide().getCentral_resource2());
+            System.out.println(c.getSide().getCentral_resource3());
+
+            System.out.println(c.getSide().getAngleLeftDown()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightDown());
+
+        }
 
         //vedo se alla posizione 22 22 è presente la carta
-        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource());
+        //System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource());
         controller.statePlaceCard(gioco.getGet_player_index().get(0), 0, false, 23, 23);
+        System.out.println("stampa carta sovrascritta");
+        System.out.println(p1.getGameField().getCell(23,23,45).getCard().getSide().getAngleLeftUp()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightUp());
 
     }
 
