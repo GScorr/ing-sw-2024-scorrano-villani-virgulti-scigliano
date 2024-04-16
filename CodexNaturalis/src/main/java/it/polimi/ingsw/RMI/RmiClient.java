@@ -42,7 +42,7 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         curr_player = server.getFromToken(this.token);
 
         synchronized (this) {
-/*
+
             //controllo che la partita sia non vuota
             if (server.gamesIsEmpty()) {
                 //creo partita e inserisco come player 2
@@ -57,7 +57,7 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                 server.addPlayer(existing_game, curr_player);
                 System.out.print("\n Giocatore " + curr_player.getName() + " " + existing_game.getPlayer2() + " Aggiunto a partita esistente");
             }
- */       }
+        }
         /*System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
 
 
