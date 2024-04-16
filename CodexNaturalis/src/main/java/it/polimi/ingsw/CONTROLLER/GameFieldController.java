@@ -58,13 +58,18 @@ public class GameFieldController {
                 return false;}
             else {
                 if (card instanceof GoldCard) {
-                    if (!checkGoldConstraints(card.getCostraint())) return false;
-                    player.addPoints(goldPointsCount((GoldCard) card, x, y));
+                    if (!checkGoldConstraints(card.getCostraint())) {
+                        System.out.println("Gold Constraint Error");
+                        return false;
+                    }
+                    else {
+                        player.addPoints(goldPointsCount((GoldCard) card, x, y));
+                    }
                 }
                 if (card instanceof ResourceCard)
                     player.addPoints(resourcePointsCount(((ResourceCard) card)));
                 resourcePointsChange(card, x, y);
-
+                //System.out.println("almeno una volta ci arrivo qua");
                 return true;
 
             }

@@ -25,24 +25,7 @@ class GameControllerTest {
 
     @Test
     void createPlayer() {
-/*
-        Scanner scanner = new Scanner(System.in);
-        String nome;
-        boolean first = false;
-        List<Player> giocatori = new ArrayList<>();
 
-
-        for(int i=0; i<4; i++){
-            if(i==0){
-                first=true;
-            }
-            System.out.println("inserire nome "+(i+1)+" giocatore");
-            nome= scanner.nextLine();
-            giocatori.add(controller.createPlayer(nome, first));
-        }
-
-
- */
         Player giocatore1, giocatore2, giocatore3, giocatore4;
         giocatore1 = controller.createPlayer("nome_giocatore", true);
         //System.out.println("stato del giocatore: "+ giocatore.getPlayerState()); //il player parte con lo stato non inizializzato
@@ -147,16 +130,18 @@ class GameControllerTest {
     void statePlaceCard() {
 
         createPlayer();
-        Game gioco = controller.getGame(); //ho il game istanziato da gamecontroller
-        boolean check = controller.checkNumPlayer(); //forse posso evitare la variabile check ma usare solo la chiamata
-        List<PState> stato = new ArrayList<>();
+        if(controller.checkNumPlayer()){
+            System.out.println("gioco inizializzato");
+        }else{System.out.println("gioco non inizializzato");}
 
-        /*
-        controllo pre chiamata
-         */
+
+        Game gioco = controller.getGame(); //ho il game istanziato da gamecontroller
+
+
+
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             controller.playerChooseGoal(gioco.getGet_player_index().get(i), 1); //i indica il goal tra 1 e 2
-            System.err.println(gioco.getGet_player_index().get(i).actual_state.getNameState()); //controllo in che stato sono i giocatori dopo la chiamata di choosegoals
+
         }
         /*
         setto lo stato del palyer
@@ -164,48 +149,26 @@ class GameControllerTest {
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             controller.playerSelectStartingCard(gioco.getGet_player_index().get(i), false);
-            // stato.add(gioco.getGet_player_index().get(i).actual_state); //salvo gli stati pre chiamata a place card
-            System.err.println(gioco.getGet_player_index().get(i).actual_state.getNameState()); //stampo lo stato ce
         }
         /*
         chiamo la funzione che sto testando
          */
         Player p1 = gioco.getGet_player_index().get(0);
-        System.err.println("stampa dopo chiamata a funzione");
-        System.err.println(gioco.getGet_player_index().get(0).actual_state.getNameState());
+        Player p2 = gioco.getGet_player_index().get(1);
+        System.out.println(p1.actual_state.getNameState());
+        assertEquals(p1.getGameField().getCell(22,22,45).getCard(),p1.getGameField().getCell(23,23,45).getCard());
 
-        System.err.println("stampa carta iniziale");
-
-        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleLeftUp()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightUp());
-
-
-        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource());
-        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource2());
-        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource3());
-
-        System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleLeftDown()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightDown());
-
-
-        System.out.println("stampa carte in mano");
-
-        for(PlayCard c: p1.getCardsInHand()){
-            System.out.println("carta:");
-            System.out.println(c.getSide().getAngleLeftUp()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightUp());
-
-
-            System.out.println(c.getSide().getCentral_resource());
-            System.out.println(c.getSide().getCentral_resource2());
-            System.out.println(c.getSide().getCentral_resource3());
-
-            System.out.println(c.getSide().getAngleLeftDown()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightDown());
-
-        }
-
-        //vedo se alla posizione 22 22 è presente la carta
-        //System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource());
         controller.statePlaceCard(gioco.getGet_player_index().get(0), 0, false, 23, 23);
-        System.out.println("stampa carta sovrascritta");
-        System.out.println(p1.getGameField().getCell(23,23,45).getCard().getSide().getAngleLeftUp()+" "+p1.getGameField().getCell(22,22,45).getCard().getSide().getAngleRightUp());
+        //assertEquals(p1.getGameField().getCell(22,22,45).getCard(),p1.getGameField().getCell(23,23,45).getCard());
+        System.out.println(p1.actual_state.getNameState());
+        System.out.println(p2.actual_state.getNameState());
+
+        controller.playerPeachCardFromGoldDeck(p1);
+        System.out.println(p1.actual_state.getNameState());
+        System.out.println(p2.actual_state.getNameState());
+
+        p2.setPlayer_points(19);
+
 
     }
 
