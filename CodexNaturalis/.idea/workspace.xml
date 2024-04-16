@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiunta stato End Game Player">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/State/TurnEndGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/State/EndGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,58 +62,62 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.RmiClient.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RmiServer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DeckCreationTestGoal.creteGoalDeck.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameControllerTest.checkNumPlayer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameControllerTest.playerPlaceCard.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameControllerTest.playerSelectStartingCard.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GestioneViewTest.scegliCarta.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.GoalDiagonalTest.creteResourceDeck.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalDiagonalTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalDiagonalTest.testGoalDiagonal.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalDiagonalTest.totalPoints.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPoints.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsAnimal.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsInsect.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsMushroom.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalLFigureTest.totalPointsPlant.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoalStrategyTest.totalPoints.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.addPoints.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PlayerTest.getColor.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.getIsFirst.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.getPlayerState.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.insertCard.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PlayerTest.nextStatePlayer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.placeCard.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PlayerTest.setPlayer_state.executor&quot;: &quot;Run&quot;,
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mirko/IdeaProjects/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.RmiClient.executor": "Run",
+    "Application.RmiServer.executor": "Run",
+    "JUnit.DeckCreationTestGoal.creteGoalDeck.executor": "Run",
+    "JUnit.GameControllerTest.PlaceCard.executor": "Run",
+    "JUnit.GameControllerTest.checkNumPlayer.executor": "Coverage",
+    "JUnit.GameControllerTest.createPlayer.executor": "Coverage",
+    "JUnit.GameControllerTest.playerChooseGoal.executor": "Coverage",
+    "JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor": "Coverage",
+    "JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor": "Run",
+    "JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor": "Run",
+    "JUnit.GameControllerTest.playerPlaceCard.executor": "Run",
+    "JUnit.GameControllerTest.playerSelectStartingCard.executor": "Coverage",
+    "JUnit.GameControllerTest.statePlaceCard.executor": "Debug",
+    "JUnit.GestioneViewTest.scegliCarta.executor": "Debug",
+    "JUnit.GoalDiagonalTest.creteResourceDeck.executor": "Run",
+    "JUnit.GoalDiagonalTest.executor": "Run",
+    "JUnit.GoalDiagonalTest.testGoalDiagonal.executor": "Run",
+    "JUnit.GoalDiagonalTest.totalPoints.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPoints.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsAnimal.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsInsect.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsMushroom.executor": "Run",
+    "JUnit.GoalLFigureTest.totalPointsPlant.executor": "Run",
+    "JUnit.GoalStrategyTest.totalPoints.executor": "Run",
+    "JUnit.PlayerTest.addPoints.executor": "Debug",
+    "JUnit.PlayerTest.getColor.executor": "Run",
+    "JUnit.PlayerTest.getIsFirst.executor": "Run",
+    "JUnit.PlayerTest.getPlayerState.executor": "Run",
+    "JUnit.PlayerTest.insertCard.executor": "Debug",
+    "JUnit.PlayerTest.nextStatePlayer.executor": "Run",
+    "JUnit.PlayerTest.placeCard.executor": "Run",
+    "JUnit.PlayerTest.setPlayer_state.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Mirko/IdeaProjects/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -126,8 +131,8 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameControllerTest.playerPeachFromCardsInCenter">
-    <configuration name="GameControllerTest.gioco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GameControllerTest.statePlaceCard">
+    <configuration name="GameControllerTest.checkNumPlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -137,13 +142,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="gioco" />
+      <option name="METHOD_NAME" value="checkNumPlayer" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPeachCardFromGoldDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameControllerTest.createPlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -153,13 +158,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPeachCardFromGoldDeck" />
+      <option name="METHOD_NAME" value="createPlayer" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPeachCardFromResourcesDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameControllerTest.playerChooseGoal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -169,13 +174,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPeachCardFromResourcesDeck" />
+      <option name="METHOD_NAME" value="playerChooseGoal" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPeachFromCardsInCenter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameControllerTest.playerSelectStartingCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -185,13 +190,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPeachFromCardsInCenter" />
+      <option name="METHOD_NAME" value="playerSelectStartingCard" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPlaceCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameControllerTest.statePlaceCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -201,7 +206,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPlaceCard" />
+      <option name="METHOD_NAME" value="statePlaceCard" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -221,19 +226,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.GameControllerTest.gioco" />
-      <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
-      <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
-      <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
-      <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
+      <item itemvalue="JUnit.GameControllerTest.checkNumPlayer" />
+      <item itemvalue="JUnit.GameControllerTest.createPlayer" />
+      <item itemvalue="JUnit.GameControllerTest.playerChooseGoal" />
+      <item itemvalue="JUnit.GameControllerTest.playerSelectStartingCard" />
+      <item itemvalue="JUnit.GameControllerTest.statePlaceCard" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
-        <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
-        <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
-        <item itemvalue="JUnit.GameControllerTest.gioco" />
-        <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
+        <item itemvalue="JUnit.GameControllerTest.statePlaceCard" />
+        <item itemvalue="JUnit.GameControllerTest.playerSelectStartingCard" />
+        <item itemvalue="JUnit.GameControllerTest.playerChooseGoal" />
+        <item itemvalue="JUnit.GameControllerTest.checkNumPlayer" />
+        <item itemvalue="JUnit.GameControllerTest.createPlayer" />
       </list>
     </recent_temporary>
   </component>
@@ -711,8 +716,44 @@
     <MESSAGE value="Aggiunta stato End Game Player" />
     <option name="LAST_COMMIT_MESSAGE" value="Aggiunta stato End Game Player" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java</url>
+          <line>176</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromGoldDeck.ic" NAME="GameControllerTest.playerPeachCardFromGoldDeck Coverage Results" MODIFIED="1713272359559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_statePlaceCard.ic" NAME="GameControllerTest.statePlaceCard Coverage Results" MODIFIED="1713272585536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_checkNumPlayer.ic" NAME="GameControllerTest.checkNumPlayer Coverage Results" MODIFIED="1713272531642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerSelectStartingCard.ic" NAME="GameControllerTest.playerSelectStartingCard Coverage Results" MODIFIED="1713272558414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerChooseGoal.ic" NAME="GameControllerTest.playerChooseGoal Coverage Results" MODIFIED="1713272545604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
   </component>
 </project>
