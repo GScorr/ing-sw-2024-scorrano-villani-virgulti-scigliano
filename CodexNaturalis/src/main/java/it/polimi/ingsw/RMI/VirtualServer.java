@@ -13,19 +13,22 @@ public interface VirtualServer extends Remote {
 
     public boolean gamesIsEmpty() throws RemoteException;
 
-    public Giocatore createPlayer(String name, VirtualView client) throws RemoteException;
+    public void createPlayer(String name, String client) throws RemoteException;
 
-    public Map<VirtualView, Giocatore> getMap() throws RemoteException;
+    public Map<String, Giocatore> getMap() throws RemoteException;
 
     public void clearMap() throws  RemoteException;
 
     public List<VirtualView> getListClients() throws RemoteException;
     public List<GiocoController> getLisGames() throws RemoteException;
 
-    public Giocatore getPlayerFromClient(VirtualView client ) throws RemoteException;
+    public Giocatore getPlayerFromClient(String client ) throws RemoteException;
 
     public void createGame(String name, Giocatore player ) throws  RemoteException;
 
     public void addPlayer(Gioco game, Giocatore player) throws  RemoteException;
 
+    public String createToken(VirtualView client ) throws  RemoteException;
+
+    public Giocatore getFromToken(String token) throws  RemoteException;
 }
