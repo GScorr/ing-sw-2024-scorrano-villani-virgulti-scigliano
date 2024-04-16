@@ -174,10 +174,11 @@ class GameControllerTest {
         System.err.println("stampa dopo chiamata a funzione");
         System.err.println(gioco.getGet_player_index().get(0).actual_state.getNameState());
 
-        //controller.statePlaceCard(gioco.getGet_player_index().get(0), 0, false, 23, 23);
+
 
         //vedo se alla posizione 22 22 è presente la carta
         System.out.println(p1.getGameField().getCell(22,22,45).getCard().getSide().getCentral_resource());
+        controller.statePlaceCard(gioco.getGet_player_index().get(0), 0, false, 23, 23);
 
     }
 
