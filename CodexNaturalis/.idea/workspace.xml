@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="a">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiunta stato End Game Player">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/State/TurnEndGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/State/EndGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +39,14 @@
     &quot;assignee&quot;: &quot;Mirko0109&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git&quot;,
-    &quot;accountId&quot;: &quot;04cff0e4-987d-467b-953c-22f8f0bdbc0e&quot;
-  }
-}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3a259a6d-dbc4-4e87-a710-6c6481997434" />
+        <option name="url" value="https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -118,6 +121,9 @@
       <recent name="it.polimi.ingsw.MODEL.Game" />
       <recent name="it.polimi.ingsw.MODEL.Goal" />
       <recent name="it.polimi.ingsw.MODEL" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.GameControllerTest.playerPeachFromCardsInCenter">
@@ -632,7 +638,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713190089703</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="fine test GameController">
+      <option name="closed" value="true" />
+      <created>1713259729204</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1713259729204</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Aggiunta stato End Game Player">
+      <option name="closed" value="true" />
+      <created>1713269717722</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1713269717722</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,8 +684,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="creazione Classi ENUMERAZIONE" />
-    <MESSAGE value="creazione&#10;Class PlayCard&#10;Class Side&#10;Class Player&#10;class Goal" />
     <MESSAGE value="aggiunta commento &#10;classe PlayCard" />
     <MESSAGE value="Inizio codice/modifica InsertCard di GameField" />
     <MESSAGE value="modifica InsertCard di GameField" />
@@ -687,7 +707,9 @@
     <MESSAGE value="Inizio gestione di partite multiple" />
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
+    <MESSAGE value="fine test GameController" />
+    <MESSAGE value="Aggiunta stato End Game Player" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta stato End Game Player" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

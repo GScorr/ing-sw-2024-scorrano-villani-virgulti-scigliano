@@ -3,10 +3,7 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
-import it.polimi.ingsw.MODEL.Game.State.Begin;
-import it.polimi.ingsw.MODEL.Game.State.GameState;
-import it.polimi.ingsw.MODEL.Game.State.NotInitialized;
-import it.polimi.ingsw.MODEL.Game.State.Turn;
+import it.polimi.ingsw.MODEL.Game.State.*;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -54,7 +51,8 @@ public class Game  {
 
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
-              turn = new Turn(this);
+              turn = new Turn(this),
+              end_game = new EndGame(this);
     public  GameState actual_state;
 
 
@@ -227,11 +225,9 @@ public class Game  {
             case "BEGIN":
                 setGame_state(turn);
                 break;
-            //bisogna definire un END_GAME state
             case "TURN":
-                setGame_state( actual_state);
+                setGame_state( end_game);
                 break;
-
 
         }
 

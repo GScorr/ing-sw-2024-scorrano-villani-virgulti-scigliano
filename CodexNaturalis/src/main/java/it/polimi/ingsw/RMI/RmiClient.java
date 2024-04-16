@@ -1,5 +1,7 @@
 package it.polimi.ingsw.RMI;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 //
 public class RmiClient extends UnicastRemoteObject implements VirtualView {
     final VirtualServer server;
+    private  String token;
 
     protected RmiClient(VirtualServer server) throws RemoteException {
         this.server = server;
@@ -29,7 +32,14 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         //creo giocatore
         System.out.print("\n Scegli nome Player > ");
         player_name = scan.nextLine();
-        curr_player = server.createPlayer( player_name , curr_client );
+        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement which contains a
+        // map that associate the client with the token, and we also have a map in server that associate the token with the player
+        // < RmiClient , TOKEN > < TOKEN , Player >
+        this.token = server.createToken(this);
+        System.out.print("\n Token Player > " + this.token);
+        server.createPlayer( player_name , this.token );
+
+        curr_player = server.getFromToken(this.token);
 
         synchronized (this) {
 /*
@@ -40,8 +50,9 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                 String game_name = scan.nextLine();
                 server.createGame(game_name, curr_player);
                 System.out.print("\n Giocatore " + server.getLisGames().getFirst().getGame().getPlayer1().getName() + " Ha creato a una nuova Partita  ");
+
             } else {
-                //inserisco player come player 2 in game todo correzione bug inserimento giocatore 2____
+                //inserisco player come player 2 in game todo correzione bug inserimento giocatore 2____ il giocatore 2 non viene inserito nel game
                 Gioco existing_game = server.getLisGames().getFirst().getGame();
                 server.addPlayer(existing_game, curr_player);
                 System.out.print("\n Giocatore " + curr_player.getName() + " " + existing_game.getPlayer2() + " Aggiunto a partita esistente");
@@ -81,14 +92,9 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         System.err.print("\n[ERROR] " + details + "\n> ");
     }
 
-    public static void main(String[] args) throws RemoteException, NotBoundException {
-        /*if (args.length == 0) {
-            System.err.println("Usage: java RmiClient <server_address>");
-            System.exit(1);
-        }*/
+    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
         VirtualServer server = (VirtualServer) registry.lookup("VirtualServer");
-
         new RmiClient(server).run();
     }
 }

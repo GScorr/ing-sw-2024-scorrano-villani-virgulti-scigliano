@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -15,9 +16,11 @@ public class RmiServer implements VirtualServer{
 
     GiocoController controller;
 
+    public TokenManager token_manager = new TokenManagerImplement();
+
     private List<VirtualView> clients = new ArrayList<>();
 
-    private Map<VirtualView, Giocatore> mappa = new HashMap<>();
+    private Map<String, Giocatore> mappa = new HashMap<>();
     private List<GiocoController> games = new ArrayList<>();
 
     public RmiServer(GiocoController controller) {
@@ -72,14 +75,18 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public synchronized Giocatore createPlayer(String name, VirtualView client) {
+    public synchronized void createPlayer(String name, String client_token) {
         Giocatore p = controller.createPlayer(name);
-        mappa.put(client, p );
-        return p;
+        mappa.put( client_token , p );
     }
 
     @Override
-    public Map<VirtualView, Giocatore> getMap() {
+    public String createToken(VirtualView client){
+        return token_manager.generateToken(client);
+    }
+
+    @Override
+    public Map<String, Giocatore> getMap() {
         return mappa;
     }
 
@@ -99,7 +106,8 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public Giocatore getPlayerFromClient(VirtualView client) throws RemoteException {
+    public Giocatore getPlayerFromClient(String client) throws RemoteException {
+
         return mappa.get(client);
     }
 
@@ -114,6 +122,10 @@ public class RmiServer implements VirtualServer{
         game.setPlayer2(player);
     }
 
+    @Override
+    public Giocatore getFromToken(String token){
+        return mappa.get(token);
+    }
 
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
@@ -121,7 +133,7 @@ public class RmiServer implements VirtualServer{
         VirtualServer stub = (VirtualServer) UnicastRemoteObject.exportObject(server,0);
         Registry registry = LocateRegistry.createRegistry(1234);
         registry.rebind(serverName,stub);
-        System.out.println("server bound. ");
+        System.out.println("[SUCCESSFUL] : server connected. ");
 
     }
 
