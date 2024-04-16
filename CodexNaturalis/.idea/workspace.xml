@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiunta stato End Game su classe Game">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamenot">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,19 +125,16 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameControllerTest.playerPeachFromCardsInCenter">
-    <configuration name="GameControllerTest.gioco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GameFieldControllerTest.goldPointsCount">
+    <configuration name="RmiServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiServer" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="gioco" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -189,7 +187,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPlaceCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameFieldControllerTest.goldPointsCount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -198,8 +196,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPlaceCard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameFieldControllerTest" />
+      <option name="METHOD_NAME" value="goldPointsCount" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -219,19 +217,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.GameControllerTest.gioco" />
+      <item itemvalue="Application.RmiServer" />
+      <item itemvalue="JUnit.GameFieldControllerTest.goldPointsCount" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
-      <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GameFieldControllerTest.goldPointsCount" />
+        <item itemvalue="Application.RmiServer" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
-        <item itemvalue="JUnit.GameControllerTest.gioco" />
-        <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
       </list>
     </recent_temporary>
   </component>
@@ -259,14 +257,6 @@
       <workItem from="1712562916423" duration="12647000" />
       <workItem from="1712653919101" duration="2285000" />
       <workItem from="1713018449356" duration="10906000" />
-    </task>
-    <task id="LOCAL-00002" summary="Modifica classe Game - prova">
-      <option name="closed" value="true" />
-      <created>1710604974768</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1710604974768</updated>
     </task>
     <task id="LOCAL-00003" summary="Modifica classe Game - prova2">
       <option name="closed" value="true" />
@@ -652,7 +642,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713270270408</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="aggiornamenot">
+      <option name="closed" value="true" />
+      <created>1713272783263</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1713272783264</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -682,7 +680,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Inizio codice/modifica InsertCard di GameField" />
     <MESSAGE value="modifica InsertCard di GameField" />
     <MESSAGE value="Aggiunta di ResourceCountChange e checkPlacing in insertcard" />
     <MESSAGE value="Aggiunta addPoints-rimuoviCartaMano + creazione di getter-setter in Player" />
@@ -707,7 +704,8 @@
     <MESSAGE value="fine test GameController" />
     <MESSAGE value="Aggiunta stato End Game Player" />
     <MESSAGE value="Aggiunta stato End Game su classe Game" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta stato End Game su classe Game" />
+    <MESSAGE value="aggiornamenot" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiornamenot" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
