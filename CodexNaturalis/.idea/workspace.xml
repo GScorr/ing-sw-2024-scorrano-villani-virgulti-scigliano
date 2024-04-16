@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiunta stato End Game Player">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,19 +125,16 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameControllerTest.playerPeachFromCardsInCenter">
-    <configuration name="GameControllerTest.gioco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GoalDiagonalTest.totalPoints">
+    <configuration name="RmiServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiServer" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="gioco" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -189,17 +187,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPlaceCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GoalDiagonalTest.totalPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.MODEL.Goal.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPlaceCard" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.MODEL.Goal" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.MODEL.Goal.GoalDiagonalTest" />
+      <option name="METHOD_NAME" value="totalPoints" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -219,19 +217,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.GameControllerTest.gioco" />
+      <item itemvalue="Application.RmiServer" />
+      <item itemvalue="JUnit.GoalDiagonalTest.totalPoints" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
-      <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GoalDiagonalTest.totalPoints" />
+        <item itemvalue="Application.RmiServer" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
-        <item itemvalue="JUnit.GameControllerTest.gioco" />
-        <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
       </list>
     </recent_temporary>
   </component>
@@ -259,22 +257,6 @@
       <workItem from="1712562916423" duration="12647000" />
       <workItem from="1712653919101" duration="2285000" />
       <workItem from="1713018449356" duration="10906000" />
-    </task>
-    <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
-      <option name="closed" value="true" />
-      <created>1710604736560</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1710604736560</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Modifica classe Game - prova">
-      <option name="closed" value="true" />
-      <created>1710604974768</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1710604974768</updated>
     </task>
     <task id="LOCAL-00003" summary="Modifica classe Game - prova2">
       <option name="closed" value="true" />
@@ -652,7 +634,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713269717722</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713270941384</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1713270941385</updated>
+    </task>
+    <task id="LOCAL-00051" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713271015845</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1713271015845</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -693,7 +691,6 @@
     <MESSAGE value="Creazione Design Pattern StatePlayer e relativa modifica di Player&#10;&#10;&#10;Quando si andranno a chiamare i metodi in player si devono chiamare con actual_state" />
     <MESSAGE value="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json" />
     <MESSAGE value="CREAZIONE RMI / CAMBIAMENTI GESTIONE GAMEFIELD" />
-    <MESSAGE value="aggiornamento" />
     <MESSAGE value="Aggiornamento sono gabriele" />
     <MESSAGE value="Aggiunta commenti" />
     <MESSAGE value="test su game e fix game" />
@@ -707,7 +704,8 @@
     <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
     <MESSAGE value="fine test GameController" />
     <MESSAGE value="Aggiunta stato End Game Player" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta stato End Game Player" />
+    <MESSAGE value="aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
