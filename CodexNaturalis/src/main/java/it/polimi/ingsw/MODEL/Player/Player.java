@@ -9,7 +9,7 @@ import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Game.GameObserver;
+
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
@@ -35,7 +35,7 @@ import java.util.List;
 * PLAYER_OBSERVER:
 * PLAYER_SUBJECT
 * */
-public class Player implements PlayerObserver,PlayerSubject {
+public class Player implements PlayerObserver {
     private String name;
     public PState
             not_initialized = new NotInitialized(this),
@@ -53,9 +53,10 @@ public class Player implements PlayerObserver,PlayerSubject {
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
-    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    private final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    //rendi questo private, mi serviva per i test renderlo pubblico
+    public final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
@@ -65,20 +66,26 @@ public class Player implements PlayerObserver,PlayerSubject {
     private Goal goal_card;
     private int player_points = 0;
 
+
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
 
-    GameObserver gameObserver;
 
 
 
-    public Player( ColorsEnum color, String name ){
+
+    public Player( ColorsEnum color, String name, boolean isFirst){
         this.name = name;
         this.color = color;
         this.player_state = PlayerState.NOT_INITIALIZED;
         createField();
         this.actual_state = not_initialized;
+        this.isFirst = isFirst;
+    }
+
+    public String getName() {
+        return name;
     }
 
     private void createField(){
@@ -123,6 +130,10 @@ public class Player implements PlayerObserver,PlayerSubject {
         return goal_card;
     }
 
+    public List<Goal> getInitial_goal_cards() {
+        return initial_goal_cards;
+    }
+
     public int getPlayerPoints() {
         return player_points;
     }
@@ -148,6 +159,12 @@ public class Player implements PlayerObserver,PlayerSubject {
         this.goal_card = goal_card;
     }
 
+    public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
+        this.resources_deck = resources_deck;
+        this.gold_deck = gold_deck;
+        this.cards_in_center = cards_in_center;
+    }
+
     /*
     * STATE MACHINE
     * Costructor iniziatialized all the player to NOT_INITIALIZED
@@ -166,14 +183,17 @@ public class Player implements PlayerObserver,PlayerSubject {
     //questi cambiamenti vengono chiamati su tutti i player, perchè contemporaneamente devono eseguire i comandi
     // Es: tutti  i player devono scegliere "contemporaneamente" (sullo stesso stato di Game)  il loro obbiettivo prima di proseguire il gioco
     // tutti i  plater devono piazzare la loro starting_car prima di proseguire il gioco con il prossimo stato
-    private void InitialNextStatePlayer(){
+    public void InitialNextStatePlayer(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setPlayer_state(begin);
+                return;
             case "BEGIN":
                 setPlayer_state(choose_goal);
+                return;
             case "CHOOSE_GOAL":
                 setPlayer_state( choose_side_first_card);
+                return;
             case "CHOOSE_SIDE_FIRST_CARD":
                 if(this.isFirst){
                     setPlayer_state( place_card);
@@ -181,6 +201,7 @@ public class Player implements PlayerObserver,PlayerSubject {
                 else {
                     setPlayer_state(wait_turn);
                 }
+                return;
 
         }
     }
@@ -192,10 +213,13 @@ public class Player implements PlayerObserver,PlayerSubject {
         switch(actual_state.getNameState()){
             case "WAIT_TURN" :
                     setPlayer_state( place_card);
+                    return;
             case "PLACE_CARD":
                 setPlayer_state( draw_card );
+                return;
             case "DRAW_CARD":
                 setPlayer_state( wait_turn);
+                return;
         }
     }
 
@@ -205,11 +229,14 @@ public class Player implements PlayerObserver,PlayerSubject {
     * index -> posizione nella lista delle carte in mano
     * */
     public void placeCard(int index,boolean flipped, int x, int y){
+        if(index< 0 || index > 2){
+            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
+        }
             PlayCard playing_card =  cards_in_hand.get(index);
             playing_card.flipCard(flipped);
-            if(game_field.insertCard(playing_card, x, y)){
-                removeHandCard(playing_card, index);
-            }
+            game_field.insertCard(playing_card, x, y);
+            removeHandCard(playing_card, index);
+
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
@@ -235,6 +262,11 @@ public class Player implements PlayerObserver,PlayerSubject {
         insertCard(this.resources_deck.drawCard());
     }
     public void peachFromCardsInCenter(int i){
+
+        if(i< 0 || i > 3){
+            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<4");
+        }
+
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));
         }else if(i==1){
@@ -251,37 +283,22 @@ public class Player implements PlayerObserver,PlayerSubject {
 
 
     public void selectGoal(int i){
-            this.goal_card = initial_goal_cards.get(i);
+        if(i< 0 || i > 1){
+            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
+        }
 
-            //notifica al Game che il player ha chiamato questo metodo
-            gameObserver.updateChooseGoal();
+        this.goal_card = initial_goal_cards.get(i);
     }
 
 
     //this metod select the first side of the starting_card and put it on the field
     public void selectStartingCard(boolean flipped){
-
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 0, 0);
-            //notifica al Game che il player ha chiamato questo metodo
-            gameObserver.updateChooseStartingCard();
-    }
-
-
-
-    //questo metodi servo
-    @Override
-    public void registerObserver(GameObserver gameObserver) {
-        this.gameObserver = gameObserver;
-    }
-
-    @Override
-    public void removeObserver(GameObserver gameObserver) {
 
     }
 
-    @Override
-    public void notifyObservers() {
 
-    }
+
+
 }

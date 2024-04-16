@@ -22,6 +22,10 @@ public class Goal {
         return goalType;
     }
 
+    public AnglesEnum getResource() {
+        return resource;
+    }
+
     public void setPoints(int points) {
         this.points = points;
     }

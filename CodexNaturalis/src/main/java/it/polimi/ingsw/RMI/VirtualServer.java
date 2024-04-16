@@ -1,21 +1,31 @@
 package it.polimi.ingsw.RMI;
 
-import it.polimi.ingsw.MODEL.Card.GoldCard;
-import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Card.ResourceCard;
-import it.polimi.ingsw.MODEL.ENUM.Costraint;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
+import java.util.Map;
 
 public interface VirtualServer extends Remote {
     public void connect(VirtualView client) throws RemoteException;
 
-    //functions in GameFieldController
-    public void checkPlacingRMI(PlayCard card, int x, int y) throws RemoteException;
-    public void checkGoldConstraintsRMI(Costraint val) throws  RemoteException;
-    public void goldPointsCountRMI(GoldCard card, int x, int y) throws  RemoteException;
-    public void resourcePointsCountRMI(ResourceCard card) throws RemoteException;
-    public void resourcePointsChange(PlayCard card, int x, int y) throws  RemoteException;
+    public void put(int index, Integer number, Giocatore player) throws RemoteException;
+
+    public boolean gamesIsEmpty() throws RemoteException;
+
+    public Giocatore createPlayer(String name, VirtualView client) throws RemoteException;
+
+    public Map<VirtualView, Giocatore> getMap() throws RemoteException;
+
+    public void clearMap() throws  RemoteException;
+
+    public List<VirtualView> getListClients() throws RemoteException;
+    public List<GiocoController> getLisGames() throws RemoteException;
+
+    public Giocatore getPlayerFromClient(VirtualView client ) throws RemoteException;
+
+    public void createGame(String name, Giocatore player ) throws  RemoteException;
+
+    public void addPlayer(Gioco game, Giocatore player) throws  RemoteException;
 
 }
