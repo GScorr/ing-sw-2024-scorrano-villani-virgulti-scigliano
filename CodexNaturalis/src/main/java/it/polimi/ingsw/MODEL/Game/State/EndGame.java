@@ -3,9 +3,9 @@ package it.polimi.ingsw.MODEL.Game.State;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Player.Player;
 
-public class TurnEndGame implements GameState{
+public class EndGame implements GameState{
     Game game;
-    public TurnEndGame(Game game){
+    public EndGame(Game game){
         this.game = game;
     }
     @Override
