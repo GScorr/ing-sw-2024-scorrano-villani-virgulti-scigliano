@@ -224,6 +224,7 @@ public class GameController implements GameSubject {
 
     private void finalPointEndGame(){
         for(Player p: player_list){ //forall player inside player_list
+            p.setEndGame(); //tutti i player sono in stato finale e non possono fare nulla
             Goal goal = p.getGoalCard();
             p.addPoints(goal.numPoints(p.getGameField())); //aggiungo i punti del goal singolo
             p.addPoints(game.getGoal1().numPoints(p.getGameField()));
