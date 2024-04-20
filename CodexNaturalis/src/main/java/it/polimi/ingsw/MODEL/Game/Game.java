@@ -51,6 +51,8 @@ public class Game  {
 
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
+              choosing_goal = new CHOOSING_GOAL(this),
+              choosing_starting_card = new CHOOSING_STARTING_CARD(this),
               turn = new Turn(this),
               end_game = new EndGame(this);
     public  GameState actual_state;
@@ -216,6 +218,12 @@ public class Game  {
                 setGame_state(begin);
                 break;
             case "BEGIN":
+                setGame_state(choosing_goal);
+                break;
+            case "CHOOSING_GOAL":
+                setGame_state(choosing_starting_card);
+                break;
+            case "CHOOSING_STARTING_CARD":
                 setGame_state(turn);
                 break;
             case "TURN":

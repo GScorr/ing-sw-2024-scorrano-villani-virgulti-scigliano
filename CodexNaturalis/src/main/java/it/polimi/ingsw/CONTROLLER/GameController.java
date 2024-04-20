@@ -125,25 +125,19 @@ public class GameController implements GameSubject {
         }
     }
 
-    public void playerChooseGoal(Player p, int i){
-        try{
-            if (this.choosed_goal.get(p) == false){
-
-                    if(p.actual_state.selectGoal(i)){
-                        goal_count++;
-                        this.choosed_goal.put(p,true);
-                        if(goal_count == game.getMax_num_player()){
-                            notifyObservers();
-                        }
-                    }else{
-                        throw new ControllerException(5,"Not possible call this method, Player State is:" + p.actual_state.getNameState());
-                    }
-
-
+    public void playerChooseGoal(Player p, int i) {
+        if (this.choosed_goal.get(p) == false) {
+            if (p.actual_state.selectGoal(i)) {
+                goal_count++;
+                this.choosed_goal.put(p, true);
+                if (goal_count == game.getMax_num_player()) {
+                    game.gameNextState();
+                    notifyObservers();
+                }
+            } else {
+                throw new ControllerException(5, "Not possible call this method, Player State is:" + p.actual_state.getNameState());
             }
-        }catch(InvalidStateException e){
-            System.out.println(e.getMessage());
-        }
+        }else{ throw new ControllerException(6, "Goal Card already select, wait for the continuing of the game.");}
     }
 
     public HashMap<Player, Boolean> getChoosed_goal() {
@@ -151,18 +145,21 @@ public class GameController implements GameSubject {
     }
 
     public void playerSelectStartingCard(Player p, boolean flipped){
-        try{
-            if (this.choosed_starting_card.get(p) == false){
-                p.actual_state.selectStartingCard(flipped);
+        if (this.choosed_starting_card.get(p) == false){
+            if(p.actual_state.selectStartingCard(flipped)) {
                 starting_card_count++;
-                this.choosed_starting_card.put(p,true);
-                if(starting_card_count == game.getMax_num_player()){
+                this.choosed_starting_card.put(p, true);
+                if (starting_card_count == game.getMax_num_player()) {
                     notifyObservers();
+                    game.gameNextState();
                 }
+            }else{
+                throw new ControllerException(7, "Not possible call this method, Player State is:" + p.actual_state.getNameState());
             }
-        }catch(InvalidStateException e){
-            System.out.println(e.getMessage());
+        }else{
+            throw new ControllerException(8, "Goal Card already select, wait for the continuing of the game.");
         }
+
     }
 
 // ------ da qui in avanti inizia il gioco con i turni
