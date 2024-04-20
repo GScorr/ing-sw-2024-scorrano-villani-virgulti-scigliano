@@ -10,13 +10,14 @@ public class Begin implements GameState{
     }
 
     @Override
-    public void insertPlayer(Player player) {
-        throw new GameInvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean insertPlayer(Player player) {
+        return false;
     }
 
     @Override
-    public void initializedGame() {
+    public boolean initializedGame() {
         game.initializedGame();
+        return true;
     }
 
 
