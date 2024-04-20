@@ -9,7 +9,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-//
+
 public class RmiClient extends UnicastRemoteObject implements VirtualView {
     final VirtualServer server;
     private  String token;
