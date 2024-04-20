@@ -53,8 +53,7 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
             } else {
                 //inserisco player come player 2 in game todo correzione bug inserimento giocatore 2____ il giocatore 2 non viene inserito nel game
-                GiocoController existing_game = server.getLisGames().get(0);
-                server.addPlayer(existing_game, curr_player);
+                server.addPlayer(0, curr_player);
                 System.out.print("\n Giocatore " + curr_player.getName() +" Aggiunto a partita esistente");
             }
         }
