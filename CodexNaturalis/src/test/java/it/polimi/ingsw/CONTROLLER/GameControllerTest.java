@@ -30,8 +30,8 @@ class GameControllerTest {
         giocatore1 = controller.createPlayer("nome_giocatore", true);
         //System.out.println("stato del giocatore: "+ giocatore.getPlayerState()); //il player parte con lo stato non inizializzato
         giocatore2 = controller.createPlayer("nome_giocatore2", false); //cosa succede se istanzio due giocatori con isFirst=1
-        giocatore3 = controller.createPlayer("nome_giocatore2", false);
-        giocatore4 = controller.createPlayer("nome_giocatore2", false);
+        giocatore3 = controller.createPlayer("nome_giocatore3", false);
+        giocatore4 = controller.createPlayer("nome_giocatore4", false);
 
 
     }
@@ -214,28 +214,29 @@ class GameControllerTest {
         Player p3 = gioco.getGet_player_index().get(2);
         Player p4 = gioco.getGet_player_index().get(3);
 
-        System.out.println(gioco.getActual_state().getNameState());
+        System.out.println("1"+gioco.getActual_state().getNameState());
 
         if(controller.checkNumPlayer()){
-            System.out.println("gioco inizializzato");
-        }else{System.out.println("gioco non inizializzato");
+            //System.out.println("gioco inizializzato");
+        }else{
+            //System.out.println("gioco non inizializzato");
         }
 
-        System.out.println(gioco.getActual_state().getNameState());
+        System.out.println("2"+gioco.getActual_state().getNameState());
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             controller.playerChooseGoal(gioco.getGet_player_index().get(i), 1); //i indica il goal tra 1 e 2
 
         }
 
-        System.out.println(gioco.getActual_state().getNameState());
+        System.out.println("3"+gioco.getActual_state().getNameState());
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             controller.playerSelectStartingCard(gioco.getGet_player_index().get(i), false);
         }
 
-        System.out.println(gioco.getActual_state().getNameState());
-
+        System.out.println("4"+gioco.getActual_state().getNameState());
+/*
 
         System.out.println(p1.actual_state.getNameState());
         System.out.println(p2.actual_state.getNameState());
@@ -247,11 +248,13 @@ class GameControllerTest {
         p3.setPlayer_points(18);
         p4.setPlayer_points(17);
 
+
+
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             System.out.println(gioco.getGet_player_index().get(i).getPlayerPoints());
         }
 
-
+ */
         controller.statePlaceCard(p1, 1, false, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p1);
 
@@ -264,9 +267,9 @@ class GameControllerTest {
         controller.statePlaceCard(p4, 1, false, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p4);
 
-        System.out.println(gioco.getActual_state().getNameState());
+        System.out.println("5"+gioco.getActual_state().getNameState());
 
-       // gioco.gameNextState();
+        gioco.gameNextState();
 
 
         /*
@@ -290,7 +293,7 @@ class GameControllerTest {
         //System.out.println("stampo il counter: " + controller.getFinal_counter());
 
          */
-        System.out.println(gioco.getActual_state().getNameState());
+        System.out.println("6"+gioco.getActual_state().getNameState());
 
     }
 
