@@ -21,7 +21,7 @@ public class RmiServer implements VirtualServer{
     private Map<String, Giocatore> mappa;
     private List<GiocoController> games = new ArrayList<>();
 
-    private Map<Giocatore, GiocoController> mappa_gp ;
+    private Map<String, GiocoController> mappa_gp ;
 
     public RmiServer(GiocoController controller) {
         this.controller = controller;
@@ -59,9 +59,8 @@ public class RmiServer implements VirtualServer{
     public void put(int index, Integer number, String player_name) throws RemoteException, InterruptedException {
         Integer[] currentState;
         System.out.println("\n [add request received] \n");
-        Giocatore player = mappa.get(player_name);
-
-        mappa_gp.get(player).putInArray(index, number, player);
+        System.out.println(mappa_gp.size());
+        mappa_gp.get(player_name).putInArray(index, number, mappa.get(player_name));
 
         /*
         if ( gioco.getStatus1() == null || gioco.getStatus2()== null ) {System.err.println("\n [ERROR] \n"); return;}
@@ -121,16 +120,16 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public void createGame(String name, Giocatore player) throws RemoteException {
-        GiocoController game = new GiocoController(name, player);
+    public void createGame(String name, String player) throws RemoteException {
+        GiocoController game = new GiocoController(name, mappa.get(player));
         games.add(game);
-        mappa_gp.put(player, game );
+        mappa_gp.put( player , game );
     }
 
     @Override
-    public void addPlayer(int index, Giocatore player) throws RemoteException {
-        games.get(index).getGame().setPlayer2(player);
-        player.setGame(games.get(index));
+    public void addPlayer(int index, String player) throws RemoteException {
+        games.get(index).getGame().setPlayer2(mappa.get(player));
+        mappa.get(player).setGame(games.get(index));
         mappa_gp.put(player, games.get(index) );
     }
 
