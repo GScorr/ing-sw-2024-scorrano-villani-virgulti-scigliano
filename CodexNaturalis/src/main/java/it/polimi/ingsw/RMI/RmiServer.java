@@ -16,18 +16,20 @@ public class RmiServer implements VirtualServer{
 
     private GiocoController controller;
     public TokenManager token_manager = new TokenManagerImplement();
-
     private List<VirtualView> clients = new ArrayList<>();
 
     private Map<String, Giocatore> mappa;
     private List<GiocoController> games = new ArrayList<>();
 
+    private Map<Giocatore, GiocoController> mappa_gp ;
+
     public RmiServer(GiocoController controller) {
         this.controller = controller;
         this.mappa = new HashMap<>();
+        this.mappa_gp = new HashMap<>();
     }
 
-    final BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
+    private BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
 
 
 
@@ -54,13 +56,17 @@ public class RmiServer implements VirtualServer{
 
 
     @Override
-    public void put(int index, Integer number, Giocatore player) throws RemoteException{
+    public void put(int index, Integer number, String player_name) throws RemoteException, InterruptedException {
         Integer[] currentState;
         System.out.println("\n [add request received] \n");
-        controller.putInArray(index, number, player);
-        if ( controller.getStatus1() == null || controller.getStatus2()== null ) {System.err.println("\n [ERROR] \n"); return;}
-        if ( player == controller.getStatus1() ) currentState = controller.getStatus1().getCampo();
-        else currentState = controller.getStatus2().getCampo();
+        Giocatore player = mappa.get(player_name);
+
+        mappa_gp.get(player).putInArray(index, number, player);
+
+        /*
+        if ( gioco.getStatus1() == null || gioco.getStatus2()== null ) {System.err.println("\n [ERROR] \n"); return;}
+        if ( player == gioco.getStatus1() ) currentState = gioco.getStatus1().getCampo();
+        else currentState = gioco.getStatus2().getCampo();
 
         try
         {
@@ -68,6 +74,8 @@ public class RmiServer implements VirtualServer{
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
+        broadcastUpdateThread();*/
+
     }
 
     @Override
@@ -116,11 +124,14 @@ public class RmiServer implements VirtualServer{
     public void createGame(String name, Giocatore player) throws RemoteException {
         GiocoController game = new GiocoController(name, player);
         games.add(game);
+        mappa_gp.put(player, game );
     }
 
     @Override
     public void addPlayer(int index, Giocatore player) throws RemoteException {
         games.get(index).getGame().setPlayer2(player);
+        player.setGame(games.get(index));
+        mappa_gp.put(player, games.get(index) );
     }
 
     @Override
