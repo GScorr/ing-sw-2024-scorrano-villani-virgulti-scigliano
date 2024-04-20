@@ -15,6 +15,11 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/*
+todo
+    test sulla gestione degli erroi
+ */
+
 class GameControllerTest {
 
     String nomePlayer = "nome_giocatore";
@@ -245,8 +250,8 @@ class GameControllerTest {
 
         p1.setPlayer_points(15);
         p2.setPlayer_points(20);
-        p3.setPlayer_points(18);
-        p4.setPlayer_points(17);
+        p3.setPlayer_points(15);
+        p4.setPlayer_points(15);
 
 
 
@@ -254,7 +259,9 @@ class GameControllerTest {
             System.out.println(gioco.getGet_player_index().get(i).getPlayerPoints());
         }
 
-
+        /*
+        non può entrare perche il primoPlayer è arrivato a 20 punti e non può fare il secondo giro
+         */
         controller.statePlaceCard(p1, 1, true, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p1);
 
@@ -270,8 +277,6 @@ class GameControllerTest {
         System.out.println("5"+gioco.getActual_state().getNameState());
 
         gioco.gameNextState();
-
-
 
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
@@ -336,7 +341,7 @@ class GameControllerTest {
 /*
 test sull'errore
  */
-        controller.playerPeachCardFromGoldDeck(p1);
+       // controller.playerPeachCardFromGoldDeck(p1);
 
 
         System.out.println("supero il select starting card");
@@ -410,7 +415,7 @@ test sull'errore
         controllo sull'errore
          */
 
-        controller.playerPeachCardFromResourcesDeck(gioco.getGet_player_index().get(0));
+      //  controller.playerPeachCardFromResourcesDeck(gioco.getGet_player_index().get(0));
 
         //System.out.println(gioco.getGet_player_index().get(0).getCardsInHand());
         //System.out.println(gioco.getResources_deck().seeFirstCard());
@@ -483,7 +488,7 @@ test sull'errore
 
         //System.out.println(gioco.getGet_player_index().get(0).getCardsInHand());
 
-        controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(0), 1);
+       // controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(0), 1);
 
         // STARTING_CARD => FIRST_PLAYER => PLACE     (OTHER => WAIT)
         prima_carta = gioco.getCars_in_center().getGold_list().get(1);

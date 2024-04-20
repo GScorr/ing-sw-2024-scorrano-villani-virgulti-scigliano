@@ -48,7 +48,7 @@ public class GameController implements GameSubject {
     private Game game;
 
     Comparator<Player> idComparator_point = Comparator.comparingInt(Player::getPlayerPoints);
-    Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getPlayerPoints);
+    Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
 
 
     public GameController(int max_num_player) {
@@ -257,16 +257,16 @@ public class GameController implements GameSubject {
             Goal goal = p.getGoalCard();
             p.addPoints(goal.numPoints(p.getGameField())); //aggiungo i punti del goal singolo
             if(goal.numPoints(p.getGameField()) > 0){
-                p.num_goal_achieve++;
+                p.setNum_goal_achieve(p.getNum_goal_achieve()+1);
             }
             p.addPoints(game.getGoal1().numPoints(p.getGameField()));
             if(game.getGoal1().numPoints(p.getGameField()) > 0){
-                p.num_goal_achieve++;
+                p.setNum_goal_achieve(p.getNum_goal_achieve()+1);
             }
             p.addPoints(game.getGoal2().numPoints(p.getGameField()));
 
             if(game.getGoal2().numPoints(p.getGameField()) > 0){
-                p.num_goal_achieve++;
+                p.setNum_goal_achieve(p.getNum_goal_achieve()+1);
             }
         }
 

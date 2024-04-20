@@ -27,15 +27,6 @@ class GameFieldControllerTest {
     List<ResourceCard> mazzo_risorse_list = creation.getDeck_resources();
     List<GoldCard> mazzo_gold_list = creation.getDeck_gold();
 
-    @Test
-    void checkPlacing() {
-        cards = istanzia_carte();
-        player.getGameField().insertCard(cards.get(0),0,2);
-        Boolean bool= controller.checkPlacing(cards.get(1),1,1);
-        assertTrue(bool);
-        Boolean bool2= controller.checkPlacing(cards.get(2),2,1);
-        assertFalse(bool2);
-    }
 
     List<PlayCard> istanzia_carte(){
         List<PlayCard> carte = new ArrayList<>();
@@ -52,6 +43,22 @@ class GameFieldControllerTest {
         }
         return carte;
     }
+
+    /*
+        TODO
+            da rifare questo tes
+     */
+    @Test
+    void checkPlacing() {
+        cards = istanzia_carte();
+        player.getGameField().insertCard(cards.get(0),22,22);
+        Boolean bool= controller.checkPlacing(cards.get(1),23,23);
+        assertTrue(bool);
+        Boolean bool2= controller.checkPlacing(cards.get(2),2,1);
+        assertFalse(bool2);
+    }
+
+
 
     @Test
     void checkGoldConstraints() {
