@@ -276,14 +276,6 @@
       <workItem from="1712653919101" duration="2285000" />
       <workItem from="1713018449356" duration="10906000" />
     </task>
-    <task id="LOCAL-00013" summary="Aggiunta di ResourceCountChange e checkPlacing in insertcard">
-      <option name="closed" value="true" />
-      <created>1710626391456</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1710626391456</updated>
-    </task>
     <task id="LOCAL-00014" summary="Aggiunta addPoints-rimuoviCartaMano + creazione di getter-setter in Player">
       <option name="closed" value="true" />
       <created>1710851204517</created>
@@ -668,7 +660,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713632918606</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713636813652</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1713636813653</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
