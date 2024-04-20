@@ -169,12 +169,18 @@ public class GameController implements GameSubject {
         }
     }
 
+    /*
+    TODO
+        gestire la fine del gioco in caso di fine di entrambi i deck
+     */
+
 
     public void statePlaceCard(Player player, int index, boolean flipped, int x, int y){ //cambiare nome al metodo
         if(is_final_state){
             placeCard(player, index, flipped, x, y);
             final_counter++;
             if(final_counter == game.getMax_num_player()){
+                game.gameNextState(); //cambio stato al game
                 finalPointEndGame(); //conta i punti di ogni giocatore
             }
         }
@@ -222,6 +228,10 @@ public class GameController implements GameSubject {
         }
     }
 
+    /*
+    da testare
+     */
+
     private void finalPointEndGame(){
         for(Player p: player_list){ //forall player inside player_list
             p.setEndGame(); //tutti i player sono in stato finale e non possono fare nulla
@@ -230,6 +240,13 @@ public class GameController implements GameSubject {
             p.addPoints(game.getGoal1().numPoints(p.getGameField()));
             p.addPoints(game.getGoal2().numPoints(p.getGameField()));
         }
+
+    }
+
+    /*
+    da gestire la parità di punteggio
+     */
+    public void getClassifica(){
 
     }
 
