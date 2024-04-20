@@ -250,6 +250,7 @@ public class GameController implements GameSubject {
      */
 
     private void finalPointEndGame(){
+
         for(Player p: player_list){ //forall player inside player_list
             p.setEndGame(); //tutti i player sono in stato finale e non possono fare nulla
             Goal goal = p.getGoalCard();
@@ -257,6 +258,9 @@ public class GameController implements GameSubject {
             p.addPoints(game.getGoal1().numPoints(p.getGameField()));
             p.addPoints(game.getGoal2().numPoints(p.getGameField()));
         }
+
+        player_list.
+
 
     }
 
