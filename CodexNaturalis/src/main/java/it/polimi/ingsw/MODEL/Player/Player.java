@@ -67,7 +67,7 @@ public class Player implements PlayerObserver {
     private Goal goal_card;
     private int player_points = 0;
 
-    public int num_goal_achieve;
+    private int num_goal_achieve = 0;
 
 
     //Questi mazzi servono per pescare
@@ -308,4 +308,11 @@ public class Player implements PlayerObserver {
 
     }
 
+    public int getNum_goal_achieve() {
+        return num_goal_achieve;
+    }
+
+    public void setNum_goal_achieve(int num_goal_achieve) {
+        this.num_goal_achieve = num_goal_achieve;
+    }
 }
