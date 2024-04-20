@@ -26,7 +26,7 @@ public interface VirtualServer extends Remote {
 
     public void createGame(String name, Giocatore player ) throws  RemoteException;
 
-    public void addPlayer(GiocoController game, Giocatore player) throws  RemoteException;
+    public void addPlayer(int index, Giocatore player) throws  RemoteException;
 
     public String createToken(VirtualView client ) throws  RemoteException;
 

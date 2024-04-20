@@ -119,8 +119,8 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public void addPlayer(GiocoController game, Giocatore player) throws RemoteException {
-        game.getGame().setPlayer2(player);
+    public void addPlayer(int index, Giocatore player) throws RemoteException {
+        games.get(index).getGame().setPlayer2(player);
     }
 
     @Override
