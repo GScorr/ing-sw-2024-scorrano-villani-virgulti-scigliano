@@ -44,6 +44,11 @@ public class PlaceCard implements PState{
         return true;
     }
 
+    public boolean selectSideCard(int index, boolean flip){
+        player.side_card_in_hand.put(index,flip);
+        return true;
+    }
+
     @Override
     public boolean peachCardFromGoldDeck() {
         return false;

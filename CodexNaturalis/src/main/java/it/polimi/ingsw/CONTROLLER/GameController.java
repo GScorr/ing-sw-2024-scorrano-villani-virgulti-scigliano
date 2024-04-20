@@ -44,6 +44,9 @@ public class GameController implements GameSubject {
       */
     private boolean is_final_state = false;
     private boolean tmp_final_state = false;
+    private boolean resources_deck_finished = false;
+    private boolean gold_deck_finished = false;
+    private boolean both_deck_finished = false;
 
     private int final_counter = 0;
 
@@ -175,7 +178,7 @@ public class GameController implements GameSubject {
                 throw new ControllerException(7, "Not possible call this method, Player State is:" + p.actual_state.getNameState());
             }
         }else{
-            throw new ControllerException(8, "Goal Card already select, wait for the continuing of the game.");
+            throw new ControllerException(8, "Starting Card already select, wait for the continuing of the game.");
         }
 
     }
@@ -187,6 +190,10 @@ public class GameController implements GameSubject {
         Player currentPlayer = player_list.get(actual_player), nextPlayer;
         if(currentPlayer.actual_state.getNameState().equals("PLACE_CARD")){
             currentPlayer.nextStatePlayer();
+            // If deck are terminated the DRAW_CARD state is skipped
+            if(both_deck_finished){
+                nextStatePlayer();
+            }
         }else if (currentPlayer.actual_state.getNameState().equals("DRAW_CARD")){
             if( actual_player == player_list.size() - 1 ){
                 nextPlayer = player_list.get(0) ;}
@@ -209,10 +216,18 @@ public class GameController implements GameSubject {
         gestire la fine del gioco in caso di fine di entrambi i deck
      */
 
+    public void selectSideCard(Player player, int index, boolean flip){
+       if( player.actual_state.selectSideCard(index,flip)){}
+       else{
+           throw new ControllerException(21,"Not possible chosing SIDE card in this STATE: " + player.actual_state.getNameState());
+       }
 
-    public void statePlaceCard(Player player, int index, boolean flipped, int x, int y){ //cambiare nome al metodo
+    }
+
+    public void statePlaceCard(Player player, int index, int x, int y){ //cambiare nome al metodo
+
         if(is_final_state){
-            placeCard(player, index, flipped, x, y);
+            placeCard(player, index, x, y);
             final_counter++;
             if(final_counter == game.getMax_num_player()){
                 game.gameNextState(); //cambio stato al game
@@ -221,14 +236,14 @@ public class GameController implements GameSubject {
         }
         else{
             if(tmp_final_state){
-                placeCard(player, index, flipped, x, y);
+                placeCard(player, index, x, y);
                 if(player.getIsFirst()){
                     is_final_state = true;
                     final_counter=1;
                 }
             }
             else{
-                placeCard(player, index, flipped, x, y);
+                placeCard(player, index, x, y);
                 if(player.getPlayerPoints() >= 20) {
                     if(player.getIsFirst()){
                         is_final_state=true;
@@ -242,7 +257,8 @@ public class GameController implements GameSubject {
         }
     }
 
-    private void placeCard(Player player, int index,boolean flipped, int x, int y){
+    private void placeCard(Player player, int index, int x, int y){
+        boolean flipped = player.side_card_in_hand.get(index);
             if(index>2 || index < 0){
                 throw new ControllerException(9,"Index error, placeCard accept 0 <= index <= 2");
             }
@@ -306,6 +322,20 @@ public class GameController implements GameSubject {
             throw new ControllerException(15, "Deck is empty, draw from a different one." );
         }
         if(player.actual_state.peachCardFromGoldDeck()) {
+            if(game.getGold_deck().cards.size() == 0){
+                gold_deck_finished = true;
+                if(resources_deck_finished){
+                    both_deck_finished = true;
+                    if(player.getIsFirst()){
+                        is_final_state=true;
+                        final_counter=1;
+                    }
+                    else{
+                        tmp_final_state = true;
+                    }
+                }
+            }
+
             nextStatePlayer();
         }else{
             throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
@@ -316,7 +346,21 @@ public class GameController implements GameSubject {
             if(game.getResources_deck().cards.size() == 0 ){
                 throw new ControllerException(15, "Deck is empty, draw from a different one." );
             }
+
             if(player.actual_state.peachFromResourcesDeck()) {
+                if(game.getResources_deck().cards.size() == 0){
+                    resources_deck_finished = true;
+                    if(gold_deck_finished){
+                        both_deck_finished = true;
+                        if(player.getIsFirst()){
+                            is_final_state=true;
+                            final_counter=1;
+                        }
+                        else{
+                            tmp_final_state = true;
+                        }
+                    }
+                }
                 nextStatePlayer();
             }else{
                 throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
@@ -337,6 +381,38 @@ public class GameController implements GameSubject {
             throw new ControllerException(19,"Card is not present. Case where the deck is terminated");
         } else if (i == 3 && game.getCars_in_center().getResource_list().get(1) == null) {
             throw new ControllerException(20,"Card is not present. Case where the deck is terminated");
+        }
+
+        if(i == 0 || i == 1){
+            if(game.getGold_deck().cards.size() == 0){
+                gold_deck_finished = true;
+                if(resources_deck_finished){
+                    both_deck_finished = true;
+                    if(player.getIsFirst()){
+                        is_final_state=true;
+                        final_counter=1;
+                    }
+                    else{
+                        tmp_final_state = true;
+                    }
+                }
+            }
+        }
+
+        if( i == 2 || i == 3){
+            if(game.getResources_deck().cards.size() == 0){
+                resources_deck_finished = true;
+                if(gold_deck_finished){
+                    both_deck_finished = true;
+                    if(player.getIsFirst()){
+                        is_final_state=true;
+                        final_counter=1;
+                    }
+                    else{
+                        tmp_final_state = true;
+                    }
+                }
+            }
         }
 
         if(player.actual_state.peachFromCardsInCenter(i)){

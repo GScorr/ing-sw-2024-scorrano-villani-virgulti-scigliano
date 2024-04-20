@@ -58,6 +58,10 @@ public class NotInitialized implements PState {
         return false;
     }
 
+    public boolean selectSideCard(int index, boolean flip){
+        return false;
+    }
+
     @Override
     public String getNameState() {
         return "NOT_INITIALIZED";

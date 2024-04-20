@@ -58,6 +58,10 @@ public class EndGame implements PState {
         return false;
     }
 
+    public boolean selectSideCard(int index, boolean flip){
+        return false;
+    }
+
     @Override
     public String getNameState() {
         return "END_GAME";
