@@ -173,16 +173,19 @@ class GameControllerTest {
 
         System.out.println(p1.getCardsInHand());
 
+        /*
+        test sull'errore
+         */
+        //controller.statePlaceCard(p1, 4, false, 23, 23);
+
         controller.statePlaceCard(gioco.getGet_player_index().get(0), 1, false, 23, 23);
         //assertEquals(p1.getGameField().getCell(22,22,45).getCard(),p1.getGameField().getCell(23,23,45).getCard());
         System.out.println("stato di p1 "+p1.actual_state.getNameState());
         System.out.println("stato di p2 "+p2.actual_state.getNameState());
 
         System.out.println(p1.getCardsInHand());
-        /*
-        quando gioco una carta abbiamo deciso di mettere una carta trasparente al posto della vecchia carta vero?
-         */
-        assertEquals(p1.getCardsInHand().size(), 3);
+
+        assertEquals(p1.getCardsInHand().size(), 3); //perche al posto della carta vecchia c'è la tc
 
         controller.playerPeachCardFromGoldDeck(p1); //devo pescare dopo aver giocato una carta altrimenti non cambia lo stato dei giocatori successivi che rimangono in wait
         System.out.println(p1.actual_state.getNameState());
@@ -203,22 +206,8 @@ class GameControllerTest {
         Game gioco = controller.getGame(); //ho il game istanziato da gamecontroller
        // boolean check = controller.checkNumPlayer(); //forse posso evitare la variabile check ma usare solo la chiamata
         List<PState> stato = new ArrayList<>();
+        PlayCard carta_da_pescare;
 
-    /*
-        for(int i=0; i<controller.getGame().getNum_player(); i++){
-            gioco.getGet_player_index().get(i).setPlayer_state(gioco.getGet_player_index().get(i).draw_card);
-            System.err.println(gioco.getGet_player_index().get(i).actual_state.getNameState());
-        }
-
-        for(int i=0; i<controller.getGame().getNum_player(); i++){
-            controller.playerPeachCardFromGoldDeck(gioco.getGet_player_index().get(i));
-        }
-        for(int i=0; i<controller.getGame().getNum_player(); i++){
-            //gioco.getGet_player_index().get(i).setPlayer_state(gioco.getGet_player_index().get(i).draw_card);
-            System.err.println(gioco.getGet_player_index().get(i).actual_state.getNameState());
-        }
-
-*/
         // NOT INITIALIZED => BEGIN => CHOOSE_GOAL
         controller.checkNumPlayer(); //inizializzo il gioco
 
@@ -241,44 +230,48 @@ class GameControllerTest {
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             controller.playerSelectStartingCard(gioco.getGet_player_index().get(i), false);
         }
+/*
+test sull'errore
+ */
+        controller.playerPeachCardFromGoldDeck(p1);
+
 
         System.out.println("supero il select starting card");
 
         // STARTING_CARD => FIRST_PLAYER => PLACE     (OTHER => WAIT)
+        carta_da_pescare = gioco.getResources_deck().seeFirstCard();
         System.out.println();
         System.out.println("stampo la mano di p1 prima il peach");
+        carta_da_pescare = gioco.getGold_deck().seeFirstCard();
         System.out.println(p1.getCardsInHand());
         controller.statePlaceCard(gioco.getGet_player_index().get(0), 1,true, 23, 23);
         controller.playerPeachCardFromGoldDeck(gioco.getGet_player_index().get(0));
         System.out.println("stampo la mano di p1 dopo il peach");
         System.out.println(p1.getCardsInHand());
         System.out.println();
+        assertEquals(carta_da_pescare, p1.getCardsInHand().get(1));
 
 
-
-        controller.statePlaceCard(gioco.getGet_player_index().get(1), 1,true, 1, 1);
+        carta_da_pescare = gioco.getGold_deck().seeFirstCard();
+        controller.statePlaceCard(gioco.getGet_player_index().get(1), 1,true, 23, 23);
         controller.playerPeachCardFromGoldDeck(gioco.getGet_player_index().get(1));
+        assertEquals(carta_da_pescare, p2.getCardsInHand().get(1));
 
-
-        controller.statePlaceCard(gioco.getGet_player_index().get(2), 1,true, 1, 1);
+        carta_da_pescare = gioco.getGold_deck().seeFirstCard();
+        controller.statePlaceCard(gioco.getGet_player_index().get(2), 1,true, 23, 23);
         controller.playerPeachCardFromGoldDeck(gioco.getGet_player_index().get(2));
+        assertEquals(carta_da_pescare, p3.getCardsInHand().get(1));
 
-        controller.statePlaceCard(gioco.getGet_player_index().get(3), 1,true, 1, 1);
+        carta_da_pescare = gioco.getGold_deck().seeFirstCard();
+        controller.statePlaceCard(gioco.getGet_player_index().get(3), 1,true, 23, 23);
         controller.playerPeachCardFromGoldDeck(gioco.getGet_player_index().get(3));
+        assertEquals(carta_da_pescare, p4.getCardsInHand().get(1));
+
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             System.err.println(gioco.getGet_player_index().get(i).actual_state.getNameState());
         }
 
-
-        /*
-        for(int i=0; i<controller.getGame().getNum_player(); i++){
-            controller.playerPeachCardFromGoldDeck(gioco.getGet_player_index().get(i)); //chiamo la funzione
-            //gioco.getGet_player_index().get(i).getCardsInHand();
-        }
-
-
-         */
 
     }
 
@@ -288,6 +281,7 @@ class GameControllerTest {
         Game gioco = controller.getGame(); //ho il game istanziato da gamecontroller
         boolean check = controller.checkNumPlayer(); //forse posso evitare la variabile check ma usare solo la chiamata
         List<PState> stato = new ArrayList<>();
+        PlayCard carta_da_pescare;
 /*
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             gioco.getGet_player_index().get(i).setPlayer_state(gioco.getGet_player_index().get(i).draw_card);
@@ -309,26 +303,42 @@ class GameControllerTest {
             controller.playerSelectStartingCard(gioco.getGet_player_index().get(i), false);
         }
 
-        // STARTING_CARD => FIRST_PLAYER => PLACE     (OTHER => WAIT)
-        controller.statePlaceCard(gioco.getGet_player_index().get(0), 1,true, 1, 1);
+        /*
+        controllo sull'errore
+         */
+
         controller.playerPeachCardFromResourcesDeck(gioco.getGet_player_index().get(0));
 
-        controller.statePlaceCard(gioco.getGet_player_index().get(1), 1,true, 1, 1);
+        //System.out.println(gioco.getGet_player_index().get(0).getCardsInHand());
+        //System.out.println(gioco.getResources_deck().seeFirstCard());
+        // STARTING_CARD => FIRST_PLAYER => PLACE     (OTHER => WAIT)
+        controller.statePlaceCard(gioco.getGet_player_index().get(0), 1,true, 23, 23);
+        carta_da_pescare = gioco.getResources_deck().seeFirstCard();
+        //System.out.println(carta_da_pescare);
+        controller.playerPeachCardFromResourcesDeck(gioco.getGet_player_index().get(0));
+        //System.out.println(gioco.getGet_player_index().get(0).getCardsInHand());
+        assertEquals(carta_da_pescare, gioco.getGet_player_index().get(0).getCardsInHand().get(1), "errore player 1");
+
+        controller.statePlaceCard(gioco.getGet_player_index().get(1), 1,true, 23, 23);
+        carta_da_pescare = gioco.getResources_deck().seeFirstCard();
         controller.playerPeachCardFromResourcesDeck(gioco.getGet_player_index().get(1));
+        assertEquals(carta_da_pescare, gioco.getGet_player_index().get(1).getCardsInHand().get(1), "errore player 2");
 
 
-        controller.statePlaceCard(gioco.getGet_player_index().get(2), 1,true, 1, 1);
+        controller.statePlaceCard(gioco.getGet_player_index().get(2), 1,true, 23, 23);
+        carta_da_pescare = gioco.getResources_deck().seeFirstCard();
         controller.playerPeachCardFromResourcesDeck(gioco.getGet_player_index().get(2));
+        assertEquals(carta_da_pescare, gioco.getGet_player_index().get(2).getCardsInHand().get(1), "errore player 3");
 
-        controller.statePlaceCard(gioco.getGet_player_index().get(3), 1,true, 1, 1);
+        controller.statePlaceCard(gioco.getGet_player_index().get(3), 1,true, 23, 23);
+        carta_da_pescare = gioco.getResources_deck().seeFirstCard();
         controller.playerPeachCardFromResourcesDeck(gioco.getGet_player_index().get(3));
+        assertEquals(carta_da_pescare, gioco.getGet_player_index().get(3).getCardsInHand().get(1), "errore player 4");
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             System.err.println(gioco.getGet_player_index().get(i).actual_state.getNameState());
         }
-/*
-mancano le assertion
- */
+
     }
 
     @Test
@@ -353,41 +363,49 @@ mancano le assertion
             controller.playerChooseGoal(gioco.getGet_player_index().get(i), 1);
         }
 
+
         // CHOOSE_GOAL => STARTING_CARD
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
             controller.playerSelectStartingCard(gioco.getGet_player_index().get(i), false);
         }
 
-        System.out.println(gioco.getGet_player_index().get(0).actual_state.getNameState());
+       // System.out.println("1 "+gioco.getGet_player_index().get(0).actual_state.getNameState());
 
-        PlayCard prima_carta = gioco.getCars_in_center().getResource_list().get(1);
+        PlayCard prima_carta;
+
+        for(int i=0; i<controller.getGame().getNum_player(); i++){
+            System.err.println(gioco.getGet_player_index().get(i).actual_state.getNameState());
+        }
 
         //System.out.println(gioco.getGet_player_index().get(0).getCardsInHand());
 
-        // STARTING_CARD => FIRST_PLAYER => PLACE     (OTHER => WAIT)
-        controller.statePlaceCard(gioco.getGet_player_index().get(0), 1,true, 23, 23);
-        System.out.println(gioco.getGet_player_index().get(0).actual_state.getNameState());
-        controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(1), 1);
+        controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(0), 1);
 
-      //  assertEquals(prima_carta, gioco.getGet_player_index().get(0).getCardsInHand().get(1));
+        // STARTING_CARD => FIRST_PLAYER => PLACE     (OTHER => WAIT)
+        prima_carta = gioco.getCars_in_center().getGold_list().get(1);
+        controller.statePlaceCard(gioco.getGet_player_index().get(0), 1,true, 23, 23);
+       // System.out.println("2 "+gioco.getGet_player_index().get(0).actual_state.getNameState());
+        controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(0), 1);
+
+        assertEquals(prima_carta, gioco.getGet_player_index().get(0).getCardsInHand().get(1), "errore player 1");
 
 
         prima_carta = gioco.getCars_in_center().getGold_list().get(1);
         assertNotEquals(prima_carta,gioco.getGet_player_index().get(0).getCardsInHand().get(1));
 
         prima_carta = gioco.getCars_in_center().getGold_list().get(1);
-        controller.statePlaceCard(gioco.getGet_player_index().get(1), 1,true, 1, 1);
+        controller.statePlaceCard(gioco.getGet_player_index().get(1), 1,true, 23, 23);
         controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(1), 1);
         assertEquals(prima_carta, gioco.getGet_player_index().get(1).getCardsInHand().get(1));
 
         prima_carta = gioco.getCars_in_center().getGold_list().get(1);
-        controller.statePlaceCard(gioco.getGet_player_index().get(2), 1,true, 1, 1);
+        controller.statePlaceCard(gioco.getGet_player_index().get(2), 1,true, 23,23 );
         controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(2), 1);
         assertEquals(prima_carta, gioco.getGet_player_index().get(2).getCardsInHand().get(1));
 
         prima_carta = gioco.getCars_in_center().getGold_list().get(1);
-        controller.statePlaceCard(gioco.getGet_player_index().get(3), 1,true, 1, 1);
+        controller.statePlaceCard(gioco.getGet_player_index().get(3), 1,true, 23, 23);
         controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(3), 1);
         assertEquals(prima_carta, gioco.getGet_player_index().get(3).getCardsInHand().get(1));
 
