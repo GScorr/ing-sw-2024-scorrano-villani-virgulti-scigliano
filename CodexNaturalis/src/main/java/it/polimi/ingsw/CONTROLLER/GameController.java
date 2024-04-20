@@ -120,6 +120,7 @@ public class GameController implements GameSubject {
             game.actual_state.initializedGame();
             // 2° notifyObservers: playerState from BEGIN to CHOOSE_GOAL
             notifyObservers();
+            game.gameNextState();
             return true;
         }
         else{
