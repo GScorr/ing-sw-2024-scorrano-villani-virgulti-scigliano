@@ -197,8 +197,103 @@ class GameControllerTest {
 
 
 
+    }
+
+    @Test
+    void EndGame(){
+
+        /*
+        test fine game con p1.PlayerPoints!=20
+         */
+
+        Game gioco = controller.getGame();
+        createPlayer();
+
+        Player p1 = gioco.getGet_player_index().get(0);
+        Player p2 = gioco.getGet_player_index().get(1);
+        Player p3 = gioco.getGet_player_index().get(2);
+        Player p4 = gioco.getGet_player_index().get(3);
+
+        System.out.println(gioco.getActual_state().getNameState());
+
+        if(controller.checkNumPlayer()){
+            System.out.println("gioco inizializzato");
+        }else{System.out.println("gioco non inizializzato");
+        }
+
+        System.out.println(gioco.getActual_state().getNameState());
+
+        for(int i=0; i<controller.getGame().getNum_player(); i++){
+            controller.playerChooseGoal(gioco.getGet_player_index().get(i), 1); //i indica il goal tra 1 e 2
+
+        }
+
+        System.out.println(gioco.getActual_state().getNameState());
+
+        for(int i=0; i<controller.getGame().getNum_player(); i++){
+            controller.playerSelectStartingCard(gioco.getGet_player_index().get(i), false);
+        }
+
+        System.out.println(gioco.getActual_state().getNameState());
+
+
+        System.out.println(p1.actual_state.getNameState());
+        System.out.println(p2.actual_state.getNameState());
+        System.out.println(p3.actual_state.getNameState());
+        System.out.println(p4.actual_state.getNameState());
+
+        p1.setPlayer_points(15);
+        p2.setPlayer_points(20);
+        p3.setPlayer_points(18);
+        p4.setPlayer_points(17);
+
+        for(int i=0; i<controller.getGame().getNum_player(); i++){
+            System.out.println(gioco.getGet_player_index().get(i).getPlayerPoints());
+        }
+
+
+        controller.statePlaceCard(p1, 1, false, 23, 23);
+        controller.playerPeachCardFromResourcesDeck(p1);
+
+        controller.statePlaceCard(p2, 1, false, 23, 23);
+        controller.playerPeachCardFromResourcesDeck(p2);
+
+        controller.statePlaceCard(p3, 1, false, 23, 23);
+        controller.playerPeachCardFromResourcesDeck(p3);
+
+        controller.statePlaceCard(p4, 1, false, 23, 23);
+        controller.playerPeachCardFromResourcesDeck(p4);
+
+        System.out.println(gioco.getActual_state().getNameState());
+
+       // gioco.gameNextState();
+
+
+        /*
+
+        for(int i=0; i<controller.getGame().getNum_player(); i++){
+            System.out.println(gioco.getGet_player_index().get(i).getPlayerPoints());
+        }
+
+        //System.out.println("stampo il counter: " + controller.getFinal_counter());
+        controller.statePlaceCard(p1, 1, false, 24,24);
+        controller.playerPeachCardFromResourcesDeck(p1);
+
+        controller.statePlaceCard(p2, 1, false, 24, 24);
+        controller.playerPeachCardFromResourcesDeck(p2);
+
+        controller.statePlaceCard(p3, 1, false, 24, 24);
+        controller.playerPeachCardFromResourcesDeck(p3);
+
+        controller.statePlaceCard(p4, 1, false, 24, 24);
+        controller.playerPeachCardFromResourcesDeck(p4);
+        //System.out.println("stampo il counter: " + controller.getFinal_counter());
+
+         */
+        System.out.println(gioco.getActual_state().getNameState());
 
     }
+
 
     @Test
     void playerPeachCardFromGoldDeck() {
@@ -388,7 +483,7 @@ test sull'errore
        // System.out.println("2 "+gioco.getGet_player_index().get(0).actual_state.getNameState());
         controller.playerPeachFromCardsInCenter(gioco.getGet_player_index().get(0), 1);
 
-        assertEquals(prima_carta, gioco.getGet_player_index().get(0).getCardsInHand().get(1), "errore player 1");
+        assertEquals(prima_carta, gioco.getGet_player_index().get(0).getCardsInHand().get(1));
 
 
         prima_carta = gioco.getCars_in_center().getGold_list().get(1);
