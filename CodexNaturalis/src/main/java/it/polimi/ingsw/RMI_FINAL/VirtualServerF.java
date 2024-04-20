@@ -15,21 +15,6 @@ public interface VirtualServerF extends Remote {
 
     public boolean gamesIsEmpty() throws RemoteException;
 
-    public void createPlayer(String name, String client) throws RemoteException;
-
-    public Map<String, Player> getMap() throws RemoteException;
-
-    public void clearMap() throws  RemoteException;
-
-    public List<VirtualViewF> getListClients() throws RemoteException;
-    public List<GameController> getListGames() throws RemoteException;
-
-    public Player getPlayerFromClient(String client ) throws RemoteException;
-
-    public void createGame(String name, String player ) throws  RemoteException;
-
-    public void addPlayer(int index, String player) throws  RemoteException;
-
     public String createToken(VirtualViewF client ) throws  RemoteException;
 
     public Player getFromToken(String token) throws  RemoteException;
