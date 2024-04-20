@@ -27,8 +27,8 @@ import java.util.*;
 */
 
 public class GameController implements GameSubject {
-    static int index_counter;
-    public int index_game;
+    private static int index_counter=0;
+    private int index_game;
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
     private List<String> names = new ArrayList<>();
@@ -53,11 +53,14 @@ public class GameController implements GameSubject {
 
 
     public GameController(int max_num_player) {
-        if (max_num_player <= 2 || max_num_player > 4) {
-            throw new ControllerException(0, "Num Player not Valid in creation Game");
-        } else {
-            this.game = new Game(max_num_player);
-            this.index_game = index_counter ++;
+        synchronized(this) {
+            if (max_num_player <= 2 || max_num_player > 4) {
+                throw new ControllerException(0, "Num Player not Valid in creation Game");
+            } else {
+                this.game = new Game(max_num_player);
+                this.index_game = index_counter++;
+                index_counter++;
+            }
         }
     }
 
