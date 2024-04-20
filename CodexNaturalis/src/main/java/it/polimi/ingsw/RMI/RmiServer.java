@@ -54,7 +54,7 @@ public class RmiServer implements VirtualServer{
 
 
     @Override
-    public void put(int index, Integer number, Giocatore player, GiocoController controller) throws RemoteException{
+    public void put(int index, Integer number, Giocatore player) throws RemoteException{
         Integer[] currentState;
         System.out.println("\n [add request received] \n");
         controller.putInArray(index, number, player);
