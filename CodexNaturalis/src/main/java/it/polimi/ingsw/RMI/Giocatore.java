@@ -1,5 +1,7 @@
 package it.polimi.ingsw.RMI;
 
+import it.polimi.ingsw.MODEL.Game.Game;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,6 +9,8 @@ public class Giocatore implements Serializable {
     private final String name;
 
     private Integer[] campo;
+
+    private GiocoController game;
 
     public Giocatore(String name) {
         this.name = name;
@@ -25,5 +29,8 @@ public class Giocatore implements Serializable {
         campo[index] = value;
     }
 
-
+    public GiocoController getGame(){
+        return this.game;
+    }
+    public void setGame(GiocoController game){this.game = game;}
 }

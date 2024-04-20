@@ -18,12 +18,12 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         this.server = server;
     }
 
-    private void run() throws RemoteException {
+    private void run() throws RemoteException, InterruptedException {
         this.server.connect(this);
         runCli();
     }
 
-    private void runCli() throws RemoteException {
+    private void runCli() throws RemoteException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         VirtualView curr_client =  this;
         String player_name ;
@@ -57,22 +57,19 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                 System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer2().getName() +" Aggiunto a partita esistente");
             }
         }
-        System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
-
 
         System.out.print("...creazione Player andata a buon fine");
         System.out.print("\nCONTIENE: " + server.getMap().size() );
-
-        // for (Giocatore g : server.getMap().values() ) System.out.print(" " +  g.getName() );
-        //server.getMap().values().forEach(giocatore -> System.out.println(giocatore.getName()));
-        //System.out.print("\nche giocatore sono ?" + server.getPlayerFromClient(this).getName() );
 
 
         while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
             int value = scan.nextInt();
-            server.put(index, value, curr_player );
+            server.put(index, value, token );
+            Integer[] campo = server.getFromToken(token).getCampo();
+            for(int i=0; i<10; i++)
+                System.out.println(" " +campo[i]);
         }
 
     }
@@ -91,7 +88,7 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         System.err.print("\n[ERROR] " + details + "\n> ");
     }
 
-    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
+    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
         VirtualServer server = (VirtualServer) registry.lookup("VirtualServer");
         new RmiClient(server).run();
