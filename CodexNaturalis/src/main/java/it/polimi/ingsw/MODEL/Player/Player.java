@@ -15,6 +15,7 @@ import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.State.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -51,6 +52,9 @@ public class Player implements PlayerObserver {
 
     private final boolean isFirst;
     private int index_removed_card;
+
+    public HashMap<Integer,Boolean> side_card_in_hand  = new HashMap<>();
+
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
@@ -227,6 +231,7 @@ public class Player implements PlayerObserver {
                 return;
         }
     }
+
     public void setEndGame(){
         setPlayer_state(end_game);
     }
@@ -260,7 +265,13 @@ public class Player implements PlayerObserver {
 
     //questo metodo serve a peachFrom...  per inserire la carta pescata
     private void insertCard(PlayCard card){
+        this.side_card_in_hand.put(index_removed_card,false);
         this.cards_in_hand.set(this.index_removed_card, card);
+    }
+
+
+    public void selectSideCard(int index, boolean flipp){
+        this.side_card_in_hand.put(index,flipp);
     }
 
     //Una volta che il giocatore ha giocato una carta ne deve pescare una
