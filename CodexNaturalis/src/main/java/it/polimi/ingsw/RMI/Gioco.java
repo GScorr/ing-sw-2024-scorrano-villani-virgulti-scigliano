@@ -20,13 +20,13 @@ public class Gioco implements Serializable {
         return name;
     }
 
-    public Giocatore getPlayer1() {
+    public synchronized  Giocatore getPlayer1() {
         return player1;
     }
-    public Giocatore getPlayer2() {
+    public synchronized Giocatore getPlayer2() {
         return player2;
     }
 
-    public void setPlayer2(Giocatore player2){ this.player2 = player2; }
+    public synchronized void setPlayer2(Giocatore player2){ this.player2 = player2; }
 
 }

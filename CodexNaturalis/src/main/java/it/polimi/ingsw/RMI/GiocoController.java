@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class GiocoController implements Serializable {
      private Gioco game;
 
+    public GiocoController(Gioco game) {
+        this.game = game;
+    }
+
     public GiocoController(String name, Giocatore player1) {
         this.game = new Gioco(name, player1);
     }
