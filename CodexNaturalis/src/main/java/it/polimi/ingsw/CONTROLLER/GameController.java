@@ -13,10 +13,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
 import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /*
@@ -30,6 +27,8 @@ import java.util.Map;
 */
 
 public class GameController implements GameSubject {
+    static int index_counter;
+    public int index_game;
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
     private List<String> names = new ArrayList<>();
@@ -49,13 +48,21 @@ public class GameController implements GameSubject {
 
     private Game game;
 
+    Comparator<Player> idComparator_point = Comparator.comparingInt(Player::getPlayerPoints);
+    Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
+
 
     public GameController(int max_num_player) {
-        if (max_num_player <= 0 || max_num_player > 4) {
+        if (max_num_player <= 2 || max_num_player > 4) {
             throw new ControllerException(0, "Num Player not Valid in creation Game");
         } else {
             this.game = new Game(max_num_player);
+            this.index_game = index_counter ++;
         }
+    }
+
+    public int getIndexGame() {
+        return index_game;
     }
 
     public Game getGame() {
@@ -250,13 +257,31 @@ public class GameController implements GameSubject {
      */
 
     private void finalPointEndGame(){
+
         for(Player p: player_list){ //forall player inside player_list
             p.setEndGame(); //tutti i player sono in stato finale e non possono fare nulla
             Goal goal = p.getGoalCard();
             p.addPoints(goal.numPoints(p.getGameField())); //aggiungo i punti del goal singolo
+            if(goal.numPoints(p.getGameField()) > 0){
+                p.setNum_goal_achieve(p.getNum_goal_achieve()+1);
+            }
             p.addPoints(game.getGoal1().numPoints(p.getGameField()));
+            if(game.getGoal1().numPoints(p.getGameField()) > 0){
+                p.setNum_goal_achieve(p.getNum_goal_achieve()+1);
+            }
             p.addPoints(game.getGoal2().numPoints(p.getGameField()));
+
+            if(game.getGoal2().numPoints(p.getGameField()) > 0){
+                p.setNum_goal_achieve(p.getNum_goal_achieve()+1);
+            }
         }
+
+        Collections.sort(player_list, idComparator_point.reversed().thenComparing(idComparator_goals_achieve)); //restituisce la lista ordinata
+
+        for(Player p: player_list){
+            System.out.println(p.getName());
+        }
+
 
     }
 
@@ -269,31 +294,48 @@ public class GameController implements GameSubject {
 
 
     public void playerPeachCardFromGoldDeck(Player player){
-            try {
-                player.actual_state.peachCardFromGoldDeck();
-                nextStatePlayer();
-            }catch(InvalidStateException e){
-                System.out.println(e.getMessage());
-            }
+        if(game.getGold_deck().cards.size() == 0 ){
+            throw new ControllerException(15, "Deck is empty, draw from a different one." );
         }
-
-    public void playerPeachCardFromResourcesDeck(Player player){
-        try {
-            player.actual_state.peachFromResourcesDeck();
+        if(player.actual_state.peachCardFromGoldDeck()) {
             nextStatePlayer();
-        }catch(InvalidStateException e){
-            System.out.println(e.getMessage());
+        }else{
+            throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
         }
     }
 
+    public void playerPeachCardFromResourcesDeck(Player player){
+            if(game.getResources_deck().cards.size() == 0 ){
+                throw new ControllerException(15, "Deck is empty, draw from a different one." );
+            }
+            if(player.actual_state.peachFromResourcesDeck()) {
+                nextStatePlayer();
+            }else{
+                throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+            }
+    }
+
     public void playerPeachFromCardsInCenter(Player player, int i){
-        try {
-            player.actual_state.peachFromCardsInCenter(i);
-            nextStatePlayer();
-        }catch(InvalidStateException e){
-            System.out.println(e.getMessage());
+
+        if(i< 0 || i > 3){
+            throw new ControllerException(16,"Bound exception: l'int passato può essere solo 0<=i<4");
         }
 
+        if(i==0 && game.getCars_in_center().getGold_list().get(0) == null){
+            throw new ControllerException(17,"Card is not present. Case where the deck is terminated");
+        }else if(i==1 && game.getCars_in_center().getGold_list().get(1) == null){
+            throw new ControllerException(18,"Card is not present. Case where the deck is terminated");
+        }else if(i==2 && game.getCars_in_center().getResource_list().get(0) == null){
+            throw new ControllerException(19,"Card is not present. Case where the deck is terminated");
+        } else if (i == 3 && game.getCars_in_center().getResource_list().get(1) == null) {
+            throw new ControllerException(20,"Card is not present. Case where the deck is terminated");
+        }
+
+        if(player.actual_state.peachFromCardsInCenter(i)){
+            nextStatePlayer();
+        }else{
+            throw new ControllerException(15, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+        }
     }
 
     @Override
