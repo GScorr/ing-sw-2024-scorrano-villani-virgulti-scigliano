@@ -32,7 +32,7 @@ import java.util.Map;
 public class GameController implements GameSubject {
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
-    private List<String> names;
+    private List<String> names = new ArrayList<>();
     private HashMap<Player,Boolean> choosed_goal = new HashMap<Player, Boolean>();
     private HashMap<Player,GameFieldController> field_controller = new HashMap<>();
     private int goal_count = 0;

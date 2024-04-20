@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Modifica Stati Game">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -258,14 +258,6 @@
       <workItem from="1712562916423" duration="12647000" />
       <workItem from="1712653919101" duration="2285000" />
       <workItem from="1713018449356" duration="10906000" />
-    </task>
-    <task id="LOCAL-00008" summary="aggiunta commento &#10;classe PlayCard">
-      <option name="closed" value="true" />
-      <created>1710614839311</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1710614839311</updated>
     </task>
     <task id="LOCAL-00009" summary="aggiunta commento &#10;classe PlayCard">
       <option name="closed" value="true" />
@@ -651,7 +643,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713625802621</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713626080154</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1713626080156</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -704,9 +704,9 @@
     <MESSAGE value="aggiornameno" />
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="inizio prove inserimenti stringa" />
-    <MESSAGE value="Aggiornamento" />
     <MESSAGE value="Modifica Stati Game" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifica Stati Game" />
+    <MESSAGE value="Aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
