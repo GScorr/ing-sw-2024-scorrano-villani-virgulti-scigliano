@@ -28,6 +28,7 @@ import java.util.*;
 
 public class GameController implements GameSubject {
     private static int index_counter=0;
+    private boolean full;
     private int index_game;
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
@@ -64,6 +65,7 @@ public class GameController implements GameSubject {
         }
     }
 
+
     public int getIndexGame() {
         return index_game;
     }
@@ -71,6 +73,8 @@ public class GameController implements GameSubject {
     public Game getGame() {
         return game;
     }
+
+    public boolean getFull() { return  full;}
 
     public void setGame(Game game) {
         this.game = game;
@@ -124,6 +128,7 @@ public class GameController implements GameSubject {
         Integer num_player = game.getNum_player();
         Integer max_num_player = game.getMax_num_player();
         if(num_player == max_num_player && game.actual_state.getNameState().equals("NOT_INITIALIZED")){
+            full = true;
             game.gameNextState();
             // 1° notifyObservers: playerState from NOT_INITIALIZED to BEGIN
             notifyObservers();
