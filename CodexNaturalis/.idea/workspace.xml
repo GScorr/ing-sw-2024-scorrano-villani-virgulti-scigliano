@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="inizio prove inserimenti stringa">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI/RmiServer.java" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +125,7 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.MODEL.Game.State" />
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
@@ -259,30 +258,6 @@
       <workItem from="1712562916423" duration="12647000" />
       <workItem from="1712653919101" duration="2285000" />
       <workItem from="1713018449356" duration="10906000" />
-    </task>
-    <task id="LOCAL-00006" summary="creazione Classi ENUMERAZIONE">
-      <option name="closed" value="true" />
-      <created>1710610141753</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1710610141753</updated>
-    </task>
-    <task id="LOCAL-00007" summary="creazione&#10;Class PlayCard&#10;Class Side&#10;Class Player&#10;class Goal">
-      <option name="closed" value="true" />
-      <created>1710614286515</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1710614286515</updated>
-    </task>
-    <task id="LOCAL-00008" summary="aggiunta commento &#10;classe PlayCard">
-      <option name="closed" value="true" />
-      <created>1710614839311</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1710614839311</updated>
     </task>
     <task id="LOCAL-00009" summary="aggiunta commento &#10;classe PlayCard">
       <option name="closed" value="true" />
@@ -652,7 +627,31 @@
       <option name="project" value="LOCAL" />
       <updated>1713623906880</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713624917321</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1713624917321</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Modifica Stati Game">
+      <option name="closed" value="true" />
+      <created>1713625802620</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1713625802621</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713626080154</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1713626080156</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -698,7 +697,6 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;CodexNaturalis/.idea/workspace.xml" />
     <MESSAGE value="prove rmi" />
     <MESSAGE value="Inizio gestione di partite multiple" />
-    <MESSAGE value="Aggiornamento" />
     <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
     <MESSAGE value="fine test GameController" />
     <MESSAGE value="Aggiunta stato End Game Player" />
@@ -706,8 +704,9 @@
     <MESSAGE value="aggiornameno" />
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="inizio prove inserimenti stringa" />
-    <MESSAGE value="stringa viene stampata" />
-    <option name="LAST_COMMIT_MESSAGE" value="stringa viene stampata" />
+    <MESSAGE value="Modifica Stati Game" />
+    <MESSAGE value="Aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
