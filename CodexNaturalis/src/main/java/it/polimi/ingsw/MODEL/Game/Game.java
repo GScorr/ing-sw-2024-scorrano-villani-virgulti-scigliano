@@ -107,7 +107,6 @@ public class Game  {
     //crezione dei deck
     // scelta max_num_player
     public Game( /* DeckGoalCard goal_deck */ int max_num_player) {
-        if(max_num_player <= 0 || max_num_player > 4){throw new LimitNumPlayerException("max_num_player invalido");}
         this.creation = new DeckCreation();
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
@@ -115,15 +114,10 @@ public class Game  {
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
-
-
     }
 
 
     public void insertPlayer(Player player){
-        if( this.num_player == max_num_player ){
-            throw new LimitNumPlayerException("Limite giocatori già raggiunto, non è possibile entrare in questa partita");
-        }else{
             if(num_player == 0){
                 this.player1 = player;
                 get_player_index.put(0,player1);
@@ -140,10 +134,9 @@ public class Game  {
                 this.player4 = player;
                 get_player_index.put(3,player4);
             }
-
             this.num_player++;
 
-        }
+
     }
 
     //prima di chiamare questo metodo devo vedere se i Players sono >= 2 &&  < 4 (non possono mai essere per metodo InsertPlayer)
