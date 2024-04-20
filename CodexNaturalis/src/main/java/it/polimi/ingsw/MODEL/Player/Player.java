@@ -273,9 +273,7 @@ public class Player implements PlayerObserver {
     }
     public void peachFromCardsInCenter(int i){
 
-        if(i< 0 || i > 3){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<4");
-        }
+
 
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));

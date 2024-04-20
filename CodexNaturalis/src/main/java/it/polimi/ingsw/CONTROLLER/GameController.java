@@ -27,7 +27,8 @@ import java.util.*;
 */
 
 public class GameController implements GameSubject {
-
+    static int index_counter;
+    public int index_game;
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
     private List<String> names = new ArrayList<>();
@@ -56,7 +57,12 @@ public class GameController implements GameSubject {
             throw new ControllerException(0, "Num Player not Valid in creation Game");
         } else {
             this.game = new Game(max_num_player);
+            this.index_game = index_counter ++;
         }
+    }
+
+    public int getIndexGame() {
+        return index_game;
     }
 
     public Game getGame() {
@@ -288,31 +294,48 @@ public class GameController implements GameSubject {
 
 
     public void playerPeachCardFromGoldDeck(Player player){
-            try {
-                player.actual_state.peachCardFromGoldDeck();
-                nextStatePlayer();
-            }catch(InvalidStateException e){
-                System.out.println(e.getMessage());
-            }
+        if(game.getGold_deck().cards.size() == 0 ){
+            throw new ControllerException(15, "Deck is empty, draw from a different one." );
         }
-
-    public void playerPeachCardFromResourcesDeck(Player player){
-        try {
-            player.actual_state.peachFromResourcesDeck();
+        if(player.actual_state.peachCardFromGoldDeck()) {
             nextStatePlayer();
-        }catch(InvalidStateException e){
-            System.out.println(e.getMessage());
+        }else{
+            throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
         }
     }
 
+    public void playerPeachCardFromResourcesDeck(Player player){
+            if(game.getResources_deck().cards.size() == 0 ){
+                throw new ControllerException(15, "Deck is empty, draw from a different one." );
+            }
+            if(player.actual_state.peachFromResourcesDeck()) {
+                nextStatePlayer();
+            }else{
+                throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+            }
+    }
+
     public void playerPeachFromCardsInCenter(Player player, int i){
-        try {
-            player.actual_state.peachFromCardsInCenter(i);
-            nextStatePlayer();
-        }catch(InvalidStateException e){
-            System.out.println(e.getMessage());
+
+        if(i< 0 || i > 3){
+            throw new ControllerException(16,"Bound exception: l'int passato può essere solo 0<=i<4");
         }
 
+        if(i==0 && game.getCars_in_center().getGold_list().get(0) == null){
+            throw new ControllerException(17,"Card is not present. Case where the deck is terminated");
+        }else if(i==1 && game.getCars_in_center().getGold_list().get(1) == null){
+            throw new ControllerException(18,"Card is not present. Case where the deck is terminated");
+        }else if(i==2 && game.getCars_in_center().getResource_list().get(0) == null){
+            throw new ControllerException(19,"Card is not present. Case where the deck is terminated");
+        } else if (i == 3 && game.getCars_in_center().getResource_list().get(1) == null) {
+            throw new ControllerException(20,"Card is not present. Case where the deck is terminated");
+        }
+
+        if(player.actual_state.peachFromCardsInCenter(i)){
+            nextStatePlayer();
+        }else{
+            throw new ControllerException(15, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+        }
     }
 
     @Override
