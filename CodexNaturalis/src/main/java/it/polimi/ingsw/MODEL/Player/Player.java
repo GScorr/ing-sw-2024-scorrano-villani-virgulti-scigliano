@@ -67,6 +67,8 @@ public class Player implements PlayerObserver {
     private Goal goal_card;
     private int player_points = 0;
 
+    public int num_goal_achieve;
+
 
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
