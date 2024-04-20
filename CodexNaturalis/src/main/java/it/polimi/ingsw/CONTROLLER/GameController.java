@@ -88,7 +88,9 @@ public class GameController implements GameSubject {
     }
 
     public Player createPlayer(String nome, boolean isFirst){
-        isUniqueName(nome);
+        if(game.getNumPlayer() > 0) {
+            isUniqueName(nome);
+        }
         Player player = new Player(ColorsEnum.GREEN, nome, isFirst);
         if(game.getNum_player() == game.getMax_num_player()){
             throw new ControllerException(3,"Maximum number of players reached");
