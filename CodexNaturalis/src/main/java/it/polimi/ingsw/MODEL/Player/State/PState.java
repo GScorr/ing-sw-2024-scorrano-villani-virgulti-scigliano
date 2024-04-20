@@ -17,6 +17,8 @@ public interface PState {
     boolean peachCardFromGoldDeck();
     boolean peachFromResourcesDeck();
     boolean peachFromCardsInCenter(int i);
+
+    boolean selectSideCard(int index, boolean flip);
     String getNameState();
 
 }

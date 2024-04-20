@@ -30,6 +30,10 @@ public class Begin implements PState {
         return true;
     }
 
+    public boolean selectSideCard(int index, boolean flip){
+        return false;
+    }
+
     @Override
     public boolean selectGoal(int i) {
         return false;

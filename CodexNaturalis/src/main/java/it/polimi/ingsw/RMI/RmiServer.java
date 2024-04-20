@@ -54,6 +54,7 @@ public class RmiServer implements VirtualServer{
 
     @Override
     public void put(int index, Integer number, String player_name) throws RemoteException, InterruptedException {
+
         Integer[] currentState;
         System.out.println("\n [add request received] \n");
         System.out.println(mappa_gp.size());

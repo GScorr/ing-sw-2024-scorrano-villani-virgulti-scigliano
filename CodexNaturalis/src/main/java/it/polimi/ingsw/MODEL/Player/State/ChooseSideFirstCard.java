@@ -39,6 +39,11 @@ public class ChooseSideFirstCard implements PState{
         return true;
     }
 
+    public boolean selectSideCard(int index, boolean flip){
+        player.side_card_in_hand.put(index,flip);
+        return true;
+    }
+
     @Override
     public boolean placeCard(int index, boolean flipped, int x, int y) {
         return false;
