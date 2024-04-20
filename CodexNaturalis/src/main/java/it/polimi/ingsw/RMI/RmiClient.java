@@ -80,9 +80,9 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         int a=0;
         for ( int i=0 ; i<10; i++)
         {   if( number[i] != null )
-            System.out.print( number[i] );
+                System.out.print( number[i] );
             else
-            System.out.println(a);
+                System.out.println(a);
         }
         System.out.print("\n> ");
     }

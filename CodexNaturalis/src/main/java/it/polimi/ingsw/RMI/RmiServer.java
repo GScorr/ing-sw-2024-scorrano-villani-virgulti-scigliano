@@ -20,7 +20,6 @@ public class RmiServer implements VirtualServer{
 
     private Map<String, Giocatore> mappa;
     private List<GiocoController> games = new ArrayList<>();
-
     private Map<String, GiocoController> mappa_gp ;
 
     public RmiServer(GiocoController controller) {
@@ -62,10 +61,9 @@ public class RmiServer implements VirtualServer{
         System.out.println(mappa_gp.size());
         mappa_gp.get(player_name).putInArray(index, number, mappa.get(player_name));
 
-        /*
-        if ( gioco.getStatus1() == null || gioco.getStatus2()== null ) {System.err.println("\n [ERROR] \n"); return;}
-        if ( player == gioco.getStatus1() ) currentState = gioco.getStatus1().getCampo();
-        else currentState = gioco.getStatus2().getCampo();
+
+        if ( mappa.get(player_name) == mappa_gp.get(player_name).getStatus1() ) currentState = mappa_gp.get(player_name).getStatus1().getCampo();
+        else currentState = mappa_gp.get(player_name).getStatus2().getCampo();
 
         try
         {
@@ -73,7 +71,7 @@ public class RmiServer implements VirtualServer{
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
-        broadcastUpdateThread();*/
+        broadcastUpdateThread();
 
     }
 
