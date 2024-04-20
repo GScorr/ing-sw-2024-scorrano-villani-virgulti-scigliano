@@ -227,24 +227,21 @@ public class GameController implements GameSubject {
     }
 
     private void placeCard(Player player, int index,boolean flipped, int x, int y){
-        try{
             if(index>2 || index < 0){
-                System.out.println("carta non esistente, index sbagliato"); //da convertire in errore
-                return;
+                throw new ControllerException(9,"Index error, placeCard accept 0 <= index <= 2");
             }
             GameFieldController field_controller_player = field_controller.get(player);
             PlayCard card_played = player.getCardsInHand().get(index);
 
             if(field_controller_player.checkPlacing(card_played,x,y)) {
-                player.actual_state.placeCard(index, flipped, x, y);
-                nextStatePlayer();
-            }else{
-                System.out.println("non è possibile aggiungere la carta in questa posizione");
+                if(player.actual_state.placeCard(index, flipped, x, y)){
+                    nextStatePlayer();
+                }else{
+                    throw new ControllerException(10, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+                }
+
             }
-        }
-        catch(InvalidStateException e){
-            System.out.println(e.getMessage());
-        }
+
     }
 
     /*
