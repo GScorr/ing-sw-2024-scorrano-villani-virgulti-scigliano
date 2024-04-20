@@ -1,4 +1,4 @@
-package it.polimi.ingsw.RMI_FINAL;
+/*package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Player.Player;

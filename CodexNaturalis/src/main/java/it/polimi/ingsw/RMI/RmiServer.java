@@ -116,18 +116,33 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public synchronized void createGame(String name, String player) throws RemoteException {
-        GiocoController game = new GiocoController(name, mappa.get(player));
+    public synchronized void createGame(String name, int numplayers, String player) throws RemoteException {
+        GiocoController game = new GiocoController(name, numplayers, mappa.get(player));
         games.add(game);
-        System.out.println(name);
-        mappa_gp.put( player , game );
+        mappa_gp.put(player, game);
     }
 
     @Override
-    public void addPlayer(int index, String player) throws RemoteException {
-        games.get(index).getGame().setPlayer2(mappa.get(player));
-        mappa.get(player).setGame(games.get(index));
-        mappa_gp.put(player, games.get(index) );
+    public boolean addPlayer(int ID, String player) throws RemoteException {
+        int index = fromIDtoindex(ID);
+        if(index!=-1) {
+
+            games.get(index).getGame().insertPlayer( mappa.get(player) );
+            mappa_gp.put(player, games.get(index));
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public int fromIDtoindex(int id) throws RemoteException {
+        int index = games.stream()
+                .filter(gc -> gc.getGame().getIndex_game() == id)
+                .findFirst()
+                .map(games::indexOf)
+                .orElse(-1);
+        return index;
     }
 
     @Override
@@ -136,7 +151,7 @@ public class RmiServer implements VirtualServer{
     }
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
-        VirtualServer server = new RmiServer(new GiocoController("new", null));         //modifica
+        VirtualServer server = new RmiServer(new GiocoController("new",3, null));         //modifica
         VirtualServer stub = (VirtualServer) UnicastRemoteObject.exportObject(server,0);
         Registry registry = LocateRegistry.createRegistry(1234);
         registry.rebind(serverName,stub);

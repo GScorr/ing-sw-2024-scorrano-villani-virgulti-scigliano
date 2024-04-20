@@ -50,36 +50,43 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
             System.out.print("\nScegli nome Partita > ");
             game_name = scan.nextLine();
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-            int numplayers = scan.nextInt()
-            server.createGame(game_name, token);
+            int numplayers = scan.nextInt();
+            server.createGame(game_name, numplayers, token);
         } else {
-            System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
-            String decision = scan.nextLine();
+            int done=0;
+            while(done==0) {
+                System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
+                String decision = scan.nextLine();
+                if (decision.equalsIgnoreCase("old")) {
+                    boolean check=false;
+                    while(!check) {
+                        done = 1;
+                        System.out.println("\nElenco partite disponibili: ");
+                        List<GiocoController> partite = server.getLisGames();
 
-            if (decision.equalsIgnoreCase("old")) {
-                System.out.println("\nElenco partite disponibili: ");
-                List<GiocoController> partite = server.getLisGames();
+                        for (GiocoController g : partite) {
+                            System.out.println(g.getGame().getName() + " " + g.getGame().getPlayers().size() + "/" + g.getGame().getNumplayers() + " ID:" + g.getGame().getIndex_game());
+                        }
 
-                for (GiocoController g : partite) {
-                    System.out.println(g.getGame().getName());
+                        System.out.println("\nInserisci ID partita in cui entrare");
+                        int ID = scan.nextInt();
+                        check = server.addPlayer(ID, token);
+                    }
+                } else if (decision.equalsIgnoreCase("new")) {
+                    done=1;
+                    System.out.print("\nScegli nome Partita > ");
+                    game_name = scan.nextLine();
+                    System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+                    int numplayers = scan.nextInt();
+                    server.createGame(game_name, numplayers, token);
+                } else {
+                    System.out.println("\nInserimento errato!");
                 }
-
-                System.out.println("\nInserisci ID partita in cui entrare");
-                int index = scan.nextInt();
-                server.addPlayer(index, token);
-            } else {
-                System.out.print("\nScegli nome Partita > ");
-                game_name = scan.nextLine();
-                server.createGame(game_name, token);
             }
         }
+        System.out.print("creazione Player andata a buon fine!");
 
-
-        System.out.print("...creazione Player andata a buon fine");
-        System.out.print("\nCONTIENE: " + server.getMap().size() );
-
-
-        while (true) {
+        /*while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
             int value = scan.nextInt();
@@ -87,7 +94,7 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
             Integer[] campo = server.getFromToken(token).getCampo();
             for(int i=0; i<10; i++)
                 System.out.println(" " +campo[i]);
-        }
+        }*/
 
     }
 
@@ -116,3 +123,5 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         new RmiClient(server).run();
     }
 }
+
+// todo check numero massimo giocatori partita, check id partita, check su scritta new/old
