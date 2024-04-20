@@ -47,11 +47,12 @@ public class GameController implements GameSubject {
 
     private Game game;
 
-    Comparator<Player> idComparator = Comparator.comparingInt(Player::getPlayerPoints);
+    Comparator<Player> idComparator_point = Comparator.comparingInt(Player::getPlayerPoints);
+    Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getPlayerPoints);
 
 
     public GameController(int max_num_player) {
-        if (max_num_player <= 0 || max_num_player > 4) {
+        if (max_num_player <= 2 || max_num_player > 4) {
             throw new ControllerException(0, "Num Player not Valid in creation Game");
         } else {
             this.game = new Game(max_num_player);
@@ -255,11 +256,21 @@ public class GameController implements GameSubject {
             p.setEndGame(); //tutti i player sono in stato finale e non possono fare nulla
             Goal goal = p.getGoalCard();
             p.addPoints(goal.numPoints(p.getGameField())); //aggiungo i punti del goal singolo
+            if(goal.numPoints(p.getGameField()) > 0){
+                p.num_goal_achieve++;
+            }
             p.addPoints(game.getGoal1().numPoints(p.getGameField()));
+            if(game.getGoal1().numPoints(p.getGameField()) > 0){
+                p.num_goal_achieve++;
+            }
             p.addPoints(game.getGoal2().numPoints(p.getGameField()));
+
+            if(game.getGoal2().numPoints(p.getGameField()) > 0){
+                p.num_goal_achieve++;
+            }
         }
 
-        Collections.sort(player_list, idComparator.reversed()); //restituisce la lista ordinata
+        Collections.sort(player_list, idComparator_point.reversed().thenComparing(idComparator_goals_achieve)); //restituisce la lista ordinata
 
         for(Player p: player_list){
             System.out.println(p.getName());
