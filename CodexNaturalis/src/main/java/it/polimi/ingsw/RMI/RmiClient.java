@@ -58,7 +58,7 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                 System.out.print("\n Giocatore " + curr_player.getName() + " " + existing_game.getPlayer2() + " Aggiunto a partita esistente");
             }
         }
-        /*System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
+        System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
 
 
         System.out.print("...creazione Player andata a buon fine");
@@ -68,13 +68,13 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         //server.getMap().values().forEach(giocatore -> System.out.println(giocatore.getName()));
         //System.out.print("\nche giocatore sono ?" + server.getPlayerFromClient(this).getName() );
 
-        /*
+
         while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
             int value = scan.nextInt();
             server.put(index, value, curr_player );
-        }*/
+        }
 
     }
 
