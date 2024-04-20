@@ -13,48 +13,51 @@ public class Begin implements PState {
     }
 
     @Override
-    public void setInitialCardsInHand(List<PlayCard> cards_in_hand) {
+    public boolean setInitialCardsInHand(List<PlayCard> cards_in_hand) {
         this.player.setInitialCardsInHand(cards_in_hand);
+        return true;
     }
 
     @Override
-    public void setInitialGoalCards(List<Goal> initial_goal_cards) {
+    public boolean setInitialGoalCards(List<Goal> initial_goal_cards) {
         this.player.setInitialGoalCards(initial_goal_cards);
+        return true;
     }
 
     @Override
-    public void setStartingCard(PlayCard starting_card) {
+    public boolean setStartingCard(PlayCard starting_card) {
         this.player.setStartingCard(starting_card);
+        return true;
     }
 
     @Override
-    public void selectGoal(int i) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean selectGoal(int i) {
+        return false;
     }
 
     @Override
-    public void selectStartingCard(boolean flipped) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean selectStartingCard(boolean flipped) {
+        return false;
     }
 
     @Override
-    public void placeCard(int index, boolean flipped, int x, int y) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean placeCard(int index, boolean flipped, int x, int y) {
+        return false;
     }
 
     @Override
-    public void peachCardFromGoldDeck() {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean peachCardFromGoldDeck() {
+        return false;
     }
 
     @Override
-    public void peachFromResourcesDeck() {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean peachFromResourcesDeck() {
+        return false;
     }
 
     @Override
-    public void peachFromCardsInCenter(int i) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean peachFromCardsInCenter(int i) {
+        return false;
     }
 
     @Override
