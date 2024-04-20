@@ -14,17 +14,17 @@ import java.util.concurrent.BlockingQueue;
 
 public class RmiServer implements VirtualServer{
 
-    GiocoController controller;
-
+    private GiocoController controller;
     public TokenManager token_manager = new TokenManagerImplement();
 
     private List<VirtualView> clients = new ArrayList<>();
 
-    private Map<String, Giocatore> mappa = new HashMap<>();
+    private Map<String, Giocatore> mappa;
     private List<GiocoController> games = new ArrayList<>();
 
     public RmiServer(GiocoController controller) {
         this.controller = controller;
+        this.mappa = new HashMap<>();
     }
 
     final BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
