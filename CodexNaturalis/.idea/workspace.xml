@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="fine test su GameControllerTest, inizio struttura test generale, aggiunta di getter in Player">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornameno">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameFieldController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CONTROLLER/GameControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +27,11 @@
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -32,12 +40,14 @@
     &quot;assignee&quot;: &quot;Mirko0109&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git",
-    "accountId": "995fa9e0-3d2d-4d41-9be2-4734f4dc124c"
-  }
-}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3a259a6d-dbc4-4e87-a710-6c6481997434" />
+        <option name="url" value="https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -58,12 +68,12 @@
     &quot;Application.RmiServer.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.DeckCreationTestGoal.creteGoalDeck.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GameControllerTest.checkNumPlayer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameControllerTest.gioco.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GameControllerTest.playerPlaceCard.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GameControllerTest.playerSelectStartingCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.statePlaceCard.executor&quot;: &quot;Debug&quot;,
     &quot;JUnit.GestioneViewTest.scegliCarta.executor&quot;: &quot;Debug&quot;,
     &quot;JUnit.GoalDiagonalTest.creteResourceDeck.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GoalDiagonalTest.executor&quot;: &quot;Run&quot;,
@@ -101,7 +111,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -114,36 +124,33 @@
       <recent name="it.polimi.ingsw.MODEL.Goal" />
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.MODEL.Player.State" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameControllerTest.gioco">
-    <configuration name="GameControllerTest.gioco" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GameControllerTest.statePlaceCard">
+    <configuration name="RmiClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiClient" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="gioco" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPeachCardFromGoldDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RmiServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiServer" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPeachCardFromGoldDeck" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,7 +187,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameControllerTest.playerPlaceCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameControllerTest.statePlaceCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -190,7 +197,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameControllerTest" />
-      <option name="METHOD_NAME" value="playerPlaceCard" />
+      <option name="METHOD_NAME" value="statePlaceCard" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -210,27 +217,26 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.GameControllerTest.gioco" />
-      <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
+      <item itemvalue="Application.RmiClient" />
+      <item itemvalue="Application.RmiServer" />
+      <item itemvalue="JUnit.GameControllerTest.statePlaceCard" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
       <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
-      <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameControllerTest.gioco" />
+        <item itemvalue="JUnit.GameControllerTest.statePlaceCard" />
+        <item itemvalue="Application.RmiClient" />
+        <item itemvalue="Application.RmiServer" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachFromCardsInCenter" />
         <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromResourcesDeck" />
-        <item itemvalue="JUnit.GameControllerTest.playerPeachCardFromGoldDeck" />
-        <item itemvalue="JUnit.GameControllerTest.playerPlaceCard" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -250,33 +256,7 @@
       <workItem from="1712496737462" duration="2558000" />
       <workItem from="1712562916423" duration="12647000" />
       <workItem from="1712653919101" duration="2285000" />
-      <workItem from="1713018449356" duration="11513000" />
-      <workItem from="1713035121690" duration="25000" />
-      <workItem from="1713035193141" duration="2582000" />
-    </task>
-    <task id="LOCAL-00001" summary="Creazione Classe Game - prova">
-      <option name="closed" value="true" />
-      <created>1710604736560</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1710604736560</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Modifica classe Game - prova">
-      <option name="closed" value="true" />
-      <created>1710604974768</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1710604974768</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Modifica classe Game - prova2">
-      <option name="closed" value="true" />
-      <created>1710605105551</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1710605105551</updated>
+      <workItem from="1713018449356" duration="10906000" />
     </task>
     <task id="LOCAL-00004" summary="Modifica classe Game - prova fetch">
       <option name="closed" value="true" />
@@ -622,15 +602,55 @@
       <option name="project" value="LOCAL" />
       <updated>1713018696397</updated>
     </task>
-    <task id="LOCAL-00047" summary="fine test su GameControllerTest, inizio struttura test generale, aggiunta di getter in Player">
+    <task id="LOCAL-00047" summary="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller">
       <option name="closed" value="true" />
-      <created>1713034807096</created>
+      <created>1713190089702</created>
       <option name="number" value="00047" />
       <option name="presentableId" value="LOCAL-00047" />
       <option name="project" value="LOCAL" />
-      <updated>1713034807096</updated>
+      <updated>1713190089703</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="fine test GameController">
+      <option name="closed" value="true" />
+      <created>1713259729204</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1713259729204</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Aggiunta stato End Game Player">
+      <option name="closed" value="true" />
+      <created>1713269717722</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1713269717722</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Aggiunta stato End Game su classe Game">
+      <option name="closed" value="true" />
+      <created>1713270270407</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1713270270408</updated>
+    </task>
+    <task id="LOCAL-00051" summary="aggiornameno">
+      <option name="closed" value="true" />
+      <created>1713275246639</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1713275246640</updated>
+    </task>
+    <task id="LOCAL-00052" summary="aggiornameno">
+      <option name="closed" value="true" />
+      <created>1713275545448</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1713275545449</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,10 +680,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="creazione Classi ENUMERAZIONE" />
-    <MESSAGE value="creazione&#10;Class PlayCard&#10;Class Side&#10;Class Player&#10;class Goal" />
-    <MESSAGE value="aggiunta commento &#10;classe PlayCard" />
-    <MESSAGE value="Inizio codice/modifica InsertCard di GameField" />
     <MESSAGE value="modifica InsertCard di GameField" />
     <MESSAGE value="Aggiunta di ResourceCountChange e checkPlacing in insertcard" />
     <MESSAGE value="Aggiunta addPoints-rimuoviCartaMano + creazione di getter-setter in Player" />
@@ -684,11 +700,38 @@
     <MESSAGE value="prove rmi" />
     <MESSAGE value="Inizio gestione di partite multiple" />
     <MESSAGE value="Aggiornamento" />
-    <MESSAGE value="fine test su GameControllerTest, inizio struttura test generale, aggiunta di getter in Player" />
-    <option name="LAST_COMMIT_MESSAGE" value="fine test su GameControllerTest, inizio struttura test generale, aggiunta di getter in Player" />
+    <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
+    <MESSAGE value="fine test GameController" />
+    <MESSAGE value="Aggiunta stato End Game Player" />
+    <MESSAGE value="Aggiunta stato End Game su classe Game" />
+    <MESSAGE value="aggiornameno" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiornameno" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromGoldDeck.ic" NAME="GameControllerTest.playerPeachCardFromGoldDeck Coverage Results" MODIFIED="1713272359559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_statePlaceCard.ic" NAME="GameControllerTest.statePlaceCard Coverage Results" MODIFIED="1713272585536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_checkNumPlayer.ic" NAME="GameControllerTest.checkNumPlayer Coverage Results" MODIFIED="1713272531642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerSelectStartingCard.ic" NAME="GameControllerTest.playerSelectStartingCard Coverage Results" MODIFIED="1713272558414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerChooseGoal.ic" NAME="GameControllerTest.playerChooseGoal Coverage Results" MODIFIED="1713272545604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameFieldControllerTest_goldPointsCount.ic" NAME="GameFieldControllerTest.goldPointsCount Coverage Results" MODIFIED="1713274770770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
   </component>
 </project>
