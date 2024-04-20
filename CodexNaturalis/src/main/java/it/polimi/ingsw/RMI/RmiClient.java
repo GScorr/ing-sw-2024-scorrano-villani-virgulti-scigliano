@@ -48,12 +48,12 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                 //creo partita e inserisco come player 2
                 System.out.print("\n Scegli nome Partita > ");
                 String game_name = scan.nextLine();
-                server.createGame(game_name, curr_player);
+                server.createGame(game_name, token);
                 System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer1().getName() + " Ha creato a una nuova Partita  ");
 
             } else {
                 //inserisco player come player 2 in game
-                server.addPlayer(0, curr_player);
+                server.addPlayer(0, token);
                 System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer2().getName() +" Aggiunto a partita esistente");
             }
         }
@@ -77,8 +77,13 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
     @Override
     public void showUpdate(Integer[] number) throws RemoteException {
         System.out.print("\n> ");
+        int a=0;
         for ( int i=0 ; i<10; i++)
+        {   if( number[i] != null )
             System.out.print( number[i] );
+            else
+            System.out.println(a);
+        }
         System.out.print("\n> ");
     }
 
