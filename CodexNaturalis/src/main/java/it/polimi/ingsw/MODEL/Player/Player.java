@@ -306,7 +306,4 @@ public class Player implements PlayerObserver {
 
     }
 
-
-
-
 }

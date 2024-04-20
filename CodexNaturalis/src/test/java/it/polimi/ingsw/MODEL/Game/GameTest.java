@@ -12,11 +12,13 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
+
     Player player1 = new Player(ColorsEnum.BLU,"a",true);
     Player player2 = new Player(ColorsEnum.RED,"b",false);
     Player player3 = new Player(ColorsEnum.GREEN,"c",false);
     Player player4 = new Player(ColorsEnum.YELLOW,"d",false);
     Game game= new Game(3);
+
     @Test
     void insertPlayer() {
         game.insertPlayer(player1);

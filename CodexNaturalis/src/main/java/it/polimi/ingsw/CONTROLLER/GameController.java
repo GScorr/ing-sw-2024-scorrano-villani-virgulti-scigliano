@@ -13,10 +13,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
 import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /*
@@ -30,6 +27,7 @@ import java.util.Map;
 */
 
 public class GameController implements GameSubject {
+
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
     private List<String> names = new ArrayList<>();
@@ -48,6 +46,8 @@ public class GameController implements GameSubject {
     private int final_counter = 0;
 
     private Game game;
+
+    Comparator<Player> idComparator = Comparator.comparingInt(Player::getPlayerPoints);
 
 
     public GameController(int max_num_player) {
@@ -259,7 +259,11 @@ public class GameController implements GameSubject {
             p.addPoints(game.getGoal2().numPoints(p.getGameField()));
         }
 
-        player_list.
+        Collections.sort(player_list, idComparator.reversed()); //restituisce la lista ordinata
+
+        for(Player p: player_list){
+            System.out.println(p.getName());
+        }
 
 
     }
