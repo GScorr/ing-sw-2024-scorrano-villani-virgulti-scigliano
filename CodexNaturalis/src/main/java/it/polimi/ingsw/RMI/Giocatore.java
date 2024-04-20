@@ -14,7 +14,7 @@ public class Giocatore implements Serializable {
 
     public Giocatore(String name) {
         this.name = name;
-        this.campo = new Integer[9];
+        this.campo = new Integer[10];
     }
 
     public String getName() {

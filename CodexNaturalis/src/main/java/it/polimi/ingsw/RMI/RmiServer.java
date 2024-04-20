@@ -21,9 +21,12 @@ public class RmiServer implements VirtualServer{
     private Map<String, Giocatore> mappa;
     private List<GiocoController> games = new ArrayList<>();
 
+    private Map<Giocatore, GiocoController> mappa_gp ;
+
     public RmiServer(GiocoController controller) {
         this.controller = controller;
         this.mappa = new HashMap<>();
+        this.mappa_gp = new HashMap<>();
     }
 
     private BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
@@ -57,8 +60,8 @@ public class RmiServer implements VirtualServer{
         Integer[] currentState;
         System.out.println("\n [add request received] \n");
         Giocatore player = mappa.get(player_name);
-        GiocoController gioco = games.get(games.indexOf( player.getGame() ));
-        gioco.putInArray(index, number, player);
+
+        mappa_gp.get(player).putInArray(index, number, player);
 
         /*
         if ( gioco.getStatus1() == null || gioco.getStatus2()== null ) {System.err.println("\n [ERROR] \n"); return;}
@@ -121,13 +124,14 @@ public class RmiServer implements VirtualServer{
     public void createGame(String name, Giocatore player) throws RemoteException {
         GiocoController game = new GiocoController(name, player);
         games.add(game);
-        player.setGame(game);
+        mappa_gp.put(player, game );
     }
 
     @Override
     public void addPlayer(int index, Giocatore player) throws RemoteException {
         games.get(index).getGame().setPlayer2(player);
         player.setGame(games.get(index));
+        mappa_gp.put(player, games.get(index) );
     }
 
     @Override
