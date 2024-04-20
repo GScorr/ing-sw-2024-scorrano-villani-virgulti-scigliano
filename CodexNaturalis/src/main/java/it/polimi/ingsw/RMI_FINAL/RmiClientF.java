@@ -1,6 +1,7 @@
 /*package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.net.MalformedURLException;
@@ -66,7 +67,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public void showUpdate(Integer[] number) throws RemoteException {
+    public void showUpdate(GameField game_field) throws RemoteException {
     }
 
     @Override

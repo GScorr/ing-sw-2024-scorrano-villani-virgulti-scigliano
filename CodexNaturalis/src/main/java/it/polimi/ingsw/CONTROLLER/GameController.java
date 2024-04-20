@@ -74,7 +74,7 @@ public class GameController implements GameSubject {
         return game;
     }
 
-    public boolean getFull() { return  full;}
+    public boolean getFull() { return  full; }
 
     public void setGame(Game game) {
         this.game = game;
