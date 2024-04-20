@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface PState {
 
-    void setInitialCardsInHand(List<PlayCard> cards_in_hand);
-    void setInitialGoalCards(List<Goal> initial_goal_cards);
-    void setStartingCard(PlayCard starting_card);
-    void selectGoal(int i);
-    void selectStartingCard(boolean flipped);
-    void placeCard(int index, boolean flipped, int x, int y);
+    boolean setInitialCardsInHand(List<PlayCard> cards_in_hand);
+    boolean setInitialGoalCards(List<Goal> initial_goal_cards);
+    boolean setStartingCard(PlayCard starting_card);
+    boolean selectGoal(int i);
+    boolean selectStartingCard(boolean flipped);
+    boolean placeCard(int index, boolean flipped, int x, int y);
 
-    void peachCardFromGoldDeck();
-    void peachFromResourcesDeck();
-    void peachFromCardsInCenter(int i);
+    boolean peachCardFromGoldDeck();
+    boolean peachFromResourcesDeck();
+    boolean peachFromCardsInCenter(int i);
     String getNameState();
 
 }

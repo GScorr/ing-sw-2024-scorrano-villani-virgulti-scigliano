@@ -4,8 +4,8 @@ import it.polimi.ingsw.MODEL.Player.Player;
 
 public interface GameState {
 
-    void insertPlayer(Player player);
-    void initializedGame();
+    boolean insertPlayer(Player player);
+    boolean initializedGame();
 
     String getNameState();
 

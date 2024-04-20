@@ -32,6 +32,7 @@ import java.util.Map;
 public class GameController implements GameSubject {
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
+    private List<String> names;
     private HashMap<Player,Boolean> choosed_goal = new HashMap<Player, Boolean>();
     private HashMap<Player,GameFieldController> field_controller = new HashMap<>();
     private int goal_count = 0;
@@ -49,13 +50,12 @@ public class GameController implements GameSubject {
     private Game game;
 
 
-    public GameController(int max_num_player){
-        try{
-            this.game = new Game(max_num_player);}
-        catch (LimitNumPlayerException e){
-            System.out.println(e.getMessage());
+    public GameController(int max_num_player) {
+        if (max_num_player <= 0 || max_num_player > 4) {
+            throw new ControllerException(0, "Num Player not Valid in creation Game");
+        } else {
+            this.game = new Game(max_num_player);
         }
-
     }
 
     public Game getGame() {
@@ -66,18 +66,43 @@ public class GameController implements GameSubject {
         this.game = game;
     }
 
+    public int get_final_counter() {
+        return final_counter;
+    }
+
+    private void isUniqueName(String name) {
+        if(name.length() == 0){
+            throw new ControllerException(1,"Insert at least 1 character");
+        }
+        // Cicla attraverso la lista di nomi
+        for (String existingName : names) {
+            // Confronta il nome dato con ogni nome nella lista, mantenendo la distinzione tra maiuscole e minuscole
+            if (existingName.equals(name)) {
+                // Se trova una corrispondenza, restituisce false perché il nome non è univoco
+                throw new ControllerException(2,"Name is not unique, Insert another one");
+
+            }
+        }
+        // Se non trova corrispondenze, restituisce true perché il nome è univoco
+        return;
+    }
+
     public Player createPlayer(String nome, boolean isFirst){
+        isUniqueName(nome);
         Player player = new Player(ColorsEnum.GREEN, nome, isFirst);
-        try {
-            GameFieldController field = new GameFieldController(player);
-            this.field_controller.put(player,field);
-            this.game.actual_state.insertPlayer(player);
-            this.choosed_goal.put(player,false);
-            this.choosed_starting_card.put(player,false);
+        if(game.getNum_player() == game.getMax_num_player()){
+            throw new ControllerException(3,"Maximum number of players reached");
+        }
+        GameFieldController field = new GameFieldController(player);
+        this.names.add(nome);
+        this.field_controller.put(player, field);
+        if(this.game.actual_state.insertPlayer(player)){
+            this.choosed_goal.put(player, false);
+            this.choosed_starting_card.put(player, false);
             registerObserver(player);
             player_list.add(player);
-        }catch(GameInvalidStateException e){
-            System.out.println(e.getMessage());
+        }else{
+            throw new ControllerException(4,"Not possible call this method, Game State is:" + game.actual_state.getNameState());
         }
         return player;
     }
@@ -90,12 +115,6 @@ public class GameController implements GameSubject {
             game.gameNextState();
             // 1° notifyObservers: playerState from NOT_INITIALIZED to BEGIN
             notifyObservers();
-            /*
-            for(int i = 0; i<game.getNum_player(); i++){
-                System.err.println(game.getGet_player_index().get(i).actual_state.getNameState());
-            }
-
-             */
             game.actual_state.initializedGame();
             // 2° notifyObservers: playerState from BEGIN to CHOOSE_GOAL
             notifyObservers();
@@ -109,17 +128,18 @@ public class GameController implements GameSubject {
     public void playerChooseGoal(Player p, int i){
         try{
             if (this.choosed_goal.get(p) == false){
-                try{
-                    p.actual_state.selectGoal(i);
-                    goal_count++;
-                    this.choosed_goal.put(p,true);
-                    if(goal_count == game.getMax_num_player()){
-                        notifyObservers();
+
+                    if(p.actual_state.selectGoal(i)){
+                        goal_count++;
+                        this.choosed_goal.put(p,true);
+                        if(goal_count == game.getMax_num_player()){
+                            notifyObservers();
+                        }
+                    }else{
+                        throw new ControllerException(5,"Not possible call this method, Player State is:" + p.actual_state.getNameState());
                     }
-                }
-                catch (InvalidBoundException e) {
-                    System.out.println(e.getMessage());
-                }
+
+
             }
         }catch(InvalidStateException e){
             System.out.println(e.getMessage());

@@ -10,13 +10,14 @@ public class NotInitialized implements GameState{
         this.game = game;
     }
     @Override
-    public void insertPlayer(Player player) {
+    public boolean insertPlayer(Player player) {
         game.insertPlayer(player);
+        return true;
     }
 
     @Override
-    public void initializedGame() {
-        throw new GameInvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean initializedGame() {
+        return false;
     }
 
     @Override
