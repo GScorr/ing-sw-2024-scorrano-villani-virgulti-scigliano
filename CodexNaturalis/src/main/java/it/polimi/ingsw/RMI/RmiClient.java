@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -25,38 +26,52 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
     private void runCli() throws RemoteException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        VirtualView curr_client =  this;
-        String player_name ;
+        VirtualView curr_client = this;
+        String player_name;
         Giocatore curr_player;
 
-        //creo giocatore
-        System.out.print("\n Scegli nome Player > ");
+        // Creo giocatore
+        System.out.print("\nScegli nome Player > ");
         player_name = scan.nextLine();
-        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement which contains a
-        // map that associate the client with the token, and we also have a map in server that associate the token with the player
+
+        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
+        // which contains a map that associate the client with the token, and we also have a map in server that
+        // associate the token with the player
         // < RmiClient , TOKEN > < TOKEN , Player >
         this.token = server.createToken(this);
-        System.out.print("\n Token Player > " + this.token);
-        server.createPlayer( player_name , this.token );
+        //System.out.print("\nToken Player > " + this.token);
+        server.createPlayer(player_name, this.token);
 
-        curr_player = server.getFromToken(this.token);
+        String game_name;
 
-        synchronized (this) {
+        // Se non esistono partite
+        if (server.gamesIsEmpty()) {
+            System.out.println("\nNon esiste nessuna partita, creane una nuova!");
+            System.out.print("\nScegli nome Partita > ");
+            game_name = scan.nextLine();
+            server.createGame(game_name, token);
+        } else {
+            System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
+            String decision = scan.nextLine();
 
-            //controllo che la partita sia non vuota
-            if (server.gamesIsEmpty()) {
-                //creo partita e inserisco come player 2
-                System.out.print("\n Scegli nome Partita > ");
-                String game_name = scan.nextLine();
-                server.createGame(game_name, token);
-                System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer1().getName() + " Ha creato a una nuova Partita  ");
+            if (decision.equalsIgnoreCase("old")) {
+                System.out.println("\nElenco partite disponibili: ");
+                List<GiocoController> partite = server.getLisGames();
 
+                for (GiocoController g : partite) {
+                    System.out.println(g.getGame().getName());
+                }
+
+                System.out.println("\nInserisci ID partita in cui entrare");
+                int index = scan.nextInt();
+                server.addPlayer(index, token);
             } else {
-                //inserisco player come player 2 in game
-                server.addPlayer(0, token);
-                System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer2().getName() +" Aggiunto a partita esistente");
+                System.out.print("\nScegli nome Partita > ");
+                game_name = scan.nextLine();
+                server.createGame(game_name, token);
             }
         }
+
 
         System.out.print("...creazione Player andata a buon fine");
         System.out.print("\nCONTIENE: " + server.getMap().size() );
@@ -80,9 +95,9 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         int a=0;
         for ( int i=0 ; i<10; i++)
         {   if( number[i] != null )
-                System.out.print( number[i] );
-            else
-                System.out.println(a);
+            System.out.print( number[i] );
+        else
+            System.out.println(a);
         }
         System.out.print("\n> ");
     }

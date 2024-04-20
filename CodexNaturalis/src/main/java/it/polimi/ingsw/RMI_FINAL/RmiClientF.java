@@ -1,4 +1,4 @@
-/*package it.polimi.ingsw.RMI_FINAL;
+package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -12,7 +12,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-//
+//todo modificare chiamate a new Game()
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
     private  String token;
@@ -44,7 +44,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
         //se non esistono partite
         if (server.gamesIsEmpty()) {
-            //creo partita e inserisco come player 2
+
             System.out.println("\n Non esiste nessuna partita, creane una nuova!");
             System.out.print("\n Scegli nome Partita > ");
             String game_name = scan.nextLine();
@@ -53,9 +53,18 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         } else {
             System.out.println("\n Elenco partite disponibili: ");
             for(GameController game: server.getListGames()){
-                System.out.println("\n" + game.getGame().getNam);
+                System.out.println("\n" + server.getListGames() + ". " + game.getGame().getName());
             }
-            //inserisco player come player 2 in game
+            System.out.println("\n Inserisci numero partita in cui entrare, oppure digita 0 per crearne una nuova ");
+            int decision = scan.nextInt();
+            if(decision==0){
+                System.out.print("\n Scegli nome Partita > ");
+                String game_name = scan.nextLine();
+                server.createGame(game_name, token);
+            }
+            else{
+
+            }
             server.addPlayer(0, token);
             System.out.print("\n Giocatore " + server.getListGames().get(0).getGame().getPlayer2().getName() +" Aggiunto a partita esistente");
         }
@@ -79,4 +88,3 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         new RmiClientF(server).run();
     }
 }
-*/

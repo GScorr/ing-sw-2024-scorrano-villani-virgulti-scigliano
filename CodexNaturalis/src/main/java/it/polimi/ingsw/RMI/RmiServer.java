@@ -118,9 +118,10 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public void createGame(String name, String player) throws RemoteException {
+    public synchronized void createGame(String name, String player) throws RemoteException {
         GiocoController game = new GiocoController(name, mappa.get(player));
         games.add(game);
+        System.out.println(name);
         mappa_gp.put( player , game );
     }
 
@@ -135,7 +136,6 @@ public class RmiServer implements VirtualServer{
     public Giocatore getFromToken(String token){
         return mappa.get(token);
     }
-
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
         VirtualServer server = new RmiServer(new GiocoController("new", null));         //modifica
