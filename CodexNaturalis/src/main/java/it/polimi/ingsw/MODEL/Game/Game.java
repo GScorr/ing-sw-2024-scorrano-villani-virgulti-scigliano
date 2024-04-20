@@ -47,7 +47,7 @@ public class Game  {
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
-
+    private String name;
 
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
@@ -235,30 +235,8 @@ public class Game  {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public String getName() {
+        return name;
+    }
 
 }

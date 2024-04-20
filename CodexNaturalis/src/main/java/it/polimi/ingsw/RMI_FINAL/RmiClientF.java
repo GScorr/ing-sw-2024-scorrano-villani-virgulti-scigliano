@@ -1,5 +1,6 @@
-package it.polimi.ingsw.RMI_FINAL;
+/*package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.net.MalformedURLException;
@@ -38,26 +39,25 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         // map that associate the client with the token, and we also have a map in server that associate the token with the player
         // < RmiClient , TOKEN > < TOKEN , Player >
         this.token = server.createToken(this);
-        System.out.print("\n Token Player > " + this.token);
+        //System.out.print("\n Token Player > " + this.token);
         server.createPlayer( player_name , this.token );
 
-        curr_player = server.getFromToken(this.token);
+        //se non esistono partite
+        if (server.gamesIsEmpty()) {
+            //creo partita e inserisco come player 2
+            System.out.println("\n Non esiste nessuna partita, creane una nuova!");
+            System.out.print("\n Scegli nome Partita > ");
+            String game_name = scan.nextLine();
+            server.createGame(game_name, token);
 
-        synchronized (this) {
-
-            //controllo che la partita sia non vuota
-            if (server.gamesIsEmpty()) {
-                //creo partita e inserisco come player 2
-                System.out.print("\n Scegli nome Partita > ");
-                String game_name = scan.nextLine();
-                server.createGame(game_name, token);
-                System.out.print("\n Giocatore " + server.getListGames().get(0).getGame().getPlayer1().getName() + " Ha creato a una nuova Partita  ");
-
-            } else {
-                //inserisco player come player 2 in game
-                server.addPlayer(0, token);
-                System.out.print("\n Giocatore " + server.getListGames().get(0).getGame().getPlayer2().getName() +" Aggiunto a partita esistente");
+        } else {
+            System.out.println("\n Elenco partite disponibili: ");
+            for(GameController game: server.getListGames()){
+                System.out.println("\n" + game.getGame().getNam);
             }
+            //inserisco player come player 2 in game
+            server.addPlayer(0, token);
+            System.out.print("\n Giocatore " + server.getListGames().get(0).getGame().getPlayer2().getName() +" Aggiunto a partita esistente");
         }
 
         System.out.print("...creazione Player andata a buon fine");
@@ -67,21 +67,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public void showUpdate(Integer[] number) throws RemoteException {
-        System.out.print("\n> ");
-        int a=0;
-        for ( int i=0 ; i<10; i++)
-        {   if( number[i] != null )
-            System.out.print( number[i] );
-        else
-            System.out.println(a);
-        }
-        System.out.print("\n> ");
     }
 
     @Override
     public void reportError(String details) throws RemoteException {
-        // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
-        System.err.print("\n[ERROR] " + details + "\n> ");
     }
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
@@ -90,3 +79,4 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         new RmiClientF(server).run();
     }
 }
+*/

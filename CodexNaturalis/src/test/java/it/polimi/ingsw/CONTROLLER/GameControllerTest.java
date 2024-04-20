@@ -255,16 +255,16 @@ class GameControllerTest {
         }
 
 
-        controller.statePlaceCard(p1, 1, false, 23, 23);
+        controller.statePlaceCard(p1, 1, true, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p1);
 
-        controller.statePlaceCard(p2, 1, false, 23, 23);
+        controller.statePlaceCard(p2, 1, true, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p2);
 
-        controller.statePlaceCard(p3, 1, false, 23, 23);
+        controller.statePlaceCard(p3, 1, true, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p3);
 
-        controller.statePlaceCard(p4, 1, false, 23, 23);
+        controller.statePlaceCard(p4, 1, true, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p4);
 
         System.out.println("5"+gioco.getActual_state().getNameState());
@@ -275,7 +275,7 @@ class GameControllerTest {
 
 
         for(int i=0; i<controller.getGame().getNum_player(); i++){
-            System.out.println(gioco.getGet_player_index().get(i).getPlayerPoints());
+            System.out.println(gioco.getGet_player_index().get(i).getPlayerPoints()+gioco.getGet_player_index().get(i).getName());
         }
 
 
@@ -293,7 +293,6 @@ class GameControllerTest {
 
         controller.statePlaceCard(p4, 1, false, 24, 24);
         controller.playerPeachCardFromResourcesDeck(p4);
-
 
 
         System.out.println("stampo il counter: " + controller.get_final_counter());
