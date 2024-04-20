@@ -35,13 +35,17 @@ public class CenterCards {
     }
 
     public PlayCard drawGoldCard(int index){
-        if(gold_list.size()>0){
+        if(gold_deck.cards.size() > 0){
             PlayCard tmp = gold_list.get(index);
             gold_list.remove(index);
             gold_list.add(insertFromGoldDeck(index));
             return tmp;
         }
-        else throw new EmptyDeckException("errore mazzo vuoto in drawGoldCard");
+        else {
+            PlayCard tmp = gold_list.get(index);
+            gold_list.remove(index);
+            return tmp;
+        }
 
     }
 

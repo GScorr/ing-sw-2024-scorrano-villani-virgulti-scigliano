@@ -67,6 +67,8 @@ public class Player implements PlayerObserver {
     private Goal goal_card;
     private int player_points = 0;
 
+    private int num_goal_achieve = 0;
+
 
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
@@ -271,9 +273,7 @@ public class Player implements PlayerObserver {
     }
     public void peachFromCardsInCenter(int i){
 
-        if(i< 0 || i > 3){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<4");
-        }
+
 
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));
@@ -306,7 +306,11 @@ public class Player implements PlayerObserver {
 
     }
 
+    public int getNum_goal_achieve() {
+        return num_goal_achieve;
+    }
 
-
-
+    public void setNum_goal_achieve(int num_goal_achieve) {
+        this.num_goal_achieve = num_goal_achieve;
+    }
 }
