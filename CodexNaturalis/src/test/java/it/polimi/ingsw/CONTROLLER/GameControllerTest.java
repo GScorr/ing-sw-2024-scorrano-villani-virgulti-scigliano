@@ -295,7 +295,6 @@ class GameControllerTest {
         controller.playerPeachCardFromResourcesDeck(p4);
 
 
-
         System.out.println("stampo il counter: " + controller.get_final_counter());
 
 
