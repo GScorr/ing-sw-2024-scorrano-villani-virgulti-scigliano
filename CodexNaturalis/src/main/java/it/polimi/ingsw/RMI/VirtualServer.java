@@ -9,7 +9,7 @@ import java.util.Map;
 public interface VirtualServer extends Remote {
     public void connect(VirtualView client) throws RemoteException;
 
-    public void put(int index, Integer number, Giocatore player ) throws RemoteException;
+    public void put(int index, Integer number, String player ) throws RemoteException, InterruptedException;
 
     public boolean gamesIsEmpty() throws RemoteException;
 
