@@ -19,7 +19,9 @@ public class Gioco implements Serializable {
     public String getName() {
         return name;
     }
-
+    public void getPlayersName(){
+        System.out.println("\nPartita-> "+ name + "Giocatore 1-> " + player1+ "Giocatore 2-> " + player2);
+    }
     public synchronized  Giocatore getPlayer1() {
         return player1;
     }
