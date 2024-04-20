@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="inizio rmi">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Game/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/MODEL/Game/GameTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -262,14 +257,6 @@
       <workItem from="1712562916423" duration="12647000" />
       <workItem from="1712653919101" duration="2285000" />
       <workItem from="1713018449356" duration="10906000" />
-    </task>
-    <task id="LOCAL-00012" summary="modifica InsertCard di GameField">
-      <option name="closed" value="true" />
-      <created>1710618249886</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1710618249886</updated>
     </task>
     <task id="LOCAL-00013" summary="Aggiunta di ResourceCountChange e checkPlacing in insertcard">
       <option name="closed" value="true" />
@@ -655,7 +642,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713628955685</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713630370960</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1713630370960</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -705,12 +700,12 @@
     <MESSAGE value="Aggiunta stato End Game Player" />
     <MESSAGE value="Aggiunta stato End Game su classe Game" />
     <MESSAGE value="aggiornameno" />
-    <MESSAGE value="aggiornamento" />
     <MESSAGE value="inizio prove inserimenti stringa" />
     <MESSAGE value="Modifica Stati Game" />
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="inizio rmi" />
-    <option name="LAST_COMMIT_MESSAGE" value="inizio rmi" />
+    <MESSAGE value="aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
