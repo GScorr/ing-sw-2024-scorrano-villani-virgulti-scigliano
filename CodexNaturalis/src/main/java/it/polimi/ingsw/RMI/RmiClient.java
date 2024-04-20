@@ -12,7 +12,7 @@ import java.util.Scanner;
 //
 public class RmiClient extends UnicastRemoteObject implements VirtualView {
     final VirtualServer server;
-    private String token;
+    private  String token;
 
     protected RmiClient(VirtualServer server) throws RemoteException {
         this.server = server;
@@ -49,17 +49,16 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                 System.out.print("\n Scegli nome Partita > ");
                 String game_name = scan.nextLine();
                 server.createGame(game_name, curr_player);
-                System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer1().getName() + " Ha creato una nuova Partita  ");
+                System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer1().getName() + " Ha creato a una nuova Partita  ");
 
             } else {
                 //inserisco player come player 2 in game todo correzione bug inserimento giocatore 2____ il giocatore 2 non viene inserito nel game
-                GiocoController existing_game = server.getLisGames().get(0);
-                existing_game.getGame().setPlayer2(curr_player);
-                System.out.print("\n  " + existing_game.getGame().getPlayer2());
-                System.out.print("\n Giocatore " + curr_player.getName() + " "  + " Aggiunto a partita esistente");
+                Gioco existing_game = server.getLisGames().get(0).getGame();
+                server.addPlayer(existing_game, curr_player);
+                System.out.print("\n Giocatore " + curr_player.getName() + " " + existing_game.getPlayer2() + " Aggiunto a partita esistente");
             }
         }
-
+        System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
 
 
         System.out.print("...creazione Player andata a buon fine");
@@ -69,13 +68,12 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         //server.getMap().values().forEach(giocatore -> System.out.println(giocatore.getName()));
         //System.out.print("\nche giocatore sono ?" + server.getPlayerFromClient(this).getName() );
 
-        GiocoController existing_game = new GiocoController( server.getLisGames().get(0).getGame() );
+
         while (true) {
-            System.out.print("\n Inserisci valore nel tuo array, INDICE>  ");
+            System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
-            System.out.print("\n Inserisci valore nel tuo array,  VALORE>  ");
             int value = scan.nextInt();
-            server.put(index, value, curr_player, existing_game );
+            server.put(index, value, curr_player );
         }
 
     }

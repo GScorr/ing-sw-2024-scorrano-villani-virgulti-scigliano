@@ -252,6 +252,9 @@ public class Player implements PlayerObserver {
         this.player_points=this.player_points+point;
     }
 
+    public void setPlayer_points(int player_points) {
+        this.player_points = player_points;
+    }
 
     //questo metodo serve a peachFrom...  per inserire la carta pescata
     private void insertCard(PlayCard card){
@@ -299,7 +302,7 @@ public class Player implements PlayerObserver {
     //this metod select the first side of the starting_card and put it on the field
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
-            game_field.insertCard(this.starting_card, 0, 0);
+            game_field.insertCard(this.starting_card, 22, 22);
 
     }
 
