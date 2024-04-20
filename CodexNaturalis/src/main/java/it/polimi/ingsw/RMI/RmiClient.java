@@ -53,12 +53,11 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
 
             } else {
                 //inserisco player come player 2 in game todo correzione bug inserimento giocatore 2____ il giocatore 2 non viene inserito nel game
-                Gioco existing_game = server.getLisGames().get(0).getGame();
-                server.addPlayer(existing_game, curr_player);
-                System.out.print("\n Giocatore " + curr_player.getName() + " " + existing_game.getPlayer2() + " Aggiunto a partita esistente");
+                server.addPlayer(0, curr_player);
+                System.out.print("\n Giocatore " + curr_player.getName() +" Aggiunto a partita esistente");
             }
         }
-        /*System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
+        System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
 
 
         System.out.print("...creazione Player andata a buon fine");
@@ -68,13 +67,13 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         //server.getMap().values().forEach(giocatore -> System.out.println(giocatore.getName()));
         //System.out.print("\nche giocatore sono ?" + server.getPlayerFromClient(this).getName() );
 
-        /*
+
         while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
             int value = scan.nextInt();
-            server.put(index, value, curr_player );
-        }*/
+            //server.put(index, value, curr_player );
+        }
 
     }
 

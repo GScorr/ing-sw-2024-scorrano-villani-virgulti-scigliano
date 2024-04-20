@@ -228,6 +228,10 @@ public class GameController implements GameSubject {
         }
     }
 
+    /*
+    da testare
+     */
+
     private void finalPointEndGame(){
         for(Player p: player_list){ //forall player inside player_list
             p.setEndGame(); //tutti i player sono in stato finale e non possono fare nulla
