@@ -85,18 +85,16 @@ public class RmiServerF implements VirtualServerF {
                 .map(controllers::indexOf)
                 .orElse(-1);
         if (index != -1) {
-            boolean isFull = controllers.get(index).getFull();
-            if(isFull){
-                return false;
-            }
-            else{
-                controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
-                controllers.get(index).checkNumPlayer();
-                token_to_game.put(p_token , controllers.get(index) );
-                return true;
-            }
+            if( controllers.get(index).getFull() )
+                {String error = "\nGame is Full\n";
+                token_manager.getTokens().get(p_token).reportError(error);
+                return false;}
+            controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
+            controllers.get(index).checkNumPlayer();
+            token_to_game.put(p_token , controllers.get(index) );
+            return true;
         }
-        String error = "Not Existing Game";
+        String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
         return false;
     }
@@ -116,23 +114,34 @@ public class RmiServerF implements VirtualServerF {
         return free;
     }
 
+    //todo
     @Override
     public void insertCard(String p_token, PlayCard card, int pos_x, int pos_y, int index) throws RemoteException, InterruptedException {
 
-        String currentState;
         System.out.println("\n [Insert request received] \n");
         //todo cambia gestione flipped
         //token_to_game.get(p_token).statePlaceCard(token_to_player.get(p_token), index, true, pos_x, pos_y );
-        currentState = p_token;
 
         try
         {
-            updates.put(currentState);
+            updates.put(p_token);
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
         //todo come gestire il broadcast per non far intasare il client
         broadcastUpdateThread();
+    }
+
+    //Look if there are clients with the same name, return true if it's available false otherwise
+    @Override
+    public boolean checkName(String name, String token) throws RemoteException {
+        for ( String t : token_to_player.keySet() ){
+            if( token_to_player.get(t).getName().equals(name) ){
+                String error = " Name Already Existing ";
+                token_manager.getTokens().get(token).reportError(error);
+                return false; }
+        }
+        return true;
     }
 
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
@@ -154,6 +163,7 @@ public class RmiServerF implements VirtualServerF {
 
         }
     }
+
 
 
     public static void main(String[] args) throws RemoteException {

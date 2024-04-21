@@ -23,4 +23,5 @@ public interface VirtualServerF extends Remote {
     public List<VirtualViewF> getListClient() throws RemoteException;
     public List<GameController> getFreeGames() throws RemoteException;
     public void insertCard(String p_token, PlayCard card, int x, int y, int index) throws RemoteException, InterruptedException;
+    public boolean checkName(String name, String token) throws RemoteException;
 }
