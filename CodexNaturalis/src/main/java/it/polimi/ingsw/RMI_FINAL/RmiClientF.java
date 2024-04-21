@@ -52,7 +52,24 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         } else {
             makeChoice(player_name);
         }
-        System.out.print("creazione Player andata a buon fine!");
+        System.out.print("creazione Player andata a buon fine!\n");
+
+        System.out.print("Aspetta il tuo turno -");
+        while (true) {
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("/");
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("|");
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("\\");
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("-");
+        }
+
 
         /*while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
