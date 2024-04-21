@@ -48,7 +48,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         String game_name;
 
         // Se non esistono partite
-        if (server.getFreeGames()==null) {
+        if (server.getFreeGames()==null||server.getFreeGames().isEmpty()) {
             server.CreatePlayer(player_name, this.token,true);
             System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
             System.out.print("\nScegli nome Partita > ");

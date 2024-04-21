@@ -78,15 +78,23 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public boolean addPlayer(int game_id, String p_token) throws RemoteException {
         int index = controllers.stream()
-                .filter(gc -> gc.getIndexGame() == game_id)
+                .filter(gc -> gc.getGame().getIndex_game() == game_id)
                 .findFirst()
                 .map(controllers::indexOf)
                 .orElse(-1);
-
+        System.out.println(index);
         if (index != -1) {
-            controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
-            token_to_game.put(p_token , controllers.get(index) );
-            return true; }
+            boolean isFull = controllers.get(index).getFull();
+            if(isFull){
+                return false;
+            }
+            else{
+                controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
+                controllers.get(index).checkNumPlayer();
+                token_to_game.put(p_token , controllers.get(index) );
+                return true;
+            }
+        }
         String error = "Not Existing Game";
         token_manager.getTokens().get(p_token).reportError(error);
         return false;

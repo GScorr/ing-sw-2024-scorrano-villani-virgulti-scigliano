@@ -28,9 +28,7 @@ import java.util.*;
 */
 
 public class GameController implements GameSubject, Serializable {
-    private static int index_counter=0;
     private boolean full;
-    private int index_game;
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
     private List<String> names = new ArrayList<>();
@@ -63,8 +61,6 @@ public class GameController implements GameSubject, Serializable {
                 throw new ControllerException(0, "Num Player not Valid in creation Game");
             } else {
                 this.game = new Game(max_num_player);
-                this.index_game = index_counter++;
-                index_counter++;
             }
         }
     }
@@ -74,15 +70,9 @@ public class GameController implements GameSubject, Serializable {
                 throw new ControllerException(0, "Num Player not Valid in creation Game");
             } else {
                 this.game = new Game(name, max_num_player);
-                this.index_game = index_counter++;
-                index_counter++;
+
             }
         }
-    }
-
-
-    public int getIndexGame() {
-        return index_game;
     }
 
     public Game getGame() {
