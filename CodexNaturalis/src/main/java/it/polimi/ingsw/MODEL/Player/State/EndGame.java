@@ -4,9 +4,10 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EndGame implements PState {
+public class EndGame implements PState, Serializable {
     Player player;
 
     public EndGame(Player player) {
@@ -55,6 +56,10 @@ public class EndGame implements PState {
 
     @Override
     public boolean peachFromCardsInCenter(int i) {
+        return false;
+    }
+
+    public boolean selectSideCard(int index, boolean flip){
         return false;
     }
 

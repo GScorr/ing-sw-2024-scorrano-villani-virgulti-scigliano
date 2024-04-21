@@ -14,13 +14,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class DeckCreation {
+public class DeckCreation implements Serializable {
     private String resources_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json";
     private String gold_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/gold.json";
     private String starting_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/starting.json";
     private String goal_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/goals.json";
 
-    private JsonArray resources_jsonArray, gold_jsonArray,starting_jsonArray, goal_jsonArray;
+    private transient JsonArray resources_jsonArray, gold_jsonArray,starting_jsonArray, goal_jsonArray;
     public static List<ResourceCard> deck_resources = new ArrayList<>();
     public static List<GoldCard> deck_gold = new ArrayList<>();
     public static List<StartingCard> deck_starting = new ArrayList<>();

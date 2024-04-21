@@ -5,9 +5,10 @@ import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 
+import java.io.Serializable;
 import java.sql.SQLOutput;
 
-public class GoalDiagonal implements GoalStrategy {
+public class GoalDiagonal implements GoalStrategy, Serializable {
     public int totalPoints(GameField field, int points, AnglesEnum resource) {
         int counter = 0;
         int tmp1, tmp2;

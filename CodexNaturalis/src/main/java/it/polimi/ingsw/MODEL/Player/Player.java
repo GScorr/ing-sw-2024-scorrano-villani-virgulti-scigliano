@@ -15,6 +15,8 @@ import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.State.*;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -35,14 +37,14 @@ import java.util.List;
 * PLAYER_OBSERVER:
 * PLAYER_SUBJECT
 * */
-public class Player implements PlayerObserver {
+public class Player implements PlayerObserver, Serializable {
     private String name;
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
             choose_goal = new ChooseGoal(this),
             choose_side_first_card = new ChooseSideFirstCard(this),
-            wait_turn = new WaitTurn(this),
+            //wait_turn = new WaitTurn(this),
             place_card = new PlaceCard(this),
             draw_card = new DrawCard(this),
             end_game = new EndGame(this),
@@ -51,6 +53,9 @@ public class Player implements PlayerObserver {
 
     private final boolean isFirst;
     private int index_removed_card;
+
+    public HashMap<Integer,Boolean> side_card_in_hand  = new HashMap<>();
+
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
@@ -202,7 +207,7 @@ public class Player implements PlayerObserver {
                     setPlayer_state( place_card);
                 }
                 else {
-                    setPlayer_state(wait_turn);
+                    //setPlayer_state(wait_turn);
                 }
                 return;
 
@@ -221,12 +226,13 @@ public class Player implements PlayerObserver {
                 setPlayer_state( draw_card );
                 return;
             case "DRAW_CARD":
-                setPlayer_state( wait_turn);
+                //setPlayer_state( wait_turn);
                 return;
             case "END_GAME":
                 return;
         }
     }
+
     public void setEndGame(){
         setPlayer_state(end_game);
     }
@@ -260,7 +266,13 @@ public class Player implements PlayerObserver {
 
     //questo metodo serve a peachFrom...  per inserire la carta pescata
     private void insertCard(PlayCard card){
+        this.side_card_in_hand.put(index_removed_card,false);
         this.cards_in_hand.set(this.index_removed_card, card);
+    }
+
+
+    public void selectSideCard(int index, boolean flipp){
+        this.side_card_in_hand.put(index,flipp);
     }
 
     //Una volta che il giocatore ha giocato una carta ne deve pescare una
@@ -273,9 +285,7 @@ public class Player implements PlayerObserver {
     }
     public void peachFromCardsInCenter(int i){
 
-        if(i< 0 || i > 3){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<4");
-        }
+
 
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));

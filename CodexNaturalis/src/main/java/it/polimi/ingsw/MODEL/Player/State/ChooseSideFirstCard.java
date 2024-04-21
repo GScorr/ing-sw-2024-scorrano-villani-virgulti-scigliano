@@ -4,9 +4,10 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ChooseSideFirstCard implements PState{
+public class ChooseSideFirstCard implements PState, Serializable {
     Player player;
 
     public ChooseSideFirstCard(Player player) {
@@ -36,6 +37,11 @@ public class ChooseSideFirstCard implements PState{
     @Override
     public boolean selectStartingCard(boolean flipped) {
         this.player.selectStartingCard(flipped);
+        return true;
+    }
+
+    public boolean selectSideCard(int index, boolean flip){
+        player.side_card_in_hand.put(index,flip);
         return true;
     }
 

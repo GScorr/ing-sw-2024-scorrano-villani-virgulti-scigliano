@@ -6,9 +6,11 @@ import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 
+import java.io.Serializable;
+
 //@Davide
 // Class for the single cell present in the matrix of GameField
-public class GameFieldSingleCell {
+public class GameFieldSingleCell implements Serializable {
     /*
     provo a mettere la carta trasparente tc e a considerarla sempre come carta_down,
     inizio carta trasparente

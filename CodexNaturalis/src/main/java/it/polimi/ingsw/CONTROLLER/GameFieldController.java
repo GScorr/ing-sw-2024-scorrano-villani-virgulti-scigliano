@@ -80,7 +80,7 @@ public class GameFieldController {
     }
     //check for all constraints of Gold Card,
     // given a value of the constraint
-    public synchronized boolean checkGoldConstraints(Costraint val){
+    private synchronized boolean checkGoldConstraints(Costraint val){
         return switch (val) {
             case FIVEINS -> player_field.getNumOfInsect() >= 5;
             case FIVEANIM -> player_field.getNumOfAnimal() >= 5;
