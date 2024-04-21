@@ -14,7 +14,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class RmiServerF implements VirtualServerF {
 
-    private final GameController ctrl;
+    private GameController ctrl;
     private TokenManagerF token_manager = new TokenManagerImplementF();
     private List<VirtualViewF> clients = new ArrayList<>();
     private Map<String, Player> token_to_player = new HashMap<>();
@@ -59,6 +59,7 @@ public class RmiServerF implements VirtualServerF {
     //todo: decidere come scegliere il colore, per ora lascio sempre green (come da controller)
     @Override
     public void CreatePlayer(String player_name, String client_token, boolean first) throws RemoteException {
+        ctrl = new GameController(4);
         Player p = ctrl.createPlayer(player_name, first );
         token_to_player.put( client_token, p );
     }
@@ -90,7 +91,6 @@ public class RmiServerF implements VirtualServerF {
             }
             else{
                 controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
-                System.out.println(controllers.get(index).getGame().getGet_player_index().get(0).getName());
                 controllers.get(index).checkNumPlayer();
                 token_to_game.put(p_token , controllers.get(index) );
                 return true;
