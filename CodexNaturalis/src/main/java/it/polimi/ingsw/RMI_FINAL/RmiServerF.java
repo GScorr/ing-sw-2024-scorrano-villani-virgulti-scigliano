@@ -68,8 +68,9 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public void createGame(String name, int num_player, String p_token) throws RemoteException {
         GameController game_controller = new GameController(name, num_player);
-        controllers.add(game_controller);
         game_controller.getGame().insertPlayer(token_to_player.get(p_token));
+        game_controller.checkNumPlayer();
+        controllers.add(game_controller);
         token_to_game.put( p_token, game_controller);
     }
 

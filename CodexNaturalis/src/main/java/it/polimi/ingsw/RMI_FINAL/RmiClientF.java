@@ -85,7 +85,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     while(right==0) {
                         System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
                         numplayers = scan.nextInt();
-                        if(numplayers>=2&&numplayers<=4){
+                        if(numplayers>=2 && numplayers<=4){
                             right=1;
                         }
                     }
