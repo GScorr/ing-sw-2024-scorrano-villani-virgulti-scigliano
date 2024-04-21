@@ -62,6 +62,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
                 String decision = scan.nextLine();
                 if (decision.equalsIgnoreCase("old")) {
+                    server.CreatePlayer(player_name, this.token,false);
                     boolean check=false;
                     while(!check) {
                         done = 1;
@@ -77,6 +78,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                         check = server.addPlayer(ID, token);
                     }
                 } else if (decision.equalsIgnoreCase("new")) {
+                    server.CreatePlayer(player_name, this.token,true);
                     done=1;
                     System.out.print("\nScegli nome Partita > ");
                     game_name = scan.nextLine();

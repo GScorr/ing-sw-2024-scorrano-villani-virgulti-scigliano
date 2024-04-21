@@ -83,7 +83,6 @@ public class RmiServerF implements VirtualServerF {
                 .findFirst()
                 .map(controllers::indexOf)
                 .orElse(-1);
-        System.out.println(index);
         if (index != -1) {
             boolean isFull = controllers.get(index).getFull();
             if(isFull){
@@ -91,6 +90,7 @@ public class RmiServerF implements VirtualServerF {
             }
             else{
                 controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
+                System.out.println(controllers.get(index).getGame().getGet_player_index().get(0).getName());
                 controllers.get(index).checkNumPlayer();
                 token_to_game.put(p_token , controllers.get(index) );
                 return true;
