@@ -12,8 +12,8 @@ public class GiocoController implements Serializable {
         this.game = game;
     }
 
-    public GiocoController(String name, Giocatore player1) {
-        this.game = new Gioco(name, player1);
+    public GiocoController(String name, int numplayers, Giocatore player1) {
+        this.game = new Gioco(name, numplayers, player1);
     }
 
     public Giocatore getStatus1(){

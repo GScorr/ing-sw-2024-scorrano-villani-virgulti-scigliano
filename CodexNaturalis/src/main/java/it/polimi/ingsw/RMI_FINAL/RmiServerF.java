@@ -66,10 +66,11 @@ public class RmiServerF implements VirtualServerF {
     /*create a new GController, add it to the list and after insert player to the new game
     , add token and gcontroller in the token to controller*/
     @Override
-    public void createGame(int num_player, String p_token) throws RemoteException {
-        GameController game_controller = new GameController(num_player);
-        controllers.add(game_controller);
+    public void createGame(String name, int num_player, String p_token) throws RemoteException {
+        GameController game_controller = new GameController(name, num_player);
         game_controller.getGame().insertPlayer(token_to_player.get(p_token));
+        game_controller.checkNumPlayer();
+        controllers.add(game_controller);
         token_to_game.put( p_token, game_controller);
     }
 
@@ -78,15 +79,23 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public boolean addPlayer(int game_id, String p_token) throws RemoteException {
         int index = controllers.stream()
-                .filter(gc -> gc.getIndexGame() == game_id)
+                .filter(gc -> gc.getGame().getIndex_game() == game_id)
                 .findFirst()
                 .map(controllers::indexOf)
                 .orElse(-1);
-
+        System.out.println(index);
         if (index != -1) {
-            controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
-            token_to_game.put(p_token , controllers.get(index) );
-            return true; }
+            boolean isFull = controllers.get(index).getFull();
+            if(isFull){
+                return false;
+            }
+            else{
+                controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
+                controllers.get(index).checkNumPlayer();
+                token_to_game.put(p_token , controllers.get(index) );
+                return true;
+            }
+        }
         String error = "Not Existing Game";
         token_manager.getTokens().get(p_token).reportError(error);
         return false;
@@ -113,7 +122,7 @@ public class RmiServerF implements VirtualServerF {
         String currentState;
         System.out.println("\n [Insert request received] \n");
         //todo cambia gestione flipped
-        token_to_game.get(p_token).statePlaceCard(token_to_player.get(p_token), index, true, pos_x, pos_y );
+        //token_to_game.get(p_token).statePlaceCard(token_to_player.get(p_token), index, true, pos_x, pos_y );
         currentState = p_token;
 
         try
