@@ -3,9 +3,10 @@ package it.polimi.ingsw.MODEL.DeckPackage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 
+import java.io.Serializable;
 import java.util.Deque;
 
-public class DeckGoalCard {
+public class DeckGoalCard implements Serializable {
 
     private Deque<Goal> cards;
 

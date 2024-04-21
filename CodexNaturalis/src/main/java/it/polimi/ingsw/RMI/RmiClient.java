@@ -76,8 +76,16 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
                     done=1;
                     System.out.print("\nScegli nome Partita > ");
                     game_name = scan.nextLine();
-                    System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-                    int numplayers = scan.nextInt();
+                    int right=0;
+                    int numplayers=4;
+                    while(right==0) {
+                        System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+                        numplayers = scan.nextInt();
+                        if(numplayers>=2&&numplayers<=4){
+                            right=1;
+                        }
+                    }
+
                     server.createGame(game_name, numplayers, token);
                 } else {
                     System.out.println("\nInserimento errato!");

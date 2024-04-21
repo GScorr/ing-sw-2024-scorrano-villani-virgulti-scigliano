@@ -8,7 +8,9 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
+import it.polimi.ingsw.RMI.IndexManager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +31,7 @@ TODO:
 */
 
 
-public class Game  {
+public class Game implements Serializable {
     DeckCreation creation;
     private int max_num_player;
     private int num_player;
@@ -37,6 +39,8 @@ public class Game  {
     private Player player2;
     private Player player3;
     private Player player4;
+    private int index_game;
+    private String name;
 
 
     private Map<Integer,Player> get_player_index = new HashMap<>();
@@ -116,6 +120,19 @@ public class Game  {
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
+        this.index_game = IndexManagerF.getNextIndex();
+    }
+
+    public Game( /* DeckGoalCard goal_deck */ String name, int max_num_player) {
+        this.creation = new DeckCreation();
+        this.gold_deck = new Deck(creation.getMixGoldDeck());
+        this.resources_deck = new Deck(creation.getMixResourcesDeck());
+        this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
+        this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
+        this.max_num_player = max_num_player;
+        this.actual_state = not_initialized;
+        this.index_game = IndexManagerF.getNextIndex();
+        this.name = name;
     }
 
 
@@ -234,31 +251,11 @@ public class Game  {
 
     }
 
+    public String getName() {
+        return name;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public int getIndex_game() {
+        return index_game;
+    }
 }

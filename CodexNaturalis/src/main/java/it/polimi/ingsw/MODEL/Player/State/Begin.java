@@ -3,9 +3,11 @@ package it.polimi.ingsw.MODEL.Player.State;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Begin implements PState {
+public class Begin implements PState, Serializable {
     Player player;
 
     public Begin(Player player) {

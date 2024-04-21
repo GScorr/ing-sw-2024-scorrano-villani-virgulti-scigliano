@@ -2,13 +2,15 @@ package it.polimi.ingsw.MODEL.Card;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 
+import java.io.Serializable;
+
 /*
 *  @Francesco_Virgulti
 * central_resources_list è passato dal main solamente se la carta è una StartingCard
 * In tutte le altre carte central_resources_list sarà nullo
 * Nel front_side della StartingCard central_resources_list sarà nullo
 * */
-public class Side {
+public class Side implements Serializable {
     private final AnglesEnum angle_right_up;
     private final AnglesEnum angle_right_down;
     private final AnglesEnum angle_left_up;

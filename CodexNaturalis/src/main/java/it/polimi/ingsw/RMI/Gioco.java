@@ -31,7 +31,13 @@ public class Gioco implements Serializable {
         return players.get(2);
     }
 
-    public synchronized void insertPlayer(Giocatore player){ players.add(player); }
+    public synchronized boolean insertPlayer(Giocatore player){
+        if(players.size()<numplayers) {
+            players.add(player);
+            return true;
+        }
+        else return false;
+    }
 
     public List<Giocatore> getPlayers() {
         return players;

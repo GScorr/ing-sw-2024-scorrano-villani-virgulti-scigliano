@@ -1,4 +1,4 @@
-package it.polimi.ingsw.MODEL.Player.State;
+/*package it.polimi.ingsw.MODEL.Player.State;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
@@ -62,4 +62,4 @@ public class WaitTurn implements PState {
     public String getNameState() {
         return "WAIT_TURN";
     }
-}
+}*/

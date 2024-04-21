@@ -18,7 +18,7 @@ public interface VirtualServerF extends Remote {
     public Map<String, GameController> getTtoG() throws RemoteException;
     public List<GameController> getListGameController() throws  RemoteException;
     public void CreatePlayer(String name, String client_token, boolean first) throws RemoteException;
-    public void createGame(int num_player, String p_token) throws RemoteException;
+    public void createGame(String game_name, int num_player, String p_token) throws RemoteException;
     public boolean addPlayer(int game_id, String token) throws RemoteException;
     public List<VirtualViewF> getListClient() throws RemoteException;
     public List<GameController> getFreeGames() throws RemoteException;

@@ -128,9 +128,12 @@ public class RmiServer implements VirtualServer{
         int index = fromIDtoindex(ID);
         if(index!=-1) {
 
-            games.get(index).getGame().insertPlayer( mappa.get(player) );
-            mappa_gp.put(player, games.get(index));
-            return true;
+            boolean check= games.get(index).getGame().insertPlayer( mappa.get(player) );
+            if (check) {
+                mappa_gp.put(player, games.get(index));
+                return true;
+            }
+            else return false;
         }
         else{
             return false;
