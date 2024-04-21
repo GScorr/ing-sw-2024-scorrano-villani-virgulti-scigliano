@@ -79,7 +79,6 @@ public class GameController implements GameSubject, Serializable {
         return game;
     }
 
-    public boolean getFull() { return  full; }
 
     public void setGame(Game game) {
         this.game = game;
@@ -128,6 +127,10 @@ public class GameController implements GameSubject, Serializable {
         return player;
     }
 
+    public boolean getFull(){
+        if(game.getMax_num_player() == game.getNum_player() ) return true;
+        return false;
+    }
 
     public boolean checkNumPlayer(){
         Integer num_player = game.getNum_player();
