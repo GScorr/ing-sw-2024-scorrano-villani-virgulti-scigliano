@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,77 +63,75 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.RmiClient.executor": "Run",
-    "Application.RmiClientF.executor": "Run",
-    "Application.RmiServer.executor": "Run",
-    "Application.RmiServerF.executor": "Run",
-    "JUnit.CenterCardsTest.drawResourceCard.executor": "Coverage",
-    "JUnit.CenterCardsTest.executor": "Coverage",
-    "JUnit.DeckCreationTestGoal.creteGoalDeck.executor": "Run",
-    "JUnit.DeckGoalCardTest.executor": "Coverage",
-    "JUnit.DeckTest.executor": "Coverage",
-    "JUnit.GameControllerTest.EndGame.executor": "Run",
-    "JUnit.GameControllerTest.checkNumPlayer.executor": "Run",
-    "JUnit.GameControllerTest.executor": "Coverage",
-    "JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor": "Run",
-    "JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor": "Run",
-    "JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor": "Debug",
-    "JUnit.GameControllerTest.playerPlaceCard.executor": "Run",
-    "JUnit.GameControllerTest.playerSelectStartingCard.executor": "Run",
-    "JUnit.GameControllerTest.statePlaceCard.executor": "Coverage",
-    "JUnit.GameFieldControllerTest.checkPlacing.executor": "Run",
-    "JUnit.GameFieldControllerTest.executor": "Coverage",
-    "JUnit.GameTest.executor": "Coverage",
-    "JUnit.GameTest.insertPlayer.executor": "Coverage",
-    "JUnit.GestioneViewTest.scegliCarta.executor": "Debug",
-    "JUnit.GoalDiagonalTest.creteResourceDeck.executor": "Run",
-    "JUnit.GoalDiagonalTest.executor": "Coverage",
-    "JUnit.GoalDiagonalTest.testGoalDiagonal.executor": "Run",
-    "JUnit.GoalDiagonalTest.totalPoints.executor": "Run",
-    "JUnit.GoalDoubleGoldTest.executor": "Coverage",
-    "JUnit.GoalFeatherPenPaperTest.executor": "Coverage",
-    "JUnit.GoalLFigureTest.executor": "Coverage",
-    "JUnit.GoalLFigureTest.totalPoints.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsAnimal.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsInsect.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsMushroom.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsPlant.executor": "Run",
-    "JUnit.GoalStrategyTest.executor": "Coverage",
-    "JUnit.GoalStrategyTest.totalPoints.executor": "Run",
-    "JUnit.GoalTripleTest.executor": "Coverage",
-    "JUnit.PlayerTest.addPoints.executor": "Debug",
-    "JUnit.PlayerTest.executor": "Coverage",
-    "JUnit.PlayerTest.getColor.executor": "Run",
-    "JUnit.PlayerTest.getIsFirst.executor": "Run",
-    "JUnit.PlayerTest.getPlayerState.executor": "Run",
-    "JUnit.PlayerTest.insertCard.executor": "Debug",
-    "JUnit.PlayerTest.nextStatePlayer.executor": "Run",
-    "JUnit.PlayerTest.placeCard.executor": "Run",
-    "JUnit.PlayerTest.setPlayer_state.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Mirko/IdeaProjects/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.JavaFX",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.RmiClient.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RmiServer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CenterCardsTest.drawResourceCard.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.CenterCardsTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.DeckCreationTestGoal.creteGoalDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DeckGoalCardTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.DeckTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameControllerTest.EndGame.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.checkNumPlayer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.GameControllerTest.playerPlaceCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.playerSelectStartingCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.statePlaceCard.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameFieldControllerTest.checkPlacing.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameFieldControllerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameTest.insertPlayer.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GestioneViewTest.scegliCarta.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.GoalDiagonalTest.creteResourceDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalDiagonalTest.testGoalDiagonal.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDoubleGoldTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalFeatherPenPaperTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalLFigureTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsAnimal.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsInsect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsMushroom.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsPlant.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalStrategyTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalStrategyTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalTripleTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PlayerTest.addPoints.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PlayerTest.getColor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getIsFirst.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getPlayerState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.insertCard.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.nextStatePlayer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.placeCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.setPlayer_state.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mirko/IdeaProjects/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -276,14 +274,6 @@
       <workItem from="1713018449356" duration="10906000" />
       <workItem from="1713640206406" duration="3355000" />
       <workItem from="1713643582992" duration="1323000" />
-    </task>
-    <task id="LOCAL-00017" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1710877848514</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1710877848514</updated>
     </task>
     <task id="LOCAL-00018" summary="Aggiornamento">
       <option name="closed" value="true" />
@@ -669,7 +659,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713661315451</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="super modifica serializable e clientdef">
+      <option name="closed" value="true" />
+      <created>1713692229114</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1713692229114</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
