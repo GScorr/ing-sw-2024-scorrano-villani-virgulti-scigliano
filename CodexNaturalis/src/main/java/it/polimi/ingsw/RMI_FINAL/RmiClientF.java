@@ -46,59 +46,30 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         //System.out.print("\nToken Player > " + this.token);
 
         String game_name;
-
         // Se non esistono partite
         if (server.getFreeGames()==null||server.getFreeGames().isEmpty()) {
-            server.CreatePlayer(player_name, this.token,true);
-            System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
-            System.out.print("\nScegli nome Partita > ");
-            game_name = scan.nextLine();
-            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-            int numplayers = scan.nextInt();
-            server.createGame(game_name, numplayers, token);
+            newGame_notavailable(player_name);
         } else {
-            int done=0;
-            while(done==0) {
-                System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
-                String decision = scan.nextLine();
-                if (decision.equalsIgnoreCase("old")) {
-                    server.CreatePlayer(player_name, this.token,false);
-                    boolean check=false;
-                    while(!check) {
-                        done = 1;
-                        System.out.println("\nElenco partite disponibili: ");
-                        List<GameController> partite = server.getFreeGames();
-
-                        for (GameController g : partite) {
-                            System.out.println(g.getGame().getName() + " ID:" + g.getGame().getIndex_game() + " " + g.getGame().getNumPlayer() + "/" + g.getGame().getMax_num_player());
-                        }
-
-                        System.out.println("\nInserisci ID partita in cui entrare");
-                        int ID = scan.nextInt();
-                        check = server.addPlayer(ID, token);
-                    }
-                } else if (decision.equalsIgnoreCase("new")) {
-                    server.CreatePlayer(player_name, this.token,true);
-                    done=1;
-                    System.out.print("\nScegli nome Partita > ");
-                    game_name = scan.nextLine();
-                    int right=0;
-                    int numplayers=4;
-                    while(right==0) {
-                        System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-                        numplayers = scan.nextInt();
-                        if(numplayers>=2 && numplayers<=4){
-                            right=1;
-                        }
-                    }
-
-                    server.createGame(game_name, numplayers, token);
-                } else {
-                    System.out.println("\nInserimento errato!");
-                }
-            }
+            makeChoice(player_name);
         }
-        System.out.print("creazione Player andata a buon fine!");
+        System.out.print("creazione Player andata a buon fine!\n");
+
+        System.out.print("Aspetta il tuo turno -");
+        while (true) {
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("/");
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("|");
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("\\");
+                Thread.sleep(500);
+                System.out.print("\b");
+                System.out.print("-");
+        }
+
 
         /*while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
@@ -110,6 +81,71 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println(" " +campo[i]);
         }*/
 
+    }
+
+    private void makeChoice(String player_name) throws RemoteException{
+        Scanner scan = new Scanner(System.in);
+        int done=0;
+        while(done==0) {
+            System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
+            String decision = scan.nextLine();
+            if (decision.equalsIgnoreCase("old")) {
+                server.CreatePlayer(player_name, this.token,false);
+                done = 1;
+                chooseMatch();
+            } else if (decision.equalsIgnoreCase("new")) {
+                done=1;
+                newGame(player_name);
+            } else {
+                System.out.println("\nInserimento errato!");
+            }
+        }
+    }
+
+    private void chooseMatch() throws RemoteException {
+        Scanner scan = new Scanner(System.in);
+        boolean check=false;
+        while(!check) {
+            System.out.println("\nElenco partite disponibili: ");
+            List<GameController> partite = server.getFreeGames();
+
+            for (GameController g : partite) {
+                System.out.println(g.getGame().getName() + " ID:" + g.getGame().getIndex_game() + " " + g.getGame().getNumPlayer() + "/" + g.getGame().getMax_num_player());
+            }
+
+            System.out.println("\nInserisci ID partita in cui entrare");
+            int ID = scan.nextInt();
+            check = server.addPlayer(ID, token);
+        }
+    }
+
+    private void newGame(String player_name) throws RemoteException {
+        Scanner scan = new Scanner(System.in);
+        server.CreatePlayer(player_name, this.token,true);
+        System.out.print("\nScegli nome Partita > ");
+        String game_name = scan.nextLine();
+        int right=0;
+        int numplayers=4;
+        while(right==0) {
+            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+            numplayers = scan.nextInt();
+            if(numplayers>=2 && numplayers<=4){
+                right=1;
+            }
+        }
+
+        server.createGame(game_name, numplayers, token);
+    }
+
+    private void newGame_notavailable(String playerName) throws RemoteException {
+        Scanner scan = new Scanner(System.in);
+        server.CreatePlayer(playerName, this.token,true);
+        System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
+        System.out.print("\nScegli nome Partita > ");
+        String game_name = scan.nextLine();
+        System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+        int numplayers = scan.nextInt();
+        server.createGame(game_name, numplayers, token);
     }
 
     @Override
