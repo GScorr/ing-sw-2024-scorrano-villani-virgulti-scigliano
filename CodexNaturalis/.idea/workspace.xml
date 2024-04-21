@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +65,9 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.RmiClient.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RmiClientF.executor&quot;: &quot;Run&quot;,
     &quot;Application.RmiServer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RmiServerF.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.CenterCardsTest.drawResourceCard.executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.CenterCardsTest.executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.DeckCreationTestGoal.creteGoalDeck.executor&quot;: &quot;Run&quot;,
@@ -274,6 +275,14 @@
       <workItem from="1713018449356" duration="10906000" />
       <workItem from="1713640206406" duration="3355000" />
       <workItem from="1713643582992" duration="1323000" />
+    </task>
+    <task id="LOCAL-00017" summary="Aggiornamento">
+      <option name="closed" value="true" />
+      <created>1710877848514</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1710877848514</updated>
     </task>
     <task id="LOCAL-00018" summary="Aggiornamento">
       <option name="closed" value="true" />
@@ -659,15 +668,7 @@
       <option name="project" value="LOCAL" />
       <updated>1713661315451</updated>
     </task>
-    <task id="LOCAL-00066" summary="super modifica serializable e clientdef">
-      <option name="closed" value="true" />
-      <created>1713692229114</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1713692229114</updated>
-    </task>
-    <option name="localTasksCounter" value="67" />
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
