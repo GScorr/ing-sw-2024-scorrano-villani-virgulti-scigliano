@@ -58,6 +58,11 @@ public class WaitTurn implements PState {
         return false;
     }
 
+    public boolean selectSideCard(int index, boolean flip){
+        player.selectSideCard(index,flip);
+        return true;
+    }
+
     @Override
     public String getNameState() {
         return "WAIT_TURN";

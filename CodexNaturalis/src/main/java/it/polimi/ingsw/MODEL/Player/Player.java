@@ -271,7 +271,7 @@ public class Player implements PlayerObserver {
 
 
     public void selectSideCard(int index, boolean flipp){
-        this.side_card_in_hand.put(index,flipp);
+        cards_in_hand.get(index).flipCard(flipp);
     }
 
     //Una volta che il giocatore ha giocato una carta ne deve pescare una
