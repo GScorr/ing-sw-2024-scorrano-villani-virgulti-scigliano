@@ -47,6 +47,7 @@ public class Player implements PlayerObserver, Serializable {
             //wait_turn = new WaitTurn(this),
             place_card = new PlaceCard(this),
             draw_card = new DrawCard(this),
+            wait_turn = new WaitTurn(this),
             end_game = new EndGame(this),
             actual_state;
 
@@ -146,11 +147,22 @@ public class Player implements PlayerObserver, Serializable {
         return player_points;
     }
 
+    public Deck getGold_deck() {
+        return gold_deck;
+    }
+
+    public Deck getResources_deck() {
+        return resources_deck;
+    }
+
     /*
-            setter:
-             */
+                    setter:
+                     */
     public void setPlayer_state( PState state){
         this.actual_state=state;
+    }
+    public void setPlayerEndGame(){
+        this.actual_state = end_game;
     }
     public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
         this.cards_in_hand = cards_in_hand;
@@ -207,7 +219,7 @@ public class Player implements PlayerObserver, Serializable {
                     setPlayer_state( place_card);
                 }
                 else {
-                    //setPlayer_state(wait_turn);
+                    setPlayer_state(wait_turn);
                 }
                 return;
 
@@ -226,12 +238,14 @@ public class Player implements PlayerObserver, Serializable {
                 setPlayer_state( draw_card );
                 return;
             case "DRAW_CARD":
-                //setPlayer_state( wait_turn);
+                setPlayer_state( wait_turn);
                 return;
             case "END_GAME":
                 return;
         }
     }
+
+
 
     public void setEndGame(){
         setPlayer_state(end_game);
@@ -303,9 +317,7 @@ public class Player implements PlayerObserver, Serializable {
 
 
     public void selectGoal(int i){
-        if(i< 0 || i > 1){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
-        }
+
 
         this.goal_card = initial_goal_cards.get(i);
     }

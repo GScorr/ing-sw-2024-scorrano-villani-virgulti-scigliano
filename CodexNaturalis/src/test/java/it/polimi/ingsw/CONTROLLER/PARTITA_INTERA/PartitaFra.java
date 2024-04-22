@@ -7,7 +7,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.PlaceCard;
 import org.junit.jupiter.api.Test;
 
-import java.lang.foreign.PaddingLayout;
+
 
 public class PartitaFra {
     GameController controller = new GameController(2);
@@ -40,7 +40,6 @@ public class PartitaFra {
             System.out.println(c.getSide().getAngleRightUp().name());
             System.out.println(c.getSide().getAngleLeftDown().name());
             System.out.println(c.getSide().getAngleLeftUp().name());
-
             System.out.println(c.getSide().getCentral_resource().name());
         }
 
@@ -55,12 +54,11 @@ public class PartitaFra {
         controller.playerPeachCardFromGoldDeck(p1);
 
         controller.statePlaceCard(p2,2,22,23);
-        controller.playerPeachCardFromGoldDeck(p2);
+        controller.playerPeachCardFromResourcesDeck(p2);
 
-        try{controller.statePlaceCard(p2,0,22,24);}
-        catch (ControllerException e){
-            System.out.println(e.getId() + e.getMessage());
-        }
+        System.out.println(p1.getResources_deck().cards.size());
+        System.out.println(p2.getGold_deck().cards.size());
+
 
         p1.setPlayer_points(20);
 
