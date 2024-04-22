@@ -15,6 +15,7 @@ import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.State.*;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,14 +37,14 @@ import java.util.List;
 * PLAYER_OBSERVER:
 * PLAYER_SUBJECT
 * */
-public class Player implements PlayerObserver {
+public class Player implements PlayerObserver, Serializable {
     private String name;
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
             choose_goal = new ChooseGoal(this),
             choose_side_first_card = new ChooseSideFirstCard(this),
-            wait_turn = new WaitTurn(this),
+            //wait_turn = new WaitTurn(this),
             place_card = new PlaceCard(this),
             draw_card = new DrawCard(this),
             end_game = new EndGame(this),
@@ -206,7 +207,7 @@ public class Player implements PlayerObserver {
                     setPlayer_state( place_card);
                 }
                 else {
-                    setPlayer_state(wait_turn);
+                    //setPlayer_state(wait_turn);
                 }
                 return;
 
@@ -225,7 +226,7 @@ public class Player implements PlayerObserver {
                 setPlayer_state( draw_card );
                 return;
             case "DRAW_CARD":
-                setPlayer_state( wait_turn);
+                //setPlayer_state( wait_turn);
                 return;
             case "END_GAME":
                 return;

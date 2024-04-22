@@ -4,9 +4,10 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ChooseGoal implements PState{
+public class ChooseGoal implements PState, Serializable {
     Player player;
 
     public ChooseGoal(Player player) {

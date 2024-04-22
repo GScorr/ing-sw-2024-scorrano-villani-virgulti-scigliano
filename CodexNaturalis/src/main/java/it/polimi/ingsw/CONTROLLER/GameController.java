@@ -13,6 +13,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
 import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
 
+import java.io.Serializable;
 import java.util.*;
 
 
@@ -26,10 +27,8 @@ import java.util.*;
 *                           quando per ogni observer (player) si chiama il passaggio di stato, solo uno di questi player avrà la variabile is_first = true => quel player sarà il primo giocatore
 */
 
-public class GameController implements GameSubject {
-    private static int index_counter=0;
+public class GameController implements GameSubject, Serializable {
     private boolean full;
-    private int index_game;
     private List<PlayerObserver> player_observers = new ArrayList<>();
     private List<Player> player_list = new ArrayList<>();
     private List<String> names = new ArrayList<>();
@@ -52,32 +51,34 @@ public class GameController implements GameSubject {
 
     private Game game;
 
-    Comparator<Player> idComparator_point = Comparator.comparingInt(Player::getPlayerPoints);
-    Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
+    transient Comparator<Player> idComparator_point = Comparator.comparingInt(Player::getPlayerPoints);
+    transient Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
 
 
     public GameController(int max_num_player) {
         synchronized(this) {
-            if (max_num_player <= 2 || max_num_player > 4) {
+            if (max_num_player < 2 || max_num_player > 4) {
                 throw new ControllerException(0, "Num Player not Valid in creation Game");
             } else {
                 this.game = new Game(max_num_player);
-                this.index_game = index_counter++;
-                index_counter++;
             }
         }
     }
+    public GameController(String name, int max_num_player) {
+        synchronized(this) {
+            if (max_num_player < 2 || max_num_player > 4) {
+                throw new ControllerException(0, "Num Player not Valid in creation Game");
+            } else {
+                this.game = new Game(name, max_num_player);
 
-
-    public int getIndexGame() {
-        return index_game;
+            }
+        }
     }
 
     public Game getGame() {
         return game;
     }
 
-    public boolean getFull() { return  full;}
 
     public void setGame(Game game) {
         this.game = game;
@@ -126,6 +127,10 @@ public class GameController implements GameSubject {
         return player;
     }
 
+    public boolean getFull(){
+        if(game.getMax_num_player() == game.getNum_player() ) return true;
+        return false;
+    }
 
     public boolean checkNumPlayer(){
         Integer num_player = game.getNum_player();

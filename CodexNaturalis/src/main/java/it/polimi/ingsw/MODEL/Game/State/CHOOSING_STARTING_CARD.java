@@ -3,7 +3,9 @@ package it.polimi.ingsw.MODEL.Game.State;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Player.Player;
 
-public class CHOOSING_STARTING_CARD implements GameState{
+import java.io.Serializable;
+
+public class CHOOSING_STARTING_CARD implements GameState, Serializable {
     Game game;
     public CHOOSING_STARTING_CARD(Game game){
         this.game = game;

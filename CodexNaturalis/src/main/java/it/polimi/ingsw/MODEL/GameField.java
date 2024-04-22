@@ -5,6 +5,8 @@ import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
+
 //Class for the matrix field of each player
 /*@Davide   XXX= DONE
 * TODO:
@@ -13,7 +15,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 *  - gestione errori
 *  - implementa gestione punti per carte risorsa e non XXX
 * */
-public class GameField {
+public class GameField implements Serializable {
     private GameFieldSingleCell[][] field;
     private Player player;
     private int num_of_animal;

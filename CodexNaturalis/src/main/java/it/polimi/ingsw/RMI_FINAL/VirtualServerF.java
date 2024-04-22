@@ -2,6 +2,7 @@ package it.polimi.ingsw.RMI_FINAL;
 
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.VirtualView;
 
@@ -17,6 +18,10 @@ public interface VirtualServerF extends Remote {
     public Map<String, GameController> getTtoG() throws RemoteException;
     public List<GameController> getListGameController() throws  RemoteException;
     public void CreatePlayer(String name, String client_token, boolean first) throws RemoteException;
-    public void createGame(int num_player, String p_token) throws RemoteException;
-    public void addPlayer() throws RemoteException;
+    public void createGame(String game_name, int num_player, String p_token) throws RemoteException;
+    public boolean addPlayer(int game_id, String token) throws RemoteException;
+    public List<VirtualViewF> getListClient() throws RemoteException;
+    public List<GameController> getFreeGames() throws RemoteException;
+    public void insertCard(String p_token, PlayCard card, int x, int y, int index) throws RemoteException, InterruptedException;
+    public boolean checkName(String name, String token) throws RemoteException;
 }

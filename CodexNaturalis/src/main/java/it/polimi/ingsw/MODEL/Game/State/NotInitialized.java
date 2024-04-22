@@ -4,7 +4,9 @@ import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
 
-public class NotInitialized implements GameState{
+import java.io.Serializable;
+
+public class NotInitialized implements GameState, Serializable {
     Game game;
     public NotInitialized(Game game){
         this.game = game;
