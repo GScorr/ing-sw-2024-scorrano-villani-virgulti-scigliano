@@ -276,14 +276,6 @@
       <workItem from="1713640206406" duration="3355000" />
       <workItem from="1713643582992" duration="1323000" />
     </task>
-    <task id="LOCAL-00023" summary="Modifica e fine file json carte risorsa, creazione json gold">
-      <option name="closed" value="true" />
-      <created>1711487100086</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1711487100086</updated>
-    </task>
     <task id="LOCAL-00024" summary="FINE JSON CARD ORO">
       <option name="closed" value="true" />
       <created>1711488825160</created>
@@ -668,7 +660,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713871963687</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="continuazione client">
+      <option name="closed" value="true" />
+      <created>1713873296896</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1713873296896</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -698,7 +698,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Aggiornamento sono gabriele" />
     <MESSAGE value="Aggiunta commenti" />
     <MESSAGE value="test su game e fix game" />
     <MESSAGE value="test su centercards distribuite da game" />
@@ -723,7 +722,8 @@
     <MESSAGE value="small fixes" />
     <MESSAGE value="aggiunta metodo checkName in RmiServerF" />
     <MESSAGE value="Chiusura GameController Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chiusura GameController Test" />
+    <MESSAGE value="continuazione client" />
+    <option name="LAST_COMMIT_MESSAGE" value="continuazione client" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
