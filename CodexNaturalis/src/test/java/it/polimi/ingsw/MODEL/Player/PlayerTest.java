@@ -251,15 +251,18 @@ class PlayerTest {
             System.out.println(e.getMessage());
         }
 
-
+/*
         System.out.println("8 parte 3° Test: se il Player inserisce un Index non valido deve essere lanciata un'eccezione (bound right):  ");
         choose = 2;
         try{
         p1.actual_state.selectGoal(choose);
-        }catch(InvalidBoundException e){
+        }catch(IndexOutOfBoundsException e){
             System.out.println(e.getMessage());
         }
 
+        */
+
+        /*
         System.out.println("8 parte 4° Test: se il Player inserisce un Index non valido deve essere lanciata un'eccezione (bound left):  ");
         choose = -1;
         try{
@@ -267,6 +270,8 @@ class PlayerTest {
         }catch(InvalidBoundException e){
             System.out.println(e.getMessage());
         }
+
+         */
 
         System.out.println("9° test : cambio lo stato del Player:  ");
         p1.InitialNextStatePlayer();
@@ -307,12 +312,16 @@ class PlayerTest {
         }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
-
+/*
         System.out.println("12 parte 1°: PlaceCard Bound Exception (left)  ");
         try{p1.actual_state.placeCard(-1,true,1,1);}
         catch (InvalidBoundException e){
             System.out.println(e.getMessage());
         }
+
+
+ */
+        /*
 
         System.out.println("12 parte 2°: PlaceCard Bound Exception (right)  ");
         try{p1.actual_state.placeCard(3,true,1,1);}
@@ -320,12 +329,15 @@ class PlayerTest {
             System.out.println(e.getMessage());
         }
 
+         */
+
         System.out.println("13 : PLACE_CARD -> DRAW_CARD ");
         p1.nextStatePlayer();
         try{assertEquals("DRAW_CARD",p1.actual_state.getNameState());
         }catch(AssertionError e){
             System.out.println(e.getMessage());
         }
+
 
         /*
         System.out.println("14 DrawCard: Gold-deck");

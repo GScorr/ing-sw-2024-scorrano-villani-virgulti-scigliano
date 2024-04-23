@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /*
 todo
-    test sulla gestione degli erroi
+    test sulla gestione degli errori
  */
 
 class GameControllerTest {
