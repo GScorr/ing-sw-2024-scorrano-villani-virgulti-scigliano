@@ -62,7 +62,7 @@ public class DrawCard implements PState, Serializable {
         return true;
     }
     public boolean selectSideCard(int index, boolean flip){
-        player.side_card_in_hand.put(index,flip);
+        player.selectSideCard(index,flip);
         return true;
     }
 
