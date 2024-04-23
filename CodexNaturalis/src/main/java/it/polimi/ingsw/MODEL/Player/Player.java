@@ -251,18 +251,11 @@ public class Player implements PlayerObserver, Serializable {
         setPlayer_state(end_game);
     }
 
-    /*
-    *if (player_state != PLACE_CARD
-    * index -> posizione nella lista delle carte in mano
-    * */
     public void placeCard(int index,boolean flipped, int x, int y){
-        if(index< 0 || index > 2){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
-        }
-            PlayCard playing_card =  cards_in_hand.get(index);
-            playing_card.flipCard(flipped);
-            game_field.insertCard(playing_card, x, y);
-            removeHandCard(playing_card, index);
+        PlayCard playing_card =  cards_in_hand.get(index);
+        playing_card.flipCard(flipped);
+        game_field.insertCard(playing_card, x, y);
+        removeHandCard(playing_card, index);
 
     }
     private void removeHandCard(PlayCard card, int index){
@@ -317,8 +310,6 @@ public class Player implements PlayerObserver, Serializable {
 
 
     public void selectGoal(int i){
-
-
         this.goal_card = initial_goal_cards.get(i);
     }
 
