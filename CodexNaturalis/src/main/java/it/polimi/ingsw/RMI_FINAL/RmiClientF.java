@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -132,8 +133,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 right=1;
             }
         }
-
-        server.createGame(game_name, numplayers, token, player_name);
+        try{
+        server.createGame(game_name, numplayers, token, player_name);}
+        catch (ControllerException e ){
+            System.out.println(e.getId() + e.getMessage());
+        }
     }
 
     private void newGame_notavailable(String playerName) throws RemoteException {
@@ -141,9 +145,18 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
         System.out.print("\nScegli nome Partita > ");
         String game_name = scan.nextLine();
-        System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-        int numplayers = scan.nextInt();
-        server.createGame(game_name, numplayers, token, playerName);
+        boolean flag;
+        do {
+            flag = false;
+            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+            int numplayers = scan.nextInt();
+            try {
+                server.createGame(game_name, numplayers, token, playerName);
+            } catch (ControllerException e) {
+                System.err.println(e.getMessage());
+                flag = true;
+            }
+        } while(flag);
     }
 
     @Override

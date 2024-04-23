@@ -61,7 +61,7 @@ public class GameController implements GameSubject, Serializable {
     public GameController(int max_num_player) {
         synchronized(this) {
             if (max_num_player < 2 || max_num_player > 4) {
-                throw new ControllerException(0, "Num Player not Valid in creation Game");
+                throw new ControllerException(0, "Num Player not Valid in creation Game, Insert Again ...");
             } else {
                 this.game = new Game(max_num_player);
             }
@@ -70,7 +70,7 @@ public class GameController implements GameSubject, Serializable {
     public GameController(String name, int max_num_player) {
         synchronized(this) {
             if (max_num_player < 2 || max_num_player > 4) {
-                throw new ControllerException(0, "Num Player not Valid in creation Game");
+                throw new ControllerException(0, "Num Player not Valid in creation Game, Insert Again ...");
             } else {
                 this.game = new Game(name, max_num_player);
 
