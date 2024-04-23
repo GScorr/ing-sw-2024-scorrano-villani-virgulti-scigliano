@@ -157,6 +157,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.err.print("\n[ERROR] " + details + "\n> ");
     }
 
+    @Override
+    public void reportMessage(String details) throws RemoteException {
+        // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
+        System.err.print("\n[ERROR] " + details + "\n> ");
+
+    }
+
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
