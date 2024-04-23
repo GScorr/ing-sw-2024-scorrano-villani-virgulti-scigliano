@@ -2,19 +2,18 @@ package it.polimi.ingsw.MODEL.Game.State;
 
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Player.Player;
-import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
 
 import java.io.Serializable;
 
-public class NotInitialized implements GameState, Serializable {
+public class CHOOSING_STARTING_CARD implements GameState, Serializable {
     Game game;
-    public NotInitialized(Game game){
+    public CHOOSING_STARTING_CARD(Game game){
         this.game = game;
     }
     @Override
     public boolean insertPlayer(Player player) {
-        game.insertPlayer(player);
-        return true;
+        return false;
+
     }
 
     @Override
@@ -24,7 +23,8 @@ public class NotInitialized implements GameState, Serializable {
 
     @Override
 
+
     public String getNameState() {
-        return "NOT_INITIALIZED";
+        return "CHOOSING_STARTING_CARD";
     }
 }

@@ -1,6 +1,4 @@
 package it.polimi.ingsw.RMI;
-
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -14,20 +12,21 @@ import java.util.concurrent.BlockingQueue;
 
 public class RmiServer implements VirtualServer{
 
-    GiocoController controller;
-
+    private GiocoController controller;
     public TokenManager token_manager = new TokenManagerImplement();
-
     private List<VirtualView> clients = new ArrayList<>();
 
-    private Map<String, Giocatore> mappa = new HashMap<>();
+    private Map<String, Giocatore> mappa;
     private List<GiocoController> games = new ArrayList<>();
+    private Map<String, GiocoController> mappa_gp ;
 
     public RmiServer(GiocoController controller) {
         this.controller = controller;
+        this.mappa = new HashMap<>();
+        this.mappa_gp = new HashMap<>();
     }
 
-    final BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
+    private BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
 
 
 
@@ -54,12 +53,16 @@ public class RmiServer implements VirtualServer{
 
 
     @Override
-    public void put(int index, Integer number, Giocatore player) throws RemoteException{
+    public void put(int index, Integer number, String player_name) throws RemoteException, InterruptedException {
+
         Integer[] currentState;
-        System.err.println("add request received");
-        this.controller.putInArray(index, number, player);
-        if ( player == controller.getStatus1() ) currentState = this.controller.getStatus1().getCampo();
-        else currentState = this.controller.getStatus2().getCampo();
+        System.out.println("\n [add request received] \n");
+        System.out.println(mappa_gp.size());
+        mappa_gp.get(player_name).putInArray(index, number, mappa.get(player_name));
+
+
+        if ( mappa.get(player_name) == mappa_gp.get(player_name).getStatus1() ) currentState = mappa_gp.get(player_name).getStatus1().getCampo();
+        else currentState = mappa_gp.get(player_name).getStatus2().getCampo();
 
         try
         {
@@ -67,6 +70,8 @@ public class RmiServer implements VirtualServer{
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
+        broadcastUpdateThread();
+
     }
 
     @Override
@@ -112,24 +117,45 @@ public class RmiServer implements VirtualServer{
     }
 
     @Override
-    public void createGame(String name, Giocatore player) throws RemoteException {
-        GiocoController game = new GiocoController(name, player);
+    public synchronized void createGame(String name, int numplayers, String player) throws RemoteException {
+        GiocoController game = new GiocoController(name, numplayers, mappa.get(player));
         games.add(game);
+        mappa_gp.put(player, game);
     }
 
     @Override
-    public void addPlayer(Gioco game, Giocatore player) throws RemoteException {
-        game.setPlayer2(player);
+    public boolean addPlayer(int ID, String player) throws RemoteException {
+        int index = fromIDtoindex(ID);
+        if(index!=-1) {
+
+            boolean check= games.get(index).getGame().insertPlayer( mappa.get(player) );
+            if (check) {
+                mappa_gp.put(player, games.get(index));
+                return true;
+            }
+            else return false;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public int fromIDtoindex(int id) throws RemoteException {
+        int index = games.stream()
+                .filter(gc -> gc.getGame().getIndex_game() == id)
+                .findFirst()
+                .map(games::indexOf)
+                .orElse(-1);
+        return index;
     }
 
     @Override
     public Giocatore getFromToken(String token){
         return mappa.get(token);
     }
-
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
-        VirtualServer server = new RmiServer(new GiocoController("new", null));         //modifica
+        VirtualServer server = new RmiServer(new GiocoController("new",3, null));         //modifica
         VirtualServer stub = (VirtualServer) UnicastRemoteObject.exportObject(server,0);
         Registry registry = LocateRegistry.createRegistry(1234);
         registry.rebind(serverName,stub);

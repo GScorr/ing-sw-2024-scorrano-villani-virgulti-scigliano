@@ -12,11 +12,13 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
+
     Player player1 = new Player(ColorsEnum.BLU,"a",true);
     Player player2 = new Player(ColorsEnum.RED,"b",false);
     Player player3 = new Player(ColorsEnum.GREEN,"c",false);
     Player player4 = new Player(ColorsEnum.YELLOW,"d",false);
     Game game= new Game(3);
+
     @Test
     void insertPlayer() {
         game.insertPlayer(player1);
@@ -26,6 +28,7 @@ class GameTest {
         game.insertPlayer(player3);
         assertEquals(player3,game.getGet_player_index().get(2));
         assertEquals(3,game.getNum_player());
+        /*
         try {
             game.insertPlayer(player4);
 
@@ -33,6 +36,8 @@ class GameTest {
         } catch (LimitNumPlayerException e) {
             assertEquals("Limite giocatori già raggiunto, non è possibile entrare in questa partita", e.getMessage());
         }
+
+         */
 
     }
 

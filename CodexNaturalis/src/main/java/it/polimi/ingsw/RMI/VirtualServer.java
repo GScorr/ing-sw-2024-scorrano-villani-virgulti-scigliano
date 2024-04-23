@@ -9,7 +9,7 @@ import java.util.Map;
 public interface VirtualServer extends Remote {
     public void connect(VirtualView client) throws RemoteException;
 
-    public void put(int index, Integer number, Giocatore player) throws RemoteException;
+    public void put(int index, Integer number, String player ) throws RemoteException, InterruptedException;
 
     public boolean gamesIsEmpty() throws RemoteException;
 
@@ -24,11 +24,12 @@ public interface VirtualServer extends Remote {
 
     public Giocatore getPlayerFromClient(String client ) throws RemoteException;
 
-    public void createGame(String name, Giocatore player ) throws  RemoteException;
+    public void createGame(String name, int numplayers, String player ) throws  RemoteException;
 
-    public void addPlayer(Gioco game, Giocatore player) throws  RemoteException;
+    public boolean addPlayer(int index, String player) throws  RemoteException;
 
     public String createToken(VirtualView client ) throws  RemoteException;
 
     public Giocatore getFromToken(String token) throws  RemoteException;
+    public int fromIDtoindex(int id) throws RemoteException;
 }

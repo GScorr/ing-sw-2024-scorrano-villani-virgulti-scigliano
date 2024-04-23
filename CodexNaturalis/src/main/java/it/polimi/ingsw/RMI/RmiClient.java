@@ -7,9 +7,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 import java.util.Scanner;
 
-//
+
 public class RmiClient extends UnicastRemoteObject implements VirtualView {
     final VirtualServer server;
     private  String token;
@@ -18,62 +19,89 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         this.server = server;
     }
 
-    private void run() throws RemoteException {
+    private void run() throws RemoteException, InterruptedException {
         this.server.connect(this);
         runCli();
     }
 
-    private void runCli() throws RemoteException {
+    private void runCli() throws RemoteException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        VirtualView curr_client =  this;
-        String player_name ;
+        VirtualView curr_client = this;
+        String player_name;
         Giocatore curr_player;
 
-        //creo giocatore
-        System.out.print("\n Scegli nome Player > ");
+        // Creo giocatore
+        System.out.print("\nScegli nome Player > ");
         player_name = scan.nextLine();
-        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement which contains a
-        // map that associate the client with the token, and we also have a map in server that associate the token with the player
+
+        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
+        // which contains a map that associate the client with the token, and we also have a map in server that
+        // associate the token with the player
         // < RmiClient , TOKEN > < TOKEN , Player >
         this.token = server.createToken(this);
-        System.out.print("\n Token Player > " + this.token);
-        server.createPlayer( player_name , this.token );
+        //System.out.print("\nToken Player > " + this.token);
+        server.createPlayer(player_name, this.token);
 
-        curr_player = server.getFromToken(this.token);
+        String game_name;
 
-        synchronized (this) {
+        // Se non esistono partite
+        if (server.gamesIsEmpty()) {
+            System.out.println("\nNon esiste nessuna partita, creane una nuova!");
+            System.out.print("\nScegli nome Partita > ");
+            game_name = scan.nextLine();
+            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+            int numplayers = scan.nextInt();
+            server.createGame(game_name, numplayers, token);
+        } else {
+            int done=0;
+            while(done==0) {
+                System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
+                String decision = scan.nextLine();
+                if (decision.equalsIgnoreCase("old")) {
+                    boolean check=false;
+                    while(!check) {
+                        done = 1;
+                        System.out.println("\nElenco partite disponibili: ");
+                        List<GiocoController> partite = server.getLisGames();
 
-            //controllo che la partita sia non vuota
-            if (server.gamesIsEmpty()) {
-                //creo partita e inserisco come player 2
-                System.out.print("\n Scegli nome Partita > ");
-                String game_name = scan.nextLine();
-                server.createGame(game_name, curr_player);
-                System.out.print("\n Giocatore " + server.getLisGames().get(0).getGame().getPlayer1().getName() + " Ha creato a una nuova Partita  ");
+                        for (GiocoController g : partite) {
+                            System.out.println(g.getGame().getName() + " " + g.getGame().getPlayers().size() + "/" + g.getGame().getNumplayers() + " ID:" + g.getGame().getIndex_game());
+                        }
 
-            } else {
-                //inserisco player come player 2 in game todo correzione bug inserimento giocatore 2____ il giocatore 2 non viene inserito nel game
-                Gioco existing_game = server.getLisGames().get(0).getGame();
-                server.addPlayer(existing_game, curr_player);
-                System.out.print("\n Giocatore " + curr_player.getName() + " " + existing_game.getPlayer2() + " Aggiunto a partita esistente");
+                        System.out.println("\nInserisci ID partita in cui entrare");
+                        int ID = scan.nextInt();
+                        check = server.addPlayer(ID, token);
+                    }
+                } else if (decision.equalsIgnoreCase("new")) {
+                    done=1;
+                    System.out.print("\nScegli nome Partita > ");
+                    game_name = scan.nextLine();
+                    int right=0;
+                    int numplayers=4;
+                    while(right==0) {
+                        System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+                        numplayers = scan.nextInt();
+                        if(numplayers>=2&&numplayers<=4){
+                            right=1;
+                        }
+                    }
+
+                    server.createGame(game_name, numplayers, token);
+                } else {
+                    System.out.println("\nInserimento errato!");
+                }
             }
         }
-        /*System.out.print("\nnome Scelto > " + player_name + " > creazione Player...\n");
+        System.out.print("creazione Player andata a buon fine!");
 
-
-        System.out.print("...creazione Player andata a buon fine");
-        System.out.print("\nCONTIENE: " + server.getMap().size() );
-
-        // for (Giocatore g : server.getMap().values() ) System.out.print(" " +  g.getName() );
-        //server.getMap().values().forEach(giocatore -> System.out.println(giocatore.getName()));
-        //System.out.print("\nche giocatore sono ?" + server.getPlayerFromClient(this).getName() );
-
-        /*
-        while (true) {
+        /*while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
             int value = scan.nextInt();
-            server.put(index, value, curr_player );
+            server.put(index, value, token );
+            Integer[] campo = server.getFromToken(token).getCampo();
+            for(int i=0; i<10; i++)
+                System.out.println(" " +campo[i]);
         }*/
 
     }
@@ -81,8 +109,13 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
     @Override
     public void showUpdate(Integer[] number) throws RemoteException {
         System.out.print("\n> ");
+        int a=0;
         for ( int i=0 ; i<10; i++)
+        {   if( number[i] != null )
             System.out.print( number[i] );
+        else
+            System.out.println(a);
+        }
         System.out.print("\n> ");
     }
 
@@ -92,9 +125,11 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
         System.err.print("\n[ERROR] " + details + "\n> ");
     }
 
-    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
+    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
         VirtualServer server = (VirtualServer) registry.lookup("VirtualServer");
         new RmiClient(server).run();
     }
 }
+
+// todo check numero massimo giocatori partita, check id partita, check su scritta new/old

@@ -15,6 +15,8 @@ import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.State.*;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -35,22 +37,26 @@ import java.util.List;
 * PLAYER_OBSERVER:
 * PLAYER_SUBJECT
 * */
-public class Player implements PlayerObserver {
+public class Player implements PlayerObserver, Serializable {
     private String name;
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
             choose_goal = new ChooseGoal(this),
             choose_side_first_card = new ChooseSideFirstCard(this),
-            wait_turn = new WaitTurn(this),
+            //wait_turn = new WaitTurn(this),
             place_card = new PlaceCard(this),
             draw_card = new DrawCard(this),
+            wait_turn = new WaitTurn(this),
             end_game = new EndGame(this),
             actual_state;
 
 
     private final boolean isFirst;
     private int index_removed_card;
+
+    public HashMap<Integer,Boolean> side_card_in_hand  = new HashMap<>();
+
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
@@ -66,6 +72,8 @@ public class Player implements PlayerObserver {
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
     private int player_points = 0;
+
+    private int num_goal_achieve = 0;
 
 
     //Questi mazzi servono per pescare
@@ -139,11 +147,22 @@ public class Player implements PlayerObserver {
         return player_points;
     }
 
+    public Deck getGold_deck() {
+        return gold_deck;
+    }
+
+    public Deck getResources_deck() {
+        return resources_deck;
+    }
+
     /*
-            setter:
-             */
+                    setter:
+                     */
     public void setPlayer_state( PState state){
         this.actual_state=state;
+    }
+    public void setPlayerEndGame(){
+        this.actual_state = end_game;
     }
     public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
         this.cards_in_hand = cards_in_hand;
@@ -225,6 +244,9 @@ public class Player implements PlayerObserver {
                 return;
         }
     }
+
+
+
     public void setEndGame(){
         setPlayer_state(end_game);
     }
@@ -252,10 +274,19 @@ public class Player implements PlayerObserver {
         this.player_points=this.player_points+point;
     }
 
+    public void setPlayer_points(int player_points) {
+        this.player_points = player_points;
+    }
 
     //questo metodo serve a peachFrom...  per inserire la carta pescata
     private void insertCard(PlayCard card){
+        this.side_card_in_hand.put(index_removed_card,false);
         this.cards_in_hand.set(this.index_removed_card, card);
+    }
+
+
+    public void selectSideCard(int index, boolean flipp){
+        cards_in_hand.get(index).flipCard(flipp);
     }
 
     //Una volta che il giocatore ha giocato una carta ne deve pescare una
@@ -268,9 +299,7 @@ public class Player implements PlayerObserver {
     }
     public void peachFromCardsInCenter(int i){
 
-        if(i< 0 || i > 3){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<4");
-        }
+
 
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));
@@ -288,9 +317,7 @@ public class Player implements PlayerObserver {
 
 
     public void selectGoal(int i){
-        if(i< 0 || i > 1){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
-        }
+
 
         this.goal_card = initial_goal_cards.get(i);
     }
@@ -303,7 +330,11 @@ public class Player implements PlayerObserver {
 
     }
 
+    public int getNum_goal_achieve() {
+        return num_goal_achieve;
+    }
 
-
-
+    public void setNum_goal_achieve(int num_goal_achieve) {
+        this.num_goal_achieve = num_goal_achieve;
+    }
 }

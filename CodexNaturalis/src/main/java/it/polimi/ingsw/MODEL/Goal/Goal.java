@@ -3,7 +3,9 @@ package it.polimi.ingsw.MODEL.Goal;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.GameField;
 
-public class Goal {
+import java.io.Serializable;
+
+public class Goal implements Serializable {
     private GoalStrategy goalType;
     private AnglesEnum resource;
     private int points;

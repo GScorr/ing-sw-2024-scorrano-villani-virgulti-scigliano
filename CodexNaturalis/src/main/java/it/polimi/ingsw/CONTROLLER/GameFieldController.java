@@ -30,6 +30,7 @@ public class GameFieldController {
         return player_field;
     }
 
+    String errore = "Impossible insert a card in this position: ";
     // TODO capire come collegare a MODEL
     // Function to check if the card can be placed,
     // Return false if you can't, true if you can
@@ -41,7 +42,8 @@ public class GameFieldController {
                 (player_field.getField()[x+1][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() ) && player_field.getField()[x+1][y].isFilled()) ||
                 (player_field.getField()[x][y+1].getCard().equals( player_field.getField()[x+1][y+1].getCard() )&& player_field.getField()[x][y+1].isFilled())){
             //System.out.println("a");
-            return false;}
+            throw new ControllerException(11,errore + "another Card is already insert in this position ");
+            }
 
         // Check that there is at least one card in the space ( you can't place a card in an empty space )
         if(     !player_field.getField()[x][y].isEmpty()   ||
@@ -55,25 +57,30 @@ public class GameFieldController {
                     (!player_field.getField()[x][y + 1].isEmpty() && player_field.getField()[x][y + 1].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x + 1][y + 1].isEmpty() && player_field.getField()[x + 1][y + 1].getValue().equals(AnglesEnum.NONE))){
                 //System.out.println("c");
-                return false;}
+                throw new ControllerException(13,errore + "The Cards already in the field doesn't have a valid angle ");}
             else {
                 if (card instanceof GoldCard) {
-                    if (!checkGoldConstraints(card.getCostraint())) return false;
-                    player.addPoints(goldPointsCount((GoldCard) card, x, y));
+                    if (!checkGoldConstraints(card.getCostraint())) {
+                        throw new ControllerException(14,errore + "Gold Costraint requirement not met ");
+                    }
+                    else {
+                        player.addPoints(goldPointsCount((GoldCard) card, x, y));
+                    }
                 }
                 if (card instanceof ResourceCard)
                     player.addPoints(resourcePointsCount(((ResourceCard) card)));
                 resourcePointsChange(card, x, y);
-
                 return true;
 
             }
+        }else{
+            throw new ControllerException(12,errore + "Card insert in an empty space ");
         }
-        return false;
+
     }
     //check for all constraints of Gold Card,
     // given a value of the constraint
-    public synchronized boolean checkGoldConstraints(Costraint val){
+    private synchronized boolean checkGoldConstraints(Costraint val){
         return switch (val) {
             case FIVEINS -> player_field.getNumOfInsect() >= 5;
             case FIVEANIM -> player_field.getNumOfAnimal() >= 5;
