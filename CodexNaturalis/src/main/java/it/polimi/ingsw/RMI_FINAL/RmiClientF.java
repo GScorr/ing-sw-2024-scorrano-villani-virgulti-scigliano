@@ -56,16 +56,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
         System.out.print("Aspetta il tuo turno -");
         while (true) {
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("/");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("|");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("\\");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("-");
         }
@@ -155,6 +155,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void reportError(String details) throws RemoteException {
         // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
         System.err.print("\n[ERROR] " + details + "\n> ");
+    }
+
+    @Override
+    public void reportMessage(String details) throws RemoteException {
+        // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
+        System.err.print("\n[ERROR] " + details + "\n> ");
+
     }
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
