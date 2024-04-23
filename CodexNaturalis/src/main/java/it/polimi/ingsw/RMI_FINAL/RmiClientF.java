@@ -76,7 +76,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 Thread.sleep(70);
                 System.out.print("\b");
                 System.out.print("-");
+            System.out.println(server.checkFull(this.token));
         }
+        System.out.println("Scegli obiettivo tra:\n " + server.getTtoP().get(this.token).getInitial_goal_cards().get(0).getGoalType()
+        + "e" + server.getTtoP().get(this.token).getInitial_goal_cards().get(1).getGoalType());
         System.out.println("Ehi la tua partita è piena!\n");
 
         server.showStartingCard(token);
