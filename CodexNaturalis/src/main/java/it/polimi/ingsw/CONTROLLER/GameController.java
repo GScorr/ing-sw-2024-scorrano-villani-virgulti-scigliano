@@ -57,6 +57,7 @@ public class GameController implements GameSubject, Serializable {
     transient Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
 
 
+
     public GameController(int max_num_player) {
         synchronized(this) {
             if (max_num_player < 2 || max_num_player > 4) {
@@ -106,6 +107,8 @@ public class GameController implements GameSubject, Serializable {
         // Se non trova corrispondenze, restituisce true perché il nome è univoco
         return;
     }
+
+
 
     public Player createPlayer(String nome, boolean isFirst){
         if(game.getNumPlayer() > 0) {

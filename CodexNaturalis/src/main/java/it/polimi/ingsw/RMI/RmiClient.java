@@ -25,10 +25,12 @@ public class RmiClient extends UnicastRemoteObject implements VirtualView {
     }
 
     private void runCli() throws RemoteException, InterruptedException {
+
         Scanner scan = new Scanner(System.in);
         VirtualView curr_client = this;
         String player_name;
         Giocatore curr_player;
+
 
         // Creo giocatore
         System.out.print("\nScegli nome Player > ");
