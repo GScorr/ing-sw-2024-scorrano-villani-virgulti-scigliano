@@ -92,7 +92,7 @@ public class RmiServerF implements VirtualServerF {
                 token_manager.getTokens().get(p_token).reportError(error);
                 return false;}
             token_to_player.put( p_token , controllers.get(index).createPlayer(name, false) );
-            //controllers.get(index).checkNumPlayer();
+            controllers.get(index).checkNumPlayer();
             token_to_game.put(p_token , controllers.get(index) );
             return true;
         }
@@ -165,7 +165,7 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public void showStartingCard(String token) throws RemoteException {
         PlayCard card = token_to_player.get(token).getStartingCard();
-
+        token_manager.getTokens().get(token).showCard(card);
     }
 
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
