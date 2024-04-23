@@ -92,7 +92,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             if (decision.equalsIgnoreCase("old")) {
                 server.CreatePlayer(player_name, this.token,false);
                 done = 1;
-                chooseMatch();
+                chooseMatch(player_name);
             } else if (decision.equalsIgnoreCase("new")) {
                 done=1;
                 newGame(player_name);
@@ -102,7 +102,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
 
-    private void chooseMatch() throws RemoteException {
+    private void chooseMatch(String player_name) throws RemoteException {
         Scanner scan = new Scanner(System.in);
         boolean check=false;
         while(!check) {
@@ -115,13 +115,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
             System.out.println("\nInserisci ID partita in cui entrare");
             int ID = scan.nextInt();
-            check = server.addPlayer(ID, token);
+            check = server.addPlayer(ID, token, player_name);
         }
     }
 
     private void newGame(String player_name) throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        server.CreatePlayer(player_name, this.token,true);
         System.out.print("\nScegli nome Partita > ");
         String game_name = scan.nextLine();
         int right=0;
@@ -134,18 +133,17 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
 
-        server.createGame(game_name, numplayers, token);
+        server.createGame(game_name, numplayers, token, player_name);
     }
 
     private void newGame_notavailable(String playerName) throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        server.CreatePlayer(playerName, this.token,true);
         System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
         System.out.print("\nScegli nome Partita > ");
         String game_name = scan.nextLine();
         System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
         int numplayers = scan.nextInt();
-        server.createGame(game_name, numplayers, token);
+        server.createGame(game_name, numplayers, token, playerName);
     }
 
     @Override
@@ -166,4 +164,3 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 }
 
-// todo check numero massimo giocatori partita, check id partita, check su scritta new/old

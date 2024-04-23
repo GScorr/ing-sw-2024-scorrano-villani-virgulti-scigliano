@@ -59,7 +59,7 @@ public class RmiServerF implements VirtualServerF {
     //todo: decidere come scegliere il colore, per ora lascio sempre green (come da controller)
     @Override
     public void CreatePlayer(String player_name, String client_token, boolean first) throws RemoteException {
-        ctrl = new GameController(4);
+        //ctrl = new GameController(4);
         Player p = ctrl.createPlayer(player_name, first );
         token_to_player.put( client_token, p );
     }
@@ -67,9 +67,10 @@ public class RmiServerF implements VirtualServerF {
     /*create a new GController, add it to the list and after insert player to the new game
     , add token and gcontroller in the token to controller*/
     @Override
-    public void createGame(String name, int num_player, String p_token) throws RemoteException {
+    public void createGame(String name, int num_player, String p_token, String player_name) throws RemoteException {
         GameController game_controller = new GameController(name, num_player);
-        game_controller.getGame().insertPlayer(token_to_player.get(p_token));
+        token_to_player.put( p_token , game_controller.createPlayer(player_name, true) );
+        //game_controller.getGame().insertPlayer(token_to_player.get(p_token));
         game_controller.checkNumPlayer();
         controllers.add(game_controller);
         token_to_game.put( p_token, game_controller);
@@ -78,7 +79,7 @@ public class RmiServerF implements VirtualServerF {
     /*check if the id is valid, if not I send back a report error, otherwise i insert the
      player in the given game */
     @Override
-    public boolean addPlayer(int game_id, String p_token) throws RemoteException {
+    public boolean addPlayer(int game_id, String p_token, String name) throws RemoteException {
         int index = controllers.stream()
                 .filter(gc -> gc.getGame().getIndex_game() == game_id)
                 .findFirst()
@@ -89,7 +90,7 @@ public class RmiServerF implements VirtualServerF {
                 {String error = "\nGame is Full\n";
                 token_manager.getTokens().get(p_token).reportError(error);
                 return false;}
-            controllers.get(index).getGame().insertPlayer(token_to_player.get(p_token));
+            token_to_player.put( p_token , controllers.get(index).createPlayer(name, false) );
             controllers.get(index).checkNumPlayer();
             token_to_game.put(p_token , controllers.get(index) );
             return true;
