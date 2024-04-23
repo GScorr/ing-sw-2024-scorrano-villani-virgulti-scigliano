@@ -1,6 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.*;
 
@@ -71,7 +72,7 @@ public class RmiServerF implements VirtualServerF {
         GameController game_controller = new GameController(name, num_player);
         token_to_player.put( p_token , game_controller.createPlayer(player_name, true) );
         //game_controller.getGame().insertPlayer(token_to_player.get(p_token));
-        game_controller.checkNumPlayer();
+        //game_controller.checkNumPlayer();
         controllers.add(game_controller);
         token_to_game.put( p_token, game_controller);
     }
@@ -91,7 +92,7 @@ public class RmiServerF implements VirtualServerF {
                 token_manager.getTokens().get(p_token).reportError(error);
                 return false;}
             token_to_player.put( p_token , controllers.get(index).createPlayer(name, false) );
-            controllers.get(index).checkNumPlayer();
+            //controllers.get(index).checkNumPlayer();
             token_to_game.put(p_token , controllers.get(index) );
             return true;
         }
@@ -143,6 +144,28 @@ public class RmiServerF implements VirtualServerF {
                 return false; }
         }
         return true;
+    }
+
+    @Override
+    public void chooseGoal(String p_token, int goal_index) throws RemoteException {
+        token_to_game.get(p_token).playerChooseGoal( token_to_player.get(p_token), goal_index );
+    }
+
+    @Override
+    public void selectStartingCard(String p_token, boolean flipped) throws RemoteException {
+        token_to_game.get(p_token).playerSelectStartingCard( token_to_player.get(p_token) , flipped );
+    }
+
+    @Override
+    public boolean checkNumPlayers(String token) throws RemoteException {
+        //ritorna true se ho raggiunto i player
+        return token_to_game.get(token).checkNumPlayer();
+    }
+
+    @Override
+    public void showStartingCard(String token) throws RemoteException {
+        PlayCard card = token_to_player.get(token).getStartingCard();
+
     }
 
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
