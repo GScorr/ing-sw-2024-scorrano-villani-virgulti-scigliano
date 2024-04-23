@@ -172,14 +172,11 @@ public class RmiServerF implements VirtualServerF {
 
     @Override
     public RmiController findRmiController(int game_id, String p_token) throws RemoteException {
-        int index = rmi_controllers.stream()
-                .map( r -> {
-                    try {
-                        return r.getController();
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
+        List<GameController> games = new ArrayList<>();
+        for(RmiController r : rmi_controllers){
+            games.add(r.getController());
+        }
+        int index = games.stream()
                 .filter(gc -> gc.getGame().getIndex_game() == game_id)
                 .findFirst()
                 .map(games::indexOf)
