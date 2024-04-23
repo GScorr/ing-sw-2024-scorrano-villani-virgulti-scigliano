@@ -150,6 +150,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public void showUpdate(GameField gamefield) throws RemoteException {
+
     }
 
     @Override
