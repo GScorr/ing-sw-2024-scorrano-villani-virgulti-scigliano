@@ -67,9 +67,9 @@ public class RmiServerF implements VirtualServerF {
     /*create a new GController, add it to the list and after insert player to the new game
     , add token and gcontroller in the token to controller*/
     @Override
-    public void createGame(String name, int num_player, String p_token) throws RemoteException {
+    public void createGame(String name, int num_player, String p_token, String player_name) throws RemoteException {
         GameController game_controller = new GameController(name, num_player);
-        token_to_player.put( p_token , game_controller.createPlayer(name, true) );
+        token_to_player.put( p_token , game_controller.createPlayer(player_name, true) );
         //game_controller.getGame().insertPlayer(token_to_player.get(p_token));
         game_controller.checkNumPlayer();
         controllers.add(game_controller);
@@ -90,7 +90,7 @@ public class RmiServerF implements VirtualServerF {
                 {String error = "\nGame is Full\n";
                 token_manager.getTokens().get(p_token).reportError(error);
                 return false;}
-            token_to_player.put( p_token , controllers.get(index).createPlayer(name, true) );
+            token_to_player.put( p_token , controllers.get(index).createPlayer(name, false) );
             controllers.get(index).checkNumPlayer();
             token_to_game.put(p_token , controllers.get(index) );
             return true;

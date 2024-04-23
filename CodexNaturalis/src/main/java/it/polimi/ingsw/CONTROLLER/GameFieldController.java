@@ -10,10 +10,12 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
+
 //import javax.smartcardio.Card;
 
 
-public class GameFieldController {
+public class GameFieldController implements Serializable {
     private GameField player_field;
     private Player player;
 
