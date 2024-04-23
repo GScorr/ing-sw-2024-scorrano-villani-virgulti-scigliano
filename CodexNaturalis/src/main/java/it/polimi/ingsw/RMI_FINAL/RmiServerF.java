@@ -181,8 +181,9 @@ public class RmiServerF implements VirtualServerF {
         int index = games.stream()
                 .filter(gc -> gc.getGame().getIndex_game() == game_id)
                 .findFirst()
-                .map(rmi_controllers::indexOf)
+                .map(games::indexOf)
                 .orElse(-1);
+
         if (index != -1)
         {
             token_to_rmi.put(p_token , rmi_controllers.get(index) );
