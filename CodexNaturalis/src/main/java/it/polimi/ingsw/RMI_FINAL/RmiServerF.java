@@ -157,9 +157,9 @@ public class RmiServerF implements VirtualServerF {
     }
 
     @Override
-    public boolean checkNumPlayers(String token) throws RemoteException {
+    public boolean checkFull(String token) throws RemoteException {
         //ritorna true se ho raggiunto i player
-        return token_to_game.get(token).checkNumPlayer();
+        return token_to_game.get(token).getFull();
     }
 
     @Override

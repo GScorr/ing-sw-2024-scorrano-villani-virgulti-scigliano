@@ -26,6 +26,6 @@ public interface VirtualServerF extends Remote {
     public boolean checkName(String name, String token) throws RemoteException;
     public void chooseGoal(String p_token, int goal_index) throws RemoteException;
     public void selectStartingCard(String token, boolean flipped) throws RemoteException;
-    public boolean checkNumPlayers(String token) throws RemoteException;
+    public boolean checkFull(String token) throws RemoteException;
     public void showStartingCard(String token) throws RemoteException;
 }

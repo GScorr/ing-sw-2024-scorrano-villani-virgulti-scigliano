@@ -2,6 +2,10 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.MODEL.Card.GoldCard;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.ResourceCard;
+import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 
@@ -59,7 +63,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.print("creazione Player andata a buon fine!\n");
 
         System.out.print("Aspetta il riempimento partita -");
-        while (!server.checkNumPlayers(this.token)) {
+        while (!server.checkFull(this.token)) {
                 Thread.sleep(70);
                 System.out.print("\b");
                 System.out.print("/");
@@ -72,7 +76,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 Thread.sleep(70);
                 System.out.print("\b");
                 System.out.print("-");
+            System.out.println(server.checkFull(this.token));
         }
+        System.out.println("Scegli obiettivo tra:\n " + server.getTtoP().get(this.token).getInitial_goal_cards().get(0).getGoalType()
+        + "e" + server.getTtoP().get(this.token).getInitial_goal_cards().get(1).getGoalType());
         System.out.println("Ehi la tua partita è piena!\n");
 
 
@@ -176,6 +183,38 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void reportMessage(String details) throws RemoteException {
         // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
         System.err.print("\n[ERROR] " + details + "\n> ");
+
+    }
+
+    @Override
+    public void showCard(PlayCard card) throws RemoteException {
+        Side back = card.getBackSide();
+        Side front = card.getFrontSide();
+
+        System.out.println("BACK SIDE\n--------------------------");
+        System.out.println( " | " + back.getAngleLeftUp().toString().charAt(0)  + " |       " );
+        System.out.println( " | " + back.getAngleRightUp().toString().charAt(0) + " |\n " );
+        System.out.println( " |       | " + back.getCentral_resource().toString().charAt(0) + back.getCentral_resource2().toString().charAt(0) + back.getCentral_resource3().toString().charAt(0) + " |         |\n " );
+        System.out.println( " | " + back.getAngleLeftDown().toString().charAt(0) +  " |       " );
+        System.out.println( " | " + back.getAngleRightDown().toString().charAt(0) + " |\n " );
+        System.out.println("--------------------------\n\n");
+
+        System.out.println("FRONT SIDE\n--------------------------");
+        System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " );
+        if(card instanceof ResourceCard) {
+            System.out.println( " | " + card.getPoint() + " | ");
+            if ( card instanceof GoldCard ){
+                System.out.println("  " + ((GoldCard) card).getPointBonus().toString().charAt(0)  + "  ");
+            }
+        }
+        System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
+        System.out.println( " |       | " + front.getCentral_resource().toString().charAt(0) + front.getCentral_resource2().toString().charAt(0) + front.getCentral_resource3().toString().charAt(0) + " |         |\n " );
+        System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
+        if ( card instanceof GoldCard ){
+            System.out.println("  " + card.getCostraint().toString().charAt(0)  + "  ");
+        }
+        System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
+        System.out.println("--------------------------\n\n");
 
     }
 

@@ -33,12 +33,12 @@ public abstract class  PlayCard implements Serializable {
     }
 
 
-    private Side getFrontSide() {
+    public Side getFrontSide() {
         return front_side;
     }
 
 
-    private Side getBackSide() {
+    public Side getBackSide() {
         return back_side;
     }
     public  Side getSide(){
