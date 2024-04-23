@@ -1,6 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.*;
 
@@ -159,6 +160,12 @@ public class RmiServerF implements VirtualServerF {
     public boolean checkNumPlayers(String token) throws RemoteException {
         //ritorna true se ho raggiunto i player
         return token_to_game.get(token).checkNumPlayer();
+    }
+
+    @Override
+    public void showStartingCard(String token) throws RemoteException {
+        PlayCard card = token_to_player.get(token).getStartingCard();
+
     }
 
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
