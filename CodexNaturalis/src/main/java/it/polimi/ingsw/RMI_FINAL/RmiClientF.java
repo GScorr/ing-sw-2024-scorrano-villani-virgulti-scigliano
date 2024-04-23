@@ -32,18 +32,21 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private void runCli() throws RemoteException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         VirtualViewF curr_client = this;
-        String player_name;
+        String player_name = " ";
         Player curr_player;
-
+        boolean new_name;
         // Creo giocatore
-        System.out.print("\nScegli nome Player > ");
-        player_name = scan.nextLine();
+        do{
+            System.out.print("\nScegli nome Player > ");
+            player_name = scan.nextLine();
+            this.token = server.createToken(this);
+            new_name = server.checkName(player_name,this.token);
+        } while(!new_name);
 
         // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
         // which contains a map that associate the client with the token, and we also have a map in server that
         // associate the token with the player
         // < RmiClient , TOKEN > < TOKEN , Player >
-        this.token = server.createToken(this);
         //System.out.print("\nToken Player > " + this.token);
 
         String game_name;
