@@ -56,16 +56,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
         System.out.print("Aspetta il tuo turno -");
         while (true) {
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("/");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("|");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("\\");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 System.out.print("\b");
                 System.out.print("-");
         }
