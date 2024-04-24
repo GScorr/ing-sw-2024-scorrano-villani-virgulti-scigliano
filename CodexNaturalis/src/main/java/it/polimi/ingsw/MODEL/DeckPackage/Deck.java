@@ -1,7 +1,9 @@
 package it.polimi.ingsw.MODEL.DeckPackage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 
+import java.io.Serializable;
 import java.util.Deque;
+import java.util.EmptyStackException;
 
 /*
 * @Francesco Virgulti
@@ -9,7 +11,7 @@ import java.util.Deque;
 *  - getNumber()
 *  - Implementa anche le sottoclassi
 * */
-public class Deck {
+public class Deck implements Serializable {
     public Deque<PlayCard> cards;
 
     //il deck
@@ -19,8 +21,11 @@ public class Deck {
 
 
     public PlayCard drawCard(){
-        return cards.pop();
-    };
+        if(cards.size()>0){
+            return cards.pop();
+        }
+        else throw new EmptyDeckException("errore mazzo vuoto in DrawCard in Deck");
+    }
     public PlayCard seeFirstCard(){return cards.getFirst();}
 
     public int getNumber(){

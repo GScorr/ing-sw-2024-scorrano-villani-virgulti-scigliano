@@ -3,19 +3,21 @@ package it.polimi.ingsw.MODEL.Game.State;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Player.Player;
 
-public class Turn implements GameState{
+import java.io.Serializable;
+
+public class Turn implements GameState, Serializable {
     Game game;
     public Turn(Game game){
         this.game = game;
     }
     @Override
-    public void insertPlayer(Player player) {
-        throw new GameInvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean insertPlayer(Player player) {
+        return false;
     }
 
     @Override
-    public void initializedGame() {
-        throw new GameInvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean initializedGame() {
+        return false;
     }
 
     @Override

@@ -9,12 +9,14 @@ import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Game.GameObserver;
+
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.State.*;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -35,27 +37,33 @@ import java.util.List;
 * PLAYER_OBSERVER:
 * PLAYER_SUBJECT
 * */
-public class Player implements PlayerObserver {
+public class Player implements PlayerObserver, Serializable {
     private String name;
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
             choose_goal = new ChooseGoal(this),
             choose_side_first_card = new ChooseSideFirstCard(this),
-            wait_turn = new WaitTurn(this),
+            //wait_turn = new WaitTurn(this),
             place_card = new PlaceCard(this),
             draw_card = new DrawCard(this),
+            wait_turn = new WaitTurn(this),
+            end_game = new EndGame(this),
             actual_state;
 
 
     private final boolean isFirst;
     private int index_removed_card;
+
+    public HashMap<Integer,Boolean> side_card_in_hand  = new HashMap<>();
+
     /*
     tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
-    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    private final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+    private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
+    //rendi questo private, mi serviva per i test renderlo pubblico
+    public final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
@@ -64,6 +72,9 @@ public class Player implements PlayerObserver {
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
     private int player_points = 0;
+
+    private int num_goal_achieve = 0;
+
 
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
@@ -82,7 +93,9 @@ public class Player implements PlayerObserver {
         this.isFirst = isFirst;
     }
 
-
+    public String getName() {
+        return name;
+    }
 
     private void createField(){
         Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
@@ -126,15 +139,30 @@ public class Player implements PlayerObserver {
         return goal_card;
     }
 
+    public List<Goal> getInitial_goal_cards() {
+        return initial_goal_cards;
+    }
+
     public int getPlayerPoints() {
         return player_points;
     }
 
+    public Deck getGold_deck() {
+        return gold_deck;
+    }
+
+    public Deck getResources_deck() {
+        return resources_deck;
+    }
+
     /*
-            setter:
-             */
+                    setter:
+                     */
     public void setPlayer_state( PState state){
         this.actual_state=state;
+    }
+    public void setPlayerEndGame(){
+        this.actual_state = end_game;
     }
     public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
         this.cards_in_hand = cards_in_hand;
@@ -149,6 +177,12 @@ public class Player implements PlayerObserver {
 
     public void setGoal_card(Goal goal_card) {
         this.goal_card = goal_card;
+    }
+
+    public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
+        this.resources_deck = resources_deck;
+        this.gold_deck = gold_deck;
+        this.cards_in_center = cards_in_center;
     }
 
     /*
@@ -169,14 +203,17 @@ public class Player implements PlayerObserver {
     //questi cambiamenti vengono chiamati su tutti i player, perchè contemporaneamente devono eseguire i comandi
     // Es: tutti  i player devono scegliere "contemporaneamente" (sullo stesso stato di Game)  il loro obbiettivo prima di proseguire il gioco
     // tutti i  plater devono piazzare la loro starting_car prima di proseguire il gioco con il prossimo stato
-    private void InitialNextStatePlayer(){
+    public void InitialNextStatePlayer(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setPlayer_state(begin);
+                return;
             case "BEGIN":
                 setPlayer_state(choose_goal);
+                return;
             case "CHOOSE_GOAL":
                 setPlayer_state( choose_side_first_card);
+                return;
             case "CHOOSE_SIDE_FIRST_CARD":
                 if(this.isFirst){
                     setPlayer_state( place_card);
@@ -184,6 +221,7 @@ public class Player implements PlayerObserver {
                 else {
                     setPlayer_state(wait_turn);
                 }
+                return;
 
         }
     }
@@ -195,24 +233,30 @@ public class Player implements PlayerObserver {
         switch(actual_state.getNameState()){
             case "WAIT_TURN" :
                     setPlayer_state( place_card);
+                    return;
             case "PLACE_CARD":
                 setPlayer_state( draw_card );
+                return;
             case "DRAW_CARD":
                 setPlayer_state( wait_turn);
+                return;
+            case "END_GAME":
+                return;
         }
     }
 
 
-    /*
-    *if (player_state != PLACE_CARD
-    * index -> posizione nella lista delle carte in mano
-    * */
+
+    public void setEndGame(){
+        setPlayer_state(end_game);
+    }
+
     public void placeCard(int index,boolean flipped, int x, int y){
-            PlayCard playing_card =  cards_in_hand.get(index);
-            playing_card.flipCard(flipped);
-            if(game_field.insertCard(playing_card, x, y)){
-                removeHandCard(playing_card, index);
-            }
+        PlayCard playing_card =  cards_in_hand.get(index);
+        playing_card.flipCard(flipped);
+        game_field.insertCard(playing_card, x, y);
+        removeHandCard(playing_card, index);
+
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
@@ -223,10 +267,19 @@ public class Player implements PlayerObserver {
         this.player_points=this.player_points+point;
     }
 
+    public void setPlayer_points(int player_points) {
+        this.player_points = player_points;
+    }
 
     //questo metodo serve a peachFrom...  per inserire la carta pescata
     private void insertCard(PlayCard card){
+        this.side_card_in_hand.put(index_removed_card,false);
         this.cards_in_hand.set(this.index_removed_card, card);
+    }
+
+
+    public void selectSideCard(int index, boolean flipp){
+        cards_in_hand.get(index).flipCard(flipp);
     }
 
     //Una volta che il giocatore ha giocato una carta ne deve pescare una
@@ -238,6 +291,9 @@ public class Player implements PlayerObserver {
         insertCard(this.resources_deck.drawCard());
     }
     public void peachFromCardsInCenter(int i){
+
+
+
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));
         }else if(i==1){
@@ -254,18 +310,22 @@ public class Player implements PlayerObserver {
 
 
     public void selectGoal(int i){
-            this.goal_card = initial_goal_cards.get(i);
+        this.goal_card = initial_goal_cards.get(i);
     }
 
 
     //this metod select the first side of the starting_card and put it on the field
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
-            game_field.insertCard(this.starting_card, 0, 0);
+            game_field.insertCard(this.starting_card, 22, 22);
 
     }
 
+    public int getNum_goal_achieve() {
+        return num_goal_achieve;
+    }
 
-
-
+    public void setNum_goal_achieve(int num_goal_achieve) {
+        this.num_goal_achieve = num_goal_achieve;
+    }
 }

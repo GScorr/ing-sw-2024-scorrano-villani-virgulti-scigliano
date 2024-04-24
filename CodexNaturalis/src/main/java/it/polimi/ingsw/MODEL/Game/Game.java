@@ -3,16 +3,16 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
-import it.polimi.ingsw.MODEL.Game.State.Begin;
-import it.polimi.ingsw.MODEL.Game.State.GameState;
-import it.polimi.ingsw.MODEL.Game.State.NotInitialized;
-import it.polimi.ingsw.MODEL.Game.State.Turn;
+import it.polimi.ingsw.MODEL.Game.State.*;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.PlayerObserver;
+import it.polimi.ingsw.RMI.IndexManager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /*
@@ -31,7 +31,7 @@ TODO:
 */
 
 
-public class Game  {
+public class Game implements Serializable {
     DeckCreation creation;
     private int max_num_player;
     private int num_player;
@@ -39,9 +39,11 @@ public class Game  {
     private Player player2;
     private Player player3;
     private Player player4;
-    private int actual_player = 0;  //tiene traccia del giocatore che sta giocando
+    private int index_game;
+    private String name;
 
-    private Map<Integer,Player> get_player_index;
+
+    private Map<Integer,Player> get_player_index = new HashMap<>();
     private Goal goal1;
     private Goal goal2;
 
@@ -49,11 +51,14 @@ public class Game  {
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
 
-    private List<PlayerObserver> player_observers = new ArrayList<>();
+
 
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
-              turn = new Turn(this);
+              choosing_goal = new CHOOSING_GOAL(this),
+              choosing_starting_card = new CHOOSING_STARTING_CARD(this),
+              turn = new Turn(this),
+              end_game = new EndGame(this);
     public  GameState actual_state;
 
 
@@ -108,22 +113,37 @@ public class Game  {
     //crezione dei deck
     // scelta max_num_player
     public Game( /* DeckGoalCard goal_deck */ int max_num_player) {
-        if(max_num_player <= 0 || max_num_player > 4){throw new LimitNumPlayerException("max_num_player invalido");}
+        this.creation = new DeckCreation();
+        this.gold_deck = new Deck(creation.getGoldDeck());
+        this.resources_deck = new Deck(creation.getResourcesDeck());
+
+        /*  -- DECK MISCHIATO NON UTILE PER I TEST, POI BISOGNERÀ TORNARE AL DECK MISCHIATO
+
+        this.gold_deck = new Deck(creation.getMixGoldDeck());
+        this.resources_deck = new Deck(creation.getMixResourcesDeck());
+
+         */
+        this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
+        this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
+        this.max_num_player = max_num_player;
+        this.actual_state = not_initialized;
+        this.index_game = IndexManagerF.getNextIndex();
+    }
+
+    public Game( /* DeckGoalCard goal_deck */ String name, int max_num_player) {
         this.creation = new DeckCreation();
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
+        this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
-        //this.goal_deck = goal_deck;
-
+        this.index_game = IndexManagerF.getNextIndex();
+        this.name = name;
     }
 
 
     public void insertPlayer(Player player){
-        if( this.num_player == max_num_player ){
-            throw new LimitNumPlayerException("Limite giocatori già raggiunto, non è possibile entrare in questa partita");
-        }else{
             if(num_player == 0){
                 this.player1 = player;
                 get_player_index.put(0,player1);
@@ -140,10 +160,9 @@ public class Game  {
                 this.player4 = player;
                 get_player_index.put(3,player4);
             }
-
             this.num_player++;
 
-        }
+
     }
 
     //prima di chiamare questo metodo devo vedere se i Players sono >= 2 &&  < 4 (non possono mai essere per metodo InsertPlayer)
@@ -154,6 +173,10 @@ public class Game  {
                 distributeThreeCards();
                 selectGoals();
                 distributeTwoGoalsToPlayer();
+
+                for(int i=0; i<num_player;i++){
+                    get_player_index.get(i).setDeck(resources_deck,gold_deck,cards_in_center);
+                }
 
     }
 
@@ -204,45 +227,42 @@ public class Game  {
     private void setGame_state(GameState state){
         this.actual_state = state;
     }
+
+    public GameState getActual_state() {
+        return actual_state;
+    }
+
+    public Map<Integer, Player> getGet_player_index() {
+        return get_player_index;
+    }
+
     public void gameNextState(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
                 setGame_state(begin);
+                break;
             case "BEGIN":
+                setGame_state(choosing_goal);
+                break;
+            case "CHOOSING_GOAL":
+                setGame_state(choosing_starting_card);
+                break;
+            case "CHOOSING_STARTING_CARD":
                 setGame_state(turn);
-            //bisogna definire un END_GAME state
+                break;
             case "TURN":
-                setGame_state( actual_state);
-
+                setGame_state( end_game);
+                break;
 
         }
+
     }
 
+    public String getName() {
+        return name;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public int getIndex_game() {
+        return index_game;
+    }
 }

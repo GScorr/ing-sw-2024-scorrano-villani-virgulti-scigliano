@@ -2,16 +2,18 @@ package it.polimi.ingsw.MODEL.Card;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
 
+import java.io.Serializable;
+
 /*
 * @Francesco_Virgulti
 * TODO: - se flipp = true =>  getFrontalSide || flipp = false => getBackSide
 *       - implementare metodo place()
 *
 */
-public abstract class  PlayCard {
+public abstract class  PlayCard implements Serializable {
     private final Side front_side ;
     private final  Side back_side;
-    protected boolean flipped;
+    public boolean flipped;
 
     public final CentralEnum colore;
 
@@ -31,12 +33,12 @@ public abstract class  PlayCard {
     }
 
 
-    private Side getFrontSide() {
+    public Side getFrontSide() {
         return front_side;
     }
 
 
-    private Side getBackSide() {
+    public Side getBackSide() {
         return back_side;
     }
     public  Side getSide(){

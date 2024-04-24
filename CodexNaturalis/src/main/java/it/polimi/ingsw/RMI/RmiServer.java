@@ -1,82 +1,165 @@
 package it.polimi.ingsw.RMI;
-
-import it.polimi.ingsw.CONTROLLER.GameFieldController;
-import it.polimi.ingsw.MODEL.Card.GoldCard;
-import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Card.ResourceCard;
-import it.polimi.ingsw.MODEL.ENUM.Costraint;
-import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.MODEL.GameFieldSingleCell;
-import it.polimi.ingsw.MODEL.Player.Player;
-
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class RmiServer implements VirtualServer{
 
-    final GameFieldController field_controller;
-    final List<VirtualView> clients = new ArrayList<>();
+    private GiocoController controller;
+    public TokenManager token_manager = new TokenManagerImplement();
+    private List<VirtualView> clients = new ArrayList<>();
+    private Map<String, Giocatore> mappa;
+    private List<GiocoController> games = new ArrayList<>();
+    private Map<String, GiocoController> mappa_gp;
 
-    public RmiServer(GameFieldController fieldController) {
-        field_controller = fieldController;
+    public RmiServer(GiocoController controller) {
+        this.controller = controller;
+        this.mappa = new HashMap<>();
+        this.mappa_gp = new HashMap<>();
     }
 
-    final BlockingQueue<GameField> updates = new ArrayBlockingQueue<>(20);
-    private void broadcastUpdateThread() throws InterruptedException, RemoteException {
+    private BlockingQueue<Integer[]> updates = new ArrayBlockingQueue<>(10);
 
+
+
+
+    private void broadcastUpdateThread() throws InterruptedException, RemoteException {
         while (true){
-            GameField update = updates.take();
+            Integer[] update = updates.take();
             synchronized (this.clients){
-                for(var c : this.clients){
+                for(var c: this.clients){
                     c.showUpdate(update);
                 }
             }
+
         }
     }
 
-    @Override
-    public void connect(VirtualView client) throws RemoteException {
-            System.err.println("NEW CLIENT CONNECTED");
-            //todo data race ??
+
+
+    public void connect(VirtualView client)throws RemoteException{
+        synchronized (this.clients){
             this.clients.add(client);
+        }
     }
 
+
     @Override
-    public void checkPlacingRMI(PlayCard card, int x, int y) throws RemoteException {
-        System.err.println("insert request received");
-        this.field_controller.checkPlacing(card, x, y);
-        GameField current_state = this.field_controller.getCurrent();
+    public void put(int index, Integer number, String player_name) throws RemoteException, InterruptedException {
+
+        Integer[] currentState;
+        System.out.println("\n [add request received] \n");
+        System.out.println(mappa_gp.size());
+        mappa_gp.get(player_name).putInArray(index, number, mappa.get(player_name));
+
+
+        if ( mappa.get(player_name) == mappa_gp.get(player_name).getStatus1() ) currentState = mappa_gp.get(player_name).getStatus1().getCampo();
+        else currentState = mappa_gp.get(player_name).getStatus2().getCampo();
+
         try
         {
-            updates.put(current_state);
+            updates.put(currentState);
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public void checkGoldConstraintsRMI(Costraint val) throws RemoteException {
+        broadcastUpdateThread();
 
     }
 
     @Override
-    public void goldPointsCountRMI(GoldCard card, int x, int y) throws RemoteException {
-
+    public boolean gamesIsEmpty() {
+        return this.games.isEmpty();
     }
 
     @Override
-    public void resourcePointsCountRMI(ResourceCard card) throws RemoteException {
-
+    public synchronized void createPlayer(String name, String client_token) {
+        Giocatore p = controller.createPlayer(name);
+        mappa.put( client_token , p );
     }
 
     @Override
-    public void resourcePointsChange(PlayCard card, int x, int y) throws RemoteException {
-
+    public String createToken(VirtualView client){
+        return token_manager.generateToken(client);
     }
 
+    @Override
+    public Map<String, Giocatore> getMap() {
+        return mappa;
+    }
 
+    @Override
+    public synchronized void  clearMap(){
+        mappa.clear();
+    }
+
+    @Override
+    public synchronized List<VirtualView> getListClients() throws RemoteException {
+        return clients;
+    }
+
+    @Override
+    public List<GiocoController> getLisGames() throws RemoteException {
+        return games;
+    }
+
+    @Override
+    public Giocatore getPlayerFromClient(String client) throws RemoteException {
+
+        return mappa.get(client);
+    }
+
+    @Override
+    public synchronized void createGame(String name, int numplayers, String player) throws RemoteException {
+        GiocoController game = new GiocoController(name, numplayers, mappa.get(player));
+        games.add(game);
+        mappa_gp.put(player, game);
+    }
+
+    @Override
+    public boolean addPlayer(int ID, String player) throws RemoteException {
+        int index = fromIDtoindex(ID);
+        if(index!=-1) {
+
+            boolean check= games.get(index).getGame().insertPlayer( mappa.get(player) );
+            if (check) {
+                mappa_gp.put(player, games.get(index));
+                return true;
+            }
+            else return false;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public int fromIDtoindex(int id) throws RemoteException {
+        int index = games.stream()
+                .filter(gc -> gc.getGame().getIndex_game() == id)
+                .findFirst()
+                .map(games::indexOf)
+                .orElse(-1);
+        return index;
+    }
+
+    @Override
+    public Giocatore getFromToken(String token){
+        return mappa.get(token);
+    }
+    public static void main(String[] args) throws RemoteException {
+        final String serverName = "VirtualServer";
+        VirtualServer server = new RmiServer(new GiocoController("new",3, null));         //modifica
+        VirtualServer stub = (VirtualServer) UnicastRemoteObject.exportObject(server,0);
+        Registry registry = LocateRegistry.createRegistry(1234);
+        registry.rebind(serverName,stub);
+        System.out.println("[SUCCESSFUL] : server connected. ");
+
+    }
 
 }

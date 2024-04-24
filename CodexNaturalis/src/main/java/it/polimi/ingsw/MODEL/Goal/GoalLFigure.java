@@ -5,7 +5,9 @@ import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 
-public class GoalLFigure implements GoalStrategy {
+import java.io.Serializable;
+
+public class GoalLFigure implements GoalStrategy, Serializable {
     int counter;
     public int totalPoints(GameField field, int points, AnglesEnum resource) {
         //System.out.println("sono nella classe");

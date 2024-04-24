@@ -2,9 +2,10 @@ package it.polimi.ingsw.MODEL.DeckPackage;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CenterCards {
+public class CenterCards implements Serializable {
     private List<PlayCard>  gold_list;
     private List<PlayCard> resource_list;
     private Deck gold_deck;
@@ -35,17 +36,29 @@ public class CenterCards {
     }
 
     public PlayCard drawGoldCard(int index){
-        PlayCard tmp = gold_list.get(index);
-        gold_list.remove(index);
-        gold_list.add(insertFromGoldDeck(index));
-        return tmp;
+        if(gold_deck.cards.size() > 0){
+            PlayCard tmp = gold_list.get(index);
+            gold_list.remove(index);
+            gold_list.add(insertFromGoldDeck(index));
+            return tmp;
+        }
+        else {
+            PlayCard tmp = gold_list.get(index);
+            gold_list.remove(index);
+            return tmp;
+        }
+
     }
 
     public PlayCard drawResourceCard(int index){
-        PlayCard tmp = resource_list.get(index);
-        resource_list.remove(index);
-        resource_list.add(insertFromResourcesDeck(index));
-        return tmp;
+        if(resource_list.size()>0){
+            PlayCard tmp = resource_list.get(index);
+            resource_list.remove(index);
+            resource_list.add(insertFromResourcesDeck(index));
+            return tmp;
+        }
+        else throw new EmptyDeckException("errore mazzo vuoto in drawResourceCard");
+
     }
 
     //If a GoldCard has been took from drawGoldCard a Card has to be drawed from the GoldDeck

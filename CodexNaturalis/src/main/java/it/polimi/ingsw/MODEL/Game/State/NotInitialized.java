@@ -4,19 +4,22 @@ import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.InvalidStateException;
 
-public class NotInitialized implements GameState{
+import java.io.Serializable;
+
+public class NotInitialized implements GameState, Serializable {
     Game game;
     public NotInitialized(Game game){
         this.game = game;
     }
     @Override
-    public void insertPlayer(Player player) {
+    public boolean insertPlayer(Player player) {
         game.insertPlayer(player);
+        return true;
     }
 
     @Override
-    public void initializedGame() {
-        throw new GameInvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean initializedGame() {
+        return false;
     }
 
     @Override

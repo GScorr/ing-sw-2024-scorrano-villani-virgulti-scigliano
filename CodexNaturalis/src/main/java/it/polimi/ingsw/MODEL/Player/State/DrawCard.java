@@ -4,9 +4,10 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class DrawCard implements PState{
+public class DrawCard implements PState, Serializable {
     Player player;
 
     public DrawCard(Player player) {
@@ -14,48 +15,55 @@ public class DrawCard implements PState{
     }
 
     @Override
-    public void setInitialCardsInHand(List<PlayCard> cards_in_hand) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean setInitialCardsInHand(List<PlayCard> cards_in_hand) {
+        return false;
     }
 
     @Override
-    public void setInitialGoalCards(List<Goal> initial_goal_cards) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean setInitialGoalCards(List<Goal> initial_goal_cards) {
+        return false;
     }
 
     @Override
-    public void setStartingCard(PlayCard starting_card) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean setStartingCard(PlayCard starting_card) {
+        return false;
     }
 
     @Override
-    public void selectGoal(int i) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean selectGoal(int i) {
+        return false;
     }
 
     @Override
-    public void selectStartingCard(boolean flipped) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean selectStartingCard(boolean flipped) {
+        return false;
     }
 
     @Override
-    public void placeCard(int index, boolean flipped, int x, int y) {
-        throw new InvalidStateException("Impossibile chiamare il metodo in questo stato.");
+    public boolean placeCard(int index, boolean flipped, int x, int y) {
+        return false;
     }
 
     @Override
-    public void peachCardFromGoldDeck() {
+    public boolean peachCardFromGoldDeck() {
         this.player.peachCardFromGoldDeck();
+        return true;
     }
 
     @Override
-    public void peachFromResourcesDeck() {
+    public boolean peachFromResourcesDeck() {
         this.player.peachFromResourcesDeck();
+        return true;
     }
 
     @Override
-    public void peachFromCardsInCenter(int i) {
+    public boolean peachFromCardsInCenter(int i) {
         this.player.peachFromCardsInCenter(i);
+        return true;
+    }
+    public boolean selectSideCard(int index, boolean flip){
+        player.selectSideCard(index,flip);
+        return true;
     }
 
     @Override
