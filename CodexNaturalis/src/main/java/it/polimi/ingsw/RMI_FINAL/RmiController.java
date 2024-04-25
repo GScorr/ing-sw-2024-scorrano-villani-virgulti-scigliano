@@ -26,7 +26,7 @@ public class RmiController implements VirtualRmiController, Serializable {
         this.clients.add(client);
     }
 
-    public synchronized boolean getFull()  throws RemoteException {
+    public  boolean getFull()  throws RemoteException {
         return controller.getFull();
     }
 

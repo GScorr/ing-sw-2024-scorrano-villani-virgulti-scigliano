@@ -28,5 +28,5 @@ public Map<Integer,RmiController> getListRmiController() throws  RemoteException
     public boolean checkFull(String token) throws RemoteException;
     public void showStartingCard(String token) throws RemoteException;
 
-    public boolean findRmiController(Integer id, String p_token) throws RemoteException;
+    public boolean findRmiController(Integer id, String p_token, String player_name) throws RemoteException;
 }
