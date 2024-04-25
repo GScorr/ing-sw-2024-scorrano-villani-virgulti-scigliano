@@ -64,7 +64,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.print("creazione Player andata a buon fine!\n");
 
         System.out.print("Aspetta il riempimento partita -");
-        while ( !controller.getFull() ) {
+        while ( !server.checkFull(token) ) {
                 Thread.sleep(70);
                 System.out.print("\b");
                 System.out.print("/");
@@ -77,13 +77,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 Thread.sleep(70);
                 System.out.print("\b");
                 System.out.print("-");
-
         }
-        System.out.println("Scegli obiettivo tra:\n " + server.getTtoP().get(this.token).getInitial_goal_cards().get(0).getGoalType()
-        + "e" + server.getTtoP().get(this.token).getInitial_goal_cards().get(1).getGoalType());
+        //System.out.println("Scegli obiettivo tra:\n " + server.getTtoP().get(this.token).getInitial_goal_cards().get(0).getGoalType()
+        //+ "e" + server.getTtoP().get(this.token).getInitial_goal_cards().get(1).getGoalType());
         System.out.println("Ehi la tua partita è piena!\n");
 
-        server.showStartingCard(token);
+        //server.showStartingCard(token);
         /*while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
             int index = scan.nextInt();
@@ -127,9 +126,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             do {
                 System.out.println("\nInserisci ID partita in cui entrare");
                 int ID = scan.nextInt();
-                controller = server.findRmiController(ID,this.token);
-                if(controller != null ) {check = controller.addPlayer(token, player_name);}
-                else {check = false;}
+                check = server.addPlayer(ID, token, player_name);
 
             }while(!check);
     }
@@ -225,6 +222,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         //System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
         System.out.println("--------------------------\n\n");
 
+    }
+
+    @Override
+    public void setController(RmiController controller) {
+        this.controller = controller;
     }
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {

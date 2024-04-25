@@ -21,7 +21,7 @@ public class RmiServerF implements VirtualServerF {
     private Map<String, Player> token_to_player = new HashMap<>();
     private Map<String, RmiController>  token_to_rmi = new HashMap<>();
     //private List<GameController> controllers = new ArrayList<>();
-    private List<RmiController> rmi_controllers = new ArrayList<>();
+    private Map<Integer , RmiController> rmi_controllers = new HashMap<>();
 
     //todo da modificare una volta capito che tipo di update invia
     private BlockingQueue<String> updates = new ArrayBlockingQueue<>(20);
@@ -51,7 +51,7 @@ public class RmiServerF implements VirtualServerF {
     }
 
 
-    public List<RmiController> getListRmiController() throws RemoteException {
+    public Map<Integer, RmiController> getListRmiController() throws RemoteException {
         return rmi_controllers;
     }
 
@@ -65,7 +65,7 @@ public class RmiServerF implements VirtualServerF {
         RmiController serverino = new RmiController(name, num_player);
         Player p = serverino.createPlayer(player_name,true);
         token_to_player.put( p_token , p);
-        rmi_controllers.add(serverino);
+        rmi_controllers.put(serverino.getController().getGame().getIndex_game() , serverino);
         token_to_rmi.put( p_token, serverino);
         return serverino;
     }
@@ -75,32 +75,22 @@ public class RmiServerF implements VirtualServerF {
     /*check if the id is valid, if not I send back a report error, otherwise i insert the
      player in the given game */
     @Override
-    public boolean addPlayer(int game_id, String p_token, String name) throws RemoteException {
-        int index = rmi_controllers.stream()
-                .map( r -> {
-                    try {
-                        return r.getController();
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .filter(gc -> gc.getGame().getIndex_game() == game_id)
-                .findFirst()
-                .map(rmi_controllers::indexOf)
-                .orElse(-1);
-        if (index != -1) {
-            if( rmi_controllers.get(index).getController().getFull() )
+    public boolean addPlayer(Integer game_id, String p_token, String name) throws RemoteException {
+       /* RmiController index = rmi_controllers.get(game_id);
+        if (index != null) {
+            if( index.getController().getFull() )
                 {String error = "\nGame is Full\n";
                 token_manager.getTokens().get(p_token).reportError(error);
                 return false;}
-            token_to_player.put( p_token , rmi_controllers.get(index).getController().createPlayer(name, false) );
-            rmi_controllers.get(index).getController().checkNumPlayer();
-            token_to_rmi.put(p_token , rmi_controllers.get(index) );
+            token_to_player.put( p_token , index.getController().createPlayer(name, false) );
+            index.getController().checkNumPlayer();
+            token_to_rmi.put(p_token , index );
             return true;
         }
         String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
-        return false;
+        return false;*/
+        return rmi_controllers.get(game_id).addPlayer(p_token,name);
     }
 
     @Override
@@ -113,8 +103,8 @@ public class RmiServerF implements VirtualServerF {
     public List<RmiController> getFreeGames() throws RemoteException {
         if( rmi_controllers.isEmpty() ) return null;
         List<RmiController> free = new ArrayList<>();
-        for ( RmiController rc : rmi_controllers )
-            if( !rc.getFull() ) free.add(rc);
+        for ( Integer id : rmi_controllers.keySet() )
+            if( !rmi_controllers.get(id).getFull() ) free.add(rmi_controllers.get(id));
         return free;
     }
 
@@ -171,25 +161,18 @@ public class RmiServerF implements VirtualServerF {
     }
 
     @Override
-    public RmiController findRmiController(int game_id, String p_token) throws RemoteException {
-        List<GameController> games = new ArrayList<>();
-        for(RmiController r : rmi_controllers){
-            games.add(r.getController());
-        }
-        int index = games.stream()
-                .filter(gc -> gc.getGame().getIndex_game() == game_id)
-                .findFirst()
-                .map(games::indexOf)
-                .orElse(-1);
+    public boolean findRmiController(Integer game_id, String p_token) throws RemoteException {
 
-        if (index != -1)
+        RmiController index = rmi_controllers.get(game_id);
+        if (index != null)
         {
-            token_to_rmi.put(p_token , rmi_controllers.get(index) );
-            return rmi_controllers.get(index);
+            token_to_rmi.put(p_token , index );
+            token_manager.getTokens().get(p_token).setController(index);
+            return true;
         }
         String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
-        return null;
+        return false;
     }
 
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
