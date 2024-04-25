@@ -161,14 +161,13 @@ public class RmiServerF implements VirtualServerF {
     }
 
     @Override
-    public boolean findRmiController(Integer game_id, String p_token) throws RemoteException {
+    public boolean findRmiController(Integer game_id, String p_token, String player_name) throws RemoteException {
 
         RmiController index = rmi_controllers.get(game_id);
         if (index != null)
         {
             token_to_rmi.put(p_token , index );
-            token_manager.getTokens().get(p_token).setController(index);
-            return true;
+            return addPlayer(game_id, p_token, player_name);
         }
         String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);

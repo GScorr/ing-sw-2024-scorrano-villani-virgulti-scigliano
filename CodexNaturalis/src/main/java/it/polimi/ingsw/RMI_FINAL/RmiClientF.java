@@ -23,7 +23,6 @@ import java.util.Scanner;
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
     private  String token;
-    private RmiController controller;
 
     protected RmiClientF(VirtualServerF server) throws RemoteException {
         this.server = server;
@@ -126,9 +125,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             do {
                 System.out.println("\nInserisci ID partita in cui entrare");
                 int ID = scan.nextInt();
-                check = server.addPlayer(ID, token, player_name);
-
+                check = server.findRmiController(ID, token, player_name);
             }while(!check);
+
     }
 
     private void newGame(String player_name) throws RemoteException {
@@ -142,7 +141,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             numplayers = scan.nextInt();
             try {
-                this.controller = server.createGame(game_name, numplayers, token, player_name);
+                server.createGame(game_name, numplayers, token, player_name);
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -161,7 +160,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             int numplayers = scan.nextInt();
             try {
-                this.controller = server.createGame(game_name, numplayers, token, playerName);
+                server.createGame(game_name, numplayers, token, playerName);
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -224,10 +223,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
-    @Override
-    public void setController(RmiController controller) {
-        this.controller = controller;
-    }
+
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
