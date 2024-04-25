@@ -131,16 +131,21 @@ public class RmiServerF implements VirtualServerF {
         broadcastUpdateThread();
     }
 
-    //Look if there are clients with the same name, return true if it's available false otherwise
+    //return 0 if the name is free, 1 if the name is already used by an active player, 2 if the player is coming back
     @Override
-    public boolean checkName(String name, String token) throws RemoteException {
-        for ( String t : token_to_player.keySet() ){
-            if( token_to_player.get(t).getName().equals(name) ){
-                String error = " Name Already Existing ";
-                token_manager.getTokens().get(token).reportError(error);
-                return false; }
+    public int checkName(String name, String token) throws RemoteException {
+
+        for ( Integer i : rmi_controllers.keySet() )
+        {
+            for ( Integer j : rmi_controllers.get(i).getController().getGame().getGet_player_index().keySet() )
+            {
+                Player p = rmi_controllers.get(i).getController().getGame().getGet_player_index().get(j);
+                if ( p.getName().equals(name) && p.isDisconnected() ) return 2;
+                else if (p.getName().equals(name) && !p.isDisconnected() ) { return 1;
+                }
+            }
         }
-        return true;
+        return 0;
     }
 
     @Override
