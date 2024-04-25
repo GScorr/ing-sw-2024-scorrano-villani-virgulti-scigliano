@@ -90,6 +90,7 @@ public class RmiServerF implements VirtualServerF {
         String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
         return false;*/
+
         return rmi_controllers.get(game_id).addPlayer(p_token,name);
     }
 
@@ -167,6 +168,7 @@ public class RmiServerF implements VirtualServerF {
         if (index != null && !rmi_controllers.get(game_id).getFull())
         {
             token_to_rmi.put(p_token , index );
+
             return addPlayer(game_id, p_token, player_name);
         }
         String error = "\nWRONG ID : Not Available Game\n";

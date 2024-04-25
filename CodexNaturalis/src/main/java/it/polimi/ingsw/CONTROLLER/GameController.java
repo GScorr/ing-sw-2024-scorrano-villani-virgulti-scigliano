@@ -108,6 +108,16 @@ public class GameController implements GameSubject, Serializable {
         return;
     }
 
+    public boolean isAlone(){
+        boolean num = false;
+        int num_disconnected = 0;
+        for ( int i = 0 ; i < game.getMax_num_player(); i++ )
+        {
+            if (game.getGet_player_index().get(i).isDisconnected()) num_disconnected++;
+        }
+        if(  (game.getMax_num_player() - num_disconnected == 1) || (game.getMax_num_player() - num_disconnected == 0) ) num = true;
+        return num;
+    }
 
 
     public Player createPlayer(String nome, boolean isFirst){
