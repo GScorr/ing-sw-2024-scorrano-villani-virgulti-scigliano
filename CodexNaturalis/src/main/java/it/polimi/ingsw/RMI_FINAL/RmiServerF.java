@@ -28,7 +28,7 @@ public class RmiServerF implements VirtualServerF {
     private BlockingQueue<String> updates = new ArrayBlockingQueue<>(20);
     private final Map<String, Long> lastHeartbeatTime = new HashMap<>();
 
-    public RmiServerF() {
+    public RmiServerF() throws RemoteException {
         startHeartbeatChecker();
     }
 
@@ -219,22 +219,24 @@ public class RmiServerF implements VirtualServerF {
     public void receiveHeartbeat(String token) throws RemoteException {
         lastHeartbeatTime.put(token, System.currentTimeMillis());
     }
-    private synchronized void checkHeartbeats() {
+    private synchronized void checkHeartbeats() throws RemoteException{
         long currentTime = System.currentTimeMillis();
 
         for (Map.Entry<String, Long> entry : lastHeartbeatTime.entrySet()) {
             if (currentTime - entry.getValue() > HEARTBEAT_TIMEOUT) {
-                System.out.println(entry.getKey() + "frate me so disconnected\n");
+                if(token_to_rmi.get(entry.getKey()).getTtoP().get(entry.getKey()).isDisconnected()) continue;
+                token_to_rmi.get(entry.getKey()).getTtoP().get(entry.getKey()).disconnect();
+                System.out.println(token_to_rmi.get(entry.getKey()).getTtoP().get(entry.getKey()).getName() + "frate me so disconnected\n");
             }
         }
     }
-    private void startHeartbeatChecker() {
+    private void startHeartbeatChecker() throws RemoteException{
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(5000); // Controlla gli "heartbeats" ogni 5 secondi
+                    Thread.sleep(500); // Controlla gli "heartbeats" ogni 5 secondi
                     checkHeartbeats();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | RemoteException e) {
                     e.printStackTrace();
                 }
             }
