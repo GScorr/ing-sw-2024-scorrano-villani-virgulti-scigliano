@@ -64,7 +64,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.print("creazione Player andata a buon fine!\n");
 
         System.out.print("Aspetta il riempimento partita -");
-        while (!server.checkFull(this.token)) {
+        while ( !controller.getFull() ) {
                 Thread.sleep(70);
                 System.out.print("\b");
                 System.out.print("/");
@@ -77,6 +77,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 Thread.sleep(70);
                 System.out.print("\b");
                 System.out.print("-");
+
         }
         System.out.println("Scegli obiettivo tra:\n " + server.getTtoP().get(this.token).getInitial_goal_cards().get(0).getGoalType()
         + "e" + server.getTtoP().get(this.token).getInitial_goal_cards().get(1).getGoalType());
@@ -115,7 +116,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void chooseMatch(String player_name) throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        boolean check=false;
+        boolean check;
             System.out.println("\nElenco partite disponibili: ");
             List<RmiController> partite = server.getFreeGames();
 
@@ -127,7 +128,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("\nInserisci ID partita in cui entrare");
                 int ID = scan.nextInt();
                 controller = server.findRmiController(ID,this.token);
-                check = controller.addPlayer(token, player_name);
+                if(controller != null ) {check = controller.addPlayer(token, player_name);}
+                else {check = false;}
+
             }while(!check);
     }
 
