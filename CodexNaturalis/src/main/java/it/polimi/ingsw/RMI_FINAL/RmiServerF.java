@@ -140,7 +140,7 @@ public class RmiServerF implements VirtualServerF {
 
     @Override
     public void chooseGoal(String p_token, int goal_index) throws RemoteException {
-        token_to_rmi.get(p_token).getController().playerChooseGoal( token_to_player.get(p_token), goal_index );
+        getRmiController(p_token).chooseGoal(p_token, goal_index);
     }
 
     @Override

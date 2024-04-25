@@ -59,7 +59,12 @@ public class RmiController implements VirtualRmiController, Serializable {
         controller.checkNumPlayer();
         return true;
     }
-    
+
+    @Override
+    public void chooseGoal(String token, int index) throws RemoteException {
+        controller.playerChooseGoal(token_to_player.get(token), index);
+    }
+
 
 }
 
