@@ -1,11 +1,13 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.Game.State.GameState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 
@@ -30,6 +32,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void run() throws RemoteException, InterruptedException {
         this.server.connect(this);
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(5000);
+                    server.receiveHeartbeat(token);
+                } catch (RemoteException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         runCli();
     }
 
@@ -64,23 +76,18 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
         System.out.print("Aspetta il riempimento partita -");
         while ( !server.checkFull(token) ) {
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("/");
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("|");
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("\\");
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("-");
+            buffering();
         }
-        System.out.println("Ehi la tua partita è piena!\n");
+        System.out.println("\nEhi la tua partita è piena!\n");
         chooseGoal();
-
-
+        System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+        while(!server.getRmiController(token).getController().getGame().getActual_state().getNameState().equals("CHOOSING_STARTING_CARD")){
+            buffering();
+        }
+        chooseStartingCard();
+        while(true) {
+            buffering();
+        }
 
 
         /*while (true) {
@@ -93,6 +100,40 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println(" " +campo[i]);
         }*/
 
+    }
+
+    private void chooseStartingCard() throws RemoteException{
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\nScegli lato carta iniziale:\n");
+        server.showStartingCard(token);
+        int done=0;
+        while(done==0){
+            System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
+            String dec = scan.nextLine();
+            if (dec.equals("F")){
+                done=1;
+                server.chooseStartingCard(token,false);
+            } else if (dec.equals("B")){
+                done=1;
+                server.chooseStartingCard(token,true);
+            }
+            else System.out.println("Inserimento errato!");
+        }
+    }
+
+    private void buffering() throws RemoteException, InterruptedException{
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("/");
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("|");
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("\\");
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("-");
     }
 
     private void chooseGoal() throws RemoteException{
@@ -225,7 +266,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("  " + ((GoldCard) card).getPointBonus().toString().charAt(0)  + "  " + " | " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
             }
         }else{
-            System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " + " |             " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
+            System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " + "             | " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
         }
         //System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
         System.out.println( " |       | " + front.getCentral_resource().toString().charAt(0) + front.getCentral_resource2().toString().charAt(0) + front.getCentral_resource3().toString().charAt(0) + " |         |\n " );
