@@ -90,6 +90,9 @@ public class Player implements PlayerObserver, Serializable {
     public void disconnect(){
         this.isDisconnected = true;
     }
+    public void connect(){
+        this.isDisconnected = false;
+    }
 
 
     public Player( ColorsEnum color, String name, boolean isFirst){

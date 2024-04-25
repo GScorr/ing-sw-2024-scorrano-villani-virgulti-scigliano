@@ -40,14 +40,47 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         VirtualViewF curr_client = this;
         String player_name = " ";
         Player curr_player;
-        boolean new_name;
+        String isnew;
+        boolean flag;
         // Creo giocatore
         do{
             System.out.print("\nScegli nome Player > ");
             player_name = scan.nextLine();
-            this.token = server.createToken(this);
-            new_name = server.checkName(player_name,this.token);
-        } while(!new_name);
+            isnew = server.checkName(player_name);
+            System.out.println(isnew);
+            if(isnew.equals("true")) {
+                flag = true;
+                this.token = server.createToken(this);
+                new Thread(() -> {
+                    while (true) {
+                        try {
+                            Thread.sleep(500);
+                            server.receiveHeartbeat(token);
+                        } catch (RemoteException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+            else if(isnew.equals("false")){
+                flag=false;
+            }
+            else{
+                this.token = isnew;
+                flag=true;
+                System.out.println("skip");
+                new Thread(() -> {
+                    while (true) {
+                        try {
+                            Thread.sleep(500);
+                            server.receiveHeartbeat(token);
+                        } catch (RemoteException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        } while(!flag);
 
         // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
         // which contains a map that associate the client with the token, and we also have a map in server that
@@ -63,16 +96,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             makeChoice(player_name);
         }
         System.out.print("creazione Player andata a buon fine!\n");
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(500);
-                    server.receiveHeartbeat(token);
-                } catch (RemoteException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
 
         System.out.print("Aspetta il riempimento partita -");
         while ( !server.checkFull(token) ) {
@@ -290,4 +313,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         new RmiClientF(server).run();
     }
 }
+
+//todo riconnessione gianni
 
