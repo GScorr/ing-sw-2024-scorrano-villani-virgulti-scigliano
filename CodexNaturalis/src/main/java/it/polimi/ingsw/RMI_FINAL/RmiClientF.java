@@ -32,16 +32,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void run() throws RemoteException, InterruptedException {
         this.server.connect(this);
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(5000);
-                    server.receiveHeartbeat(token);
-                } catch (RemoteException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
         runCli();
     }
 
@@ -73,6 +63,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             makeChoice(player_name);
         }
         System.out.print("creazione Player andata a buon fine!\n");
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(500);
+                    server.receiveHeartbeat(token);
+                } catch (RemoteException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         System.out.print("Aspetta il riempimento partita -");
         while ( !server.checkFull(token) ) {
