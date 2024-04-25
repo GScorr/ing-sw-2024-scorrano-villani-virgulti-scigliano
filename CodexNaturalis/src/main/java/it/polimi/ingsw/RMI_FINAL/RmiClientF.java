@@ -77,12 +77,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.print("\b");
                 System.out.print("-");
         }
-        System.out.println("LA PARTITA STA PER AVERE INIZIO!\n");
         System.out.println("Scegli obiettivo tra:\n " + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(0).getGoalType().toString()
         + "e" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(1).getGoalType().toString());
 
+        System.out.println("Ehi la tua partita è piena!\n");
 
-        System.out.println("Scegli lato carta inziale\n");
         server.showStartingCard(token);
 
         /*while (true) {
@@ -210,7 +209,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("  " + ((GoldCard) card).getPointBonus().toString().charAt(0)  + "  " + " | " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
             }
         }else{
-            System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " + "              |" + front.getAngleRightUp().toString().charAt(0) + " |\n ");
+            System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " + " |             " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
         }
         //System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
         System.out.println( " |       | " + front.getCentral_resource().toString().charAt(0) + front.getCentral_resource2().toString().charAt(0) + front.getCentral_resource3().toString().charAt(0) + " |         |\n " );

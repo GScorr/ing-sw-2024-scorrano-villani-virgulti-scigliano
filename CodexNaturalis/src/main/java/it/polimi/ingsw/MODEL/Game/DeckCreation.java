@@ -271,6 +271,7 @@ public class DeckCreation implements Serializable {
             String resource = singlegoal.get("resource").getAsString();
             AnglesEnum enum_resource = AnglesEnum.fromString(resource);
             int point = singlegoal.get("points").getAsInt();
+            String string = singlegoal.get("string").getAsString();
             String strategyString = singlegoal.get("goalType").getAsString();
             GoalStrategy strategy = new GoalDiagonal(); //inizializzata per evitare errori
             switch(strategyString){
@@ -290,7 +291,7 @@ public class DeckCreation implements Serializable {
                     strategy = new GoalFeatherPenPaper();
                     break;
             }
-            Goal tmp = new Goal(strategy,point,enum_resource);
+            Goal tmp = new Goal(strategy,point,enum_resource,string);
             deck_goal.add(tmp);
         }
     }
