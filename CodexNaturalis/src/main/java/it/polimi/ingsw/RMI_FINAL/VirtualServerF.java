@@ -31,5 +31,5 @@ public Map<Integer,RmiController> getListRmiController() throws  RemoteException
     public boolean findRmiController(Integer id, String p_token, String player_name) throws RemoteException;
 
     public RmiController getRmiController(String token) throws RemoteException;
-
+    public void chooseStartingCard(String token, boolean flip) throws RemoteException;
 }

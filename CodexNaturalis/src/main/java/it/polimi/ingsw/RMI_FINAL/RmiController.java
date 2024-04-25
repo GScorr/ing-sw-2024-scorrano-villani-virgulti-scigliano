@@ -65,6 +65,11 @@ public class RmiController implements VirtualRmiController, Serializable {
         controller.playerChooseGoal(token_to_player.get(token), index);
     }
 
+    @Override
+    public void chooseStartingCard(String token, boolean flip) throws RemoteException {
+        controller.playerSelectStartingCard(token_to_player.get(token), flip);
+    }
+
 
 }
 

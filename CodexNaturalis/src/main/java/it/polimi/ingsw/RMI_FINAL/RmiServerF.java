@@ -199,6 +199,11 @@ public class RmiServerF implements VirtualServerF {
         return token_to_rmi.get(token);
     }
 
+    @Override
+    public void chooseStartingCard(String token, boolean flip) throws RemoteException {
+        getRmiController(token).chooseStartingCard(token, flip);
+    }
+
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
         VirtualServerF server = new RmiServerF();
