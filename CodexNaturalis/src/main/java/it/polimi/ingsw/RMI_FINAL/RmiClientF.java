@@ -40,21 +40,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         VirtualViewF curr_client = this;
         String player_name = " ";
         Player curr_player;
-        int isnew;
-        boolean flag=false;
+        boolean new_name;
         // Creo giocatore
         do{
             System.out.print("\nScegli nome Player > ");
             player_name = scan.nextLine();
             this.token = server.createToken(this);
-            isnew = server.checkName(player_name,this.token);
-            if(isnew==0)
-                flag=true;
-            else if(isnew==2){
-                flag=true;
-                reconnect();
-            }
-        } while(!flag);
+            new_name = server.checkName(player_name,this.token);
+        } while(!new_name);
 
         // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
         // which contains a map that associate the client with the token, and we also have a map in server that
@@ -107,10 +100,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println(" " +campo[i]);
         }*/
 
-    }
-
-    private void reconnect() throws RemoteException{
-        server.comeBack(token);
     }
 
     private void chooseStartingCard() throws RemoteException{
