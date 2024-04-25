@@ -77,12 +77,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.print("\b");
                 System.out.print("-");
         }
-        System.out.println("\nScegli obiettivo tra:\n " + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
-        + " e " + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
-
         System.out.println("Ehi la tua partita è piena!\n");
+        chooseGoal();
 
-        server.showStartingCard(token);
+
+
 
         /*while (true) {
             System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
@@ -94,6 +93,23 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println(" " +campo[i]);
         }*/
 
+    }
+
+    private void chooseGoal() throws RemoteException{
+        Scanner scan = new Scanner(System.in);
+        int done=0;
+        while(done==0) {
+            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
+                    + "\n 2-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
+            String choice = scan.nextLine();
+            if (choice.equals("1")) {
+                done=1;
+                server.chooseGoal(token,0);
+            } else if (choice.equals("2")){
+                done=1;
+                server.chooseGoal(token,1);
+            } else System.out.println("Inserimento errato!");
+        }
     }
 
     private void makeChoice(String player_name) throws RemoteException{
