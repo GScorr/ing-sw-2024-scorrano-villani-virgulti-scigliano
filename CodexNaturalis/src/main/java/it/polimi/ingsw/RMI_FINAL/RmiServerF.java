@@ -143,7 +143,10 @@ public class RmiServerF implements VirtualServerF {
                 if ( p.getName().equals(name) && p.isDisconnected() ) {
                     for ( String s : rmi_controllers.get(i).getTtoP().keySet() )
                     {
-                        if ( rmi_controllers.get(i).getTtoP().get(s).equals(p) ) return s;
+                        if ( rmi_controllers.get(i).getTtoP().get(s).equals(p) ){
+                            p.connect();
+                            return s;
+                        }
                     }
                 }
                 else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false";
