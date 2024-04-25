@@ -56,11 +56,9 @@ public class RmiController implements VirtualRmiController, Serializable {
             return false;}
         createPlayer(name, false);
         controller.checkNumPlayer();
-
         return true;
     }
-
-
+    
 
 }
 
