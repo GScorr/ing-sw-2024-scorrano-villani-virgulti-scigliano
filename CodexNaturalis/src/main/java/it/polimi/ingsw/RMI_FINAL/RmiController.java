@@ -43,9 +43,9 @@ public class RmiController implements VirtualRmiController, Serializable {
         return controller;
     }
 
-    public synchronized Player createPlayer(String playerName, boolean b) throws RemoteException{
+    public synchronized Player createPlayer(String p_token,String playerName, boolean b) throws RemoteException{
         Player p = controller.createPlayer(playerName,b);
-        token_to_player.put(playerName , p);
+        token_to_player.put(p_token , p);
         return p;
     }
 
@@ -55,7 +55,7 @@ public class RmiController implements VirtualRmiController, Serializable {
         {String error = "\nGame is Full\n";
             token_manager.getTokens().get(p_token).reportError(error);
             return false;}
-        Player p = createPlayer(name, false);
+        createPlayer(p_token, name, false);
         controller.checkNumPlayer();
         return true;
     }

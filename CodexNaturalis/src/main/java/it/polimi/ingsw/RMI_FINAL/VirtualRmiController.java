@@ -14,6 +14,6 @@ public interface VirtualRmiController extends Remote {
     public List<VirtualViewF> getClients() throws RemoteException;
     public Map<String, Player> getTtoP() throws RemoteException;
     public GameController getController() throws RemoteException;
-    public Player createPlayer(String playerName, boolean b) throws RemoteException;
+    public Player createPlayer(String pla, String playerName, boolean b) throws RemoteException;
     public boolean addPlayer(String p_token, String name) throws RemoteException;
 }

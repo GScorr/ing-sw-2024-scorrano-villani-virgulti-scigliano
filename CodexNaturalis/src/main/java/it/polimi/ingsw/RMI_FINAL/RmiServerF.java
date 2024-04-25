@@ -63,7 +63,7 @@ public class RmiServerF implements VirtualServerF {
     public RmiController createGame(String name, int num_player, String p_token, String player_name) throws RemoteException {
 
         RmiController serverino = new RmiController(name, num_player);
-        Player p = serverino.createPlayer(player_name,true);
+        Player p = serverino.createPlayer(p_token,player_name,true);
         token_to_player.put( p_token , p);
         rmi_controllers.put(serverino.getController().getGame().getIndex_game() , serverino);
         token_to_rmi.put( p_token, serverino);
@@ -156,7 +156,7 @@ public class RmiServerF implements VirtualServerF {
 
     @Override
     public void showStartingCard(String token) throws RemoteException {
-        PlayCard card = token_to_player.get(token).getStartingCard();
+        PlayCard card = getRmiController(token).getTtoP().get(token).getStartingCard();
         token_manager.getTokens().get(token).showCard(card);
     }
 
@@ -194,7 +194,10 @@ public class RmiServerF implements VirtualServerF {
         }
     }
 
-
+    @Override
+    public RmiController getRmiController(String token) throws RemoteException{
+        return token_to_rmi.get(token);
+    }
 
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
