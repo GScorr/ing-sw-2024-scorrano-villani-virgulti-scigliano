@@ -133,20 +133,26 @@ public class RmiServerF implements VirtualServerF {
 
     //return 0 if the name is free, 1 if the name is already used by an active player, 2 if the player is coming back
     @Override
-    public int checkName(String name, String token) throws RemoteException {
+    public String checkName(String name) throws RemoteException {
 
         for ( Integer i : rmi_controllers.keySet() )
         {
             for ( Integer j : rmi_controllers.get(i).getController().getGame().getGet_player_index().keySet() )
             {
                 Player p = rmi_controllers.get(i).getController().getGame().getGet_player_index().get(j);
-                if ( p.getName().equals(name) && p.isDisconnected() ) return 2;
-                else if (p.getName().equals(name) && !p.isDisconnected() ) { return 1;
+                if ( p.getName().equals(name) && p.isDisconnected() ) {
+                    for ( String s : rmi_controllers.get(i).getTtoP().keySet() )
+                    {
+                        if ( rmi_controllers.get(i).getTtoP().get(s).equals(p) ) return s;
+                    }
+                }
+                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false";
                 }
             }
         }
-        return 0;
+        return "true";
     }
+
 
     @Override
     public void chooseGoal(String p_token, int goal_index) throws RemoteException {
