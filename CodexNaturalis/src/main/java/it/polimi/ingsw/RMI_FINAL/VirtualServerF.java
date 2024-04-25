@@ -16,9 +16,9 @@ public interface VirtualServerF extends Remote {
     public String createToken(VirtualViewF client ) throws  RemoteException;
     public Map<String, Player> getTtoP() throws RemoteException;
     public Map<String, RmiController> getTtoR() throws RemoteException;
-public List<RmiController> getListRmiController() throws  RemoteException;
+public Map<Integer,RmiController> getListRmiController() throws  RemoteException;
     public RmiController createGame(String game_name, int num_player, String p_token, String player_name) throws RemoteException;
-    public boolean addPlayer(int game_id, String token, String name) throws RemoteException;
+    public boolean addPlayer(Integer game_id, String token, String name) throws RemoteException;
     public List<VirtualViewF> getListClient() throws RemoteException;
     public List<RmiController> getFreeGames() throws RemoteException;
     public void insertCard(String p_token, PlayCard card, int x, int y, int index) throws RemoteException, InterruptedException;
@@ -28,5 +28,5 @@ public List<RmiController> getListRmiController() throws  RemoteException;
     public boolean checkFull(String token) throws RemoteException;
     public void showStartingCard(String token) throws RemoteException;
 
-    RmiController findRmiController(int id, String p_token) throws RemoteException;
+    public boolean findRmiController(Integer id, String p_token) throws RemoteException;
 }

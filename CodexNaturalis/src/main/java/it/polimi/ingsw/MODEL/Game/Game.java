@@ -39,7 +39,7 @@ public class Game implements Serializable {
     private Player player2;
     private Player player3;
     private Player player4;
-    private int index_game;
+    private Integer index_game;
     private String name;
 
 
@@ -262,7 +262,7 @@ public class Game implements Serializable {
         return name;
     }
 
-    public int getIndex_game() {
+    public Integer getIndex_game() {
         return index_game;
     }
 }
