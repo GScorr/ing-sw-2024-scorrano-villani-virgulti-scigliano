@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
@@ -74,7 +75,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             buffering();
         }
         chooseStartingCard();
-
+        while(true) {
+            buffering();
+        }
 
 
         /*while (true) {
@@ -90,8 +93,22 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void chooseStartingCard() throws RemoteException{
+        Scanner scan = new Scanner(System.in);
         System.out.println("\nScegli lato carta iniziale:\n");
         server.showStartingCard(token);
+        int done=0;
+        while(done==0){
+            System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
+            String dec = scan.nextLine();
+            if (dec.equals("F")){
+                done=1;
+                server.chooseStartingCard(token,false);
+            } else if (dec.equals("B")){
+                done=1;
+                server.chooseStartingCard(token,true);
+            }
+            else System.out.println("Inserimento errato!");
+        }
     }
 
     private void buffering() throws RemoteException, InterruptedException{
