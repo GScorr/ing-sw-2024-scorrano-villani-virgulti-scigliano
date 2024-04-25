@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento durante le bestemmie">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +150,7 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RmiServerF">
+  <component name="RunManager" selected="Application.RmiClientF">
     <configuration name="RmiClientF" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI_FINAL.RmiClientF" />
       <module name="PSP30" />
@@ -244,8 +244,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RmiServerF" />
         <item itemvalue="Application.RmiClientF" />
+        <item itemvalue="Application.RmiServerF" />
         <item itemvalue="JUnit.GameFieldControllerTest" />
         <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.GameControllerTest" />
@@ -278,6 +278,14 @@
       <workItem from="1713018449356" duration="10906000" />
       <workItem from="1713640206406" duration="3355000" />
       <workItem from="1713643582992" duration="1323000" />
+    </task>
+    <task id="LOCAL-00024" summary="FINE JSON CARD ORO">
+      <option name="closed" value="true" />
+      <created>1711488825160</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1711488825160</updated>
     </task>
     <task id="LOCAL-00025" summary="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json">
       <option name="closed" value="true" />
@@ -663,15 +671,7 @@
       <option name="project" value="LOCAL" />
       <updated>1713873296896</updated>
     </task>
-    <task id="LOCAL-00073" summary="aggiornamento durante le bestemmie">
-      <option name="closed" value="true" />
-      <created>1713893378940</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1713893378940</updated>
-    </task>
-    <option name="localTasksCounter" value="74" />
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -701,6 +701,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Aggiunta commenti" />
     <MESSAGE value="test su game e fix game" />
     <MESSAGE value="test su centercards distribuite da game" />
     <MESSAGE value="test su inizializzazione game finiti" />
@@ -725,8 +726,7 @@
     <MESSAGE value="aggiunta metodo checkName in RmiServerF" />
     <MESSAGE value="Chiusura GameController Test" />
     <MESSAGE value="continuazione client" />
-    <MESSAGE value="aggiornamento durante le bestemmie" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento durante le bestemmie" />
+    <option name="LAST_COMMIT_MESSAGE" value="continuazione client" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
