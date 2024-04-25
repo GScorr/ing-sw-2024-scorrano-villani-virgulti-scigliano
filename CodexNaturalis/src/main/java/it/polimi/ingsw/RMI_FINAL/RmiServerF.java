@@ -16,6 +16,7 @@ import java.util.concurrent.BlockingQueue;
 public class RmiServerF implements VirtualServerF {
 
     //private GameController ctrl;
+    private static final long HEARTBEAT_TIMEOUT = 1500;
     private TokenManagerF token_manager = new TokenManagerImplementF();
     private List<VirtualViewF> clients = new ArrayList<>();
     private Map<String, Player> token_to_player = new HashMap<>();
@@ -25,8 +26,11 @@ public class RmiServerF implements VirtualServerF {
 
     //todo da modificare una volta capito che tipo di update invia
     private BlockingQueue<String> updates = new ArrayBlockingQueue<>(20);
+    private final Map<String, Long> lastHeartbeatTime = new HashMap<>();
 
-
+    public RmiServerF() {
+        startHeartbeatChecker();
+    }
 
     //put the client in the clients list
     @Override
@@ -202,6 +206,32 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public void chooseStartingCard(String token, boolean flip) throws RemoteException {
         getRmiController(token).chooseStartingCard(token, flip);
+    }
+
+    @Override
+    public void receiveHeartbeat(String token) throws RemoteException {
+        lastHeartbeatTime.put(token, System.currentTimeMillis());
+    }
+    private synchronized void checkHeartbeats() {
+        long currentTime = System.currentTimeMillis();
+
+        for (Map.Entry<String, Long> entry : lastHeartbeatTime.entrySet()) {
+            if (currentTime - entry.getValue() > HEARTBEAT_TIMEOUT) {
+                System.out.println(entry.getKey() + "frate me so disconnected\n");
+            }
+        }
+    }
+    private void startHeartbeatChecker() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(5000); // Controlla gli "heartbeats" ogni 5 secondi
+                    checkHeartbeats();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     public static void main(String[] args) throws RemoteException {

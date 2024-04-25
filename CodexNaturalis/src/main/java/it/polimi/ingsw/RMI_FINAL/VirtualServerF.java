@@ -32,4 +32,6 @@ public Map<Integer,RmiController> getListRmiController() throws  RemoteException
 
     public RmiController getRmiController(String token) throws RemoteException;
     public void chooseStartingCard(String token, boolean flip) throws RemoteException;
+
+    public void receiveHeartbeat(String token) throws RemoteException;
 }

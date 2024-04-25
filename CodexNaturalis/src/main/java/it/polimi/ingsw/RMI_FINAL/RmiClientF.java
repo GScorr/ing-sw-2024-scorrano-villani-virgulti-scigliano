@@ -32,6 +32,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void run() throws RemoteException, InterruptedException {
         this.server.connect(this);
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(5000);
+                    server.receiveHeartbeat(token);
+                } catch (RemoteException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         runCli();
     }
 
