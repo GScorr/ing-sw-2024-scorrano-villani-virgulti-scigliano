@@ -16,4 +16,5 @@ public interface VirtualRmiController extends Remote {
     public GameController getController() throws RemoteException;
     public Player createPlayer(String pla, String playerName, boolean b) throws RemoteException;
     public boolean addPlayer(String p_token, String name) throws RemoteException;
+    public void chooseGoal(String token, int index) throws RemoteException;
 }
