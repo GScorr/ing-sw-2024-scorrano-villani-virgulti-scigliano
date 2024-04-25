@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -700,8 +700,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test su game e fix game" />
-    <MESSAGE value="test su centercards distribuite da game" />
     <MESSAGE value="test su inizializzazione game finiti" />
     <MESSAGE value="PROVE RMI" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;CodexNaturalis/.idea/workspace.xml" />
@@ -725,7 +723,9 @@
     <MESSAGE value="Chiusura GameController Test" />
     <MESSAGE value="continuazione client" />
     <MESSAGE value="recap" />
-    <option name="LAST_COMMIT_MESSAGE" value="recap" />
+    <MESSAGE value="ci siamo" />
+    <MESSAGE value="inserimento metodo chooseGoal" />
+    <option name="LAST_COMMIT_MESSAGE" value="inserimento metodo chooseGoal" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
