@@ -20,6 +20,6 @@ public interface VirtualRmiController extends Remote {
     public void chooseStartingCard(String token, boolean flip) throws RemoteException;
     public void checkQueue() throws RemoteException;
     public void executeCall(Integer function) throws RemoteException;
-    public void addtoQueue(String string,Integer idRequest) throws RemoteException;
+    public void addtoQueue(String string,Integer idRequest, Object wrap) throws RemoteException;
     public Object getAnswer(Integer idRequest) throws RemoteException;
 }

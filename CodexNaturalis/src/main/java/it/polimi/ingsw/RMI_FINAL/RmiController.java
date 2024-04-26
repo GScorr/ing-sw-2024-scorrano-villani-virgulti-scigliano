@@ -17,6 +17,7 @@ public class RmiController implements VirtualRmiController, Serializable {
     public Queue<Integer> callQueue = new LinkedList<>();
     public Map<Integer, Object> returns = new HashMap<>();
     public Map<Integer,String> request_to_function = new HashMap<>();
+    public Map<Integer,Object> request_to_wrap = new HashMap<>();
 
     public RmiController(String name, int numPlayer) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
@@ -93,9 +94,10 @@ public class RmiController implements VirtualRmiController, Serializable {
     public void chooseStartingCard(String token, boolean flip) throws RemoteException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
     }
-    public void addtoQueue(String function, Integer idRequest) throws RemoteException{
+    public void addtoQueue(String function, Integer idRequest, Object wrap) throws RemoteException{
         callQueue.add(idRequest);
         request_to_function.put(idRequest, function);
+        request_to_wrap.put(idRequest,wrap);
         returns.put(idRequest,"no return");
     }
 
