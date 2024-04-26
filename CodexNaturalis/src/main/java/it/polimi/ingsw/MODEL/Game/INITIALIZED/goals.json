@@ -2,81 +2,98 @@
   {
     "goalType": "GoalDiagonal",
     "resource": "MUSHROOMS",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo diagonale da basso-sinistra ad alto-destra composta da 3 funghi"
   },
   {
     "goalType": "GoalDiagonal",
     "resource": "PLANT",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo diagonale da alto-sinistra a basso-destra composta da 3 piante"
   },
   {
     "goalType": "GoalDiagonal",
     "resource": "ANIMAL",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo diagonale da basso-sinistra ad alto-destra composta da 3 animali"
   },
   {
     "goalType": "GoalDiagonal",
     "resource": "INSECTS",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo diagonale da alto-sinistra a basso-destra composta da 3 insetti"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "MUSHROOMS",
-    "points": 3
+    "points": 3,
+    "string": "Obiettivo figura ad l funghi"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "PLANT",
-    "points": 3
+    "points": 3,
+    "string": "Obiettivo figura ad l pianta"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "ANIMAL",
-    "points": 3
+    "points": 3,
+    "string": "Obiettivo figura ad l animali"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "INSECTS",
-    "points": 3
+    "points": 3,
+    "string": "Obiettivo figura ad l insetti"
   },
   {
     "goalType": "GoalTriple",
     "resource": "MUSHROOMS",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo triplo fungo"
   },
   {
-    "goalType": "GoalLFigure",
+    "goalType": "GoalTriple",
     "resource": "PLANT",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo tripla pianta"
+
   },
   {
-    "goalType": "GoalLFigure",
+    "goalType": "GoalTriple",
     "resource": "ANIMAL",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo triplo animale"
   },
   {
-    "goalType": "GoalLFigure",
+    "goalType": "GoalTriple",
     "resource": "INSECTS",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo tripli insetti"
   },
   {
     "goalType": "GoalFeatherPenPaper",
     "resource": "MIX",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo una piuma, una pergamena e un calamaio"
   },
   {
     "goalType": "GoalDoubleGold",
     "resource": "FEATHER",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo doppia piuma"
   },
   {
-    "goalType": "GoalLFigure",
+    "goalType": "GoalDoubleGold",
     "resource": "PEN",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo doppio calamaio"
   },
   {
-    "goalType": "GoalLFigure",
+    "goalType": "GoalDoubleGold",
     "resource": "PAPER",
-    "points": 2
+    "points": 2,
+    "string": "Obiettivo doppia pergamena"
   }
 ]

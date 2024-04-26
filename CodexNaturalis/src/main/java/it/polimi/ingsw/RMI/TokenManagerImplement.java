@@ -1,10 +1,11 @@
 package it.polimi.ingsw.RMI;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class TokenManagerImplement implements TokenManager{
+public class TokenManagerImplement implements TokenManager, Serializable {
 
     public Map<String, VirtualView> tokens = new HashMap<>();
     @Override
