@@ -53,6 +53,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
             else if(isnew.equals("false")){
                 flag=false;
+                System.out.println("Giocatore già presente, reinserisci nome!");
             }
             else{
                 this.token = isnew;
@@ -134,16 +135,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void buffering() throws RemoteException, InterruptedException{
-        Thread.sleep(70);
+        Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("/");
-        Thread.sleep(70);
+        Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("|");
-        Thread.sleep(70);
+        Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("\\");
-        Thread.sleep(70);
+        Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("-");
     }

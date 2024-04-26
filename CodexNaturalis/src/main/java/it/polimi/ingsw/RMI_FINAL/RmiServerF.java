@@ -2,6 +2,7 @@ package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
+import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.*;
 
@@ -65,7 +66,6 @@ public class RmiServerF implements VirtualServerF {
     , add token and gcontroller in the token to controller*/
     @Override
     public RmiController createGame(String name, int num_player, String p_token, String player_name) throws RemoteException {
-
         RmiController serverino = new RmiController(name, num_player);
         Player p = serverino.createPlayer(p_token,player_name,true);
         token_to_player.put( p_token , p);
@@ -169,8 +169,16 @@ public class RmiServerF implements VirtualServerF {
 
     @Override
     public boolean checkFull(String token) throws RemoteException {
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
         //ritorna true se ho raggiunto i player
-        return token_to_rmi.get(token).getFull();
+        token_to_rmi.get(token).addtoQueue("getFull",idRequest);
+        Boolean boo = (boolean) waitAnswer(token,idRequest);
+        System.out.println(boo);
+        return boo;
+    }
+
+    private Object waitAnswer(String token, Integer idRequest) throws RemoteException {
+            return token_to_rmi.get(token).getAnswer(idRequest);
     }
 
     @Override
@@ -230,11 +238,6 @@ public class RmiServerF implements VirtualServerF {
     }
     private synchronized void checkHeartbeats() throws RemoteException{
         long currentTime = System.currentTimeMillis();
-        for (Map.Entry<String, Long> entry : lastHeartbeatTime.entrySet()) {
-            String key = entry.getKey();
-            Long value = entry.getValue();
-            System.out.println("Chiave: " + key + ", Valore: " + value);
-        }
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {

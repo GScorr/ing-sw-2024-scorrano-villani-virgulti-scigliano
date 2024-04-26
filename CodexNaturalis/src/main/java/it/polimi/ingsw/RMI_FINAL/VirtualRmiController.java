@@ -18,4 +18,8 @@ public interface VirtualRmiController extends Remote {
     public boolean addPlayer(String p_token, String name) throws RemoteException;
     public void chooseGoal(String token, int index) throws RemoteException;
     public void chooseStartingCard(String token, boolean flip) throws RemoteException;
+    public void checkQueue() throws RemoteException;
+    public void executeCall(Integer function) throws RemoteException;
+    public void addtoQueue(String string,Integer idRequest) throws RemoteException;
+    public Object getAnswer(Integer idRequest) throws RemoteException;
 }
