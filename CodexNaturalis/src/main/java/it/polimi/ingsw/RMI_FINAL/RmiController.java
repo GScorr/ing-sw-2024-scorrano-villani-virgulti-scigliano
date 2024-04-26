@@ -4,11 +4,9 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.io.Serializable;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RmiController implements VirtualRmiController, Serializable {
     public List<VirtualViewF> clients = new ArrayList<>();
@@ -16,14 +14,46 @@ public class RmiController implements VirtualRmiController, Serializable {
     public Map<String, Player> token_to_player = new HashMap<>();
 
     public GameController controller;
+    public Queue<Integer> callQueue = new LinkedList<>();
+    public Map<Integer, Object> returns = new HashMap<>();
+    public Map<Integer,String> request_to_function = new HashMap<>();
+    public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
 
-    public RmiController(String name, int numPlayer) {
+    public RmiController(String name, int numPlayer) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
+        checkQueue();
     }
 
     @Override
     public synchronized void connect(VirtualViewF client)throws RemoteException{
         this.clients.add(client);
+    }
+    public void checkQueue() throws RemoteException {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(250); // Controlla le functions ogni 0.25 secondi
+                    while (!callQueue.isEmpty()) {
+                        Integer request = callQueue.poll();
+                        executeCall(request);
+                    }
+                } catch (InterruptedException | RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    public void executeCall(Integer request) throws RemoteException {
+        String function = request_to_function.get(request);
+        switch (function) {
+            case "getFull":
+                returns.put(request,getFull());
+                break;
+            case "createPlayer":
+                returns.put(request,createPlayer((String) request_to_wrap.get(request).obj1,
+                        (String) request_to_wrap.get(request).obj2, (boolean) request_to_wrap.get(request).obj3));
+                break;
+        }
     }
 
     public  boolean getFull()  throws RemoteException {
@@ -69,8 +99,20 @@ public class RmiController implements VirtualRmiController, Serializable {
     public void chooseStartingCard(String token, boolean flip) throws RemoteException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
     }
+    public void addtoQueue(String function, Integer idRequest, Wrapper wrap) throws RemoteException{
+        callQueue.add(idRequest);
+        request_to_function.put(idRequest, function);
+        request_to_wrap.put(idRequest,wrap);
+        returns.put(idRequest,"no return");
+    }
 
-
+    public Object getAnswer(Integer idRequest) throws RemoteException{
+        Object wait = null;
+        do{
+            wait = returns.get(idRequest);
+        }while(wait.equals("no return"));
+        return wait;
+    }
 }
 
 

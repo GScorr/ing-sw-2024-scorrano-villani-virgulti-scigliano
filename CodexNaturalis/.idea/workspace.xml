@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="gestione disconnesioni">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualRmiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualRmiController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +146,7 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.RMI" />
       <recent name="it.polimi.ingsw.MODEL.Game" />
       <recent name="it.polimi.ingsw.MODEL.Game.State" />
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
@@ -276,54 +280,6 @@
       <workItem from="1713018449356" duration="10906000" />
       <workItem from="1713640206406" duration="3355000" />
       <workItem from="1713643582992" duration="1323000" />
-    </task>
-    <task id="LOCAL-00033" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712516522386</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1712516522386</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712521108250</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1712521108250</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712563009541</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1712563009541</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712567413725</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1712567413725</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Aggiornamento sono gabriele">
-      <option name="closed" value="true" />
-      <created>1712567896746</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1712567896746</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Aggiunta commenti">
-      <option name="closed" value="true" />
-      <created>1712591712313</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1712591712313</updated>
     </task>
     <task id="LOCAL-00039" summary="test su game e fix game">
       <option name="closed" value="true" />
@@ -669,7 +625,55 @@
       <option name="project" value="LOCAL" />
       <updated>1714065019987</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="heartbeat">
+      <option name="closed" value="true" />
+      <created>1714066472074</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1714066472074</updated>
+    </task>
+    <task id="LOCAL-00083" summary="gestione disconnessione e riconnessione">
+      <option name="closed" value="true" />
+      <created>1714127330624</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1714127330624</updated>
+    </task>
+    <task id="LOCAL-00084" summary="inizio lista queue">
+      <option name="closed" value="true" />
+      <created>1714141233731</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1714141233732</updated>
+    </task>
+    <task id="LOCAL-00085" summary="inizio lista queue">
+      <option name="closed" value="true" />
+      <created>1714145638989</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1714145638989</updated>
+    </task>
+    <task id="LOCAL-00086" summary="inizio lista queue">
+      <option name="closed" value="true" />
+      <created>1714145668126</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1714145668126</updated>
+    </task>
+    <task id="LOCAL-00087" summary="inizio lista queue">
+      <option name="closed" value="true" />
+      <created>1714146430038</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1714146430042</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -699,8 +703,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="PROVE RMI" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;CodexNaturalis/.idea/workspace.xml" />
     <MESSAGE value="prove rmi" />
     <MESSAGE value="Inizio gestione di partite multiple" />
     <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
@@ -724,7 +726,9 @@
     <MESSAGE value="ci siamo" />
     <MESSAGE value="inserimento metodo chooseGoal" />
     <MESSAGE value="heartbeat" />
-    <option name="LAST_COMMIT_MESSAGE" value="heartbeat" />
+    <MESSAGE value="gestione disconnessione e riconnessione" />
+    <MESSAGE value="inizio lista queue" />
+    <option name="LAST_COMMIT_MESSAGE" value="inizio lista queue" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
