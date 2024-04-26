@@ -1,19 +1,18 @@
-package it.polimi.ingsw.SOCKET.Token;
-/*
+package it.polimi.ingsw.SOCKET_FINAL.TokenManager;
+
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
-import it.polimi.ingsw.RMI_FINAL.TokenManagerF;
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.VirtualViewS;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
+
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class TokenManagerS{
+public class TokenManager{
 
-    public Map<String, VirtualViewS> tokens = new HashMap<>();
+    public Map<String, VirtualView> tokens = new HashMap<>();
 
-    public String generateToken(VirtualViewS clientId) {
+    public String generateToken(VirtualView clientId) {
         String token = UUID.randomUUID().toString(); // Generate a casual token
         tokens.put(token,clientId); // save client token association
         return token;
@@ -23,10 +22,10 @@ public class TokenManagerS{
         return tokens.containsKey(clientId) && tokens.get(clientId).equals(token);
     }
 
-    public Map<String, VirtualViewS> getTokens(){
+    public Map<String, VirtualView> getTokens(){
         return this.tokens;
     }
 
 }
-*/
+
 

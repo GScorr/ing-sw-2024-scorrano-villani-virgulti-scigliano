@@ -1,9 +1,12 @@
-package it.polimi.ingsw.SOCKET;
-/*
+package it.polimi.ingsw.SOCKET_FINAL;
+
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,16 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 
 
-
-public class ServerS {
+public class Server {
 
     final ServerSocket listenSocket;
     final Controller controller;
-    final List<ClientHandlerS> clients = new ArrayList<>();
+    final List<ClientHandler> clients = new ArrayList<>();
 
     public HashMap<String, Giocatore> token_map = new HashMap<>();
 
-    public ServerS(ServerSocket listenSocket, Controller controller) {
+    public Server(ServerSocket listenSocket, Controller controller) {
         this.listenSocket = listenSocket;
         this.controller = controller;
     }
@@ -31,7 +33,7 @@ public class ServerS {
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             OutputStreamWriter socketTx = new OutputStreamWriter(clientSocket.getOutputStream());
 
-            ClientHandlerS handler = new ClientHandlerS(this.controller, this, inputStream, new BufferedWriter(socketTx));
+            ClientHandler handler = new ClientHandler(this.controller, this, inputStream, new BufferedWriter(socketTx));
 
             clients.add(handler);
             new Thread(() -> {
@@ -45,7 +47,6 @@ public class ServerS {
             }).start();
         }
     }
-
 
 
     public void broadcastUpdate(String value) {
@@ -63,8 +64,7 @@ public class ServerS {
 
         ServerSocket listenSocket = new ServerSocket(port);
 
-        new ServerS(listenSocket, new Controller()).runServer();
+        new Server(listenSocket, new Controller()).runServer();
     }
 
 }
-*/

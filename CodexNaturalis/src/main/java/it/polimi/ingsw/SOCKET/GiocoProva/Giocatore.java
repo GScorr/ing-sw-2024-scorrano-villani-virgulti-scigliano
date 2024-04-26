@@ -1,6 +1,8 @@
 package it.polimi.ingsw.SOCKET.GiocoProva;
 
-public class Giocatore {
+import java.io.Serializable;
+
+public class Giocatore implements Serializable {
     /**
      * Player semplificato
 

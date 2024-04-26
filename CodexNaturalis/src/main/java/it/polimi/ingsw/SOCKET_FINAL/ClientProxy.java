@@ -1,13 +1,12 @@
-/*
-package it.polimi.ingsw.SOCKET;
+package it.polimi.ingsw.SOCKET_FINAL;
 
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 
-public class ClientProxyS implements VirtualViewS{
+public class ClientProxy implements VirtualView {
     final PrintWriter output;
 
-    public ClientProxyS(BufferedWriter output) {
+    public ClientProxy(BufferedWriter output) {
         this.output = new PrintWriter(output);
     }
 
@@ -29,5 +28,3 @@ public class ClientProxyS implements VirtualViewS{
         output.flush();
     }
 }
-
- */
