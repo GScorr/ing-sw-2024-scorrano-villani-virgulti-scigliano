@@ -69,12 +69,13 @@ public class RmiServerF implements VirtualServerF {
         RmiController serverino = new RmiController(name, num_player);
         token_to_rmi.put( p_token, serverino);
         Integer idRequest = IndexRequestManagerF.getNextIndex();
-        Wrapper wrap = new Wrapper(p_token,player_name,true,player_name);
-        serverino.addtoQueue("createPlayer",idRequest,wrap);
+        serverino.addtoQueue("createPlayer",idRequest,new Wrapper(p_token,player_name,true));
         Player p = (Player) waitAnswer(p_token,idRequest);
         token_to_player.put( p_token , p);
-        //Player p = serverino.createPlayer(p_token,player_name,true);
-        rmi_controllers.put(serverino.getController().getGame().getIndex_game() , serverino);
+        //Player p = serverino.createPlayer(p_token,player_name,true); /old method
+        Integer idRequest2 = IndexRequestManagerF.getNextIndex();
+        serverino.addtoQueue("getIndexGame",idRequest2,null);
+        rmi_controllers.put((Integer) waitAnswer(p_token, idRequest2), serverino);
         return serverino;
     }
 
@@ -98,8 +99,10 @@ public class RmiServerF implements VirtualServerF {
         String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
         return false;*/
-
-        return rmi_controllers.get(game_id).addPlayer(p_token,name);
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
+        rmi_controllers.get(game_id).addtoQueue("addPlayer", idRequest, new Wrapper(p_token,name));
+        return (boolean) waitAnswer(p_token,idRequest);
+        //return rmi_controllers.get(game_id).addPlayer(p_token,name);
     }
 
     @Override

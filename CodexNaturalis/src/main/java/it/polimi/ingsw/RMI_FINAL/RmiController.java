@@ -53,6 +53,14 @@ public class RmiController implements VirtualRmiController, Serializable {
                 returns.put(request,createPlayer((String) request_to_wrap.get(request).obj1,
                         (String) request_to_wrap.get(request).obj2, (boolean) request_to_wrap.get(request).obj3));
                 break;
+            case "addPlayer":
+                returns.put(request,addPlayer((String) request_to_wrap.get(request).obj1,
+                        (String) request_to_wrap.get(request).obj2));
+                break;
+            case "getIndexGame":
+                returns.put(request, getController().getGame().getIndex_game());
+                break;
+                
         }
     }
 
