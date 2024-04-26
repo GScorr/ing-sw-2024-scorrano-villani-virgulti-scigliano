@@ -3,7 +3,6 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
-import it.polimi.ingsw.SOCKET.ServerS;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.Serializable;

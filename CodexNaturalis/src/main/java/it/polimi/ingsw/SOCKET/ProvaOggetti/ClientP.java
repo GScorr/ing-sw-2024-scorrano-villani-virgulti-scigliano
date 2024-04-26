@@ -1,4 +1,5 @@
 package it.polimi.ingsw.SOCKET.ProvaOggetti;
+/*
 import it.polimi.ingsw.SOCKET.Message.CreatePlayerMessage;
 
 import java.io.*;
@@ -50,3 +51,6 @@ class MyMessage implements Serializable {
         return content;
     }
 }
+
+
+ */
