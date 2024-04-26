@@ -1,6 +1,8 @@
 package it.polimi.ingsw.RMI_FINAL;
 
-public class Wrapper {
+import java.io.Serializable;
+
+public class Wrapper implements Serializable {
     public Object obj1;
     public Object obj2;
     public Object obj3;
