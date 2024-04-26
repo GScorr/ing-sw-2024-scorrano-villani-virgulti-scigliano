@@ -75,13 +75,24 @@ public class Player implements PlayerObserver, Serializable {
 
     private int num_goal_achieve = 0;
 
+    private boolean isDisconnected;
+
 
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
 
 
+    public boolean isDisconnected(){
+        return isDisconnected;
+    }
 
+    public void disconnect(){
+        this.isDisconnected = true;
+    }
+    public void connect(){
+        this.isDisconnected = false;
+    }
 
 
     public Player( ColorsEnum color, String name, boolean isFirst){
@@ -91,6 +102,7 @@ public class Player implements PlayerObserver, Serializable {
         createField();
         this.actual_state = not_initialized;
         this.isFirst = isFirst;
+        this.isDisconnected = false;
     }
 
     public String getName() {

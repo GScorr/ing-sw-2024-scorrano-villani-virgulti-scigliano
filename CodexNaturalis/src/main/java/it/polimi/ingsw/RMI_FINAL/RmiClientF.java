@@ -1,11 +1,13 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.Game.State.GameState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 
@@ -38,14 +40,36 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         VirtualViewF curr_client = this;
         String player_name = " ";
         Player curr_player;
-        boolean new_name;
+        String isnew;
+        boolean flag;
         // Creo giocatore
         do{
             System.out.print("\nScegli nome Player > ");
             player_name = scan.nextLine();
-            this.token = server.createToken(this);
-            new_name = server.checkName(player_name,this.token);
-        } while(!new_name);
+            isnew = server.checkName(player_name);
+            if(isnew.equals("true")) {
+                flag = true;
+                this.token = server.createToken(this);
+            }
+            else if(isnew.equals("false")){
+                flag=false;
+            }
+            else{
+                this.token = isnew;
+                flag=true;
+                System.out.println(token + "riconnessa");
+            }
+        } while(!flag);
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(100);
+                    server.receiveHeartbeat(token);
+                } catch (RemoteException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
         // which contains a map that associate the client with the token, and we also have a map in server that
@@ -63,24 +87,19 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.print("creazione Player andata a buon fine!\n");
 
         System.out.print("Aspetta il riempimento partita -");
-        while (!server.checkFull(this.token)) {
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("/");
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("|");
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("\\");
-                Thread.sleep(70);
-                System.out.print("\b");
-                System.out.print("-");
-            System.out.println(server.checkFull(this.token));
+        while ( !server.checkFull(token) ) {
+            buffering();
         }
-        System.out.println("Scegli obiettivo tra:\n " + server.getTtoP().get(this.token).getInitial_goal_cards().get(0).getGoalType()
-        + "e" + server.getTtoP().get(this.token).getInitial_goal_cards().get(1).getGoalType());
-        System.out.println("Ehi la tua partita è piena!\n");
+        System.out.println("\nEhi la tua partita è piena!\n");
+        chooseGoal();
+        System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+        while(!server.getRmiController(token).getController().getGame().getActual_state().getNameState().equals("CHOOSING_STARTING_CARD")){
+            buffering();
+        }
+        chooseStartingCard();
+        while(true) {
+            buffering();
+        }
 
 
         /*while (true) {
@@ -95,6 +114,57 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
+    private void chooseStartingCard() throws RemoteException{
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\nScegli lato carta iniziale:\n");
+        server.showStartingCard(token);
+        int done=0;
+        while(done==0){
+            System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
+            String dec = scan.nextLine();
+            if (dec.equals("F")){
+                done=1;
+                server.chooseStartingCard(token,false);
+            } else if (dec.equals("B")){
+                done=1;
+                server.chooseStartingCard(token,true);
+            }
+            else System.out.println("Inserimento errato!");
+        }
+    }
+
+    private void buffering() throws RemoteException, InterruptedException{
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("/");
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("|");
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("\\");
+        Thread.sleep(70);
+        System.out.print("\b");
+        System.out.print("-");
+    }
+
+    private void chooseGoal() throws RemoteException{
+        Scanner scan = new Scanner(System.in);
+        int done=0;
+        while(done==0) {
+            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
+                    + "\n 2-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
+            String choice = scan.nextLine();
+            if (choice.equals("1")) {
+                done=1;
+                server.chooseGoal(token,0);
+            } else if (choice.equals("2")){
+                done=1;
+                server.chooseGoal(token,1);
+            } else System.out.println("Inserimento errato!");
+        }
+    }
+
     private void makeChoice(String player_name) throws RemoteException{
         Scanner scan = new Scanner(System.in);
         int done=0;
@@ -102,7 +172,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
             String decision = scan.nextLine();
             if (decision.equalsIgnoreCase("old")) {
-                server.CreatePlayer(player_name, this.token,false);
                 done = 1;
                 chooseMatch(player_name);
             } else if (decision.equalsIgnoreCase("new")) {
@@ -116,18 +185,20 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void chooseMatch(String player_name) throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        boolean check=false;
+        boolean check;
             System.out.println("\nElenco partite disponibili: ");
-            List<GameController> partite = server.getFreeGames();
+            List<RmiController> partite = server.getFreeGames();
 
-            for (GameController g : partite) {
-                System.out.println(g.getGame().getName() + " ID:" + g.getGame().getIndex_game() + " " + g.getGame().getNumPlayer() + "/" + g.getGame().getMax_num_player());
+            for (RmiController r : partite) {
+                System.out.println(r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
+                        + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player());
             }
             do {
                 System.out.println("\nInserisci ID partita in cui entrare");
                 int ID = scan.nextInt();
-                check = server.addPlayer(ID, token, player_name);
+                check = server.findRmiController(ID, token, player_name);
             }while(!check);
+
     }
 
     private void newGame(String player_name) throws RemoteException {
@@ -192,31 +263,38 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Side front = card.getFrontSide();
 
         System.out.println("BACK SIDE\n--------------------------");
-        System.out.println( " | " + back.getAngleLeftUp().toString().charAt(0)  + " |       " );
-        System.out.println( " | " + back.getAngleRightUp().toString().charAt(0) + " |\n " );
+        System.out.println( " | " + back.getAngleLeftUp().toString().charAt(0)  +   " |               "+ " | " + back.getAngleRightUp().toString().charAt(0) + " |\n " );
+        //System.out.println( " | " + back.getAngleRightUp().toString().charAt(0) + " |\n " );
         System.out.println( " |       | " + back.getCentral_resource().toString().charAt(0) + back.getCentral_resource2().toString().charAt(0) + back.getCentral_resource3().toString().charAt(0) + " |         |\n " );
-        System.out.println( " | " + back.getAngleLeftDown().toString().charAt(0) +  " |       " );
-        System.out.println( " | " + back.getAngleRightDown().toString().charAt(0) + " |\n " );
+        System.out.println( " | " + back.getAngleLeftDown().toString().charAt(0) +  " |               " + " | " + back.getAngleRightDown().toString().charAt(0) + " |\n " );
+        //System.out.println(  );
         System.out.println("--------------------------\n\n");
 
         System.out.println("FRONT SIDE\n--------------------------");
-        System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " );
+
         if(card instanceof ResourceCard) {
             System.out.println( " | " + card.getPoint() + " | ");
             if ( card instanceof GoldCard ){
-                System.out.println("  " + ((GoldCard) card).getPointBonus().toString().charAt(0)  + "  ");
+                System.out.println("  " + ((GoldCard) card).getPointBonus().toString().charAt(0)  + "  " + " | " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
             }
+        }else{
+            System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " + "             | " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
         }
-        System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
+        //System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
         System.out.println( " |       | " + front.getCentral_resource().toString().charAt(0) + front.getCentral_resource2().toString().charAt(0) + front.getCentral_resource3().toString().charAt(0) + " |         |\n " );
-        System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
+        //System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
         if ( card instanceof GoldCard ){
-            System.out.println("  " + card.getCostraint().toString().charAt(0)  + "  ");
+            System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
+            System.out.println("  " + card.getCostraint().toString().charAt(0)  + "  " + " | " + front.getAngleRightDown().toString().charAt(0) + " |\n ");
+        }else{
+            System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |              " + " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
         }
-        System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
+        //System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
         System.out.println("--------------------------\n\n");
 
     }
+
+
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
@@ -224,4 +302,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         new RmiClientF(server).run();
     }
 }
+
+//todo riconnessione gianni
 

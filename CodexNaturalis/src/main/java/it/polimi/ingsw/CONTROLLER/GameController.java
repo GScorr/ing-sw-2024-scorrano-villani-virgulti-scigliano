@@ -108,12 +108,22 @@ public class GameController implements GameSubject, Serializable {
         return;
     }
 
+    public boolean isAlone(){
+        boolean num = false;
+        int num_disconnected = 0;
+        for ( int i = 0 ; i < game.getMax_num_player(); i++ )
+        {
+            if (game.getGet_player_index().get(i).isDisconnected()) num_disconnected++;
+        }
+        if(  (game.getMax_num_player() - num_disconnected == 1) || (game.getMax_num_player() - num_disconnected == 0) ) num = true;
+        return num;
+    }
 
 
     public Player createPlayer(String nome, boolean isFirst){
-        if(game.getNumPlayer() > 0) {
+        /*if(game.getNumPlayer() > 0) {
             isUniqueName(nome);
-        }
+        }*/
         Player player = new Player(ColorsEnum.GREEN, nome, isFirst);
         if(game.getNum_player() == game.getMax_num_player()){
             throw new ControllerException(3,"Maximum number of players reached");
@@ -137,7 +147,7 @@ public class GameController implements GameSubject, Serializable {
         return false;
     }
 
-    public boolean checkNumPlayer(){
+    public boolean  checkNumPlayer(){
         Integer num_player = game.getNum_player();
         Integer max_num_player = game.getMax_num_player();
         if(num_player == max_num_player && game.actual_state.getNameState().equals("NOT_INITIALIZED")){

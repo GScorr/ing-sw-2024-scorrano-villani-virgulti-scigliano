@@ -9,11 +9,13 @@ public class Goal implements Serializable {
     private GoalStrategy goalType;
     private AnglesEnum resource;
     private int points;
+    private String string;
 
-    public Goal(GoalStrategy goalType,int points,AnglesEnum resource) {
+    public Goal(GoalStrategy goalType,int points,AnglesEnum resource, String string) {
         this.goalType = goalType;
         this.points = points;
         this.resource=resource;
+        this.string = string;
     }
 
     public void setGoalType(GoalStrategy goalType) {
@@ -39,5 +41,8 @@ public class Goal implements Serializable {
     //returns the total number of points achieved from the player with the GameField field
     public int numPoints(GameField field){
         return goalType.totalPoints(field,points,resource);
+    }
+    public String toString(){
+        return string;
     }
 }

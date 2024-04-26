@@ -1,10 +1,11 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class TokenManagerImplementF implements TokenManagerF{
+public class TokenManagerImplementF implements TokenManagerF, Serializable {
 
     public Map<String, VirtualViewF> tokens = new HashMap<>();
     @Override

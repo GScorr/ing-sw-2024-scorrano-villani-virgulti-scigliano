@@ -14,4 +14,5 @@ public interface VirtualViewF extends Remote {
     public void reportError(String details) throws RemoteException;
     public void reportMessage(String details) throws  RemoteException;
     public void showCard(PlayCard card) throws RemoteException;
+
 }
