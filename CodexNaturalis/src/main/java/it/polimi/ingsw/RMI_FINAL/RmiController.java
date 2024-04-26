@@ -31,7 +31,7 @@ public class RmiController implements VirtualRmiController, Serializable {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(250); // Controlla le functions ogni 0.5 secondi
+                    Thread.sleep(250); // Controlla le functions ogni 0.25 secondi
                     while (!callQueue.isEmpty()) {
                         Integer request = callQueue.poll();
                         executeCall(request);
