@@ -17,6 +17,7 @@ public class RmiController implements VirtualRmiController, Serializable {
     public Queue<Integer> callQueue = new LinkedList<>();
     public Map<Integer, Object> returns = new HashMap<>();
     public Map<Integer,String> request_to_function = new HashMap<>();
+    public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
 
     public RmiController(String name, int numPlayer) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
@@ -31,7 +32,7 @@ public class RmiController implements VirtualRmiController, Serializable {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(250); // Controlla le functions ogni 0.5 secondi
+                    Thread.sleep(250); // Controlla le functions ogni 0.25 secondi
                     while (!callQueue.isEmpty()) {
                         Integer request = callQueue.poll();
                         executeCall(request);
@@ -47,6 +48,19 @@ public class RmiController implements VirtualRmiController, Serializable {
         switch (function) {
             case "getFull":
                 returns.put(request,getFull());
+                break;
+            case "createPlayer":
+                returns.put(request,createPlayer((String) request_to_wrap.get(request).obj1,
+                        (String) request_to_wrap.get(request).obj2, (boolean) request_to_wrap.get(request).obj3));
+                break;
+            case "addPlayer":
+                returns.put(request,addPlayer((String) request_to_wrap.get(request).obj1,
+                        (String) request_to_wrap.get(request).obj2));
+                break;
+            case "getIndexGame":
+                returns.put(request, getController().getGame().getIndex_game());
+                break;
+                
         }
     }
 
@@ -93,9 +107,10 @@ public class RmiController implements VirtualRmiController, Serializable {
     public void chooseStartingCard(String token, boolean flip) throws RemoteException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
     }
-    public void addtoQueue(String function, Integer idRequest) throws RemoteException{
+    public void addtoQueue(String function, Integer idRequest, Wrapper wrap) throws RemoteException{
         callQueue.add(idRequest);
         request_to_function.put(idRequest, function);
+        request_to_wrap.put(idRequest,wrap);
         returns.put(idRequest,"no return");
     }
 

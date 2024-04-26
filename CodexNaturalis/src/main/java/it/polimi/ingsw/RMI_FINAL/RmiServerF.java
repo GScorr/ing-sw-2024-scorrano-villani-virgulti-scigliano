@@ -67,10 +67,15 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public RmiController createGame(String name, int num_player, String p_token, String player_name) throws RemoteException {
         RmiController serverino = new RmiController(name, num_player);
-        Player p = serverino.createPlayer(p_token,player_name,true);
-        token_to_player.put( p_token , p);
-        rmi_controllers.put(serverino.getController().getGame().getIndex_game() , serverino);
         token_to_rmi.put( p_token, serverino);
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
+        serverino.addtoQueue("createPlayer",idRequest,new Wrapper(p_token,player_name,true));
+        Player p = (Player) waitAnswer(p_token,idRequest);
+        token_to_player.put( p_token , p);
+        //Player p = serverino.createPlayer(p_token,player_name,true); /old method
+        Integer idRequest2 = IndexRequestManagerF.getNextIndex();
+        serverino.addtoQueue("getIndexGame",idRequest2,null);
+        rmi_controllers.put((Integer) waitAnswer(p_token, idRequest2), serverino);
         return serverino;
     }
 
@@ -94,8 +99,10 @@ public class RmiServerF implements VirtualServerF {
         String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
         return false;*/
-
-        return rmi_controllers.get(game_id).addPlayer(p_token,name);
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
+        rmi_controllers.get(game_id).addtoQueue("addPlayer", idRequest, new Wrapper(p_token,name));
+        return (boolean) waitAnswer(p_token,idRequest);
+        //return rmi_controllers.get(game_id).addPlayer(p_token,name);
     }
 
     @Override
@@ -170,10 +177,10 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public boolean checkFull(String token) throws RemoteException {
         Integer idRequest = IndexRequestManagerF.getNextIndex();
+        Wrapper wrap = new Wrapper();
         //ritorna true se ho raggiunto i player
-        token_to_rmi.get(token).addtoQueue("getFull",idRequest);
+        token_to_rmi.get(token).addtoQueue("getFull",idRequest,wrap);
         Boolean boo = (boolean) waitAnswer(token,idRequest);
-        System.out.println(boo);
         return boo;
     }
 
