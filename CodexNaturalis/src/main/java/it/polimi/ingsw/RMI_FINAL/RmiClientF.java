@@ -47,20 +47,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             System.out.print("\nScegli nome Player > ");
             player_name = scan.nextLine();
             isnew = server.checkName(player_name);
-            System.out.println(isnew);
             if(isnew.equals("true")) {
                 flag = true;
                 this.token = server.createToken(this);
-                new Thread(() -> {
-                    while (true) {
-                        try {
-                            Thread.sleep(500);
-                            server.receiveHeartbeat(token);
-                        } catch (RemoteException | InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
             }
             else if(isnew.equals("false")){
                 flag=false;
@@ -68,19 +57,19 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             else{
                 this.token = isnew;
                 flag=true;
-                System.out.println("skip");
-                new Thread(() -> {
-                    while (true) {
-                        try {
-                            Thread.sleep(500);
-                            server.receiveHeartbeat(token);
-                        } catch (RemoteException | InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
+                System.out.println(token + "riconnessa");
             }
         } while(!flag);
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(100);
+                    server.receiveHeartbeat(token);
+                } catch (RemoteException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
         // which contains a map that associate the client with the token, and we also have a map in server that

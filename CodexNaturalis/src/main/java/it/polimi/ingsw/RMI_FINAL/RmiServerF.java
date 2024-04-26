@@ -141,10 +141,10 @@ public class RmiServerF implements VirtualServerF {
             {
                 Player p = rmi_controllers.get(i).getController().getGame().getGet_player_index().get(j);
                 if ( p.getName().equals(name) && p.isDisconnected() ) {
+                    p.connect();
                     for ( String s : rmi_controllers.get(i).getTtoP().keySet() )
                     {
                         if ( rmi_controllers.get(i).getTtoP().get(s).equals(p) ){
-                            p.connect();
                             return s;
                         }
                     }
@@ -230,12 +230,17 @@ public class RmiServerF implements VirtualServerF {
     }
     private synchronized void checkHeartbeats() throws RemoteException{
         long currentTime = System.currentTimeMillis();
-
         for (Map.Entry<String, Long> entry : lastHeartbeatTime.entrySet()) {
-            if (currentTime - entry.getValue() > HEARTBEAT_TIMEOUT) {
-                if(token_to_rmi.get(entry.getKey()).getTtoP().get(entry.getKey()).isDisconnected()) continue;
-                token_to_rmi.get(entry.getKey()).getTtoP().get(entry.getKey()).disconnect();
-                System.out.println(token_to_rmi.get(entry.getKey()).getTtoP().get(entry.getKey()).getName() + "frate me so disconnected\n");
+            String key = entry.getKey();
+            Long value = entry.getValue();
+            System.out.println("Chiave: " + key + ", Valore: " + value);
+        }
+        Set<String> keys = lastHeartbeatTime.keySet();
+        for (String key : keys) {
+            if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
+                if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
+                token_to_rmi.get(key).getTtoP().get(key).disconnect();
+                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + "frate me so disconnected\n");
             }
         }
     }
