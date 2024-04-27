@@ -2,7 +2,9 @@ package it.polimi.ingsw.SOCKET.GiocoProva;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 
-public class Controller {
+import java.io.Serializable;
+
+public class Controller implements Serializable {
     private Partita partita = new Partita();
 
     public Controller() {

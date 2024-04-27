@@ -1,27 +1,27 @@
-package it.polimi.ingsw.SOCKET;
-/*
-import it.polimi.ingsw.CONTROLLER.ControllerException;
+package it.polimi.ingsw.SOCKET_FINAL;
+
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
-import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
-import it.polimi.ingsw.SOCKET.Message.CreatePlayerMessage;
-import it.polimi.ingsw.SOCKET.Message.Message;
+import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
 
-import java.io.*;
-import java.net.ConnectException;
 
-public class ClientHandlerS implements VirtualViewS{
+import java.io.BufferedWriter;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class ClientHandler implements VirtualView {
 
     final Controller controller;
-    final ServerS server;
+    final Server server;
     final ObjectInputStream input;
-    final VirtualViewS view;
+    final VirtualView view;
 
 
-    public ClientHandlerS(Controller controller, ServerS server, ObjectInputStream input, BufferedWriter output) {
+    public ClientHandler(Controller controller, Server server, ObjectInputStream input, BufferedWriter output) {
         this.controller = controller;
         this.server = server;
         this.input = input;
-        this.view = new ClientProxyS(output);
+        this.view = new ClientProxy(output);
     }
 
     public void runVirtualView() throws IOException, ClassNotFoundException {
@@ -60,5 +60,3 @@ public class ClientHandlerS implements VirtualViewS{
 
 
 }
-
- */
