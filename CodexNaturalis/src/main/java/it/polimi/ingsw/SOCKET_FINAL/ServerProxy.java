@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 
 public class ServerProxy implements VirtualServer {
@@ -41,28 +40,24 @@ public class ServerProxy implements VirtualServer {
         output.writeObject(DP_message);
         output.flush();
 
-        // Wait for response from server
-        Object response = input.readObject();
+        MyMessageFinal response = (MyMessageFinal) input.readObject();
 
-        /*
-        * if response.getBool() return true
-        * else return false
-        * */
-        return true;
+        if(response.getContent().compareTo("TRUE") == 0){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
-    public String getToken(VirtualView client) throws IOException, ClassNotFoundException {
-        Message DP_message = new GetTokenMessage(client);
+    public String getToken(String name) throws IOException, ClassNotFoundException {
+        Message DP_message = new GetTokenMessage(name);
         output.writeObject(DP_message);
         output.flush();
 
-        // Wait for response from server
-        Object response = input.readObject();
+        MyMessageFinal response = (MyMessageFinal) input.readObject();
 
-        /*
-         * return response.getString()
-         * */
-        return "token_di_prova";
+        return response.getContent();
     }
 
     public ArrayList getFreeGame(String token) throws IOException, ClassNotFoundException {
@@ -71,7 +66,7 @@ public class ServerProxy implements VirtualServer {
         output.flush();
 
         // Wait for response from server
-        Object response = input.readObject();
+        //Object response = input.readObject();
 
         /*
          * return response.getList()

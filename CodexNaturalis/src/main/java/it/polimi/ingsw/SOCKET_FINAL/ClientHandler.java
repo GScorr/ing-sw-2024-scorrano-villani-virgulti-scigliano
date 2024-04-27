@@ -1,26 +1,29 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
+
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
+import it.polimi.ingsw.SOCKET_FINAL.Message.MyMessageFinal;
 
 
-import java.io.BufferedWriter;
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
+import java.util.ArrayList;
 
 public class ClientHandler implements VirtualView {
 
     final Controller controller;
     final Server server;
     final ObjectInputStream input;
+    final ObjectOutputStream output;
     final VirtualView view;
 
 
-    public ClientHandler(Controller controller, Server server, ObjectInputStream input, BufferedWriter output) {
+
+    public ClientHandler(Controller controller, Server server, ObjectInputStream input, ObjectOutputStream output) {
         this.controller = controller;
         this.server = server;
         this.input = input;
+        this.output = output;
         this.view = new ClientProxy(output);
     }
 
@@ -32,6 +35,7 @@ public class ClientHandler implements VirtualView {
                 while ((DP_message = (Message) input.readObject()) != null) {
                     DP_message.setController(controller);
                     DP_message.setServer(server);
+                    DP_message.setOutput(output);
                     DP_message.action();
                 }
             } catch (EOFException e) {
@@ -47,14 +51,14 @@ public class ClientHandler implements VirtualView {
     @Override
     public void showValue(String message) {
         synchronized (this) {
-            this.view.showValue(message);
+         //   this.view.showValue(message);
         }
     }
 
     @Override
     public void reportError(String details) {
         synchronized (this) {
-            this.view.reportError(details);
+         //   this.view.reportError(details);
         }
     }
 

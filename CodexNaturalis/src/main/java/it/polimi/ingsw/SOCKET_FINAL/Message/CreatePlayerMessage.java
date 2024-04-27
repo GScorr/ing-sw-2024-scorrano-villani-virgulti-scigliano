@@ -5,11 +5,13 @@ import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class CreatePlayerMessage implements Message, Serializable {
     public Controller controller;
     public Server server;
+    ObjectOutputStream output;
 
     public String nome,token;
     public CreatePlayerMessage(String nome, String token){
@@ -23,6 +25,9 @@ public class CreatePlayerMessage implements Message, Serializable {
 
     public void setServer(Server server) {
         this.server = server;
+    }
+    public void setOutput(ObjectOutputStream output) {
+        this.output = output;
     }
 
     @Override

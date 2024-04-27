@@ -3,9 +3,13 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public interface Message  {
     static int id = 0;
-    void action();
+    void action() throws IOException;
     void setController(Controller controller);
     void setServer(Server server);
+    void setOutput(ObjectOutputStream output);
 }

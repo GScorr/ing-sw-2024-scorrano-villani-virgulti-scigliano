@@ -1,12 +1,11 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
+import it.polimi.ingsw.RMI.TokenManagerImplement;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
+import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -22,18 +21,25 @@ public class Server {
 
     public HashMap<String, Giocatore> token_map = new HashMap<>();
 
+    public ArrayList<String> names = new ArrayList<>();
+
+    public TokenManager token_manager = new TokenManager();
+
     public Server(ServerSocket listenSocket, Controller controller) {
         this.listenSocket = listenSocket;
         this.controller = controller;
     }
 
-    private void runServer() throws IOException {
+    public void runServer() throws IOException {
         Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
-            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
-            OutputStreamWriter socketTx = new OutputStreamWriter(clientSocket.getOutputStream());
+            System.out.println("Client connected: " + clientSocket.getInetAddress());
 
-            ClientHandler handler = new ClientHandler(this.controller, this, inputStream, new BufferedWriter(socketTx));
+            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            //OutputStreamWriter socketTx = new OutputStreamWriter(clientSocket.getOutputStream());
+
+            ClientHandler handler = new ClientHandler(this.controller, this, inputStream, outputStream);
 
             clients.add(handler);
             new Thread(() -> {
@@ -60,9 +66,11 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         String host = "127.0.0.1";
-        int port = Integer.parseInt("4567");
+        int port = 12345;
+
 
         ServerSocket listenSocket = new ServerSocket(port);
+        System.out.println("Server is running...");
 
         new Server(listenSocket, new Controller()).runServer();
     }
