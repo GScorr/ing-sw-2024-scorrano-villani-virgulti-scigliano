@@ -61,7 +61,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println(token + "riconnessa");
             }
         } while(!flag);
-
         new Thread(() -> {
             while (true) {
                 try {
@@ -89,17 +88,17 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.print("creazione Player andata a buon fine!\n");
 
         System.out.print("Aspetta il riempimento partita -");
-        while ( !server.checkFull(token) ) {
+        while ( server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED") ) {
             buffering();
         }
         System.out.println("\nEhi la tua partita è piena!\n");
         chooseGoal();
-        System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString() );
-        while(!server.getRmiController(token).getController().getGame().getActual_state().getNameState().equals("CHOOSING_STARTING_CARD")){
+        System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+        while(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")){
             buffering();
         }
         chooseStartingCard();
-        while(true) {
+        while(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             buffering();
         }
 
@@ -303,8 +302,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
         new RmiClientF(server).run();
     }
-
-
 }
 
 //todo riconnessione gianni
