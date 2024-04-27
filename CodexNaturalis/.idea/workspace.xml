@@ -5,39 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/Message/CreatePlayerMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/Message/LunchMessageMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/Message/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ProvaOggetti/ClientP.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ProvaOggetti/ServerP.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CheckNameMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CreateGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CreatePlayerMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/GetFreeGames.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/GetTokenMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/LunchMessageMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/TokenManager/TokenManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/VirtualServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/VirtualView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ClientHandlerS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ClientHandlerS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ClientProxyS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ClientProxyS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ClientS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ClientS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/GiocoProva/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/GiocoProva/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/GiocoProva/Giocatore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/GiocoProva/Giocatore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/GiocoProva/Partita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/GiocoProva/Partita.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ServerProxyS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ServerProxyS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ServerS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/ServerS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/Token/TokenManagerS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/Token/TokenManagerS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/VirtualServerS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/VirtualServerS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/VirtualViewS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET/VirtualViewS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +70,7 @@
     "Application.RmiClientF.executor": "Run",
     "Application.RmiServer.executor": "Run",
     "Application.RmiServerF.executor": "Run",
+    "Application.Server.executor": "Run",
     "JUnit.CenterCardsTest.drawResourceCard.executor": "Coverage",
     "JUnit.CenterCardsTest.executor": "Coverage",
     "JUnit.DeckCreationTestGoal.creteGoalDeck.executor": "Run",
@@ -186,7 +157,7 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientS">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="ClientS" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET.ClientS" />
       <module name="PSP30" />
@@ -213,12 +184,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RmiServerF" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI_FINAL.RmiServerF" />
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Server" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -280,19 +251,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.ClientS" />
+      <item itemvalue="Application.Server" />
       <item itemvalue="Application.ServerP" />
       <item itemvalue="Application.ServerS" />
       <item itemvalue="Application.it.polimi.ingsw.SOCKET.ProvaOggetti.ClientS" />
       <item itemvalue="Application.RmiClientF" />
-      <item itemvalue="Application.RmiServerF" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Server" />
         <item itemvalue="Application.ServerS" />
         <item itemvalue="Application.it.polimi.ingsw.SOCKET.ProvaOggetti.ClientS" />
         <item itemvalue="Application.ServerP" />
         <item itemvalue="Application.RmiClientF" />
-        <item itemvalue="Application.RmiServerF" />
       </list>
     </recent_temporary>
   </component>

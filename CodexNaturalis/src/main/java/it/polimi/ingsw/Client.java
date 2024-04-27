@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.ClientS;
+
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -34,7 +34,7 @@ public class Client {
                 Socket serverSocket = new Socket(host, port);
                 InputStreamReader socketRx = new InputStreamReader(serverSocket.getInputStream());
                 OutputStreamWriter socketTx = new OutputStreamWriter(serverSocket.getOutputStream());
-                new ClientS(new BufferedReader(socketRx), new BufferedWriter(socketTx)).run();
+                //new ClientS(new BufferedReader(socketRx), new BufferedWriter(socketTx)).run();
                 break;
         }
     }
