@@ -30,13 +30,17 @@ public class RmiController implements VirtualRmiController, Serializable {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(250);// Controlla i player disconnected ogni 0.25 secondi
+                    Thread.sleep(1000);// Controlla i player disconnected ogni 5 secondi
                     for(Player p : controller.getPlayer_list()) {
                         if(p.isDisconnected() && p.getActual_state().getNameState().equals("CHOOSE_GOAL") && p.getGoalCard()==null) {
                             controller.playerChooseGoal(p, 0);
                         }
                         if(p.isDisconnected() && p.getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD") && !p.isFirstPlaced()) {
                             controller.playerSelectStartingCard(p, true);
+                        }
+                        if(p.isDisconnected() && (p.getActual_state().getNameState().equals("PLACE_CARD") ||
+                                p.getActual_state().getNameState().equals("DRAW_CARD"))){
+                            controller.nextStatePlayer();
                         }
                     }
                 } catch (InterruptedException e) {

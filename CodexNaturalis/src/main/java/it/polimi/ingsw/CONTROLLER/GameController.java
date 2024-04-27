@@ -213,7 +213,7 @@ public class GameController implements GameSubject, Serializable {
 // ------ da qui in avanti inizia il gioco con i turni
 
 
-    private void nextStatePlayer(){
+    public void nextStatePlayer(){
         Player currentPlayer = player_list.get(actual_player), nextPlayer;
         if(currentPlayer.actual_state.getNameState().equals("PLACE_CARD")){
             currentPlayer.nextStatePlayer();
@@ -494,4 +494,5 @@ public class GameController implements GameSubject, Serializable {
             player_observer.update();
         }
     }
+
 }
