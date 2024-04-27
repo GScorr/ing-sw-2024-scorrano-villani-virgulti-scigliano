@@ -81,7 +81,11 @@ public class Player implements PlayerObserver, Serializable {
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
+    private boolean firstPlaced = false;
 
+    public boolean isFirstPlaced() {
+        return firstPlaced;
+    }
 
     public boolean isDisconnected(){
         return isDisconnected;
@@ -330,7 +334,11 @@ public class Player implements PlayerObserver, Serializable {
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 22, 22);
+            firstPlaced = true;
+    }
 
+    public PState getActual_state() {
+        return actual_state;
     }
 
     public int getNum_goal_achieve() {

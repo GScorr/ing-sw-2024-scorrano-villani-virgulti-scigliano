@@ -91,6 +91,10 @@ public class GameController implements GameSubject, Serializable {
         return final_counter;
     }
 
+    public List<Player> getPlayer_list() {
+        return player_list;
+    }
+
     private void isUniqueName(String name) {
         if(name.length() == 0){
             throw new ControllerException(1,"Insert at least 1 character");
