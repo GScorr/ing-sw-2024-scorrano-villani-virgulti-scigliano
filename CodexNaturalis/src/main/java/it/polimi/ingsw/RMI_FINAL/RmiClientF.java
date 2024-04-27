@@ -26,11 +26,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
     private  String token;
 
-    protected RmiClientF(VirtualServerF server) throws RemoteException {
+    public RmiClientF(VirtualServerF server) throws RemoteException {
         this.server = server;
     }
 
-    private void run() throws RemoteException, InterruptedException {
+    public void run() throws RemoteException, InterruptedException {
         this.server.connect(this);
         runCli();
     }
@@ -61,6 +61,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println(token + "riconnessa");
             }
         } while(!flag);
+
         new Thread(() -> {
             while (true) {
                 try {
@@ -93,7 +94,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
         System.out.println("\nEhi la tua partita è piena!\n");
         chooseGoal();
-        System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+        System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString() );
         while(!server.getRmiController(token).getController().getGame().getActual_state().getNameState().equals("CHOOSING_STARTING_CARD")){
             buffering();
         }
@@ -302,6 +303,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
         new RmiClientF(server).run();
     }
+
+
 }
 
 //todo riconnessione gianni

@@ -153,8 +153,7 @@ public class RmiServerF implements VirtualServerF {
                         }
                     }
                 }
-                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false";
-                }
+                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false"; }
             }
         }
         return "true";

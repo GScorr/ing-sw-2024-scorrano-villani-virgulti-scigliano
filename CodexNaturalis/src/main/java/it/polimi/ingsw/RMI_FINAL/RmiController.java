@@ -113,6 +113,7 @@ public class RmiController implements VirtualRmiController, Serializable {
         }while(wait.equals("no return"));
         return wait;
     }
+
 }
 
 

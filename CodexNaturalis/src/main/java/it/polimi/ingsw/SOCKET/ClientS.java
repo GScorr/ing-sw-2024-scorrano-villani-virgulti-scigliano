@@ -15,12 +15,12 @@ public class ClientS implements VirtualViewS{
     //genero token
     public String token = new TokenManagerS().generateToken(this);
 
-    protected ClientS(BufferedReader input, BufferedWriter output) {
+    public ClientS(BufferedReader input, BufferedWriter output) {
         this.input = input;
         this.server = new ServerProxyS(output);
     }
 
-    private void run() throws RemoteException {
+    public void run() throws RemoteException {
         new Thread(() -> {
             try {
                 runVirtualServer();
