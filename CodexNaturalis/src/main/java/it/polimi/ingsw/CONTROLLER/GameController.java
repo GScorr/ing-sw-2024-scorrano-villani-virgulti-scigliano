@@ -91,6 +91,10 @@ public class GameController implements GameSubject, Serializable {
         return final_counter;
     }
 
+    public List<Player> getPlayer_list() {
+        return player_list;
+    }
+
     private void isUniqueName(String name) {
         if(name.length() == 0){
             throw new ControllerException(1,"Insert at least 1 character");
@@ -209,7 +213,7 @@ public class GameController implements GameSubject, Serializable {
 // ------ da qui in avanti inizia il gioco con i turni
 
 
-    private void nextStatePlayer(){
+    public void nextStatePlayer(){
         Player currentPlayer = player_list.get(actual_player), nextPlayer;
         if(currentPlayer.actual_state.getNameState().equals("PLACE_CARD")){
             currentPlayer.nextStatePlayer();
@@ -490,4 +494,5 @@ public class GameController implements GameSubject, Serializable {
             player_observer.update();
         }
     }
+
 }

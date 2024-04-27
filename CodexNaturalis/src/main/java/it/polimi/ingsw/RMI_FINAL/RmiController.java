@@ -19,9 +19,36 @@ public class RmiController implements VirtualRmiController, Serializable {
     public Map<Integer,String> request_to_function = new HashMap<>();
     public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
 
+
     public RmiController(String name, int numPlayer) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
+        checkDisconnected();
+    }
+
+    private void checkDisconnected() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(1000);// Controlla i player disconnected ogni 5 secondi
+                    for(Player p : controller.getPlayer_list()) {
+                        if(p.isDisconnected() && p.getActual_state().getNameState().equals("CHOOSE_GOAL") && p.getGoalCard()==null) {
+                            controller.playerChooseGoal(p, 0);
+                        }
+                        if(p.isDisconnected() && p.getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD") && !p.isFirstPlaced()) {
+                            controller.playerSelectStartingCard(p, true);
+                        }
+                        if(p.isDisconnected() && (p.getActual_state().getNameState().equals("PLACE_CARD") ||
+                                p.getActual_state().getNameState().equals("DRAW_CARD"))){
+                            controller.nextStatePlayer();
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }).start();
     }
 
     @Override
