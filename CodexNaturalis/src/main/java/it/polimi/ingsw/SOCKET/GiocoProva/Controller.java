@@ -1,4 +1,6 @@
+
 package it.polimi.ingsw.SOCKET.GiocoProva;
+
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 
@@ -31,3 +33,5 @@ public class Controller implements Serializable {
         return partita;
     }
 }
+
+
