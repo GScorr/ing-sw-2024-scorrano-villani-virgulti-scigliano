@@ -3,6 +3,7 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class CreateGame implements Message, Serializable {
@@ -10,6 +11,7 @@ public class CreateGame implements Message, Serializable {
     public Server server;
     public String token;
     public String nome;
+    ObjectOutputStream output;
     public String game_name;
     int num_players;
 
@@ -26,6 +28,11 @@ public class CreateGame implements Message, Serializable {
 
     public void setServer(Server server) {
         this.server = server;
+    }
+
+    @Override
+    public void setOutput(ObjectOutputStream output) {
+        this.output = output;
     }
 
     @Override

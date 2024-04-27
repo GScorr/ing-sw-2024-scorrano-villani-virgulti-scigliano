@@ -18,15 +18,15 @@ public class Client implements VirtualView {
 
     //genero token
     public String token ;
-    protected Client(ObjectInputStream input, ObjectOutputStream output) throws IOException {
+    public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException {
         this.input = input;
         this.server = new ServerProxy(output,input);
     }
 
-    private void run() throws IOException, ClassNotFoundException {
+    public void run() throws IOException, ClassNotFoundException {
         new Thread(() -> {
             try {
-                runVirtualServer();
+               // runVirtualServer();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -34,10 +34,9 @@ public class Client implements VirtualView {
         runCli();
     }
 
+    /*
     private void runVirtualServer() throws IOException {
-        /*
-        da rivedere la chiamata
-         */
+
         String line;
         // Read message type
         while ((line = input.readLine()) != null) {
@@ -51,6 +50,7 @@ public class Client implements VirtualView {
         }
 
     }
+    */
 
     private void runCli() throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
@@ -65,7 +65,8 @@ public class Client implements VirtualView {
             boolean isnew = server.checkName(player_name);
             if(isnew){
                 flag = true;
-                this.token = server.getToken(this);
+                this.token = server.getToken(player_name);
+                System.out.println(token);
             }else if(!isnew){
                 System.out.println("Giocatore già presente, reinserisci nome!");
             }else{
@@ -78,9 +79,10 @@ public class Client implements VirtualView {
         //TODO : gestione persistenza connessioni
 
         String game_name;
+
         //If games does not exists
         ArrayList free_games = server.getFreeGame(this.token);
-
+        System.out.println("fino a qui");
         if(free_games == null || free_games.isEmpty()){
             newGameNotAvailable(player_name);
         }else{
@@ -110,6 +112,7 @@ public class Client implements VirtualView {
             int numplayers = scan.nextInt();
             try {
                 server.createGame(game_name, numplayers, token, playerName);
+
             }catch (SocketException e){
                 System.out.println(e.getMessage());
                 flag = true;
@@ -127,15 +130,20 @@ public class Client implements VirtualView {
     }
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String host = "127.0.0.1";
-        int port = Integer.parseInt("4567");
+        int port = 12345;
 
         Socket serverSocket = new Socket(host, port);
+        try{
 
+            ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
+            ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
 
-        ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
-        ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
+            new Client(inputStream, outputStream).run();
+        }catch (IOException e) {
+            System.out.println("impossibile creare socket input / output");
+            return;
+        }
 
-        new Client(inputStream, outputStream).run();
     }
 }
 

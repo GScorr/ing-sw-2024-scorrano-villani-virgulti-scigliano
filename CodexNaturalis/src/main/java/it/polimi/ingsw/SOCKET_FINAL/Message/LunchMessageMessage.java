@@ -5,6 +5,7 @@ import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class LunchMessageMessage implements Message, Serializable {
@@ -12,6 +13,7 @@ public class LunchMessageMessage implements Message, Serializable {
     public Controller controller;
     public Server server;
     public String message, token;
+    ObjectOutputStream output;
     public LunchMessageMessage(String message, String token){
         this.message = message;
         this.token = token;
@@ -25,6 +27,10 @@ public class LunchMessageMessage implements Message, Serializable {
     @Override
     public void setServer(Server server) {
         this.server = server;
+    }
+
+    public void setOutput(ObjectOutputStream output) {
+        this.output = output;
     }
 
     @Override
