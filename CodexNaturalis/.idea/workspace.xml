@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_04_2024_21_14_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_04_2024_21_14__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_04_24,_17_55_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_04_24__17_55__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_04_2024_12_04_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_04_2024_12_04__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualServerF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualViewF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualViewF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +163,7 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RmiClientF">
+  <component name="RunManager" selected="Application.RmiServerF">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -305,23 +300,7 @@
       <workItem from="1713640206406" duration="3355000" />
       <workItem from="1713643582992" duration="1323000" />
       <workItem from="1714209042514" duration="14322000" />
-      <workItem from="1714303441979" duration="2379000" />
-    </task>
-    <task id="LOCAL-00041" summary="test su centercards distribuite da game">
-      <option name="closed" value="true" />
-      <created>1712668483263</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1712668483263</updated>
-    </task>
-    <task id="LOCAL-00042" summary="test su centercards distribuite da game">
-      <option name="closed" value="true" />
-      <created>1712668818794</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1712668818794</updated>
+      <workItem from="1714303441979" duration="5961000" />
     </task>
     <task id="LOCAL-00043" summary="test su inizializzazione game finiti">
       <option name="closed" value="true" />
@@ -699,7 +678,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714299146765</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="modularizzazione cli">
+      <option name="closed" value="true" />
+      <created>1714306467686</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1714306467687</updated>
+    </task>
+    <task id="LOCAL-00091" summary="modularizzazione cli">
+      <option name="closed" value="true" />
+      <created>1714306517371</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1714306517371</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -729,7 +724,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="prove rmi" />
     <MESSAGE value="Inizio gestione di partite multiple" />
     <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
     <MESSAGE value="fine test GameController" />
@@ -754,7 +748,8 @@
     <MESSAGE value="gestione disconnessione e riconnessione" />
     <MESSAGE value="aggiornamento e prima scrittura Front END Socket" />
     <MESSAGE value="aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
+    <MESSAGE value="modularizzazione cli" />
+    <option name="LAST_COMMIT_MESSAGE" value="modularizzazione cli" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

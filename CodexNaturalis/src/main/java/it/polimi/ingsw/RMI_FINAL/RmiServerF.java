@@ -3,9 +3,11 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.*;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -191,6 +193,11 @@ public class RmiServerF implements VirtualServerF {
     public void showStartingCard(String token) throws RemoteException {
         PlayCard card = getRmiController(token).getTtoP().get(token).getStartingCard();
         token_manager.getTokens().get(token).showCard(card);
+    }
+
+    public void showGameField(String token) throws RemoteException {
+        GameField field = getRmiController(token).getTtoP().get(token).getGameField();
+        token_manager.getTokens().get(token).showField(field);
     }
 
     @Override

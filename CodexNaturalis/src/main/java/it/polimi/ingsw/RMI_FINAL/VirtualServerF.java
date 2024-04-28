@@ -35,4 +35,6 @@ public interface VirtualServerF extends Remote {
 
     public void receiveHeartbeat(String token) throws RemoteException;
 
+    public void showGameField(String token) throws RemoteException;
+
 }

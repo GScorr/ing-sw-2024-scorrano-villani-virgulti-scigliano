@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
@@ -43,7 +44,22 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         waitFullGame();
         chooseGoalState();
         chooseStartingCardState();
+        manageGame();
+    }
 
+    private void manageGame() throws RemoteException, InterruptedException {
+        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+            System.out.println("\nAspetta il tuo turno ");
+            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+                buffering();
+            }
+        }
+        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+            System.out.println("\nInserisci la tua carta: ");
+            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+                //buffering();
+            }
+        }
     }
 
     private void gameAccess(String player_name) throws RemoteException {
@@ -92,7 +108,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 chooseStartingCard();
             }
             while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-                buffering();
+                //buffering();
             }
         }
     }
@@ -149,6 +165,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
             else System.out.println("Inserimento errato!");
         }
+        server.showGameField(token);
     }
 
     private void buffering() throws RemoteException, InterruptedException{
@@ -312,6 +329,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
+    public void showField(GameField field) throws RemoteException{
+        for (int i = 0; i< Constants.MATRIXDIM; i++){
+            for (int j = 0; j<Constants.MATRIXDIM; j++){
+                System.out.print(field.getCell(i,j,Constants.MATRIXDIM).getShort_value() + " ");
+            }
+            System.out.print("\n");
+        }
+    }
 
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
