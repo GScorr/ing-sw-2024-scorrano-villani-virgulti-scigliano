@@ -249,7 +249,7 @@ public class RmiServerF implements VirtualServerF {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
                 if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                 token_to_rmi.get(key).getTtoP().get(key).disconnect();
-                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + "frate me so disconnected\n");
+                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " frate me so disconnected");
             }
         }
     }
@@ -257,7 +257,7 @@ public class RmiServerF implements VirtualServerF {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(500); // Controlla gli "heartbeats" ogni 5 secondi
+                    Thread.sleep(1000); // Controlla gli "heartbeats" ogni 5 secondi
                     checkHeartbeats();
                 } catch (InterruptedException | RemoteException e) {
                     e.printStackTrace();
