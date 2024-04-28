@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.RMI_FINAL.RmiServerF;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
-import it.polimi.ingsw.SOCKET.ServerS;
+//import it.polimi.ingsw.SOCKET.ServerS;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -31,11 +31,11 @@ public class Server {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        try {
+        /*try {
             System.out.println("[SUCCESSFUL] : SOCKET server connected. ");
             new ServerS(listenSocket, new Controller()).runServer();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 }

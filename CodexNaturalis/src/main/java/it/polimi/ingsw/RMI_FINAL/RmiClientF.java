@@ -61,7 +61,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 this.token = isnew;
                 flag=true;
                 newClient = false;
-                System.out.println(token + "riconnessa");
+                System.out.println(player_name + " riconnesso!");
             }
         } while(!flag);
         new Thread(() -> {
@@ -99,14 +99,18 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             System.out.println("\nEhi la tua partita è piena!\n");
         }
         if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-            chooseGoal();
-            System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+            if(server.getRmiController(token).getTtoP().get(token).getGoalCard()==null) {
+                chooseGoal();
+                System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+            }
             while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
                 buffering();
             }
         }
         if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-            chooseStartingCard();
+            if(!server.getRmiController(token).getTtoP().get(token).isFirstPlaced()) {
+                chooseStartingCard();
+            }
             while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
                 buffering();
             }
@@ -316,3 +320,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 //todo riconnessione gianni
 
+
+
+//todo disconnessione prima di scelta partita
+// e disconnessione e subito riconnessione con due client stesso nome
