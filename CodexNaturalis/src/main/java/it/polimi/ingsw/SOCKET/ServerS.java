@@ -25,7 +25,7 @@ public class ServerS {
         this.controller = controller;
     }
 
-    private void runServer() throws IOException {
+    public void runServer() throws IOException {
         Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());

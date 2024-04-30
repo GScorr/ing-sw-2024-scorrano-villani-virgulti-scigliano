@@ -3,9 +3,11 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.*;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -156,8 +158,7 @@ public class RmiServerF implements VirtualServerF {
                         }
                     }
                 }
-                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false";
-                }
+                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false"; }
             }
         }
         return "true";
@@ -192,6 +193,11 @@ public class RmiServerF implements VirtualServerF {
     public void showStartingCard(String token) throws RemoteException {
         PlayCard card = getRmiController(token).getTtoP().get(token).getStartingCard();
         token_manager.getTokens().get(token).showCard(card);
+    }
+
+    public void showGameField(String token) throws RemoteException {
+        GameField field = getRmiController(token).getTtoP().get(token).getGameField();
+        token_manager.getTokens().get(token).showField(field);
     }
 
     @Override
@@ -250,7 +256,7 @@ public class RmiServerF implements VirtualServerF {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
                 if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                 token_to_rmi.get(key).getTtoP().get(key).disconnect();
-                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + "frate me so disconnected\n");
+                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " frate me so disconnected");
             }
         }
     }
@@ -258,7 +264,7 @@ public class RmiServerF implements VirtualServerF {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(500); // Controlla gli "heartbeats" ogni 5 secondi
+                    Thread.sleep(1000); // Controlla gli "heartbeats" ogni 5 secondi
                     checkHeartbeats();
                 } catch (InterruptedException | RemoteException e) {
                     e.printStackTrace();

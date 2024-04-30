@@ -2,17 +2,13 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
-import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
-import it.polimi.ingsw.MODEL.Game.State.GameState;
 import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -25,6 +21,7 @@ import java.util.Scanner;
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
     private  String token;
+    private boolean newClient;
 
     public RmiClientF(VirtualServerF server) throws RemoteException {
         this.server = server;
@@ -36,10 +33,49 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void runCli() throws RemoteException, InterruptedException {
+        String player_name = selectNamePlayer();
+        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
+        // which contains a map that associate the client with the token, and we also have a map in server that
+        // associate the token with the player
+        // < RmiClient , TOKEN > < TOKEN , Player >
+        //System.out.print("\nToken Player > " + this.token);
+        gameAccess(player_name);
+        startSendingHeartbeats();
+        waitFullGame();
+        chooseGoalState();
+        chooseStartingCardState();
+        manageGame();
+    }
+
+    private void manageGame() throws RemoteException, InterruptedException {
+        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+            System.out.println("\nAspetta il tuo turno ");
+            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+                buffering();
+            }
+        }
+        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+            System.out.println("\nInserisci la tua carta: ");
+            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+                //buffering();
+            }
+        }
+    }
+
+    private void gameAccess(String player_name) throws RemoteException {
+        if(newClient) {
+            if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
+                newGame_notavailable(player_name);
+            } else {
+                makeChoice(player_name);
+            }
+            System.out.print("creazione Player andata a buon fine!\n");
+        }
+    }
+
+    private String selectNamePlayer() throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        VirtualViewF curr_client = this;
         String player_name = " ";
-        Player curr_player;
         String isnew;
         boolean flag;
         // Creo giocatore
@@ -49,6 +85,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             isnew = server.checkName(player_name);
             if(isnew.equals("true")) {
                 flag = true;
+                newClient = true;
                 this.token = server.createToken(this);
             }
             else if(isnew.equals("false")){
@@ -58,61 +95,57 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             else{
                 this.token = isnew;
                 flag=true;
-                System.out.println(token + "riconnessa");
+                newClient = false;
+                System.out.println(player_name + " riconnesso!");
             }
         } while(!flag);
+        return player_name;
+    }
+
+    private void chooseStartingCardState() throws RemoteException, InterruptedException {
+        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            if(!server.getRmiController(token).getTtoP().get(token).isFirstPlaced()) {
+                chooseStartingCard();
+            }
+            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+                //buffering();
+            }
+        }
+    }
+
+    private void chooseGoalState() throws RemoteException, InterruptedException {
+        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
+            if(server.getRmiController(token).getTtoP().get(token).getGoalCard()==null) {
+                chooseGoal();
+                System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+            }
+            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
+                buffering();
+            }
+        }
+    }
+
+    private void waitFullGame() throws RemoteException, InterruptedException {
+        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
+            System.out.print("Aspetta il riempimento partita -");
+            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
+                buffering();
+            }
+            System.out.println("\nEhi la tua partita è piena!\n");
+        }
+    }
+
+    private void startSendingHeartbeats() {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                     server.receiveHeartbeat(token);
                 } catch (RemoteException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-
-        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
-        // which contains a map that associate the client with the token, and we also have a map in server that
-        // associate the token with the player
-        // < RmiClient , TOKEN > < TOKEN , Player >
-        //System.out.print("\nToken Player > " + this.token);
-
-        String game_name;
-        // Se non esistono partite
-        if (server.getFreeGames()==null||server.getFreeGames().isEmpty()) {
-            newGame_notavailable(player_name);
-        } else {
-            makeChoice(player_name);
-        }
-        System.out.print("creazione Player andata a buon fine!\n");
-
-        System.out.print("Aspetta il riempimento partita -");
-        while ( server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED") ) {
-            buffering();
-        }
-        System.out.println("\nEhi la tua partita è piena!\n");
-        chooseGoal();
-        System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
-        while(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")){
-            buffering();
-        }
-        chooseStartingCard();
-        while(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-            buffering();
-        }
-
-
-        /*while (true) {
-            System.out.print("\n Inserisci valore nel tuo array, INDICE  >  VALORE>  ");
-            int index = scan.nextInt();
-            int value = scan.nextInt();
-            server.put(index, value, token );
-            Integer[] campo = server.getFromToken(token).getCampo();
-            for(int i=0; i<10; i++)
-                System.out.println(" " +campo[i]);
-        }*/
-
     }
 
     private void chooseStartingCard() throws RemoteException{
@@ -132,6 +165,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
             else System.out.println("Inserimento errato!");
         }
+        server.showGameField(token);
     }
 
     private void buffering() throws RemoteException, InterruptedException{
@@ -295,6 +329,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
+    public void showField(GameField field) throws RemoteException{
+        for (int i = 0; i< Constants.MATRIXDIM; i++){
+            for (int j = 0; j<Constants.MATRIXDIM; j++){
+                System.out.print(field.getCell(i,j,Constants.MATRIXDIM).getShort_value() + " ");
+            }
+            System.out.print("\n");
+        }
+    }
 
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
@@ -306,3 +348,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 //todo riconnessione gianni
 
+
+//todo
+// disconnessione e subito riconnessione con due client stesso nome
