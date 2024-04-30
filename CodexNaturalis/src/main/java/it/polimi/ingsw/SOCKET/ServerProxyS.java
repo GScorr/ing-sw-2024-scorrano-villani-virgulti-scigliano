@@ -1,31 +1,32 @@
 package it.polimi.ingsw.SOCKET;
 
-import it.polimi.ingsw.SOCKET.GiocoProva.Partita;
+/*
 
-import java.io.PrintWriter;
+import it.polimi.ingsw.SOCKET.Message.CreatePlayerMessage;
+import it.polimi.ingsw.SOCKET.Message.LunchMessageMessage;
+import it.polimi.ingsw.SOCKET.Message.Message;
 
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
+import java.io.*;
+
+
 
 public class ServerProxyS implements VirtualServerS{
 
-    final PrintWriter output;
+    public ObjectOutputStream output;
 
-    public ServerProxyS(BufferedWriter output) {
-        this.output = new PrintWriter(output);
+    public ServerProxyS( ObjectOutputStream output) throws IOException {
+        this.output = output;
     }
 
 
-    public void inserisciGiocatore(String nome, String token){
-        output.println("Inserisci_Giocatore");
-        output.println(nome);
-        output.println(token);
+    public void inserisciGiocatore(String nome, String token) throws IOException {
+        CreatePlayerMessage DP_message = new CreatePlayerMessage(nome,token);
+        output.writeObject(DP_message);
         output.flush();
     }
-    public void lunchMessage(String message, String token){
-        output.println("lunch_message");
-        output.println(message);
-        output.println(token);
+    public void lunchMessage(String message, String token) throws IOException {
+        Message DP_message = new LunchMessageMessage(message,token);
+        output.writeObject(DP_message);
         output.flush();
     }
 
@@ -35,15 +36,15 @@ public class ServerProxyS implements VirtualServerS{
     }
 
     public void getMessage(String token){
-        output.println("getMessage");
-        output.println(token);
-        output.flush();
+
     }
 
-    /**
-     * da togliere
-     */
+
     public void getPartita(){
 
     }
 }
+
+
+ */
+

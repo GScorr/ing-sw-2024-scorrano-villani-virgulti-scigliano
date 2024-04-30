@@ -1,5 +1,5 @@
 package it.polimi.ingsw.SOCKET.Token;
-
+/*
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
 import it.polimi.ingsw.RMI_FINAL.TokenManagerF;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
@@ -28,5 +28,5 @@ public class TokenManagerS{
     }
 
 }
-
+*/
 

@@ -1,7 +1,9 @@
-package it.polimi.ingsw.SOCKET;
-/*
+package it.polimi.ingsw.SOCKET_FINAL;
+
+import it.polimi.ingsw.RMI.TokenManagerImplement;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
+import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -11,16 +13,19 @@ import java.util.HashMap;
 import java.util.List;
 
 
-
-public class ServerS {
+public class Server {
 
     final ServerSocket listenSocket;
     final Controller controller;
-    final List<ClientHandlerS> clients = new ArrayList<>();
+    final List<ClientHandler> clients = new ArrayList<>();
 
     public HashMap<String, Giocatore> token_map = new HashMap<>();
 
-    public ServerS(ServerSocket listenSocket, Controller controller) {
+    public ArrayList<String> names = new ArrayList<>();
+
+    public TokenManager token_manager = new TokenManager();
+
+    public Server(ServerSocket listenSocket, Controller controller) {
         this.listenSocket = listenSocket;
         this.controller = controller;
     }
@@ -28,10 +33,13 @@ public class ServerS {
     public void runServer() throws IOException {
         Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
-            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
-            OutputStreamWriter socketTx = new OutputStreamWriter(clientSocket.getOutputStream());
+            System.out.println("Client connected: " + clientSocket.getInetAddress());
 
-            ClientHandlerS handler = new ClientHandlerS(this.controller, this, inputStream, new BufferedWriter(socketTx));
+            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            //OutputStreamWriter socketTx = new OutputStreamWriter(clientSocket.getOutputStream());
+
+            ClientHandler handler = new ClientHandler(this.controller, this, inputStream, outputStream);
 
             clients.add(handler);
             new Thread(() -> {
@@ -47,7 +55,6 @@ public class ServerS {
     }
 
 
-
     public void broadcastUpdate(String value) {
         synchronized (this.clients) {
             for (var client : this.clients) {
@@ -59,12 +66,13 @@ public class ServerS {
 
     public static void main(String[] args) throws IOException {
         String host = "127.0.0.1";
-        int port = Integer.parseInt("4567");
+        int port = 12345;
+
 
         ServerSocket listenSocket = new ServerSocket(port);
+        System.out.println("Server is running...");
 
-        new ServerS(listenSocket, new Controller()).runServer();
+        new Server(listenSocket, new Controller()).runServer();
     }
 
 }
-*/

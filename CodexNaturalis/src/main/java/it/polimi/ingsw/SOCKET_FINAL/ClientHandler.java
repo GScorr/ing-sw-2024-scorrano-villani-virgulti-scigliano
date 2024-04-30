@@ -1,27 +1,30 @@
-package it.polimi.ingsw.SOCKET;
-/*
-import it.polimi.ingsw.CONTROLLER.ControllerException;
+package it.polimi.ingsw.SOCKET_FINAL;
+
+
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
-import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
-import it.polimi.ingsw.SOCKET.Message.CreatePlayerMessage;
-import it.polimi.ingsw.SOCKET.Message.Message;
+import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
+import it.polimi.ingsw.SOCKET_FINAL.Message.MyMessageFinal;
+
 
 import java.io.*;
-import java.net.ConnectException;
+import java.util.ArrayList;
 
-public class ClientHandlerS implements VirtualViewS{
+public class ClientHandler implements VirtualView {
 
     final Controller controller;
-    final ServerS server;
+    final Server server;
     final ObjectInputStream input;
-    final VirtualViewS view;
+    final ObjectOutputStream output;
+    final VirtualView view;
 
 
-    public ClientHandlerS(Controller controller, ServerS server, ObjectInputStream input, BufferedWriter output) {
+
+    public ClientHandler(Controller controller, Server server, ObjectInputStream input, ObjectOutputStream output) {
         this.controller = controller;
         this.server = server;
         this.input = input;
-        this.view = new ClientProxyS(output);
+        this.output = output;
+        this.view = new ClientProxy(output);
     }
 
     public void runVirtualView() throws IOException, ClassNotFoundException {
@@ -32,6 +35,7 @@ public class ClientHandlerS implements VirtualViewS{
                 while ((DP_message = (Message) input.readObject()) != null) {
                     DP_message.setController(controller);
                     DP_message.setServer(server);
+                    DP_message.setOutput(output);
                     DP_message.action();
                 }
             } catch (EOFException e) {
@@ -47,18 +51,16 @@ public class ClientHandlerS implements VirtualViewS{
     @Override
     public void showValue(String message) {
         synchronized (this) {
-            this.view.showValue(message);
+         //   this.view.showValue(message);
         }
     }
 
     @Override
     public void reportError(String details) {
         synchronized (this) {
-            this.view.reportError(details);
+         //   this.view.reportError(details);
         }
     }
 
 
 }
-
- */

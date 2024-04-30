@@ -5,8 +5,10 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
+import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
 
 import java.io.Serializable;
+import java.util.List;
 
 //@Davide
 // Class for the single cell present in the matrix of GameField
@@ -24,6 +26,9 @@ public class GameFieldSingleCell implements Serializable {
     private PlayCard card;
     private AnglesEnum value;
     private PlayCard card_down;
+    private List<AnglesEnum> values; //overusage of variables, but useful in gamefield printing
+    private List<EdgeEnum> edges;
+
 //card_down means the angles that the card will cover -mirko-
     public GameFieldSingleCell(boolean filled, PlayCard card, AnglesEnum value, PlayCard card_down) {
         this.filled = filled;
@@ -78,5 +83,35 @@ public class GameFieldSingleCell implements Serializable {
     }
     public void setCardDown(PlayCard card) {
         this.card_down = card;
+    }
+    public String getShort_value(){
+        switch(value){
+            case ANIMAL:
+                return "AN";
+            case PEN:
+                return "PE";
+            case PAPER:
+                return "PA";
+            case PLANT:
+                return "PL";
+            case FEATHER:
+                return "FE";
+            case INSECTS:
+                return "IN";
+            case MUSHROOMS:
+                return "MU";
+            case NONE:
+                return "NO";
+            case EMPTY:
+                return "EM";
+        }
+        return " ";
+    }
+
+    public void setValues(AnglesEnum value, int index) {
+        values.add(index,value);
+    }
+    public void setEdges(EdgeEnum value, int index) {
+        edges.add(index,value);
     }
 }

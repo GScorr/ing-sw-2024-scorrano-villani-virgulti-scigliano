@@ -1,9 +1,10 @@
 package it.polimi.ingsw.SOCKET.GiocoProva;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Partita {
+public class Partita implements Serializable {
     /**
      * partita semplificata
 

@@ -2,9 +2,12 @@ package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
+import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.*;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -65,12 +68,16 @@ public class RmiServerF implements VirtualServerF {
     , add token and gcontroller in the token to controller*/
     @Override
     public RmiController createGame(String name, int num_player, String p_token, String player_name) throws RemoteException {
-
         RmiController serverino = new RmiController(name, num_player);
-        Player p = serverino.createPlayer(p_token,player_name,true);
-        token_to_player.put( p_token , p);
-        rmi_controllers.put(serverino.getController().getGame().getIndex_game() , serverino);
         token_to_rmi.put( p_token, serverino);
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
+        serverino.addtoQueue("createPlayer",idRequest,new Wrapper(p_token,player_name,true));
+        Player p = (Player) waitAnswer(p_token,idRequest);
+        token_to_player.put( p_token , p);
+        //Player p = serverino.createPlayer(p_token,player_name,true); /old method
+        Integer idRequest2 = IndexRequestManagerF.getNextIndex();
+        serverino.addtoQueue("getIndexGame",idRequest2,null);
+        rmi_controllers.put((Integer) waitAnswer(p_token, idRequest2), serverino);
         return serverino;
     }
 
@@ -94,8 +101,10 @@ public class RmiServerF implements VirtualServerF {
         String error = "\nWRONG ID : Not Existing Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
         return false;*/
-
-        return rmi_controllers.get(game_id).addPlayer(p_token,name);
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
+        rmi_controllers.get(game_id).addtoQueue("addPlayer", idRequest, new Wrapper(p_token,name));
+        return (boolean) waitAnswer(p_token,idRequest);
+        //return rmi_controllers.get(game_id).addPlayer(p_token,name);
     }
 
     @Override
@@ -149,8 +158,7 @@ public class RmiServerF implements VirtualServerF {
                         }
                     }
                 }
-                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false";
-                }
+                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false"; }
             }
         }
         return "true";
@@ -169,14 +177,27 @@ public class RmiServerF implements VirtualServerF {
 
     @Override
     public boolean checkFull(String token) throws RemoteException {
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
+        Wrapper wrap = new Wrapper();
         //ritorna true se ho raggiunto i player
-        return token_to_rmi.get(token).getFull();
+        token_to_rmi.get(token).addtoQueue("getFull",idRequest,wrap);
+        Boolean boo = (boolean) waitAnswer(token,idRequest);
+        return boo;
+    }
+
+    private Object waitAnswer(String token, Integer idRequest) throws RemoteException {
+            return token_to_rmi.get(token).getAnswer(idRequest);
     }
 
     @Override
     public void showStartingCard(String token) throws RemoteException {
         PlayCard card = getRmiController(token).getTtoP().get(token).getStartingCard();
         token_manager.getTokens().get(token).showCard(card);
+    }
+
+    public void showGameField(String token) throws RemoteException {
+        GameField field = getRmiController(token).getTtoP().get(token).getGameField();
+        token_manager.getTokens().get(token).showField(field);
     }
 
     @Override
@@ -230,17 +251,12 @@ public class RmiServerF implements VirtualServerF {
     }
     private synchronized void checkHeartbeats() throws RemoteException{
         long currentTime = System.currentTimeMillis();
-        for (Map.Entry<String, Long> entry : lastHeartbeatTime.entrySet()) {
-            String key = entry.getKey();
-            Long value = entry.getValue();
-            System.out.println("Chiave: " + key + ", Valore: " + value);
-        }
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
                 if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                 token_to_rmi.get(key).getTtoP().get(key).disconnect();
-                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + "frate me so disconnected\n");
+                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " frate me so disconnected");
             }
         }
     }
@@ -248,7 +264,7 @@ public class RmiServerF implements VirtualServerF {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(500); // Controlla gli "heartbeats" ogni 5 secondi
+                    Thread.sleep(1000); // Controlla gli "heartbeats" ogni 5 secondi
                     checkHeartbeats();
                 } catch (InterruptedException | RemoteException e) {
                     e.printStackTrace();
