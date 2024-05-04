@@ -1,6 +1,8 @@
 package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.io.Serializable;
@@ -18,12 +20,17 @@ public class RmiController implements VirtualRmiController, Serializable {
     public Map<Integer, Object> returns = new HashMap<>();
     public Map<Integer,String> request_to_function = new HashMap<>();
     public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
+    private int port;
 
-
-    public RmiController(String name, int numPlayer) throws RemoteException {
+    public RmiController(String name, int numPlayer, int port) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         checkDisconnected();
+        this.port = port;
+    }
+
+    public int getPort(){
+        return port;
     }
 
     private void checkDisconnected() {
@@ -80,10 +87,10 @@ public class RmiController implements VirtualRmiController, Serializable {
                 returns.put(request,createPlayer((String) request_to_wrap.get(request).obj1,
                         (String) request_to_wrap.get(request).obj2, (boolean) request_to_wrap.get(request).obj3));
                 break;
-            case "addPlayer":
+           /* case "addPlayer":
                 returns.put(request,addPlayer((String) request_to_wrap.get(request).obj1,
                         (String) request_to_wrap.get(request).obj2));
-                break;
+                break;*/
             case "getIndexGame":
                 returns.put(request, getController().getGame().getIndex_game());
                 break;
@@ -115,12 +122,13 @@ public class RmiController implements VirtualRmiController, Serializable {
     }
 
     @Override
-    public synchronized boolean addPlayer(String p_token, String name) throws RemoteException {
+    public synchronized boolean addPlayer(String p_token, String name, VirtualViewF client ) throws RemoteException {
         if(controller.getFull() )
         {String error = "\nGame is Full\n";
             token_manager.getTokens().get(p_token).reportError(error);
             return false;}
         createPlayer(p_token, name, false);
+        token_manager.getTokens().put(p_token,client);
         controller.checkNumPlayer();
         return true;
     }
@@ -148,6 +156,21 @@ public class RmiController implements VirtualRmiController, Serializable {
         }while(wait.equals("no return"));
         return wait;
     }
+
+    @Override
+    public void showStartingCard(String token) throws RemoteException {
+        System.out.println("COOOOOOO");
+        PlayCard card = token_to_player.get(token).getStartingCard();
+        System.out.println("CARTA" + card);
+        token_manager.getTokens().get(token).showCard(card);
+    }
+
+    @Override
+    public void showGameField(String token) throws RemoteException {
+        GameField field = token_to_player.get(token).getGameField();
+        token_manager.getTokens().get(token).showField(field);
+    }
+
 
 }
 

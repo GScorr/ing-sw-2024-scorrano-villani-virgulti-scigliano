@@ -1,15 +1,11 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
-import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.MODEL.Player.Player;
-import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 
 import java.io.*;
 import java.net.Socket;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 public class Client implements VirtualView {
 

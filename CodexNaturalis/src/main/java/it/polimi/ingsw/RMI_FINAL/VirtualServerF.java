@@ -17,24 +17,13 @@ public interface VirtualServerF extends Remote {
     public Map<String, Player> getTtoP() throws RemoteException;
     public Map<String, RmiController> getTtoR() throws RemoteException;
     public Map<Integer,RmiController> getListRmiController() throws  RemoteException;
-    public RmiController createGame(String game_name, int num_player, String p_token, String player_name) throws RemoteException;
-    public boolean addPlayer(Integer game_id, String token, String name) throws RemoteException;
+    public int createGame(String game_name, int num_player, String p_token, String player_name,VirtualViewF client) throws RemoteException;
+    public boolean addPlayer(Integer game_id, String token, String name,VirtualViewF client) throws RemoteException;
     public List<VirtualViewF> getListClient() throws RemoteException;
     public List<RmiController> getFreeGames() throws RemoteException;
-    public void insertCard(String p_token, PlayCard card, int x, int y, int index) throws RemoteException, InterruptedException;
     public String checkName(String name) throws RemoteException;
-    public void chooseGoal(String p_token, int goal_index) throws RemoteException;
-    public void selectStartingCard(String token, boolean flipped) throws RemoteException;
-    public boolean checkFull(String token) throws RemoteException;
-    public void showStartingCard(String token) throws RemoteException;
-
-    public boolean findRmiController(Integer id, String p_token, String player_name) throws RemoteException;
-
+    public boolean findRmiController(Integer id, String p_token, String player_name, VirtualViewF client) throws RemoteException;
     public RmiController getRmiController(String token) throws RemoteException;
-    public void chooseStartingCard(String token, boolean flip) throws RemoteException;
-
     public void receiveHeartbeat(String token) throws RemoteException;
-
-    public void showGameField(String token) throws RemoteException;
-
+    int getPort(String token) throws RemoteException;
 }

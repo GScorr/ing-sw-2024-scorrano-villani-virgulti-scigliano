@@ -10,6 +10,7 @@ import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
 import it.polimi.ingsw.MODEL.GameField;
 
 import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -22,24 +23,20 @@ import java.util.Scanner;
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
     private String token;
+    private VirtualRmiController rmi_controller;
     private boolean newClient;
 
     public RmiClientF(VirtualServerF server) throws RemoteException {
         this.server = server;
     }
 
-    public void run() throws RemoteException, InterruptedException {
+    public void run() throws RemoteException, InterruptedException, NotBoundException {
         this.server.connect(this);
         runCli();
     }
 
-    private void runCli() throws RemoteException, InterruptedException {
+    private void runCli() throws RemoteException, InterruptedException, NotBoundException {
         String player_name = selectNamePlayer();
-        // Create a token associated with a client, in the rmi server we have a reference to TokenManagerImplement
-        // which contains a map that associate the client with the token, and we also have a map in server that
-        // associate the token with the player
-        // < RmiClient , TOKEN > < TOKEN , Player >
-        //System.out.print("\nToken Player > " + this.token);
         gameAccess(player_name);
         startSendingHeartbeats();
         waitFullGame();
@@ -49,21 +46,21 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void manageGame() throws RemoteException, InterruptedException {
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
             System.out.println("\nAspetta il tuo turno ");
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
                 buffering();
             }
         }
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
             System.out.println("\nInserisci la tua carta: ");
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
-                //buffering();
+            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+                //
             }
         }
     }
 
-    private void gameAccess(String player_name) throws RemoteException {
+    private void gameAccess(String player_name) throws RemoteException, NotBoundException {
         if(newClient) {
             if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
                 newGame_notavailable(player_name);
@@ -74,7 +71,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
 
-    private String selectNamePlayer() throws RemoteException {
+    private String selectNamePlayer() throws RemoteException, NotBoundException {
         Scanner scan = new Scanner(System.in);
         String player_name = " ";
         String isnew;
@@ -95,6 +92,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
             else{
                 this.token = isnew;
+                int port = server.getPort(token);
+                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
                 flag=true;
                 newClient = false;
                 System.out.println(player_name + " riconnesso!");
@@ -104,32 +104,32 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void chooseStartingCardState() throws RemoteException, InterruptedException {
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-            if(!server.getRmiController(token).getTtoP().get(token).isFirstPlaced()) {
+        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            if(!rmi_controller.getTtoP().get(token).isFirstPlaced()) {
                 chooseStartingCard();
             }
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-                //buffering();
+            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+                buffering();
             }
         }
     }
 
     private void chooseGoalState() throws RemoteException, InterruptedException {
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-            if(server.getRmiController(token).getTtoP().get(token).getGoalCard()==null) {
+        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
+            if(rmi_controller.getTtoP().get(token).getGoalCard()==null) {
                 chooseGoal();
-                System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
+                System.out.println("\nHai scelto :" + rmi_controller.getTtoP().get(token).getGoalCard().toString());
             }
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
+            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
                 buffering();
             }
         }
     }
 
     private void waitFullGame() throws RemoteException, InterruptedException {
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
+        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
             System.out.print("Aspetta il riempimento partita -");
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
+            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
                 buffering();
             }
             System.out.println("\nEhi la tua partita è piena!\n");
@@ -152,21 +152,21 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private void chooseStartingCard() throws RemoteException{
         Scanner scan = new Scanner(System.in);
         System.out.println("\nScegli lato carta iniziale:\n");
-        server.showStartingCard(token);
+        rmi_controller.showStartingCard(token);
         int done=0;
         while(done==0){
             System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
             String dec = scan.nextLine();
             if (dec.equals("F")){
                 done=1;
-                server.chooseStartingCard(token,false);
+                rmi_controller.chooseStartingCard(token,false);
             } else if (dec.equals("B")){
                 done=1;
-                server.chooseStartingCard(token,true);
+                rmi_controller.chooseStartingCard(token,true);
             }
             else System.out.println("Inserimento errato!");
         }
-        server.showGameField(token);
+        rmi_controller.showGameField(token);
     }
 
     private void buffering() throws RemoteException, InterruptedException{
@@ -188,20 +188,20 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
-                    + "\n 2-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
+            System.out.println("\nScegli obiettivo tra:\n 1-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
+                    + "\n 2-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
             String choice = scan.nextLine();
             if (choice.equals("1")) {
                 done=1;
-                server.chooseGoal(token,0);
+                rmi_controller.chooseGoal(token,0);
             } else if (choice.equals("2")){
                 done=1;
-                server.chooseGoal(token,1);
+                rmi_controller.chooseGoal(token,1);
             } else System.out.println("Inserimento errato!");
         }
     }
 
-    private void makeChoice(String player_name) throws RemoteException{
+    private void makeChoice(String player_name) throws RemoteException, NotBoundException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
@@ -219,22 +219,23 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
 
-    private void chooseMatch(String player_name) throws RemoteException {
+    private void chooseMatch(String player_name) throws RemoteException, NotBoundException {
         Scanner scan = new Scanner(System.in);
         boolean check;
             System.out.println("\nElenco partite disponibili: ");
             List<RmiController> partite = server.getFreeGames();
-
-            for (RmiController r : partite) {
-                System.out.println(r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
-                        + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player());
+            for ( VirtualRmiController r : partite) {
+                System.out.println( r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
+                        + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player() );
             }
             do {
                 System.out.println("\nInserisci ID partita in cui entrare");
                 int ID = scan.nextInt();
-                check = server.findRmiController(ID, token, player_name);
+                check = server.findRmiController(ID, token, player_name,this);
             }while(!check);
-
+        int port = server.getPort(token);
+        Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+        this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
     }
 
     private void newGame(String player_name) throws RemoteException {
@@ -247,11 +248,19 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             flag = false;
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             numplayers = scan.nextInt();
+
             try {
-                server.createGame(game_name, numplayers, token, player_name);
+                int port;
+                port = server.createGame(game_name, numplayers, token, player_name,this);
+                System.out.println("porta" + port);
+                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
+            } catch (NotBoundException e) {
+                throw new RuntimeException(e);
             }
         } while(flag);
     }
@@ -267,10 +276,17 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             int numplayers = scan.nextInt();
             try {
-                server.createGame(game_name, numplayers, token, playerName);
+                int port;
+                port = server.createGame(game_name, numplayers, token, playerName,this);
+                System.out.println("porta" + port);
+                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
+            } catch (NotBoundException e) {
+                throw new RuntimeException(e);
             }
         } while(flag);
     }
@@ -282,14 +298,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public void reportError(String details) throws RemoteException {
-        // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
         System.err.print("\n[ERROR] " + details + "\n> ");
     }
 
     @Override
     public void reportMessage(String details) throws RemoteException {
-        // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
-        System.err.print("\n[ERROR] " + details + "\n> ");
+        System.out.print("\n[ERROR] " + details + "\n> ");
 
     }
 
@@ -398,19 +412,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
 
-
-
-
-
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
+        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
         new RmiClientF(server).run();
     }
 }
 
-//todo riconnessione gianni
-
-
-//todo
-// disconnessione e subito riconnessione con due client stesso nome
