@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
 import it.polimi.ingsw.MODEL.GameField;
 
 import java.net.MalformedURLException;
@@ -20,7 +21,7 @@ import java.util.Scanner;
 
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
-    private  String token;
+    private String token;
     private boolean newClient;
 
     public RmiClientF(VirtualServerF server) throws RemoteException {
@@ -329,14 +330,60 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
-    public void showField(GameField field) throws RemoteException{
-        for (int i = 0; i< Constants.MATRIXDIM; i++){
-            for (int j = 0; j<Constants.MATRIXDIM; j++){
-                System.out.print(field.getCell(i,j,Constants.MATRIXDIM).getShort_value() + " ");
+    public void showField(GameField field) throws RemoteException {
+        boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
+        boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                    nonEmptyRows[i] = true;
+                    nonEmptyCols[j] = true;
+
+
+                    if (i > 0) nonEmptyRows[i - 1] = true;
+                    if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
+                    if (j > 0) nonEmptyCols[j - 1] = true;
+                    if (j < Constants.MATRIXDIM - 1) nonEmptyCols[j + 1] = true;
+                }
             }
-            System.out.print("\n");
+        }
+
+
+        System.out.print("  ");
+        for (int k = 0; k < Constants.MATRIXDIM; k++) {
+            if (nonEmptyCols[k]) {
+                System.out.print(k + " ");
+            }
+        }
+        System.out.print("\n");
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            if (nonEmptyRows[i]) {
+                System.out.print(i + " ");
+                for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                    if (nonEmptyCols[j]) {
+                        if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
+                        } else {
+                            System.out.print("  ");
+                        }
+                    }
+                }
+                System.out.print("\n");
+            }
         }
     }
+
+
+
+
+
+
+
+
 
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
