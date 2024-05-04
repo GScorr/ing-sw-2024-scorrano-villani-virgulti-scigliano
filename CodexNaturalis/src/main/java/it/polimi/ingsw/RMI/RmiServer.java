@@ -15,10 +15,9 @@ public class RmiServer implements VirtualServer{
     private GiocoController controller;
     public TokenManager token_manager = new TokenManagerImplement();
     private List<VirtualView> clients = new ArrayList<>();
-
     private Map<String, Giocatore> mappa;
     private List<GiocoController> games = new ArrayList<>();
-    private Map<String, GiocoController> mappa_gp ;
+    private Map<String, GiocoController> mappa_gp;
 
     public RmiServer(GiocoController controller) {
         this.controller = controller;

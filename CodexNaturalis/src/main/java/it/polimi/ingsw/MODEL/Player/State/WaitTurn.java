@@ -1,12 +1,13 @@
-/*package it.polimi.ingsw.MODEL.Player.State;
+package it.polimi.ingsw.MODEL.Player.State;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class WaitTurn implements PState {
+public class WaitTurn implements PState, Serializable {
     Player player;
 
     public WaitTurn(Player player) {
@@ -58,8 +59,13 @@ public class WaitTurn implements PState {
         return false;
     }
 
+    public boolean selectSideCard(int index, boolean flip){
+        player.selectSideCard(index,flip);
+        return true;
+    }
+
     @Override
     public String getNameState() {
         return "WAIT_TURN";
     }
-}*/
+}

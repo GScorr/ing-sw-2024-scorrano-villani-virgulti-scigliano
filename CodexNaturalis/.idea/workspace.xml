@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_04_2024_21_14_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_04_2024_21_14__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_04_2024_12_04_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_04_2024_12_04__Changes_.xml" beforeDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +41,14 @@
     &quot;assignee&quot;: &quot;Mirko0109&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git&quot;,
-    &quot;accountId&quot;: &quot;995fa9e0-3d2d-4d41-9be2-4734f4dc124c&quot;
-  }
-}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3a259a6d-dbc4-4e87-a710-6c6481997434" />
+        <option name="url" value="https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -64,78 +63,88 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.RmiClient.executor": "Run",
-    "Application.RmiServer.executor": "Run",
-    "JUnit.CenterCardsTest.drawResourceCard.executor": "Coverage",
-    "JUnit.CenterCardsTest.executor": "Coverage",
-    "JUnit.DeckCreationTestGoal.creteGoalDeck.executor": "Run",
-    "JUnit.DeckGoalCardTest.executor": "Coverage",
-    "JUnit.DeckTest.executor": "Coverage",
-    "JUnit.GameControllerTest.EndGame.executor": "Run",
-    "JUnit.GameControllerTest.checkNumPlayer.executor": "Run",
-    "JUnit.GameControllerTest.executor": "Coverage",
-    "JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor": "Run",
-    "JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor": "Run",
-    "JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor": "Debug",
-    "JUnit.GameControllerTest.playerPlaceCard.executor": "Run",
-    "JUnit.GameControllerTest.playerSelectStartingCard.executor": "Run",
-    "JUnit.GameControllerTest.statePlaceCard.executor": "Coverage",
-    "JUnit.GameFieldControllerTest.checkPlacing.executor": "Run",
-    "JUnit.GameFieldControllerTest.executor": "Coverage",
-    "JUnit.GameTest.executor": "Coverage",
-    "JUnit.GameTest.insertPlayer.executor": "Coverage",
-    "JUnit.GestioneViewTest.scegliCarta.executor": "Debug",
-    "JUnit.GoalDiagonalTest.creteResourceDeck.executor": "Run",
-    "JUnit.GoalDiagonalTest.executor": "Coverage",
-    "JUnit.GoalDiagonalTest.testGoalDiagonal.executor": "Run",
-    "JUnit.GoalDiagonalTest.totalPoints.executor": "Run",
-    "JUnit.GoalDoubleGoldTest.executor": "Coverage",
-    "JUnit.GoalFeatherPenPaperTest.executor": "Coverage",
-    "JUnit.GoalLFigureTest.executor": "Coverage",
-    "JUnit.GoalLFigureTest.totalPoints.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsAnimal.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsInsect.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsMushroom.executor": "Run",
-    "JUnit.GoalLFigureTest.totalPointsPlant.executor": "Run",
-    "JUnit.GoalStrategyTest.executor": "Coverage",
-    "JUnit.GoalStrategyTest.totalPoints.executor": "Run",
-    "JUnit.GoalTripleTest.executor": "Coverage",
-    "JUnit.PlayerTest.addPoints.executor": "Debug",
-    "JUnit.PlayerTest.executor": "Coverage",
-    "JUnit.PlayerTest.getColor.executor": "Run",
-    "JUnit.PlayerTest.getIsFirst.executor": "Run",
-    "JUnit.PlayerTest.getPlayerState.executor": "Run",
-    "JUnit.PlayerTest.insertCard.executor": "Debug",
-    "JUnit.PlayerTest.nextStatePlayer.executor": "Run",
-    "JUnit.PlayerTest.placeCard.executor": "Run",
-    "JUnit.PlayerTest.setPlayer_state.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Mirko/IdeaProjects/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.RmiClient.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RmiClientF.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RmiServer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RmiServerF.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CenterCardsTest.drawResourceCard.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.CenterCardsTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.DeckCreationTestGoal.creteGoalDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DeckGoalCardTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.DeckTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameControllerTest.EndGame.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.checkNumPlayer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameControllerTest.playerPeachCardFromGoldDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.playerPeachCardFromResourcesDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.playerPeachFromCardsInCenter.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.GameControllerTest.playerPlaceCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.playerSelectStartingCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameControllerTest.statePlaceCard.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameFieldControllerTest.checkPlacing.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameFieldControllerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameTest.insertPlayer.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GestioneViewTest.scegliCarta.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.GoalDiagonalTest.creteResourceDeck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalDiagonalTest.testGoalDiagonal.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDiagonalTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalDoubleGoldTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalFeatherPenPaperTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalLFigureTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsAnimal.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsInsect.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsMushroom.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalLFigureTest.totalPointsPlant.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalStrategyTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GoalStrategyTest.totalPoints.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GoalTripleTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PlayerTest.addPoints.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PlayerTest.getColor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getIsFirst.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.getPlayerState.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.insertCard.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.PlayerTest.nextStatePlayer.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.placeCard.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PlayerTest.setPlayer_state.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gabrielescorrano/Desktop/Ingegneria del Software/Esercizi/ing-sw-2024-scorrano-villani-virgulti-scigliano/CodexNaturalis/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED" />
+      <recent name="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/TokenManager" />
+      <recent name="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.SOCKET_FINAL.Message" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="it.polimi.ingsw.MODEL.Game" />
@@ -143,18 +152,20 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.SOCKET_FINAL.Message" />
+      <recent name="it.polimi.ingsw.SOCKET_FINAL" />
       <recent name="it.polimi.ingsw.MODEL.Game" />
       <recent name="it.polimi.ingsw.MODEL.Game.State" />
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
   <component name="RunManager" selected="Application.RmiClientF">
-    <configuration name="RmiClientF" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI_FINAL.RmiClientF" />
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.SOCKET_FINAL.Message.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -162,12 +173,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RmiServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI.RmiServer" />
+    <configuration name="ClientS" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET.ClientS" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.RMI.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.SOCKET.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RmiClientF" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI_FINAL.RmiClientF" />
+      <module name="PSP30" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -188,33 +212,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameFieldControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Server" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.SOCKET_FINAL.Message.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameFieldControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameFieldControllerTest.checkPlacing" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="it.polimi.ingsw.SOCKET.ProvaOggettiAR.Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET.ProvaOggettiAR.Client" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.CONTROLLER.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.SOCKET.ProvaOggettiAR.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.CONTROLLER" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.CONTROLLER.GameFieldControllerTest" />
-      <option name="METHOD_NAME" value="checkPlacing" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -233,27 +252,27 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ClientS" />
       <item itemvalue="Application.RmiClientF" />
-      <item itemvalue="Application.RmiServer" />
       <item itemvalue="Application.RmiServerF" />
-      <item itemvalue="JUnit.GameFieldControllerTest" />
-      <item itemvalue="JUnit.GameFieldControllerTest.checkPlacing" />
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.it.polimi.ingsw.SOCKET.ProvaOggettiAR.Client" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.RmiClientF" />
         <item itemvalue="Application.RmiServerF" />
-        <item itemvalue="Application.RmiServer" />
-        <item itemvalue="JUnit.GameFieldControllerTest.checkPlacing" />
-        <item itemvalue="JUnit.GameFieldControllerTest" />
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.it.polimi.ingsw.SOCKET.ProvaOggettiAR.Client" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -276,209 +295,8 @@
       <workItem from="1713018449356" duration="10906000" />
       <workItem from="1713640206406" duration="3355000" />
       <workItem from="1713643582992" duration="1323000" />
-      <workItem from="1713719698209" duration="48000" />
-      <workItem from="1714843754389" duration="778000" />
-      <workItem from="1714845262459" duration="95000" />
-    </task>
-    <task id="LOCAL-00020" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1711216807112</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1711216807113</updated>
-    </task>
-    <task id="LOCAL-00021" summary="aggiunta di todo a PieceField">
-      <option name="closed" value="true" />
-      <created>1711222446657</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1711222446657</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1711482120596</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1711482120596</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Modifica e fine file json carte risorsa, creazione json gold">
-      <option name="closed" value="true" />
-      <created>1711487100086</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1711487100086</updated>
-    </task>
-    <task id="LOCAL-00024" summary="FINE JSON CARD ORO">
-      <option name="closed" value="true" />
-      <created>1711488825160</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1711488825160</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json">
-      <option name="closed" value="true" />
-      <created>1712310547598</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1712310547598</updated>
-    </task>
-    <task id="LOCAL-00026" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712485289198</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1712485289198</updated>
-    </task>
-    <task id="LOCAL-00027" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712507660881</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1712507660881</updated>
-    </task>
-    <task id="LOCAL-00028" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712508866399</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1712508866399</updated>
-    </task>
-    <task id="LOCAL-00029" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712509073508</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1712509073508</updated>
-    </task>
-    <task id="LOCAL-00030" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712509207370</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1712509207370</updated>
-    </task>
-    <task id="LOCAL-00031" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712509510591</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1712509510592</updated>
-    </task>
-    <task id="LOCAL-00032" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712512812754</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1712512812754</updated>
-    </task>
-    <task id="LOCAL-00033" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712516522386</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1712516522386</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712521108250</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1712521108250</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712563009541</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1712563009541</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1712567413725</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1712567413725</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Aggiornamento sono gabriele">
-      <option name="closed" value="true" />
-      <created>1712567896746</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1712567896746</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Aggiunta commenti">
-      <option name="closed" value="true" />
-      <created>1712591712313</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1712591712313</updated>
-    </task>
-    <task id="LOCAL-00039" summary="test su game e fix game">
-      <option name="closed" value="true" />
-      <created>1712659295017</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1712659295017</updated>
-    </task>
-    <task id="LOCAL-00040" summary="test su centercards distribuite da game">
-      <option name="closed" value="true" />
-      <created>1712660377302</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1712660377302</updated>
-    </task>
-    <task id="LOCAL-00041" summary="test su centercards distribuite da game">
-      <option name="closed" value="true" />
-      <created>1712668483263</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1712668483263</updated>
-    </task>
-    <task id="LOCAL-00042" summary="test su centercards distribuite da game">
-      <option name="closed" value="true" />
-      <created>1712668818794</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1712668818794</updated>
-    </task>
-    <task id="LOCAL-00043" summary="test su inizializzazione game finiti">
-      <option name="closed" value="true" />
-      <created>1712672313400</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1712672313400</updated>
-    </task>
-    <task id="LOCAL-00044" summary="prove rmi">
-      <option name="closed" value="true" />
-      <created>1712684448799</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1712684448799</updated>
+      <workItem from="1714209042514" duration="14322000" />
+      <workItem from="1714303441979" duration="5961000" />
     </task>
     <task id="LOCAL-00045" summary="Inizio gestione di partite multiple">
       <option name="closed" value="true" />
@@ -672,7 +490,207 @@
       <option name="project" value="LOCAL" />
       <updated>1713695372465</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="aggiunta metodo checkName in RmiServerF">
+      <option name="closed" value="true" />
+      <created>1713710596376</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1713710596376</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Chiusura GameController Test">
+      <option name="closed" value="true" />
+      <created>1713780341840</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1713780341841</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Chiusura GameController Test">
+      <option name="closed" value="true" />
+      <created>1713871963687</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1713871963687</updated>
+    </task>
+    <task id="LOCAL-00072" summary="continuazione client">
+      <option name="closed" value="true" />
+      <created>1713873296896</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1713873296896</updated>
+    </task>
+    <task id="LOCAL-00073" summary="recap">
+      <option name="closed" value="true" />
+      <created>1714054387771</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1714054387771</updated>
+    </task>
+    <task id="LOCAL-00074" summary="recap">
+      <option name="closed" value="true" />
+      <created>1714055389732</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1714055389732</updated>
+    </task>
+    <task id="LOCAL-00075" summary="recap">
+      <option name="closed" value="true" />
+      <created>1714057767978</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1714057767978</updated>
+    </task>
+    <task id="LOCAL-00076" summary="recap">
+      <option name="closed" value="true" />
+      <created>1714058425706</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1714058425706</updated>
+    </task>
+    <task id="LOCAL-00077" summary="recap">
+      <option name="closed" value="true" />
+      <created>1714059980837</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1714059980837</updated>
+    </task>
+    <task id="LOCAL-00078" summary="inserimento metodo chooseGoal">
+      <option name="closed" value="true" />
+      <created>1714060774967</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1714060774967</updated>
+    </task>
+    <task id="LOCAL-00079" summary="heartbeat">
+      <option name="closed" value="true" />
+      <created>1714062135886</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1714062135887</updated>
+    </task>
+    <task id="LOCAL-00080" summary="heartbeat">
+      <option name="closed" value="true" />
+      <created>1714064774317</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1714064774317</updated>
+    </task>
+    <task id="LOCAL-00081" summary="heartbeat">
+      <option name="closed" value="true" />
+      <created>1714065019987</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1714065019987</updated>
+    </task>
+    <task id="LOCAL-00082" summary="heartbeat">
+      <option name="closed" value="true" />
+      <created>1714066472074</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1714066472074</updated>
+    </task>
+    <task id="LOCAL-00083" summary="gestione disconnessione e riconnessione">
+      <option name="closed" value="true" />
+      <created>1714127330624</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1714127330624</updated>
+    </task>
+    <task id="LOCAL-00084" summary="aggiornamento e prima scrittura Front END Socket">
+      <option name="closed" value="true" />
+      <created>1714169755290</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1714169755291</updated>
+    </task>
+    <task id="LOCAL-00085" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1714169868685</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1714169868685</updated>
+    </task>
+    <task id="LOCAL-00086" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1714238987870</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1714238987870</updated>
+    </task>
+    <task id="LOCAL-00087" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1714239037426</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1714239037426</updated>
+    </task>
+    <task id="LOCAL-00088" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1714298235160</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1714298235160</updated>
+    </task>
+    <task id="LOCAL-00089" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1714299146765</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1714299146765</updated>
+    </task>
+    <task id="LOCAL-00090" summary="modularizzazione cli">
+      <option name="closed" value="true" />
+      <created>1714306467686</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1714306467687</updated>
+    </task>
+    <task id="LOCAL-00091" summary="modularizzazione cli">
+      <option name="closed" value="true" />
+      <created>1714306517371</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1714306517371</updated>
+    </task>
+    <task id="LOCAL-00092" summary="modularizzazione clih">
+      <option name="closed" value="true" />
+      <created>1714493313406</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1714493313406</updated>
+    </task>
+    <task id="LOCAL-00093" summary="agg">
+      <option name="closed" value="true" />
+      <created>1714814725403</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1714814725403</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -702,18 +720,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Creazione Design Pattern StateGame --da completare&#10;&#10;Creazione dei Deck tramite lettura da file json" />
-    <MESSAGE value="CREAZIONE RMI / CAMBIAMENTI GESTIONE GAMEFIELD" />
-    <MESSAGE value="Aggiornamento sono gabriele" />
-    <MESSAGE value="Aggiunta commenti" />
-    <MESSAGE value="test su game e fix game" />
-    <MESSAGE value="test su centercards distribuite da game" />
-    <MESSAGE value="test su inizializzazione game finiti" />
-    <MESSAGE value="PROVE RMI" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;CodexNaturalis/.idea/workspace.xml" />
-    <MESSAGE value="prove rmi" />
-    <MESSAGE value="Inizio gestione di partite multiple" />
-    <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
     <MESSAGE value="fine test GameController" />
     <MESSAGE value="Aggiunta stato End Game Player" />
     <MESSAGE value="Aggiunta stato End Game su classe Game" />
@@ -726,8 +732,30 @@
     <MESSAGE value="super modifica serializable e clientdef" />
     <MESSAGE value="fix problemi creazione giocatore client" />
     <MESSAGE value="small fixes" />
+    <MESSAGE value="aggiunta metodo checkName in RmiServerF" />
+    <MESSAGE value="Chiusura GameController Test" />
+    <MESSAGE value="continuazione client" />
+    <MESSAGE value="recap" />
+    <MESSAGE value="ci siamo" />
+    <MESSAGE value="inserimento metodo chooseGoal" />
+    <MESSAGE value="heartbeat" />
+    <MESSAGE value="gestione disconnessione e riconnessione" />
+    <MESSAGE value="aggiornamento e prima scrittura Front END Socket" />
     <MESSAGE value="aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
+    <MESSAGE value="modularizzazione cli" />
+    <MESSAGE value="modularizzazione clih" />
+    <MESSAGE value="agg" />
+    <option name="LAST_COMMIT_MESSAGE" value="agg" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.OptionalDataException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -787,6 +815,9 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GoalLFigureTest.ic" NAME="GoalLFigureTest Coverage Results" MODIFIED="1713631999375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createErrorPlayer.ic" NAME="GameControllerTest.createErrorPlayer Coverage Results" MODIFIED="1713780269877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>

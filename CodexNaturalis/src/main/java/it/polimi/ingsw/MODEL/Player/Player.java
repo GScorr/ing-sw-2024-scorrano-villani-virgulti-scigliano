@@ -47,6 +47,7 @@ public class Player implements PlayerObserver, Serializable {
             //wait_turn = new WaitTurn(this),
             place_card = new PlaceCard(this),
             draw_card = new DrawCard(this),
+            wait_turn = new WaitTurn(this),
             end_game = new EndGame(this),
             actual_state;
 
@@ -74,13 +75,28 @@ public class Player implements PlayerObserver, Serializable {
 
     private int num_goal_achieve = 0;
 
+    private boolean isDisconnected;
+
 
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
+    private boolean firstPlaced = false;
 
+    public boolean isFirstPlaced() {
+        return firstPlaced;
+    }
 
+    public boolean isDisconnected(){
+        return isDisconnected;
+    }
 
+    public void disconnect(){
+        this.isDisconnected = true;
+    }
+    public void connect(){
+        this.isDisconnected = false;
+    }
 
 
     public Player( ColorsEnum color, String name, boolean isFirst){
@@ -90,6 +106,7 @@ public class Player implements PlayerObserver, Serializable {
         createField();
         this.actual_state = not_initialized;
         this.isFirst = isFirst;
+        this.isDisconnected = false;
     }
 
     public String getName() {
@@ -146,11 +163,22 @@ public class Player implements PlayerObserver, Serializable {
         return player_points;
     }
 
+    public Deck getGold_deck() {
+        return gold_deck;
+    }
+
+    public Deck getResources_deck() {
+        return resources_deck;
+    }
+
     /*
-            setter:
-             */
+                    setter:
+                     */
     public void setPlayer_state( PState state){
         this.actual_state=state;
+    }
+    public void setPlayerEndGame(){
+        this.actual_state = end_game;
     }
     public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
         this.cards_in_hand = cards_in_hand;
@@ -207,7 +235,7 @@ public class Player implements PlayerObserver, Serializable {
                     setPlayer_state( place_card);
                 }
                 else {
-                    //setPlayer_state(wait_turn);
+                    setPlayer_state(wait_turn);
                 }
                 return;
 
@@ -226,29 +254,24 @@ public class Player implements PlayerObserver, Serializable {
                 setPlayer_state( draw_card );
                 return;
             case "DRAW_CARD":
-                //setPlayer_state( wait_turn);
+                setPlayer_state( wait_turn);
                 return;
             case "END_GAME":
                 return;
         }
     }
 
+
+
     public void setEndGame(){
         setPlayer_state(end_game);
     }
 
-    /*
-    *if (player_state != PLACE_CARD
-    * index -> posizione nella lista delle carte in mano
-    * */
     public void placeCard(int index,boolean flipped, int x, int y){
-        if(index< 0 || index > 2){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
-        }
-            PlayCard playing_card =  cards_in_hand.get(index);
-            playing_card.flipCard(flipped);
-            game_field.insertCard(playing_card, x, y);
-            removeHandCard(playing_card, index);
+        PlayCard playing_card =  cards_in_hand.get(index);
+        playing_card.flipCard(flipped);
+        game_field.insertCard(playing_card, x, y);
+        removeHandCard(playing_card, index);
 
     }
     private void removeHandCard(PlayCard card, int index){
@@ -272,7 +295,7 @@ public class Player implements PlayerObserver, Serializable {
 
 
     public void selectSideCard(int index, boolean flipp){
-        this.side_card_in_hand.put(index,flipp);
+        cards_in_hand.get(index).flipCard(flipp);
     }
 
     //Una volta che il giocatore ha giocato una carta ne deve pescare una
@@ -303,10 +326,6 @@ public class Player implements PlayerObserver, Serializable {
 
 
     public void selectGoal(int i){
-        if(i< 0 || i > 1){
-            throw new InvalidBoundException("Bound exception: l'int passato può essere solo 0<=i<2");
-        }
-
         this.goal_card = initial_goal_cards.get(i);
     }
 
@@ -315,7 +334,11 @@ public class Player implements PlayerObserver, Serializable {
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 22, 22);
+            firstPlaced = true;
+    }
 
+    public PState getActual_state() {
+        return actual_state;
     }
 
     public int getNum_goal_achieve() {

@@ -13,7 +13,7 @@ import java.io.Serializable;
 public abstract class  PlayCard implements Serializable {
     private final Side front_side ;
     private final  Side back_side;
-    protected boolean flipped;
+    public boolean flipped;
 
     public final CentralEnum colore;
 
@@ -33,12 +33,12 @@ public abstract class  PlayCard implements Serializable {
     }
 
 
-    private Side getFrontSide() {
+    public Side getFrontSide() {
         return front_side;
     }
 
 
-    private Side getBackSide() {
+    public Side getBackSide() {
         return back_side;
     }
     public  Side getSide(){

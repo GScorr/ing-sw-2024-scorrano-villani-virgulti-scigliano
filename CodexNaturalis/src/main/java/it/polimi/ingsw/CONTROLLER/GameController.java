@@ -41,11 +41,13 @@ public class GameController implements GameSubject, Serializable {
      /*
      attributi per fine game
       */
-    private boolean is_final_state = false;
-    private boolean tmp_final_state = false;
+    public boolean is_final_state = false;
+    public boolean tmp_final_state = false;
+    public boolean end__game = false;
     private boolean resources_deck_finished = false;
     private boolean gold_deck_finished = false;
-    private boolean both_deck_finished = false;
+    //public solo per test
+    public boolean both_deck_finished = false;
 
     private int final_counter = 0;
 
@@ -55,10 +57,11 @@ public class GameController implements GameSubject, Serializable {
     transient Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
 
 
+
     public GameController(int max_num_player) {
         synchronized(this) {
             if (max_num_player < 2 || max_num_player > 4) {
-                throw new ControllerException(0, "Num Player not Valid in creation Game");
+                throw new ControllerException(0, "Num Player not Valid in creation Game, Insert Again ...");
             } else {
                 this.game = new Game(max_num_player);
             }
@@ -67,7 +70,7 @@ public class GameController implements GameSubject, Serializable {
     public GameController(String name, int max_num_player) {
         synchronized(this) {
             if (max_num_player < 2 || max_num_player > 4) {
-                throw new ControllerException(0, "Num Player not Valid in creation Game");
+                throw new ControllerException(0, "Num Player not Valid in creation Game, Insert Again ...");
             } else {
                 this.game = new Game(name, max_num_player);
 
@@ -88,6 +91,10 @@ public class GameController implements GameSubject, Serializable {
         return final_counter;
     }
 
+    public List<Player> getPlayer_list() {
+        return player_list;
+    }
+
     private void isUniqueName(String name) {
         if(name.length() == 0){
             throw new ControllerException(1,"Insert at least 1 character");
@@ -105,10 +112,22 @@ public class GameController implements GameSubject, Serializable {
         return;
     }
 
-    public Player createPlayer(String nome, boolean isFirst){
-        if(game.getNumPlayer() > 0) {
-            isUniqueName(nome);
+    public boolean isAlone(){
+        boolean num = false;
+        int num_disconnected = 0;
+        for ( int i = 0 ; i < game.getMax_num_player(); i++ )
+        {
+            if (game.getGet_player_index().get(i).isDisconnected()) num_disconnected++;
         }
+        if(  (game.getMax_num_player() - num_disconnected == 1) || (game.getMax_num_player() - num_disconnected == 0) ) num = true;
+        return num;
+    }
+
+
+    public Player createPlayer(String nome, boolean isFirst){
+        /*if(game.getNumPlayer() > 0) {
+            isUniqueName(nome);
+        }*/
         Player player = new Player(ColorsEnum.GREEN, nome, isFirst);
         if(game.getNum_player() == game.getMax_num_player()){
             throw new ControllerException(3,"Maximum number of players reached");
@@ -132,7 +151,7 @@ public class GameController implements GameSubject, Serializable {
         return false;
     }
 
-    public boolean checkNumPlayer(){
+    public boolean  checkNumPlayer(){
         Integer num_player = game.getNum_player();
         Integer max_num_player = game.getMax_num_player();
         if(num_player == max_num_player && game.actual_state.getNameState().equals("NOT_INITIALIZED")){
@@ -152,6 +171,9 @@ public class GameController implements GameSubject, Serializable {
     }
 
     public void playerChooseGoal(Player p, int i) {
+        if(i< 0 || i > 1){
+            throw new ControllerException(30, "Index Goal OUTBOUND, 0 <= index <= 1");
+        }
         if (this.choosed_goal.get(p) == false) {
             if (p.actual_state.selectGoal(i)) {
                 goal_count++;
@@ -191,29 +213,38 @@ public class GameController implements GameSubject, Serializable {
 // ------ da qui in avanti inizia il gioco con i turni
 
 
-    private void nextStatePlayer(){
+    public void nextStatePlayer(){
         Player currentPlayer = player_list.get(actual_player), nextPlayer;
         if(currentPlayer.actual_state.getNameState().equals("PLACE_CARD")){
             currentPlayer.nextStatePlayer();
-            // If deck are terminated the DRAW_CARD state is skipped
-            if(both_deck_finished){
-                nextStatePlayer();
+            if(both_deck_finished && end__game){
+                game.gameNextState(); //cambio stato al game
+                finalPointEndGame(); //conta i punti di ogni giocatore
+            }else {
+                // If deck are terminated the DRAW_CARD state is skipped
+                if (both_deck_finished) {
+                    nextStatePlayer();
+                }
             }
-        }else if (currentPlayer.actual_state.getNameState().equals("DRAW_CARD")){
-            if( actual_player == player_list.size() - 1 ){
-                nextPlayer = player_list.get(0) ;}
-            else{
-                nextPlayer = player_list.get(actual_player + 1);
+        }else if (currentPlayer.actual_state.getNameState().equals("DRAW_CARD")) {
+            if (end__game ) {
+                game.gameNextState(); //cambio stato al game
+                finalPointEndGame(); //conta i punti di ogni giocatore
+            } else {
+                if (actual_player == player_list.size() - 1) {
+                    nextPlayer = player_list.get(0);
+                } else {
+                    nextPlayer = player_list.get(actual_player + 1);
+                }
+                currentPlayer.nextStatePlayer();
+                nextPlayer.nextStatePlayer();
+                if (actual_player + 1 == game.getMax_num_player()) {
+                    actual_player = 0;
+                } else {
+                    actual_player++;
+                }
             }
-            currentPlayer.nextStatePlayer();
-            nextPlayer.nextStatePlayer();
-            if(actual_player + 1 == game.getMax_num_player() ){
-                actual_player = 0;
             }
-            else{
-                actual_player ++;
-            }
-        }
     }
 
     /*
@@ -226,18 +257,30 @@ public class GameController implements GameSubject, Serializable {
        else{
            throw new ControllerException(21,"Not possible chosing SIDE card in this STATE: " + player.actual_state.getNameState());
        }
+       if(index < 0 || index > 2){
+           throw new ControllerException(32,"Index out of bound: 0 <= index <= 2");
+       }
 
     }
 
     public void statePlaceCard(Player player, int index, int x, int y){ //cambiare nome al metodo
 
+        if(player.actual_state.getNameState().compareTo("PLACE_CARD") != 0){
+            throw new ControllerException(10, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+        }
+
+        if(index>2 || index < 0){
+            throw new ControllerException(9,"Index error, placeCard accept 0 <= index <= 2");
+        }
         if(is_final_state){
             placeCard(player, index, x, y);
             final_counter++;
             if(final_counter == game.getMax_num_player()){
-                game.gameNextState(); //cambio stato al game
-                finalPointEndGame(); //conta i punti di ogni giocatore
+                //l'ultimo giocatore deve pescare una carta
+                end__game = true;
             }
+            // --
+            nextStatePlayer();
         }
         else{
             if(tmp_final_state){
@@ -246,6 +289,8 @@ public class GameController implements GameSubject, Serializable {
                     is_final_state = true;
                     final_counter=1;
                 }
+                // --
+                nextStatePlayer();
             }
             else{
                 placeCard(player, index, x, y);
@@ -258,25 +303,23 @@ public class GameController implements GameSubject, Serializable {
                         tmp_final_state = true;
                     }
                 }
+                // --
+                nextStatePlayer();
             }
         }
     }
 
     private void placeCard(Player player, int index, int x, int y){
-        boolean flipped = player.side_card_in_hand.get(index);
-            if(index>2 || index < 0){
-                throw new ControllerException(9,"Index error, placeCard accept 0 <= index <= 2");
-            }
+        boolean flipped = player.getCardsInHand().get(index).flipped;
+
             GameFieldController field_controller_player = field_controller.get(player);
             PlayCard card_played = player.getCardsInHand().get(index);
-
             if(field_controller_player.checkPlacing(card_played,x,y)) {
                 if(player.actual_state.placeCard(index, flipped, x, y)){
-                    nextStatePlayer();
+
                 }else{
                     throw new ControllerException(10, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
                 }
-
             }
 
     }
@@ -323,6 +366,9 @@ public class GameController implements GameSubject, Serializable {
 
 
     public void playerPeachCardFromGoldDeck(Player player){
+        if(player.actual_state.getNameState().compareTo("DRAW_CARD") != 0 ){
+            throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+        }
         if(game.getGold_deck().cards.size() == 0 ){
             throw new ControllerException(15, "Deck is empty, draw from a different one." );
         }
@@ -348,6 +394,9 @@ public class GameController implements GameSubject, Serializable {
     }
 
     public void playerPeachCardFromResourcesDeck(Player player){
+        if(player.actual_state.getNameState().compareTo("DRAW_CARD") != 0 ){
+            throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+        }
             if(game.getResources_deck().cards.size() == 0 ){
                 throw new ControllerException(15, "Deck is empty, draw from a different one." );
             }
@@ -373,6 +422,9 @@ public class GameController implements GameSubject, Serializable {
     }
 
     public void playerPeachFromCardsInCenter(Player player, int i){
+        if(player.actual_state.getNameState().compareTo("DRAW_CARD") != 0 ){
+            throw new ControllerException(14, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
+        }
 
         if(i< 0 || i > 3){
             throw new ControllerException(16,"Bound exception: l'int passato può essere solo 0<=i<4");
@@ -388,39 +440,38 @@ public class GameController implements GameSubject, Serializable {
             throw new ControllerException(20,"Card is not present. Case where the deck is terminated");
         }
 
-        if(i == 0 || i == 1){
-            if(game.getGold_deck().cards.size() == 0){
-                gold_deck_finished = true;
-                if(resources_deck_finished){
-                    both_deck_finished = true;
-                    if(player.getIsFirst()){
-                        is_final_state=true;
-                        final_counter=1;
-                    }
-                    else{
-                        tmp_final_state = true;
-                    }
-                }
-            }
-        }
-
-        if( i == 2 || i == 3){
-            if(game.getResources_deck().cards.size() == 0){
-                resources_deck_finished = true;
-                if(gold_deck_finished){
-                    both_deck_finished = true;
-                    if(player.getIsFirst()){
-                        is_final_state=true;
-                        final_counter=1;
-                    }
-                    else{
-                        tmp_final_state = true;
-                    }
-                }
-            }
-        }
-
         if(player.actual_state.peachFromCardsInCenter(i)){
+            if(i == 0 || i == 1){
+                if(game.getGold_deck().cards.size() == 0){
+                    gold_deck_finished = true;
+                    if(resources_deck_finished){
+                        both_deck_finished = true;
+                        if(player.getIsFirst()){
+                            is_final_state=true;
+                            final_counter=1;
+                        }
+                        else{
+                            tmp_final_state = true;
+                        }
+                    }
+                }
+            }
+
+            if( i == 2 || i == 3){
+                if(game.getResources_deck().cards.size() == 0){
+                    resources_deck_finished = true;
+                    if(gold_deck_finished){
+                        both_deck_finished = true;
+                        if(player.getIsFirst()){
+                            is_final_state=true;
+                            final_counter=1;
+                        }
+                        else{
+                            tmp_final_state = true;
+                        }
+                    }
+                }
+            }
             nextStatePlayer();
         }else{
             throw new ControllerException(15, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
@@ -443,4 +494,5 @@ public class GameController implements GameSubject, Serializable {
             player_observer.update();
         }
     }
+
 }

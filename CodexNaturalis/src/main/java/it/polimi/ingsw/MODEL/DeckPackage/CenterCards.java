@@ -2,9 +2,10 @@ package it.polimi.ingsw.MODEL.DeckPackage;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CenterCards {
+public class CenterCards implements Serializable {
     private List<PlayCard>  gold_list;
     private List<PlayCard> resource_list;
     private Deck gold_deck;
