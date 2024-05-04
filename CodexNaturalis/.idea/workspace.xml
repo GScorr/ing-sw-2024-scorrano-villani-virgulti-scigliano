@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -156,7 +159,7 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RmiServerF">
+  <component name="RunManager" selected="Application.RmiClientF">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -258,8 +261,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RmiServerF" />
         <item itemvalue="Application.RmiClientF" />
+        <item itemvalue="Application.RmiServerF" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.Server" />
         <item itemvalue="Application.it.polimi.ingsw.SOCKET.ProvaOggettiAR.Client" />
@@ -294,14 +297,6 @@
       <workItem from="1713643582992" duration="1323000" />
       <workItem from="1714209042514" duration="14322000" />
       <workItem from="1714303441979" duration="5961000" />
-    </task>
-    <task id="LOCAL-00044" summary="prove rmi">
-      <option name="closed" value="true" />
-      <created>1712684448799</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1712684448799</updated>
     </task>
     <task id="LOCAL-00045" summary="Inizio gestione di partite multiple">
       <option name="closed" value="true" />
@@ -687,7 +682,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714493313406</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="agg">
+      <option name="closed" value="true" />
+      <created>1714814725403</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1714814725403</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -717,7 +720,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller" />
     <MESSAGE value="fine test GameController" />
     <MESSAGE value="Aggiunta stato End Game Player" />
     <MESSAGE value="Aggiunta stato End Game su classe Game" />
@@ -742,7 +744,8 @@
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="modularizzazione cli" />
     <MESSAGE value="modularizzazione clih" />
-    <option name="LAST_COMMIT_MESSAGE" value="modularizzazione clih" />
+    <MESSAGE value="agg" />
+    <option name="LAST_COMMIT_MESSAGE" value="agg" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
