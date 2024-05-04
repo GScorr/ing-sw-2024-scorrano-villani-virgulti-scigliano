@@ -330,70 +330,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
-    public void showField(GameField field) throws RemoteException {
-        for (int i = 0; i < Constants.MATRIXDIM * 2; i++) {
-            // Stampa la riga superiore della cella
-            if (i % 2 == 0) {
-                for (int j = 0; j < Constants.MATRIXDIM * 2; j++) {
-                    if (j % 2 == 0) {
-                        // Stampa i bordi superiori delle carte
-                        int x = i / 2;
-                        int y = (j - 1) / 2;
-                        if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM &&
-                                (field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTUP) ||
-                                        field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.RIGHTUP))) {
-                            System.out.print("--------");
-                        } else {
-                            System.out.print("        "); // Cell space
-                        }
-                    } else {
-                        System.out.print("-");
-                    }
-                }
-                System.out.println();
-            } else {
-                // Stampa le righe delle carte e dei separatori
-                for (int j = 0; j < Constants.MATRIXDIM * 2; j++) {
-                    if (j % 2 == 0) {
-                        int x = (i - 1) / 2;
-                        int y = j / 2;
-                        if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM) {
-                            // Stampa il bordo sinistro delle carte
-                            if (field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTUP) ||
-                                    field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTDOWN)) {
-                                System.out.print("|");
-                            } else {
-                                System.out.print(" ");
-                            }
-                            // Stampa il contenuto delle carte
-                            System.out.print(" " + field.getCell(x, y, Constants.MATRIXDIM).getShort_value() + " ");
-                        } else {
-                            System.out.print("   "); // Cella vuota
-                        }
-                    } else {
-                        System.out.print("|");
-                    }
-                }
-                System.out.println();
+    public void showField(GameField field) throws RemoteException{
+        for (int i = 0; i< Constants.MATRIXDIM; i++){
+            for (int j = 0; j<Constants.MATRIXDIM; j++){
+                System.out.print(field.getCell(i,j,Constants.MATRIXDIM).getShort_value() + " ");
             }
+            System.out.print("\n");
         }
-        // Stampa la riga inferiore della cella
-        for (int j = 0; j < Constants.MATRIXDIM * 2; j++) {
-            if (j % 2 == 0) {
-                int x = Constants.MATRIXDIM - 1;
-                int y = (j - 1) / 2;
-                if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM &&
-                        (field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTDOWN) ||
-                                field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.RIGHTDOWN))) {
-                    System.out.print("--------");
-                } else {
-                    System.out.print("        "); // Cell space
-                }
-            } else {
-                System.out.print("-");
-            }
-        }
-        System.out.println();
     }
 
 

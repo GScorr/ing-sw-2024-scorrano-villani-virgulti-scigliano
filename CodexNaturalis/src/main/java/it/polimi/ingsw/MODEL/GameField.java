@@ -114,8 +114,8 @@ public class GameField implements Serializable {
 
         if( !field[x][y].isEmpty() ){  //ho cambiato .getCard con .getCardDown, penso che l'errore sia qua
             field[x][y].setCardDown(field[x][y].getCard());
-            field[x][y].setValues( card.getSide().getAngleLeftUp(), 1);
-            field[x][y].setEdges( EdgeEnum.LEFTUP, 1);
+            field[x][y].setValues( card.getSide().getAngleLeftUp(), 1); //probably useless, but I'm waiting for the GUI
+            field[x][y].setEdges( EdgeEnum.LEFTUP, 1); //probably useless, but I'm waiting for the GUI
             //System.out.println("cella base");
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
