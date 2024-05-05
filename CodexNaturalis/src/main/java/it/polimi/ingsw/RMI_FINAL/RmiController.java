@@ -169,7 +169,7 @@ public class RmiController implements VirtualRmiController, Serializable {
     }
     public boolean insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException{
         PlayCard card = token_to_player.get(token).getCardsInHand().get(index);
-        return controller.insertCard(token_to_player.get(token), card, index, x, y, flipped);
+        return controller.insertCard(token_to_player.get(token), card, x, y, index, flipped);
     }
     @Override
     public void showGameField(String token) throws RemoteException {
