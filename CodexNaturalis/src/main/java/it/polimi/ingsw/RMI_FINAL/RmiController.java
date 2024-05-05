@@ -122,12 +122,12 @@ public class RmiController implements VirtualRmiController, Serializable {
     }
 
     @Override
-    public synchronized boolean addPlayer(String p_token, String name, VirtualViewF client ) throws RemoteException {
+    public synchronized boolean addPlayer(String p_token, String name, VirtualViewF client, boolean isFirst ) throws RemoteException {
         if(controller.getFull() )
         {String error = "\nGame is Full\n";
             token_manager.getTokens().get(p_token).reportError(error);
             return false;}
-        createPlayer(p_token, name, false);
+        createPlayer(p_token, name, isFirst);
         token_manager.getTokens().put(p_token,client);
         controller.checkNumPlayer();
         return true;
