@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -27,5 +28,18 @@ public interface VirtualRmiController extends Remote {
     public void showStartingCard(String token) throws RemoteException;
     public void showGameField(String token) throws RemoteException;
     public void showCard(PlayCard card, String token) throws RemoteException;
-    public boolean insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException;
+    public void insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException, ControllerException;
+
+    public void peachFromGoldDeck(String token) throws RemoteException;
+
+    public void peachFromResourceDeck(String token) throws RemoteException;
+
+    public void showPlayerCards(String token) throws RemoteException;
+
+    public void showCardsInCenter(String token) throws RemoteException;
+
+
+
+
+    public void peachFromCardsInCenter(String token, int index) throws RemoteException;
 }

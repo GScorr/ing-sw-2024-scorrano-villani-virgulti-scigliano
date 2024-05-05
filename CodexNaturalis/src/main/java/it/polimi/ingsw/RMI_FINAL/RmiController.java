@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
@@ -167,9 +168,10 @@ public class RmiController implements VirtualRmiController, Serializable {
     public void showCard(PlayCard card, String token) throws RemoteException{
         token_manager.getTokens().get(token).showCard(card);
     }
-    public boolean insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException{
+    public void insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException, ControllerException {
         PlayCard card = token_to_player.get(token).getCardsInHand().get(index);
-        return controller.insertCard(token_to_player.get(token), card, x, y, index, flipped);
+        token_to_player.get(token).getCardsInHand().get(index).flipCard(flipped);
+        controller.statePlaceCard(token_to_player.get(token), index, x, y);
     }
     @Override
     public void showGameField(String token) throws RemoteException {
@@ -181,6 +183,43 @@ public class RmiController implements VirtualRmiController, Serializable {
         */
     }
 
+    public void peachFromGoldDeck(String token) throws RemoteException{
+        controller.playerPeachCardFromGoldDeck(token_to_player.get(token));
+    }
+
+    public void peachFromResourceDeck(String token) throws RemoteException{
+        controller.playerPeachCardFromResourcesDeck(token_to_player.get(token));
+    }
+
+    public void showPlayerCards(String token) throws RemoteException{
+        token_manager.getTokens().get(token).printString("\nLe tue carte: ");
+        token_manager.getTokens().get(token).printString("\n1:");
+        token_manager.getTokens().get(token).showCard(token_to_player.get(token).getCardsInHand().get(0));
+        token_manager.getTokens().get(token).printString("\n2:");
+        token_manager.getTokens().get(token).showCard(token_to_player.get(token).getCardsInHand().get(1));
+        token_manager.getTokens().get(token).printString("\n3:");
+        token_manager.getTokens().get(token).showCard(token_to_player.get(token).getCardsInHand().get(2));
+    }
+
+    public void showCardsInCenter(String token) throws RemoteException{
+        token_manager.getTokens().get(token).printString("\nCarte oro: ");
+        int i = 1;
+        for(PlayCard c : controller.getGame().getCars_in_center().getGold_list()){
+            token_manager.getTokens().get(token).printString(String.valueOf(i));
+            token_manager.getTokens().get(token).showCard(c);
+            i++;
+        }
+        token_manager.getTokens().get(token).printString("\nCarte risorsa: ");
+        for(PlayCard c : controller.getGame().getCars_in_center().getResource_list()){
+            token_manager.getTokens().get(token).printString(String.valueOf(i));
+            token_manager.getTokens().get(token).showCard(c);
+            i++;
+        }
+    }
+
+    public void peachFromCardsInCenter(String token, int index) throws RemoteException{
+        controller.playerPeachFromCardsInCenter(token_to_player.get(token), index);
+    }
 
 }
 

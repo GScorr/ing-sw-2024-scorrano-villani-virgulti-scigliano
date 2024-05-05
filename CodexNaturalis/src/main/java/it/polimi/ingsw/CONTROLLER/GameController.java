@@ -172,13 +172,14 @@ public class GameController implements GameSubject, Serializable {
             return false;
         }
     }
-    public boolean insertCard(Player player, PlayCard card, int x, int y, int index, boolean flipped){
+    /*public boolean insertCard(Player player, PlayCard card, int x, int y, int index, boolean flipped) throws ControllerException{
         if (field_controller.get(player).checkPlacing(card, x, y)){
             player.placeCard(index, flipped, x, y);
+            nextStatePlayer();
             return true;
         }
         return false;
-    }
+    }*/
     public void playerChooseGoal(Player p, int i) {
         if(i< 0 || i > 1){
             throw new ControllerException(30, "Index Goal OUTBOUND, 0 <= index <= 1");
@@ -272,7 +273,7 @@ public class GameController implements GameSubject, Serializable {
 
     }
 
-    public void statePlaceCard(Player player, int index, int x, int y){ //cambiare nome al metodo
+    public void statePlaceCard(Player player, int index, int x, int y) throws ControllerException{ //cambiare nome al metodo
 
         if(player.actual_state.getNameState().compareTo("PLACE_CARD") != 0){
             throw new ControllerException(10, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
@@ -318,7 +319,7 @@ public class GameController implements GameSubject, Serializable {
         }
     }
 
-    private void placeCard(Player player, int index, int x, int y){
+    private void placeCard(Player player, int index, int x, int y) throws ControllerException{
         boolean flipped = player.getCardsInHand().get(index).flipped;
 
             GameFieldController field_controller_player = field_controller.get(player);
