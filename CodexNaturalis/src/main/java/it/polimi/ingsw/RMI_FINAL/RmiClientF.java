@@ -46,28 +46,65 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void manageGame() throws RemoteException, InterruptedException {
-        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
-            System.out.println("\nAspetta il tuo turno ");
-            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
-                buffering();
+        while(!rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("END_GAME")) {
+            if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+                System.out.println("\nAspetta il tuo turno ");
+                while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
+                    buffering();
+                }
+            }
+            if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+                rmi_controller.showPlayerCards(token);
+                selectAndInsertCard();
+            }
+            if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
+                drawCard();
+            }
+            System.out.println("\nFine turno!");
+        }
+    }
+
+    public void printString(String s) throws RemoteException{
+        System.out.println(s);
+    }
+
+    private void drawCard() throws RemoteException {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n Pesca una carta, i mazzi disponibili sono: ");
+        if(rmi_controller.getController().getGame().getGold_deck().getNumber()>0){
+            System.out.println("1. Mazzo carte Oro");
+        }
+        if (rmi_controller.getController().getGame().getResources_deck().getNumber()>0){
+            System.out.println("2. Mazzo carte Risorsa");
+        }
+        System.out.println("3. Carte al centro");
+        System.out.println("Inserisci 1, 2, o 3, per visualizzare carte al centro: ");
+        String numstring = scan.nextLine();
+        int num = Integer.parseInt(numstring);
+        boolean done = false;
+        while(!done){
+            if(num==1){
+                done = true;
+                rmi_controller.peachFromGoldDeck(token);
+            } else if (num==2) {
+                done = true;
+                rmi_controller.peachFromResourceDeck(token);
+            } else if (num==3) {
+                done=true;
+                showCardsInCenter();
+                System.out.println("Scegli indice carta da pescare: ");
+                String choicestr = scan.nextLine();
+                int index = Integer.parseInt(choicestr);
+                rmi_controller.peachFromCardsInCenter(token, index-1);
+            } else{
+                System.out.println("\n Inserimento errato!");
             }
         }
-        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
-            System.out.println("\nLe tue carte: ");
-            System.out.println("\n1:");
-            rmi_controller.showCard(rmi_controller.getTtoP().get(token).getCardsInHand().get(0), token);
-            System.out.println("\n2:");
-            rmi_controller.showCard(rmi_controller.getTtoP().get(token).getCardsInHand().get(1), token);
-            System.out.println("\n3:");
-            rmi_controller.showCard(rmi_controller.getTtoP().get(token).getCardsInHand().get(2), token);
-            selectAndInsertCard();;
-        }
-        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
-            System.out.println("\n Pesca una carta: ");
-            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
-                //
-            }
-        }
+    }
+
+    private void showCardsInCenter() throws RemoteException {
+        rmi_controller.showCardsInCenter(token);
+        //rmi_controller.showCardsInCenter(rmi_controller.getController().getGame().getCars_in_center().getGold_list(),token);
     }
 
     private void selectAndInsertCard() throws RemoteException {
@@ -78,9 +115,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             String choicestring = scan.nextLine();
             int choice = Integer.parseInt(choicestring);
             if(choice>=1 && choice<=3){
-                done = true;
-                boolean udone = false;
-                while(!udone) {
                     System.out.println("\nScegli orientamento (B,F): ");
                     String flip = scan.nextLine();
                     if(flip.equals("B") || flip.equals("F")){
@@ -88,25 +122,26 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                         if(flip.equals("B")){
                             flipped = true;
                         }
-                        udone = true;
-                        boolean sdone = false;
-                        while(!sdone){
                             System.out.println("\nInserisci coordinate x e y di inserimento carta: ");
                             int x = scan.nextInt();
                             int y = scan.nextInt();
+                            scan.nextLine();
                             if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                                System.out.println("scelta carta in position " + (choice-1) + "x è " + x + "y è " + y);
-                                sdone = rmi_controller.insertCard(token,choice-1, x, y, flipped);
+                                try {
+                                    rmi_controller.insertCard(token, choice - 1, x, y, flipped);
+                                    done = true;
+                                }
+                                catch (ControllerException e){
+                                    e.printStackTrace();
+                                }
                             }
                             else{
                                 System.out.println("\nInserimento sbagliato!");
                             }
-                        }
                     }
                     else{
                         System.out.println("\nInserimento sbagliato!");
                     }
-                }
             }
             else{
                 System.out.println("\nInserimento sbagliato!");
