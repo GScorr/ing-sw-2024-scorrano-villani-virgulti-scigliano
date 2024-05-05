@@ -56,7 +56,7 @@ public class RmiServerF implements VirtualServerF {
     public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws RemoteException {
         int port = getAvailablePort();
         RmiController gameServer = new RmiController(name,num_player,port);
-        gameServer.addPlayer(p_token,player_name, client);
+        gameServer.addPlayer(p_token,player_name, client,true);
         VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);
@@ -70,7 +70,7 @@ public class RmiServerF implements VirtualServerF {
 
     //check if the id is valid, if not I send back a report error, otherwise i insert the player in the given game
     @Override
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws RemoteException {rmi_controllers.get(game_id).addPlayer(p_token,name, client);return true;}
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws RemoteException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
 
     @Override
     public List<VirtualViewF> getListClient() throws RemoteException {return clients;}
