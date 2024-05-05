@@ -124,9 +124,11 @@ public class RmiServerF implements VirtualServerF {
 
     //todo
     @Override
-    public void insertCard(String p_token, PlayCard card, int pos_x, int pos_y, int index) throws RemoteException, InterruptedException {
+    public boolean insertCard(String p_token, PlayCard card, int pos_x, int pos_y) throws RemoteException, InterruptedException {
 
-        System.out.println("\n [Insert request received] \n");
+        //System.out.println("\n [Insert request received] \n");
+        Integer idRequest = IndexRequestManagerF.getNextIndex();
+        getRmiController(p_token).addtoQueue("insertCard", idRequest, new Wrapper(p_token, card, pos_x, pos_y));
         //todo cambia gestione flipped
         //token_to_game.get(p_token).statePlaceCard(token_to_player.get(p_token), index, true, pos_x, pos_y );
 
@@ -138,6 +140,7 @@ public class RmiServerF implements VirtualServerF {
         }
         //todo come gestire il broadcast per non far intasare il client
         broadcastUpdateThread();
+        return (boolean) waitAnswer(p_token,idRequest);
     }
 
     //return 0 if the name is free, 1 if the name is already used by an active player, 2 if the player is coming back
@@ -272,7 +275,6 @@ public class RmiServerF implements VirtualServerF {
             }
         }).start();
     }
-
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
         VirtualServerF server = new RmiServerF();

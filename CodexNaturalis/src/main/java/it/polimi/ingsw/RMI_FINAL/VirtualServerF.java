@@ -21,7 +21,7 @@ public interface VirtualServerF extends Remote {
     public boolean addPlayer(Integer game_id, String token, String name) throws RemoteException;
     public List<VirtualViewF> getListClient() throws RemoteException;
     public List<RmiController> getFreeGames() throws RemoteException;
-    public void insertCard(String p_token, PlayCard card, int x, int y, int index) throws RemoteException, InterruptedException;
+    public boolean insertCard(String p_token, PlayCard card, int x, int y) throws RemoteException, InterruptedException;
     public String checkName(String name) throws RemoteException;
     public void chooseGoal(String p_token, int goal_index) throws RemoteException;
     public void selectStartingCard(String token, boolean flipped) throws RemoteException;

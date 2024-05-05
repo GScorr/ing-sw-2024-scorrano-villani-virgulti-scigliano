@@ -49,6 +49,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void manageGame() throws RemoteException, InterruptedException {
+        Scanner scan = new Scanner(System.in);
         if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
             System.out.println("\nAspetta il tuo turno ");
             while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
@@ -57,9 +58,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
         if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
             System.out.println("\nInserisci la tua carta: ");
+            System.out.println("\nCoordinata X: ");
+            int x = scan.nextInt();
+            System.out.println("\nCoordinata Y: ");
+            int y = scan.nextInt();
             while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
                 //buffering();
             }
+
         }
     }
 
