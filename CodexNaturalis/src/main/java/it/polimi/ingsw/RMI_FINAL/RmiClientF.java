@@ -345,69 +345,50 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     public void showField(GameField field) throws RemoteException {
-        for (int i = 0; i < Constants.MATRIXDIM * 2; i++) {
-            // Stampa la riga superiore della cella
-            if (i % 2 == 0) {
-                for (int j = 0; j < Constants.MATRIXDIM * 2; j++) {
-                    if (j % 2 == 0) {
-                        // Stampa i bordi superiori delle carte
-                        int x = i / 2;
-                        int y = (j - 1) / 2;
-                        if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM &&
-                                (field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTUP) ||
-                                        field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.RIGHTUP))) {
-                            System.out.print("--------");
-                        } else {
-                            System.out.print("        "); // Cell space
-                        }
-                    } else {
-                        System.out.print("-");
-                    }
+        boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
+        boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                    nonEmptyRows[i] = true;
+                    nonEmptyCols[j] = true;
+
+
+                    if (i > 0) nonEmptyRows[i - 1] = true;
+                    if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
+                    if (j > 0) nonEmptyCols[j - 1] = true;
+                    if (j < Constants.MATRIXDIM - 1) nonEmptyCols[j + 1] = true;
                 }
-                System.out.println();
-            } else {
-                // Stampa le righe delle carte e dei separatori
-                for (int j = 0; j < Constants.MATRIXDIM * 2; j++) {
-                    if (j % 2 == 0) {
-                        int x = (i - 1) / 2;
-                        int y = j / 2;
-                        if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM) {
-                            // Stampa il bordo sinistro delle carte
-                            if (field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTUP) ||
-                                    field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTDOWN)) {
-                                System.out.print("|");
-                            } else {
-                                System.out.print(" ");
-                            }
-                            // Stampa il contenuto delle carte
-                            System.out.print(" " + field.getCell(x, y, Constants.MATRIXDIM).getShort_value() + " ");
-                        } else {
-                            System.out.print("   "); // Cella vuota
-                        }
-                    } else {
-                        System.out.print("|");
-                    }
-                }
-                System.out.println();
             }
         }
-        // Stampa la riga inferiore della cella
-        for (int j = 0; j < Constants.MATRIXDIM * 2; j++) {
-            if (j % 2 == 0) {
-                int x = Constants.MATRIXDIM - 1;
-                int y = (j - 1) / 2;
-                if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM &&
-                        (field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.LEFTDOWN) ||
-                                field.getCell(x, y, Constants.MATRIXDIM).getEdges().contains(EdgeEnum.RIGHTDOWN))) {
-                    System.out.print("--------");
-                } else {
-                    System.out.print("        "); // Cell space
-                }
-            } else {
-                System.out.print("-");
+
+
+        System.out.print("  ");
+        for (int k = 0; k < Constants.MATRIXDIM; k++) {
+            if (nonEmptyCols[k]) {
+                System.out.print(k + " ");
             }
         }
-        System.out.println();
+        System.out.print("\n");
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            if (nonEmptyRows[i]) {
+                System.out.print(i + " ");
+                for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                    if (nonEmptyCols[j]) {
+                        if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
+                        } else {
+                            System.out.print("  ");
+                        }
+                    }
+                }
+                System.out.print("\n");
+            }
+        }
     }
 
 
