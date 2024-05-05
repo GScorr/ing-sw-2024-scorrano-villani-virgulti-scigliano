@@ -1,6 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.rmi.Remote;
@@ -25,4 +26,6 @@ public interface VirtualRmiController extends Remote {
     public int getPort() throws RemoteException;
     public void showStartingCard(String token) throws RemoteException;
     public void showGameField(String token) throws RemoteException;
+    public void showCard(PlayCard card, String token) throws RemoteException;
+    public boolean insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException;
 }

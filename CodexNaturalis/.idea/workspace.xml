@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="risolto problema connessione a rmi game server controller">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualRmiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualRmiController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,14 +301,6 @@
       <workItem from="1713643582992" duration="1323000" />
       <workItem from="1714209042514" duration="14322000" />
       <workItem from="1714303441979" duration="5961000" />
-    </task>
-    <task id="LOCAL-00046" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1713018696397</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1713018696397</updated>
     </task>
     <task id="LOCAL-00047" summary="Modifica GameController con aggiunta checkPlacing&#10;Eliminazione file package Controller">
       <option name="closed" value="true" />
@@ -681,15 +678,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714814725403</updated>
     </task>
-    <task id="LOCAL-00094" summary="risolto problema connessione a rmi game server controller">
+    <task id="LOCAL-00094" summary="agg">
       <option name="closed" value="true" />
-      <created>1714919183670</created>
+      <created>1714919082134</created>
       <option name="number" value="00094" />
       <option name="presentableId" value="LOCAL-00094" />
       <option name="project" value="LOCAL" />
-      <updated>1714919183671</updated>
+      <updated>1714919082134</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="agg">
+      <option name="closed" value="true" />
+      <created>1714920180074</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1714920180074</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -719,6 +724,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="fine test GameController" />
     <MESSAGE value="Aggiunta stato End Game Player" />
     <MESSAGE value="Aggiunta stato End Game su classe Game" />
     <MESSAGE value="aggiornameno" />
@@ -743,8 +749,7 @@
     <MESSAGE value="modularizzazione cli" />
     <MESSAGE value="modularizzazione clih" />
     <MESSAGE value="agg" />
-    <MESSAGE value="risolto problema connessione a rmi game server controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="risolto problema connessione a rmi game server controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="agg" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
