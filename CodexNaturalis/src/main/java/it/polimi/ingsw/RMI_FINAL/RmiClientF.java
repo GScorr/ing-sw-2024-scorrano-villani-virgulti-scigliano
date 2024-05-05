@@ -58,6 +58,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 //
             }
         }
+        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
+            System.out.println("\n Pesca una carta: ");
+            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
+                //
+            }
+        }
     }
 
     private void gameAccess(String player_name) throws RemoteException, NotBoundException {
