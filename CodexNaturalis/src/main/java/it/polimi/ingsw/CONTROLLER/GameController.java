@@ -57,7 +57,6 @@ public class GameController implements GameSubject, Serializable {
     transient Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
 
 
-
     public GameController(int max_num_player) {
         synchronized(this) {
             if (max_num_player < 2 || max_num_player > 4) {
@@ -76,6 +75,10 @@ public class GameController implements GameSubject, Serializable {
 
             }
         }
+    }
+
+    public HashMap<Player, GameFieldController> getField_controller() {
+        return field_controller;
     }
 
     public Game getGame() {
@@ -169,7 +172,13 @@ public class GameController implements GameSubject, Serializable {
             return false;
         }
     }
-
+    public boolean insertCard(Player player, PlayCard card, int x, int y, int index, boolean flipped){
+        if (field_controller.get(player).checkPlacing(card, x, y)){
+            player.placeCard(index, flipped, x, y);
+            return true;
+        }
+        return false;
+    }
     public void playerChooseGoal(Player p, int i) {
         if(i< 0 || i > 1){
             throw new ControllerException(30, "Index Goal OUTBOUND, 0 <= index <= 1");

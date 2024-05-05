@@ -53,10 +53,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
         if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
-            System.out.println("\nInserisci la tua carta: ");
-            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
-                //
-            }
+            System.out.println("\nLe tue carte: ");
+            System.out.println("\n1:");
+            rmi_controller.showCard(rmi_controller.getTtoP().get(token).getCardsInHand().get(0), token);
+            System.out.println("\n2:");
+            rmi_controller.showCard(rmi_controller.getTtoP().get(token).getCardsInHand().get(1), token);
+            System.out.println("\n3:");
+            rmi_controller.showCard(rmi_controller.getTtoP().get(token).getCardsInHand().get(2), token);
+            selectAndInsertCard();;
         }
         if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
             System.out.println("\n Pesca una carta: ");
@@ -64,6 +68,51 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 //
             }
         }
+    }
+
+    private void selectAndInsertCard() throws RemoteException {
+        Scanner scan = new Scanner(System.in);
+        boolean done = false;
+        while(!done) {
+            System.out.println("\nScegli la tua carta (1,2,3): ");
+            String choicestring = scan.nextLine();
+            int choice = Integer.parseInt(choicestring);
+            if(choice>=1 && choice<=3){
+                done = true;
+                boolean udone = false;
+                while(!udone) {
+                    System.out.println("\nScegli orientamento (B,F): ");
+                    String flip = scan.nextLine();
+                    if(flip.equals("B") || flip.equals("F")){
+                        boolean flipped = false;
+                        if(flip.equals("B")){
+                            flipped = true;
+                        }
+                        udone = true;
+                        boolean sdone = false;
+                        while(!sdone){
+                            System.out.println("\nInserisci coordinate x e y di inserimento carta: ");
+                            int x = scan.nextInt();
+                            int y = scan.nextInt();
+                            if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
+                                System.out.println("scelta carta in position " + (choice-1) + "x è " + x + "y è " + y);
+                                sdone = rmi_controller.insertCard(token,choice-1, x, y, flipped);
+                            }
+                            else{
+                                System.out.println("\nInserimento sbagliato!");
+                            }
+                        }
+                    }
+                    else{
+                        System.out.println("\nInserimento sbagliato!");
+                    }
+                }
+            }
+            else{
+                System.out.println("\nInserimento sbagliato!");
+            }
+        }
+        rmi_controller.showGameField(token);
     }
 
     private void gameAccess(String player_name) throws RemoteException, NotBoundException {
@@ -318,35 +367,38 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
-        System.out.println("BACK SIDE\n--------------------------");
-        System.out.println( " | " + back.getAngleLeftUp().toString().charAt(0)  +   " |               "+ " | " + back.getAngleRightUp().toString().charAt(0) + " |\n " );
+        System.out.println("BACK SIDE\n----------------------------");
+        System.out.println( " | " + back.getAngleLeftUp().toString().substring(0,2)  +   " |               "+ " | " + back.getAngleRightUp().toString().substring(0,2) + " |\n " );
         //System.out.println( " | " + back.getAngleRightUp().toString().charAt(0) + " |\n " );
-        System.out.println( " |       | " + back.getCentral_resource().toString().charAt(0) + back.getCentral_resource2().toString().charAt(0) + back.getCentral_resource3().toString().charAt(0) + " |         |\n " );
-        System.out.println( " | " + back.getAngleLeftDown().toString().charAt(0) +  " |               " + " | " + back.getAngleRightDown().toString().charAt(0) + " |\n " );
+        System.out.println( " |       | " + back.getCentral_resource().toString().substring(0,2) + back.getCentral_resource2().toString().substring(0,2) + back.getCentral_resource3().toString().substring(0,2) + " |         |\n " );
+        System.out.println( " | " + back.getAngleLeftDown().toString().substring(0,2) +  " |               " + " | " + back.getAngleRightDown().toString().substring(0,2) + " |\n " );
         //System.out.println(  );
-        System.out.println("--------------------------\n\n");
+        System.out.println("----------------------------\n\n");
 
-        System.out.println("FRONT SIDE\n--------------------------");
+        System.out.println("FRONT SIDE\n----------------------------");
 
         if(card instanceof ResourceCard) {
-            System.out.println( " | " + card.getPoint() + " | ");
-            if ( card instanceof GoldCard ){
-                System.out.println("  " + ((GoldCard) card).getPointBonus().toString().charAt(0)  + "  " + " | " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
+            System.out.println(" | " + card.getPoint() + " | ");
+            if (card instanceof GoldCard) {
+                System.out.println(" | " + ((GoldCard) card).getPointBonus().toString().substring(0, 2) + " | " + "             | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
+            } else {
+                System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
             }
-        }else{
-            System.out.println( " | " + front.getAngleLeftUp().toString().charAt(0)  + " | " + "             | " + front.getAngleRightUp().toString().charAt(0) + " |\n ");
+        }
+        else {
+            System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
         }
         //System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
-        System.out.println( " |       | " + front.getCentral_resource().toString().charAt(0) + front.getCentral_resource2().toString().charAt(0) + front.getCentral_resource3().toString().charAt(0) + " |         |\n " );
+        System.out.println( " |       | " + front.getCentral_resource().toString().substring(0,2) + front.getCentral_resource2().toString().substring(0,2) + front.getCentral_resource3().toString().substring(0,2) + " |        |\n " );
         //System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
         if ( card instanceof GoldCard ){
-            System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
-            System.out.println("  " + card.getCostraint().toString().charAt(0)  + "  " + " | " + front.getAngleRightDown().toString().charAt(0) + " |\n ");
+            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " | " +
+                "  " + card.getCostraint().toString()  + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n ");
         }else{
-            System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |              " + " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
+            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " |              " + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n " );
         }
         //System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
-        System.out.println("--------------------------\n\n");
+        System.out.println("----------------------------\n\n");
 
     }
 
