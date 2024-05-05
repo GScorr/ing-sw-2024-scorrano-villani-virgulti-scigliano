@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 
 
+import it.polimi.ingsw.RMI_FINAL.RmiController;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class ServerProxy implements VirtualServer {
     public ObjectOutputStream output;
     public ObjectInputStream input;
 
-    public ServerProxy(ObjectOutputStream output,ObjectInputStream input) throws IOException {
+    public ServerProxy(ObjectOutputStream output, ObjectInputStream input) throws IOException {
         this.output = output;
         this.input = input;
     }
@@ -79,7 +80,7 @@ public class ServerProxy implements VirtualServer {
         output.writeObject(DP_message);
         output.flush();
         // Wait for response from server
-        Object response = input.readObject();
+        //Object response = input.readObject();
 
         /*
         if(response.getBool()) {
@@ -91,6 +92,69 @@ public class ServerProxy implements VirtualServer {
          */
 
         return "creazione Player andata a buon fine!\n";
+    }
+
+    public boolean findRmiController(Integer id, String p_token, String player_name) throws IOException, ClassNotFoundException {
+
+        Message DP_message = new FindRMIControllerMessage(id, p_token, player_name);
+        output.writeObject(DP_message);
+        output.flush();
+     /*
+        MyMessageFinal response = (MyMessageFinal) input.readObject();
+
+        if(response.getContent().compareTo("TRUE") == 0){
+            return true;
+        }else{
+            return false;
+        }
+
+      */
+        return true;
+
+    }
+
+    public void receiveHeartbeat(String token) throws IOException {
+        Message DP_message = new receiveHeartbeatMessage(token);
+        output.writeObject(DP_message);
+        output.flush();
+    }
+
+    public void getRmiController(String token) throws IOException {
+        Message DP_message = new getRmiControllerMessage(token);
+        output.writeObject(DP_message);
+        output.flush();
+
+    }
+
+    public void chooseGoal(String token, int intero) throws IOException {
+        Message DP_message = new chooseGoalMessage(token, intero);
+        output.writeObject(DP_message);
+        output.flush();
+
+
+    }
+
+    public void showStartingCard(String token) throws IOException {
+        System.out.println("entro");
+        Message DP_message = new showStartingCardMessage(token);
+        output.writeObject(DP_message);
+        output.flush();
+    }
+
+    public void chooseStartingCard(String token, boolean check) throws IOException {
+        Message DP_message = new chooseStartingCardMessage(token, check);
+        output.writeObject(DP_message);
+        output.flush();
+    }
+
+    public void showGameField(String token) throws IOException, ClassNotFoundException {
+        Message DP_message = new showGameFieldMessage(token);
+        /**
+         * non sono sicuro sia giusto, non ritorna nulla ma prende una stringa token
+         */
+        output.writeObject(DP_message);
+        output.flush();
+
     }
 
     @Override

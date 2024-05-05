@@ -10,11 +10,11 @@ public class Server {
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            System.out.println("Server is running...");
+            System.out.println("Common_Server is running...");
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Client connected: " + clientSocket.getInetAddress());
+                System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
 
                 ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
                 ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());

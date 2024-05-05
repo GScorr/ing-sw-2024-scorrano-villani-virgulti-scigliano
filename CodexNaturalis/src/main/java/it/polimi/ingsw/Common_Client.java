@@ -2,20 +2,19 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.SOCKET_FINAL.Client;
 
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.Socket;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
-public class Client {
+public class Common_Client {
 
-    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
+    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
 
         Scanner scan = new Scanner(System.in);
         System.out.println("Scegli modalità server a cui connettersi : ");
@@ -30,11 +29,19 @@ public class Client {
 
             case(1):
                 String host = "127.0.0.1";
-                int port = Integer.parseInt("4567");
+                int port = 12345;
+
                 Socket serverSocket = new Socket(host, port);
-                InputStreamReader socketRx = new InputStreamReader(serverSocket.getInputStream());
-                OutputStreamWriter socketTx = new OutputStreamWriter(serverSocket.getOutputStream());
-                //new ClientS(new BufferedReader(socketRx), new BufferedWriter(socketTx)).run();
+                try{
+
+                    ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
+                    ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
+
+                    new Client(inputStream, outputStream).run();
+                }catch (IOException e) {
+                    System.out.println("impossibile creare socket input / output");
+                    return;
+                }
                 break;
         }
     }

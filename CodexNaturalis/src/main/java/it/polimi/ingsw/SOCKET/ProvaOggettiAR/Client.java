@@ -22,7 +22,7 @@ public class Client {
 
             // Ricezione della risposta dal server
             boolean response = inputStream.readBoolean();
-            System.out.println("Server response: " + response);
+            System.out.println("Common_Server response: " + response);
 
             socket.close();
         } catch (IOException e) {

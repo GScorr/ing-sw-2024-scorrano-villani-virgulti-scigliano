@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
+import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.RMI.TokenManagerImplement;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
@@ -33,7 +34,7 @@ public class Server {
     public void runServer() throws IOException {
         Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
-            System.out.println("Client connected: " + clientSocket.getInetAddress());
+            System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
 
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -70,7 +71,7 @@ public class Server {
 
 
         ServerSocket listenSocket = new ServerSocket(port);
-        System.out.println("Server is running...");
+        System.out.println("Common_Server is running...");
 
         new Server(listenSocket, new Controller()).runServer();
     }
