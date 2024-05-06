@@ -14,7 +14,6 @@ public class chooseStartingCardMessage implements Message, Serializable {
     public boolean check;
 
 
-    public Controller controller;
     public Server server;
 
     ObjectOutputStream output;
@@ -25,15 +24,15 @@ public class chooseStartingCardMessage implements Message, Serializable {
         this.rmi_server = rmi_server;
     }
 
-
-    public chooseStartingCardMessage(String token, boolean check) {
+    public void setToken(String token) {
         this.token = token;
+    }
+
+    public chooseStartingCardMessage(boolean check) {
         this.check = check;
     }
 
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
+
 
     public void setServer(Server server) {
         this.server = server;

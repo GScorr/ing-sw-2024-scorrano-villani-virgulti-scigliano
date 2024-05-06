@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class LunchMessageMessage implements Message, Serializable {
 
-    public Controller controller;
+
     public Server server;
     public String message, token;
     ObjectOutputStream output;
@@ -21,15 +21,15 @@ public class LunchMessageMessage implements Message, Serializable {
         this.rmi_server = rmi_server;
     }
 
-    public LunchMessageMessage(String message, String token){
+    public LunchMessageMessage(String message){
         this.message = message;
+
+    }
+
+    public void setToken(String token) {
         this.token = token;
     }
 
-    @Override
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
 
     @Override
     public void setServer(Server server) {
@@ -42,15 +42,6 @@ public class LunchMessageMessage implements Message, Serializable {
 
     @Override
     public void action() {
-        if(server.token_map.containsKey(token)){
-            try{
-                controller.lunchMessage(message);
-                this.server.broadcastUpdate(this.controller.getMessage());
-            }catch (ControllerException e){
-                this.server.broadcastUpdate(e.getMessage());
-            }
-        }else{
-            this.server.broadcastUpdate("Non hai le autorizzazioni per procedere, crea il tuo giocatore");
-        }
+
     }
 }

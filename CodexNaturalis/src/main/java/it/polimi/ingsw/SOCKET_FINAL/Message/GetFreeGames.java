@@ -1,14 +1,18 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.util.List;
 
 public class GetFreeGames implements Message, Serializable {
-    public Controller controller;
+
     public Server server;
     public String token;
     ObjectOutputStream output;
@@ -19,13 +23,15 @@ public class GetFreeGames implements Message, Serializable {
     }
 
 
-    public GetFreeGames(String token){
+    public GetFreeGames(){
+
+    }
+
+    public void setToken(String token) {
         this.token = token;
     }
 
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
+
 
     public void setServer(Server server) {
         this.server = server;
@@ -36,17 +42,17 @@ public class GetFreeGames implements Message, Serializable {
     }
 
     @Override
-    public void action() {
-        if(controller == null || server == null){
-            server.broadcastUpdate("Qualcosa è andato storto nell'invio del messaggio, controller == null || server == null");
+    public void action() throws IOException {
+
+        List<SocketRmiControllerObject> games = rmi_server.getFreeGamesSocket();
+
+        if( server == null){
+            System.out.println("error");
             return;
         }
 
-        /*
-        * CODICE DA ESEGUIRE IN CLIENT_HANDLER PER L'ESECUZIONE
-        *
-        *
-        * */
 
+        output.writeObject(games);
+        output.flush();
     }
 }

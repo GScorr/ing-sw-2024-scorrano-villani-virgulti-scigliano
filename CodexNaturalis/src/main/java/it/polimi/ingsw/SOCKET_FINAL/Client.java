@@ -3,6 +3,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.RmiController;
+import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 
@@ -15,15 +16,11 @@ import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
 
-    final ObjectInputStream input;
     final ServerProxy server;
 
     private boolean newClient;
 
-    //genero token
-    public String token ;
     public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException {
-        this.input = input;
         this.server = new ServerProxy(output,input);
     }
 
@@ -61,17 +58,7 @@ public class Client implements VirtualView {
         //TODO : gestione persistenza connessioni
         String player_name = selectNamePlayer();
         String game_name;
-/*
-        //If games does not exists
-        ArrayList free_games = server.getFreeGame(this.token);
-        System.out.println("fino a qui");
-        if(free_games == null || free_games.isEmpty()){
-            newGameNotAvailable(player_name);
-        }else{
 
-        }
-
- */
 
         /**
          * ho cpiato tutte le funzioni e aggiunto tutti i metodi
@@ -102,18 +89,16 @@ public class Client implements VirtualView {
         do{
             System.out.print("\nScegli nome Player > ");
             player_name = scan.nextLine();
-            boolean isnew = server.checkName(player_name);
-            if(isnew){
+            String isnew = server.checkName(player_name);
+            if(isnew.equals("true")){
                 flag = true;
-                this.token = server.getToken(player_name);
                 newClient=true;
-                System.out.println(token);
-            }else if(!isnew){
+                System.out.println("nome valido");
+            }else if(isnew.equals("false")){
                 System.out.println("Giocatore già presente, reinserisci nome!");
             }else{
-                //bisogno di spiegazione codice
-                flag = true;
-                System.out.println(token + "riconnessa");
+                //TODO completa questo codice
+
             }
 
         }while (!flag);
@@ -123,7 +108,8 @@ public class Client implements VirtualView {
 
     public void gameAccess(String player_name) throws IOException, ClassNotFoundException {
         if(newClient) {
-            if (server.getFreeGame(this.token) == null || server.getFreeGame(this.token).isEmpty()) {
+
+            if (server.getFreeGame() == null || server.getFreeGame().isEmpty()) {
                 newGame_notavailable(player_name);
             } else {
                 makeChoice(player_name);
@@ -143,7 +129,8 @@ public class Client implements VirtualView {
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             int numplayers = scan.nextInt();
             try {
-                server.createGame(game_name, numplayers, token, playerName);
+                String result = server.createGame(game_name, numplayers, playerName);
+                System.out.println(result);
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -196,7 +183,8 @@ public class Client implements VirtualView {
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             numplayers = scan.nextInt();
             try {
-                server.createGame(game_name, numplayers, token, player_name);
+                String result  = server.createGame(game_name, numplayers, player_name);
+                System.out.println(result);
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -209,17 +197,20 @@ public class Client implements VirtualView {
         Scanner scan = new Scanner(System.in);
         boolean check;
         System.out.println("\nElenco partite disponibili: ");
-        List<RmiController> partite = server.getFreeGame(this.token);
+         List<SocketRmiControllerObject> games = server.getFreeGame();
 
-        for (RmiController r : partite) {
-            System.out.println(r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
-                    + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player());
+        for (SocketRmiControllerObject r : games) {
+            System.out.println(r.name + " ID:" + r.ID
+                    + " " + r.num_player + "/" + r.max_num_player);
         }
         do {
             System.out.println("\nInserisci ID partita in cui entrare");
             int ID = scan.nextInt();
-            check = server.findRmiController(ID, token, player_name);
+            check = server.findRmiController(ID, player_name);
         }while(!check);
+
+        System.out.println("sei entrato nella partita !");
+
 
     }
 
@@ -298,11 +289,11 @@ public class Client implements VirtualView {
             if (choice.equals("0")) {
                 done=1;
                 System.out.println("scelta ok");
-                server.chooseGoal(token,0);
+                server.chooseGoal(0);
 
             } else if (choice.equals("1")){
                 done=1;
-                server.chooseGoal(token,1);
+                server.chooseGoal(1);
             } else System.out.println("Inserimento errato!");
         }
     }
@@ -332,21 +323,21 @@ public class Client implements VirtualView {
     private void chooseStartingCard() throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\nScegli lato carta iniziale:\n");
-        server.showStartingCard(token);
+        server.showStartingCard();
         int done=0;
         while(done==0){
             System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
             String dec = scan.nextLine();
             if (dec.equals("F")){
                 done=1;
-                server.chooseStartingCard(token,false);
+                server.chooseStartingCard(false);
             } else if (dec.equals("B")){
                 done=1;
-                server.chooseStartingCard(token,true);
+                server.chooseStartingCard(true);
             }
             else System.out.println("Inserimento errato!");
         }
-        server.showGameField(token);
+        server.showGameField();
     }
 
     /**

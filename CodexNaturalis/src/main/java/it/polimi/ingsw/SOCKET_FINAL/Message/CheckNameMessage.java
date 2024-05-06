@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 
 public class CheckNameMessage implements Message, Serializable {
-    public Controller controller;
+
     public Server server;
     VirtualServerF rmi_server;
     ObjectOutputStream output;
@@ -23,9 +23,6 @@ public class CheckNameMessage implements Message, Serializable {
         this.nome = nome;
     }
 
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
 
     public void setServer(Server server) {
         this.server = server;
@@ -40,37 +37,18 @@ public class CheckNameMessage implements Message, Serializable {
         this.rmi_server = rmi_server;
     }
 
-    public String checkNameMessageAction() throws RemoteException {
-        if(rmi_server.checkName(nome).compareTo("true") == 0) {
-          //  return rmi_server.createToken(nome);
-            return "token";
-        }else{
-            return "nome_non_disponibilie";
-        }
+    @Override
+    public void setToken(String token) {
 
+    }
+
+    public String checkNameMessageAction() throws IOException {
+        String isnew = rmi_server.checkName(nome);
+        return isnew;
     }
 
     @Override
     public void action() throws IOException {
-        if(controller == null || server == null){
-            server.broadcastUpdate("Qualcosa è andato storto nell'invio del messaggio, controller == null || server == null");
-            return;
-        }
-
-
-        if(!server.names.contains(nome)){
-            server.names.add(nome);
-            MyMessageFinal response = new MyMessageFinal("TRUE");
-            output.writeObject(response);
-            output.flush();
-        }else{
-            MyMessageFinal response = new MyMessageFinal("FALSE");
-            output.writeObject(response);
-            output.flush();
-        }
-
-
-
-
     }
+
 }

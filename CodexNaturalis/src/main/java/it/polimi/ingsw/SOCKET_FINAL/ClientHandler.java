@@ -2,30 +2,43 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
-import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
+import it.polimi.ingsw.SOCKET_FINAL.Message.*;
+import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 
 import java.io.*;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
-public class ClientHandler implements VirtualView {
+public class ClientHandler  implements VirtualView {
 
     final Server server;
     final ObjectInputStream input;
     final ObjectOutputStream output;
-    final VirtualView view;
+    //final VirtualView view;
 
     public VirtualServerF rmi_server;
+    public String token;
+
+    private VirtualRmiController rmi_controller;
 
 
-
-    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, VirtualServerF rmi_server ) {
+    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output,VirtualServerF rmi_server ) throws RemoteException, NotBoundException {
         this.server = server;
         this.input = input;
         this.output = output;
-        this.view = new ClientProxy(output);
+       // this.view = new ClientProxy(output);
         this.rmi_server = rmi_server;
+
     }
 
     public void runVirtualView() throws IOException, ClassNotFoundException {
@@ -34,10 +47,58 @@ public class ClientHandler implements VirtualView {
                 Message DP_message = null;
                 // Read message type
                 while ((DP_message = (Message) input.readObject()) != null) {
+                    if(token != null){
+                        DP_message.setToken(token);
+                    }
                     DP_message.setServer(server);
                     DP_message.setOutput(output);
                     DP_message.setRmiServer(this.rmi_server);
-                    DP_message.action();
+
+                    if((DP_message instanceof CheckNameMessage)){
+                        String mayToken = ((CheckNameMessage) DP_message).checkNameMessageAction();
+
+                        if(mayToken.equals("true")){
+                            this.token = rmi_server.createTokenSocket(((CheckNameMessage) DP_message).nome);
+
+                        } else if (mayToken.equals("false")) {
+
+                        } else{
+                            this.token = mayToken;
+                        }
+
+
+                        MyMessageFinal message = new MyMessageFinal(mayToken);
+                        output.writeObject(message);
+                        output.flush();
+
+                    }else
+                    if((DP_message instanceof CreateGame)){
+                       int port =  ((CreateGame) DP_message).actionCreateGameMessage();
+                        Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                        this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                        MyMessageFinal message = new MyMessageFinal("Creazione Player e Game andati a buon fine");
+                        output.writeObject(message);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof FindRMIControllerMessage){
+                       if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
+                           System.out.println(token);
+                           int port = rmi_server.getPort(token);
+                           Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                           this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                           MyMessageFinal message = new MyMessageFinal("true");
+                           output.writeObject(message);
+                           output.flush();
+                       }else{
+                           MyMessageFinal message = new MyMessageFinal("false");
+                           output.writeObject(message);
+                           output.flush();
+                       }
+                    }
+                    else{
+                        DP_message.action();
+                    }
+
 
                 }
             } catch (EOFException e) {
@@ -46,6 +107,8 @@ public class ClientHandler implements VirtualView {
             } catch (ClassNotFoundException | IOException e) {
                 // Gestione generica delle eccezioni durante la deserializzazione
                 e.printStackTrace();
+            } catch (NotBoundException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -59,10 +122,7 @@ public class ClientHandler implements VirtualView {
 
     @Override
     public void reportError(String details) {
-        synchronized (this) {
-         //   this.view.reportError(details);
-        }
-    }
 
+    }
 
 }

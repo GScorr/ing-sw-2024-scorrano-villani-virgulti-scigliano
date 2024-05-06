@@ -13,7 +13,7 @@ public class getRmiControllerMessage implements Message, Serializable {
     public String token;
 
 
-    public Controller controller;
+
     public Server server;
 
     public VirtualServerF rmi_server;
@@ -25,10 +25,11 @@ public class getRmiControllerMessage implements Message, Serializable {
 
     ObjectOutputStream output;
 
-
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public void setToken(String token) {
+        this.token = token;
     }
+
+
 
     public void setServer(Server server) {
         this.server = server;
@@ -37,8 +38,8 @@ public class getRmiControllerMessage implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public getRmiControllerMessage(String token) {
-        this.token = token;
+    public getRmiControllerMessage() {
+
     }
 
     @Override

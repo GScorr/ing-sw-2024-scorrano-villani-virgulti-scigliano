@@ -13,7 +13,7 @@ public class chooseGoalMessage implements Message, Serializable {
     public String token;
     public Integer intero;
 
-    public Controller controller;
+
     public Server server;
 
     ObjectOutputStream output;
@@ -24,10 +24,13 @@ public class chooseGoalMessage implements Message, Serializable {
         this.rmi_server = rmi_server;
     }
 
-
-    public void setController(Controller controller) {
-        this.controller = controller;
+    @Override
+    public void setToken(String token) {
+        this.token = token;
     }
+
+
+
 
     public void setServer(Server server) {
         this.server = server;
@@ -36,8 +39,8 @@ public class chooseGoalMessage implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public chooseGoalMessage(String token, Integer intero){
-        this.token = token;
+
+    public chooseGoalMessage( Integer intero){
         this.intero = intero;
     }
 

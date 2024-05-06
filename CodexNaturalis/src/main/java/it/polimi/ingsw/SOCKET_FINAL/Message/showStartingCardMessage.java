@@ -17,21 +17,18 @@ public class showStartingCardMessage implements Message, Serializable {
 
     public String token;
 
-
-    public Controller controller;
     public Server server;
 
     ObjectOutputStream output;
 
     public VirtualServerF rmi_server;
 
-    public void setRmiServer(VirtualServerF rmi_server) {
-        this.rmi_server = rmi_server;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public void setRmiServer(VirtualServerF rmi_server) {
+        this.rmi_server = rmi_server;
     }
 
     public void setServer(Server server) {
@@ -42,8 +39,8 @@ public class showStartingCardMessage implements Message, Serializable {
         this.output = output;
     }
 
-    public showStartingCardMessage(String token) {
-        this.token = token;
+    public showStartingCardMessage() {
+
     }
 
     @Override

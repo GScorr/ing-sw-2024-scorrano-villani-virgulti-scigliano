@@ -11,10 +11,11 @@ public interface Message  {
     static int id = 0;
     void action() throws IOException;
 
-    void setController(Controller controller);
     void setServer(Server server);
     void setOutput(ObjectOutputStream output);
 
     void setRmiServer(VirtualServerF rmi_server);
+
+    void setToken(String token);
 
 }

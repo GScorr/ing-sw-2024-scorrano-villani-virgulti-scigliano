@@ -133,7 +133,14 @@ public class RmiController implements VirtualRmiController, Serializable {
         controller.checkNumPlayer();
         return true;
     }
-
+    public synchronized boolean addPlayerSocket(String p_token, String name, boolean isFirst ) throws RemoteException {
+        if(controller.getFull() )
+            return false;
+        createPlayer(p_token, name, isFirst);
+        token_manager.getSocketTokens().put(p_token, name);
+        controller.checkNumPlayer();
+        return true;
+    }
     @Override
     public void chooseGoal(String token, int index) throws RemoteException {
         controller.playerChooseGoal(token_to_player.get(token), index);
