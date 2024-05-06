@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.RMI_FINAL</OriginalElement>
+  <nodes>
+    <node x="502.0" y="302.5">it.polimi.ingsw.RMI_FINAL.VirtualViewF</node>
+    <node x="284.0" y="726.5">it.polimi.ingsw.RMI_FINAL.TokenManagerImplementF</node>
+    <node x="-127.5" y="862.5">it.polimi.ingsw.RMI_FINAL.RmiServerF</node>
+    <node x="485.0" y="898.5">it.polimi.ingsw.RMI_FINAL.RmiClientF</node>
+    <node x="284.0" y="-13.5">it.polimi.ingsw.RMI_FINAL.TokenManagerF</node>
+    <node x="-127.5" y="122.5">it.polimi.ingsw.RMI_FINAL.VirtualServerF</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.RMI_FINAL.TokenManagerImplementF" target="it.polimi.ingsw.RMI_FINAL.TokenManagerF" relationship="REALIZATION">
+      <point x="0.0" y="-55.5" />
+      <point x="0.0" y="55.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.RMI_FINAL.RmiServerF" target="it.polimi.ingsw.RMI_FINAL.VirtualServerF" relationship="REALIZATION">
+      <point x="0.0" y="-319.5" />
+      <point x="0.0" y="259.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.RMI_FINAL.RmiClientF" target="it.polimi.ingsw.RMI_FINAL.VirtualViewF" relationship="REALIZATION">
+      <point x="0.0" y="-283.5" />
+      <point x="0.0" y="79.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.3004166666666667" showDependencies="false" x="641.8564493758668" y="1085.4590846047154" />
+  <SelectedNodes>
+    <node>it.polimi.ingsw.RMI_FINAL.VirtualViewF</node>
+    <node>it.polimi.ingsw.RMI_FINAL.RmiClientF</node>
+    <node>it.polimi.ingsw.RMI_FINAL.RmiServerF</node>
+    <node>it.polimi.ingsw.RMI_FINAL.TokenManagerImplementF</node>
+    <node>it.polimi.ingsw.RMI_FINAL.TokenManagerF</node>
+    <node>it.polimi.ingsw.RMI_FINAL.VirtualServerF</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

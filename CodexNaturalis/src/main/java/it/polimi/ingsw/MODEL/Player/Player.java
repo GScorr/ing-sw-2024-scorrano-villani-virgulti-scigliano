@@ -272,7 +272,6 @@ public class Player implements PlayerObserver, Serializable {
         playing_card.flipCard(flipped);
         game_field.insertCard(playing_card, x, y);
         removeHandCard(playing_card, index);
-
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;

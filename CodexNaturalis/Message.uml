@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.SOCKET_FINAL.Message</OriginalElement>
+  <nodes>
+    <node x="151.0809145785056" y="577.2348059017002">it.polimi.ingsw.SOCKET_FINAL.Message.chooseStartingCardMessage</node>
+    <node x="524.6297571937022" y="-13.851647441978457">it.polimi.ingsw.SOCKET_FINAL.Message.ResponseObject</node>
+    <node x="206.14914412915732" y="295.85564151270364">it.polimi.ingsw.SOCKET_FINAL.Message.getRmiControllerMessage</node>
+    <node x="557.8880922529545" y="419.49966256775815">it.polimi.ingsw.SOCKET_FINAL.Message.GetTokenMessage</node>
+    <node x="899.8523328824105" y="277.222187828415">it.polimi.ingsw.SOCKET_FINAL.Message.FindRMIControllerMessage</node>
+    <node x="1021.1374432541431" y="473.0028519620318">it.polimi.ingsw.SOCKET_FINAL.Message.showGameFieldMessage</node>
+    <node x="1241.51945268382" y="194.82671491562806">it.polimi.ingsw.SOCKET_FINAL.Message.CheckNameMessage</node>
+    <node x="1386.735248169017" y="516.2072090325834">it.polimi.ingsw.SOCKET_FINAL.Message.CreatePlayerMessage</node>
+    <node x="1582.9813490881174" y="319.7688332011659">it.polimi.ingsw.SOCKET_FINAL.Message.showStartingCardMessage</node>
+    <node x="1772.1549711378675" y="579.9147427692576">it.polimi.ingsw.SOCKET_FINAL.Message.receiveHeartbeatMessage</node>
+    <node x="222.0403992570208" y="161.81518207025215">it.polimi.ingsw.SOCKET_FINAL.Message.MyMessageFinal</node>
+    <node x="-136.91102647072785" y="381.90303569319605">it.polimi.ingsw.SOCKET_FINAL.Message.Message</node>
+    <node x="1924.339547652456" y="384.7393627866361">it.polimi.ingsw.SOCKET_FINAL.Message.LunchMessageMessage</node>
+    <node x="2151.6206015390653" y="615.6266999131949">it.polimi.ingsw.SOCKET_FINAL.Message.chooseGoalMessage</node>
+    <node x="2266.2242041844456" y="410.2110101582713">it.polimi.ingsw.SOCKET_FINAL.Message.GetFreeGames</node>
+    <node x="2537.4584139078734" y="691.6306321942991">it.polimi.ingsw.SOCKET_FINAL.Message.CreateGame</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.showStartingCardMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="-140.50034908811745" y="1.6679883410120055E-4" />
+      <point x="1455.0" y="387.269" />
+      <point x="1455.0" y="423.0" />
+      <point x="1345.0" y="423.0" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.getRmiControllerMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="102.93185587084268" y="67.50035848729637" />
+      <point x="449.581" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.receiveHeartbeatMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="2.8862132467111223E-5" y="67.50025723074242" />
+      <point x="1912.655" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.CreateGame" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="-140.50041390787328" y="8.996367805700856" />
+      <point x="1345.0" y="768.127" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.CheckNameMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="92.48054731618015" y="67.50028508437194" />
+      <point x="1474.5" y="372.269" />
+      <point x="1455.0" y="372.269" />
+      <point x="1455.0" y="423.0" />
+      <point x="1345.0" y="423.0" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.FindRMIControllerMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="140.49966711758952" y="7.77781217158504" />
+      <point x="1345.0" y="352.5" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.chooseStartingCardMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="8.542149438994784E-5" y="67.5001940982998" />
+      <point x="291.581" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.LunchMessageMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="5.815452347543896" y="67.49963721336385" />
+      <point x="2070.6549999999997" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.CreatePlayerMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="-140.50024816901703" y="-2.0903258337057196E-4" />
+      <point x="1345.0" y="583.707" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.GetTokenMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="-9.225295445958182E-5" y="67.50033743224188" />
+      <point x="698.388" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.chooseGoalMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="3.984609347753576E-4" y="67.50030008680511" />
+      <point x="2292.121" y="768.127" />
+      <point x="1345.0" y="768.127" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.GetFreeGames" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="43.3967958155547" y="67.4999898417287" />
+      <point x="2450.121" y="768.127" />
+      <point x="1345.0" y="768.127" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Message.showGameFieldMessage" target="it.polimi.ingsw.SOCKET_FINAL.Message.Message" relationship="REALIZATION">
+      <point x="140.4995567458568" y="1.48037968187964E-4" />
+      <point x="1345.0" y="540.5029999999999" />
+      <point x="1345.0" y="748.0" />
+      <point x="3.588999999999942" y="748.0" />
+      <point x="2.647072778927395E-5" y="67.49996430680395" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.49831989247311825" showDependencies="false" x="129.89683074848614" y="126.52562373567048" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

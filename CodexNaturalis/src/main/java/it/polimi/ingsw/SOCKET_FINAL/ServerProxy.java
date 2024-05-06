@@ -17,7 +17,7 @@ public class ServerProxy implements VirtualServer {
     public ObjectOutputStream output;
     public ObjectInputStream input;
 
-    public ServerProxy(ObjectOutputStream output,ObjectInputStream input) throws IOException {
+    public ServerProxy(ObjectOutputStream output, ObjectInputStream input) throws IOException {
         this.output = output;
         this.input = input;
     }
