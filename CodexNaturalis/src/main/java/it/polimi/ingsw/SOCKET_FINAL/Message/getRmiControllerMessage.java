@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -14,6 +15,13 @@ public class getRmiControllerMessage implements Message, Serializable {
 
     public Controller controller;
     public Server server;
+
+    public VirtualServerF rmi_server;
+
+    public void setRmiServer(VirtualServerF rmi_server) {
+        this.rmi_server = rmi_server;
+    }
+
 
     ObjectOutputStream output;
 

@@ -83,9 +83,12 @@ public class Client implements VirtualView {
         gameAccess(player_name);
         startSendingHeartbeats();
         waitFullGame();
+        /*
         chooseGoalState();
         chooseStartingCardState();
         manageGame();
+
+         */
 
     }
 
@@ -226,6 +229,7 @@ public class Client implements VirtualView {
 
     private void waitFullGame() throws IOException, InterruptedException {
         System.out.println("sono nel waitFullGame");
+        buffering();
         /**
          * da fixare
          */

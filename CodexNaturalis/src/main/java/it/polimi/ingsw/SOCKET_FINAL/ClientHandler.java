@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
 
@@ -10,20 +11,21 @@ import java.io.*;
 
 public class ClientHandler implements VirtualView {
 
-    final Controller controller;
     final Server server;
     final ObjectInputStream input;
     final ObjectOutputStream output;
     final VirtualView view;
 
+    public VirtualServerF rmi_server;
 
 
-    public ClientHandler(Controller controller, Server server, ObjectInputStream input, ObjectOutputStream output) {
-        this.controller = controller;
+
+    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, VirtualServerF rmi_server ) {
         this.server = server;
         this.input = input;
         this.output = output;
         this.view = new ClientProxy(output);
+        this.rmi_server = rmi_server;
     }
 
     public void runVirtualView() throws IOException, ClassNotFoundException {
@@ -32,10 +34,11 @@ public class ClientHandler implements VirtualView {
                 Message DP_message = null;
                 // Read message type
                 while ((DP_message = (Message) input.readObject()) != null) {
-                    DP_message.setController(controller);
                     DP_message.setServer(server);
                     DP_message.setOutput(output);
+                    DP_message.setRmiServer(this.rmi_server);
                     DP_message.action();
+
                 }
             } catch (EOFException e) {
                 // EOFException viene sollevata quando si raggiunge la fine del flusso di input

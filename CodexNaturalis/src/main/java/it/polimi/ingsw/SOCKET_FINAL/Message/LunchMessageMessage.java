@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -14,6 +15,12 @@ public class LunchMessageMessage implements Message, Serializable {
     public Server server;
     public String message, token;
     ObjectOutputStream output;
+    public VirtualServerF rmi_server;
+
+    public void setRmiServer(VirtualServerF rmi_server) {
+        this.rmi_server = rmi_server;
+    }
+
     public LunchMessageMessage(String message, String token){
         this.message = message;
         this.token = token;
