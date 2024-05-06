@@ -3,13 +3,14 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 
 import it.polimi.ingsw.RMI_FINAL.RmiController;
+import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class ServerProxy implements VirtualServer {
@@ -23,132 +24,97 @@ public class ServerProxy implements VirtualServer {
     }
 
 
-    public void inserisciGiocatore(String nome, String token) throws IOException {
-        CreatePlayerMessage DP_message = new CreatePlayerMessage(nome,token);
+    public void inserisciGiocatore(String nome) throws IOException {
+        CreatePlayerMessage DP_message = new CreatePlayerMessage(nome);
         output.writeObject(DP_message);
         output.flush();
     }
-    public void lunchMessage(String message, String token) throws IOException {
-        Message DP_message = new LunchMessageMessage(message,token);
+    public void lunchMessage(String message) throws IOException {
+        Message DP_message = new LunchMessageMessage(message);
         output.writeObject(DP_message);
         output.flush();
 
 
     }
 
-    public boolean checkName(String name) throws IOException, ClassNotFoundException {
+    public String checkName(String name) throws IOException, ClassNotFoundException {
         Message DP_message = new CheckNameMessage(name);
         output.writeObject(DP_message);
         output.flush();
 
         MyMessageFinal response = (MyMessageFinal) input.readObject();
-
-        if(response.getContent().compareTo("TRUE") == 0){
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-
-    public String getToken(String name) throws IOException, ClassNotFoundException {
-        Message DP_message = new GetTokenMessage(name);
-        output.writeObject(DP_message);
-        output.flush();
-
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-
         return response.getContent();
+
     }
 
-    public ArrayList getFreeGame(String token) throws IOException, ClassNotFoundException {
-        Message DP_message = new GetFreeGames(token);
+
+    public List<SocketRmiControllerObject> getFreeGame() throws IOException, ClassNotFoundException {
+        Message DP_message = new GetFreeGames();
         output.writeObject(DP_message);
         output.flush();
 
-        // Wait for response from server
-        //Object response = input.readObject();
-
-        /*
-         * return response.getList()
-         * */
-        return null;
+        List<SocketRmiControllerObject> games  = (List<SocketRmiControllerObject>) input.readObject();
+        return games;
     }
 
-    public  String createGame(String game_name, int num_players, String token, String nome  ) throws IOException, ClassNotFoundException, SocketException {
-        Message DP_message = new CreateGame(game_name,num_players,token,nome);
+    public  String createGame(String game_name, int num_players, String nome  ) throws IOException, ClassNotFoundException, SocketException {
+        Message DP_message = new CreateGame(game_name,num_players,nome);
         output.writeObject(DP_message);
         output.flush();
-        // Wait for response from server
-        //Object response = input.readObject();
 
-        /*
-        if(response.getBool()) {
-            return "creazione Player andata a buon fine!\n";
-        }else{
-            throw new SocketException(0, "Game non creato");
-        }
+        MyMessageFinal response = (MyMessageFinal) input.readObject();
+        return response.getContent();
 
-         */
-
-        return "creazione Player andata a buon fine!\n";
     }
 
-    public boolean findRmiController(Integer id, String p_token, String player_name) throws IOException, ClassNotFoundException {
+    public boolean findRmiController(Integer id, String player_name) throws IOException, ClassNotFoundException {
 
-        Message DP_message = new FindRMIControllerMessage(id, p_token, player_name);
+        Message DP_message = new FindRMIControllerMessage(id, player_name);
         output.writeObject(DP_message);
         output.flush();
-     /*
+
         MyMessageFinal response = (MyMessageFinal) input.readObject();
 
-        if(response.getContent().compareTo("TRUE") == 0){
-            return true;
-        }else{
-            return false;
-        }
-
-      */
-        return true;
+        return response.getContent().compareTo("true") == 0;
 
     }
 
-    public void receiveHeartbeat(String token) throws IOException {
-        Message DP_message = new receiveHeartbeatMessage(token);
+    public void receiveHeartbeat() throws IOException {
+        Message DP_message = new receiveHeartbeatMessage();
         output.writeObject(DP_message);
         output.flush();
     }
 
-    public void getRmiController(String token) throws IOException {
-        Message DP_message = new getRmiControllerMessage(token);
+    public void getRmiController() throws IOException {
+        Message DP_message = new getRmiControllerMessage();
         output.writeObject(DP_message);
         output.flush();
 
     }
 
-    public void chooseGoal(String token, int intero) throws IOException {
-        Message DP_message = new chooseGoalMessage(token, intero);
+    public void chooseGoal(int intero) throws IOException {
+        Message DP_message = new chooseGoalMessage( intero);
         output.writeObject(DP_message);
         output.flush();
 
 
     }
 
-    public void showStartingCard(String token) throws IOException {
+    public void showStartingCard() throws IOException {
         System.out.println("entro");
-        Message DP_message = new showStartingCardMessage(token);
+        Message DP_message = new showStartingCardMessage();
         output.writeObject(DP_message);
         output.flush();
     }
 
-    public void chooseStartingCard(String token, boolean check) throws IOException {
-        Message DP_message = new chooseStartingCardMessage(token, check);
+    public void chooseStartingCard(boolean check) throws IOException {
+        Message DP_message = new chooseStartingCardMessage(check);
         output.writeObject(DP_message);
         output.flush();
     }
 
-    public void showGameField(String token) throws IOException, ClassNotFoundException {
-        Message DP_message = new showGameFieldMessage(token);
+    public void showGameField() throws IOException, ClassNotFoundException {
+        Message DP_message = new showGameFieldMessage();
         /**
          * non sono sicuro sia giusto, non ritorna nulla ma prende una stringa token
          */

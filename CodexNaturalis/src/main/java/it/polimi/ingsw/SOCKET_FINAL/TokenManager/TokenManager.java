@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class TokenManager implements Serializable {
+ public class TokenManager implements Serializable {
 
     public TokenManager() {
     }
