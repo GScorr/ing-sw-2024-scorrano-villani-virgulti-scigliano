@@ -30,6 +30,7 @@ public class ClientHandler  implements VirtualView {
     public String token;
 
     private VirtualRmiController rmi_controller;
+    public boolean client_is_connected = true;
 
 
     public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output,VirtualServerF rmi_server ) throws RemoteException, NotBoundException {
@@ -39,6 +40,19 @@ public class ClientHandler  implements VirtualView {
        // this.view = new ClientProxy(output);
         this.rmi_server = rmi_server;
 
+    }
+
+    private void startSendingHeartbeats() {
+        new Thread(() -> {
+            while (client_is_connected) {
+                try {
+                    Thread.sleep(50);
+                    rmi_server.receiveHeartbeat(token);
+                } catch (RemoteException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     public void runVirtualView() throws IOException, ClassNotFoundException {
@@ -67,6 +81,11 @@ public class ClientHandler  implements VirtualView {
 
                         } else{
                             this.token = mayToken;
+                            int port = rmi_server.getPort(token);
+                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                            this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                            client_is_connected = true;
+                            startSendingHeartbeats();
                         }
 
 
@@ -82,6 +101,7 @@ public class ClientHandler  implements VirtualView {
                         MyMessageFinal message = new MyMessageFinal("Creazione Player e Game andati a buon fine");
                         output.writeObject(message);
                         output.flush();
+                        startSendingHeartbeats();
                     }
                     else if(DP_message instanceof FindRMIControllerMessage){
                        if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
@@ -92,6 +112,7 @@ public class ClientHandler  implements VirtualView {
                            MyMessageFinal message = new MyMessageFinal("true");
                            output.writeObject(message);
                            output.flush();
+                           startSendingHeartbeats();
                        }else{
                            MyMessageFinal message = new MyMessageFinal("false");
                            output.writeObject(message);
@@ -105,8 +126,7 @@ public class ClientHandler  implements VirtualView {
 
                 }
             } catch (EOFException e) {
-                // EOFException viene sollevata quando si raggiunge la fine del flusso di input
-                //System.out.println("Fine del flusso di input");
+                client_is_connected = false;
             } catch (ClassNotFoundException | IOException e) {
                 // Gestione generica delle eccezioni durante la deserializzazione
                 e.printStackTrace();
