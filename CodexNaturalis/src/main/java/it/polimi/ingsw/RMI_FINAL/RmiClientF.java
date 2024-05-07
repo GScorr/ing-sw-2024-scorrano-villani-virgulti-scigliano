@@ -60,8 +60,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
                 drawCard();
             }
+            rmi_controller.getPoints(token);
             System.out.println("\nFine turno!");
         }
+        System.out.println("Fine game!\nClassifica finale:\n");
+        rmi_controller.getFinalStandings(token);
     }
 
     public void printString(String s) throws RemoteException{

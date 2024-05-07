@@ -221,6 +221,18 @@ public class RmiController implements VirtualRmiController, Serializable {
         controller.playerPeachFromCardsInCenter(token_to_player.get(token), index);
     }
 
+    public void getPoints(String token) throws RemoteException{
+        token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
+    }
+
+
+    public void getFinalStandings(String token) throws RemoteException{
+            int i = 1;
+            for(Player p : controller.getPlayer_list()){
+                token_manager.getTokens().get(token).printString(i + "- " + p.getName());
+                i++;
+            }
+    }
 }
 
 
