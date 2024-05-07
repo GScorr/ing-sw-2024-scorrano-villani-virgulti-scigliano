@@ -153,15 +153,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         rmi_controller.showGameField(token);
     }
 
-    private void gameAccess(String player_name) throws RemoteException, NotBoundException {
+    private void gameAccess(String player_name) throws RemoteException, NotBoundException, InterruptedException {
         if(newClient) {
-            if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
-                newGame_notavailable(player_name);
-            } else {
                 makeChoice(player_name);
+                System.out.print("creazione Player andata a buon fine!\n");}
+            else {
+                manageGame();
             }
-            System.out.print("creazione Player andata a buon fine!\n");
-        }
     }
 
     private String selectNamePlayer() throws RemoteException, NotBoundException {
@@ -295,6 +293,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void makeChoice(String player_name) throws RemoteException, NotBoundException {
+        if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
+            newGame_notavailable(player_name);
+            return;
+        }
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
