@@ -38,10 +38,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private void runCli() throws RemoteException, InterruptedException, NotBoundException {
         String player_name = selectNamePlayer();
         gameAccess(player_name);
-        startSendingHeartbeats();
-        waitFullGame();
-        chooseGoalState();
-        chooseStartingCardState();
+        if(newClient) {
+            startSendingHeartbeats();
+            waitFullGame();
+            chooseGoalState();
+            chooseStartingCardState();
+        }
         manageGame();
     }
 
@@ -54,6 +56,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 }
             }
             if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
+                System.out.println("TI STO PER MOSTRARE LE CARTE");
                 rmi_controller.showPlayerCards(token);
                 selectAndInsertCard();
             }
@@ -157,9 +160,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         if(newClient) {
                 makeChoice(player_name);
                 System.out.print("creazione Player andata a buon fine!\n");}
-            else {
-                manageGame();
-            }
     }
 
     private String selectNamePlayer() throws RemoteException, NotBoundException {
@@ -171,7 +171,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         do{
             System.out.print("\nScegli nome Player > ");
             player_name = scan.nextLine();
-            isnew = server.checkName(player_name);
+            isnew = server.checkName(player_name,this);
             if(isnew.equals("true")) {
                 flag = true;
                 newClient = true;
@@ -188,6 +188,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
                 flag=true;
                 newClient = false;
+                startSendingHeartbeats();
                 System.out.println(player_name + " riconnesso!");
             }
         } while(!flag);
@@ -234,7 +235,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     Thread.sleep(50);
                     server.receiveHeartbeat(token);
                 } catch (RemoteException | InterruptedException e) {
-                    e.printStackTrace();
+                    System.err.println("impossible to start heartbeats");
                 }
             }
         }).start();

@@ -53,7 +53,7 @@ public class CheckNameMessage implements Message, Serializable {
 
 
     public String checkNameMessageAction() throws IOException {
-        String isnew = rmi_server.checkName(nome);
+        String isnew = rmi_server.checkName(nome,null);
         return isnew;
     }
 
