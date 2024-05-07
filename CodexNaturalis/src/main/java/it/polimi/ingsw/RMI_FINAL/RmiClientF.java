@@ -461,7 +461,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
 
 
-        System.out.print("  ");
+        System.out.print("   ");
         for (int k = 0; k < Constants.MATRIXDIM; k++) {
             if (nonEmptyCols[k]) {
                 System.out.print(k + " ");
@@ -478,7 +478,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                         if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
                             System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
                         } else {
-                            System.out.print("  ");
+                            System.out.print("   ");
                         }
                     }
                 }

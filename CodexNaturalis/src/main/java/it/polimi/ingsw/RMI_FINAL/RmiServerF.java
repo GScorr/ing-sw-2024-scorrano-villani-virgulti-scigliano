@@ -208,7 +208,7 @@ public class RmiServerF implements VirtualServerF {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
                 if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                 token_to_rmi.get(key).getTtoP().get(key).disconnect();
-                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " frate me so disconnected");
+                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
             }
         }
     }
