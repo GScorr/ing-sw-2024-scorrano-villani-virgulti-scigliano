@@ -60,8 +60,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
                 drawCard();
             }
+            rmi_controller.getPoints(token);
             System.out.println("\nFine turno!");
         }
+        System.out.println("Fine game!\nClassifica finale:\n");
+        rmi_controller.getFinalStandings(token);
     }
 
     public void printString(String s) throws RemoteException{
@@ -458,7 +461,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
 
 
-        System.out.print("  ");
+        System.out.print("   ");
         for (int k = 0; k < Constants.MATRIXDIM; k++) {
             if (nonEmptyCols[k]) {
                 System.out.print(k + " ");
@@ -475,7 +478,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                         if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
                             System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
                         } else {
-                            System.out.print("  ");
+                            System.out.print("   ");
                         }
                     }
                 }
