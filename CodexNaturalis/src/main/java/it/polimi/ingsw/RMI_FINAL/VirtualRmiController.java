@@ -42,4 +42,8 @@ public interface VirtualRmiController extends Remote {
 
 
     public void peachFromCardsInCenter(String token, int index) throws RemoteException;
+
+    public void getPoints(String token) throws RemoteException;
+
+    public void getFinalStandings(String token) throws RemoteException;
 }
