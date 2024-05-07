@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
@@ -17,6 +18,14 @@ public class CheckNameMessage implements Message, Serializable {
 
 
     public String nome;
+    public VirtualRmiController rmi_controller;
+
+
+    @Override
+    public void setRmiController(VirtualRmiController rmi_controller) {
+        this.rmi_controller = rmi_controller;
+    }
+
 
     boolean check;
     public CheckNameMessage(String nome){
@@ -41,6 +50,7 @@ public class CheckNameMessage implements Message, Serializable {
     public void setToken(String token) {
 
     }
+
 
     public String checkNameMessageAction() throws IOException {
         String isnew = rmi_server.checkName(nome);

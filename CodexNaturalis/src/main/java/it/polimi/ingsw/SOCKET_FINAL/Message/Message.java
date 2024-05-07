@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
@@ -17,5 +18,7 @@ public interface Message  {
     void setRmiServer(VirtualServerF rmi_server);
 
     void setToken(String token);
+
+    void setRmiController(VirtualRmiController rmi_controller);
 
 }

@@ -50,6 +50,9 @@ public class ClientHandler  implements VirtualView {
                     if(token != null){
                         DP_message.setToken(token);
                     }
+                    if(rmi_controller != null){
+                        DP_message.setRmiController(this.rmi_controller);
+                    }
                     DP_message.setServer(server);
                     DP_message.setOutput(output);
                     DP_message.setRmiServer(this.rmi_server);
