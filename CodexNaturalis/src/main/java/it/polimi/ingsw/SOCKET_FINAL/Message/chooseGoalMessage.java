@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -12,16 +13,24 @@ public class chooseGoalMessage implements Message, Serializable {
     public String token;
     public Integer intero;
 
-    public Controller controller;
+
     public Server server;
 
     ObjectOutputStream output;
     boolean check;
+    public VirtualServerF rmi_server;
 
-
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public void setRmiServer(VirtualServerF rmi_server) {
+        this.rmi_server = rmi_server;
     }
+
+    @Override
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
+
 
     public void setServer(Server server) {
         this.server = server;
@@ -30,8 +39,8 @@ public class chooseGoalMessage implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public chooseGoalMessage(String token, Integer intero){
-        this.token = token;
+
+    public chooseGoalMessage( Integer intero){
         this.intero = intero;
     }
 
