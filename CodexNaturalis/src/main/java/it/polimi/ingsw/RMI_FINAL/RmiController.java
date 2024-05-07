@@ -26,7 +26,8 @@ public class RmiController implements VirtualRmiController, Serializable {
     public RmiController(String name, int numPlayer, int port) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
-        checkDisconnected();
+        //checkDisconnected();
+        playDisconnected();
         this.port = port;
     }
 
@@ -147,7 +148,7 @@ public class RmiController implements VirtualRmiController, Serializable {
     }
 
     @Override
-    public void chooseStartingCard(String token, boolean flip) throws RemoteException {
+    public synchronized void chooseStartingCard(String token, boolean flip) throws RemoteException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
     }
     public void addtoQueue(String function, Integer idRequest, Wrapper wrap) throws RemoteException{
@@ -167,15 +168,13 @@ public class RmiController implements VirtualRmiController, Serializable {
 
     @Override
     public void showStartingCard(String token) throws RemoteException {
-        System.out.println("COOOOOOO");
         PlayCard card = token_to_player.get(token).getStartingCard();
-        System.out.println("CARTA" + card);
         token_manager.getTokens().get(token).showCard(card);
     }
     public void showCard(PlayCard card, String token) throws RemoteException{
         token_manager.getTokens().get(token).showCard(card);
     }
-    public void insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException, ControllerException {
+    public synchronized void insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException, ControllerException {
         PlayCard card = token_to_player.get(token).getCardsInHand().get(index);
         token_to_player.get(token).getCardsInHand().get(index).flipCard(flipped);
         controller.statePlaceCard(token_to_player.get(token), index, x, y);
@@ -190,11 +189,11 @@ public class RmiController implements VirtualRmiController, Serializable {
         */
     }
 
-    public void peachFromGoldDeck(String token) throws RemoteException{
+    public synchronized void peachFromGoldDeck(String token) throws RemoteException{
         controller.playerPeachCardFromGoldDeck(token_to_player.get(token));
     }
 
-    public void peachFromResourceDeck(String token) throws RemoteException{
+    public synchronized void peachFromResourceDeck(String token) throws RemoteException{
         controller.playerPeachCardFromResourcesDeck(token_to_player.get(token));
     }
 
@@ -208,7 +207,7 @@ public class RmiController implements VirtualRmiController, Serializable {
         token_manager.getTokens().get(token).showCard(token_to_player.get(token).getCardsInHand().get(2));
     }
 
-    public void showCardsInCenter(String token) throws RemoteException{
+    public synchronized void showCardsInCenter(String token) throws RemoteException{
         token_manager.getTokens().get(token).printString("\nCarte oro: ");
         int i = 1;
         for(PlayCard c : controller.getGame().getCars_in_center().getGold_list()){
@@ -224,7 +223,7 @@ public class RmiController implements VirtualRmiController, Serializable {
         }
     }
 
-    public void peachFromCardsInCenter(String token, int index) throws RemoteException{
+    public synchronized void peachFromCardsInCenter(String token, int index) throws RemoteException{
         controller.playerPeachFromCardsInCenter(token_to_player.get(token), index);
     }
 
@@ -232,6 +231,42 @@ public class RmiController implements VirtualRmiController, Serializable {
         token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
     }
 
+
+    private  void playDisconnected() throws RemoteException {
+        new Thread(() -> {
+            Player tmp;
+            while(true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                synchronized (this) {
+                    for (String s : token_to_player.keySet()) {
+                        tmp = token_to_player.get(s);
+                        if (tmp.isDisconnected()) {
+                            if ( tmp.getActual_state().getNameState().equals("CHOOSE_GOAL") && tmp.getGoalCard()==null ) {
+                                try {
+                                    chooseGoal(s, 1);
+                                } catch (RemoteException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            if ( tmp.getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD") && !tmp.isFirstPlaced()) {
+                                try {
+                                    chooseStartingCard(s, true);
+                                } catch (RemoteException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            if (tmp.getActual_state().getNameState().equals("PLACE_CARD")) controller.nextStatePlayer();
+                            if (tmp.getActual_state().getNameState().equals("DRAW_CARD")) controller.nextStatePlayer();
+                        }
+                    }
+                }
+                }
+        }).start();
+    }
 
     public void getFinalStandings(String token) throws RemoteException{
             int i = 1;

@@ -180,7 +180,7 @@ public class GameController implements GameSubject, Serializable {
         }
         return false;
     }*/
-    public void playerChooseGoal(Player p, int i) {
+    public synchronized void playerChooseGoal(Player p, int i) {
         if(i< 0 || i > 1){
             throw new ControllerException(30, "Index Goal OUTBOUND, 0 <= index <= 1");
         }
