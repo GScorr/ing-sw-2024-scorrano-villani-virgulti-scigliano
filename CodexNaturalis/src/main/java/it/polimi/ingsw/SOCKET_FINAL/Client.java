@@ -1,6 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.RmiController;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
@@ -70,9 +71,11 @@ public class Client implements VirtualView {
         gameAccess(player_name);
         startSendingHeartbeats();
         waitFullGame();
-        /*
+
         chooseGoalState();
+
         chooseStartingCardState();
+        /*
         manageGame();
 
          */
@@ -218,22 +221,14 @@ public class Client implements VirtualView {
      * manca getTtop, non so in che classe va
      */
 
-    private void waitFullGame() throws IOException, InterruptedException {
-        System.out.println("sono nel waitFullGame");
-        buffering();
-        /**
-         * da fixare
-         */
-        /*
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-            System.out.print("Aspetta il riempimento partita -");
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
+    private void waitFullGame() throws IOException, InterruptedException, ClassNotFoundException {
+        if(server.getPlayerState().equals("NOT_INITIALIZED")){
+            System.out.println("Wait until the game is full");
+            while(server.getPlayerState().equals("NOT_INITIALIZED")){
                 buffering();
             }
-            System.out.println("\nEhi la tua partita è piena!\n");
+            System.out.println("\nYou Game is ready to start");
         }
-
-         */
     }
 
     private void buffering() throws RemoteException, InterruptedException{
@@ -251,50 +246,38 @@ public class Client implements VirtualView {
         System.out.print("-");
     }
 
-    private void chooseGoalState() throws IOException, InterruptedException {
-        chooseGoal();
-        /**
-         * da fixare
-         */
-        /*
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-            if(server.getRmiController(token).getTtoP().get(token).getGoalCard()==null) {
-                chooseGoal();
-                System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
-            }
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-                buffering();
-            }
-        }
-
-         */
+    private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
+       if(server.getPlayerState().equals("CHOOSE_GOAL")){
+           if(server.getGoalCard() == null){
+               chooseGoal();
+               Goal goal = server.getGoalCard();
+               System.out.println("\nHai scelto :" + goal.toString());
+           }
+       }
+       while(server.getPlayerState().equals("CHOOSE_GOAL")){
+           buffering();
+       }
     }
 
     /**
      *manca getTtop
      */
-    private void chooseGoal() throws IOException {
+    private void chooseGoal() throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-            System.out.println("scegli obiettivo tra 0 o 1: ");
-            /**
-             * da fixare
-             */
-            /*
-            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
-                    + "\n 2-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
-             */
+
+            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getListGoalCard().get(0).toString()
+                    + "\n 2-" + server.getListGoalCard().get(1).toString());
+
             String choice = scan.nextLine();
             if (choice.equals("0")) {
                 done=1;
-                System.out.println("scelta ok");
                 server.chooseGoal(0);
-
             } else if (choice.equals("1")){
                 done=1;
                 server.chooseGoal(1);
-            } else System.out.println("Inserimento errato!");
+            } else System.out.println("Index boundaries not respected!");
         }
     }
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 
 
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.RMI_FINAL.RmiController;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
@@ -79,6 +80,48 @@ public class ServerProxy implements VirtualServer {
 
     }
 
+    public String getPlayerState() throws IOException, ClassNotFoundException {
+        Message DP_mesasage = new getPlayerState();
+        output.writeObject(DP_mesasage);
+        output.flush();
+
+        MyMessageFinal response = (MyMessageFinal) input.readObject();
+        return response.getContent();
+    }
+
+    public Goal getGoalCard() throws IOException, ClassNotFoundException {
+        Message DP_mesasage = new getGoalCard();
+        output.writeObject(DP_mesasage);
+        output.flush();
+
+        Goal goal_card = (Goal) input.readObject();
+        return goal_card;
+    }
+
+    public List<Goal> getListGoalCard() throws IOException, ClassNotFoundException {
+        Message DP_mesasage = new getListGoalCard();
+        output.writeObject(DP_mesasage);
+        output.flush();
+
+        List<Goal> list_goal_card = (List<Goal>) input.readObject();
+        return list_goal_card;
+    }
+
+    public void chooseGoal(int index) throws IOException {
+        Message DP_message = new chooseGoalMessage( index);
+        output.writeObject(DP_message);
+        output.flush();
+
+    }
+
+    public void chooseStartingCard(boolean check) throws IOException {
+        Message DP_message = new chooseStartingCardMessage(check);
+        output.writeObject(DP_message);
+        output.flush();
+    }
+
+
+
     public void receiveHeartbeat() throws IOException {
         Message DP_message = new receiveHeartbeatMessage();
         output.writeObject(DP_message);
@@ -92,13 +135,7 @@ public class ServerProxy implements VirtualServer {
 
     }
 
-    public void chooseGoal(int intero) throws IOException {
-        Message DP_message = new chooseGoalMessage( intero);
-        output.writeObject(DP_message);
-        output.flush();
 
-
-    }
 
     public void showStartingCard() throws IOException {
         System.out.println("entro");
@@ -107,11 +144,7 @@ public class ServerProxy implements VirtualServer {
         output.flush();
     }
 
-    public void chooseStartingCard(boolean check) throws IOException {
-        Message DP_message = new chooseStartingCardMessage(check);
-        output.writeObject(DP_message);
-        output.flush();
-    }
+
 
     public void showGameField() throws IOException, ClassNotFoundException {
         Message DP_message = new showGameFieldMessage();
