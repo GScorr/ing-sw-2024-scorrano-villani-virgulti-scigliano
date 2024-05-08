@@ -138,7 +138,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                                     done = true;
                                 }
                                 catch (ControllerException e){
-                                    e.printStackTrace();
+                                    e.getMessage();
                                 }
                             }
                             else{
