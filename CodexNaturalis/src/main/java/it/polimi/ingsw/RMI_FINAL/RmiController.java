@@ -231,6 +231,15 @@ public class RmiController implements VirtualRmiController, Serializable {
         token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
     }
 
+    public void wakeUp(String name, VirtualViewF client){
+        for( String s : token_to_player.keySet()){
+            if(token_to_player.get(s).getName().equals(name) )  {
+                token_to_player.get(s).connect();
+            token_manager.getTokens().remove(s);
+            token_manager.getTokens().put(s, client );
+            }
+        }
+    }
 
     private  void playDisconnected() throws RemoteException {
         new Thread(() -> {

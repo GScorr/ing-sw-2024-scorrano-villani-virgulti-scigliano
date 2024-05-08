@@ -39,7 +39,7 @@ public interface VirtualRmiController extends Remote {
     public void showCardsInCenter(String token) throws RemoteException;
 
 
-
+    public void wakeUp(String s, VirtualViewF client)throws RemoteException;
 
     public void peachFromCardsInCenter(String token, int index) throws RemoteException;
 

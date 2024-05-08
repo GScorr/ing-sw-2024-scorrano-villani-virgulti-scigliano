@@ -118,7 +118,7 @@ public class RmiServerF implements VirtualServerF {
     }
 
         @Override
-    public String checkName(String name) throws RemoteException {
+    public String checkName(String name, VirtualViewF client) throws RemoteException {
 
         for ( Integer i : rmi_controllers.keySet() )
         {
@@ -126,7 +126,7 @@ public class RmiServerF implements VirtualServerF {
             {
                 Player p = rmi_controllers.get(i).getController().getGame().getGet_player_index().get(j);
                 if ( p.getName().equals(name) && p.isDisconnected() ) {
-                    p.connect();
+                    rmi_controllers.get(i).wakeUp(name,client);
                     for ( String s : rmi_controllers.get(i).getTtoP().keySet() )
                     {
                         if ( rmi_controllers.get(i).getTtoP().get(s).equals(p) ){

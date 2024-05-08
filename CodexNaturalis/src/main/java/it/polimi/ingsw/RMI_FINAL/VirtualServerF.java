@@ -25,10 +25,11 @@ public interface VirtualServerF extends Remote {
     public List<VirtualViewF> getListClient() throws RemoteException;
     public List<RmiController> getFreeGames() throws RemoteException;
     public List<SocketRmiControllerObject> getFreeGamesSocket() throws RemoteException;
-    public String checkName(String name) throws RemoteException;
+    public String checkName(String name, VirtualViewF client) throws RemoteException;
     public boolean findRmiController(Integer id, String p_token, String player_name, VirtualViewF client) throws RemoteException;
     public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws RemoteException;
     public RmiController getRmiController(String token) throws RemoteException;
     public void receiveHeartbeat(String token) throws RemoteException;
     int getPort(String token) throws RemoteException;
+
 }

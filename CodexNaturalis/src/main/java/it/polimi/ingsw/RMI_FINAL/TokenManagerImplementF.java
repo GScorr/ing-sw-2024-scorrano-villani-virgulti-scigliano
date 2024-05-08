@@ -32,6 +32,7 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
         return Socket_tokens.containsKey(name) && Socket_tokens.get(token).equals(name);
     }
 
+
     public Map<String, VirtualViewF> getTokens(){
         return this.tokens;
     }
