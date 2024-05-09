@@ -17,7 +17,6 @@ public class Common_Client {
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
 
         Scanner scan = new Scanner(System.in);
-        printLogo();
         int choose=-1;
         do{
             if(choose != -1 ) System.err.println("[INSERT ERROR]");
@@ -28,14 +27,14 @@ public class Common_Client {
                 case(0):
                     Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
                     VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
-
+                    printLogo();
                     new RmiClientF(server).run();
                     break;
 
                 case(1):
                     String host = "127.0.0.1";
                     int port = 12345;
-
+                    printLogo();
                     Socket serverSocket = new Socket(host, port);
                     try{
 
@@ -54,17 +53,6 @@ public class Common_Client {
 
     private static void printLogo() throws IOException {
         System.out.println("\n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
                 "                                 ___           ___           ___           ___           ___                            \n" +
                 "                                /\\  \\         /\\  \\         /\\  \\         /\\  \\         |\\__\\                           \n" +
                 "                               /::\\  \\       /::\\  \\       /::\\  \\       /::\\  \\        |:|  |                          \n" +
@@ -87,16 +75,6 @@ public class Common_Client {
                 "     |::/  /        /:/  /     \\/__/         \\:\\/:/  /      |:|\\/__/        /:/  /     \\:\\  \\   \\:\\__\\       \\:\\/:/  /  \n" +
                 "     /:/  /        /:/  /                     \\::/  /       |:|  |         /:/  /       \\:\\__\\   \\/__/        \\::/  /   \n" +
                 "     \\/__/         \\/__/                       \\/__/         \\|__|         \\/__/         \\/__/                 \\/__/    \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n" +
-                "                                                                                                                        \n");
+                "                                                                                                                        ");
     }
 }
