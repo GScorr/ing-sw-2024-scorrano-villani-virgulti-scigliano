@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getCardsInCenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getCardsInHand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGameField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGoldDeckSize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getResourcesDeckSize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromCardsInCenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromGoldDeck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromResourcesDeck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/placeCard.java" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="risolto problema rmi disconnessioni, modifica token manager">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +64,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.Common_Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Common_Server.executor&quot;: &quot;Run&quot;,
     &quot;Application.RmiClient.executor&quot;: &quot;Run&quot;,
     &quot;Application.RmiClientF.executor&quot;: &quot;Run&quot;,
     &quot;Application.RmiServer.executor&quot;: &quot;Run&quot;,
