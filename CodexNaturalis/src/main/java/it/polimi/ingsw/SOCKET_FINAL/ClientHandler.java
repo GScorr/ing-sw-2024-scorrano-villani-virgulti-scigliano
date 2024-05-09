@@ -46,7 +46,7 @@ public class ClientHandler  implements VirtualView {
         new Thread(() -> {
             while (client_is_connected) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(1500);
                     rmi_server.receiveHeartbeat(token);
                 } catch (RemoteException | InterruptedException e) {
                     e.printStackTrace();

@@ -17,32 +17,86 @@ public class Common_Client {
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
 
         Scanner scan = new Scanner(System.in);
-        System.out.println("Scegli modalità server a cui connettersi : ");
-        int choose = scan.nextInt();
+        printLogo();
+        int choose=-1;
+        do{
+            if(choose != -1 ) System.err.println("[INSERT ERROR]");
 
-        switch (choose) {
-            case(0):
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
-                VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
-                new RmiClientF(server).run();
-                break;
+            System.out.println("CHOOSE A CONNECTION : \n 0 -> RMI \n 1 -> SOCKET ");
+            choose = scan.nextInt();
+            switch (choose) {
+                case(0):
+                    Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
+                    VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
 
-            case(1):
-                String host = "127.0.0.1";
-                int port = 12345;
+                    new RmiClientF(server).run();
+                    break;
 
-                Socket serverSocket = new Socket(host, port);
-                try{
+                case(1):
+                    String host = "127.0.0.1";
+                    int port = 12345;
 
-                    ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
-                    ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
+                    Socket serverSocket = new Socket(host, port);
+                    try{
 
-                    new Client(inputStream, outputStream).run();
-                }catch (IOException e) {
-                    System.out.println("impossibile creare socket input / output");
-                    return;
-                }
-                break;
-        }
+                        ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
+                        ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
+
+                        new Client(inputStream, outputStream).run();
+                    }catch (IOException e) {
+                        System.out.println("impossibile creare socket input / output");
+                        return;
+                    }
+                    break;
+            }
+        }while( choose != 0  && choose != 1);
+    }
+
+    private static void printLogo() throws IOException {
+        System.out.println("\n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                 ___           ___           ___           ___           ___                            \n" +
+                "                                /\\  \\         /\\  \\         /\\  \\         /\\  \\         |\\__\\                           \n" +
+                "                               /::\\  \\       /::\\  \\       /::\\  \\       /::\\  \\        |:|  |                          \n" +
+                "                              /:/\\:\\  \\     /:/\\:\\  \\     /:/\\:\\  \\     /:/\\:\\  \\       |:|  |                          \n" +
+                "                             /:/  \\:\\  \\   /:/  \\:\\  \\   /:/  \\:\\__\\   /::\\~\\:\\  \\      |:|__|__                        \n" +
+                "                            /:/__/ \\:\\__\\ /:/__/ \\:\\__\\ /:/__/ \\:|__| /:/\\:\\ \\:\\__\\ ____/::::\\__\\                       \n" +
+                "                            \\:\\  \\  \\/__/ \\:\\  \\ /:/  / \\:\\  \\ /:/  / \\:\\~\\:\\ \\/__/ \\::::/~~/~                          \n" +
+                "                             \\:\\  \\        \\:\\  /:/  /   \\:\\  /:/  /   \\:\\ \\:\\__\\    ~~|:|~~|                           \n" +
+                "                              \\:\\  \\        \\:\\/:/  /     \\:\\/:/  /     \\:\\ \\/__/      |:|  |                           \n" +
+                "                               \\:\\__\\        \\::/  /       \\::/__/       \\:\\__\\        |:|  |                           \n" +
+                "                                \\/__/         \\/__/         ~~            \\/__/         \\|__|                           \n" +
+                "      ___           ___           ___           ___           ___           ___           ___                   ___     \n" +
+                "     /\\__\\         /\\  \\         /\\  \\         /\\__\\         /\\  \\         /\\  \\         /\\__\\      ___        /\\  \\    \n" +
+                "    /::|  |       /::\\  \\        \\:\\  \\       /:/  /        /::\\  \\       /::\\  \\       /:/  /     /\\  \\      /::\\  \\   \n" +
+                "   /:|:|  |      /:/\\:\\  \\        \\:\\  \\     /:/  /        /:/\\:\\  \\     /:/\\:\\  \\     /:/  /      \\:\\  \\    /:/\\ \\  \\  \n" +
+                "  /:/|:|  |__   /::\\~\\:\\  \\       /::\\  \\   /:/  /  ___   /::\\~\\:\\  \\   /::\\~\\:\\  \\   /:/  /       /::\\__\\  _\\:\\~\\ \\  \\ \n" +
+                " /:/ |:| /\\__\\ /:/\\:\\ \\:\\__\\     /:/\\:\\__\\ /:/__/  /\\__\\ /:/\\:\\ \\:\\__\\ /:/\\:\\ \\:\\__\\ /:/__/     __/:/\\/__/ /\\ \\:\\ \\ \\__\\\n" +
+                " \\/__|:|/:/  / \\/__\\:\\/:/  /    /:/  \\/__/ \\:\\  \\ /:/  / \\/_|::\\/:/  / \\/__\\:\\/:/  / \\:\\  \\    /\\/:/  /    \\:\\ \\:\\ \\/__/\n" +
+                "     |:/:/  /       \\::/  /    /:/  /       \\:\\  /:/  /     |:|::/  /       \\::/  /   \\:\\  \\   \\::/__/      \\:\\ \\:\\__\\  \n" +
+                "     |::/  /        /:/  /     \\/__/         \\:\\/:/  /      |:|\\/__/        /:/  /     \\:\\  \\   \\:\\__\\       \\:\\/:/  /  \n" +
+                "     /:/  /        /:/  /                     \\::/  /       |:|  |         /:/  /       \\:\\__\\   \\/__/        \\::/  /   \n" +
+                "     \\/__/         \\/__/                       \\/__/         \\|__|         \\/__/         \\/__/                 \\/__/    \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n" +
+                "                                                                                                                        \n");
     }
 }
