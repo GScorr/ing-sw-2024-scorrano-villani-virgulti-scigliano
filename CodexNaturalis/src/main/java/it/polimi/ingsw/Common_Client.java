@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Common_Client {
 
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
-
+        printLogo();
         Scanner scan = new Scanner(System.in);
         int choose=-1;
         do{
@@ -28,14 +28,14 @@ public class Common_Client {
                     
                     Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
                     VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
-                    printLogo();
+
                     new RmiClientF(server).run();
                     break;
 
                 case(1):
                     String host = "127.0.0.1";
                     int port = 12345;
-                    printLogo();
+
                     Socket serverSocket = new Socket(host, port);
                     try{
 
