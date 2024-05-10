@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.SOCKET_FINAL</OriginalElement>
+  <nodes>
+    <node x="-226.0" y="1034.5">it.polimi.ingsw.SOCKET_FINAL.Client</node>
+    <node x="226.5" y="-13.5">it.polimi.ingsw.SOCKET_FINAL.SocketException</node>
+    <node x="10.5" y="390.5">it.polimi.ingsw.SOCKET_FINAL.ServerProxy</node>
+    <node x="231.5" y="886.5">it.polimi.ingsw.SOCKET_FINAL.Server</node>
+    <node x="-29.5" y="886.5">it.polimi.ingsw.SOCKET_FINAL.ClientHandler</node>
+    <node x="-229.5" y="558.5">it.polimi.ingsw.SOCKET_FINAL.VirtualView</node>
+    <node x="47.0" y="134.5">it.polimi.ingsw.SOCKET_FINAL.VirtualServer</node>
+    <node x="100.0" y="1226.5">it.polimi.ingsw.SOCKET_FINAL.ClientProxy</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.ClientProxy" target="it.polimi.ingsw.SOCKET_FINAL.VirtualView" relationship="REALIZATION">
+      <point x="0.0" y="-55.5" />
+      <point x="208.0" y="862.0" />
+      <point x="-92.0" y="862.0" />
+      <point x="-92.0" y="682.0" />
+      <point x="-132.0" y="682.0" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.ClientHandler" target="it.polimi.ingsw.SOCKET_FINAL.VirtualView" relationship="REALIZATION">
+      <point x="0.0" y="-55.5" />
+      <point x="68.0" y="862.0" />
+      <point x="-92.0" y="862.0" />
+      <point x="-92.0" y="682.0" />
+      <point x="-132.0" y="682.0" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.ServerProxy" target="it.polimi.ingsw.SOCKET_FINAL.VirtualServer" relationship="REALIZATION">
+      <point x="0.0" y="-211.5" />
+      <point x="0.0" y="67.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.SOCKET_FINAL.Client" target="it.polimi.ingsw.SOCKET_FINAL.VirtualView" relationship="REALIZATION">
+      <point x="0.0" y="-247.5" />
+      <point x="-92.0" y="682.0" />
+      <point x="-132.0" y="682.0" />
+      <point x="0.0" y="43.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.45460358056265987" showDependencies="false" x="130.0" y="768.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

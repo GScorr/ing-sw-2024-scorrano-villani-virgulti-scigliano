@@ -3,6 +3,7 @@ package it.polimi.ingsw.MODEL;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
+import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.io.Serializable;
@@ -113,21 +114,29 @@ public class GameField implements Serializable {
 
         if( !field[x][y].isEmpty() ){  //ho cambiato .getCard con .getCardDown, penso che l'errore sia qua
             field[x][y].setCardDown(field[x][y].getCard());
+            field[x][y].setValues( card.getSide().getAngleLeftUp(), 1); //probably useless, but I'm waiting for the GUI
+            field[x][y].setEdges( EdgeEnum.LEFTUP, 1); //probably useless, but I'm waiting for the GUI
             //System.out.println("cella base");
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
         if( !field[x+1][y].isEmpty() ){
             field[x+1][y].setCardDown(field[x+1][y].getCard());
+            field[x+1][y].setValues( card.getSide().getAngleLeftDown(), 1);
+            field[x+1][y].setEdges( EdgeEnum.LEFTDOWN, 1);
             //System.out.println("cella riga sotto");
             //System.out.println(field[x][y].getCard().getSide().getAngleLeftDown());
         }
         if( !field[x][y+1].isEmpty() ){
             field[x][y+1].setCardDown(field[x][y+1].getCard());
+            field[x][y+1].setValues( card.getSide().getAngleRightUp(), 1);
+            field[x][y+1].setEdges( EdgeEnum.RIGHTUP, 1);
             //System.out.println("cella colonna a dx");
             //System.out.println(field[x][y].getCard().getSide().getAngleRightUp());
         }
         if( !field[x+1][y+1].isEmpty() ){
             field[x+1][y+1].setCardDown(field[x+1][y+1].getCard());
+            field[x+1][y+1].setValues( card.getSide().getAngleRightDown(), 1 );
+            field[x+1][y+1].setEdges( EdgeEnum.RIGHTDOWN, 1);
             //System.out.println("cella colonna + riga +1");
             //System.out.println(field[x][y].getCard().getSide().getAngleRightDown());
         }
@@ -136,21 +145,29 @@ public class GameField implements Serializable {
         field[x][y].setFilled(true);
         field[x][y].setCard(card);
         field[x][y].setValue( card.getSide().getAngleLeftUp() );
+        field[x][y].setValues( card.getSide().getAngleLeftUp(), 0 );
+        field[x][y].setEdges( EdgeEnum.LEFTUP, 0);
 
         field[x+1][y].setFilled(true);
         field[x+1][y].setCard(card);
         //field[x+1][y].setValue( card.getSide().getAngleRightUp() );
         field[x+1][y].setValue( card.getSide().getAngleLeftDown() );
+        field[x+1][y].setValues( card.getSide().getAngleLeftDown(), 0 );
+        field[x+1][y].setEdges( EdgeEnum.LEFTDOWN, 0);
 
 
         field[x][y+1].setFilled(true);
         field[x][y+1].setCard(card);
         //field[x][y+1].setValue( card.getSide().getAngleLeftDown() ); erano invertiti gli angoli che salvava -mirko-
         field[x][y+1].setValue( card.getSide().getAngleRightUp() );
+        field[x][y+1].setValues( card.getSide().getAngleRightUp(), 0 );
+        field[x][y+1].setEdges( EdgeEnum.RIGHTUP, 0);
 
         field[x+1][y+1].setFilled(true);
         field[x+1][y+1].setCard(card);
         field[x+1][y+1].setValue( card.getSide().getAngleRightDown() );
+        field[x+1][y+1].setValues( card.getSide().getAngleRightDown(), 0 );
+        field[x+1][y+1].setEdges( EdgeEnum.RIGHTDOWN, 0);
         return true;
     }
 

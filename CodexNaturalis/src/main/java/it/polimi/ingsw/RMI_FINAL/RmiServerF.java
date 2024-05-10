@@ -2,9 +2,12 @@ package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
+import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI.*;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -16,180 +19,162 @@ import java.util.concurrent.BlockingQueue;
 public class RmiServerF implements VirtualServerF {
 
     //private GameController ctrl;
+    private static final long HEARTBEAT_TIMEOUT = 1500;
     private TokenManagerF token_manager = new TokenManagerImplementF();
+    private static int port;
     private List<VirtualViewF> clients = new ArrayList<>();
     private Map<String, Player> token_to_player = new HashMap<>();
     private Map<String, RmiController>  token_to_rmi = new HashMap<>();
     //private List<GameController> controllers = new ArrayList<>();
-    private List<RmiController> rmi_controllers = new ArrayList<>();
+    private Map<Integer , RmiController> rmi_controllers = new HashMap<>();
 
     //todo da modificare una volta capito che tipo di update invia
     private BlockingQueue<String> updates = new ArrayBlockingQueue<>(20);
 
+    private final Map<String, Long> lastHeartbeatTime = new HashMap<>();
 
+    public RmiServerF() throws RemoteException {startHeartbeatChecker();}
 
     //put the client in the clients list
     @Override
-    public synchronized void connect(VirtualViewF client)throws RemoteException{
-            this.clients.add(client);
-    }
+    public synchronized void connect(VirtualViewF client)throws RemoteException{this.clients.add(client);}
 
     //given a client create the token that will represent it
     @Override
-    public String createToken(VirtualViewF client) throws RemoteException {
-        return token_manager.generateToken(client);
-    }
+    public String createToken(VirtualViewF client) throws RemoteException {return token_manager.generateToken(client);}
+    public String createTokenSocket(String name) throws RemoteException {return token_manager.generateTokenSocket(name);}
 
     @Override
-    public Map<String, Player> getTtoP() throws RemoteException {
-        return token_to_player;
-    }
+    public Map<String, Player> getTtoP() throws RemoteException {return token_to_player;}
 
     @Override
-    public Map<String, RmiController> getTtoR() throws RemoteException {
-        return token_to_rmi;
-    }
+    public Map<String, RmiController> getTtoR() throws RemoteException {return token_to_rmi;}
 
+    public Map<Integer, RmiController> getListRmiController() throws RemoteException {return rmi_controllers;}
 
-    public List<RmiController> getListRmiController() throws RemoteException {
-        return rmi_controllers;
-    }
-
-    //todo: decidere come scegliere il colore, per ora lascio sempre green (come da controller)
-
-    /*create a new GController, add it to the list and after insert player to the new game
-    , add token and gcontroller in the token to controller*/
+    //todo: NEL CONTROLLER SCEGLIERE COLORE
     @Override
-    public RmiController createGame(String name, int num_player, String p_token, String player_name) throws RemoteException {
-
-        RmiController serverino = new RmiController(name, num_player);
-        Player p = serverino.createPlayer(player_name,true);
-        token_to_player.put( p_token , p);
-        rmi_controllers.add(serverino);
-        token_to_rmi.put( p_token, serverino);
-        return serverino;
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws RemoteException {
+        int port = getAvailablePort();
+        RmiController gameServer = new RmiController(name,num_player,port);
+        gameServer.addPlayer(p_token,player_name, client,true);
+        VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
+        Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
+        registry.rebind(String.valueOf(port), serverStub);
+        token_to_rmi.put( p_token, gameServer);
+        rmi_controllers.put(gameServer.getController().getGame().getIndex_game(), gameServer);
+        System.out.println(port);
+        return port;
     }
 
+    public int createGameSocket(String name, int num_player, String p_token, String player_name) throws RemoteException {
+        int port = getAvailablePort();
+        RmiController gameServer = new RmiController(name,num_player,port);
+        gameServer.addPlayerSocket(p_token,player_name,true);
+        VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
+        Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
+        registry.rebind(String.valueOf(port), serverStub);
+        token_to_rmi.put( p_token, gameServer);
+        rmi_controllers.put(gameServer.getController().getGame().getIndex_game(), gameServer);
+        System.out.println(port);
+        return port;
+    }
 
+    private int getAvailablePort(){port++;return port;}
 
-    /*check if the id is valid, if not I send back a report error, otherwise i insert the
-     player in the given game */
+    //check if the id is valid, if not I send back a report error, otherwise i insert the player in the given game
     @Override
-    public boolean addPlayer(int game_id, String p_token, String name) throws RemoteException {
-        int index = rmi_controllers.stream()
-                .map( r -> {
-                    try {
-                        return r.getController();
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .filter(gc -> gc.getGame().getIndex_game() == game_id)
-                .findFirst()
-                .map(rmi_controllers::indexOf)
-                .orElse(-1);
-        if (index != -1) {
-            if( rmi_controllers.get(index).getController().getFull() )
-                {String error = "\nGame is Full\n";
-                token_manager.getTokens().get(p_token).reportError(error);
-                return false;}
-            token_to_player.put( p_token , rmi_controllers.get(index).getController().createPlayer(name, false) );
-            rmi_controllers.get(index).getController().checkNumPlayer();
-            token_to_rmi.put(p_token , rmi_controllers.get(index) );
-            return true;
-        }
-        String error = "\nWRONG ID : Not Existing Game\n";
-        token_manager.getTokens().get(p_token).reportError(error);
-        return false;
-    }
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws RemoteException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
+
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name) throws RemoteException {
+        rmi_controllers.get(game_id).addPlayerSocket(p_token,name,false);
+        return true;}
 
     @Override
-    public List<VirtualViewF> getListClient() throws RemoteException {
-        return clients;
-    }
-
+    public List<VirtualViewF> getListClient() throws RemoteException {return clients;}
     //returns the list of all game controllers that are accessible ( not full )
+
     @Override
     public List<RmiController> getFreeGames() throws RemoteException {
         if( rmi_controllers.isEmpty() ) return null;
         List<RmiController> free = new ArrayList<>();
-        for ( RmiController rc : rmi_controllers )
-            if( !rc.getFull() ) free.add(rc);
+        for ( Integer id : rmi_controllers.keySet() )
+        {if( !rmi_controllers.get(id).getFull() ) free.add(rmi_controllers.get(id));}
+        return free;
+
+    }
+    //return 0 if the name is free, 1 if the name is already used by an active player, 2 if the player is coming back
+    public List<SocketRmiControllerObject> getFreeGamesSocket() throws RemoteException {
+        if (rmi_controllers.isEmpty()) return null;
+        List<SocketRmiControllerObject> free = new ArrayList<>();
+        for (Integer id : rmi_controllers.keySet()) {
+            if (!rmi_controllers.get(id).getFull()) {
+                RmiController r = rmi_controllers.get(id);
+                SocketRmiControllerObject tmp = new SocketRmiControllerObject(r.getController().getGame().getName(),r.getController().getGame().getIndex_game(),r.getController().getGame().getNumPlayer(),r.getController().getGame().getMax_num_player());
+                free.add(tmp);
+            }
+        }
         return free;
     }
 
-    //todo
-    @Override
-    public void insertCard(String p_token, PlayCard card, int pos_x, int pos_y, int index) throws RemoteException, InterruptedException {
+        @Override
+    public String checkName(String name, VirtualViewF client) throws RemoteException {
 
-        System.out.println("\n [Insert request received] \n");
-        //todo cambia gestione flipped
-        //token_to_game.get(p_token).statePlaceCard(token_to_player.get(p_token), index, true, pos_x, pos_y );
-
-        try
+        for ( Integer i : rmi_controllers.keySet() )
         {
-            updates.put(p_token);
-        }catch (InterruptedException e){
-            throw new RuntimeException(e);
+            for ( Integer j : rmi_controllers.get(i).getController().getGame().getGet_player_index().keySet() )
+            {
+                Player p = rmi_controllers.get(i).getController().getGame().getGet_player_index().get(j);
+                if ( p.getName().equals(name) && p.isDisconnected() ) {
+                    rmi_controllers.get(i).wakeUp(name,client);
+                    for ( String s : rmi_controllers.get(i).getTtoP().keySet() )
+                    {
+                        if ( rmi_controllers.get(i).getTtoP().get(s).equals(p) ){
+                            return s;
+                        }
+                    }
+                }
+                else if (p.getName().equals(name) && !p.isDisconnected() ) { return "false"; }
+            }
         }
-        //todo come gestire il broadcast per non far intasare il client
-        broadcastUpdateThread();
+        return "true";
     }
 
-    //Look if there are clients with the same name, return true if it's available false otherwise
+    private Object waitAnswer(String token, Integer idRequest) throws RemoteException {return token_to_rmi.get(token).getAnswer(idRequest);}
+
     @Override
-    public boolean checkName(String name, String token) throws RemoteException {
-        for ( String t : token_to_player.keySet() ){
-            if( token_to_player.get(t).getName().equals(name) ){
-                String error = " Name Already Existing ";
-                token_manager.getTokens().get(token).reportError(error);
-                return false; }
-        }
-        return true;
+    public int getPort(String token) throws RemoteException {
+
+        return token_to_rmi.get(token).getPort();
     }
 
     @Override
-    public void chooseGoal(String p_token, int goal_index) throws RemoteException {
-        token_to_rmi.get(p_token).getController().playerChooseGoal( token_to_player.get(p_token), goal_index );
-    }
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws RemoteException {
 
-    @Override
-    public void selectStartingCard(String p_token, boolean flipped) throws RemoteException {
-        token_to_rmi.get(p_token).getController().playerSelectStartingCard( token_to_player.get(p_token) , flipped );
-    }
-
-    @Override
-    public boolean checkFull(String token) throws RemoteException {
-        //ritorna true se ho raggiunto i player
-        return token_to_rmi.get(token).getFull();
-    }
-
-    @Override
-    public void showStartingCard(String token) throws RemoteException {
-        PlayCard card = token_to_player.get(token).getStartingCard();
-        token_manager.getTokens().get(token).showCard(card);
-    }
-
-    @Override
-    public RmiController findRmiController(int game_id, String p_token) throws RemoteException {
-        List<GameController> games = new ArrayList<>();
-        for(RmiController r : rmi_controllers){
-            games.add(r.getController());
-        }
-        int index = games.stream()
-                .filter(gc -> gc.getGame().getIndex_game() == game_id)
-                .findFirst()
-                .map(games::indexOf)
-                .orElse(-1);
-
-        if (index != -1)
+        RmiController index = rmi_controllers.get(game_id);
+        if (index != null && !rmi_controllers.get(game_id).getFull())
         {
-            token_to_rmi.put(p_token , rmi_controllers.get(index) );
-            return rmi_controllers.get(index);
+            token_to_rmi.put(p_token , index );
+
+            return addPlayer(game_id, p_token, player_name,client);
         }
-        String error = "\nWRONG ID : Not Existing Game\n";
+        String error = "\nWRONG ID : Not Available Game\n";
         token_manager.getTokens().get(p_token).reportError(error);
-        return null;
+        return false;
+    }
+
+    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws RemoteException {
+
+        RmiController index = rmi_controllers.get(game_id);
+        if (index != null && !rmi_controllers.get(game_id).getFull())
+        {
+            token_to_rmi.put(p_token , index );
+
+            return addPlayerSocket(game_id, p_token, player_name);
+        }
+        String error = "\nWRONG ID : Not Available Game\n";
+        token_manager.getTokens().get(p_token).reportError(error);
+        return false;
     }
 
     private void broadcastUpdateThread() throws InterruptedException, RemoteException {
@@ -211,14 +196,42 @@ public class RmiServerF implements VirtualServerF {
 
         }
     }
+    @Override
+    public RmiController getRmiController(String token) throws RemoteException{return token_to_rmi.get(token);}
+    @Override
+    public void receiveHeartbeat(String token) throws RemoteException {lastHeartbeatTime.put(token, System.currentTimeMillis());}
 
+    private synchronized void checkHeartbeats() throws RemoteException{
+        long currentTime = System.currentTimeMillis();
+        Set<String> keys = lastHeartbeatTime.keySet();
+        for (String key : keys) {
+            if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
+                if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
+                token_to_rmi.get(key).getTtoP().get(key).disconnect();
+                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
+            }
+        }
+    }
 
+    private void startHeartbeatChecker() throws RemoteException{
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(1000); // Controlla gli "heartbeats" ogni 5 secondi
+                    checkHeartbeats();
+                } catch (InterruptedException | RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 
     public static void main(String[] args) throws RemoteException {
         final String serverName = "VirtualServer";
         VirtualServerF server = new RmiServerF();
         VirtualServerF stub = (VirtualServerF) UnicastRemoteObject.exportObject(server,0);
-        Registry registry = LocateRegistry.createRegistry(1234);
+        port=1099;
+        Registry registry = LocateRegistry.createRegistry(1);
         registry.rebind(serverName,stub);
         System.out.println("[SUCCESSFUL] : server connected. ");
     }

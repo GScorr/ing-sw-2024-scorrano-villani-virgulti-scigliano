@@ -57,7 +57,6 @@ public class GameController implements GameSubject, Serializable {
     transient Comparator<Player> idComparator_goals_achieve = Comparator.comparingInt(Player::getNum_goal_achieve);
 
 
-
     public GameController(int max_num_player) {
         synchronized(this) {
             if (max_num_player < 2 || max_num_player > 4) {
@@ -78,6 +77,10 @@ public class GameController implements GameSubject, Serializable {
         }
     }
 
+    public HashMap<Player, GameFieldController> getField_controller() {
+        return field_controller;
+    }
+
     public Game getGame() {
         return game;
     }
@@ -89,6 +92,10 @@ public class GameController implements GameSubject, Serializable {
 
     public int get_final_counter() {
         return final_counter;
+    }
+
+    public List<Player> getPlayer_list() {
+        return player_list;
     }
 
     private void isUniqueName(String name) {
@@ -108,12 +115,22 @@ public class GameController implements GameSubject, Serializable {
         return;
     }
 
+    public boolean isAlone(){
+        boolean num = false;
+        int num_disconnected = 0;
+        for ( int i = 0 ; i < game.getMax_num_player(); i++ )
+        {
+            if (game.getGet_player_index().get(i).isDisconnected()) num_disconnected++;
+        }
+        if(  (game.getMax_num_player() - num_disconnected == 1) || (game.getMax_num_player() - num_disconnected == 0) ) num = true;
+        return num;
+    }
 
 
     public Player createPlayer(String nome, boolean isFirst){
-        if(game.getNumPlayer() > 0) {
+        /*if(game.getNumPlayer() > 0) {
             isUniqueName(nome);
-        }
+        }*/
         Player player = new Player(ColorsEnum.GREEN, nome, isFirst);
         if(game.getNum_player() == game.getMax_num_player()){
             throw new ControllerException(3,"Maximum number of players reached");
@@ -137,7 +154,7 @@ public class GameController implements GameSubject, Serializable {
         return false;
     }
 
-    public boolean checkNumPlayer(){
+    public boolean  checkNumPlayer(){
         Integer num_player = game.getNum_player();
         Integer max_num_player = game.getMax_num_player();
         if(num_player == max_num_player && game.actual_state.getNameState().equals("NOT_INITIALIZED")){
@@ -155,8 +172,15 @@ public class GameController implements GameSubject, Serializable {
             return false;
         }
     }
-
-    public void playerChooseGoal(Player p, int i) {
+    /*public boolean insertCard(Player player, PlayCard card, int x, int y, int index, boolean flipped) throws ControllerException{
+        if (field_controller.get(player).checkPlacing(card, x, y)){
+            player.placeCard(index, flipped, x, y);
+            nextStatePlayer();
+            return true;
+        }
+        return false;
+    }*/
+    public synchronized void playerChooseGoal(Player p, int i) {
         if(i< 0 || i > 1){
             throw new ControllerException(30, "Index Goal OUTBOUND, 0 <= index <= 1");
         }
@@ -199,7 +223,7 @@ public class GameController implements GameSubject, Serializable {
 // ------ da qui in avanti inizia il gioco con i turni
 
 
-    private void nextStatePlayer(){
+    public void nextStatePlayer(){
         Player currentPlayer = player_list.get(actual_player), nextPlayer;
         if(currentPlayer.actual_state.getNameState().equals("PLACE_CARD")){
             currentPlayer.nextStatePlayer();
@@ -249,7 +273,7 @@ public class GameController implements GameSubject, Serializable {
 
     }
 
-    public void statePlaceCard(Player player, int index, int x, int y){ //cambiare nome al metodo
+    public void statePlaceCard(Player player, int index, int x, int y) throws ControllerException{ //cambiare nome al metodo
 
         if(player.actual_state.getNameState().compareTo("PLACE_CARD") != 0){
             throw new ControllerException(10, "Not possible call this method, Player State is:" + player.actual_state.getNameState());
@@ -295,7 +319,7 @@ public class GameController implements GameSubject, Serializable {
         }
     }
 
-    private void placeCard(Player player, int index, int x, int y){
+    private void placeCard(Player player, int index, int x, int y) throws ControllerException{
         boolean flipped = player.getCardsInHand().get(index).flipped;
 
             GameFieldController field_controller_player = field_controller.get(player);
@@ -480,4 +504,5 @@ public class GameController implements GameSubject, Serializable {
             player_observer.update();
         }
     }
+
 }

@@ -71,17 +71,32 @@ public class Player implements PlayerObserver, Serializable {
     private PlayCard starting_card;
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
-    private int player_points = 0;
+    private int player_points = 19;
 
     private int num_goal_achieve = 0;
+
+    private boolean isDisconnected;
 
 
     //Questi mazzi servono per pescare
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
+    private boolean firstPlaced = false;
 
+    public boolean isFirstPlaced() {
+        return firstPlaced;
+    }
 
+    public boolean isDisconnected(){
+        return isDisconnected;
+    }
 
+    public void disconnect(){
+        this.isDisconnected = true;
+    }
+    public void connect(){
+        this.isDisconnected = false;
+    }
 
 
     public Player( ColorsEnum color, String name, boolean isFirst){
@@ -91,6 +106,7 @@ public class Player implements PlayerObserver, Serializable {
         createField();
         this.actual_state = not_initialized;
         this.isFirst = isFirst;
+        this.isDisconnected = false;
     }
 
     public String getName() {
@@ -256,7 +272,6 @@ public class Player implements PlayerObserver, Serializable {
         playing_card.flipCard(flipped);
         game_field.insertCard(playing_card, x, y);
         removeHandCard(playing_card, index);
-
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
@@ -318,7 +333,11 @@ public class Player implements PlayerObserver, Serializable {
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 22, 22);
+            firstPlaced = true;
+    }
 
+    public PState getActual_state() {
+        return actual_state;
     }
 
     public int getNum_goal_achieve() {
