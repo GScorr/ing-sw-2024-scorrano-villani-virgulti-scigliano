@@ -25,6 +25,7 @@ public class Common_Client {
             choose = scan.nextInt();
             switch (choose) {
                 case(0):
+                    
                     Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
                     VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
                     printLogo();
@@ -51,6 +52,25 @@ public class Common_Client {
         }while( choose != 0  && choose != 1);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private static void printLogo() throws IOException {
         System.out.println("\n" +
                 "                                 ___           ___           ___           ___           ___                            \n" +
@@ -62,8 +82,8 @@ public class Common_Client {
                 "                            \\:\\  \\  \\/__/ \\:\\  \\ /:/  / \\:\\  \\ /:/  / \\:\\~\\:\\ \\/__/ \\::::/~~/~                          \n" +
                 "                             \\:\\  \\        \\:\\  /:/  /   \\:\\  /:/  /   \\:\\ \\:\\__\\    ~~|:|~~|                           \n" +
                 "                              \\:\\  \\        \\:\\/:/  /     \\:\\/:/  /     \\:\\ \\/__/      |:|  |                           \n" +
-                "                               \\:\\__\\        \\::/  /       \\::/__/       \\:\\__\\        |:|  |                           \n" +
-                "                                \\/__/         \\/__/         ~~            \\/__/         \\|__|                           \n" +
+                "                               \\:\\__\\        \\::/  /       \\::/  /       \\:\\__\\        |:|  |                           \n" +
+                "                                \\/__/         \\/__/         \\/__/         \\/__/         \\|__|                           \n" +
                 "      ___           ___           ___           ___           ___           ___           ___                   ___     \n" +
                 "     /\\__\\         /\\  \\         /\\  \\         /\\__\\         /\\  \\         /\\  \\         /\\__\\      ___        /\\  \\    \n" +
                 "    /::|  |       /::\\  \\        \\:\\  \\       /:/  /        /::\\  \\       /::\\  \\       /:/  /     /\\  \\      /::\\  \\   \n" +
