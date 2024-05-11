@@ -27,7 +27,6 @@ import java.util.List;
 public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     final ServerSocket listenSocket;
-    VirtualServerF serverRmi;
 
     final List<ClientHandler> clients = new ArrayList<>();
 
@@ -37,12 +36,12 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     public TokenManager token_manager = new TokenManager();
 
-    private Common_Server common;
+    public Common_Server common;
 
-    public Server(ServerSocket listenSocket, VirtualServerF serverRmi, Common_Server common) throws RemoteException {
+    public Server(ServerSocket listenSocket, Common_Server common) throws RemoteException {
         this.common = common;
         this.listenSocket = listenSocket;
-        this.serverRmi = serverRmi;
+
     }
 
     public void runServer() throws IOException, NotBoundException {
@@ -55,7 +54,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
             ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
 
-            ClientHandler handler = new ClientHandler(this, inputStream, outputStream, serverRmi);
+            ClientHandler handler = new ClientHandler(this, inputStream, outputStream,  common );
 
             clients.add(handler);
             new Thread(() -> {

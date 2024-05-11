@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
@@ -26,19 +27,19 @@ public class ClientHandler  implements VirtualView {
     final ObjectOutputStream output;
     //final VirtualView view;
 
-    public VirtualServerF rmi_server;
+    public Common_Server common;
     public String token;
 
     private VirtualRmiController rmi_controller;
     public boolean client_is_connected = true;
 
 
-    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output,VirtualServerF rmi_server ) throws RemoteException, NotBoundException {
+    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common ) throws RemoteException, NotBoundException {
         this.server = server;
         this.input = input;
         this.output = output;
        // this.view = new ClientProxy(output);
-        this.rmi_server = rmi_server;
+       this.common = common;
 
     }
 
@@ -47,7 +48,7 @@ public class ClientHandler  implements VirtualView {
             while (client_is_connected) {
                 try {
                     Thread.sleep(1500);
-                    rmi_server.receiveHeartbeat(token);
+                    common.receiveHeartbeat(token);
                 } catch (RemoteException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -69,19 +70,19 @@ public class ClientHandler  implements VirtualView {
                     }
                     DP_message.setServer(server);
                     DP_message.setOutput(output);
-                    DP_message.setRmiServer(this.rmi_server);
+                    DP_message.setCommonServer(this.common);
 
                     if((DP_message instanceof CheckNameMessage)){
                         String mayToken = ((CheckNameMessage) DP_message).checkNameMessageAction();
 
                         if(mayToken.equals("true")){
-                            this.token = rmi_server.createTokenSocket(((CheckNameMessage) DP_message).nome);
+                            this.token = common.createTokenSocket(((CheckNameMessage) DP_message).nome);
 
                         } else if (mayToken.equals("false")) {
 
                         } else{
                             this.token = mayToken;
-                            int port = rmi_server.getPort(token);
+                            int port = common.getPort(token);
                             Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                             this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
                             client_is_connected = true;
@@ -106,7 +107,7 @@ public class ClientHandler  implements VirtualView {
                     else if(DP_message instanceof FindRMIControllerMessage){
                        if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
                            System.out.println(token);
-                           int port = rmi_server.getPort(token);
+                           int port = common.getPort(token);
                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                            this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
                            MyMessageFinal message = new MyMessageFinal("true");
