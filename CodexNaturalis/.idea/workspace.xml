@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiorn">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="cambio common server">
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Common_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Common_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiServerF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualServerF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualServerF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,22 +302,6 @@
       <workItem from="1715087112111" duration="7364000" />
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
-    </task>
-    <task id="LOCAL-00055" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1713624917321</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1713624917321</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Modifica Stati Game">
-      <option name="closed" value="true" />
-      <created>1713625802620</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1713625802621</updated>
     </task>
     <task id="LOCAL-00057" summary="Aggiornamento">
       <option name="closed" value="true" />
@@ -701,7 +679,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715442287487</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="cambio common server">
+      <option name="closed" value="true" />
+      <created>1715443869589</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1715443869589</updated>
+    </task>
+    <task id="LOCAL-00105" summary="cambio common server">
+      <option name="closed" value="true" />
+      <created>1715443892635</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1715443892635</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -731,7 +725,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="aggiornameno" />
     <MESSAGE value="inizio prove inserimenti stringa" />
     <MESSAGE value="Modifica Stati Game" />
     <MESSAGE value="inizio rmi" />
@@ -756,7 +749,8 @@
     <MESSAGE value="insert card successful" />
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="aggiorn" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiorn" />
+    <MESSAGE value="cambio common server" />
+    <option name="LAST_COMMIT_MESSAGE" value="cambio common server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
