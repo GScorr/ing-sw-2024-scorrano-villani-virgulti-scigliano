@@ -1,8 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
@@ -19,6 +18,6 @@ public interface Message  {
 
     void setToken(String token);
 
-    void setRmiController(VirtualRmiController rmi_controller);
+    void setRmiController(VirtualGameServer rmi_controller);
 
 }

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -18,11 +18,11 @@ public class getCardsInCenter implements Message, Serializable {
     public String token;
     ObjectOutputStream output;
     public VirtualServerF rmi_server;
-    public VirtualRmiController rmi_controller;
+    public VirtualGameServer rmi_controller;
 
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 

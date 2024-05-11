@@ -1,10 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
-import it.polimi.ingsw.CONTROLLER.ControllerException;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
-import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.ObjectOutputStream;
@@ -15,11 +12,11 @@ public class CreatePlayerMessage implements Message, Serializable {
     public Server server;
     ObjectOutputStream output;
     public VirtualServerF rmi_server;
-    public VirtualRmiController rmi_controller;
+    public VirtualGameServer rmi_controller;
 
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 
