@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.RMI_FINAL.RmiServerF;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.RMI_FINAL.*;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 import java.io.IOException;
@@ -11,22 +11,25 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Common_Server {
 
-    private int num;
+    private TokenManagerF token_manager = new TokenManagerImplementF();
+    private List<VirtualViewF> clients = new ArrayList<>();
+    private Map<String, Player> token_to_player = new HashMap<>();
+    private Map<String, GameServer>  token_to_rmi = new HashMap<>();
+    private Map<Integer , GameServer> rmi_controllers = new HashMap<>();
+
     public Common_Server(){
-        this.num = 0;
+
     }
 
-    public void setNum(int n){
-        this.num = n;
-    }
-
-    public int getNum(){
-        return this.num;
-    }
-
+    public String createToken(VirtualViewF client) throws RemoteException {return token_manager.generateToken(client);}
+    public String createTokenSocket(String name) throws RemoteException {return token_manager.generateTokenSocket(name);}
 
 
     public static void main(String[] args) throws IOException, NotBoundException {
