@@ -32,4 +32,7 @@ public interface VirtualServerF extends Remote {
     public void receiveHeartbeat(String token) throws RemoteException;
     int getPort(String token) throws RemoteException;
 
+    public void setNum(int n) throws RemoteException;
+    public int getNum() throws RemoteException;
+
 }

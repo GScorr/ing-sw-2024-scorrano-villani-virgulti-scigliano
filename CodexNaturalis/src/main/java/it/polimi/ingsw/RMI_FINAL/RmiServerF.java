@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
@@ -20,6 +21,7 @@ public class RmiServerF implements VirtualServerF {
 
     //private GameController ctrl;
     private static final long HEARTBEAT_TIMEOUT = 1500;
+    private Common_Server common;
     private TokenManagerF token_manager = new TokenManagerImplementF();
     private static int port;
     private List<VirtualViewF> clients = new ArrayList<>();
@@ -33,7 +35,9 @@ public class RmiServerF implements VirtualServerF {
 
     private final Map<String, Long> lastHeartbeatTime = new HashMap<>();
 
-    public RmiServerF() throws RemoteException {startHeartbeatChecker();}
+    public RmiServerF(Common_Server common) throws RemoteException {
+        this.common = common;
+        startHeartbeatChecker();}
 
     //put the client in the clients list
     @Override
@@ -226,14 +230,20 @@ public class RmiServerF implements VirtualServerF {
         }).start();
     }
 
+    public void setNum(int n){
+        common.setNum(n);
+    }
+    public int getNum(){
+        return common.getNum();
+    }
     public static void main(String[] args) throws RemoteException {
-        final String serverName = "VirtualServer";
+      /*  final String serverName = "VirtualServer";
         VirtualServerF server = new RmiServerF();
         VirtualServerF stub = (VirtualServerF) UnicastRemoteObject.exportObject(server,0);
         port=1099;
         Registry registry = LocateRegistry.createRegistry(1);
         registry.rebind(serverName,stub);
-        System.out.println("[SUCCESSFUL] : server connected. ");
+        System.out.println("[SUCCESSFUL] : server connected. ");*/
     }
 
 }

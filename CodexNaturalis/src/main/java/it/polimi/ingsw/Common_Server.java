@@ -14,21 +14,37 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class Common_Server {
 
+    private int num;
+    public Common_Server(){
+        this.num = 0;
+    }
+
+    public void setNum(int n){
+        this.num = n;
+    }
+
+    public int getNum(){
+        return this.num;
+    }
+
+
 
     public static void main(String[] args) throws IOException, NotBoundException {
 
+        Common_Server common = new Common_Server();
+
         final String serverName = "VirtualServer";
-        VirtualServerF server = new RmiServerF();
+        VirtualServerF server = new RmiServerF(common);
         VirtualServerF stub = (VirtualServerF) UnicastRemoteObject.exportObject(server,0);
         Registry registry = LocateRegistry.createRegistry(1234);
         registry.rebind(serverName,stub);
         System.out.println("[SUCCESSFUL] : RMI server connected. ");
 
-        String host = "127.0.0.1";
+
         int port = 12345;
         ServerSocket listenSocket = new ServerSocket(port);
         System.out.println("[SUCCESSFUL] : SOCKET server is running...");
-        new Server(listenSocket, stub).runServer();
+        new Server(listenSocket, stub, common).runServer();
     }
 }
 
