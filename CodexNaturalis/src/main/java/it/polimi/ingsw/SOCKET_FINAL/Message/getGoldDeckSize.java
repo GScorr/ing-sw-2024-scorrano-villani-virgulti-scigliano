@@ -2,21 +2,16 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class receiveHeartbeatMessage implements Message, Serializable {
+public class getGoldDeckSize implements Message, Serializable {
 
-    public String token;
-
-
-    public Controller controller;
     public Server server;
-
+    public String token;
     ObjectOutputStream output;
     public VirtualServerF rmi_server;
     public VirtualRmiController rmi_controller;
@@ -32,9 +27,15 @@ public class receiveHeartbeatMessage implements Message, Serializable {
     }
 
 
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public getGoldDeckSize(){
+
     }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
 
     public void setServer(Server server) {
         this.server = server;
@@ -44,18 +45,11 @@ public class receiveHeartbeatMessage implements Message, Serializable {
         this.output = output;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-
-    public receiveHeartbeatMessage() {
-
-    }
-
     @Override
     public void action() throws IOException {
+        int size = rmi_controller.getController().getGame().getGold_deck().getNumber();
+        output.writeObject(size);
+        output.flush();
 
     }
-
 }

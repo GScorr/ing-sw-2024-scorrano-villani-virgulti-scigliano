@@ -1,8 +1,16 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.MODEL.Card.GoldCard;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.ResourceCard;
+import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.RmiController;
+import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 
@@ -15,15 +23,11 @@ import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
 
-    final ObjectInputStream input;
     final ServerProxy server;
 
     private boolean newClient;
 
-    //genero token
-    public String token ;
     public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException {
-        this.input = input;
         this.server = new ServerProxy(output,input);
     }
 
@@ -61,31 +65,18 @@ public class Client implements VirtualView {
         //TODO : gestione persistenza connessioni
         String player_name = selectNamePlayer();
         String game_name;
-/*
-        //If games does not exists
-        ArrayList free_games = server.getFreeGame(this.token);
-        System.out.println("fino a qui");
-        if(free_games == null || free_games.isEmpty()){
-            newGameNotAvailable(player_name);
-        }else{
-
-        }
-
- */
-
-        /**
-         * ho cpiato tutte le funzioni e aggiunto tutti i metodi
-         * e creato tutti i metodi connessi
-         * fatta struttura messaggi
-         * fatta struttura funzioni da chiamare su server proxy
-         */
 
         gameAccess(player_name);
-        startSendingHeartbeats();
+
         waitFullGame();
+
         chooseGoalState();
+
         chooseStartingCardState();
+
         manageGame();
+
+
 
     }
 
@@ -99,18 +90,17 @@ public class Client implements VirtualView {
         do{
             System.out.print("\nScegli nome Player > ");
             player_name = scan.nextLine();
-            boolean isnew = server.checkName(player_name);
-            if(isnew){
+            String isnew = server.checkName(player_name);
+            if(isnew.equals("true")){
                 flag = true;
-                this.token = server.getToken(player_name);
                 newClient=true;
-                System.out.println(token);
-            }else if(!isnew){
+                System.out.println("nome valido");
+            }else if(isnew.equals("false")){
                 System.out.println("Giocatore già presente, reinserisci nome!");
             }else{
-                //bisogno di spiegazione codice
                 flag = true;
-                System.out.println(token + "riconnessa");
+                newClient = false;
+                System.out.println(player_name + " riconnesso!");
             }
 
         }while (!flag);
@@ -120,7 +110,8 @@ public class Client implements VirtualView {
 
     public void gameAccess(String player_name) throws IOException, ClassNotFoundException {
         if(newClient) {
-            if (server.getFreeGame(this.token) == null || server.getFreeGame(this.token).isEmpty()) {
+
+            if (server.getFreeGame() == null || server.getFreeGame().isEmpty()) {
                 newGame_notavailable(player_name);
             } else {
                 makeChoice(player_name);
@@ -140,28 +131,13 @@ public class Client implements VirtualView {
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             int numplayers = scan.nextInt();
             try {
-                server.createGame(game_name, numplayers, token, playerName);
+                String result = server.createGame(game_name, numplayers, playerName);
+                System.out.println(result);
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
             }
         } while(flag);
-    }
-
-    private void startSendingHeartbeats() {
-        /*
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(50);
-                    server.receiveHeartbeat(token);
-                } catch (RemoteException | InterruptedException | IOException e) {
-                   e.printStackTrace();
-                }
-            }
-        }).start();
-
-        */
     }
 
     private void makeChoice(String player_name) throws IOException, ClassNotFoundException {
@@ -193,7 +169,8 @@ public class Client implements VirtualView {
             System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
             numplayers = scan.nextInt();
             try {
-                server.createGame(game_name, numplayers, token, player_name);
+                String result  = server.createGame(game_name, numplayers, player_name);
+                System.out.println(result);
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -206,17 +183,20 @@ public class Client implements VirtualView {
         Scanner scan = new Scanner(System.in);
         boolean check;
         System.out.println("\nElenco partite disponibili: ");
-        List<RmiController> partite = server.getFreeGame(this.token);
+         List<SocketRmiControllerObject> games = server.getFreeGame();
 
-        for (RmiController r : partite) {
-            System.out.println(r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
-                    + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player());
+        for (SocketRmiControllerObject r : games) {
+            System.out.println(r.name + " ID:" + r.ID
+                    + " " + r.num_player + "/" + r.max_num_player);
         }
         do {
             System.out.println("\nInserisci ID partita in cui entrare");
             int ID = scan.nextInt();
-            check = server.findRmiController(ID, token, player_name);
+            check = server.findRmiController(ID, player_name);
         }while(!check);
+
+        System.out.println("sei entrato nella partita !");
+
 
     }
 
@@ -224,21 +204,14 @@ public class Client implements VirtualView {
      * manca getTtop, non so in che classe va
      */
 
-    private void waitFullGame() throws IOException, InterruptedException {
-        System.out.println("sono nel waitFullGame");
-        /**
-         * da fixare
-         */
-        /*
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-            System.out.print("Aspetta il riempimento partita -");
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
+    private void waitFullGame() throws IOException, InterruptedException, ClassNotFoundException {
+        if(server.getPlayerState().equals("NOT_INITIALIZED")){
+            System.out.println("Wait until the game is full");
+            while(server.getPlayerState().equals("NOT_INITIALIZED")){
                 buffering();
             }
-            System.out.println("\nEhi la tua partita è piena!\n");
+            System.out.println("\nYou Game is ready to start");
         }
-
-         */
     }
 
     private void buffering() throws RemoteException, InterruptedException{
@@ -256,123 +229,192 @@ public class Client implements VirtualView {
         System.out.print("-");
     }
 
-    private void chooseGoalState() throws IOException, InterruptedException {
-        chooseGoal();
-        /**
-         * da fixare
-         */
-        /*
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-            if(server.getRmiController(token).getTtoP().get(token).getGoalCard()==null) {
-                chooseGoal();
-                System.out.println("\nHai scelto :" + server.getRmiController(token).getTtoP().get(token).getGoalCard().toString());
-            }
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-                buffering();
-            }
-        }
-
-         */
+    private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
+       if(server.getPlayerState().equals("CHOOSE_GOAL")){
+           if(server.getGoalCard() == null){
+               chooseGoal();
+               Goal goal = server.getGoalCard();
+               System.out.println("\nHai scelto :" + goal.toString());
+           }
+       }
+       while(server.getPlayerState().equals("CHOOSE_GOAL")){
+           buffering();
+       }
     }
 
-    /**
-     *manca getTtop
-     */
-    private void chooseGoal() throws IOException {
+    private void chooseGoal() throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-            System.out.println("scegli obiettivo tra 0 o 1: ");
-            /**
-             * da fixare
-             */
-            /*
-            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
-                    + "\n 2-" + server.getRmiController(token).getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
-             */
+
+            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getListGoalCard().get(0).toString()
+                    + "\n 2-" + server.getListGoalCard().get(1).toString());
+
             String choice = scan.nextLine();
             if (choice.equals("0")) {
                 done=1;
-                System.out.println("scelta ok");
-                server.chooseGoal(token,0);
-
+                server.chooseGoal(0);
             } else if (choice.equals("1")){
                 done=1;
-                server.chooseGoal(token,1);
-            } else System.out.println("Inserimento errato!");
+                server.chooseGoal(1);
+            } else System.out.println("Index boundaries not respected!");
         }
     }
 
     private void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
+        if(server.getPlayerState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            System.out.println("choose starting card");
+            PlayCard starting_card =  server.getStartingCard();
+            showCard(starting_card);
 
-        System.out.println("choose starting card");
-        chooseStartingCard();
-
-        /**
-         * TODO:
-         *  sistemare quando il player rimane in buffering
-         */
-    /*
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-            if(!server.getRmiController(token).getTtoP().get(token).isFirstPlaced()) {
+            if(!server.startingCardIsPlaced()) {
                 chooseStartingCard();
             }
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            while (server.getPlayerState().equals("CHOOSE_SIDE_FIRST_CARD")) {
                 buffering();
             }
+            GameField game_field = server.getGameField();
+            showField(game_field);
         }
 
-     */
+
     }
 
     private void chooseStartingCard() throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\nScegli lato carta iniziale:\n");
-        server.showStartingCard(token);
         int done=0;
         while(done==0){
             System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
             String dec = scan.nextLine();
             if (dec.equals("F")){
                 done=1;
-                server.chooseStartingCard(token,false);
+                server.chooseStartingCard(false);
             } else if (dec.equals("B")){
                 done=1;
-                server.chooseStartingCard(token,true);
+                server.chooseStartingCard(true);
             }
             else System.out.println("Inserimento errato!");
         }
-        server.showGameField(token);
-    }
-
-    /**
-     * manca getTtop
-     */
-
-
-    private void manageGame() throws IOException, InterruptedException {
-        System.out.println("entro in manageGame");
-        /**
-         * da fixare
-         */
-       /*
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
-            System.out.println("\nAspetta il tuo turno ");
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
-                buffering();
-            }
-        }
-        if(server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
-            System.out.println("\nInserisci la tua carta: ");
-            while (server.getRmiController(token).getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
-                buffering();
-            }
-        }
-
-        */
+        server.showGameField();
     }
 
 
+
+
+    private void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
+
+        while (!server.getPlayerState().equals("END_GAME")) {
+            if (server.getPlayerState().equals("WAIT_TURN")) {
+                System.out.println("\nWait for your turn ");
+                while (server.getPlayerState().equals("WAIT_TURN")) {
+                    buffering();
+                }
+            }
+            if (server.getPlayerState().equals("PLACE_CARD")) {
+                System.out.println("\nInsert the card, this is your cards in hand: ");
+                List<PlayCard> cards_in_hand = server.getCardsInHand();
+                for(PlayCard c : cards_in_hand){
+                    showCard(c);
+                }
+                selectAndInsertCard();
+            }
+            if(server.getPlayerState().equals("DRAW_CARD")) {
+                drawCard();
+            }
+
+            int point = server.getPoint();
+            System.out.println("end of your turn, you have a total of : " +  point + "points");
+        }
+
+        System.out.println("End of the GAME, completare questa parte");
+
+
+    }
+
+    private void selectAndInsertCard() throws IOException, ClassNotFoundException {
+        Scanner scan = new Scanner(System.in);
+        boolean done = false;
+        while(!done) {
+            System.out.println("\nChoosed index (1,2,3): ");
+            String choicestring = scan.nextLine();
+            int choice = Integer.parseInt(choicestring);
+            if(choice>=1 && choice<=3){
+                System.out.println("\nChoose the side (B,F): ");
+                String flip = scan.nextLine();
+                if(flip.equals("B") || flip.equals("F")){
+                    boolean flipped = false;
+                    if(flip.equals("B")){
+                        flipped = true;
+                    }
+                    System.out.println("\nInserisci coordinate x e y di inserimento carta: ");
+                    int x = scan.nextInt();
+                    int y = scan.nextInt();
+                    scan.nextLine();
+                    if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
+                        try {
+                            server.placeCard(choice - 1, x, y, flipped);
+                            done = true;
+                        }
+                        catch (ControllerException e){
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else{
+                        System.out.println("\nInserimento sbagliato!");
+                    }
+                }
+                else{
+                    System.out.println("\nInserimento sbagliato!");
+                }
+            }
+            else{
+                System.out.println("\nInserimento sbagliato!");
+            }
+        }
+        GameField game_field = server.getGameField();
+        showField(game_field);
+    }
+
+    private void drawCard() throws IOException, ClassNotFoundException {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n Draw a card, deck available: ");
+        if(server.getGoldDeckSize() > 0){
+            System.out.println("1. Gold Deck");
+        }
+        if (server.getResourcesDeckSize() > 0){
+            System.out.println("2. Resources Deck");
+        }
+        System.out.println("3  Center Cards");
+
+
+        String numstring = scan.nextLine();
+        int num = Integer.parseInt(numstring);
+        boolean done = false;
+        while(!done){
+            if(num==1){
+                done = true;
+                server.peachFromGoldDeck();
+            } else if (num==2) {
+                done = true;
+                server.peachFromResourcesDeck();
+            } else if (num==3) {
+                done=true;
+                List<PlayCard> center_cards = server.getCardsInCenter();
+                for(PlayCard c : center_cards){
+                    showCardInCenter(c);
+                }
+                System.out.println("Scegli indice carta da pescare: ");
+                String choicestr = scan.nextLine();
+                int index = Integer.parseInt(choicestr);
+                server.peachFromCardsInCenter(index-1);
+            } else{
+                System.out.println("\n Inserimento errato!");
+            }
+        }
+    }
 
 
 
@@ -391,29 +433,6 @@ public class Client implements VirtualView {
 
      */
 
-    /*
-    private void newGameNotAvailable(String playerName) throws IOException, ClassNotFoundException {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
-        System.out.print("\nScegli nome Partita > ");
-        String game_name = scan.nextLine();
-        boolean flag;
-        do {
-            flag = false;
-            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-            int numplayers = scan.nextInt();
-            try {
-                server.createGame(game_name, numplayers, token, playerName);
-
-            }catch (SocketException e){
-                System.out.println(e.getMessage());
-                flag = true;
-            }
-        } while(flag);
-    }
-
-
-     */
     public void reportError(String details) {
         // TODO Attenzione! Questo può causare data race con il thread dell'interfaccia o un altro thread
         System.err.print("\n[ERROR] " + details + "\n> ");
@@ -423,6 +442,124 @@ public class Client implements VirtualView {
     public void showValue(String message) {
         System.out.println(message);
     }
+
+
+    public void showCard(PlayCard card) throws RemoteException {
+        Side back = card.getBackSide();
+        Side front = card.getFrontSide();
+
+        System.out.println("BACK SIDE\n----------------------------");
+        System.out.println( " | " + back.getAngleLeftUp().toString().substring(0,2)  +   " |               "+ " | " + back.getAngleRightUp().toString().substring(0,2) + " |\n " );
+        //System.out.println( " | " + back.getAngleRightUp().toString().charAt(0) + " |\n " );
+        System.out.println( " |       | " + back.getCentral_resource().toString().substring(0,2) + back.getCentral_resource2().toString().substring(0,2) + back.getCentral_resource3().toString().substring(0,2) + " |         |\n " );
+        System.out.println( " | " + back.getAngleLeftDown().toString().substring(0,2) +  " |               " + " | " + back.getAngleRightDown().toString().substring(0,2) + " |\n " );
+        //System.out.println(  );
+        System.out.println("----------------------------\n\n");
+
+        System.out.println("FRONT SIDE\n----------------------------");
+
+        if(card instanceof ResourceCard) {
+            System.out.println(" | " + card.getPoint() + " | ");
+            if (card instanceof GoldCard) {
+                System.out.println(" | " + ((GoldCard) card).getPointBonus().toString().substring(0, 2) + " | " + "             | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
+            } else {
+                System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
+            }
+        }
+        else {
+            System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
+        }
+        //System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
+        System.out.println( " |       | " + front.getCentral_resource().toString().substring(0,2) + front.getCentral_resource2().toString().substring(0,2) + front.getCentral_resource3().toString().substring(0,2) + " |        |\n " );
+        //System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
+        if ( card instanceof GoldCard ){
+            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " | " +
+                    "  " + card.getCostraint().toString()  + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n ");
+        }else{
+            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " |              " + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n " );
+        }
+        //System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
+        System.out.println("----------------------------\n\n");
+
+    }
+    public void showField(GameField field) throws RemoteException {
+        boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
+        boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                    nonEmptyRows[i] = true;
+                    nonEmptyCols[j] = true;
+
+
+                    if (i > 0) nonEmptyRows[i - 1] = true;
+                    if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
+                    if (j > 0) nonEmptyCols[j - 1] = true;
+                    if (j < Constants.MATRIXDIM - 1) nonEmptyCols[j + 1] = true;
+                }
+            }
+        }
+
+
+        System.out.print("   ");
+        for (int k = 0; k < Constants.MATRIXDIM; k++) {
+            if (nonEmptyCols[k]) {
+                System.out.print(k + " ");
+            }
+        }
+        System.out.print("\n");
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            if (nonEmptyRows[i]) {
+                System.out.print(i + " ");
+                for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                    if (nonEmptyCols[j]) {
+                        if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
+                        } else {
+                            System.out.print("   ");
+                        }
+                    }
+                }
+                System.out.print("\n");
+            }
+        }
+    }
+
+    public void showCardInCenter(PlayCard card) throws RemoteException {
+
+        Side front = card.getFrontSide();
+
+        System.out.println(" You can Only See the FRONT SIDE\n----------------------------");
+
+        if(card instanceof ResourceCard) {
+            System.out.println(" | " + card.getPoint() + " | ");
+            if (card instanceof GoldCard) {
+                System.out.println(" | " + ((GoldCard) card).getPointBonus().toString().substring(0, 2) + " | " + "             | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
+            } else {
+                System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
+            }
+        }
+        else {
+            System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
+        }
+        //System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
+        System.out.println( " |       | " + front.getCentral_resource().toString().substring(0,2) + front.getCentral_resource2().toString().substring(0,2) + front.getCentral_resource3().toString().substring(0,2) + " |        |\n " );
+        //System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
+        if ( card instanceof GoldCard ){
+            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " | " +
+                    "  " + card.getCostraint().toString()  + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n ");
+        }else{
+            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " |              " + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n " );
+        }
+        //System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
+        System.out.println("----------------------------\n\n");
+
+    }
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String host = "127.0.0.1";
         int port = 12345;

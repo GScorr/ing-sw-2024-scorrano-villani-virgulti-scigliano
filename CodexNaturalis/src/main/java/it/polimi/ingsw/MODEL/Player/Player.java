@@ -71,7 +71,7 @@ public class Player implements PlayerObserver, Serializable {
     private PlayCard starting_card;
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
-    private int player_points = 0;
+    private int player_points = 19;
 
     private int num_goal_achieve = 0;
 
@@ -272,7 +272,6 @@ public class Player implements PlayerObserver, Serializable {
         playing_card.flipCard(flipped);
         game_field.insertCard(playing_card, x, y);
         removeHandCard(playing_card, index);
-
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;

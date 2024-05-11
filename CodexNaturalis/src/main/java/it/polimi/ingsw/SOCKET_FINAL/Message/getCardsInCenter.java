@@ -1,22 +1,22 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class getRmiControllerMessage implements Message, Serializable {
-
-    public String token;
-
-
+public class getCardsInCenter implements Message, Serializable {
 
     public Server server;
-
+    public String token;
+    ObjectOutputStream output;
     public VirtualServerF rmi_server;
     public VirtualRmiController rmi_controller;
 
@@ -31,7 +31,9 @@ public class getRmiControllerMessage implements Message, Serializable {
     }
 
 
-    ObjectOutputStream output;
+    public getCardsInCenter(){
+
+    }
 
     public void setToken(String token) {
         this.token = token;
@@ -46,13 +48,16 @@ public class getRmiControllerMessage implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public getRmiControllerMessage() {
-
-    }
 
     @Override
     public void action() throws IOException {
+        List<PlayCard> golds_cards_in_center = rmi_controller.getController().getGame().getCars_in_center().getGold_list();
+        List<PlayCard> resources_cards_in_center = rmi_controller.getController().getGame().getCars_in_center().getResource_list();
+        // Combine elements of both lists using Stream API (Java 8+)
+        List<PlayCard> cards_in_center = Stream.concat(golds_cards_in_center.stream(), resources_cards_in_center.stream())
+                .collect(Collectors.toList());
+        output.writeObject(cards_in_center);
+        output.flush();
 
     }
-
 }
