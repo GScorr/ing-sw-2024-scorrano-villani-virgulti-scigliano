@@ -6,11 +6,9 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
-import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
 import it.polimi.ingsw.MODEL.GameField;
 
 import java.net.MalformedURLException;
-import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -37,9 +35,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void runCli() throws RemoteException, InterruptedException, NotBoundException {
         //server.setNum(11);
-        System.out.println(server.getNum());
-        Thread.sleep(150);
-        System.out.println(server.getNum());
         /*String player_name = selectNamePlayer();
         gameAccess(player_name);
         if(newClient) {
@@ -50,11 +45,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
         manageGame();*/
 
-        while(true){
-            System.out.println(server.getNum());
-            Thread.sleep(150);
-            System.out.println(server.getNum());
-        }
     }
 
     private void manageGame() throws RemoteException, InterruptedException {
@@ -329,7 +319,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Scanner scan = new Scanner(System.in);
         boolean check;
             System.out.println("\nElenco partite disponibili: ");
-            List<RmiController> partite = server.getFreeGames();
+            List<GameServer> partite = server.getFreeGames();
             for ( VirtualRmiController r : partite) {
                 System.out.println( r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
                         + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player() );

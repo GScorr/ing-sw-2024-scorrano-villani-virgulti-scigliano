@@ -7,11 +7,10 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.*;
 
-public class RmiController implements VirtualRmiController, Serializable {
+public class GameServer implements VirtualRmiController, Serializable {
     public List<VirtualViewF> clients = new ArrayList<>();
     public TokenManagerF token_manager = new TokenManagerImplementF();
     public Map<String, Player> token_to_player = new HashMap<>();
@@ -23,7 +22,7 @@ public class RmiController implements VirtualRmiController, Serializable {
     public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
     private int port;
 
-    public RmiController(String name, int numPlayer, int port) throws RemoteException {
+    public GameServer(String name, int numPlayer, int port) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         //checkDisconnected();

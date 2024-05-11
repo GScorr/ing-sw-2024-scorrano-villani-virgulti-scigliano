@@ -1,14 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL;
-import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Card.StartingCard;
-import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
-import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
-import it.polimi.ingsw.RMI.*;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -26,9 +19,8 @@ public class RmiServerF implements VirtualServerF {
     private static int port;
     private List<VirtualViewF> clients = new ArrayList<>();
     private Map<String, Player> token_to_player = new HashMap<>();
-    private Map<String, RmiController>  token_to_rmi = new HashMap<>();
-    //private List<GameController> controllers = new ArrayList<>();
-    private Map<Integer , RmiController> rmi_controllers = new HashMap<>();
+    private Map<String, GameServer>  token_to_rmi = new HashMap<>();
+    private Map<Integer , GameServer> rmi_controllers = new HashMap<>();
 
     //todo da modificare una volta capito che tipo di update invia
     private BlockingQueue<String> updates = new ArrayBlockingQueue<>(20);
@@ -45,22 +37,21 @@ public class RmiServerF implements VirtualServerF {
 
     //given a client create the token that will represent it
     @Override
-    public String createToken(VirtualViewF client) throws RemoteException {return token_manager.generateToken(client);}
-    public String createTokenSocket(String name) throws RemoteException {return token_manager.generateTokenSocket(name);}
-
+    public String createToken(VirtualViewF client) throws RemoteException {return common.createToken(client);}
+    public String createTokenSocket(String name) throws RemoteException {return common.createTokenSocket(name);}
     @Override
     public Map<String, Player> getTtoP() throws RemoteException {return token_to_player;}
 
     @Override
-    public Map<String, RmiController> getTtoR() throws RemoteException {return token_to_rmi;}
+    public Map<String, GameServer> getTtoR() throws RemoteException {return token_to_rmi;}
 
-    public Map<Integer, RmiController> getListRmiController() throws RemoteException {return rmi_controllers;}
+    public Map<Integer, GameServer> getListRmiController() throws RemoteException {return rmi_controllers;}
 
     //todo: NEL CONTROLLER SCEGLIERE COLORE
     @Override
     public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws RemoteException {
         int port = getAvailablePort();
-        RmiController gameServer = new RmiController(name,num_player,port);
+        GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayer(p_token,player_name, client,true);
         VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
@@ -73,7 +64,7 @@ public class RmiServerF implements VirtualServerF {
 
     public int createGameSocket(String name, int num_player, String p_token, String player_name) throws RemoteException {
         int port = getAvailablePort();
-        RmiController gameServer = new RmiController(name,num_player,port);
+        GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayerSocket(p_token,player_name,true);
         VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
@@ -99,9 +90,9 @@ public class RmiServerF implements VirtualServerF {
     //returns the list of all game controllers that are accessible ( not full )
 
     @Override
-    public List<RmiController> getFreeGames() throws RemoteException {
+    public List<GameServer> getFreeGames() throws RemoteException {
         if( rmi_controllers.isEmpty() ) return null;
-        List<RmiController> free = new ArrayList<>();
+        List<GameServer> free = new ArrayList<>();
         for ( Integer id : rmi_controllers.keySet() )
         {if( !rmi_controllers.get(id).getFull() ) free.add(rmi_controllers.get(id));}
         return free;
@@ -113,7 +104,7 @@ public class RmiServerF implements VirtualServerF {
         List<SocketRmiControllerObject> free = new ArrayList<>();
         for (Integer id : rmi_controllers.keySet()) {
             if (!rmi_controllers.get(id).getFull()) {
-                RmiController r = rmi_controllers.get(id);
+                GameServer r = rmi_controllers.get(id);
                 SocketRmiControllerObject tmp = new SocketRmiControllerObject(r.getController().getGame().getName(),r.getController().getGame().getIndex_game(),r.getController().getGame().getNumPlayer(),r.getController().getGame().getMax_num_player());
                 free.add(tmp);
             }
@@ -155,7 +146,7 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws RemoteException {
 
-        RmiController index = rmi_controllers.get(game_id);
+        GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
         {
             token_to_rmi.put(p_token , index );
@@ -169,7 +160,7 @@ public class RmiServerF implements VirtualServerF {
 
     public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws RemoteException {
 
-        RmiController index = rmi_controllers.get(game_id);
+        GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
         {
             token_to_rmi.put(p_token , index );
@@ -187,7 +178,7 @@ public class RmiServerF implements VirtualServerF {
             synchronized (this){
 
                 List<String> tokens = new ArrayList<>();
-                RmiController gc = token_to_rmi.get(update);
+                GameServer gc = token_to_rmi.get(update);
 
                 for( String t : token_to_rmi.keySet() )
                     if( token_to_rmi.get(t).equals(gc) ) tokens.add(t);
@@ -201,7 +192,7 @@ public class RmiServerF implements VirtualServerF {
         }
     }
     @Override
-    public RmiController getRmiController(String token) throws RemoteException{return token_to_rmi.get(token);}
+    public GameServer getRmiController(String token) throws RemoteException{return token_to_rmi.get(token);}
     @Override
     public void receiveHeartbeat(String token) throws RemoteException {lastHeartbeatTime.put(token, System.currentTimeMillis());}
 
@@ -230,12 +221,6 @@ public class RmiServerF implements VirtualServerF {
         }).start();
     }
 
-    public void setNum(int n){
-        common.setNum(n);
-    }
-    public int getNum(){
-        return common.getNum();
-    }
     public static void main(String[] args) throws RemoteException {
       /*  final String serverName = "VirtualServer";
         VirtualServerF server = new RmiServerF();

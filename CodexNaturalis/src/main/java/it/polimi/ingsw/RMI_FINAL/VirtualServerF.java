@@ -1,10 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL;
 
 
-import it.polimi.ingsw.CONTROLLER.GameController;
-import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Player.Player;
-import it.polimi.ingsw.RMI.VirtualView;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -16,23 +13,20 @@ public interface VirtualServerF extends Remote {
     public String createToken(VirtualViewF client ) throws  RemoteException;
     public String createTokenSocket(String name) throws RemoteException;
     public Map<String, Player> getTtoP() throws RemoteException;
-    public Map<String, RmiController> getTtoR() throws RemoteException;
-    public Map<Integer,RmiController> getListRmiController() throws  RemoteException;
+    public Map<String, GameServer> getTtoR() throws RemoteException;
+    public Map<Integer, GameServer> getListRmiController() throws  RemoteException;
     public int createGame(String game_name, int num_player, String p_token, String player_name,VirtualViewF client) throws RemoteException;
     public int createGameSocket(String name, int num_player, String p_token, String player_name) throws RemoteException;
     public boolean addPlayer(Integer game_id, String token, String name,VirtualViewF client) throws RemoteException;
     public boolean addPlayerSocket(Integer game_id, String p_token, String name) throws RemoteException;
     public List<VirtualViewF> getListClient() throws RemoteException;
-    public List<RmiController> getFreeGames() throws RemoteException;
+    public List<GameServer> getFreeGames() throws RemoteException;
     public List<SocketRmiControllerObject> getFreeGamesSocket() throws RemoteException;
     public String checkName(String name, VirtualViewF client) throws RemoteException;
     public boolean findRmiController(Integer id, String p_token, String player_name, VirtualViewF client) throws RemoteException;
     public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws RemoteException;
-    public RmiController getRmiController(String token) throws RemoteException;
+    public GameServer getRmiController(String token) throws RemoteException;
     public void receiveHeartbeat(String token) throws RemoteException;
     int getPort(String token) throws RemoteException;
-
-    public void setNum(int n) throws RemoteException;
-    public int getNum() throws RemoteException;
 
 }
