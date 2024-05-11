@@ -248,10 +248,10 @@ public class Client implements VirtualView {
                     + "\n 2-" + server.getListGoalCard().get(1).toString());
 
             String choice = scan.nextLine();
-            if (choice.equals("0")) {
+            if (choice.equals("1")) {
                 done=1;
                 server.chooseGoal(0);
-            } else if (choice.equals("1")){
+            } else if (choice.equals("2")){
                 done=1;
                 server.chooseGoal(1);
             } else System.out.println("Index boundaries not respected!");
