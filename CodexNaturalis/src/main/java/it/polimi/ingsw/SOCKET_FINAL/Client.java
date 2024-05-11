@@ -58,11 +58,9 @@ public class Client implements VirtualView {
 
     private void runCli() throws IOException, ClassNotFoundException, InterruptedException {
 
-        String ciao = server.modify_Message(20);
 
-        System.out.println(ciao);
         //TODO : gestione persistenza connessioni
-        /*String player_name = selectNamePlayer();
+        String player_name = selectNamePlayer();
         String game_name;
 
         gameAccess(player_name);
@@ -73,7 +71,7 @@ public class Client implements VirtualView {
 
         chooseStartingCardState();
 
-        manageGame();*/
+        manageGame();
 
 
 
@@ -351,19 +349,13 @@ public class Client implements VirtualView {
                     int y = scan.nextInt();
                     scan.nextLine();
                     if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                        try {
-                            server.placeCard(choice - 1, x, y, flipped);
-                            done = true;
-                        }
-                        catch (ControllerException e){
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+
+                            done = server.placeCard(choice - 1, x, y, flipped);
+                            System.out.println(done);
+
                     }
-                    else{
-                        System.out.println("\nInserimento sbagliato!");
-                    }
+                    if( ! done){System.out.println("\nInserimento sbagliato!");}
+
                 }
                 else{
                     System.out.println("\nInserimento sbagliato!");

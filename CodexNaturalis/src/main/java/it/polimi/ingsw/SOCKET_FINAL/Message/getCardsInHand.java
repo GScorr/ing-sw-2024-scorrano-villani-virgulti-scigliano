@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
@@ -16,7 +17,7 @@ public class getCardsInHand implements Message, Serializable {
     public Server server;
     public String token;
     ObjectOutputStream output;
-    public VirtualServerF rmi_server;
+    public Common_Server common;
     public VirtualRmiController rmi_controller;
 
 
@@ -25,8 +26,8 @@ public class getCardsInHand implements Message, Serializable {
         this.rmi_controller = rmi_controller;
     }
 
-    public void setRmiServer(VirtualServerF rmi_server) {
-        this.rmi_server = rmi_server;
+    public void setCommonServer(Common_Server common){
+        this.common = common;
     }
 
 

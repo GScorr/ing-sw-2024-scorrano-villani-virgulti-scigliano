@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
@@ -13,7 +14,7 @@ import java.rmi.RemoteException;
 public class CheckNameMessage implements Message, Serializable {
 
     public Server server;
-    VirtualServerF rmi_server;
+    public Common_Server common;
     ObjectOutputStream output;
 
 
@@ -42,8 +43,8 @@ public class CheckNameMessage implements Message, Serializable {
     }
 
     @Override
-    public void setRmiServer(VirtualServerF rmi_server) {
-        this.rmi_server = rmi_server;
+    public  void setCommonServer(Common_Server common){
+        this.common = common;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class CheckNameMessage implements Message, Serializable {
     }
 
     public String checkNameMessageAction() throws IOException {
-        String isnew = rmi_server.checkName(nome,null);
+        String isnew = common.checkName(nome,null);
         return isnew;
     }
 
