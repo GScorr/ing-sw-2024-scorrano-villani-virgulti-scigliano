@@ -9,16 +9,12 @@ import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
-import it.polimi.ingsw.RMI_FINAL.RmiController;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
-import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 
 import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
@@ -62,8 +58,11 @@ public class Client implements VirtualView {
 
     private void runCli() throws IOException, ClassNotFoundException, InterruptedException {
 
+        String ciao = server.modify_Message(20);
+
+        System.out.println(ciao);
         //TODO : gestione persistenza connessioni
-        String player_name = selectNamePlayer();
+        /*String player_name = selectNamePlayer();
         String game_name;
 
         gameAccess(player_name);
@@ -74,7 +73,7 @@ public class Client implements VirtualView {
 
         chooseStartingCardState();
 
-        manageGame();
+        manageGame();*/
 
 
 

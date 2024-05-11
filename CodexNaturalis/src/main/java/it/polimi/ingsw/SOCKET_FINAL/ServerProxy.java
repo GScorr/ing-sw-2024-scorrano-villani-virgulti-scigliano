@@ -9,8 +9,6 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
-import it.polimi.ingsw.MODEL.Player.State.PlaceCard;
-import it.polimi.ingsw.RMI_FINAL.RmiController;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,7 +28,15 @@ public class ServerProxy implements VirtualServer {
         this.output = output;
         this.input = input;
     }
+    public String modify_Message(int i) throws IOException, ClassNotFoundException {
+        Message DP_message = new ModifyCommonServerMessage(i);
+        output.writeObject(DP_message);
+        output.flush();
 
+        MyMessageFinal response = (MyMessageFinal) input.readObject();
+        return response.getContent();
+
+    }
 
     public void inserisciGiocatore(String nome) throws IOException {
         CreatePlayerMessage DP_message = new CreatePlayerMessage(nome);

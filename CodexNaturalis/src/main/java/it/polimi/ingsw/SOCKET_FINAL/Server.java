@@ -1,6 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI.TokenManagerImplement;
@@ -36,13 +37,17 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     public TokenManager token_manager = new TokenManager();
 
-    public Server(ServerSocket listenSocket, VirtualServerF serverRmi) throws RemoteException {
+    private Common_Server common;
+
+    public Server(ServerSocket listenSocket, VirtualServerF serverRmi, Common_Server common) throws RemoteException {
+        this.common = common;
         this.listenSocket = listenSocket;
         this.serverRmi = serverRmi;
     }
 
     public void runServer() throws IOException, NotBoundException {
-        Socket clientSocket = null;
+
+       Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
             System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
 
@@ -76,7 +81,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
 
     public static void main(String[] args) throws IOException, NotBoundException {
-        // Server Socket
+       /* // Server Socket
         String host = "127.0.0.1";
         int port = 12345;
 
@@ -88,7 +93,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
         VirtualServerF serverRmi = (VirtualServerF) registry.lookup("VirtualServer");
 
 
-        new Server(listenSocket,serverRmi).runServer();
+        new Server(listenSocket,serverRmi).runServer();*/
     }
 
     @Override
@@ -120,4 +125,5 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
     public void printString(String s) throws RemoteException {
 
     }
+
 }
