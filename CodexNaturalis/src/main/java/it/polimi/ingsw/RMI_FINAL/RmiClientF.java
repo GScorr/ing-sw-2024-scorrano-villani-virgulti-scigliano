@@ -16,6 +16,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
@@ -35,15 +37,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void runCli() throws RemoteException, InterruptedException, NotBoundException {
         //server.setNum(11);
-        /*String player_name = selectNamePlayer();
+        String player_name = selectNamePlayer();
         gameAccess(player_name);
-        if(newClient) {
             startSendingHeartbeats();
             waitFullGame();
             chooseGoalState();
             chooseStartingCardState();
-        }
-        manageGame();*/
+        manageGame();
 
     }
 
@@ -220,12 +220,31 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void waitFullGame() throws RemoteException, InterruptedException {
         if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-            System.out.print("Aspetta il riempimento partita -");
-            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-                buffering();
-            }
+            getMenuWait();
             System.out.println("\nEhi la tua partita è piena!\n");
         }
+    }
+
+    private void getMenuWait() throws RemoteException, InterruptedException {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Aspetta il riempimento partita");
+        System.out.println("MENU");
+        System.out.println("Premi 1 per accedere alla chat");
+        while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
+            if(scan.hasNextInt()){
+                int choice = scan.nextInt();
+                scan.nextLine();
+                if(choice==1){
+                    System.out.println("Uela");
+                }
+            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private void startSendingHeartbeats() {
