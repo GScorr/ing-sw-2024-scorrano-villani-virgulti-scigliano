@@ -126,11 +126,4 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
-    public void setCommon(int i ){
-        common.setNum(i);
-    }
-
-    public int getCommon(){
-      return  common.getNum();
-    }
 }
