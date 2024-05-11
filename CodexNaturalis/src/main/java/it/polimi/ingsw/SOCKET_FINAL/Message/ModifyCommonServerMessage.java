@@ -47,10 +47,5 @@ public class ModifyCommonServerMessage implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-        server.setCommon(num);
-        MyMessageFinal message = new MyMessageFinal(String.valueOf(server.getCommon()));
-
-        output.writeObject(message);
-        output.flush();
     }
 }
