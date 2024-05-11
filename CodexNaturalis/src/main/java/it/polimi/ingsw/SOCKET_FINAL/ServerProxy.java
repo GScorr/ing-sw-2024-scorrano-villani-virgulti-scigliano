@@ -31,7 +31,15 @@ public class ServerProxy implements VirtualServer {
         this.output = output;
         this.input = input;
     }
+    public String modify_Message(int i) throws IOException, ClassNotFoundException {
+        Message DP_message = new ModifyCommonServerMessage(i);
+        output.writeObject(DP_message);
+        output.flush();
 
+        MyMessageFinal response = (MyMessageFinal) input.readObject();
+        return response.getContent();
+
+    }
 
     public void inserisciGiocatore(String nome) throws IOException {
         CreatePlayerMessage DP_message = new CreatePlayerMessage(nome);

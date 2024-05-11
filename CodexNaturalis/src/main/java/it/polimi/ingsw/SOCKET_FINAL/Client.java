@@ -62,8 +62,11 @@ public class Client implements VirtualView {
 
     private void runCli() throws IOException, ClassNotFoundException, InterruptedException {
 
+        String ciao = server.modify_Message(20);
+
+        System.out.println(ciao);
         //TODO : gestione persistenza connessioni
-        String player_name = selectNamePlayer();
+        /*String player_name = selectNamePlayer();
         String game_name;
 
         gameAccess(player_name);
@@ -74,7 +77,7 @@ public class Client implements VirtualView {
 
         chooseStartingCardState();
 
-        manageGame();
+        manageGame();*/
 
 
 

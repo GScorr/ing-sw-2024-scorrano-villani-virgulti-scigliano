@@ -36,13 +36,25 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void runCli() throws RemoteException, InterruptedException, NotBoundException {
-        String player_name = selectNamePlayer();
+        //server.setNum(11);
+        System.out.println(server.getNum());
+        Thread.sleep(150);
+        System.out.println(server.getNum());
+        /*String player_name = selectNamePlayer();
         gameAccess(player_name);
+        if(newClient) {
             startSendingHeartbeats();
             waitFullGame();
             chooseGoalState();
             chooseStartingCardState();
-        manageGame();
+        }
+        manageGame();*/
+
+        while(true){
+            System.out.println(server.getNum());
+            Thread.sleep(150);
+            System.out.println(server.getNum());
+        }
     }
 
     private void manageGame() throws RemoteException, InterruptedException {
