@@ -1,25 +1,21 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.util.List;
 
-public class GetFreeGames implements Message, Serializable {
+public class firstCardIsPlaced implements Message, Serializable {
 
     public Server server;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
-
     public VirtualRmiController rmi_controller;
 
 
@@ -28,11 +24,13 @@ public class GetFreeGames implements Message, Serializable {
         this.rmi_controller = rmi_controller;
     }
 
-    public void setCommonServer(Common_Server common){
+    public void setCommonServer(Common_Server common ){
         this.common = common;
     }
 
-    public GetFreeGames(){
+
+
+    public firstCardIsPlaced(){
 
     }
 
@@ -52,16 +50,16 @@ public class GetFreeGames implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-
-        List<SocketRmiControllerObject> games = common.getFreeGamesSocket();
-
-        if( server == null){
-            System.out.println("error");
-            return;
+        boolean is_places = rmi_controller.getTtoP().get(token).isFirstPlaced();
+        MyMessageFinal message;
+        if(is_places){
+             message = new MyMessageFinal("true");
+        }else{
+             message = new MyMessageFinal("false");
         }
 
-
-        output.writeObject(games);
+        output.writeObject(message);
         output.flush();
+
     }
 }

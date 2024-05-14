@@ -1,0 +1,26 @@
+module PSP31 {
+
+    requires java.management;
+    requires java.rmi;
+    requires javafx.graphics;
+    requires javafx.base;
+    requires javafx.fxml;
+    requires javafx.controls;
+    requires javafx.media;
+    requires com.google.gson;
+    exports it.polimi.ingsw.MODEL;
+    exports it.polimi.ingsw.VIEW;
+    exports it.polimi.ingsw.SOCKET_FINAL;
+    exports it.polimi.ingsw.RMI_FINAL;
+    exports it.polimi.ingsw.RMI;
+    exports it.polimi.ingsw.CONSTANTS;
+    exports it.polimi.ingsw.CONTROLLER;
+
+
+    //può essere che al posto di questa linea bisogna aggiungere tutte le varie cartelle come:
+    // exports it.polimi.ingsw
+
+    exports it.polimi.ingsw;
+    opens it.polimi.ingsw.VIEW to javafx.fxml;
+
+}

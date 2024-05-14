@@ -1,5 +1,8 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
+import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
+import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -10,22 +13,36 @@ import java.io.Serializable;
 public class chooseStartingCardMessage implements Message, Serializable {
 
     public String token;
-    public boolean check;
+    public boolean flipped;
 
 
-    public Controller controller;
     public Server server;
 
     ObjectOutputStream output;
 
-    public chooseStartingCardMessage(String token, boolean check) {
-        this.token = token;
-        this.check = check;
+    public Common_Server common;
+
+    public VirtualRmiController rmi_controller;
+
+
+    @Override
+    public void setRmiController(VirtualRmiController rmi_controller) {
+        this.rmi_controller = rmi_controller;
     }
 
-    public void setController(Controller controller) {
-        this.controller = controller;
+    public void setCommonServer(Common_Server common){
+        this.common = common;
     }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public chooseStartingCardMessage(boolean flipped) {
+        this.flipped = flipped;
+    }
+
+
 
     public void setServer(Server server) {
         this.server = server;
@@ -37,7 +54,7 @@ public class chooseStartingCardMessage implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-
+        rmi_controller.chooseStartingCard(token,flipped);
     }
 
 }

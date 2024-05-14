@@ -1,27 +1,24 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.util.List;
 
-public class GetFreeGames implements Message, Serializable {
+public class peachFromCardsInCenter implements Message, Serializable {
 
     public Server server;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
-
     public VirtualRmiController rmi_controller;
+    public int index;
 
+    public boolean flipped;
 
     @Override
     public void setRmiController(VirtualRmiController rmi_controller) {
@@ -32,8 +29,8 @@ public class GetFreeGames implements Message, Serializable {
         this.common = common;
     }
 
-    public GetFreeGames(){
-
+    public peachFromCardsInCenter(int index) {
+        this.index = index;
     }
 
     public void setToken(String token) {
@@ -52,16 +49,6 @@ public class GetFreeGames implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-
-        List<SocketRmiControllerObject> games = common.getFreeGamesSocket();
-
-        if( server == null){
-            System.out.println("error");
-            return;
-        }
-
-
-        output.writeObject(games);
-        output.flush();
+        rmi_controller.peachFromCardsInCenter(token,index);
     }
 }

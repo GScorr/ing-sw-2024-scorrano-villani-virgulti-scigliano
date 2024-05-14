@@ -1,25 +1,24 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class GetFreeGames implements Message, Serializable {
+public class getCardsInCenter implements Message, Serializable {
 
     public Server server;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
-
     public VirtualRmiController rmi_controller;
 
 
@@ -32,7 +31,8 @@ public class GetFreeGames implements Message, Serializable {
         this.common = common;
     }
 
-    public GetFreeGames(){
+
+    public getCardsInCenter(){
 
     }
 
@@ -52,16 +52,13 @@ public class GetFreeGames implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-
-        List<SocketRmiControllerObject> games = common.getFreeGamesSocket();
-
-        if( server == null){
-            System.out.println("error");
-            return;
-        }
-
-
-        output.writeObject(games);
+        List<PlayCard> golds_cards_in_center = rmi_controller.getController().getGame().getCars_in_center().getGold_list();
+        List<PlayCard> resources_cards_in_center = rmi_controller.getController().getGame().getCars_in_center().getResource_list();
+        // Combine elements of both lists using Stream API (Java 8+)
+        List<PlayCard> cards_in_center = Stream.concat(golds_cards_in_center.stream(), resources_cards_in_center.stream())
+                .collect(Collectors.toList());
+        output.writeObject(cards_in_center);
         output.flush();
+
     }
 }

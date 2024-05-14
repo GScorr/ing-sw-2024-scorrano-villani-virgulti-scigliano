@@ -1,25 +1,23 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.List;
 
-public class GetFreeGames implements Message, Serializable {
+public class getCardsInHand implements Message, Serializable {
 
     public Server server;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
-
     public VirtualRmiController rmi_controller;
 
 
@@ -32,7 +30,8 @@ public class GetFreeGames implements Message, Serializable {
         this.common = common;
     }
 
-    public GetFreeGames(){
+
+    public getCardsInHand(){
 
     }
 
@@ -52,16 +51,9 @@ public class GetFreeGames implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-
-        List<SocketRmiControllerObject> games = common.getFreeGamesSocket();
-
-        if( server == null){
-            System.out.println("error");
-            return;
-        }
-
-
-        output.writeObject(games);
+        List<PlayCard> cards_in_hands = rmi_controller.getTtoP().get(token).getCardsInHand();
+        output.writeObject(cards_in_hands);
         output.flush();
+
     }
 }

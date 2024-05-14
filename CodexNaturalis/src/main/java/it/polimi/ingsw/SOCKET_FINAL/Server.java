@@ -1,7 +1,12 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI.TokenManagerImplement;
+import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
@@ -9,15 +14,20 @@ import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class Server {
+public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     final ServerSocket listenSocket;
-    final Controller controller;
+
     final List<ClientHandler> clients = new ArrayList<>();
 
     public HashMap<String, Giocatore> token_map = new HashMap<>();
@@ -26,21 +36,25 @@ public class Server {
 
     public TokenManager token_manager = new TokenManager();
 
-    public Server(ServerSocket listenSocket, Controller controller) {
+    public Common_Server common;
+
+    public Server(ServerSocket listenSocket, Common_Server common) throws RemoteException {
+        this.common = common;
         this.listenSocket = listenSocket;
-        this.controller = controller;
+
     }
 
-    public void runServer() throws IOException {
-        Socket clientSocket = null;
+    public void runServer() throws IOException, NotBoundException {
+
+       Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
-            System.out.println("Client connected: " + clientSocket.getInetAddress());
+            System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
 
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            //OutputStreamWriter socketTx = new OutputStreamWriter(clientSocket.getOutputStream());
 
-            ClientHandler handler = new ClientHandler(this.controller, this, inputStream, outputStream);
+
+            ClientHandler handler = new ClientHandler(this, inputStream, outputStream,  common );
 
             clients.add(handler);
             new Thread(() -> {
@@ -65,15 +79,50 @@ public class Server {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NotBoundException {
+       /* // Server Socket
         String host = "127.0.0.1";
         int port = 12345;
 
-
         ServerSocket listenSocket = new ServerSocket(port);
-        System.out.println("Server is running...");
+        System.out.println("Common_Server is running...");
 
-        new Server(listenSocket, new Controller()).runServer();
+        //server Socket connect to ServerRmi as a Client
+        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);
+        VirtualServerF serverRmi = (VirtualServerF) registry.lookup("VirtualServer");
+
+
+        new Server(listenSocket,serverRmi).runServer();*/
+    }
+
+    @Override
+    public void showUpdate(GameField game_field) throws RemoteException {
+
+    }
+
+    @Override
+    public void reportError(String details) throws RemoteException {
+
+    }
+
+    @Override
+    public void reportMessage(String details) throws RemoteException {
+
+    }
+
+    @Override
+    public void showCard(PlayCard card) throws RemoteException {
+
+    }
+
+    @Override
+    public void showField(GameField field) throws RemoteException {
+
+    }
+
+    @Override
+    public void printString(String s) throws RemoteException {
+
     }
 
 }
