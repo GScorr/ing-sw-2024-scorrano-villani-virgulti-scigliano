@@ -14,13 +14,13 @@ import java.util.Scanner;
 
 public class Common_Client {
 
+
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         printLogo();
         Scanner scan = new Scanner(System.in);
         int choose=-1;
         do{
             if(choose != -1 ) System.err.println("[INSERT ERROR]");
-
             System.out.println("CHOOSE A CONNECTION : \n 0 -> RMI \n 1 -> SOCKET ");
             choose = scan.nextInt();
             switch (choose) {

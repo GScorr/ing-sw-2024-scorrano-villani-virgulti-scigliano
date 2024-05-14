@@ -4,7 +4,7 @@ import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.SOCKET_FINAL.ResponseMessage.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.ResponseMessage;
 
 import java.rmi.RemoteException;
 import java.util.LinkedList;

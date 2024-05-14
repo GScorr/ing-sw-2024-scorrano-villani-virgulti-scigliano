@@ -10,7 +10,6 @@ import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.GameField;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -117,7 +116,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private void selectAndInsertCard() throws RemoteException {
         Scanner scan = new Scanner(System.in);
         boolean done = false;
-        while(!done) {
+        while(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
             System.out.println("\nScegli la tua carta (1,2,3): ");
             String choicestring = scan.nextLine();
             int choice = Integer.parseInt(choicestring);
@@ -136,7 +135,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                             if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
                                 Integer idrequest = IndexRequestManagerF.getNextIndex();
                                 rmi_controller.addtoQueue("insertCard", idrequest,
-                                        new Wrapper(token,choice - 1, x, y, flipped));
+                                        new Wrapper(token, choice - 1, x, y, flipped));
                                 /*try {
                                     rmi_controller.insertCard(token, choice - 1, x, y, flipped);
                                     done = true;
@@ -190,6 +189,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 int port = server.getPort(token);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                rmi_controller.connectRMI(this);
                 flag=true;
                 newClient = false;
                 startSendingHeartbeats();
@@ -227,11 +227,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
             System.out.print("Aspetta il riempimento partita -");
             while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-                System.out.println("Metti 1");
+                buffering();
+                /*System.out.println("Metti 1");
                 String s = scan.nextLine();
                 if(System.in.available() == 0){
                     System.out.println("Coglionazzo, ti ho visto che non hai inserito");
-                }
+                }*/
             }
             System.out.println("\nEhi la tua partita è piena!\n");
         }
@@ -341,6 +342,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         int port = server.getPort(token);
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+        rmi_controller.connectRMI(this);
     }
 
     private void newGame(String player_name) throws RemoteException {
@@ -360,6 +362,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("porta" + port);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                rmi_controller.connectRMI(this);
 
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
@@ -386,6 +389,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("porta" + port);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                rmi_controller.connectRMI(this);
 
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
