@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.GameField;
 
 import java.io.IOException;
@@ -131,13 +132,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                             int y = scan.nextInt();
                             scan.nextLine();
                             if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                                try {
+                                Integer idrequest = IndexRequestManagerF.getNextIndex();
+                                rmi_controller.addtoQueue("insertCard", idrequest,
+                                        new Wrapper(token,choice - 1, x, y, flipped));
+                                /*try {
                                     rmi_controller.insertCard(token, choice - 1, x, y, flipped);
                                     done = true;
                                 }
                                 catch (ControllerException e){
                                     e.getMessage();
-                                }
+                                }*/
                             }
                             else{
                                 System.out.println("\nInserimento sbagliato!");

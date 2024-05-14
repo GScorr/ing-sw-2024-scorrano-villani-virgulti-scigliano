@@ -81,17 +81,6 @@ public class GameServer implements VirtualGameServer, Serializable {
     public void executeCall(Integer request) throws RemoteException {
         String function = request_to_function.get(request);
         switch (function) {
-            case "getFull":
-                returns.put(request,getFull());
-                break;
-            case "createPlayer":
-                returns.put(request,createPlayer((String) request_to_wrap.get(request).obj1,
-                        (String) request_to_wrap.get(request).obj2, (boolean) request_to_wrap.get(request).obj3));
-                break;
-           /* case "addPlayer":
-                returns.put(request,addPlayer((String) request_to_wrap.get(request).obj1,
-                        (String) request_to_wrap.get(request).obj2));
-                break;*/
             case "getIndexGame":
                 returns.put(request, getController().getGame().getIndex_game());
                 break;
