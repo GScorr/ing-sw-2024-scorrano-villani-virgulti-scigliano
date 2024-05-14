@@ -26,6 +26,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private VirtualGameServer rmi_controller;
     private boolean newClient;
 
+
+
     public RmiClientF(VirtualServerF server) throws RemoteException {
         this.server = server;
     }

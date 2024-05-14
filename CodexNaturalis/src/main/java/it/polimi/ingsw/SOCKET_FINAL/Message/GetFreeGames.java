@@ -3,7 +3,6 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;

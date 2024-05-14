@@ -1,16 +1,9 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
 
-import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
-import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 
 import java.io.*;
@@ -18,7 +11,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
 
 public class ClientHandler  implements VirtualView {
 
@@ -30,7 +22,7 @@ public class ClientHandler  implements VirtualView {
     public Common_Server common;
     public String token;
 
-    private VirtualRmiController rmi_controller;
+    private VirtualGameServer rmi_controller;
     public boolean client_is_connected = true;
 
 
@@ -84,7 +76,7 @@ public class ClientHandler  implements VirtualView {
                             this.token = mayToken;
                             int port = common.getPort(token);
                             Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                            this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                             client_is_connected = true;
                             startSendingHeartbeats();
                         }
@@ -98,7 +90,7 @@ public class ClientHandler  implements VirtualView {
                     if((DP_message instanceof CreateGame)){
                        int port =  ((CreateGame) DP_message).actionCreateGameMessage();
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                        this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                         MyMessageFinal message = new MyMessageFinal("Creazione Player e Game andati a buon fine");
                         output.writeObject(message);
                         output.flush();
@@ -109,7 +101,7 @@ public class ClientHandler  implements VirtualView {
                            System.out.println(token);
                            int port = common.getPort(token);
                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                           this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                           this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                            MyMessageFinal message = new MyMessageFinal("true");
                            output.writeObject(message);
                            output.flush();
