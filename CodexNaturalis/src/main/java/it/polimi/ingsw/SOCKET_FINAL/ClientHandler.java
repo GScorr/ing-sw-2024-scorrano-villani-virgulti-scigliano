@@ -47,7 +47,7 @@ public class ClientHandler  implements VirtualView {
         new Thread(() -> {
             while (client_is_connected) {
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(100);
                     common.receiveHeartbeat(token);
                 } catch (RemoteException | InterruptedException e) {
                     e.printStackTrace();
@@ -130,8 +130,10 @@ public class ClientHandler  implements VirtualView {
                 client_is_connected = false;
             } catch (ClassNotFoundException | IOException e) {
                 // Gestione generica delle eccezioni durante la deserializzazione
-                e.printStackTrace();
+                client_is_connected = false;
+                //e.printStackTrace();
             } catch (NotBoundException e) {
+                client_is_connected = false;
                 throw new RuntimeException(e);
             }
         }
