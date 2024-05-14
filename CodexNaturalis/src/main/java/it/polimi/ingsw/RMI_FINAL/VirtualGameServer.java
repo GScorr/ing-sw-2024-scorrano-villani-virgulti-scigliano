@@ -4,6 +4,7 @@ import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -12,8 +13,10 @@ import java.util.Map;
 
 public interface VirtualGameServer extends Remote {
     public boolean getFull() throws RemoteException;
-    public void connect(VirtualViewF client)throws RemoteException;
-    public List<VirtualViewF> getClients() throws RemoteException;
+
+    public void connectSocket(VirtualView clientSocket) throws RemoteException;
+    public void connectRMI(VirtualViewF client)throws RemoteException;
+    public List<VirtualViewF> getClientsRMI() throws RemoteException;
     public Map<String, Player> getTtoP() throws RemoteException;
     public GameController getController() throws RemoteException;
     public Player createPlayer(String pla, String playerName, boolean b) throws RemoteException;
@@ -23,7 +26,6 @@ public interface VirtualGameServer extends Remote {
     public void checkQueue() throws RemoteException;
     public void executeCall(Integer function) throws RemoteException;
     public void addtoQueue(String string,Integer idRequest, Wrapper wrap) throws RemoteException;
-    public Object getAnswer(Integer idRequest) throws RemoteException;
     public int getPort() throws RemoteException;
     public void showStartingCard(String token) throws RemoteException;
     public void showGameField(String token) throws RemoteException;

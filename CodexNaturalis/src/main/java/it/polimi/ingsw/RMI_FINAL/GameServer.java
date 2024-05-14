@@ -5,19 +5,20 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.*;
 
 public class GameServer implements VirtualGameServer, Serializable {
-    public List<VirtualViewF> clients = new ArrayList<>();
+    public List<VirtualViewF> clientsRMI = new ArrayList<>();
+    public List<VirtualView> clientsSocket = new ArrayList<>();
     public TokenManagerF token_manager = new TokenManagerImplementF();
     public Map<String, Player> token_to_player = new HashMap<>();
 
     public GameController controller;
     public Queue<Integer> callQueue = new LinkedList<>();
-    public Map<Integer, Object> returns = new HashMap<>();
     public Map<Integer,String> request_to_function = new HashMap<>();
     public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
     private int port;
@@ -59,15 +60,21 @@ public class GameServer implements VirtualGameServer, Serializable {
         }).start();
     }
 
+
+    public synchronized void connectSocket(VirtualView clientSocket)throws RemoteException{
+        this.clientsSocket.add(clientSocket);
+    }
+
+
     @Override
-    public synchronized void connect(VirtualViewF client)throws RemoteException{
-        this.clients.add(client);
+    public synchronized void connectRMI(VirtualViewF client)throws RemoteException{
+        this.clientsRMI.add(client);
     }
     public void checkQueue() throws RemoteException {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(250); // Controlla le functions ogni 0.25 secondi
+                    Thread.sleep(100); // Controlla le functions ogni 0.25 secondi
                     while (!callQueue.isEmpty()) {
                         Integer request = callQueue.poll();
                         executeCall(request);
@@ -80,11 +87,26 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
     public void executeCall(Integer request) throws RemoteException {
         String function = request_to_function.get(request);
+        Wrapper wrap = request_to_wrap.get(request);
         switch (function) {
-            case "getIndexGame":
-                returns.put(request, getController().getGame().getIndex_game());
+            case "insertCard":
+                try {
+                    insertCard((String) wrap.obj1, (int) wrap.obj2, (int) wrap.obj3, (int) wrap.obj4, (boolean) wrap.obj5);
+                    ResponseMessage message = new UpdateMessage("Inserimento corretto");
+                    broadcastMessage(message);
+                }
+                catch(ControllerException e){
+                    ResponseMessage message = new ErrorMessage("Inserimento errato");
+                    broadcastMessage(message);
+                }
                 break;
                 
+        }
+    }
+
+    private void broadcastMessage(ResponseMessage message) throws RemoteException {
+        for (VirtualViewF c : clientsRMI){
+            c.printString(message.getMessage());
         }
     }
 
@@ -92,8 +114,8 @@ public class GameServer implements VirtualGameServer, Serializable {
         return controller.getFull();
     }
 
-    public synchronized List<VirtualViewF> getClients() throws RemoteException{
-        return clients;
+    public synchronized List<VirtualViewF> getClientsRMI() throws RemoteException{
+        return clientsRMI;
     }
 
 
@@ -143,16 +165,15 @@ public class GameServer implements VirtualGameServer, Serializable {
         callQueue.add(idRequest);
         request_to_function.put(idRequest, function);
         request_to_wrap.put(idRequest,wrap);
-        returns.put(idRequest,"no return");
     }
 
-    public Object getAnswer(Integer idRequest) throws RemoteException{
+    /*public Object getAnswer(Integer idRequest) throws RemoteException{
         Object wait = null;
         do{
             wait = returns.get(idRequest);
         }while(wait.equals("no return"));
         return wait;
-    }
+    }*/
 
     @Override
     public void showStartingCard(String token) throws RemoteException {
