@@ -14,7 +14,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class MiniModel {
     List<GameField> game_fields ;
-    private List<PlayCard> cards_in_hand ;
+    private List<PlayCard> cards_in_hand;
 
     private PlayerState player_state;
 
