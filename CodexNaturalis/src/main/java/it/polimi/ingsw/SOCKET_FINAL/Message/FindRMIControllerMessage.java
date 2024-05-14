@@ -1,8 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -25,11 +24,11 @@ public class FindRMIControllerMessage implements Message, Serializable {
     ObjectOutputStream output;
 
     public Common_Server common;
-    public VirtualRmiController rmi_controller;
+    public VirtualGameServer rmi_controller;
 
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 

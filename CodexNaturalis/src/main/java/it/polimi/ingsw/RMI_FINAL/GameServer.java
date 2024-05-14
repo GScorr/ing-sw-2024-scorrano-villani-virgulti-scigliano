@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.*;
 
-public class GameServer implements VirtualRmiController, Serializable {
+public class GameServer implements VirtualGameServer, Serializable {
     public List<VirtualViewF> clients = new ArrayList<>();
     public TokenManagerF token_manager = new TokenManagerImplementF();
     public Map<String, Player> token_to_player = new HashMap<>();

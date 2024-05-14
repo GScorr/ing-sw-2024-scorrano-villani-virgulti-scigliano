@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Map;
 
-public interface VirtualRmiController extends Remote {
+public interface VirtualGameServer extends Remote {
     public boolean getFull() throws RemoteException;
     public void connect(VirtualViewF client)throws RemoteException;
     public List<VirtualViewF> getClients() throws RemoteException;
