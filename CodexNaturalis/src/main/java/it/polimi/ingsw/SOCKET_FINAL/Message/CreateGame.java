@@ -1,7 +1,9 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
-import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
+import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.ObjectOutputStream;
@@ -17,18 +19,17 @@ public class CreateGame implements Message, Serializable {
     public String game_name;
     int num_players;
 
-    public VirtualServerF rmi_server;
-    public VirtualGameServer rmi_controller;
+    public Common_Server common;
+    public VirtualRmiController rmi_controller;
 
 
     @Override
-    public void setRmiController(VirtualGameServer rmi_controller) {
+    public void setRmiController(VirtualRmiController rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 
-
-    public void setRmiServer(VirtualServerF rmi_server) {
-        this.rmi_server = rmi_server;
+    public void setCommonServer(Common_Server common){
+            this.common = common;
     }
 
     public void setToken(String token){
@@ -54,7 +55,7 @@ public class CreateGame implements Message, Serializable {
     }
     public int actionCreateGameMessage() throws RemoteException {
         int port;
-        port = rmi_server.createGameSocket(game_name,num_players,token,name_p);
+        port = common.createGameSocket(game_name,num_players,token,name_p);
         return port;
     }
 

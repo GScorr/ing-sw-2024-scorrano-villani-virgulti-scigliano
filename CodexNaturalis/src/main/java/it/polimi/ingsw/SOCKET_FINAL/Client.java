@@ -10,6 +10,7 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.StringCostant;
 
 
 import java.io.*;
@@ -18,6 +19,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
+
+    StringCostant string_costant;
 
     final ServerProxy server;
 
@@ -58,11 +61,9 @@ public class Client implements VirtualView {
 
     private void runCli() throws IOException, ClassNotFoundException, InterruptedException {
 
-        String ciao = server.modify_Message(20);
 
-        System.out.println(ciao);
         //TODO : gestione persistenza connessioni
-        /*String player_name = selectNamePlayer();
+        String player_name = selectNamePlayer();
         String game_name;
 
         gameAccess(player_name);
@@ -73,7 +74,7 @@ public class Client implements VirtualView {
 
         chooseStartingCardState();
 
-        manageGame();*/
+        manageGame();
 
 
 
@@ -87,19 +88,19 @@ public class Client implements VirtualView {
 
         boolean flag = false;
         do{
-            System.out.print("\nScegli nome Player > ");
+            System.out.print(string_costant.choose_name_player);
             player_name = scan.nextLine();
             String isnew = server.checkName(player_name);
             if(isnew.equals("true")){
                 flag = true;
                 newClient=true;
-                System.out.println("nome valido");
+                System.out.println(string_costant.name_is_valid);
             }else if(isnew.equals("false")){
-                System.out.println("Giocatore già presente, reinserisci nome!");
+                System.out.println(string_costant.name_is_not_valid);
             }else{
                 flag = true;
                 newClient = false;
-                System.out.println(player_name + " riconnesso!");
+                System.out.println(player_name + string_costant.riconnected);
             }
 
         }while (!flag);
@@ -115,19 +116,18 @@ public class Client implements VirtualView {
             } else {
                 makeChoice(player_name);
             }
-            System.out.print("creazione Player andata a buon fine!\n");
+            System.out.print(string_costant.creation_player);
         }
     }
 
     private void newGame_notavailable(String playerName) throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
-        System.out.print("\nScegli nome Partita > ");
+        System.out.println(string_costant.new_game_creation);
         String game_name = scan.nextLine();
         boolean flag;
         do {
             flag = false;
-            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+            System.out.print(string_costant.new_game_num_player);
             int numplayers = scan.nextInt();
             try {
                 String result = server.createGame(game_name, numplayers, playerName);
@@ -143,7 +143,7 @@ public class Client implements VirtualView {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-            System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
+            System.out.println(string_costant.new_or_old);
             String decision = scan.nextLine();
             if (decision.equalsIgnoreCase("old")) {
                 done = 1;
@@ -152,20 +152,20 @@ public class Client implements VirtualView {
                 done=1;
                 newGame(player_name);
             } else {
-                System.out.println("\nInserimento errato!");
+                System.out.println(string_costant.error);
             }
         }
     }
 
     private void newGame(String player_name) throws RemoteException {
         Scanner scan = new Scanner(System.in);
-        System.out.print("\nScegli nome Partita > ");
+        System.out.print(string_costant.game_creation);
         String game_name = scan.nextLine();
         int numplayers=4;
         boolean flag;
         do {
             flag = false;
-            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
+            System.out.print(string_costant.new_game_num_player);
             numplayers = scan.nextInt();
             try {
                 String result  = server.createGame(game_name, numplayers, player_name);
@@ -181,7 +181,7 @@ public class Client implements VirtualView {
     private void chooseMatch(String player_name) throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         boolean check;
-        System.out.println("\nElenco partite disponibili: ");
+        System.out.println(string_costant.list_game_avilable);
          List<SocketRmiControllerObject> games = server.getFreeGame();
 
         for (SocketRmiControllerObject r : games) {
@@ -189,12 +189,12 @@ public class Client implements VirtualView {
                     + " " + r.num_player + "/" + r.max_num_player);
         }
         do {
-            System.out.println("\nInserisci ID partita in cui entrare");
+            System.out.println(string_costant.Id_game);
             int ID = scan.nextInt();
             check = server.findRmiController(ID, player_name);
         }while(!check);
 
-        System.out.println("sei entrato nella partita !");
+        System.out.println(string_costant.enter);
 
 
     }
@@ -233,7 +233,7 @@ public class Client implements VirtualView {
            if(server.getGoalCard() == null){
                chooseGoal();
                Goal goal = server.getGoalCard();
-               System.out.println("\nHai scelto :" + goal.toString());
+               System.out.println("\n You choose :" + goal.toString());
            }
        }
        while(server.getPlayerState().equals("CHOOSE_GOAL")){
@@ -246,14 +246,14 @@ public class Client implements VirtualView {
         int done=0;
         while(done==0) {
 
-            System.out.println("\nScegli obiettivo tra:\n 1-" + server.getListGoalCard().get(0).toString()
+            System.out.println("\nChoose Goal between :\n 1-" + server.getListGoalCard().get(0).toString()
                     + "\n 2-" + server.getListGoalCard().get(1).toString());
 
             String choice = scan.nextLine();
-            if (choice.equals("0")) {
+            if (choice.equals("1")) {
                 done=1;
                 server.chooseGoal(0);
-            } else if (choice.equals("1")){
+            } else if (choice.equals("2")){
                 done=1;
                 server.chooseGoal(1);
             } else System.out.println("Index boundaries not respected!");
@@ -262,7 +262,7 @@ public class Client implements VirtualView {
 
     private void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
         if(server.getPlayerState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-            System.out.println("choose starting card");
+            System.out.println(string_costant.starting_card);
             PlayCard starting_card =  server.getStartingCard();
             showCard(starting_card);
 
@@ -284,7 +284,7 @@ public class Client implements VirtualView {
         System.out.println("\nScegli lato carta iniziale:\n");
         int done=0;
         while(done==0){
-            System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
+            System.out.println(string_costant.BackorFront);
             String dec = scan.nextLine();
             if (dec.equals("F")){
                 done=1;
@@ -293,7 +293,7 @@ public class Client implements VirtualView {
                 done=1;
                 server.chooseStartingCard(true);
             }
-            else System.out.println("Inserimento errato!");
+            else System.out.println(string_costant.error);
         }
         server.showGameField();
     }
@@ -305,13 +305,13 @@ public class Client implements VirtualView {
 
         while (!server.getPlayerState().equals("END_GAME")) {
             if (server.getPlayerState().equals("WAIT_TURN")) {
-                System.out.println("\nWait for your turn ");
+                System.out.println(string_costant.waitTurn);
                 while (server.getPlayerState().equals("WAIT_TURN")) {
                     buffering();
                 }
             }
             if (server.getPlayerState().equals("PLACE_CARD")) {
-                System.out.println("\nInsert the card, this is your cards in hand: ");
+                System.out.println(string_costant.insertHandsCard);
                 List<PlayCard> cards_in_hand = server.getCardsInHand();
                 for(PlayCard c : cards_in_hand){
                     showCard(c);
@@ -351,19 +351,13 @@ public class Client implements VirtualView {
                     int y = scan.nextInt();
                     scan.nextLine();
                     if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                        try {
-                            server.placeCard(choice - 1, x, y, flipped);
-                            done = true;
-                        }
-                        catch (ControllerException e){
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+
+                            done = server.placeCard(choice - 1, x, y, flipped);
+                            System.out.println(done);
+
                     }
-                    else{
-                        System.out.println("\nInserimento sbagliato!");
-                    }
+                    if( ! done){System.out.println("\nInserimento sbagliato!");}
+
                 }
                 else{
                     System.out.println("\nInserimento sbagliato!");

@@ -186,7 +186,7 @@ public class Common_Server {
         int port = 12345;
         ServerSocket listenSocket = new ServerSocket(port);
         System.out.println("[SUCCESSFUL] : SOCKET server is running...");
-        new Server(listenSocket, stub, common).runServer();
+        new Server(listenSocket,  common).runServer();
     }
 }
 
