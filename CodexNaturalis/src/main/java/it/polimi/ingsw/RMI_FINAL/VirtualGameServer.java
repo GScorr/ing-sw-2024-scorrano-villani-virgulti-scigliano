@@ -26,7 +26,7 @@ public interface VirtualGameServer extends Remote {
     public void chooseStartingCard(String token, boolean flip) throws RemoteException;
     public void checkQueue() throws RemoteException;
     public void executeCall(Integer function) throws RemoteException;
-    public void addtoQueue(String string,Integer idRequest, Wrapper wrap) throws RemoteException;
+    public void addtoQueue(String token, String string,Integer idRequest, Wrapper wrap) throws RemoteException;
     public int getPort() throws RemoteException;
     public void showStartingCard(String token) throws RemoteException;
     public void showGameField(String token) throws RemoteException;
@@ -50,5 +50,5 @@ public interface VirtualGameServer extends Remote {
 
     public void getFinalStandings(String token) throws RemoteException;
 
-    public List<GameField> getGameFields() throws RemoteException;
+    public List<GameField> getGameFields(String token) throws RemoteException;
 }

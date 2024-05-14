@@ -1,4 +1,4 @@
-package it.polimi.ingsw.RMI_FINAL;
+package it.polimi.ingsw.RMI_FINAL.MESSAGES;
 
 public class ErrorMessage extends ResponseMessage{
     private String message;

@@ -9,6 +9,9 @@ import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -50,6 +53,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private void manageGame() throws RemoteException, InterruptedException {
+        Scanner scan = new Scanner(System.in);
         while(!rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("END_GAME")) {
             if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
                 System.out.println("\nAspetta il tuo turno ");
@@ -60,6 +64,19 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
                 System.out.println("TI STO PER MOSTRARE LE CARTE");
                 rmi_controller.showPlayerCards(token);
+                System.out.println("\n VUOI VEDERE UN ALTRO GAME FIELD? 0- il tuo\n 1- player 2 \n 2- vai avanti");
+                int decision = scan.nextInt();
+                scan.nextLine();
+                switch (decision){
+                    case (0):
+                        miniModel.showGameField(decision);
+                        break;
+                    case(1):
+                        miniModel.showGameField(decision);
+                        break;
+                    case (2):
+                        break;
+                }
                 selectAndInsertCard();
             }
             if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
@@ -115,7 +132,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         //rmi_controller.showCardsInCenter(rmi_controller.getController().getGame().getCars_in_center().getGold_list(),token);
     }
 
-    private void selectAndInsertCard() throws RemoteException {
+    private void selectAndInsertCard() throws RemoteException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         boolean done = false;
         while(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
@@ -125,9 +142,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             if(choice>=1 && choice<=3){
                     System.out.println("\nScegli orientamento (B,F): ");
                     String flip = scan.nextLine();
-                    if(flip.equals("B") || flip.equals("F")){
+                    if(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f")){
                         boolean flipped = false;
-                        if(flip.equals("B")){
+                        if(flip.equals("B")||flip.equals("b")){
                             flipped = true;
                         }
                             System.out.println("\nInserisci coordinate x e y di inserimento carta: ");
@@ -136,8 +153,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                             scan.nextLine();
                             if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
                                 Integer idrequest = IndexRequestManagerF.getNextIndex();
-                                rmi_controller.addtoQueue("insertCard", idrequest,
+                                rmi_controller.addtoQueue(token,"insertCard", idrequest,
                                         new Wrapper(token, choice - 1, x, y, flipped));
+                                Thread.sleep(500);
                                 /*try {
                                     rmi_controller.insertCard(token, choice - 1, x, y, flipped);
                                     done = true;
@@ -158,7 +176,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("\nInserimento sbagliato!");
             }
         }
-        rmi_controller.showGameField(token);
+        //rmi_controller.showGameField(token);
+        System.out.println("IL MIO GAME FIELD\n");
+        miniModel.showGameField(0);
     }
 
     private void gameAccess(String player_name) throws RemoteException, NotBoundException, InterruptedException {
@@ -237,19 +257,28 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 }*/
             }
             System.out.println("\nEhi la tua partita è piena!\n");
-            miniModel = new MiniModel(rmi_controller.getGameFields());
-            startCheckingMessages();
+
+
+
         }
+        miniModel = new MiniModel(rmi_controller.getGameFields(token));
+        System.out.println(miniModel.toString());
+        startCheckingMessages();
     }
 
     private void startCheckingMessages() {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
-                        printString(s.toString());
+                        if(s instanceof  GameFieldMessage){
+                            showField(((GameFieldMessage) s).getField());
+                        }
+                        if (s instanceof ErrorMessage){
+                            printString(s.getMessage());
+                        }
                     }
                 } catch (InterruptedException e) {
                     System.err.println("impossible to pop out");
@@ -281,10 +310,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         while(done==0){
             System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
             String dec = scan.nextLine();
-            if (dec.equals("F")){
+            if (dec.equals("F")||dec.equals("f")){
                 done=1;
                 rmi_controller.chooseStartingCard(token,false);
-            } else if (dec.equals("B")){
+            } else if (dec.equals("B")||dec.equals("b")){
                 done=1;
                 rmi_controller.chooseStartingCard(token,true);
             }
@@ -529,6 +558,15 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public MiniModel getMiniModel() throws RemoteException{
         return miniModel;
     }
+
+    public void pushBack(ResponseMessage message){
+        miniModel.pushBack(message);
+    }
+
+    public void setGameField(List<GameField> games){
+        miniModel.setGameField(games);
+    }
+
 
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);

@@ -5,6 +5,10 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.Serializable;
@@ -19,6 +23,7 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     public GameController controller;
     public Queue<Integer> callQueue = new LinkedList<>();
+    public Map<Integer,String> request_to_token = new HashMap<>();
     public Map<Integer,String> request_to_function = new HashMap<>();
     public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
     private int port;
@@ -86,27 +91,34 @@ public class GameServer implements VirtualGameServer, Serializable {
         }).start();
     }
     public void executeCall(Integer request) throws RemoteException {
+        String token = request_to_token.get(request);
         String function = request_to_function.get(request);
         Wrapper wrap = request_to_wrap.get(request);
+        ResponseMessage message = null;
         switch (function) {
             case "insertCard":
                 try {
                     insertCard((String) wrap.obj1, (int) wrap.obj2, (int) wrap.obj3, (int) wrap.obj4, (boolean) wrap.obj5);
-                    ResponseMessage message = new UpdateMessage("Inserimento corretto");
-                    broadcastMessage(message);
+                    message = new GameFieldMessage(token_to_player.get(token).getGameField());
+
+                    for (String t : token_to_player.keySet()){
+                        token_manager.getTokens().get(t).setGameField(getGameFields(t));
+                    }
                 }
                 catch(ControllerException e){
-                    ResponseMessage message = new ErrorMessage("Inserimento errato");
-                    broadcastMessage(message);
+                    message = new ErrorMessage(token_to_player.get(token).getName() + 
+                            " ha fatto un inserimento errato");
                 }
                 break;
                 
         }
+        broadcastMessage(message);
     }
 
     private void broadcastMessage(ResponseMessage message) throws RemoteException {
         for (VirtualViewF c : clientsRMI){
-            c.getMiniModel().pushBack(message);
+            c.pushBack(message);
+            //System.out.println(c.getMiniModel().getQueue().peek());
         }
     }
 
@@ -114,10 +126,11 @@ public class GameServer implements VirtualGameServer, Serializable {
         return controller.getFull();
     }
 
-    public List<GameField> getGameFields() throws RemoteException{
+    public List<GameField> getGameFields(String token) throws RemoteException{
         List<GameField> list = new ArrayList<>();
-        for ( Player p : controller.getField_controller().keySet() ){
-            list.add(controller.getField_controller().get(p).getPlayer_field());
+        list.add(0, token_to_player.get(token).getGameField());
+        for ( String t : token_to_player.keySet() ){
+            if( !t.equals(token)) list.add(token_to_player.get(t).getGameField());
         }
         return list;
     }
@@ -169,8 +182,9 @@ public class GameServer implements VirtualGameServer, Serializable {
     public synchronized void chooseStartingCard(String token, boolean flip) throws RemoteException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
     }
-    public void addtoQueue(String function, Integer idRequest, Wrapper wrap) throws RemoteException{
+    public void addtoQueue(String token, String function, Integer idRequest, Wrapper wrap) throws RemoteException{
         callQueue.add(idRequest);
+        request_to_token.put(idRequest, token);
         request_to_function.put(idRequest, function);
         request_to_wrap.put(idRequest,wrap);
     }

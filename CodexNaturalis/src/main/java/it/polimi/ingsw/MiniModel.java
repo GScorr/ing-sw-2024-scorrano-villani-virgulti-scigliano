@@ -4,14 +4,13 @@ import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.RMI_FINAL.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public class MiniModel implements Serializable {
     List<GameField> game_fields ;
@@ -24,6 +23,7 @@ public class MiniModel implements Serializable {
     public MiniModel(List<GameField> game_fields) {this.game_fields = game_fields;}
 
 
+    public Queue<ResponseMessage> getQueue(){ return messages; }
 
     public void pushBack(ResponseMessage mess){
         messages.add(mess);
@@ -37,8 +37,8 @@ public class MiniModel implements Serializable {
         showField(game_fields.get(pos));
     }
 
-    public void setGameField(int pos, GameField game){
-        game_fields.add(pos, game);
+    public void setGameField(List<GameField> game){
+        game_fields = game;
     }
 
     public void setCards(List<PlayCard> cards){
