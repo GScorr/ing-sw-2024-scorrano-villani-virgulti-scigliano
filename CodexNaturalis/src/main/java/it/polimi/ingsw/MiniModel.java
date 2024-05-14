@@ -28,8 +28,8 @@ public class MiniModel {
         messages.add(mess);
     }
 
-    public void popOut(){
-        messages.poll();
+    public ResponseMessage popOut(){
+       return messages.poll();
     }
 
     public void showGameField(int pos) throws RemoteException {
