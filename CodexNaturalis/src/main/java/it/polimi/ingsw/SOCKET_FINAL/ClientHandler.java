@@ -17,6 +17,7 @@ public class ClientHandler  implements VirtualView {
     final Server server;
     final ObjectInputStream input;
     final ObjectOutputStream output;
+
     //final VirtualView view;
 
     public Common_Server common;
