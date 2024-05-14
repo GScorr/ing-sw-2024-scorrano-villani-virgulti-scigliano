@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
 
-    StringCostant string_costant;
+    StringCostant string_costant = new StringCostant();
 
     final ServerProxy server;
 
