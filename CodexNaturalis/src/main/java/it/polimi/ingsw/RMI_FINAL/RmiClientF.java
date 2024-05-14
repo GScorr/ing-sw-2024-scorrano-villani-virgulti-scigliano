@@ -6,8 +6,10 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.GameField;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -30,12 +32,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         this.server = server;
     }
 
-    public void run() throws RemoteException, InterruptedException, NotBoundException {
+    public void run() throws IOException, InterruptedException, NotBoundException {
         this.server.connect(this);
         runCli();
     }
 
-    private void runCli() throws RemoteException, InterruptedException, NotBoundException {
+    private void runCli() throws IOException, InterruptedException, NotBoundException {
         String player_name = selectNamePlayer();
         gameAccess(player_name);
         startSendingHeartbeats();
@@ -132,13 +134,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                             int y = scan.nextInt();
                             scan.nextLine();
                             if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                                try {
+                                Integer idrequest = IndexRequestManagerF.getNextIndex();
+                                rmi_controller.addtoQueue("insertCard", idrequest,
+                                        new Wrapper(token,choice - 1, x, y, flipped));
+                                /*try {
                                     rmi_controller.insertCard(token, choice - 1, x, y, flipped);
                                     done = true;
                                 }
                                 catch (ControllerException e){
                                     e.getMessage();
-                                }
+                                }*/
                             }
                             else{
                                 System.out.println("\nInserimento sbagliato!");
@@ -217,11 +222,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
 
-    private void waitFullGame() throws RemoteException, InterruptedException {
+    private void waitFullGame() throws IOException, InterruptedException {
+        Scanner scan = new Scanner(System.in);
         if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
             System.out.print("Aspetta il riempimento partita -");
             while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-                buffering();
+                System.out.println("Metti 1");
+                String s = scan.nextLine();
+                if(System.in.available() == 0){
+                    System.out.println("Coglionazzo, ti ho visto che non hai inserito");
+                }
             }
             System.out.println("\nEhi la tua partita è piena!\n");
         }
@@ -491,7 +501,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
 
-    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
+    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
         new RmiClientF(server).run();
