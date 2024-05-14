@@ -3,6 +3,7 @@ package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
@@ -48,4 +49,6 @@ public interface VirtualGameServer extends Remote {
     public void getPoints(String token) throws RemoteException;
 
     public void getFinalStandings(String token) throws RemoteException;
+
+    public List<GameField> getGameFields() throws RemoteException;
 }

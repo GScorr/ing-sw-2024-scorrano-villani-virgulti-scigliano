@@ -6,13 +6,14 @@ import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI_FINAL.ResponseMessage;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class MiniModel {
+public class MiniModel implements Serializable {
     List<GameField> game_fields ;
     private List<PlayCard> cards_in_hand ;
 

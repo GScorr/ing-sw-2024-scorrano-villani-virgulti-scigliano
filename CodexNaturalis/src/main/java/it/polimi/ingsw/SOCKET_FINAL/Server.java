@@ -4,6 +4,7 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI.TokenManagerImplement;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
@@ -123,6 +124,10 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
     @Override
     public void printString(String s) throws RemoteException {
 
+    }
+
+    public MiniModel getMiniModel() throws RemoteException{
+        return null;
     }
 
 }

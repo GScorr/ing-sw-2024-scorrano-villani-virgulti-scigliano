@@ -3,6 +3,7 @@ package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MiniModel;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -19,6 +20,8 @@ public interface VirtualViewF extends Remote {
 
     public void printString(String s) throws RemoteException;
 
+
+    public MiniModel getMiniModel() throws RemoteException;
 
 
 }

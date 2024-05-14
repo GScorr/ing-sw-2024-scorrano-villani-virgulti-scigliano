@@ -8,6 +8,7 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MiniModel;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -25,6 +26,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private VirtualGameServer rmi_controller;
     private boolean newClient;
 
+    private MiniModel miniModel;
 
 
     public RmiClientF(VirtualServerF server) throws RemoteException {
@@ -235,7 +237,27 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 }*/
             }
             System.out.println("\nEhi la tua partita è piena!\n");
+            miniModel = new MiniModel(rmi_controller.getGameFields());
+            startCheckingMessages();
         }
+    }
+
+    private void startCheckingMessages() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(50);
+                    ResponseMessage s = miniModel.popOut();
+                    if(s!=null){
+                        printString(s.toString());
+                    }
+                } catch (InterruptedException e) {
+                    System.err.println("impossible to pop out");
+                } catch (RemoteException e) {
+                    System.err.println("impossible to pop-out");
+                }
+            }
+        }).start();
     }
 
     private void startSendingHeartbeats() {
@@ -504,6 +526,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
 
+    public MiniModel getMiniModel() throws RemoteException{
+        return miniModel;
+    }
 
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);

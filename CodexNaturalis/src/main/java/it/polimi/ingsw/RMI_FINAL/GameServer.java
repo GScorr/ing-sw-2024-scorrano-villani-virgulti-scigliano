@@ -106,12 +106,20 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void broadcastMessage(ResponseMessage message) throws RemoteException {
         for (VirtualViewF c : clientsRMI){
-            c.printString(message.getMessage());
+            c.getMiniModel().pushBack(message);
         }
     }
 
     public  boolean getFull()  throws RemoteException {
         return controller.getFull();
+    }
+
+    public List<GameField> getGameFields() throws RemoteException{
+        List<GameField> list = new ArrayList<>();
+        for ( Player p : controller.getField_controller().keySet() ){
+            list.add(controller.getField_controller().get(p).getPlayer_field());
+        }
+        return list;
     }
 
     public synchronized List<VirtualViewF> getClientsRMI() throws RemoteException{
