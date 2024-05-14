@@ -36,7 +36,7 @@ public class Common_Server {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayer(p_token,player_name, client,true);
-        VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
+        VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);
         token_to_rmi.put( p_token, gameServer);
@@ -50,7 +50,7 @@ public class Common_Server {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayerSocket(p_token,player_name,true);
-        VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
+        VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);
         token_to_rmi.put( p_token, gameServer);

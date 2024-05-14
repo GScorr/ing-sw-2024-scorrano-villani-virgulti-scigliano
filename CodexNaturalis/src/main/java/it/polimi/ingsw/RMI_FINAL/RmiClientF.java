@@ -8,6 +8,7 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -21,19 +22,19 @@ import java.util.Scanner;
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
     private String token;
-    private VirtualRmiController rmi_controller;
+    private VirtualGameServer rmi_controller;
     private boolean newClient;
 
     public RmiClientF(VirtualServerF server) throws RemoteException {
         this.server = server;
     }
 
-    public void run() throws RemoteException, InterruptedException, NotBoundException {
+    public void run() throws IOException, InterruptedException, NotBoundException {
         this.server.connect(this);
         runCli();
     }
 
-    private void runCli() throws RemoteException, InterruptedException, NotBoundException {
+    private void runCli() throws IOException, InterruptedException, NotBoundException {
         String player_name = selectNamePlayer();
         gameAccess(player_name);
         startSendingHeartbeats();
@@ -182,7 +183,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 this.token = isnew;
                 int port = server.getPort(token);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 flag=true;
                 newClient = false;
                 startSendingHeartbeats();
@@ -215,11 +216,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
 
-    private void waitFullGame() throws RemoteException, InterruptedException {
+    private void waitFullGame() throws IOException, InterruptedException {
+        Scanner scan = new Scanner(System.in);
         if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
             System.out.print("Aspetta il riempimento partita -");
             while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-                buffering();
+                System.out.println("Metti 1");
+                String s = scan.nextLine();
+                if(System.in.available() == 0){
+                    System.out.println("Coglionazzo, ti ho visto che non hai inserito");
+                }
             }
             System.out.println("\nEhi la tua partita è piena!\n");
         }
@@ -317,7 +323,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         boolean check;
             System.out.println("\nElenco partite disponibili: ");
             List<GameServer> partite = server.getFreeGames();
-            for ( VirtualRmiController r : partite) {
+            for ( VirtualGameServer r : partite) {
                 System.out.println( r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
                         + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player() );
             }
@@ -328,7 +334,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }while(!check);
         int port = server.getPort(token);
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-        this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
     }
 
     private void newGame(String player_name) throws RemoteException {
@@ -347,7 +353,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 port = server.createGame(game_name, numplayers, token, player_name,this);
                 System.out.println("porta" + port);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
 
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
@@ -373,7 +379,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 port = server.createGame(game_name, numplayers, token, playerName,this);
                 System.out.println("porta" + port);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
 
             } catch (ControllerException e) {
                 System.err.print(e.getMessage() + "\n");
@@ -489,7 +495,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
 
-    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
+    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
         new RmiClientF(server).run();
