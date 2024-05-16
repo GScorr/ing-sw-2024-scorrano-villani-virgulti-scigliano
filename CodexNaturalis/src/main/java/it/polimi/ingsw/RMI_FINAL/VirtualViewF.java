@@ -1,6 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
@@ -23,5 +24,7 @@ public interface VirtualViewF extends Remote {
     public void setGameField(List<GameField> games) throws RemoteException;
     public MiniModel getMiniModel() throws RemoteException;
 
+    public void setCards(List<PlayCard> cards) throws RemoteException;
 
+    public void setState(String state) throws RemoteException;
 }

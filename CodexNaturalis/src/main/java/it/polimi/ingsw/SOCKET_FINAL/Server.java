@@ -135,4 +135,14 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
         return null;
     }
 
+    @Override
+    public void setCards(List<PlayCard> cards) throws RemoteException {
+
+    }
+
+    @Override
+    public void setState(String state) throws RemoteException {
+
+    }
+
 }
