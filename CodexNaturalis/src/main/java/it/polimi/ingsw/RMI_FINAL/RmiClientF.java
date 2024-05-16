@@ -20,6 +20,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,10 +54,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private boolean menuChoice(int choice) throws RemoteException {
+        Scanner scan = new Scanner(System.in);
         if ( choice < 0 || choice > 3 ) return false;
         switch ( choice ){
             case ( 0 ):
-                miniModel.showGameField(0);
+                miniModel.printNumToField();
+                Integer i = scan.nextInt();
+                miniModel.showGameField(i);
                 break;
             case( 1 ):
                 miniModel.showCards();
@@ -350,7 +354,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
             else System.out.println("Inserimento errato!");
         }
-        rmi_controller.showGameField(token);
+        //rmi_controller.showGameField(token);
     }
 
     private void buffering() throws RemoteException, InterruptedException{
@@ -605,6 +609,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     public void setState(String state){ miniModel.setState(state);}
 
+    public void setNumToPlayer(HashMap<Integer, String> map){
+        miniModel.setNumToPlayer(map);
+    }
 
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);

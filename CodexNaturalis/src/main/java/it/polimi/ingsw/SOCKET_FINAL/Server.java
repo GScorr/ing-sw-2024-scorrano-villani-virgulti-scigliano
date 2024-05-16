@@ -141,6 +141,11 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
+    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException {
+
+    }
+
+    @Override
     public void setState(String state) throws RemoteException {
 
     }

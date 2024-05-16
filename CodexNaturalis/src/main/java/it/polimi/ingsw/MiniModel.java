@@ -11,15 +11,14 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class MiniModel implements Serializable {
     List<GameField> game_fields ;
     private int not_read;
     private List<PlayCard> cards_in_hand;
+
+    private HashMap<Integer, String > num_to_player;
 
     private String state;
     private List<String> menu = new LinkedList<>();
@@ -47,7 +46,16 @@ public class MiniModel implements Serializable {
        return messages.poll();
     }
 
-    public void showGameField(int pos) throws RemoteException {showField(game_fields.get(pos));}
+    public void printNumToField(){
+        System.out.println("WHICH PLAYER'S GAME FIELD YOU WANT TO SEE?");
+        for( Integer i : num_to_player.keySet() ){
+            System.out.println("-" + i + " Name:  " + num_to_player.get(i) );
+        }
+    }
+
+    public void showGameField(int pos) throws RemoteException {
+        showField(game_fields.get(pos));
+    }
 
     public void setGameField(List<GameField> game){game_fields = game;}
 
@@ -120,6 +128,9 @@ public class MiniModel implements Serializable {
 
     }
 
+    public void setNumToPlayer(HashMap<Integer, String> map){
+        this.num_to_player = map;
+    }
 
     private void showField(GameField field) throws RemoteException {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];

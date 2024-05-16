@@ -20,6 +20,8 @@ public class GameServer implements VirtualGameServer, Serializable {
     public List<VirtualViewF> clientsRMI = new ArrayList<>();
     public List<VirtualView> clientsSocket = new ArrayList<>();
     public TokenManagerF token_manager = new TokenManagerImplementF();
+
+    public HashMap<Integer, String> num_to_player = new HashMap<>();
     public Map<String, Player> token_to_player = new HashMap<>();
 
     public GameController controller;
@@ -187,15 +189,20 @@ public class GameServer implements VirtualGameServer, Serializable {
     public void chooseGoal(String token, int index) throws RemoteException {
         controller.playerChooseGoal(token_to_player.get(token), index);
         setAllStates();
+
     }
 
     @Override
     public synchronized void chooseStartingCard(String token, boolean flip) throws RemoteException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
+        Integer index = 0;
         token_manager.getTokens().get(token).setCards(token_to_player.get(token).getCardsInHand());
         for (String t : token_to_player.keySet()){
             token_manager.getTokens().get(t).setGameField(getGameFields(t));
+            num_to_player.put(index, token_to_player.get(t).getName() );
+            index++;
         }
+
       setAllStates();
     }
     public void addtoQueue(String token, String function, Integer idRequest, Wrapper wrap) throws RemoteException{
@@ -222,7 +229,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     @Override
     public void showGameField(String token) throws RemoteException {
         GameField field = controller.getField_controller().get(token_to_player.get(token)).getPlayer_field();
-        token_manager.getTokens().get(token).showField(field);
+        //token_manager.getTokens().get(token).showField(field);
         /*
         GameField field = token_to_player.get(token).getGameField();
         token_manager.getTokens().get(token).showField(field);
@@ -327,7 +334,8 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void setAllStates() throws RemoteException {
         for (String t : token_to_player.keySet()){
-        token_manager.getTokens().get(t).setState( token_to_player.get(t).getActual_state().getNameState() );
+            token_manager.getTokens().get(t).setState( token_to_player.get(t).getActual_state().getNameState() );
+            token_manager.getTokens().get(t).setNumToPlayer(num_to_player);
         }
     }
     

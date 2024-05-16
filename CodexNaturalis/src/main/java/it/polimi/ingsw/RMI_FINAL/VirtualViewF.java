@@ -8,6 +8,7 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface VirtualViewF extends Remote {
@@ -25,6 +26,6 @@ public interface VirtualViewF extends Remote {
     public MiniModel getMiniModel() throws RemoteException;
 
     public void setCards(List<PlayCard> cards) throws RemoteException;
-
+    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException;
     public void setState(String state) throws RemoteException;
 }
