@@ -27,6 +27,7 @@ public class MiniModel implements Serializable {
     private Queue<ResponseMessage> messages = new LinkedList<>();
 
     public MiniModel() {
+        this.state = "NOT_INITIALIZED";
         this.not_read = 0;
         this.menu.add("");
         this.menu.add("");

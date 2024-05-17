@@ -182,6 +182,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     scan.nextLine();
                 } while (!menuChoice(decision));
             }
+
             System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
             String choicestring = scan.nextLine();
             int choice = Integer.parseInt(choicestring);
@@ -201,7 +202,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                                 Integer idrequest = IndexRequestManagerF.getNextIndex();
                                 rmi_controller.addtoQueue(token,"insertCard", idrequest,
                                         new Wrapper(token, choice - 1, x, y, flipped));
-                                Thread.sleep(500);
+                                Thread.sleep(750);
                                 /*try {
                                     rmi_controller.insertCard(token, choice - 1, x, y, flipped);
                                     done = true;
@@ -308,10 +309,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     Thread.sleep(100);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
-                        if(s instanceof  GameFieldMessage){
+                        if( s instanceof  GameFieldMessage){
                             showField(((GameFieldMessage) s).getField());
                         }
-                        if (s instanceof ErrorMessage){
+                        if ( s instanceof ErrorMessage){
                             printString(s.getMessage());
                         }
                     }
@@ -500,7 +501,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     @Override
     public void reportMessage(String details) throws RemoteException {
         System.out.print("\n[ERROR] " + details + "\n> ");
-
     }
 
     @Override
