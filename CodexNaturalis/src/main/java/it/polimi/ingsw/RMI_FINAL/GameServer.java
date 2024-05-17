@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
@@ -26,6 +27,7 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     public GameController controller;
     public Queue<Integer> callQueue = new LinkedList<>();
+    public Queue<SendFunction> functQueue = new LinkedList<>();
     public Map<Integer,String> request_to_token = new HashMap<>();
     public Map<Integer,String> request_to_function = new HashMap<>();
     public Map<Integer,Wrapper> request_to_wrap = new HashMap<>();
@@ -34,7 +36,6 @@ public class GameServer implements VirtualGameServer, Serializable {
     public GameServer(String name, int numPlayer, int port) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
-        //checkDisconnected();
         playDisconnected();
         this.port = port;
     }
@@ -48,7 +49,8 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     @Override
     public synchronized void connectRMI(VirtualViewF client)throws RemoteException{this.clientsRMI.add(client);}
-    public void checkQueue() throws RemoteException {
+
+    /*public void checkQueue() throws RemoteException {
         new Thread(() -> {
             while (true) {
                 try {
@@ -62,9 +64,25 @@ public class GameServer implements VirtualGameServer, Serializable {
                 }
             }
         }).start();
+    }*/
+
+    public void checkQueue() throws RemoteException {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(100); // Controlla le functions ogni 0.25 secondi
+                    while (!functQueue.isEmpty()) {
+                        broadcastMessage(functQueue.poll().action(this));
+                    }
+                } catch (InterruptedException | RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
+
     public void executeCall(Integer request) throws RemoteException {
-        String token = request_to_token.get(request);
+       /* String token = request_to_token.get(request);
         String function = request_to_function.get(request);
         Wrapper wrap = request_to_wrap.get(request);
         ResponseMessage message = null;
@@ -124,7 +142,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 break;
                 
         }
-        broadcastMessage(message);
+        broadcastMessage(message);*/
     }
 
     private void broadcastMessage(ResponseMessage message) throws RemoteException {
@@ -206,10 +224,14 @@ public class GameServer implements VirtualGameServer, Serializable {
       setAllStates();
     }
     public void addtoQueue(String token, String function, Integer idRequest, Wrapper wrap) throws RemoteException{
-        callQueue.add(idRequest);
+       /* callQueue.add(idRequest);
         request_to_token.put(idRequest, token);
         request_to_function.put(idRequest, function);
-        request_to_wrap.put(idRequest,wrap);
+        request_to_wrap.put(idRequest,wrap);*/
+    }
+
+    public void addQueue(SendFunction function) throws RemoteException{
+        functQueue.add(function);
     }
 
 

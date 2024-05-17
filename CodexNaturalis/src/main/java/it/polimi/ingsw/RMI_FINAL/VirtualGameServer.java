@@ -5,6 +5,7 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.rmi.Remote;
@@ -27,6 +28,7 @@ public interface VirtualGameServer extends Remote {
     public void checkQueue() throws RemoteException;
     public void executeCall(Integer function) throws RemoteException;
     public void addtoQueue(String token, String string,Integer idRequest, Wrapper wrap) throws RemoteException;
+    public void addQueue(SendFunction function) throws RemoteException;
     public int getPort() throws RemoteException;
     public void showStartingCard(String token) throws RemoteException;
     public void showGameField(String token) throws RemoteException;
