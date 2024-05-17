@@ -2,7 +2,6 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.*;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -22,9 +21,7 @@ public class Common_Server {
     private Map<String, GameServer>  token_to_rmi = new HashMap<>();
     private Map<Integer , GameServer> rmi_controllers = new HashMap<>();
     private final Map<String, Long> lastHeartbeatTime = new HashMap<>();
-    public Common_Server(){
-
-    }
+    public Common_Server(){}
 
     public String createToken(VirtualViewF client) throws RemoteException {return token_manager.generateToken(client);}
     public String createTokenSocket(String name) throws RemoteException {return token_manager.generateTokenSocket(name);}
@@ -36,12 +33,12 @@ public class Common_Server {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayer(p_token,player_name, client,true);
-        VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
+        VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);
         token_to_rmi.put( p_token, gameServer);
         rmi_controllers.put(gameServer.getController().getGame().getIndex_game(), gameServer);
-        System.out.println(port);
+        //token_manager.getTokens().get(p_token).setState(token_to_player.get(p_token).getActual_state().getNameState());
         return port;
     }
 
@@ -50,7 +47,7 @@ public class Common_Server {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayerSocket(p_token,player_name,true);
-        VirtualRmiController serverStub = (VirtualRmiController) UnicastRemoteObject.exportObject(gameServer, 0);
+        VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);
         token_to_rmi.put( p_token, gameServer);

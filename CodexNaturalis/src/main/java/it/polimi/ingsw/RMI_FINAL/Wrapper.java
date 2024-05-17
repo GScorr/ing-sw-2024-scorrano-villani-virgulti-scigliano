@@ -7,6 +7,9 @@ public class Wrapper implements Serializable {
     public Object obj2;
     public Object obj3;
     public Object obj4;
+    public Object obj5;
+    public Object obj6;
+    public Object obj7;
 
 
 
@@ -33,4 +36,32 @@ public class Wrapper implements Serializable {
         this.obj3 = obj3;
         this.obj4 = obj4;
     }
+
+    public Wrapper(Object obj1, Object obj2, Object obj3, Object obj4, Object obj5) {
+        this.obj1 = obj1;
+        this.obj2 = obj2;
+        this.obj3 = obj3;
+        this.obj4 = obj4;
+        this.obj5 = obj5;
+    }
+
+    public Wrapper(Object obj1, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
+        this.obj1 = obj1;
+        this.obj2 = obj2;
+        this.obj3 = obj3;
+        this.obj4 = obj4;
+        this.obj5 = obj5;
+        this.obj6 = obj6;
+    }
+
+    public Wrapper(Object obj1, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6, Object obj7) {
+        this.obj1 = obj1;
+        this.obj2 = obj2;
+        this.obj3 = obj3;
+        this.obj4 = obj4;
+        this.obj5 = obj5;
+        this.obj6 = obj6;
+        this.obj7 = obj7;
+    }
+
 }

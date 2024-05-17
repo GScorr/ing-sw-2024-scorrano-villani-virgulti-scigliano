@@ -26,7 +26,8 @@ public class RmiServerF implements VirtualServerF {
     public Map<String, GameServer> getTtoR() throws RemoteException {return common.getTtoR();}
     public Map<Integer, GameServer> getListRmiController() throws RemoteException {return common.getListRmiController();}
     @Override
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws RemoteException {return common.createGame( name , num_player, p_token, player_name, client);}
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws RemoteException {
+        return common.createGame( name , num_player, p_token, player_name, client);}
     public int createGameSocket(String name, int num_player, String p_token, String player_name) throws RemoteException {return common.createGameSocket(name, num_player, p_token, player_name);}
     @Override
     public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws RemoteException {return common.addPlayer(game_id, p_token, name, client);}

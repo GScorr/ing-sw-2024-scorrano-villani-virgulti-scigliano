@@ -1,13 +1,11 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
-import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.RMI.TokenManagerImplement;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
@@ -16,8 +14,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,12 +112,41 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
+    public void pushBack(ResponseMessage message) throws RemoteException {
+
+    }
+
+    @Override
     public void showField(GameField field) throws RemoteException {
 
     }
 
     @Override
     public void printString(String s) throws RemoteException {
+
+    }
+
+    @Override
+    public void setGameField(List<GameField> games) throws RemoteException {
+
+    }
+
+    public MiniModel getMiniModel() throws RemoteException{
+        return null;
+    }
+
+    @Override
+    public void setCards(List<PlayCard> cards) throws RemoteException {
+
+    }
+
+    @Override
+    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException {
+
+    }
+
+    @Override
+    public void setState(String state) throws RemoteException {
 
     }
 

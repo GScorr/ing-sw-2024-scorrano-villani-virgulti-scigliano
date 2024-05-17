@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
 
-    StringCostant string_costant;
+    StringCostant string_costant = new StringCostant();
 
     final ServerProxy server;
 
@@ -351,9 +351,10 @@ public class Client implements VirtualView {
                     int y = scan.nextInt();
                     scan.nextLine();
                     if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-
+                            /*
                             done = server.placeCard(choice - 1, x, y, flipped);
                             System.out.println(done);
+                             */
 
                     }
                     if( ! done){System.out.println("\nInserimento sbagliato!");}

@@ -1,8 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
@@ -15,13 +14,13 @@ public class peachFromCardsInCenter implements Message, Serializable {
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
-    public VirtualRmiController rmi_controller;
+    public VirtualGameServer rmi_controller;
     public int index;
 
     public boolean flipped;
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 

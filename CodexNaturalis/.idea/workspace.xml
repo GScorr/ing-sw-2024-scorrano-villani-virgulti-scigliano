@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualViewF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualViewF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +25,6 @@
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
-        <option value="module-info" />
         <option value="Class" />
       </list>
     </option>
@@ -67,6 +70,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.Common_Client.executor&quot;: &quot;Run&quot;,
     &quot;Application.Common_Server.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GUI.executor&quot;: &quot;Run&quot;,
     &quot;Application.RmiClient.executor&quot;: &quot;Run&quot;,
     &quot;Application.RmiClientF.executor&quot;: &quot;Run&quot;,
     &quot;Application.RmiServer.executor&quot;: &quot;Run&quot;,
@@ -129,7 +133,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
@@ -161,7 +165,7 @@
       <recent name="it.polimi.ingsw.MODEL.Player.State" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Client">
+  <component name="RunManager" selected="Application.Common_Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -232,7 +236,7 @@
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.MESSAGES.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -302,57 +306,6 @@
       <workItem from="1715087112111" duration="7364000" />
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
-      <workItem from="1715682686382" duration="7693000" />
-      <workItem from="1715700670009" duration="5413000" />
-      <workItem from="1715815267409" duration="600000" />
-    </task>
-    <task id="LOCAL-00063" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1713640310461</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1713640310461</updated>
-    </task>
-    <task id="LOCAL-00064" summary="super modifica serializable e clientdef">
-      <option name="closed" value="true" />
-      <created>1713659118455</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1713659118455</updated>
-    </task>
-    <task id="LOCAL-00065" summary="super modifica serializable e clientdef">
-      <option name="closed" value="true" />
-      <created>1713661315450</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1713661315451</updated>
-    </task>
-    <task id="LOCAL-00066" summary="super modifica serializable e clientdef">
-      <option name="closed" value="true" />
-      <created>1713692229114</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1713692229114</updated>
-    </task>
-    <task id="LOCAL-00067" summary="fix problemi creazione giocatore client">
-      <option name="closed" value="true" />
-      <created>1713693206749</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1713693206749</updated>
-    </task>
-    <task id="LOCAL-00068" summary="small fixes">
-      <option name="closed" value="true" />
-      <created>1713695372465</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1713695372465</updated>
     </task>
     <task id="LOCAL-00069" summary="aggiunta metodo checkName in RmiServerF">
       <option name="closed" value="true" />
@@ -666,39 +619,87 @@
       <option name="project" value="LOCAL" />
       <updated>1715448083922</updated>
     </task>
-    <task id="LOCAL-00108" summary="aggiornametnp">
+    <task id="LOCAL-00108" summary="aggiornamento">
       <option name="closed" value="true" />
-      <created>1715449830888</created>
+      <created>1715700583607</created>
       <option name="number" value="00108" />
       <option name="presentableId" value="LOCAL-00108" />
       <option name="project" value="LOCAL" />
-      <updated>1715449830888</updated>
+      <updated>1715700583607</updated>
     </task>
-    <task id="LOCAL-00109" summary="Creation English String">
+    <task id="LOCAL-00109" summary="aggiornamento">
       <option name="closed" value="true" />
-      <created>1715684786212</created>
+      <created>1715701075791</created>
       <option name="number" value="00109" />
       <option name="presentableId" value="LOCAL-00109" />
       <option name="project" value="LOCAL" />
-      <updated>1715684786213</updated>
+      <updated>1715701075791</updated>
     </task>
-    <task id="LOCAL-00110" summary="Inserimento Gui">
+    <task id="LOCAL-00110" summary="aggiornamento">
       <option name="closed" value="true" />
-      <created>1715700005712</created>
+      <created>1715705770494</created>
       <option name="number" value="00110" />
       <option name="presentableId" value="LOCAL-00110" />
       <option name="project" value="LOCAL" />
-      <updated>1715700005714</updated>
+      <updated>1715705770494</updated>
     </task>
-    <task id="LOCAL-00111" summary="Aggiornamento">
+    <task id="LOCAL-00111" summary="inizio mini model">
       <option name="closed" value="true" />
-      <created>1715700142641</created>
+      <created>1715714956109</created>
       <option name="number" value="00111" />
       <option name="presentableId" value="LOCAL-00111" />
       <option name="project" value="LOCAL" />
-      <updated>1715700142641</updated>
+      <updated>1715714956109</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="inizio mini model">
+      <option name="closed" value="true" />
+      <created>1715716613180</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1715716613180</updated>
+    </task>
+    <task id="LOCAL-00113" summary="inizio mini model">
+      <option name="closed" value="true" />
+      <created>1715716681464</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1715716681464</updated>
+    </task>
+    <task id="LOCAL-00114" summary="inizio mini model">
+      <option name="closed" value="true" />
+      <created>1715716885221</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1715716885221</updated>
+    </task>
+    <task id="LOCAL-00115" summary="inizio mini model">
+      <option name="closed" value="true" />
+      <created>1715718585224</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1715718585224</updated>
+    </task>
+    <task id="LOCAL-00116" summary="non lo leggerà nessuno ma abbiamo fatto cose belle">
+      <option name="closed" value="true" />
+      <created>1715723500368</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1715723500369</updated>
+    </task>
+    <task id="LOCAL-00117" summary="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel">
+      <option name="closed" value="true" />
+      <created>1715899036447</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1715899036447</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -710,11 +711,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="false" />
-                </map>
-              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -744,21 +740,21 @@
     <MESSAGE value="heartbeat" />
     <MESSAGE value="gestione disconnessione e riconnessione" />
     <MESSAGE value="aggiornamento e prima scrittura Front END Socket" />
-    <MESSAGE value="aggiornamento" />
     <MESSAGE value="modularizzazione cli" />
     <MESSAGE value="modularizzazione clih" />
     <MESSAGE value="agg" />
     <MESSAGE value="insert card, ma dice empty space" />
     <MESSAGE value="insert card successful" />
+    <MESSAGE value="Aggiornamento" />
     <MESSAGE value="aggiorn" />
     <MESSAGE value="cambio common server" />
     <MESSAGE value="inizio lavori common server, passaggio funzioni" />
     <MESSAGE value="Socket final with Big Black Server" />
-    <MESSAGE value="aggiornametnp" />
-    <MESSAGE value="Creation English String" />
-    <MESSAGE value="Inserimento Gui" />
-    <MESSAGE value="Aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento" />
+    <MESSAGE value="aggiornamento" />
+    <MESSAGE value="inizio mini model" />
+    <MESSAGE value="non lo leggerà nessuno ma abbiamo fatto cose belle" />
+    <MESSAGE value="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel" />
+    <option name="LAST_COMMIT_MESSAGE" value="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -766,6 +762,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.io.OptionalDataException" package="java.io" />
           <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

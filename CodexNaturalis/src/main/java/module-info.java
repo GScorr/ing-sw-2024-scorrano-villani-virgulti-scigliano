@@ -22,5 +22,6 @@ module PSP31 {
 
     exports it.polimi.ingsw;
     opens it.polimi.ingsw.VIEW to javafx.fxml;
+    exports it.polimi.ingsw.RMI_FINAL.MESSAGES;
 
 }
