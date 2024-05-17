@@ -9,6 +9,7 @@ import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.StringCostant;
 
@@ -21,7 +22,7 @@ import java.util.Scanner;
 public class Client implements VirtualView {
 
     StringCostant string_costant = new StringCostant();
-
+    private MiniModel miniModel =  new MiniModel();
     final ServerProxy server;
 
     private boolean newClient;
@@ -204,9 +205,9 @@ public class Client implements VirtualView {
      */
 
     private void waitFullGame() throws IOException, InterruptedException, ClassNotFoundException {
-        if(server.getPlayerState().equals("NOT_INITIALIZED")){
+        if(miniModel.getState().equals("NOT_INITIALIZED")){
             System.out.println("Wait until the game is full");
-            while(server.getPlayerState().equals("NOT_INITIALIZED")){
+            while(miniModel.getState().equals("NOT_INITIALIZED")){
                 buffering();
             }
             System.out.println("\nYou Game is ready to start");

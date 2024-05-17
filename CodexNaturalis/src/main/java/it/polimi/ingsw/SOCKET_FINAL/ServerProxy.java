@@ -47,10 +47,8 @@ public class ServerProxy implements VirtualServer {
         Message DP_message = new CheckNameMessage(name);
         output.writeObject(DP_message);
         output.flush();
-
         MyMessageFinal response = (MyMessageFinal) input.readObject();
         return response.getContent();
-
     }
 
 
