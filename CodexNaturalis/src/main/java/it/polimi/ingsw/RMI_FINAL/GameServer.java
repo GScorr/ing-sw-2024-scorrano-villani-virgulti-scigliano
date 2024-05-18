@@ -83,6 +83,15 @@ public class GameServer implements VirtualGameServer, Serializable {
         controller.statePlaceCard(token_to_player.get(token), index, x, y);
     }
 
+    //END GAME
+    public void getFinalStandings(String token) throws RemoteException{
+        int i = 1;
+        for(Player p : controller.getPlayer_list()){
+            token_manager.getTokens().get(token).printString(i + "- " + p.getName());
+            i++;
+        }
+    }
+
     //QUEUE FUNCTIONS
     public void checkQueue() throws RemoteException {
         new Thread(() -> {while (true) {
@@ -96,14 +105,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         for (VirtualViewF c : clientsRMI){c.pushBack(message);}}
     public void addQueue(SendFunction function) throws RemoteException{functQueue.add(function);}
 
-    //END GAME
-    public void getFinalStandings(String token) throws RemoteException{
-        int i = 1;
-        for(Player p : controller.getPlayer_list()){
-            token_manager.getTokens().get(token).printString(i + "- " + p.getName());
-            i++;
-        }
-    }
+
 
     //DISCONNECTION
     public void wakeUp(String name, VirtualViewF client){
