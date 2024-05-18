@@ -123,6 +123,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 //token_manager.getTokens().remove(s);
                 token_manager.getTokens().put(s, client );}}
     }
+
     private  void playDisconnected() throws RemoteException {
         new Thread(() -> {
             Player tmp;
