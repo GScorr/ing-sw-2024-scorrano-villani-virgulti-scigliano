@@ -34,6 +34,10 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
         return Socket_tokens.containsKey(name) && Socket_tokens.get(token).equals(name);
     }
 
+    public void deleteVW(String token){
+        tokens.remove(token);
+    }
+
 
     public Map<String, VirtualViewF> getTokens(){
         return this.tokens;
