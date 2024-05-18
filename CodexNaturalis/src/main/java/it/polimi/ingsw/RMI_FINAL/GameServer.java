@@ -38,7 +38,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         playDisconnected();
-        checkDeadline();
+        //checkDeadline();
         this.port = port;
     }
 
@@ -70,7 +70,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         return true;
     }
     @Override
-    public void chooseGoal(String token, int index) throws IOException {
+    public void chooseGoal(String token, int index) throws IOException, RemoteException {
         controller.playerChooseGoal(token_to_player.get(token), index);
         setAllStates();
     }
@@ -124,6 +124,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 token_manager.getTokens().put(s, client );}}
     }
     private  void playDisconnected() throws RemoteException {
+        /*
         new Thread(() -> {
             Player tmp;
             while(true) {
@@ -161,9 +162,10 @@ public class GameServer implements VirtualGameServer, Serializable {
                 }
                 }
         }).start();
+         */
     }
 
-    private void checkDeadline() {
+   /* private void checkDeadline() {
         new Thread(() -> {
             String tokenalive;
             while(true) {
@@ -184,6 +186,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                             try {
                                 broadcastMessage(new UpdateMessage("You are the only player remained in the lobby: countdown started!"));
                                 Countdown countdown = new Countdown(30);
+                                countdown.start();
                                 while (controller.isAlone() && countdown.getTimeRemained() > 0) {
                                     broadcastMessage(new UpdateMessage(countdown.getTimeRemained() + "s left"));
                                 }
@@ -203,7 +206,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             }
         }).start();
     }
-
+*/
 
 
     //DRAW CARD METHODS
@@ -237,7 +240,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     //SETTER
-    private void setAllStates() throws IOException {
+    private synchronized void setAllStates() throws IOException {
         for (String t : token_to_player.keySet()){
             if(token_manager.getTokens().get(t)!=null) {
                 token_manager.getTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());

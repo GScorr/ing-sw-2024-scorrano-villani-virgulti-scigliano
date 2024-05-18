@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento funzioni disconnessioni">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/Countdown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/Countdown.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,12 +216,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.VIEW.GUI" />
+    <configuration name="Countdown" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI_FINAL.Countdown" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.VIEW.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -228,12 +229,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RmiClientF" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI_FINAL.RmiClientF" />
+    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.VIEW.GUI" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.MESSAGES.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.VIEW.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -256,8 +257,8 @@
     </configuration>
     <list>
       <item itemvalue="Application.ClientS" />
+      <item itemvalue="Application.Countdown" />
       <item itemvalue="Application.GUI" />
-      <item itemvalue="Application.RmiClientF" />
       <item itemvalue="Application.Common_Client" />
       <item itemvalue="Application.Common_Server" />
       <item itemvalue="Application.Client" />
@@ -266,9 +267,9 @@
       <list>
         <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.Common_Server" />
+        <item itemvalue="Application.Countdown" />
         <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Client" />
-        <item itemvalue="Application.RmiClientF" />
       </list>
     </recent_temporary>
   </component>
@@ -303,14 +304,6 @@
       <workItem from="1715087112111" duration="7364000" />
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
-    </task>
-    <task id="LOCAL-00078" summary="inserimento metodo chooseGoal">
-      <option name="closed" value="true" />
-      <created>1714060774967</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1714060774967</updated>
     </task>
     <task id="LOCAL-00079" summary="heartbeat">
       <option name="closed" value="true" />
@@ -696,7 +689,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716050628498</updated>
     </task>
-    <option name="localTasksCounter" value="127" />
+    <task id="LOCAL-00127" summary="sono gay">
+      <option name="closed" value="true" />
+      <created>1716052704227</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1716052704227</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -726,7 +727,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Chiusura GameController Test" />
     <MESSAGE value="continuazione client" />
     <MESSAGE value="recap" />
     <MESSAGE value="ci siamo" />
@@ -751,7 +751,8 @@
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="aggiornamento funzioni disconnessioni" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento funzioni disconnessioni" />
+    <MESSAGE value="sono gay" />
+    <option name="LAST_COMMIT_MESSAGE" value="sono gay" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
