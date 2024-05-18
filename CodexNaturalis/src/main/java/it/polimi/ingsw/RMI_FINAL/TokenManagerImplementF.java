@@ -1,5 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +10,7 @@ import java.util.UUID;
 public class TokenManagerImplementF implements TokenManagerF, Serializable {
 
     public Map<String, VirtualViewF> tokens = new HashMap<>();
-    public  Map<String, String> Socket_tokens = new HashMap<>();
+    public  Map<String, VirtualView> Socket_tokens = new HashMap<>();
     @Override
     public String generateToken(VirtualViewF clientId) {
         String token = UUID.randomUUID().toString(); // Generate a casual token
@@ -17,9 +19,9 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
     }
 
     //Socket usage
-    public String generateTokenSocket(String name){
+    public String generateTokenSocket(VirtualView client){
         String token = UUID.randomUUID().toString(); // Generate a casual token
-        Socket_tokens.put(token,name); // save client token association
+        Socket_tokens.put(token,client); // save client token association
         return token;
     }
 
@@ -36,6 +38,6 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
     public Map<String, VirtualViewF> getTokens(){
         return this.tokens;
     }
-    public Map<String,String> getSocketTokens(){return this.Socket_tokens;
+    public Map<String,VirtualView> getSocketTokens(){return this.Socket_tokens;
     }
 }
