@@ -142,13 +142,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         boolean flag;
         do {
             flag = false;
-            System.out.print("\nCHOOSE NUMBER OF PLAYERS -> MIN : 2   MAX : 4 > ");
+            System.out.print("\nCHOOSE NUMBER OF PLAYERS ( 2 - 4 ) > ");
             numplayers = scan.nextInt();
 
             try {
                 int port;
                 port = server.createGame(game_name, numplayers, token, player_name,this);
-                System.out.println("porta" + port);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
