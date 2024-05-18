@@ -14,6 +14,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.*;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.StringCostant;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -32,6 +33,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private VirtualGameServer rmi_controller;
     private boolean newClient;
     private MiniModel miniModel =  new MiniModel();
+    private StringCostant stringcostant;
     
 
     public RmiClientF(VirtualServerF server) throws RemoteException {
@@ -52,6 +54,40 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         chooseStartingCardState();
         manageGame();
 
+    }
+
+    private String selectNamePlayer() throws RemoteException, NotBoundException {
+        Scanner scan = new Scanner(System.in);
+        String player_name = " ";
+        String isnew;
+        boolean flag;
+        // Player creation
+        do{
+            System.out.print(stringcostant.choose_name_player);
+            player_name = scan.nextLine();
+            isnew = server.checkName(player_name,this);
+            if(isnew.equals("true")) {
+                flag = true;
+                newClient = true;
+                this.token = server.createToken(this);
+            }
+            else if(isnew.equals("false")){
+                flag=false;
+                System.out.println(stringcostant.name_is_not_valid);
+            }
+            else{
+                this.token = isnew;
+                int port = server.getPort(token);
+                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                rmi_controller.connectRMI(this);
+                flag=true;
+                newClient = false;
+                startSendingHeartbeats();
+                System.out.println(player_name + " reconnected!");
+            }
+        } while(!flag);
+        return player_name;
     }
 
     private boolean menuChoice(int choice) throws RemoteException {
@@ -204,40 +240,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         if(newClient) {
                 makeChoice(player_name);
                 System.out.print("creazione Player andata a buon fine!\n");}
-    }
-
-    private String selectNamePlayer() throws RemoteException, NotBoundException {
-        Scanner scan = new Scanner(System.in);
-        String player_name = " ";
-        String isnew;
-        boolean flag;
-        // Creo giocatore
-        do{
-            System.out.print("\nScegli nome Player > ");
-            player_name = scan.nextLine();
-            isnew = server.checkName(player_name,this);
-            if(isnew.equals("true")) {
-                flag = true;
-                newClient = true;
-                this.token = server.createToken(this);
-            }
-            else if(isnew.equals("false")){
-                flag=false;
-                System.out.println("Giocatore già presente, reinserisci nome!");
-            }
-            else{
-                this.token = isnew;
-                int port = server.getPort(token);
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                rmi_controller.connectRMI(this);
-                flag=true;
-                newClient = false;
-                startSendingHeartbeats();
-                System.out.println(player_name + " riconnesso!");
-            }
-        } while(!flag);
-        return player_name;
     }
 
     private void chooseStartingCardState() throws RemoteException, InterruptedException {
