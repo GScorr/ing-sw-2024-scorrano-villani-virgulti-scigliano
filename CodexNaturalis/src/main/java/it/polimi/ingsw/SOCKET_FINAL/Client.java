@@ -9,6 +9,10 @@ import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.StringCostant;
 
@@ -21,13 +25,15 @@ import java.util.Scanner;
 public class Client implements VirtualView {
 
     StringCostant string_costant = new StringCostant();
-
+    private MiniModel miniModel =  new MiniModel();
     final ServerProxy server;
 
     private boolean newClient;
+    ObjectInputStream input;
 
     public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException {
         this.server = new ServerProxy(output,input);
+        this.input = input;
     }
 
     public void run() throws IOException, ClassNotFoundException, InterruptedException {
@@ -41,23 +47,36 @@ public class Client implements VirtualView {
         runCli();
     }
 
-    /*
-    private void runVirtualServer() throws IOException {
 
-        String line;
-        // Read message type
-        while ((line = input.readLine()) != null) {
-            // Read message and perform action
-            switch (line) {
-                case "errore" -> this.showValue(String.valueOf(Integer.parseInt(input.readLine())));
-                case "update_message" -> this.showValue(input.readLine());
-                case "update_number" -> this.reportError(input.readLine());
-                default -> System.err.println("[INVALID MESSAGE]");
+    private void startCheckingMessages() throws IOException, ClassNotFoundException {
+        new Thread(() -> {
+            ResponseMessage s;
+            // Read message type
+            while (true) {
+                try {
+                    if (!((s = (ResponseMessage) input.readObject()) != null)) {
+                        s.setMiniModel(miniModel);
+                        //se non fa nulla è perchè potrebbe non aver preso l'overide
+                        s.action();
+                        if( s instanceof GameFieldMessage){
+                            showField(((GameFieldMessage) s).getField());
+                        }
+                        if ( s instanceof ErrorMessage){
+                            System.out.println(s.getMessage());
+                        }
+                    };
+                } catch (IOException e) {
+                    System.out.println("errore nel startCheckingMessages thread");
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    System.out.println("errore nel startCheckingMessages thread");
+                    throw new RuntimeException(e);
+                }
+
             }
-        }
-
+        }).start();
     }
-    */
+
 
     private void runCli() throws IOException, ClassNotFoundException, InterruptedException {
 
@@ -67,7 +86,7 @@ public class Client implements VirtualView {
         String game_name;
 
         gameAccess(player_name);
-
+        startCheckingMessages();
         waitFullGame();
 
         chooseGoalState();
@@ -204,9 +223,9 @@ public class Client implements VirtualView {
      */
 
     private void waitFullGame() throws IOException, InterruptedException, ClassNotFoundException {
-        if(server.getPlayerState().equals("NOT_INITIALIZED")){
+        if(miniModel.getState().equals("NOT_INITIALIZED")){
             System.out.println("Wait until the game is full");
-            while(server.getPlayerState().equals("NOT_INITIALIZED")){
+            while(miniModel.getState().equals("NOT_INITIALIZED")){
                 buffering();
             }
             System.out.println("\nYou Game is ready to start");
