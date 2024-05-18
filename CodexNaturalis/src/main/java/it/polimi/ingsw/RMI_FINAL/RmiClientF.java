@@ -414,7 +414,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 return true;}
         return true;
     }
-
     private void buffering() throws RemoteException, InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
