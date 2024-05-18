@@ -83,6 +83,8 @@ public class Player implements PlayerObserver, Serializable {
     private Deck gold_deck, resources_deck;
     private boolean firstPlaced = false;
 
+    private int fake_state= 0;
+
     public boolean isFirstPlaced() {
         return firstPlaced;
     }
