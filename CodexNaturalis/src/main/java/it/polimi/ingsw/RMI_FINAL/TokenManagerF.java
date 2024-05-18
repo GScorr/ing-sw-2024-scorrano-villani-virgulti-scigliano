@@ -12,4 +12,5 @@ public interface TokenManagerF extends Remote {
     public boolean validateTokenSocket(String name, String token);
     public Map< String, VirtualViewF> getTokens();
     public Map< String, VirtualView> getSocketTokens();
+    public void deleteVW(String token);
 }
