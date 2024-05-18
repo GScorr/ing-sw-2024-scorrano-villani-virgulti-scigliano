@@ -5,36 +5,22 @@ import it.polimi.ingsw.RMI_FINAL.GameServer;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
-import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
 
 import java.rmi.RemoteException;
 
-public class SendInsertCard implements SendFunction{
-
+public class SendDrawGold implements SendFunction{
     String token;
-    int index;
-    int x;
-    int y;
-    boolean flipped;
-
-
-    public SendInsertCard( String token,int index,  int x, int y, boolean flipped) {
+    public SendDrawGold( String token) {
         this.token = token;
-        this.index = index;
-        this.x = x;
-        this.y = y;
-        this.flipped = flipped;
     }
 
     @Override
     public ResponseMessage action(GameServer server) throws RemoteException {
         ResponseMessage message;
         try{
-            server.insertCard(token, index, x , y, flipped);
-             message = new GameFieldMessage(server.token_to_player.get(token).getGameField());
-            for (String t : server.token_to_player.keySet()){
-                server.token_manager.getTokens().get(t).setGameField(server.getGameFields(t));
-            }
+            server.peachFromGoldDeck(token);
+            message = new GameFieldMessage(server.token_to_player.get(token).getGameField());
+            server.token_manager.getTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
             for (String t : server.token_to_player.keySet()){
                 server.token_manager.getTokens().get(t).setState( server.token_to_player.get(t).getActual_state().getNameState() );
             }

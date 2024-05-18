@@ -10,6 +10,7 @@ import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.*;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
@@ -135,16 +136,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         while(!done){
             if(num==1){
                 done = true;
-                Integer idrequest = IndexRequestManagerF.getNextIndex();
-                rmi_controller.addtoQueue(token,"drawGoldCard", idrequest,
-                        new Wrapper(token));
+                SendFunction function = new SendDrawGold(token);
+                rmi_controller.addQueue(function);
                 Thread.sleep(500);
                 //rmi_controller.peachFromGoldDeck(token);
             } else if (num==2) {
                 done = true;
-                Integer idrequest = IndexRequestManagerF.getNextIndex();
-                rmi_controller.addtoQueue(token,"drawResourceCard", idrequest,
-                        new Wrapper(token));
+                SendFunction function = new SendDrawResource(token);
+                rmi_controller.addQueue(function);
                 Thread.sleep(500);
                 //rmi_controller.peachFromResourceDeck(token);
             } else if (num==3) {
@@ -153,9 +152,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 System.out.println("Scegli indice carta da pescare: ");
                 String choicestr = scan.nextLine();
                 int index = Integer.parseInt(choicestr);
-                Integer idrequest = IndexRequestManagerF.getNextIndex();
-                rmi_controller.addtoQueue(token,"drawCenterCard", idrequest,
-                        new Wrapper(token, index-1));
+                SendFunction function = new SendDrawCenter(token, index-1);
+                rmi_controller.addQueue(function);
                 Thread.sleep(500);
                 //rmi_controller.peachFromCardsInCenter(token, index-1);
             } else{
@@ -199,17 +197,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                             int y = scan.nextInt();
                             scan.nextLine();
                             if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                                Integer idrequest = IndexRequestManagerF.getNextIndex();
+                                /*Integer idrequest = IndexRequestManagerF.getNextIndex();
                                 rmi_controller.addtoQueue(token,"insertCard", idrequest,
-                                        new Wrapper(token, choice - 1, x, y, flipped));
+                                        new Wrapper(token, choice - 1, x, y, flipped));*/
+                                SendFunction function = new SendInsertCard(token, choice-1, x,y,flipped);
+                                rmi_controller.addQueue(function);
                                 Thread.sleep(750);
-                                /*try {
-                                    rmi_controller.insertCard(token, choice - 1, x, y, flipped);
-                                    done = true;
-                                }
-                                catch (ControllerException e){
-                                    e.getMessage();
-                                }*/
                             }
                             else{
                                 System.out.println("\nInserimento sbagliato!");

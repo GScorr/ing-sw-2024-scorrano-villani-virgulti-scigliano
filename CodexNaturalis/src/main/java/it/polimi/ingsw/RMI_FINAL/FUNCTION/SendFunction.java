@@ -7,12 +7,8 @@ import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public class SendFunction implements Serializable {
-    public GameServer server;
+public interface SendFunction extends Serializable {
 
-    public SendFunction(GameServer server) {
-        this.server = server;
-    }
+    public default ResponseMessage action(GameServer server) throws RemoteException{ return null;}
 
-    public ResponseMessage action(String token, int index, int x, int y, boolean flipped) throws RemoteException{ return null;}
 }
