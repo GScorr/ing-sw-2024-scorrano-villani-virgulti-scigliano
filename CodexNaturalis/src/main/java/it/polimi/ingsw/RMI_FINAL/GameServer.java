@@ -184,7 +184,8 @@ public class GameServer implements VirtualGameServer, Serializable {
     private void checkDeadline() {
         new Thread(() -> {
             String tokenalive;
-            while(true) {
+            boolean end = true;
+            while(end) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -203,8 +204,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED!"));
                                 int countdown = 15;
                                 while( countdown > 0 && controller.isAlone()) {
-                                    broadcastMessage(new UpdateMessage(countdown + "SECONDS LEFT"));
-                                    broadcastMessage(new UpdateMessage("\b"));
+                                    broadcastMessage(new UpdateMessage("\b"+countdown + "SECONDS LEFT"));
                                     countdown--;
                                     Thread.sleep(1000);
                                 }
@@ -212,7 +212,8 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     for (String t : token_to_player.keySet()) {
                                         PState end_game = new EndGame(token_to_player.get(t));
                                         token_to_player.get(t).setPlayer_state(end_game);
-                                        broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
+                                        if ( token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
+                                        end = false;
                                     }
                                 }
                             } catch (RemoteException e) {
