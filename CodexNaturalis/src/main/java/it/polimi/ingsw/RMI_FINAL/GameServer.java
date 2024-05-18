@@ -113,11 +113,11 @@ public class GameServer implements VirtualGameServer, Serializable {
         return true;
     }
 
-    public synchronized boolean addPlayerSocket(String p_token, String name, boolean isFirst ) throws RemoteException {
+    public synchronized boolean addPlayerSocket(String p_token, String name,VirtualView client, boolean isFirst ) throws RemoteException {
         if(controller.getFull() )
             return false;
         createPlayer(p_token, name, isFirst);
-        token_manager.getSocketTokens().put(p_token, name);
+        token_manager.getSocketTokens().put(p_token, client);
         controller.checkNumPlayer();
         return true;
     }
