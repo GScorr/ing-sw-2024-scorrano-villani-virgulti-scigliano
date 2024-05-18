@@ -31,7 +31,7 @@ public class Common_Server {
     public Map<String, GameServer> getTtoR() throws RemoteException {return token_to_rmi;}
     public Map<Integer, GameServer> getListRmiController() throws RemoteException {return rmi_controllers;}
 
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws RemoteException {
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayer(p_token,player_name, client,true);
@@ -58,7 +58,7 @@ public class Common_Server {
         return port;
     }
 
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws RemoteException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
     public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws RemoteException {
         rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
         return true;}
@@ -113,7 +113,7 @@ public class Common_Server {
         return token_to_rmi.get(token).getPort();
     }
 
-    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws RemoteException {
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {
 
         GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
