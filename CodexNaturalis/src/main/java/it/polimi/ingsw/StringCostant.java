@@ -5,6 +5,7 @@ public  class StringCostant {
     public String choose_name_player = "\nChoose name Player > ";
     public String name_is_valid = "Name is valid\n";
     public String name_is_not_valid = "Name already selected, please choose another one\n";
+
     public String error = "\n Error, please insert a correct input value";
     public String riconnected = "riconnected \n";
     public String creation_player = "Player Created, Welcome to Codex\n";
