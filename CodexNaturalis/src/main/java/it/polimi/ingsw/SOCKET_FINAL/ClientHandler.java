@@ -19,6 +19,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.HashMap;
 import java.util.List;
 
 public class ClientHandler  implements VirtualView {
@@ -58,18 +59,66 @@ public class ClientHandler  implements VirtualView {
         }).start();
     }
 
-    public void pushBack(ResponseMessage message){
+    @Override
+    public void showValue(String message) {
+
+    }
+
+    @Override
+    public void showUpdate(GameField game_field) throws IOException {
+
+    }
+
+    @Override
+    public void reportError(String details) throws IOException {
+
+    }
+
+    @Override
+    public void reportMessage(String details) throws IOException {
+
+    }
+
+    @Override
+    public void showCard(PlayCard card) throws IOException {
+
+    }
+    @Override
+    public void pushBack(ResponseMessage message) throws IOException {
         miniModel.pushBack(message);
     }
 
-    public void setGameField(List<GameField> games){
+    @Override
+    public void showField(GameField field) throws IOException {
+
+    }
+
+    @Override
+    public void printString(String s) throws IOException {
+
+    }
+
+    @Override
+    public void setGameField(List<GameField> games) throws IOException {
         miniModel.setGameField(games);
     }
 
-    public void setCards(List<PlayCard> cards){
+    @Override
+    public MiniModel getMiniModel() throws IOException {
+        return null;
+    }
+
+    @Override
+    public void setCards(List<PlayCard> cards)throws IOException {
         miniModel.setCards(cards);
     }
 
+    @Override
+    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
+
+    }
+
+    @Override
     public void setState(String state) throws IOException {
         ResponseMessage s = new setStateMessage(state);
         output.writeObject(s);
@@ -183,16 +232,6 @@ public class ClientHandler  implements VirtualView {
         }
     }
 
-    @Override
-    public void showValue(String message) {
-        synchronized (this) {
-         //   this.view.showValue(message);
-        }
-    }
 
-    @Override
-    public void reportError(String details) {
-
-    }
 
 }
