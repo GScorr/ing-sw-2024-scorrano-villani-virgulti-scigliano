@@ -19,6 +19,7 @@ import it.polimi.ingsw.StringCostant;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -135,20 +136,19 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
     private void newGame(String player_name, boolean empty) throws IOException {
         Scanner scan = new Scanner(System.in);
-        if( empty )System.out.print("\nCHOOSE GAME NAME  > ");
-        else System.out.println("\nTHERE AREN'T EXISTING GAMES");
+        if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
+        System.out.print("\nCHOOSE GAME NAME  > ");
         String game_name = scan.nextLine();
         int numplayers;
         boolean flag;
         do {
             flag = false;
-            System.out.print("\nCHOOSE NUMBER OF PLAYERS -> MIN : 2   MAX : 4 > ");
+            System.out.print("\nCHOOSE NUMBER OF PLAYERS ( 2 - 4 ) > ");
             numplayers = scan.nextInt();
 
             try {
                 int port;
                 port = server.createGame(game_name, numplayers, token, player_name,this);
-                System.out.println("porta" + port);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
@@ -161,7 +161,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         } while(flag);
     }
+    
     private void waitFullGame() throws IOException, InterruptedException {
+        
         Scanner scan = new Scanner(System.in);
         if(miniModel.getState().equals("NOT_INITIALIZED")) {
             System.out.print("[WAIT FOR OTHER PLAYERS]\n");
@@ -194,7 +196,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-    private void chooseGoal() throws IOException{
+    private void chooseGoal() throws IOException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
@@ -372,7 +374,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                     server.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
                     System.err.println("impossible to start heartbeats");
