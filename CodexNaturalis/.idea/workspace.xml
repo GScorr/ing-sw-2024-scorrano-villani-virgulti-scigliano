@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Aggiornamento" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -302,6 +300,14 @@
       <workItem from="1715087112111" duration="7364000" />
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
+    </task>
+    <task id="LOCAL-00076" summary="recap">
+      <option name="closed" value="true" />
+      <created>1714058425706</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1714058425706</updated>
     </task>
     <task id="LOCAL-00077" summary="recap">
       <option name="closed" value="true" />
@@ -687,15 +693,7 @@
       <option name="project" value="LOCAL" />
       <updated>1716045145078</updated>
     </task>
-    <task id="LOCAL-00125" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1716046659992</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1716046659992</updated>
-    </task>
-    <option name="localTasksCounter" value="126" />
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -746,11 +744,11 @@
     <MESSAGE value="inizio mini model" />
     <MESSAGE value="non lo leggerà nessuno ma abbiamo fatto cose belle" />
     <MESSAGE value="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel" />
+    <MESSAGE value="aggiornamento" />
     <MESSAGE value="eliminazione wrapper" />
     <MESSAGE value="Modifica token maps inside GameServer" />
     <MESSAGE value="Aggiornamento" />
-    <MESSAGE value="aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
