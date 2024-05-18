@@ -19,7 +19,6 @@ import it.polimi.ingsw.StringCostant;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -37,7 +36,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private StringCostant stringcostant = new StringCostant();
     
 
-    public RmiClientF(VirtualServerF server) throws RemoteException {
+    public RmiClientF(VirtualServerF server) throws IOException {
         this.server = server;
     }
 
@@ -59,7 +58,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     //GAME FLOW
 
-    private String selectNamePlayer() throws RemoteException, NotBoundException {
+    private String selectNamePlayer() throws IOException, NotBoundException {
         Scanner scan = new Scanner(System.in);
         String player_name = " ";
         String isnew;
@@ -89,12 +88,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         } while(!flag);
         return player_name;
     }
-    private void gameAccess(String player_name) throws RemoteException, NotBoundException {
+    private void gameAccess(String player_name) throws IOException, NotBoundException {
         if(newClient) {
             makeChoice(player_name);
             System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");}
     }
-    private void makeChoice(String player_name) throws RemoteException, NotBoundException {
+    private void makeChoice(String player_name) throws IOException, NotBoundException {
         if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
             newGame(player_name,false);
             return;
@@ -115,7 +114,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-    private void chooseMatch(String player_name) throws RemoteException, NotBoundException {
+    private void chooseMatch(String player_name) throws IOException, NotBoundException {
         Scanner scan = new Scanner(System.in);
         boolean check;
         System.out.println("\nEXISTING GAMES: ");
@@ -134,7 +133,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
         rmi_controller.connectRMI(this);
     }
-    private void newGame(String player_name, boolean empty) throws RemoteException {
+    private void newGame(String player_name, boolean empty) throws IOException {
         Scanner scan = new Scanner(System.in);
         if( empty )System.out.print("\nCHOOSE GAME NAME  > ");
         else System.out.println("\nTHERE AREN'T EXISTING GAMES");
@@ -174,7 +173,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         miniModel.setGameField(rmi_controller.getGameFields(token));
         startCheckingMessages();
     }
-    private void chooseGoalState() throws RemoteException, InterruptedException {
+    private void chooseGoalState() throws IOException, InterruptedException {
         if(miniModel.getState().equals("CHOOSE_GOAL")) {
             if(rmi_controller.getTtoP().get(token).getGoalCard()==null) {
                 chooseGoal();
@@ -185,7 +184,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-    private void chooseStartingCardState() throws RemoteException, InterruptedException {
+    private void chooseStartingCardState() throws IOException, InterruptedException {
         if(miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             if(!rmi_controller.getTtoP().get(token).isFirstPlaced()) {
                 chooseStartingCard();
@@ -195,7 +194,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-    private void chooseGoal() throws RemoteException{
+    private void chooseGoal() throws IOException{
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
@@ -211,7 +210,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             } else System.out.println("[ERROR] WRONG INSERT!");
         }
     }
-    private void chooseStartingCard() throws RemoteException{
+    private void chooseStartingCard() throws IOException{
         Scanner scan = new Scanner(System.in);
         System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
         rmi_controller.showStartingCard(token);
@@ -229,7 +228,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             else System.out.println("[ERROR] WRONG INSERT!");
         }
     }
-    private void manageGame() throws RemoteException, InterruptedException {
+    private void manageGame() throws IOException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int decision;
         while(!miniModel.getState().equals("END_GAME")) {
@@ -268,7 +267,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         rmi_controller.getFinalStandings(token);
     }
-    private void selectAndInsertCard() throws RemoteException, InterruptedException {
+    private void selectAndInsertCard() throws IOException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int decision;
         while( miniModel.getState().equals("PLACE_CARD") ) {
@@ -304,7 +303,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
 
-    private void drawCard() throws RemoteException, InterruptedException {
+    private void drawCard() throws IOException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\n DRAW A CARD FROM: ");
         if(rmi_controller.getController().getGame().getGold_deck().getNumber()>0){
@@ -364,8 +363,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     }
                 } catch (InterruptedException e) {
                     System.err.println("impossible to pop out");
-                } catch (RemoteException e) {
-                    System.err.println("impossible to pop-out");
                 }
             }
         }).start();
@@ -377,7 +374,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 try {
                     Thread.sleep(50);
                     server.receiveHeartbeat(token);
-                } catch (RemoteException | InterruptedException e) {
+                } catch (IOException | InterruptedException e) {
                     System.err.println("impossible to start heartbeats");
                 }
             }
@@ -396,7 +393,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
     // HELP FUNCTIONS
-    private boolean menuChoice(int choice) throws RemoteException {
+    private boolean menuChoice(int choice) throws IOException {
         Scanner scan = new Scanner(System.in);
         if ( choice < 0 || choice > 3 ) return false;
         switch ( choice ){
@@ -414,8 +411,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 return true;}
         return true;
     }
-
-    private void buffering() throws RemoteException, InterruptedException{
+    private void buffering() throws IOException, InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("/");
@@ -430,13 +426,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.print("-");
     }
     @Override
-    public void showUpdate(GameField gamefield) throws RemoteException {}
+    public void showUpdate(GameField gamefield) {}
     @Override
-    public void reportError(String details) throws RemoteException {System.err.print("\n[ERROR] " + details + "\n> ");}
+    public void reportError(String details) {System.err.print("\n[ERROR] " + details + "\n> ");}
     @Override
-    public void reportMessage(String details) throws RemoteException {System.out.print("\n[ERROR] " + details + "\n> ");}
+    public void reportMessage(String details) {System.out.print("\n[ERROR] " + details + "\n> ");}
     @Override
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
@@ -474,7 +470,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.println("----------------------------\n\n");
 
     }
-    public void showField(GameField field) throws RemoteException {
+    public void showField(GameField field) {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 
@@ -520,9 +516,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-    public MiniModel getMiniModel() throws RemoteException{return miniModel;}
-    private void showCardsInCenter() throws RemoteException {rmi_controller.showCardsInCenter(token);}
-    public void printString(String s) throws RemoteException{System.out.println(s);}
+    public MiniModel getMiniModel() {return miniModel;}
+    private void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
+    public void printString(String s) {System.out.println(s);}
 
 
     //MAIN
