@@ -135,8 +135,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
     private void newGame(String player_name, boolean empty) throws IOException {
         Scanner scan = new Scanner(System.in);
-        if( empty )System.out.print("\nCHOOSE GAME NAME  > ");
-        else System.out.println("\nTHERE AREN'T EXISTING GAMES");
+        if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
+        System.out.print("\nCHOOSE GAME NAME  > ");
         String game_name = scan.nextLine();
         int numplayers;
         boolean flag;
