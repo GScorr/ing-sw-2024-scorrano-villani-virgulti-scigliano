@@ -14,6 +14,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.*;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 import it.polimi.ingsw.StringCostant;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private VirtualGameServer rmi_controller;
     private boolean newClient;
     private MiniModel miniModel =  new MiniModel();
-    private StringCostant stringcostant;
+    private StringCostant stringcostant = new StringCostant();
     
 
     public RmiClientF(VirtualServerF server) throws RemoteException {
@@ -289,6 +290,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                             showField(((GameFieldMessage) s).getField());
                         }
                         if ( s instanceof ErrorMessage){
+                            printString(s.getMessage());
+                        }
+                        if ( s instanceof UpdateMessage){
                             printString(s.getMessage());
                         }
                     }
