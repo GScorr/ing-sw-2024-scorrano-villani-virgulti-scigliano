@@ -3,6 +3,8 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.*;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.rmi.NotBoundException;
@@ -24,7 +26,7 @@ public class Common_Server {
     public Common_Server(){}
 
     public String createToken(VirtualViewF client) throws RemoteException {return token_manager.generateToken(client);}
-    public String createTokenSocket(String name) throws RemoteException {return token_manager.generateTokenSocket(name);}
+    public String createTokenSocket(VirtualView client) throws RemoteException {return token_manager.generateTokenSocket(client);}
     public Map<String, Player> getTtoP() throws RemoteException {return token_to_player;}
     public Map<String, GameServer> getTtoR() throws RemoteException {return token_to_rmi;}
     public Map<Integer, GameServer> getListRmiController() throws RemoteException {return rmi_controllers;}
@@ -43,10 +45,10 @@ public class Common_Server {
     }
 
     private int getAvailablePort(){port++;return port;}
-    public int createGameSocket(String name, int num_player, String p_token, String player_name) throws RemoteException {
+    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws RemoteException {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
-        gameServer.addPlayerSocket(p_token,player_name,true);
+        gameServer.addPlayerSocket(p_token,player_name, client,true);
         VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);
@@ -57,8 +59,8 @@ public class Common_Server {
     }
 
     public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws RemoteException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name) throws RemoteException {
-        rmi_controllers.get(game_id).addPlayerSocket(p_token,name,false);
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws RemoteException {
+        rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
         return true;}
 
     public List<VirtualViewF> getListClient() throws RemoteException {return clients;}
@@ -124,14 +126,14 @@ public class Common_Server {
         token_manager.getTokens().get(p_token).reportError(error);
         return false;
     }
-    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws RemoteException {
+    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws RemoteException {
 
         GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
         {
             token_to_rmi.put(p_token , index );
 
-            return addPlayerSocket(game_id, p_token, player_name);
+            return addPlayerSocket(game_id, p_token, player_name, client);
         }
         String error = "\nWRONG ID : Not Available Game\n";
         token_manager.getTokens().get(p_token).reportError(error);

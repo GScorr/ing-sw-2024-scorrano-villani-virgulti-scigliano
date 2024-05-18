@@ -3,6 +3,7 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -20,6 +21,11 @@ public class CreateGame implements Message, Serializable {
     public Common_Server common;
     public VirtualGameServer rmi_controller;
 
+    public VirtualView clientHandler;
+
+    public void setClientHandler(VirtualView clientHandler) {
+        this.clientHandler = clientHandler;
+    }
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -53,7 +59,7 @@ public class CreateGame implements Message, Serializable {
     }
     public int actionCreateGameMessage() throws RemoteException {
         int port;
-        port = common.createGameSocket(game_name,num_players,token,name_p);
+        port = common.createGameSocket(game_name,num_players,token,name_p, clientHandler);
         return port;
     }
 

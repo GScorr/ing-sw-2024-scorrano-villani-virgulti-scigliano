@@ -115,7 +115,7 @@ public class ClientHandler  implements VirtualView {
                         String mayToken = ((CheckNameMessage) DP_message).checkNameMessageAction();
 
                         if(mayToken.equals("true")){
-                            this.token = common.createTokenSocket(((CheckNameMessage) DP_message).nome);
+                            this.token = common.createTokenSocket(this);
 
                         } else if (mayToken.equals("false")) {
 
@@ -124,6 +124,7 @@ public class ClientHandler  implements VirtualView {
                             int port = common.getPort(token);
                             Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                            this.rmi_controller.connectSocket(this);
                             client_is_connected = true;
                             startSendingHeartbeats();
                         }
@@ -135,6 +136,7 @@ public class ClientHandler  implements VirtualView {
 
                     }else
                     if((DP_message instanceof CreateGame)){
+                        ((CreateGame) DP_message).setClientHandler(this);
                        int port =  ((CreateGame) DP_message).actionCreateGameMessage();
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
@@ -145,6 +147,7 @@ public class ClientHandler  implements VirtualView {
                         startCheckingMessages();
                     }
                     else if(DP_message instanceof FindRMIControllerMessage){
+                        ((FindRMIControllerMessage) DP_message).setClientHandler(this);
                        if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
                            System.out.println(token);
                            int port = common.getPort(token);
