@@ -6,6 +6,8 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.MODEL.Player.State.EndGame;
+import it.polimi.ingsw.MODEL.Player.State.PState;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
@@ -29,13 +31,17 @@ public class GameServer implements VirtualGameServer, Serializable {
     public Queue<SendFunction> functQueue = new LinkedList<>();
     private final int port;
 
+    public Map<String, PState> token_to_state_deadline = new HashMap<>();
+
     //CONSTRUCTOR
     public GameServer(String name, int numPlayer, int port) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         playDisconnected();
+        checkDeadline();
         this.port = port;
     }
+
 
     //GAME FLOW
     @Override
@@ -151,6 +157,44 @@ public class GameServer implements VirtualGameServer, Serializable {
                     }
                 }
                 }
+        }).start();
+    }
+
+    private void checkDeadline() {
+        new Thread(() -> {
+            String tokenalive;
+            while(true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                synchronized (this) {
+                    if(controller.isAlone()){
+                        for(String t : token_to_player.keySet()){
+                            if(!token_to_player.get(t).isDisconnected()){
+                                tokenalive = t;
+                            }
+                        }
+                        try {
+                            broadcastMessage(new UpdateMessage("You are the only player remained in the lobby: countdown started!"));
+                            Countdown countdown = new Countdown(30);
+                            while(controller.isAlone() && countdown.getTimeRemained()>0){
+                                broadcastMessage(new UpdateMessage(countdown.getTimeRemained() + "s left"));
+                            }
+                            if(countdown.getTimeRemained()==0){
+                                for(String t : token_to_player.keySet()){
+                                    PState end_game = new EndGame(token_to_player.get(t));
+                                    token_to_player.get(t).setPlayer_state(end_game);
+                                    broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + ",you are the winner due to disconnection!"));
+                                }
+                            }
+                        } catch (RemoteException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
         }).start();
     }
 
