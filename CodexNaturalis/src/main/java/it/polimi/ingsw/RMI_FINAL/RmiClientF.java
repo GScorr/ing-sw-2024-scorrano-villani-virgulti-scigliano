@@ -268,7 +268,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         rmi_controller.getFinalStandings(token);
     }
-
     private void selectAndInsertCard() throws RemoteException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int decision;
