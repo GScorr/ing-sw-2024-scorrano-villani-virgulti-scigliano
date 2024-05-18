@@ -162,16 +162,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
 
-    private void showCardsInCenter() throws RemoteException {
-        rmi_controller.showCardsInCenter(token);
-        //rmi_controller.showCardsInCenter(rmi_controller.getController().getGame().getCars_in_center().getGold_list(),token);
-    }
+    private void showCardsInCenter() throws RemoteException {rmi_controller.showCardsInCenter(token);}
 
     private void selectAndInsertCard() throws RemoteException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        boolean done = false;
         int decision;
-        while(miniModel.getState().equals("PLACE_CARD")) {
+        while( miniModel.getState().equals("PLACE_CARD") ) {
             decision = -1;
             while( decision != 3 ) {
                 miniModel.printMenu("PLACE A CARD");
@@ -189,34 +185,19 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     String flip = scan.nextLine();
                     if(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f")){
                         boolean flipped = false;
-                        if(flip.equals("B")||flip.equals("b")){
-                            flipped = true;
-                        }
-                            System.out.println("\nCHOOSE COORDINATES: ");
-                            int x = scan.nextInt();
-                            int y = scan.nextInt();
-                            scan.nextLine();
-                            if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                                /*Integer idrequest = IndexRequestManagerF.getNextIndex();
-                                rmi_controller.addtoQueue(token,"insertCard", idrequest,
-                                        new Wrapper(token, choice - 1, x, y, flipped));*/
-                                SendFunction function = new SendInsertCard(token, choice-1, x,y,flipped);
-                                rmi_controller.addQueue(function);
-                                Thread.sleep(750);
-                            }
-                            else{
-                                System.out.println("\nInserimento sbagliato!");
-                            }
-                    }
-                    else{
-                        System.out.println("\nInserimento sbagliato!");
-                    }
-            }
-            else{
-                System.out.println("\nInserimento sbagliato!");
-            }
+                        if(flip.equals("B")||flip.equals("b")){flipped = true;}
+                        System.out.println("\nCHOOSE COORDINATES: ");
+                        int x = scan.nextInt();
+                        int y = scan.nextInt();
+                        scan.nextLine();
+                        if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
+                            SendFunction function = new SendInsertCard(token, choice-1, x,y,flipped);
+                            rmi_controller.addQueue(function);
+                            Thread.sleep(750);
+                            } else{System.err.println("\n[COORDINATES OUT OF BOUND]!");}
+                    } else{System.err.println("\n[ONLY 'B' OR 'F' ALLOWED]!");}
+            } else{System.err.println("\n[OUT OF BOUND CARD]");}
         }
-        //rmi_controller.showGameField(token);
     }
 
     private void gameAccess(String player_name) throws RemoteException, NotBoundException, InterruptedException {
