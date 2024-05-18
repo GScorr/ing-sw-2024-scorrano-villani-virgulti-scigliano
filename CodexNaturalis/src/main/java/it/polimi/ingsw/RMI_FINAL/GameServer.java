@@ -70,7 +70,10 @@ public class GameServer implements VirtualGameServer, Serializable {
         return true;
     }
     @Override
-    public void chooseGoal(String token, int index) throws IOException {controller.playerChooseGoal(token_to_player.get(token), index);   setAllStates();}
+    public void chooseGoal(String token, int index) throws IOException {
+        controller.playerChooseGoal(token_to_player.get(token), index);
+        setAllStates();
+    }
 
     @Override
     public synchronized void chooseStartingCard(String token, boolean flip) throws IOException {
@@ -169,28 +172,31 @@ public class GameServer implements VirtualGameServer, Serializable {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                synchronized (this) {
-                    if(controller.isAlone()){
-                        for(String t : token_to_player.keySet()){
-                            if(!token_to_player.get(t).isDisconnected()){
-                                tokenalive = t;
-                            }
-                        }
-                        try {
-                            broadcastMessage(new UpdateMessage("You are the only player remained in the lobby: countdown started!"));
-                            Countdown countdown = new Countdown(30);
-                            while(controller.isAlone() && countdown.getTimeRemained()>0){
-                                broadcastMessage(new UpdateMessage(countdown.getTimeRemained() + "s left"));
-                            }
-                            if(countdown.getTimeRemained()==0){
-                                for(String t : token_to_player.keySet()){
-                                    PState end_game = new EndGame(token_to_player.get(t));
-                                    token_to_player.get(t).setPlayer_state(end_game);
-                                    broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + ",you are the winner due to disconnection!"));
+                if(token_to_player.size()>=controller.getGame().getMax_num_player()) {
+
+                    synchronized (this) {
+                        if (controller.isAlone()) {
+                            for (String t : token_to_player.keySet()) {
+                                if (!token_to_player.get(t).isDisconnected()) {
+                                    tokenalive = t;
                                 }
                             }
-                        } catch (RemoteException e) {
-                            throw new RuntimeException(e);
+                            try {
+                                broadcastMessage(new UpdateMessage("You are the only player remained in the lobby: countdown started!"));
+                                Countdown countdown = new Countdown(30);
+                                while (controller.isAlone() && countdown.getTimeRemained() > 0) {
+                                    broadcastMessage(new UpdateMessage(countdown.getTimeRemained() + "s left"));
+                                }
+                                if (countdown.getTimeRemained() == 0) {
+                                    for (String t : token_to_player.keySet()) {
+                                        PState end_game = new EndGame(token_to_player.get(t));
+                                        token_to_player.get(t).setPlayer_state(end_game);
+                                        broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + ",you are the winner due to disconnection!"));
+                                    }
+                                }
+                            } catch (RemoteException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }
