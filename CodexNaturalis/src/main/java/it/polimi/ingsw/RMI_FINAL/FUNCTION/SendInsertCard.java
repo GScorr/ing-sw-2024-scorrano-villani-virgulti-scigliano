@@ -33,10 +33,10 @@ public class SendInsertCard implements SendFunction{
             server.insertCard(token, index, x , y, flipped);
              message = new GameFieldMessage(server.token_to_player.get(token).getGameField());
             for (String t : server.token_to_player.keySet()){
-                server.token_manager.getTokens().get(t).setGameField(server.getGameFields(t));
+                if( server.token_manager.getTokens().containsKey(t) ) server.token_manager.getTokens().get(t).setGameField(server.getGameFields(t));
             }
             for (String t : server.token_to_player.keySet()){
-                server.token_manager.getTokens().get(t).setState( server.token_to_player.get(t).getActual_state().getNameState() );
+                if( server.token_manager.getTokens().containsKey(t) ) server.token_manager.getTokens().get(t).setState( server.token_to_player.get(t).getActual_state().getNameState() );
             }
         }catch(ControllerException e){
             message = new ErrorMessage(server.token_to_player.get(token).getName() +

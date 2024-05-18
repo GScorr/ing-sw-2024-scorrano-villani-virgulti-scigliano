@@ -19,6 +19,7 @@ import it.polimi.ingsw.StringCostant;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -160,7 +161,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         } while(flag);
     }
+    
     private void waitFullGame() throws IOException, InterruptedException {
+        
         Scanner scan = new Scanner(System.in);
         if(miniModel.getState().equals("NOT_INITIALIZED")) {
             System.out.print("[WAIT FOR OTHER PLAYERS]\n");
@@ -193,7 +196,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-    private void chooseGoal() throws IOException{
+    private void chooseGoal() throws IOException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
@@ -371,7 +374,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                     server.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
                     System.err.println("impossible to start heartbeats");
