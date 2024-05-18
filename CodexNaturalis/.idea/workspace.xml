@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="eliminazione wrapper">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Modifica token maps inside GameServer">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -263,8 +264,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.Common_Server" />
+        <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
@@ -302,14 +303,6 @@
       <workItem from="1715087112111" duration="7364000" />
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
-    </task>
-    <task id="LOCAL-00074" summary="recap">
-      <option name="closed" value="true" />
-      <created>1714055389732</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1714055389732</updated>
     </task>
     <task id="LOCAL-00075" summary="recap">
       <option name="closed" value="true" />
@@ -695,7 +688,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716040058784</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Modifica token maps inside GameServer">
+      <option name="closed" value="true" />
+      <created>1716044862611</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1716044862612</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -725,7 +726,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="small fixes" />
     <MESSAGE value="aggiunta metodo checkName in RmiServerF" />
     <MESSAGE value="Chiusura GameController Test" />
     <MESSAGE value="continuazione client" />
@@ -750,7 +750,8 @@
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="eliminazione wrapper" />
     <MESSAGE value="Aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiornamento" />
+    <MESSAGE value="Modifica token maps inside GameServer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifica token maps inside GameServer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
