@@ -10,9 +10,7 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.*;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.StringCostant;
 
@@ -25,6 +23,16 @@ import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
 
+    boolean flag_check;
+    boolean check;
+
+    boolean GoalCardisPresent;
+    List<Goal> goalsCard;
+
+    PlayCard startingCard;
+
+    Goal goal_choosed;
+
     StringCostant string_costant = new StringCostant();
     private MiniModel miniModel =  new MiniModel();
     final ServerProxy server;
@@ -32,7 +40,7 @@ public class Client implements VirtualView {
     private boolean newClient;
     ObjectInputStream input;
 
-    public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException {
+    public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException, InterruptedException {
         this.server = new ServerProxy(output,input);
         this.input = input;
     }
@@ -55,21 +63,41 @@ public class Client implements VirtualView {
             // Read message type
             while (true) {
                 try {
-                    if (!((s = (ResponseMessage) input.readObject()) != null)) {
-                        s.setMiniModel(miniModel);
-                        //se non fa nulla è perchè potrebbe non aver preso l'overide
-                        s.action();
-                        if( s instanceof GameFieldMessage){
-                            showField(((GameFieldMessage) s).getField());
+                    if (((s = (ResponseMessage) input.readObject()) != null)) {
+                        if(s instanceof CheckRmiResponse){
+                            check = ((CheckRmiResponse) s).check;
+                            this.flag_check = false;
+
                         }
-                        if ( s instanceof ErrorMessage){
-                            System.out.println(s.getMessage());
+                        else if(s instanceof checkGoalCardPresent){
+                            System.out.println("checkGoalCardPresent");
+                             GoalCardisPresent = ((checkGoalCardPresent) s).isPresent;
+                             this.flag_check = false;
                         }
+                        else if( s instanceof getListGoalCardResponse ){
+                            System.out.println("GoalCardListMessage");
+                            this.goalsCard = ((getListGoalCardResponse) s).goal_cards;
+                            this.flag_check = false;
+                        }
+                        else if( s instanceof StartingCardResponse ){
+                            System.out.println("GoalCardListMessage");
+                            this.startingCard = ((StartingCardResponse) s).starting_card;
+                            this.flag_check = false;
+                        }
+                        else {
+                            s.setMiniModel(miniModel);
+                            //se non fa nulla è perchè potrebbe non aver preso l'overide
+                            s.action();
+                            if( s instanceof GameFieldMessage){
+                                showField(((GameFieldMessage) s).getField());
+                            }
+                            if ( s instanceof ErrorMessage){
+                                System.out.println(s.getMessage());
+                            }
+                        }
+
                     };
-                } catch (IOException e) {
-                    System.out.println("errore nel startCheckingMessages thread");
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     System.out.println("errore nel startCheckingMessages thread");
                     throw new RuntimeException(e);
                 }
@@ -87,7 +115,6 @@ public class Client implements VirtualView {
         String game_name;
 
         gameAccess(player_name);
-        startCheckingMessages();
         waitFullGame();
 
         chooseGoalState();
@@ -105,7 +132,6 @@ public class Client implements VirtualView {
         Scanner scanner = new Scanner(System.in);
         Player curr_player;
         String player_name = " ";
-
         boolean flag = false;
         do{
             System.out.print(string_costant.choose_name_player);
@@ -128,11 +154,12 @@ public class Client implements VirtualView {
         return player_name;
     }
 
-    public void gameAccess(String player_name) throws IOException, ClassNotFoundException {
+    public void gameAccess(String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         if(newClient) {
 
             if (server.getFreeGame() == null || server.getFreeGame().isEmpty()) {
                 newGame_notavailable(player_name);
+                startCheckingMessages();
             } else {
                 makeChoice(player_name);
             }
@@ -150,8 +177,8 @@ public class Client implements VirtualView {
             System.out.print(string_costant.new_game_num_player);
             int numplayers = scan.nextInt();
             try {
-                String result = server.createGame(game_name, numplayers, playerName);
-                System.out.println(result);
+                server.createGame(game_name, numplayers, playerName);
+                System.out.println("Congratulation, Game created");
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -159,7 +186,8 @@ public class Client implements VirtualView {
         } while(flag);
     }
 
-    private void makeChoice(String player_name) throws IOException, ClassNotFoundException {
+    //tieni d'occhio quando chiami startCheckingMessages();
+    private void makeChoice(String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
@@ -171,6 +199,7 @@ public class Client implements VirtualView {
             } else if (decision.equalsIgnoreCase("new")) {
                 done=1;
                 newGame(player_name);
+                startCheckingMessages();
             } else {
                 System.out.println(string_costant.error);
             }
@@ -188,8 +217,8 @@ public class Client implements VirtualView {
             System.out.print(string_costant.new_game_num_player);
             numplayers = scan.nextInt();
             try {
-                String result  = server.createGame(game_name, numplayers, player_name);
-                System.out.println(result);
+                 server.createGame(game_name, numplayers, player_name);
+                System.out.println("congratulation Game created");
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -198,9 +227,9 @@ public class Client implements VirtualView {
     }
 
 
-    private void chooseMatch(String player_name) throws IOException, ClassNotFoundException {
+    private void chooseMatch(String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        boolean check;
+
         System.out.println(string_costant.list_game_avilable);
          List<SocketRmiControllerObject> games = server.getFreeGame();
 
@@ -209,9 +238,19 @@ public class Client implements VirtualView {
                     + " " + r.num_player + "/" + r.max_num_player);
         }
         do {
+            startCheckingMessages();
             System.out.println(string_costant.Id_game);
             int ID = scan.nextInt();
-            check = server.findRmiController(ID, player_name);
+            server.findRmiController(ID, player_name);
+            flag_check = true;
+            System.out.println("prima del while");
+            while (flag_check){
+                Thread.sleep(20);
+            }
+
+            System.out.println("uscito dal while");
+
+
         }while(!check);
 
         System.out.println(string_costant.enter);
@@ -249,31 +288,46 @@ public class Client implements VirtualView {
     }
 
     private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
-       if(server.getPlayerState().equals("CHOOSE_GOAL")){
-           if(server.getGoalCard() == null){
+
+        if(miniModel.getState().equals("CHOOSE_GOAL")){
+            server.getGoalCard();
+           flag_check = true;
+           while (flag_check){
+               Thread.sleep(20);
+           }
+           if(!GoalCardisPresent){
                chooseGoal();
-               Goal goal = server.getGoalCard();
-               System.out.println("\n You choose :" + goal.toString());
+               System.out.println("\n You choose :" + goal_choosed.toString());
            }
        }
-       while(server.getPlayerState().equals("CHOOSE_GOAL")){
+       while(miniModel.getState().equals("CHOOSE_GOAL")){
            buffering();
        }
     }
 
-    private void chooseGoal() throws IOException, ClassNotFoundException {
+    private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
 
-            System.out.println("\nChoose Goal between :\n 1-" + server.getListGoalCard().get(0).toString()
-                    + "\n 2-" + server.getListGoalCard().get(1).toString());
+            server.getListGoalCard();
+            flag_check = true;
+            System.out.println("prima del while chooseGoalList");
+            while (flag_check){
+                Thread.sleep(20);
+            }
+            System.out.println("Dopo del while chooseGoal");
+
+            System.out.println("\nChoose Goal between :\n 1-" + goalsCard.get(0).toString()
+                    + "\n 2-" + goalsCard.get(1).toString());
 
             String choice = scan.nextLine();
             if (choice.equals("1")) {
+                goal_choosed = goalsCard.get(0);
                 done=1;
                 server.chooseGoal(0);
             } else if (choice.equals("2")){
+                goal_choosed = goalsCard.get(1);
                 done=1;
                 server.chooseGoal(1);
             } else System.out.println("Index boundaries not respected!");
@@ -281,15 +335,19 @@ public class Client implements VirtualView {
     }
 
     private void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
-        if(server.getPlayerState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+        if(miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             System.out.println(string_costant.starting_card);
-            PlayCard starting_card =  server.getStartingCard();
-            showCard(starting_card);
+            server.getStartingCard();
+            flag_check = true;
+            while(flag_check){
+                Thread.sleep(20);
+            }
+            showCard(this.startingCard);
 
             if(!server.startingCardIsPlaced()) {
                 chooseStartingCard();
             }
-            while (server.getPlayerState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            while (miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
                 buffering();
             }
             GameField game_field = server.getGameField();

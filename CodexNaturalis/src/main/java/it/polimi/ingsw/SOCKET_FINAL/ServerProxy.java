@@ -39,8 +39,6 @@ public class ServerProxy implements VirtualServer {
         Message DP_message = new LunchMessageMessage(message);
         output.writeObject(DP_message);
         output.flush();
-
-
     }
 
     public String checkName(String name) throws IOException, ClassNotFoundException {
@@ -61,25 +59,17 @@ public class ServerProxy implements VirtualServer {
         return games;
     }
 
-    public  String createGame(String game_name, int num_players, String nome  ) throws IOException, ClassNotFoundException, SocketException {
+    public  void createGame(String game_name, int num_players, String nome  ) throws IOException, ClassNotFoundException, SocketException {
         Message DP_message = new CreateGame(game_name,num_players,nome);
         output.writeObject(DP_message);
         output.flush();
 
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-        return response.getContent();
-
     }
 
-    public boolean findRmiController(Integer id, String player_name) throws IOException, ClassNotFoundException {
-
+    public void findRmiController(Integer id, String player_name) throws IOException, ClassNotFoundException {
         Message DP_message = new FindRMIControllerMessage(id, player_name);
         output.writeObject(DP_message);
         output.flush();
-
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-
-        return response.getContent().compareTo("true") == 0;
 
     }
 
@@ -92,22 +82,17 @@ public class ServerProxy implements VirtualServer {
         return response.getContent();
     }
 
-    public Goal getGoalCard() throws IOException, ClassNotFoundException {
+    public void getGoalCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getGoalCard();
         output.writeObject(DP_mesasage);
         output.flush();
-
-        Goal goal_card = (Goal) input.readObject();
-        return goal_card;
     }
 
-    public List<Goal> getListGoalCard() throws IOException, ClassNotFoundException {
+    public void getListGoalCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getListGoalCard();
         output.writeObject(DP_mesasage);
         output.flush();
 
-        List<Goal> list_goal_card = (List<Goal>) input.readObject();
-        return list_goal_card;
     }
 
     public void chooseGoal(int index) throws IOException {
@@ -117,12 +102,11 @@ public class ServerProxy implements VirtualServer {
 
     }
 
-    public PlayCard getStartingCard() throws IOException, ClassNotFoundException {
+    public void getStartingCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getStartingCard();
         output.writeObject(DP_mesasage);
         output.flush();
-        PlayCard starting_card = (PlayCard) input.readObject();
-        return starting_card;
+
     }
 
     boolean startingCardIsPlaced() throws IOException, ClassNotFoundException {

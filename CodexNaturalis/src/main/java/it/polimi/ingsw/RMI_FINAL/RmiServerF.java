@@ -33,10 +33,10 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
         return common.createGame( name , num_player, p_token, player_name, client);}
-    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws RemoteException {return common.createGameSocket(name, num_player, p_token, player_name, client);}
+    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws IOException {return common.createGameSocket(name, num_player, p_token, player_name, client);}
     @Override
     public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {return common.addPlayer(game_id, p_token, name, client);}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws RemoteException {return common.addPlayerSocket(game_id, p_token, name, client);}
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {return common.addPlayerSocket(game_id, p_token, name, client);}
     @Override
     public List<VirtualViewF> getListClient() throws RemoteException {return common.getListClient();}
     //returns the list of all game controllers that are accessible ( not full )
@@ -51,7 +51,7 @@ public class RmiServerF implements VirtualServerF {
     public int getPort(String token) throws RemoteException {return common.getPort(token);}
     @Override
     public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {return  common.findRmiController(game_id, p_token, player_name, client);}
-    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws RemoteException {return common.findRmiControllerSocket(game_id, p_token, player_name, client);}
+    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws IOException {return common.findRmiControllerSocket(game_id, p_token, player_name, client);}
     /*private void broadcastUpdateThread() throws InterruptedException, RemoteException {
         while ( !updates.isEmpty() ){
             String update = updates.take();

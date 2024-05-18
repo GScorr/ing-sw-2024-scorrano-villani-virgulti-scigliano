@@ -55,12 +55,13 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_to_player.put(p_token , p);
         return p;
     }
-    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws RemoteException {
+    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException {
         if(controller.getFull() )
             return false;
         createPlayer(p_token, name, isFirst);
         token_manager.getSocketTokens().put(p_token, client);
         controller.checkNumPlayer();
+        setAllStates();
         return true;
     }
     @Override
@@ -194,6 +195,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 token_manager.getTokens().get(t).setNumToPlayer(num_to_player);
             }
             else {
+                System.out.println("Game Server (socket) setAllStates() riga 198");
                 token_manager.getSocketTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getSocketTokens().get(t).setNumToPlayer(num_to_player);
             }
