@@ -20,6 +20,7 @@ import it.polimi.ingsw.StringCostant;
 import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
@@ -452,8 +453,18 @@ public class Client implements VirtualView {
     }
 
     @Override
+    public void reportMessage(String details) throws IOException {
+
+    }
+
+    @Override
     public void showValue(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void showUpdate(GameField game_field) throws IOException {
+
     }
 
 
@@ -495,6 +506,12 @@ public class Client implements VirtualView {
         System.out.println("----------------------------\n\n");
 
     }
+
+    @Override
+    public void pushBack(ResponseMessage message) throws IOException {
+
+    }
+
     public void showField(GameField field) throws RemoteException {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
@@ -540,6 +557,36 @@ public class Client implements VirtualView {
                 System.out.print("\n");
             }
         }
+    }
+
+    @Override
+    public void printString(String s) throws IOException {
+
+    }
+
+    @Override
+    public void setGameField(List<GameField> games) throws IOException {
+
+    }
+
+    @Override
+    public MiniModel getMiniModel() throws IOException {
+        return null;
+    }
+
+    @Override
+    public void setCards(List<PlayCard> cards) throws IOException {
+
+    }
+
+    @Override
+    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
+
+    }
+
+    @Override
+    public void setState(String state) throws IOException {
+
     }
 
     public void showCardInCenter(PlayCard card) throws RemoteException {
