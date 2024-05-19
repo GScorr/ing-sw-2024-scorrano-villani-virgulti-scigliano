@@ -1,4 +1,6 @@
 package it.polimi.ingsw.MODEL.Game;
+import it.polimi.ingsw.Chat;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
@@ -50,7 +52,7 @@ public class Game implements Serializable {
     private CenterCards cards_in_center;
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
-
+    private List<Chat> chats;
 
 
     private GameState not_initialized = new NotInitialized(this),
@@ -264,5 +266,12 @@ public class Game implements Serializable {
 
     public Integer getIndex_game() {
         return index_game;
+    }
+
+    public void insertMessageinChat(int i, ChatMessage message){
+        if(chats.get(i)==null){
+            chats.add(i,new Chat());
+        }
+        chats.get(i).addMessage(message);
     }
 }

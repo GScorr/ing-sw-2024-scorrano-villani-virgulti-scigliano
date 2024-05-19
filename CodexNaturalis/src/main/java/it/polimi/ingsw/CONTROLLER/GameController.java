@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CONTROLLER;
 
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
@@ -508,4 +509,7 @@ public class GameController implements GameSubject, Serializable {
         }
     }
 
+    public void insertMessageinChat(int i, ChatMessage message) {
+        game.insertMessageinChat(i,message);
+    }
 }

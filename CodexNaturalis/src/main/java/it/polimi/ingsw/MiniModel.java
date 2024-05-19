@@ -7,6 +7,7 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.Serializable;
@@ -25,7 +26,9 @@ public class MiniModel implements Serializable {
 
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
+    private List<Chat> chat = new ArrayList<>();
 
+    private ChatIndexManager chat_manager = new ChatIndexManager();
     public MiniModel() {
         this.state = "NOT_INITIALIZED";
         this.not_read = 0;
@@ -33,6 +36,13 @@ public class MiniModel implements Serializable {
         this.menu.add("");
         this.menu.add("");
         this.menu.add("");
+    }
+
+    public void addChat(int idx, ChatMessage message) {
+        if(chat.get(idx)==null){
+            chat.add(idx, new Chat());
+        }
+        chat.get(idx).addMessage(message);
     }
 
     public void setNotReadMessages(int nr){ this.not_read = nr;}
@@ -77,7 +87,12 @@ public class MiniModel implements Serializable {
     }
     }
 
-    public void showChat(){System.err.println("[ CHAT NOT AVAILABLE YET ]");}
+    public void uploadChat(){
+        setChatMenu();
+        for ( String m : menu ){
+            System.out.println(m);
+        }
+    }
 
     public void setState( String state){ this.state = state;}
 
@@ -88,6 +103,17 @@ public class MiniModel implements Serializable {
         this.menu.set(1, "1- SHOW CARDS IN HAND" );
         this.menu.set(2, "2- OPEN CHAT -> Messages Received : ( " + not_read + " )");
         this.menu.set(3, "3- " + turndecision);
+    }
+
+
+
+    public void setChatMenu() {
+        this.menu.set(0, ("\n0- CHAT 1"));
+        this.menu.set(1, "1- CHAT 2" );
+        this.menu.set(2, "2- CHAT 3");
+        this.menu.set(3, "3- CHAT 4");
+        this.menu.set(4, "4- PUBLIC CHAT");
+        this.menu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
 
     public void showCard(PlayCard card) throws RemoteException {
@@ -179,5 +205,10 @@ public class MiniModel implements Serializable {
             }
         }
     }
-    
+
+    public void showFirstChat() {
+        for(ChatMessage c : chat.get(0).getChat()){
+            System.out.println(c);
+        }
+    }
 }
