@@ -2,6 +2,7 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
@@ -30,9 +31,14 @@ public class GameServer implements VirtualGameServer, Serializable {
     public GameController controller;
     public Queue<SendFunction> functQueue = new LinkedList<>();
     private final int port;
+    private int index = 0;
+    //public Map<String, PState> token_to_state_deadline = new HashMap<>();
 
-    public Map<String, PState> token_to_state_deadline = new HashMap<>();
+    public Map<String,Integer> token_to_index = new HashMap<>();
+    public Map<Integer,String> index_to_token = new HashMap<>();
 
+
+    public ChatIndexManager chatmanager = new ChatIndexManager();
     //CONSTRUCTOR
     public GameServer(String name, int numPlayer, int port) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
@@ -59,6 +65,9 @@ public class GameServer implements VirtualGameServer, Serializable {
     public synchronized Player createPlayer(String p_token,String playerName, boolean b) throws RemoteException{
         Player p = controller.createPlayer(playerName,b);
         token_to_player.put(p_token , p);
+        index++;
+        token_to_index.put(p_token,index);
+        index_to_token.put(index, p_token);
         return p;
     }
     public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws RemoteException {
@@ -204,7 +213,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED!"));
                                 int countdown = 15;
                                 while( countdown > 0 && controller.isAlone()) {
-                                    broadcastMessage(new UpdateMessage("\b"+countdown + "SECONDS LEFT"));
+                                    broadcastMessage(new UpdateMessage(countdown + "SECONDS LEFT"));
                                     countdown--;
                                     Thread.sleep(1000);
                                 }
@@ -212,7 +221,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     for (String t : token_to_player.keySet()) {
                                         PState end_game = new EndGame(token_to_player.get(t));
                                         token_to_player.get(t).setPlayer_state(end_game);
-                                        if ( token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
+                                        if (! token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
                                         end = false;
                                     }
                                 }
@@ -324,7 +333,25 @@ public class GameServer implements VirtualGameServer, Serializable {
     @Override
     public synchronized void connectRMI(VirtualViewF client)throws RemoteException{this.clientsRMI.add(client);}
 
+    public synchronized void chattingMoment(int id1, int id2, ChatMessage message) throws RemoteException {
+        String t1 = index_to_token.get(id1);
+        String t2 = index_to_token.get(id2);
+        controller.insertMessageinChat(chatmanager.getChatIndex(id1,id2),message);
+        updatechats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
+    }
 
+    private void updatechats(String token1, String token2, int idx, ChatMessage message) throws RemoteException {
+        for (String t : token_to_player.keySet()){
+            token_to_index.get(t);
+            if(t.equals(token1) || t.equals(token2)){
+                token_manager.getTokens().get(t).addChat(idx, message);
+            }
+        }
+    }
+
+    public Map<String, Integer> getToken_to_index() throws RemoteException{
+        return token_to_index;
+    }
 }
 
 

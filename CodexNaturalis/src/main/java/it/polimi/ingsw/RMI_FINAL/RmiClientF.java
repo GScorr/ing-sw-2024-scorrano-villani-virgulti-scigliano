@@ -2,6 +2,7 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
@@ -89,8 +90,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         } while(!flag);
         return player_name;
     }
-
-
     private void gameAccess(String player_name) throws IOException, NotBoundException {
         if(newClient) {
             makeChoice(player_name);
@@ -117,7 +116,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-
     private void chooseMatch(String player_name) throws IOException, NotBoundException {
         Scanner scan = new Scanner(System.in);
         boolean check;
@@ -137,7 +135,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
         rmi_controller.connectRMI(this);
     }
-
     private void newGame(String player_name, boolean empty) throws IOException {
         Scanner scan = new Scanner(System.in);
         if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
@@ -192,15 +189,20 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
     private void chooseStartingCardState() throws IOException, InterruptedException {
         if(miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-            if(!rmi_controller.getTtoP().get(token).isFirstPlaced()) {chooseStartingCard();}
-            while (miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {buffering();}
+            if(!rmi_controller.getTtoP().get(token).isFirstPlaced()) {
+                chooseStartingCard();
+            }
+            while (miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+                buffering();
+            }
         }
     }
     private void chooseGoal() throws IOException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-            System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString() + "\n 2-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
+            System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
+                    + "\n 2-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
             String choice = scan.nextLine();
             if (choice.equals("1")) {
                 done=1;
@@ -215,28 +217,51 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Scanner scan = new Scanner(System.in);
         System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
         rmi_controller.showStartingCard(token);
-        System.out.println("\n-'B' FOR BACK SIDE \n-'F' FOR FRONT SIDE:");
         int done=0;
         while(done==0){
+            System.out.println("\n-'B' FOR BACK SIDE \n-'F' FOR FRONT SIDE:");
             String dec = scan.nextLine();
-            if (dec.equals("F")||dec.equals("f")){ rmi_controller.chooseStartingCard(token,false); done = 1;
-            } else if (dec.equals("B")||dec.equals("b")){ rmi_controller.chooseStartingCard(token,true); done = 1;}
-            else{ System.out.println("[ERROR] WRONG INSERT!");}
+            if (dec.equals("F")||dec.equals("f")){
+                done=1;
+                rmi_controller.chooseStartingCard(token,false);
+            } else if (dec.equals("B")||dec.equals("b")){
+                done=1;
+                rmi_controller.chooseStartingCard(token,true);
+            }
+            else System.out.println("[ERROR] WRONG INSERT!");
         }
     }
     private void manageGame() throws IOException, InterruptedException {
+        Scanner scan = new Scanner(System.in);
+        int decision;
         while(!miniModel.getState().equals("END_GAME")) {
             if (miniModel.getState().equals("WAIT_TURN")) {
+                decision = -1;
                 System.out.println("\n[ NOT YOUR TURN ] ");
                 while (miniModel.getState().equals("WAIT_TURN")) {
-                    menuChoice();
-                    buffering();
+                    if( decision != 3 ){
+                        miniModel.printMenu("GO IN BUFFERING");
+                        do{
+                            decision = scan.nextInt();
+                            scan.nextLine();
+                        }while( !menuChoice(decision));
+                    }else{buffering();}
                 }
             }
-            if (miniModel.getState().equals("PLACE_CARD")) {System.out.println("\n[ IT'S YOUR TURN TO PLACE ] "); selectAndInsertCard();}
+            if (miniModel.getState().equals("PLACE_CARD")) {
+                System.out.println("\n[ IT'S YOUR TURN ] ");
+                selectAndInsertCard();
+            }
             if (miniModel.getState().equals("DRAW_CARD")) {
-                System.out.println("\n[ IT'S YOUR TURN TO DRAW ] ");
-                menuChoice();
+                System.out.println("\n[ IT'S YOUR TURN ] ");
+                decision = -1;
+                while( decision != 3 ){
+                    miniModel.printMenu("DRAW A CARD");
+                    do{
+                        decision = scan.nextInt();
+                        scan.nextLine();
+                    }while( !menuChoice(decision) );
+                }
                 drawCard();
             }
             rmi_controller.getPoints(token);
@@ -247,8 +272,17 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
     private void selectAndInsertCard() throws IOException, InterruptedException {
         Scanner scan = new Scanner(System.in);
+        int decision;
         while( miniModel.getState().equals("PLACE_CARD") ) {
-            menuChoice();
+            decision = -1;
+            while( decision != 3 ) {
+                miniModel.printMenu("PLACE A CARD");
+                do {
+                    decision = scan.nextInt();
+                    scan.nextLine();
+                } while (!menuChoice(decision));
+            }
+
             System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
             String choicestring = scan.nextLine();
             int choice = Integer.parseInt(choicestring);
@@ -339,12 +373,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void startSendingHeartbeats() {
         new Thread(() -> {
+            int cracked = 0;
             while (true) {
                 try {
                     Thread.sleep(100);
                     server.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
-                    System.err.println("impossible to start heartbeats");
+                    if(cracked==0) {
+                        cracked = 1;
+                        System.err.println("Network disconnected");
+                    }
                 }
             }
         }).start();
@@ -362,28 +400,49 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
     // HELP FUNCTIONS
-    private void menuChoice() throws IOException {
-        miniModel.printMenu("GO IN BUFFERING");
-        int choice=0;
+    private boolean menuChoice(int choice) throws IOException {
         Scanner scan = new Scanner(System.in);
-        choice = scan.nextInt();
+        if ( choice < 0 || choice > 3 ) return false;
         switch ( choice ){
             case ( 0 ):
                 miniModel.printNumToField();
                 Integer i = scan.nextInt();
                 miniModel.showGameField(i);
-                menuChoice();
                 break;
             case( 1 ):
                 miniModel.showCards();
-                menuChoice();
                 break;
             case ( 2 ):
-                miniModel.showChat();
-                menuChoice();
+                miniModel.uploadChat();
+                int decision;
+                do{
+                    decision = scan.nextInt();
+                    scan.nextLine();
+                }while( !chatChoice(decision));
                 break;
-        }
+            case ( 3 ):
+                return true;}
+        return true;
     }
+
+    private boolean chatChoice(int decision) throws RemoteException {
+        switch(decision) {
+            case (0):
+                miniModel.showFirstChat();
+                return true;
+            case (5):
+                rmi_controller.chattingMoment(1,2,insertMessage());
+        }
+        return true;
+    }
+
+    private ChatMessage insertMessage() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Insert message to send:");
+        String s = scan.nextLine();
+        return new ChatMessage(s);
+    }
+
     private void buffering() throws IOException, InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
@@ -492,6 +551,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public MiniModel getMiniModel() {return miniModel;}
     private void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
     public void printString(String s) {System.out.println(s);}
+
+    public void addChat(int idx, ChatMessage message) throws RemoteException{
+        miniModel.addChat(idx, message);
+    }
 
 
     //MAIN

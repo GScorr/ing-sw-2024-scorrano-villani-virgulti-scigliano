@@ -32,7 +32,6 @@ public class Countdown {
                         }
                         if (running) {
                             time--;
-                            System.out.println("Time left: " + time + " seconds");
                         }
                     }
                 }
@@ -63,17 +62,8 @@ public class Countdown {
     public static void main(String[] args) {
         Countdown countdown = new Countdown(10);
         countdown.start();
-
-        try {
-            Thread.sleep(3000);
-            countdown.stop();
-            System.out.println("Countdown stopped");
-
-            Thread.sleep(2000);
-            countdown.resume();
-            System.out.println("Countdown resumed");
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        while (countdown.getTimeRemained() > 0) {
+            System.out.println("Mancano " + countdown.getTimeRemained());
         }
     }
 }

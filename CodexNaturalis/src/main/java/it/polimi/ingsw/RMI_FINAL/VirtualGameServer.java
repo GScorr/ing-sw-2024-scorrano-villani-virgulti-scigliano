@@ -2,6 +2,7 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -50,4 +51,9 @@ public interface VirtualGameServer extends Remote {
     public void getFinalStandings(String token) throws RemoteException;
 
     public List<GameField> getGameFields(String token) throws RemoteException;
+
+
+    public void chattingMoment(int i1, int i2, ChatMessage message) throws RemoteException;
+
+    public Map<String, Integer> getToken_to_index() throws RemoteException;
 }

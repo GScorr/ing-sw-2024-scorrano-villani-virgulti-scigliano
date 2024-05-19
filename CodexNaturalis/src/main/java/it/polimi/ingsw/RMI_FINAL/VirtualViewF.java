@@ -1,5 +1,6 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
@@ -28,4 +29,6 @@ public interface VirtualViewF extends Remote {
     public void setCards(List<PlayCard> cards) throws RemoteException;
     public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException;
     public void setState(String state) throws RemoteException;
+
+    public void addChat(int idx, ChatMessage message) throws RemoteException;
 }
