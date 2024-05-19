@@ -738,7 +738,7 @@ public class Client implements VirtualView {
                 miniModel.showCards();
                 break;
             case ( 2 ):
-                miniModel.showChat();
+             //   miniModel.showChat();
             case ( 3 ):
                 return true;}
         return true;
