@@ -262,7 +262,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public int getPort(){return port;}
     public List<GameField> getGameFields(String token) throws RemoteException{
         List<GameField> list = new ArrayList<>();
-        list.add(0, token_to_player.get(token).getGameField());
+        list.addFirst(token_to_player.get(token).getGameField());
         for ( String t : token_to_player.keySet() ){
             if( !t.equals(token)) list.add(token_to_player.get(t).getGameField());
         }
