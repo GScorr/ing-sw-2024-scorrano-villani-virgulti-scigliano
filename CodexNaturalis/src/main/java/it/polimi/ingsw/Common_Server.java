@@ -153,6 +153,7 @@ public class Common_Server {
                 System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
                 token_manager.deleteVW(key);
                 token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );
+                token_to_rmi.get(key).clientsSocket.remove( token_to_rmi.get(key).token_manager.getSocketTokens().get(key)  );
                 token_to_rmi.get(key).token_manager.deleteVW(key);
             }
         }
