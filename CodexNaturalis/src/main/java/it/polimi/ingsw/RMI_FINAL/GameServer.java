@@ -69,6 +69,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_manager.getSocketTokens().put(p_token, client);
         controller.checkNumPlayer();
         setAllStates();
+        clientsSocket.add(client);
         return true;
     }
     @Override
@@ -107,7 +108,10 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){ c.pushBack(message);}
-        for (VirtualView c : clientsSocket){ c.pushBack(message);}}
+        System.out.println("Sono inseriti : "+clientsSocket.size());
+        for (VirtualView c : clientsSocket){
+
+            c.pushBack(message);}}
     public void addQueue(SendFunction function) throws RemoteException{functQueue.add(function);}
 
     //END GAME

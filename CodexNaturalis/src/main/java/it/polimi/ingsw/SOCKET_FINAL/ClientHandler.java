@@ -84,6 +84,7 @@ public class ClientHandler  implements VirtualView {
     }
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
+        System.out.println("messaggio inserito in coda " + token);
         miniModel.pushBack(message);
     }
 
@@ -139,7 +140,9 @@ public class ClientHandler  implements VirtualView {
                 try {
                     Thread.sleep(100);
                     ResponseMessage s = miniModel.popOut();
+
                     if(s!=null){
+                        System.out.println("messaggio preso dalla coda " + token);
                        output.writeObject(s);
                        output.flush();
                     }
@@ -199,6 +202,7 @@ public class ClientHandler  implements VirtualView {
 
                         startCheckingMessages();
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                    //    this.rmi_controller.connectSocket(this);
                         startSendingHeartbeats();
 
                     }
@@ -214,6 +218,7 @@ public class ClientHandler  implements VirtualView {
                            output.flush();
                            startSendingHeartbeats();
                            startCheckingMessages();
+                       //    this.rmi_controller.connectSocket(this);
                        }else{
                            ResponseMessage s = new CheckRmiResponse(false);
                            output.writeObject(s);
