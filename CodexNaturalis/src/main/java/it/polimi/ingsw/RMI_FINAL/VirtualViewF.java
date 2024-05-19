@@ -31,4 +31,8 @@ public interface VirtualViewF extends Remote {
     public void setState(String state) throws RemoteException;
 
     public void addChat(int idx, ChatMessage message) throws RemoteException;
+
+    public void insertId(int id) throws RemoteException;
+
+    public void insertNumPlayers(int numPlayersMatch) throws RemoteException;
 }

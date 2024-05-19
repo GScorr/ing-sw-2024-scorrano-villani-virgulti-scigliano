@@ -32,7 +32,16 @@ public class GameServer implements VirtualGameServer, Serializable {
     public Queue<SendFunction> functQueue = new LinkedList<>();
     private final int port;
 
-    public Map<String, PState> token_to_state_deadline = new HashMap<>();
+    private int id = 0;
+    //public Map<String, PState> token_to_state_deadline = new HashMap<>();ù
+
+    public ChatIndexManager chatmanager = new ChatIndexManager();
+
+
+    public Map<String,Integer> token_to_index = new HashMap<>();
+    public Map<Integer,String> index_to_token = new HashMap<>();
+
+
 
     //CONSTRUCTOR
     public GameServer(String name, int numPlayer, int port) throws RemoteException {
@@ -54,6 +63,11 @@ public class GameServer implements VirtualGameServer, Serializable {
         createPlayer(p_token, name, isFirst);
         token_manager.getTokens().put(p_token,client);
         controller.checkNumPlayer();
+        id++;
+        token_to_index.put(p_token,id);
+        index_to_token.put(id, p_token);
+        token_manager.getTokens().get(p_token).insertId(id);
+        token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
         setAllStates();
         return true;
     }
@@ -259,6 +273,10 @@ public class GameServer implements VirtualGameServer, Serializable {
     public synchronized GameController getController() throws RemoteException{return controller;}
     public  boolean getFull()  throws RemoteException {return controller.getFull();}
     public int getPort(){return port;}
+
+    public int getNumPlayersMatch(){
+        return controller.getGame().getMax_num_player();
+    }
     public List<GameField> getGameFields(String token) throws RemoteException{
         List<GameField> list = new ArrayList<>();
         list.add(0, token_to_player.get(token).getGameField());
@@ -268,14 +286,24 @@ public class GameServer implements VirtualGameServer, Serializable {
         return list;
     }
 
-    @Override
-    public void chattingMoment(int i1, int i2, ChatMessage message) throws RemoteException {
-
+    public synchronized void chattingMoment(int id1, int id2, ChatMessage message) throws RemoteException {
+        String t1 = index_to_token.get(id1);
+        String t2 = index_to_token.get(id2);
+        controller.insertMessageinChat(chatmanager.getChatIndex(id1,id2),message);
+        updatechats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
     }
 
-    @Override
-    public Map<String, Integer> getToken_to_index() throws RemoteException {
-        return null;
+    private void updatechats(String token1, String token2, int idx, ChatMessage message) throws RemoteException {
+        for (String t : token_to_player.keySet()){
+            token_to_index.get(t);
+            if(t.equals(token1) || t.equals(token2)){
+                token_manager.getTokens().get(t).addChat(idx, message);
+            }
+        }
+    }
+
+    public Map<String, Integer> getToken_to_index() throws RemoteException{
+        return token_to_index;
     }
 
     //SETTER
@@ -336,6 +364,8 @@ public class GameServer implements VirtualGameServer, Serializable {
             token_manager.getSocketTokens().get(token).showCard(card);
         }
     }
+
+
 
     //CONNECT
     public synchronized void connectSocket(VirtualView clientSocket)throws RemoteException{this.clientsSocket.add(clientSocket);}

@@ -15,6 +15,8 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 public class MiniModel implements Serializable {
+    int my_index;
+    int num_players;
     List<GameField> game_fields ;
     private int not_read;
     private List<PlayCard> cards_in_hand;
@@ -23,6 +25,7 @@ public class MiniModel implements Serializable {
 
     private String state;
     private List<String> menu = new LinkedList<>();
+    private List<String> chatmenu = new LinkedList<>();
 
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
@@ -36,8 +39,12 @@ public class MiniModel implements Serializable {
         this.menu.add("");
         this.menu.add("");
         this.menu.add("");
-        this.menu.add("");
-        this.menu.add("");
+        this.chatmenu.add("");
+        this.chatmenu.add("");
+        this.chatmenu.add("");
+        this.chatmenu.add("");
+        this.chatmenu.add("");
+        this.chatmenu.add("");
         for (int i=0; i<5; i++){
             chat.add(new Chat());
         }
@@ -91,7 +98,7 @@ public class MiniModel implements Serializable {
 
     public void uploadChat(){
         setChatMenu();
-        for ( String m : menu ){
+        for ( String m : chatmenu ){
             System.out.println(m);
         }
     }
@@ -110,12 +117,15 @@ public class MiniModel implements Serializable {
 
 
     public void setChatMenu() {
-        this.menu.set(0, ("\n0- CHAT 1"));
-        this.menu.set(1, "1- CHAT 2" );
-        this.menu.set(2, "2- CHAT 3");
-        this.menu.set(3, "3- CHAT 4");
-        this.menu.set(4, "4- PUBLIC CHAT");
-        this.menu.set(5, "5- WRITE MESSAGE 1 PLAYER");
+        int i=1;
+        while(i<=num_players){
+            if(i!=my_index){
+                this.chatmenu.set(i,i + "\n-CHAT WITH PLAYER " + i+1);
+            }
+            i++;
+        }
+        this.chatmenu.set(i,i + "- PUBLIC CHAT");
+        //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
 
     public void showCard(PlayCard card) throws RemoteException {
@@ -212,5 +222,13 @@ public class MiniModel implements Serializable {
         for(ChatMessage c : chat.get(0).getChat()){
             System.out.println(c.message);
         }
+    }
+
+    public void setMy_index(int my_index) {
+        this.my_index = my_index;
+    }
+
+    public void setNum_players(int num_players) {
+        this.num_players = num_players;
     }
 }
