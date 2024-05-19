@@ -36,12 +36,14 @@ public class MiniModel implements Serializable {
         this.menu.add("");
         this.menu.add("");
         this.menu.add("");
+        this.menu.add("");
+        this.menu.add("");
+        for (int i=0; i<5; i++){
+            chat.add(new Chat());
+        }
     }
 
     public void addChat(int idx, ChatMessage message) {
-        if(chat.get(idx)==null){
-            chat.add(idx, new Chat());
-        }
         chat.get(idx).addMessage(message);
     }
 
@@ -208,7 +210,7 @@ public class MiniModel implements Serializable {
 
     public void showFirstChat() {
         for(ChatMessage c : chat.get(0).getChat()){
-            System.out.println(c);
+            System.out.println(c.message);
         }
     }
 }

@@ -2,7 +2,9 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.MODEL.Player.Player;
 
-public class ChatMessage {
+import java.io.Serializable;
+
+public class ChatMessage implements Serializable {
     String message;
     Player player;
 

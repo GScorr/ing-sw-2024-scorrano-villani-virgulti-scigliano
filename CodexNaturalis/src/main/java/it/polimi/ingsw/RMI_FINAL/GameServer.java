@@ -349,7 +349,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         }
     }
 
-    public Map<String, Integer> getToken_to_index() {
+    public Map<String, Integer> getToken_to_index() throws RemoteException{
         return token_to_index;
     }
 }
