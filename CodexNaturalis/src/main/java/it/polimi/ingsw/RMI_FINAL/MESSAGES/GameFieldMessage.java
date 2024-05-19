@@ -13,6 +13,10 @@ public class GameFieldMessage extends ResponseMessage{
         return field;
     }
 
+    public GameField actionPrintGameField(){
+        return field;
+    }
+
     public void setField(GameField field) {
         this.field = field;
     }

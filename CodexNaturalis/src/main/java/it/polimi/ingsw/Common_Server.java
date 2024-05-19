@@ -46,7 +46,7 @@ public class Common_Server {
     }
 
     private int getAvailablePort(){port++;return port;}
-    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws RemoteException {
+    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws IOException {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
         gameServer.addPlayerSocket(p_token,player_name, client,true);
@@ -60,7 +60,7 @@ public class Common_Server {
     }
 
     public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws RemoteException {
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {
         rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
         return true;}
 
@@ -127,13 +127,12 @@ public class Common_Server {
         token_manager.getTokens().get(p_token).reportError(error);
         return false;
     }
-    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws RemoteException {
+    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws IOException {
 
         GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
         {
             token_to_rmi.put(p_token , index );
-
             return addPlayerSocket(game_id, p_token, player_name, client);
         }
         String error = "\nWRONG ID : Not Available Game\n";
@@ -154,6 +153,7 @@ public class Common_Server {
                 System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
                 token_manager.deleteVW(key);
                 token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );
+                token_to_rmi.get(key).clientsSocket.remove( token_to_rmi.get(key).token_manager.getSocketTokens().get(key)  );
                 token_to_rmi.get(key).token_manager.deleteVW(key);
             }
         }

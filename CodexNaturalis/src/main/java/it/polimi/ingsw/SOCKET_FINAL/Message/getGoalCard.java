@@ -45,7 +45,15 @@ public class getGoalCard implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
+    public boolean getGoalCardAction() throws IOException{
+        Goal goal_card = rmi_controller.getTtoP().get(token).getGoalCard();
+        if(goal_card == null){
+            return false;
+        }else{
+            return true;
+        }
 
+    }
     @Override
     public void action() throws IOException {
         Goal goal_card = rmi_controller.getTtoP().get(token).getGoalCard();

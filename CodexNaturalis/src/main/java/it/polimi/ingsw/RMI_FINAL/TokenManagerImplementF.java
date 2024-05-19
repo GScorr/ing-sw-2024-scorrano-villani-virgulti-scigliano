@@ -35,7 +35,8 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
     }
 
     public void deleteVW(String token){
-        tokens.remove(token);
+        if( tokens.containsKey(token) ) {tokens.remove(token);}
+        else if ( Socket_tokens.containsKey(token) ) { Socket_tokens.remove(token);}
     }
 
 
