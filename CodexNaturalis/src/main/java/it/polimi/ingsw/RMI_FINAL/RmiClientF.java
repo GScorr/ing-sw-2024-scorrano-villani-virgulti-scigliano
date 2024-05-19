@@ -556,6 +556,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         miniModel.addChat(idx, message);
     }
 
+    public void insertId(int id) throws RemoteException{
+        miniModel.setMy_index(id);
+    }
+
+    public void insertNumPlayers(int numPlayersMatch) throws RemoteException{
+        miniModel.setNum_players(numPlayersMatch);
+    }
+
 
     //MAIN
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
