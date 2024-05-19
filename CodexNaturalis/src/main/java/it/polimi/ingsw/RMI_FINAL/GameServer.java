@@ -102,15 +102,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                 try {
                     Thread.sleep(100);
                     while (!functQueue.isEmpty()) {broadcastMessage(functQueue.poll().action(this));}
-                }catch (InterruptedException | RemoteException e) {e.printStackTrace();} catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-        }}).start();
+                }catch (InterruptedException | IOException e) {e.printStackTrace();}
+            }}).start();
     }
     private void broadcastMessage(ResponseMessage message) throws IOException {
-        for(VirtualView cS : clientsSocket){
-            cS.pushBack(message);}
-        for (VirtualViewF c : clientsRMI){ c.pushBack(message);}}
+        for (VirtualViewF c : clientsRMI){ c.pushBack(message);}
+        for (VirtualView c : clientsSocket){ c.pushBack(message);}}
     public void addQueue(SendFunction function) throws RemoteException{functQueue.add(function);}
 
     //END GAME
@@ -224,9 +221,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 }
                             } catch (RemoteException e) {
                                 throw new RuntimeException(e);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            } catch (IOException e) {
+                            } catch (InterruptedException | IOException e) {
                                 throw new RuntimeException(e);
                             }
                         }}catch (RuntimeException e){}
