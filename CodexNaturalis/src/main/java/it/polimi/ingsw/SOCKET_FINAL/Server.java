@@ -1,5 +1,6 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
@@ -147,6 +148,11 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public void setState(String state) throws RemoteException {
+
+    }
+
+    @Override
+    public void addChat(int idx, ChatMessage message) throws RemoteException {
 
     }
 

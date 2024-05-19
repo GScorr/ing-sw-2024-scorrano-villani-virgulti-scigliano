@@ -34,7 +34,8 @@ public class Common_Server {
     public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port);
-        gameServer.addPlayer(p_token,player_name, client,true);
+        gameServer.
+                addPlayer(p_token,player_name, client,true);
         VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);

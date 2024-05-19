@@ -2,6 +2,7 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
@@ -372,12 +373,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     private void startSendingHeartbeats() {
         new Thread(() -> {
+            int cracked = 0;
             while (true) {
                 try {
                     Thread.sleep(100);
                     server.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
-                    System.err.println("impossible to start heartbeats");
+                    if(cracked==0) {
+                        cracked = 1;
+                        System.err.println("Network disconnected");
+                    }
                 }
             }
         }).start();
@@ -408,11 +413,36 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 miniModel.showCards();
                 break;
             case ( 2 ):
-                miniModel.showChat();
+                miniModel.uploadChat();
+                int decision;
+                do{
+                    decision = scan.nextInt();
+                    scan.nextLine();
+                }while( !chatChoice(decision));
+                break;
             case ( 3 ):
                 return true;}
         return true;
     }
+
+    private boolean chatChoice(int decision) throws RemoteException {
+        switch(decision) {
+            case (0):
+                miniModel.showFirstChat();
+                return true;
+            case (5):
+                rmi_controller.chattingMoment(1,2,insertMessage());
+        }
+        return true;
+    }
+
+    private ChatMessage insertMessage() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Insert message to send:");
+        String s = scan.nextLine();
+        return new ChatMessage(s);
+    }
+
     private void buffering() throws IOException, InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
@@ -521,6 +551,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public MiniModel getMiniModel() {return miniModel;}
     private void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
     public void printString(String s) {System.out.println(s);}
+
+    public void addChat(int idx, ChatMessage message) throws RemoteException{
+        miniModel.addChat(idx, message);
+    }
 
 
     //MAIN
