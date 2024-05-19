@@ -2,6 +2,7 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
@@ -61,12 +62,13 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_to_player.put(p_token , p);
         return p;
     }
-    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws RemoteException {
+    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException {
         if(controller.getFull() )
             return false;
         createPlayer(p_token, name, isFirst);
         token_manager.getSocketTokens().put(p_token, client);
         controller.checkNumPlayer();
+        setAllStates();
         return true;
     }
     @Override
@@ -258,6 +260,16 @@ public class GameServer implements VirtualGameServer, Serializable {
             if( !t.equals(token)) list.add(token_to_player.get(t).getGameField());
         }
         return list;
+    }
+
+    @Override
+    public void chattingMoment(int i1, int i2, ChatMessage message) throws RemoteException {
+
+    }
+
+    @Override
+    public Map<String, Integer> getToken_to_index() throws RemoteException {
+        return null;
     }
 
     //SETTER
