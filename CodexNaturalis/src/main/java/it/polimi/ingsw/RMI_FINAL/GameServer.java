@@ -31,14 +31,9 @@ public class GameServer implements VirtualGameServer, Serializable {
     public GameController controller;
     public Queue<SendFunction> functQueue = new LinkedList<>();
     private final int port;
-    private int index = 0;
-    //public Map<String, PState> token_to_state_deadline = new HashMap<>();
 
-    public Map<String,Integer> token_to_index = new HashMap<>();
-    public Map<Integer,String> index_to_token = new HashMap<>();
+    public Map<String, PState> token_to_state_deadline = new HashMap<>();
 
-
-    public ChatIndexManager chatmanager = new ChatIndexManager();
     //CONSTRUCTOR
     public GameServer(String name, int numPlayer, int port) throws RemoteException {
         this.controller = new GameController(name, numPlayer);
@@ -65,17 +60,15 @@ public class GameServer implements VirtualGameServer, Serializable {
     public synchronized Player createPlayer(String p_token,String playerName, boolean b) throws RemoteException{
         Player p = controller.createPlayer(playerName,b);
         token_to_player.put(p_token , p);
-        index++;
-        token_to_index.put(p_token,index);
-        index_to_token.put(index, p_token);
         return p;
     }
-    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws RemoteException {
+    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException {
         if(controller.getFull() )
             return false;
         createPlayer(p_token, name, isFirst);
         token_manager.getSocketTokens().put(p_token, client);
         controller.checkNumPlayer();
+        setAllStates();
         return true;
     }
     @Override
@@ -213,7 +206,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED!"));
                                 int countdown = 15;
                                 while( countdown > 0 && controller.isAlone()) {
-                                    broadcastMessage(new UpdateMessage(countdown + "SECONDS LEFT"));
+                                    broadcastMessage(new UpdateMessage("\b"+countdown + "SECONDS LEFT"));
                                     countdown--;
                                     Thread.sleep(1000);
                                 }
@@ -221,7 +214,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     for (String t : token_to_player.keySet()) {
                                         PState end_game = new EndGame(token_to_player.get(t));
                                         token_to_player.get(t).setPlayer_state(end_game);
-                                        if (! token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
+                                        if ( token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
                                         end = false;
                                     }
                                 }
@@ -249,10 +242,10 @@ public class GameServer implements VirtualGameServer, Serializable {
     //GETTER
     public void getPoints(String token) throws IOException {
         if(token_manager.getTokens().get(token)!=null) {
-            token_manager.getTokens().get(token).printString("TOTAL POINTS:" + token_to_player.get(token).getPlayerPoints());
+            token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
         }
         else{
-            token_manager.getSocketTokens().get(token).printString("TOTAL POINTS:" + token_to_player.get(token).getPlayerPoints());
+            token_manager.getSocketTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
         }
     }
     public synchronized List<VirtualViewF> getClientsRMI() throws RemoteException{return clientsRMI;}
@@ -262,25 +255,33 @@ public class GameServer implements VirtualGameServer, Serializable {
     public int getPort(){return port;}
     public List<GameField> getGameFields(String token) throws RemoteException{
         List<GameField> list = new ArrayList<>();
-        list.addFirst(token_to_player.get(token).getGameField());
+        list.add(0, token_to_player.get(token).getGameField());
         for ( String t : token_to_player.keySet() ){
             if( !t.equals(token)) list.add(token_to_player.get(t).getGameField());
         }
         return list;
     }
 
+    @Override
+    public void chattingMoment(int i1, int i2, ChatMessage message) throws RemoteException {
+
+    }
+
+    @Override
+    public Map<String, Integer> getToken_to_index() throws RemoteException {
+        return null;
+    }
+
     //SETTER
     private void setAllStates() throws IOException {
-        if( !token_manager.getTokens().isEmpty() || !token_manager.getSocketTokens().isEmpty() ){
-            for (String t : token_to_player.keySet()){
-                if(token_manager.getTokens().containsKey(t)) {
-                    token_manager.getTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                    token_manager.getTokens().get(t).setNumToPlayer(num_to_player);
-                }
-                else if( token_manager.getSocketTokens().containsKey(t)){
-                    token_manager.getSocketTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                    token_manager.getSocketTokens().get(t).setNumToPlayer(num_to_player);
-                }
+        for (String t : token_to_player.keySet()){
+            if(token_manager.getTokens().containsKey(t)) {
+                token_manager.getTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
+                token_manager.getTokens().get(t).setNumToPlayer(num_to_player);
+            }
+            else if( token_manager.getSocketTokens().containsKey(t)){
+                token_manager.getSocketTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
+                token_manager.getSocketTokens().get(t).setNumToPlayer(num_to_player);
             }
         }
     }
@@ -335,25 +336,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     @Override
     public synchronized void connectRMI(VirtualViewF client)throws RemoteException{this.clientsRMI.add(client);}
 
-    public synchronized void chattingMoment(int id1, int id2, ChatMessage message) throws RemoteException {
-        String t1 = index_to_token.get(id1);
-        String t2 = index_to_token.get(id2);
-        controller.insertMessageinChat(chatmanager.getChatIndex(id1,id2),message);
-        updatechats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
-    }
 
-    private void updatechats(String token1, String token2, int idx, ChatMessage message) throws RemoteException {
-        for (String t : token_to_player.keySet()){
-            token_to_index.get(t);
-            if(t.equals(token1) || t.equals(token2)){
-                token_manager.getTokens().get(t).addChat(idx, message);
-            }
-        }
-    }
-
-    public Map<String, Integer> getToken_to_index() throws RemoteException{
-        return token_to_index;
-    }
 }
 
 

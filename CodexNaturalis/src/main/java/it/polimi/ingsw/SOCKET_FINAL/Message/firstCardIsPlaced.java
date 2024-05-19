@@ -46,6 +46,10 @@ public class firstCardIsPlaced implements Message, Serializable {
         this.output = output;
     }
 
+    public boolean firstCardIsPlacedAction() throws IOException{
+        return rmi_controller.getTtoP().get(token).isFirstPlaced();
+    }
+
     @Override
     public void action() throws IOException {
         boolean is_places = rmi_controller.getTtoP().get(token).isFirstPlaced();

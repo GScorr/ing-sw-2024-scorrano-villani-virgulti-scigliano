@@ -1,6 +1,8 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.PointResponse;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -48,7 +50,8 @@ public class getPoint implements Message, Serializable {
     @Override
     public void action() throws IOException {
         int point = rmi_controller.getTtoP().get(token).getPlayerPoints();
-        output.writeObject(point);
+        ResponseMessage s = new PointResponse(point);
+        output.writeObject(s);
         output.flush();
 
     }

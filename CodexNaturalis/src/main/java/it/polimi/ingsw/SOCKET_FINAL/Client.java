@@ -10,10 +10,11 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendInsertCard;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.*;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.SOCKET_FINAL.Message.firstCardIsPlaced;
 import it.polimi.ingsw.StringCostant;
 
 
@@ -25,6 +26,21 @@ import java.util.List;
 import java.util.Scanner;
 public class Client implements VirtualView {
 
+    boolean flag_check;
+    boolean check;
+
+    boolean checkSizeGoldDeck;
+    boolean checkSizeResourcesDeck;
+    int point;
+
+    boolean GoalCardisPresent;
+    List<Goal> goalsCard;
+
+    PlayCard startingCard;
+    boolean startingCardChoosed;
+
+    Goal goal_choosed;
+
     StringCostant string_costant = new StringCostant();
     private MiniModel miniModel =  new MiniModel();
     final ServerProxy server;
@@ -32,7 +48,7 @@ public class Client implements VirtualView {
     private boolean newClient;
     ObjectInputStream input;
 
-    public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException {
+    public Client(ObjectInputStream input, ObjectOutputStream output) throws IOException, InterruptedException {
         this.server = new ServerProxy(output,input);
         this.input = input;
     }
@@ -55,21 +71,59 @@ public class Client implements VirtualView {
             // Read message type
             while (true) {
                 try {
-                    if (!((s = (ResponseMessage) input.readObject()) != null)) {
-                        s.setMiniModel(miniModel);
-                        //se non fa nulla è perchè potrebbe non aver preso l'overide
-                        s.action();
-                        if( s instanceof GameFieldMessage){
-                            showField(((GameFieldMessage) s).getField());
+                    if (((s = (ResponseMessage) input.readObject()) != null)) {
+                        if(s instanceof CheckRmiResponse){
+                            check = ((CheckRmiResponse) s).check;
+                            this.flag_check = false;
+
                         }
-                        if ( s instanceof ErrorMessage){
-                            System.out.println(s.getMessage());
+                        else if(s instanceof checkGoalCardPresent){
+                            System.out.println("checkGoalCardPresent");
+                             GoalCardisPresent = ((checkGoalCardPresent) s).isPresent;
+                             this.flag_check = false;
                         }
+                        else if( s instanceof getListGoalCardResponse ){
+
+                            this.goalsCard = ((getListGoalCardResponse) s).goal_cards;
+                            this.flag_check = false;
+                        }
+                        else if( s instanceof StartingCardResponse ){
+                            this.startingCard = ((StartingCardResponse) s).starting_card;
+                            this.flag_check = false;
+                        }
+                        else if ( s instanceof checkStartingCardSelected){
+                            this.startingCardChoosed = ((checkStartingCardSelected) s).isSelected;
+                            this.flag_check = false;
+                        }
+                        else if ( s instanceof CardResponse){
+                            showCard(((CardResponse) s).CardResponseAction());
+                        }
+                        else if ( s instanceof CheckGoldDeckSize){
+                            checkSizeGoldDeck = ((CheckGoldDeckSize) s).checkSize;
+                            this.flag_check = false;
+                        }
+                        else if ( s instanceof CheckResourcesDeckSize){
+                            checkSizeResourcesDeck = ((CheckResourcesDeckSize) s).checkSize;
+                            this.flag_check = false;
+                        }
+                        else if ( s instanceof PointResponse){
+                            point = ((PointResponse) s).player_point;
+                            this.flag_check = false;
+                        }
+                        else {
+                            s.setMiniModel(miniModel);
+                            //se non fa nulla è perchè potrebbe non aver preso l'overide
+                            s.action();
+                            if( s instanceof GameFieldMessage){
+                                showField(((GameFieldMessage) s).getField());
+                            }
+                            if ( s instanceof ErrorMessage){
+                                System.out.println(s.getMessage());
+                            }
+                        }
+
                     };
-                } catch (IOException e) {
-                    System.out.println("errore nel startCheckingMessages thread");
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     System.out.println("errore nel startCheckingMessages thread");
                     throw new RuntimeException(e);
                 }
@@ -87,13 +141,11 @@ public class Client implements VirtualView {
         String game_name;
 
         gameAccess(player_name);
-        startCheckingMessages();
         waitFullGame();
 
         chooseGoalState();
 
         chooseStartingCardState();
-
         manageGame();
 
 
@@ -105,7 +157,6 @@ public class Client implements VirtualView {
         Scanner scanner = new Scanner(System.in);
         Player curr_player;
         String player_name = " ";
-
         boolean flag = false;
         do{
             System.out.print(string_costant.choose_name_player);
@@ -128,11 +179,12 @@ public class Client implements VirtualView {
         return player_name;
     }
 
-    public void gameAccess(String player_name) throws IOException, ClassNotFoundException {
+    public void gameAccess(String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         if(newClient) {
 
             if (server.getFreeGame() == null || server.getFreeGame().isEmpty()) {
                 newGame_notavailable(player_name);
+                startCheckingMessages();
             } else {
                 makeChoice(player_name);
             }
@@ -150,8 +202,8 @@ public class Client implements VirtualView {
             System.out.print(string_costant.new_game_num_player);
             int numplayers = scan.nextInt();
             try {
-                String result = server.createGame(game_name, numplayers, playerName);
-                System.out.println(result);
+                server.createGame(game_name, numplayers, playerName);
+                System.out.println("Congratulation, Game created");
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -159,7 +211,8 @@ public class Client implements VirtualView {
         } while(flag);
     }
 
-    private void makeChoice(String player_name) throws IOException, ClassNotFoundException {
+    //tieni d'occhio quando chiami startCheckingMessages();
+    private void makeChoice(String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
@@ -171,6 +224,7 @@ public class Client implements VirtualView {
             } else if (decision.equalsIgnoreCase("new")) {
                 done=1;
                 newGame(player_name);
+                startCheckingMessages();
             } else {
                 System.out.println(string_costant.error);
             }
@@ -188,8 +242,8 @@ public class Client implements VirtualView {
             System.out.print(string_costant.new_game_num_player);
             numplayers = scan.nextInt();
             try {
-                String result  = server.createGame(game_name, numplayers, player_name);
-                System.out.println(result);
+                 server.createGame(game_name, numplayers, player_name);
+                System.out.println("congratulation Game created");
             } catch (ControllerException | IOException | ClassNotFoundException e) {
                 System.err.print(e.getMessage() + "\n");
                 flag = true;
@@ -198,9 +252,9 @@ public class Client implements VirtualView {
     }
 
 
-    private void chooseMatch(String player_name) throws IOException, ClassNotFoundException {
+    private void chooseMatch(String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        boolean check;
+
         System.out.println(string_costant.list_game_avilable);
          List<SocketRmiControllerObject> games = server.getFreeGame();
 
@@ -209,9 +263,19 @@ public class Client implements VirtualView {
                     + " " + r.num_player + "/" + r.max_num_player);
         }
         do {
+            startCheckingMessages();
             System.out.println(string_costant.Id_game);
             int ID = scan.nextInt();
-            check = server.findRmiController(ID, player_name);
+            server.findRmiController(ID, player_name);
+            flag_check = true;
+            System.out.println("prima del while");
+            while (flag_check){
+                Thread.sleep(20);
+            }
+
+            System.out.println("uscito dal while");
+
+
         }while(!check);
 
         System.out.println(string_costant.enter);
@@ -233,47 +297,48 @@ public class Client implements VirtualView {
         }
     }
 
-    private void buffering() throws RemoteException, InterruptedException{
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("/");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("|");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("\\");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("-");
-    }
 
     private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
-       if(server.getPlayerState().equals("CHOOSE_GOAL")){
-           if(server.getGoalCard() == null){
+
+        if(miniModel.getState().equals("CHOOSE_GOAL")){
+            server.getGoalCard();
+           flag_check = true;
+           while (flag_check){
+               Thread.sleep(20);
+           }
+           if(!GoalCardisPresent){
                chooseGoal();
-               Goal goal = server.getGoalCard();
-               System.out.println("\n You choose :" + goal.toString());
+               System.out.println("\n You choose :" + goal_choosed.toString());
            }
        }
-       while(server.getPlayerState().equals("CHOOSE_GOAL")){
+       while(miniModel.getState().equals("CHOOSE_GOAL")){
            buffering();
        }
     }
 
-    private void chooseGoal() throws IOException, ClassNotFoundException {
+    private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
 
-            System.out.println("\nChoose Goal between :\n 1-" + server.getListGoalCard().get(0).toString()
-                    + "\n 2-" + server.getListGoalCard().get(1).toString());
+            server.getListGoalCard();
+            flag_check = true;
+            System.out.println("prima del while chooseGoalList");
+            while (flag_check){
+                Thread.sleep(20);
+            }
+            System.out.println("Dopo del while chooseGoal");
+
+            System.out.println("\nChoose Goal between :\n 1-" + goalsCard.get(0).toString()
+                    + "\n 2-" + goalsCard.get(1).toString());
 
             String choice = scan.nextLine();
             if (choice.equals("1")) {
+                goal_choosed = goalsCard.get(0);
                 done=1;
                 server.chooseGoal(0);
             } else if (choice.equals("2")){
+                goal_choosed = goalsCard.get(1);
                 done=1;
                 server.chooseGoal(1);
             } else System.out.println("Index boundaries not respected!");
@@ -281,19 +346,26 @@ public class Client implements VirtualView {
     }
 
     private void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
-        if(server.getPlayerState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+        if(miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             System.out.println(string_costant.starting_card);
-            PlayCard starting_card =  server.getStartingCard();
-            showCard(starting_card);
+            server.getStartingCard();
+            flag_check = true;
+            while(flag_check){
+                Thread.sleep(20);
+            }
 
-            if(!server.startingCardIsPlaced()) {
+            showCard(this.startingCard);
+            server.startingCardIsPlaced();
+            flag_check = true;
+            while (flag_check){
+                Thread.sleep(20);
+            }
+            if(!startingCardChoosed) {
                 chooseStartingCard();
             }
-            while (server.getPlayerState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            while (miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
                 buffering();
             }
-            GameField game_field = server.getGameField();
-            showField(game_field);
         }
 
 
@@ -319,90 +391,125 @@ public class Client implements VirtualView {
     }
 
 
-
-
     private void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
-
-        while (!server.getPlayerState().equals("END_GAME")) {
-            if (server.getPlayerState().equals("WAIT_TURN")) {
-                System.out.println(string_costant.waitTurn);
-                while (server.getPlayerState().equals("WAIT_TURN")) {
-                    buffering();
-                }
+        Scanner scan = new Scanner(System.in);
+        int decision;
+        while (!miniModel.getState().equals("END_GAME")) {
+            if (miniModel.getState().equals("WAIT_TURN")) {
+                decision = -1;
+                System.out.println("\n[ NOT YOUR TURN ] ");
+               while(miniModel.getState().equals("WAIT_TURN")){
+                   if(decision != 3){
+                       miniModel.printMenu("GO IN BUFFERING");
+                       do{
+                           decision = scan.nextInt();
+                           scan.nextLine();
+                       }while(!menuChoice(decision));
+                   }else{buffering();}
+               }
             }
-            if (server.getPlayerState().equals("PLACE_CARD")) {
-                System.out.println(string_costant.insertHandsCard);
-                List<PlayCard> cards_in_hand = server.getCardsInHand();
-                for(PlayCard c : cards_in_hand){
-                    showCard(c);
-                }
+            if (miniModel.getState().equals("PLACE_CARD")) {
+                System.out.println("\n[ IT'S YOUR TURN ] ");
                 selectAndInsertCard();
+
             }
-            if(server.getPlayerState().equals("DRAW_CARD")) {
+            if(miniModel.getState().equals("DRAW_CARD")) {
+                System.out.println("\n[ IT'S YOUR TURN ] ");
+                decision = -1;
+                while( decision != 3 ){
+                    miniModel.printMenu("DRAW A CARD");
+                    do{
+                        decision = scan.nextInt();
+                        scan.nextLine();
+                    }while( !menuChoice(decision) );
+                }
                 drawCard();
             }
 
-            int point = server.getPoint();
+            server.getPoint();
+            flag_check = true;
+            while(flag_check){
+            Thread.sleep(20);
+            }
             System.out.println("end of your turn, you have a total of : " +  point + "points");
+
         }
+
 
         System.out.println("End of the GAME, completare questa parte");
 
 
     }
 
-    private void selectAndInsertCard() throws IOException, ClassNotFoundException {
+    private void selectAndInsertCard() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        boolean done = false;
-        while(!done) {
-            System.out.println("\nChoosed index (1,2,3): ");
+        int decision;
+
+        while (miniModel.getState().equals("PLACE_CARD")) {
+            decision = -1;
+            while (decision != 3) {
+                miniModel.printMenu("PLACE A CARD");
+                do {
+                    decision = scan.nextInt();
+                    scan.nextLine();
+                } while (!menuChoice(decision));
+            }
+
+            System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
             String choicestring = scan.nextLine();
             int choice = Integer.parseInt(choicestring);
-            if(choice>=1 && choice<=3){
-                System.out.println("\nChoose the side (B,F): ");
+            if (choice >= 1 && choice <= 3) {
+                System.out.println("\nCHOOSE SIDE (B,F): ");
                 String flip = scan.nextLine();
-                if(flip.equals("B") || flip.equals("F")){
+                if (flip.equals("B") || flip.equals("F") || flip.equals("b") || flip.equals("f")) {
                     boolean flipped = false;
-                    if(flip.equals("B")){
+                    if (flip.equals("B") || flip.equals("b")) {
                         flipped = true;
                     }
-                    System.out.println("\nInserisci coordinate x e y di inserimento carta: ");
+                    System.out.println("\nCHOOSE COORDINATES: ");
                     int x = scan.nextInt();
                     int y = scan.nextInt();
                     scan.nextLine();
-                    if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                            /*
-                            done = server.placeCard(choice - 1, x, y, flipped);
-                            System.out.println(done);
-                             */
-
+                    if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM) {
+                        server.placeCard(choice, x, y, flipped);
+                        Thread.sleep(750);
+                    } else {
+                        System.err.println("\n[COORDINATES OUT OF BOUND]!");
                     }
-                    if( ! done){System.out.println("\nInserimento sbagliato!");}
-
+                } else {
+                    System.err.println("\n[ONLY 'B' OR 'F' ALLOWED]!");
                 }
-                else{
-                    System.out.println("\nInserimento sbagliato!");
-                }
-            }
-            else{
-                System.out.println("\nInserimento sbagliato!");
+            } else {
+                System.err.println("\n[OUT OF BOUND CARD]");
             }
         }
-        GameField game_field = server.getGameField();
-        showField(game_field);
+
     }
 
-    private void drawCard() throws IOException, ClassNotFoundException {
+    private void drawCard() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("\n Draw a card, deck available: ");
-        if(server.getGoldDeckSize() > 0){
-            System.out.println("1. Gold Deck");
-        }
-        if (server.getResourcesDeckSize() > 0){
-            System.out.println("2. Resources Deck");
-        }
-        System.out.println("3  Center Cards");
+        System.out.println("\n DRAW A CARD FROM: ");
 
+
+        server.getGoldDeckSize();
+        this.flag_check = true;
+        while(flag_check){
+            Thread.sleep(20);
+        }
+        if(checkSizeGoldDeck){
+            System.out.println("1. GOLD DECK");
+        }
+
+        server.getResourcesDeckSize();
+        this.flag_check = true;
+        while(flag_check){
+            Thread.sleep(20);
+        }
+        if (checkSizeResourcesDeck){
+            System.out.println("2. RESOURCE DECK");
+        }
+
+        System.out.println("3  CENTRAL CARDS DECK");
 
         String numstring = scan.nextLine();
         int num = Integer.parseInt(numstring);
@@ -416,10 +523,7 @@ public class Client implements VirtualView {
                 server.peachFromResourcesDeck();
             } else if (num==3) {
                 done=true;
-                List<PlayCard> center_cards = server.getCardsInCenter();
-                for(PlayCard c : center_cards){
-                    showCardInCenter(c);
-                }
+                 server.getCardsInCenter();
                 System.out.println("Scegli indice carta da pescare: ");
                 String choicestr = scan.nextLine();
                 int index = Integer.parseInt(choicestr);
@@ -620,6 +724,40 @@ public class Client implements VirtualView {
 
     }
 
+
+    private boolean menuChoice(int choice) throws IOException {
+        Scanner scan = new Scanner(System.in);
+        if ( choice < 0 || choice > 3 ) return false;
+        switch ( choice ){
+            case ( 0 ):
+                miniModel.printNumToField();
+                Integer i = scan.nextInt();
+                miniModel.showGameField(i);
+                break;
+            case( 1 ):
+                miniModel.showCards();
+                break;
+            case ( 2 ):
+             //   miniModel.showChat();
+            case ( 3 ):
+                return true;}
+        return true;
+    }
+    private void buffering() throws RemoteException, InterruptedException{
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("/");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("|");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("\\");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("-");
+    }
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String host = "127.0.0.1";
         int port = 12345;
@@ -637,5 +775,9 @@ public class Client implements VirtualView {
         }
 
     }
+
+
+
+
 }
 

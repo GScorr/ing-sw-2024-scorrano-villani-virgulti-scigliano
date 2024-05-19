@@ -47,6 +47,10 @@ public class getListGoalCard implements Message, Serializable {
         this.output = output;
     }
 
+    public List<Goal> actionGetListGoalCard() throws  IOException{
+        return rmi_controller.getTtoP().get(token).getInitial_goal_cards();
+    }
+
     @Override
     public void action() throws IOException {
         List<Goal> list_goal_card = rmi_controller.getTtoP().get(token).getInitial_goal_cards();

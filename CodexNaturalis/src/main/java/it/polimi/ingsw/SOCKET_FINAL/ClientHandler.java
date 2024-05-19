@@ -3,13 +3,12 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MiniModel;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.*;
 
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.setStateMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 
@@ -94,13 +93,18 @@ public class ClientHandler  implements VirtualView {
     }
 
     @Override
-    public void printString(String s) throws IOException {
+    public void printString(String string) throws IOException {
+        ResponseMessage s = new StringResponse(string);
+        output.writeObject(s);
+        output.flush();
 
     }
 
     @Override
     public void setGameField(List<GameField> games) throws IOException {
-        miniModel.setGameField(games);
+        ResponseMessage s = new setGameFieldResponse(games);
+        output.writeObject(s);
+        output.flush();
     }
 
     @Override
@@ -110,12 +114,16 @@ public class ClientHandler  implements VirtualView {
 
     @Override
     public void setCards(List<PlayCard> cards)throws IOException {
-        miniModel.setCards(cards);
+        ResponseMessage s = new setCardsResponse(cards);
+        output.writeObject(s);
+        output.flush();
     }
 
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
-
+        ResponseMessage s = new NumToPlayerResponse(map);
+        output.writeObject(s);
+        output.flush();
     }
 
     @Override
@@ -188,12 +196,11 @@ public class ClientHandler  implements VirtualView {
                         ((CreateGame) DP_message).setClientHandler(this);
                        int port =  ((CreateGame) DP_message).actionCreateGameMessage();
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                        MyMessageFinal message = new MyMessageFinal("Creazione Player e Game andati a buon fine");
-                        output.writeObject(message);
-                        output.flush();
-                        startSendingHeartbeats();
+
                         startCheckingMessages();
+                        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                        startSendingHeartbeats();
+
                     }
                     else if(DP_message instanceof FindRMIControllerMessage){
                         ((FindRMIControllerMessage) DP_message).setClientHandler(this);
@@ -202,16 +209,39 @@ public class ClientHandler  implements VirtualView {
                            int port = common.getPort(token);
                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                           MyMessageFinal message = new MyMessageFinal("true");
-                           output.writeObject(message);
+                           ResponseMessage s = new CheckRmiResponse(true);
+                           output.writeObject(s);
                            output.flush();
                            startSendingHeartbeats();
                            startCheckingMessages();
                        }else{
-                           MyMessageFinal message = new MyMessageFinal("false");
-                           output.writeObject(message);
+                           ResponseMessage s = new CheckRmiResponse(false);
+                           output.writeObject(s);
                            output.flush();
                        }
+                    }else if(DP_message instanceof getGoalCard){
+                        boolean isPresent = ((getGoalCard) DP_message).getGoalCardAction();
+                        ResponseMessage s = new checkGoalCardPresent(isPresent);
+                        output.writeObject(s);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof getListGoalCard){
+                        List<Goal> list_goal_card = ((getListGoalCard) DP_message).actionGetListGoalCard();
+                        ResponseMessage s = new getListGoalCardResponse(list_goal_card);
+                        output.writeObject(s);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof getStartingCard) {
+                        PlayCard starting_card = ((getStartingCard) DP_message).getStartingCardAction();
+                        ResponseMessage s = new StartingCardResponse(starting_card);
+                        output.writeObject(s);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof firstCardIsPlaced) {
+                        boolean isPlaced = ((firstCardIsPlaced) DP_message).firstCardIsPlacedAction();
+                        ResponseMessage s = new checkStartingCardSelected(isPlaced);
+                        output.writeObject(s);
+                        output.flush();
                     }
                     else{
                         DP_message.action();

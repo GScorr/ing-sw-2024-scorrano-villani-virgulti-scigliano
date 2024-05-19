@@ -10,6 +10,9 @@ public abstract class ResponseMessage implements Serializable {
     public String getMessage() {
         return message;
     }
+    public void setMessage(String message){
+        this.message = message;
+    }
     public void setMiniModel(MiniModel miniModel){
         this.miniModel = miniModel;
     }
