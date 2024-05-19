@@ -249,10 +249,10 @@ public class GameServer implements VirtualGameServer, Serializable {
     //GETTER
     public void getPoints(String token) throws IOException {
         if(token_manager.getTokens().get(token)!=null) {
-            token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
+            token_manager.getTokens().get(token).printString("TOTAL POINTS:" + token_to_player.get(token).getPlayerPoints());
         }
         else{
-            token_manager.getSocketTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
+            token_manager.getSocketTokens().get(token).printString("TOTAL POINTS:" + token_to_player.get(token).getPlayerPoints());
         }
     }
     public synchronized List<VirtualViewF> getClientsRMI() throws RemoteException{return clientsRMI;}
@@ -271,14 +271,16 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     //SETTER
     private void setAllStates() throws IOException {
-        for (String t : token_to_player.keySet()){
-            if(token_manager.getTokens().containsKey(t)) {
-                token_manager.getTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                token_manager.getTokens().get(t).setNumToPlayer(num_to_player);
-            }
-            else if( token_manager.getSocketTokens().containsKey(t)){
-                token_manager.getSocketTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                token_manager.getSocketTokens().get(t).setNumToPlayer(num_to_player);
+        if( !token_manager.getTokens().isEmpty() || !token_manager.getSocketTokens().isEmpty() ){
+            for (String t : token_to_player.keySet()){
+                if(token_manager.getTokens().containsKey(t)) {
+                    token_manager.getTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
+                    token_manager.getTokens().get(t).setNumToPlayer(num_to_player);
+                }
+                else if( token_manager.getSocketTokens().containsKey(t)){
+                    token_manager.getSocketTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
+                    token_manager.getSocketTokens().get(t).setNumToPlayer(num_to_player);
+                }
             }
         }
     }
