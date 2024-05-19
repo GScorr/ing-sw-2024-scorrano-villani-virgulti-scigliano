@@ -136,7 +136,7 @@ public class Common_Server {
             return addPlayerSocket(game_id, p_token, player_name, client);
         }
         String error = "\nWRONG ID : Not Available Game\n";
-        token_manager.getTokens().get(p_token).reportError(error);
+        if( token_manager.getTokens().containsKey(p_token) ) token_manager.getTokens().get(p_token).reportError(error);
         return false;
     }
     public GameServer getRmiController(String token) throws RemoteException{return token_to_rmi.get(token);}

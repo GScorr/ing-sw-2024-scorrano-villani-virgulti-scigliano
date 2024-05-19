@@ -105,6 +105,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 }catch (InterruptedException | IOException e) {e.printStackTrace();}
             }}).start();
     }
+
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){ c.pushBack(message);}
         for (VirtualView c : clientsSocket){ c.pushBack(message);}}
