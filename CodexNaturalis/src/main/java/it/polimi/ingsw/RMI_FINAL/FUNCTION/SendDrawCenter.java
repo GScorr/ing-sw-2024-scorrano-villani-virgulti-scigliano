@@ -24,8 +24,8 @@ public class SendDrawCenter implements SendFunction{
         try{
             server.peachFromCardsInCenter(token, index);
             message = new UpdateMessage("Card inserted!");
-            if(server.token_manager.getTokens().get(token) != null) server.token_manager.getTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
-            else server.token_manager.getSocketTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
+            if(server.token_manager.getTokens().containsKey(token)) server.token_manager.getTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
+            else if(server.token_manager.getSocketTokens().containsKey(token)) server.token_manager.getSocketTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
 
             for (String t : server.token_to_player.keySet()){
                 if( server.token_manager.getTokens().containsKey(t) ) server.token_manager.getTokens().get(t).setState( server.token_to_player.get(t).getActual_state().getNameState() );

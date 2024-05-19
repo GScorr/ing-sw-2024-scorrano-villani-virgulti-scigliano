@@ -270,7 +270,7 @@ public class Client implements VirtualView {
             flag_check = true;
             System.out.println("prima del while");
             while (flag_check){
-                Thread.sleep(20);
+                Thread.sleep(100);
             }
 
             System.out.println("uscito dal while");
@@ -304,7 +304,7 @@ public class Client implements VirtualView {
             server.getGoalCard();
            flag_check = true;
            while (flag_check){
-               Thread.sleep(20);
+               Thread.sleep(100);
            }
            if(!GoalCardisPresent){
                chooseGoal();
@@ -325,7 +325,7 @@ public class Client implements VirtualView {
             flag_check = true;
             System.out.println("prima del while chooseGoalList");
             while (flag_check){
-                Thread.sleep(20);
+                Thread.sleep(100);
             }
             System.out.println("Dopo del while chooseGoal");
 
@@ -351,14 +351,14 @@ public class Client implements VirtualView {
             server.getStartingCard();
             flag_check = true;
             while(flag_check){
-                Thread.sleep(20);
+                Thread.sleep(100);
             }
 
             showCard(this.startingCard);
             server.startingCardIsPlaced();
             flag_check = true;
             while (flag_check){
-                Thread.sleep(20);
+                Thread.sleep(100);
             }
             if(!startingCardChoosed) {
                 chooseStartingCard();
@@ -429,7 +429,7 @@ public class Client implements VirtualView {
             server.getPoint();
             flag_check = true;
             while(flag_check){
-            Thread.sleep(20);
+            Thread.sleep(100);
             }
             System.out.println("end of your turn, you have a total of : " +  point + "points");
 
@@ -494,7 +494,7 @@ public class Client implements VirtualView {
         server.getGoldDeckSize();
         this.flag_check = true;
         while(flag_check){
-            Thread.sleep(20);
+            Thread.sleep(100);
         }
         if(checkSizeGoldDeck){
             System.out.println("1. GOLD DECK");
@@ -503,7 +503,7 @@ public class Client implements VirtualView {
         server.getResourcesDeckSize();
         this.flag_check = true;
         while(flag_check){
-            Thread.sleep(20);
+            Thread.sleep(100);
         }
         if (checkSizeResourcesDeck){
             System.out.println("2. RESOURCE DECK");
@@ -518,9 +518,11 @@ public class Client implements VirtualView {
             if(num==1){
                 done = true;
                 server.peachFromGoldDeck();
+                Thread.sleep(100);
             } else if (num==2) {
                 done = true;
                 server.peachFromResourcesDeck();
+                Thread.sleep(100);
             } else if (num==3) {
                 done=true;
                  server.getCardsInCenter();
@@ -528,6 +530,7 @@ public class Client implements VirtualView {
                 String choicestr = scan.nextLine();
                 int index = Integer.parseInt(choicestr);
                 server.peachFromCardsInCenter(index-1);
+                Thread.sleep(100);
             } else{
                 System.out.println("\n Inserimento errato!");
             }
