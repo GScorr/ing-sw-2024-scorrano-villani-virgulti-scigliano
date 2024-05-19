@@ -1,6 +1,8 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -49,6 +51,7 @@ public class peachFromGoldDeck implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-        rmi_controller.peachFromGoldDeck(token);
+        SendFunction function = new SendDrawGold(token);
+        rmi_controller.addQueue(function);
     }
 }

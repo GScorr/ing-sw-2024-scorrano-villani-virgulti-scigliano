@@ -109,13 +109,11 @@ public class ServerProxy implements VirtualServer {
 
     }
 
-    boolean startingCardIsPlaced() throws IOException, ClassNotFoundException {
+    void startingCardIsPlaced() throws IOException, ClassNotFoundException {
         Message DP_message = new firstCardIsPlaced();
         output.writeObject(DP_message);
         output.flush();
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
 
-        return response.getContent().compareTo("true") == 0;
 
     }
 
@@ -124,7 +122,7 @@ public class ServerProxy implements VirtualServer {
         output.writeObject(DP_message);
         output.flush();
     }
-
+/*
     public GameField getGameField() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getGameField();
         output.writeObject(DP_mesasage);
@@ -132,7 +130,7 @@ public class ServerProxy implements VirtualServer {
         GameField game_field  = (GameField) input.readObject();
         return game_field;
     }
-
+*/
     public List<PlayCard> getCardsInHand() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getCardsInHand();
         output.writeObject(DP_mesasage);
@@ -141,38 +139,31 @@ public class ServerProxy implements VirtualServer {
         return cards_in_hand;
     }
 
-    public boolean placeCard(int index, int x, int y, boolean flipped) throws IOException, ClassNotFoundException {
+    public void placeCard(int index, int x, int y, boolean flipped) throws IOException, ClassNotFoundException {
         Message DP_mesasage = new placeCard(index,x,y,flipped);
         output.writeObject(DP_mesasage);
         output.flush();
-
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-
-        return response.getContent().compareTo("true") == 0;
     }
 
-    public int getGoldDeckSize() throws IOException, ClassNotFoundException {
+    public void getGoldDeckSize() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getGoldDeckSize();
         output.writeObject(DP_mesasage);
         output.flush();
-        int size  = (int) input.readObject();
-        return size;
+
     }
 
-    public int getResourcesDeckSize() throws IOException, ClassNotFoundException {
+    public void getResourcesDeckSize() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getResourcesDeckSize();
         output.writeObject(DP_mesasage);
         output.flush();
-        int size  = (int) input.readObject();
-        return size;
+
     }
 
-    public List<PlayCard> getCardsInCenter() throws IOException, ClassNotFoundException {
+    public void getCardsInCenter() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getCardsInCenter();
         output.writeObject(DP_mesasage);
         output.flush();
-        List<PlayCard> cards_in_center  = (List<PlayCard>) input.readObject();
-        return cards_in_center;
+
     }
 
     public void peachFromGoldDeck() throws IOException {
@@ -193,12 +184,11 @@ public class ServerProxy implements VirtualServer {
         output.flush();
     }
 
-    public int getPoint() throws IOException, ClassNotFoundException {
+    public void getPoint() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getPoint();
         output.writeObject(DP_mesasage);
         output.flush();
-        int point  = (int) input.readObject();
-        return point;
+
     }
 
 

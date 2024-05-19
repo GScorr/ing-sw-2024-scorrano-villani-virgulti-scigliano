@@ -71,11 +71,24 @@ public class GameServer implements VirtualGameServer, Serializable {
     public synchronized void chooseStartingCard(String token, boolean flip) throws IOException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
         Integer index = 0;
-        token_manager.getTokens().get(token).setCards(token_to_player.get(token).getCardsInHand());
+        if(token_manager.getTokens().get(token) != null) {
+            token_manager.getTokens().get(token).setCards(token_to_player.get(token).getCardsInHand());
+        }
+        else{
+            token_manager.getSocketTokens().get(token).setCards(token_to_player.get(token).getCardsInHand());
+        }
         for (String t : token_to_player.keySet()){
-            token_manager.getTokens().get(t).setGameField(getGameFields(t));
-            num_to_player.put(index, token_to_player.get(t).getName() );
-            index++;
+            if(token_manager.getTokens().get(token) != null) {
+                token_manager.getTokens().get(t).setGameField(getGameFields(t));
+                num_to_player.put(index, token_to_player.get(t).getName() );
+                index++;
+            }
+            else{
+                token_manager.getSocketTokens().get(t).setGameField(getGameFields(t));
+                num_to_player.put(index, token_to_player.get(t).getName() );
+                index++;
+            }
+
         }
         setAllStates();
     }
@@ -91,11 +104,15 @@ public class GameServer implements VirtualGameServer, Serializable {
                 try {
                     Thread.sleep(100);
                     while (!functQueue.isEmpty()) {broadcastMessage(functQueue.poll().action(this));}
-                }catch (InterruptedException | RemoteException e) {e.printStackTrace();}
+                }catch (InterruptedException | IOException e) {e.printStackTrace();}
             }}).start();
     }
-    private void broadcastMessage(ResponseMessage message) throws RemoteException {
-        for (VirtualViewF c : clientsRMI){c.pushBack(message);}}
+    private void broadcastMessage(ResponseMessage message) throws IOException {
+        for (VirtualViewF c : clientsRMI){c.pushBack(message);}
+        for(VirtualView cS : clientsSocket){
+            cS.pushBack(message);
+        }
+    }
     public void addQueue(SendFunction function) throws RemoteException{functQueue.add(function);}
 
     //END GAME
@@ -222,7 +239,12 @@ public class GameServer implements VirtualGameServer, Serializable {
             }
             i++;
         }
-        token_manager.getTokens().get(token).printString("\nCarte risorsa: ");
+        if(token_manager.getTokens().get(token)!=null) {
+            token_manager.getTokens().get(token).printString("\nCarte Risorsa: ");
+        }
+        else{
+            token_manager.getSocketTokens().get(token).printString("\nCarte Risorsa: ");
+        }
         for(PlayCard c : controller.getGame().getCars_in_center().getResource_list()){
             if(token_manager.getTokens().get(token)!=null) {
                 token_manager.getTokens().get(token).printString(String.valueOf(i));

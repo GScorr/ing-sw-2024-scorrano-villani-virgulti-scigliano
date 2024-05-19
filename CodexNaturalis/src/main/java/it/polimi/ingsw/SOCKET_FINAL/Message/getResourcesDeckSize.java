@@ -1,6 +1,8 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.CheckResourcesDeckSize;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -48,7 +50,11 @@ public class getResourcesDeckSize implements Message, Serializable {
     @Override
     public void action() throws IOException {
         int size = rmi_controller.getController().getGame().getResources_deck().getNumber();
-        output.writeObject(size);
+        boolean check;
+        if (size > 0 ) check = true;
+        else check = false;
+        ResponseMessage s = new CheckResourcesDeckSize(check);
+        output.writeObject(s);
         output.flush();
 
     }

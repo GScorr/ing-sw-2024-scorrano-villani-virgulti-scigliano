@@ -51,13 +51,7 @@ public class getCardsInCenter implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-        List<PlayCard> golds_cards_in_center = rmi_controller.getController().getGame().getCars_in_center().getGold_list();
-        List<PlayCard> resources_cards_in_center = rmi_controller.getController().getGame().getCars_in_center().getResource_list();
-        // Combine elements of both lists using Stream API (Java 8+)
-        List<PlayCard> cards_in_center = Stream.concat(golds_cards_in_center.stream(), resources_cards_in_center.stream())
-                .collect(Collectors.toList());
-        output.writeObject(cards_in_center);
-        output.flush();
+        rmi_controller.showCardsInCenter(token);
 
     }
 }

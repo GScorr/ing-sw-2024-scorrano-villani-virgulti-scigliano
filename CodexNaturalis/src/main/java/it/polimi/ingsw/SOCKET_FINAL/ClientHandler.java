@@ -93,13 +93,18 @@ public class ClientHandler  implements VirtualView {
     }
 
     @Override
-    public void printString(String s) throws IOException {
+    public void printString(String string) throws IOException {
+        ResponseMessage s = new StringResponse(string);
+        output.writeObject(s);
+        output.flush();
 
     }
 
     @Override
     public void setGameField(List<GameField> games) throws IOException {
-        miniModel.setGameField(games);
+        ResponseMessage s = new setGameFieldResponse(games);
+        output.writeObject(s);
+        output.flush();
     }
 
     @Override
@@ -109,17 +114,20 @@ public class ClientHandler  implements VirtualView {
 
     @Override
     public void setCards(List<PlayCard> cards)throws IOException {
-        miniModel.setCards(cards);
+        ResponseMessage s = new setCardsResponse(cards);
+        output.writeObject(s);
+        output.flush();
     }
 
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
-
+        ResponseMessage s = new NumToPlayerResponse(map);
+        output.writeObject(s);
+        output.flush();
     }
 
     @Override
     public void setState(String state) throws IOException {
-        System.out.println("fino a qua ci attiva CLientHandler" + this.token);
         ResponseMessage s = new setStateMessage(state);
         output.writeObject(s);
         output.flush();
@@ -226,6 +234,12 @@ public class ClientHandler  implements VirtualView {
                     else if(DP_message instanceof getStartingCard) {
                         PlayCard starting_card = ((getStartingCard) DP_message).getStartingCardAction();
                         ResponseMessage s = new StartingCardResponse(starting_card);
+                        output.writeObject(s);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof firstCardIsPlaced) {
+                        boolean isPlaced = ((firstCardIsPlaced) DP_message).firstCardIsPlacedAction();
+                        ResponseMessage s = new checkStartingCardSelected(isPlaced);
                         output.writeObject(s);
                         output.flush();
                     }

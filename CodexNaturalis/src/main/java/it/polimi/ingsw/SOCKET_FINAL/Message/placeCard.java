@@ -2,6 +2,8 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendInsertCard;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -53,17 +55,8 @@ public class placeCard implements Message, Serializable {
 
     @Override
     public void action() throws IOException, ControllerException {
-        MyMessageFinal message;
-        try {
-            rmi_controller.insertCard(token, index, x, y, flipped);
-             message = new MyMessageFinal("true");
-        }
-        catch(ControllerException e){
-             message = new MyMessageFinal("false");
-        }
-
-        output.writeObject(message);
-        output.flush();
+        SendFunction function = new SendInsertCard(token, index-1, x,y,flipped);
+        rmi_controller.addQueue(function);
     }
 
 }
