@@ -111,9 +111,6 @@ public class Client implements VirtualView {
                             point = ((PointResponse) s).player_point;
                             this.flag_check = false;
                         }
-                        else if ( s instanceof NumToPlayerResponse){
-                            miniModel.setNumToPlayer(((NumToPlayerResponse) s).getMap());
-                        }
                         else {
                             s.setMiniModel(miniModel);
                             s.action();
@@ -123,6 +120,7 @@ public class Client implements VirtualView {
                             if ( s instanceof ErrorMessage){
                                 System.out.println(s.getMessage());
                             }
+                            //ce ne devono essere 2 uno per la starting Card, uno per le Central Card
                             if(s instanceof showCenterCardsResponse){
                                 showCardInCenter(((showCenterCardsResponse) s).card);
                             }
