@@ -80,7 +80,9 @@ public class ClientHandler  implements VirtualView {
 
     @Override
     public void showCard(PlayCard card) throws IOException {
-
+        ResponseMessage s = new showCenterCardsResponse(card);
+        output.writeObject(s);
+        output.flush();
     }
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
@@ -138,7 +140,7 @@ public class ClientHandler  implements VirtualView {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     ResponseMessage s = miniModel.popOut();
 
                     if(s!=null){
