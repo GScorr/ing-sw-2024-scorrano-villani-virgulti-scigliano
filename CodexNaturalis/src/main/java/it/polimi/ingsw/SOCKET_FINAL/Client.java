@@ -111,9 +111,11 @@ public class Client implements VirtualView {
                             point = ((PointResponse) s).player_point;
                             this.flag_check = false;
                         }
+                        else if ( s instanceof NumToPlayerResponse){
+                            miniModel.setNumToPlayer(((NumToPlayerResponse) s).getMap());
+                        }
                         else {
                             s.setMiniModel(miniModel);
-                            //se non fa nulla è perchè potrebbe non aver preso l'overide
                             s.action();
                             if( s instanceof GameFieldMessage){
                                 showField(((GameFieldMessage) s).getField());
@@ -151,8 +153,6 @@ public class Client implements VirtualView {
 
         chooseStartingCardState();
         manageGame();
-
-
 
     }
 
@@ -290,11 +290,9 @@ public class Client implements VirtualView {
             }
 
 
-
         }while(!check);
 
         System.out.println(string_costant.enter);
-
 
     }
 
@@ -368,7 +366,6 @@ public class Client implements VirtualView {
             while(flag_check){
                 Thread.sleep(100);
             }
-
             server.startingCardIsPlaced();
             flag_check = true;
             while (flag_check){

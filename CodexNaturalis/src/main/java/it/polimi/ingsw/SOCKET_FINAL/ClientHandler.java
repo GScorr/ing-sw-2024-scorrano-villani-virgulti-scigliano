@@ -86,7 +86,7 @@ public class ClientHandler  implements VirtualView {
     }
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
-        System.out.println("messaggio inserito in coda " + token);
+
         miniModel.pushBack(message);
     }
 
@@ -124,6 +124,12 @@ public class ClientHandler  implements VirtualView {
 
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
+        System.out.println("Sono in ClientHandler, mi arriva questo mapping e lo devo girare al client ");
+        for( Integer i : map.keySet() ){
+            System.out.println("-" + i + " Name:  " + map.get(i) );
+        }
+
+
         ResponseMessage s = new NumToPlayerResponse(map);
         output.writeObject(s);
         output.flush();
@@ -144,12 +150,11 @@ public class ClientHandler  implements VirtualView {
                     ResponseMessage s = miniModel.popOut();
 
                     if(s!=null){
-                        System.out.println("messaggio preso dalla coda " + token);
                        output.writeObject(s);
                        output.flush();
                     }
                 } catch (InterruptedException e) {
-                    System.err.println("impossible to pop out");
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -211,7 +216,7 @@ public class ClientHandler  implements VirtualView {
                     else if(DP_message instanceof FindRMIControllerMessage){
                         ((FindRMIControllerMessage) DP_message).setClientHandler(this);
                        if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
-                           System.out.println(token);
+                           //System.out.println(token);
                            int port = common.getPort(token);
                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
