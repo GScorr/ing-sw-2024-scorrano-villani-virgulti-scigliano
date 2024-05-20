@@ -102,7 +102,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             if( token_manager.getTokens().containsKey(t) ){
             token_manager.getTokens().get(t).setGameField(getGameFields(t));
             }
-            if(token_manager.getSocketTokens().containsKey(token)) token_manager.getSocketTokens().get(t).setGameField(getGameFields(t));
+            if(token_manager.getSocketTokens().containsKey(t)) token_manager.getSocketTokens().get(t).setGameField(getGameFields(t));
             num_to_player.put(index, token_to_player.get(t).getName() );
             index++;
         }
