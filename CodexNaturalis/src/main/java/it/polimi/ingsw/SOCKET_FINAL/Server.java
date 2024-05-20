@@ -156,4 +156,14 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     }
 
+    @Override
+    public void insertId(int id) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertNumPlayers(int numPlayersMatch) throws RemoteException {
+
+    }
+
 }
