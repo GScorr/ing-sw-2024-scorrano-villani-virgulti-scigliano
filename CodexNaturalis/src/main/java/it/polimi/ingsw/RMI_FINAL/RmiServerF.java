@@ -1,7 +1,9 @@
 package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -19,18 +21,22 @@ public class RmiServerF implements VirtualServerF {
     public synchronized void connect(VirtualViewF client)throws RemoteException{common.connect(client);}
     @Override
     public String createToken(VirtualViewF client) throws RemoteException {return common.createToken(client);}
-    public String createTokenSocket(String name) throws RemoteException {return common.createTokenSocket(name);}
+
+
+
+    public String createTokenSocket(VirtualView client) throws RemoteException {return common.createTokenSocket(client);}
     @Override
     public Map<String, Player> getTtoP() throws RemoteException {return common.getTtoP();}
     @Override
     public Map<String, GameServer> getTtoR() throws RemoteException {return common.getTtoR();}
     public Map<Integer, GameServer> getListRmiController() throws RemoteException {return common.getListRmiController();}
     @Override
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws RemoteException {return common.createGame( name , num_player, p_token, player_name, client);}
-    public int createGameSocket(String name, int num_player, String p_token, String player_name) throws RemoteException {return common.createGameSocket(name, num_player, p_token, player_name);}
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
+        return common.createGame( name , num_player, p_token, player_name, client);}
+    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws IOException {return common.createGameSocket(name, num_player, p_token, player_name, client);}
     @Override
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws RemoteException {return common.addPlayer(game_id, p_token, name, client);}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name) throws RemoteException {return common.addPlayerSocket(game_id, p_token, name);}
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {return common.addPlayer(game_id, p_token, name, client);}
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {return common.addPlayerSocket(game_id, p_token, name, client);}
     @Override
     public List<VirtualViewF> getListClient() throws RemoteException {return common.getListClient();}
     //returns the list of all game controllers that are accessible ( not full )
@@ -44,8 +50,8 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public int getPort(String token) throws RemoteException {return common.getPort(token);}
     @Override
-    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws RemoteException {return  common.findRmiController(game_id, p_token, player_name, client);}
-    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws RemoteException {return common.findRmiControllerSocket(game_id, p_token, player_name);}
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {return  common.findRmiController(game_id, p_token, player_name, client);}
+    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws IOException {return common.findRmiControllerSocket(game_id, p_token, player_name, client);}
     /*private void broadcastUpdateThread() throws InterruptedException, RemoteException {
         while ( !updates.isEmpty() ){
             String update = updates.take();

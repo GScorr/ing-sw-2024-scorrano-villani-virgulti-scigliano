@@ -1,8 +1,9 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.CheckResourcesDeckSize;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
@@ -15,11 +16,11 @@ public class getResourcesDeckSize implements Message, Serializable {
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
-    public VirtualRmiController rmi_controller;
+    public VirtualGameServer rmi_controller;
 
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 
@@ -49,7 +50,11 @@ public class getResourcesDeckSize implements Message, Serializable {
     @Override
     public void action() throws IOException {
         int size = rmi_controller.getController().getGame().getResources_deck().getNumber();
-        output.writeObject(size);
+        boolean check;
+        if (size > 0 ) check = true;
+        else check = false;
+        ResponseMessage s = new CheckResourcesDeckSize(check);
+        output.writeObject(s);
         output.flush();
 
     }

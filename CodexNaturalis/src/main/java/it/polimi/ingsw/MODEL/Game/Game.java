@@ -1,4 +1,6 @@
 package it.polimi.ingsw.MODEL.Game;
+import it.polimi.ingsw.Chat;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
@@ -50,7 +52,7 @@ public class Game implements Serializable {
     private CenterCards cards_in_center;
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
-
+    private List<Chat> chats = new ArrayList<>();
 
 
     private GameState not_initialized = new NotInitialized(this),
@@ -128,6 +130,9 @@ public class Game implements Serializable {
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
         this.index_game = IndexManagerF.getNextIndex();
+        for(int i=0; i<7; i++){
+            chats.add(new Chat());
+        }
     }
 
     public Game( /* DeckGoalCard goal_deck */ String name, int max_num_player) {
@@ -140,6 +145,9 @@ public class Game implements Serializable {
         this.actual_state = not_initialized;
         this.index_game = IndexManagerF.getNextIndex();
         this.name = name;
+        for(int i=0; i<7; i++){
+            chats.add(new Chat());
+        }
     }
 
 
@@ -264,5 +272,9 @@ public class Game implements Serializable {
 
     public Integer getIndex_game() {
         return index_game;
+    }
+
+    public void insertMessageinChat(int i, ChatMessage message){
+        chats.get(i).addMessage(message);
     }
 }

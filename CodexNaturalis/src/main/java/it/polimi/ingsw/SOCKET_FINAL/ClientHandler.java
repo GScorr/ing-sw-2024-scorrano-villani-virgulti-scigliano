@@ -1,16 +1,16 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
 
-import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
+import it.polimi.ingsw.MODEL.Goal.Goal;
+import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.*;
+
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
-import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 
 import java.io.*;
@@ -18,19 +18,21 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.List;
 
 public class ClientHandler  implements VirtualView {
-
+    private MiniModel miniModel =  new MiniModel();
     final Server server;
     final ObjectInputStream input;
     final ObjectOutputStream output;
+
     //final VirtualView view;
 
     public Common_Server common;
     public String token;
 
-    private VirtualRmiController rmi_controller;
+    private VirtualGameServer rmi_controller;
     public boolean client_is_connected = true;
 
 
@@ -56,6 +58,110 @@ public class ClientHandler  implements VirtualView {
         }).start();
     }
 
+    @Override
+    public void showValue(String message) {
+
+    }
+
+    @Override
+    public void showUpdate(GameField game_field) throws IOException {
+
+    }
+
+    @Override
+    public void reportError(String details) throws IOException {
+
+    }
+
+    @Override
+    public void reportMessage(String details) throws IOException {
+
+    }
+
+    @Override
+    public void showCard(PlayCard card) throws IOException {
+        ResponseMessage s = new showCenterCardsResponse(card);
+        output.writeObject(s);
+        output.flush();
+    }
+    @Override
+    public void pushBack(ResponseMessage message) throws IOException {
+
+        miniModel.pushBack(message);
+    }
+
+    @Override
+    public void showField(GameField field) throws IOException {
+
+    }
+
+    @Override
+    public void printString(String string) throws IOException {
+        ResponseMessage s = new StringResponse(string);
+        output.writeObject(s);
+        output.flush();
+
+    }
+
+    @Override
+    public void setGameField(List<GameField> games) throws IOException {
+        ResponseMessage s = new setGameFieldResponse(games);
+        output.writeObject(s);
+        output.flush();
+    }
+
+    @Override
+    public MiniModel getMiniModel() throws IOException {
+        return null;
+    }
+
+    @Override
+    public void setCards(List<PlayCard> cards)throws IOException {
+        ResponseMessage s = new setCardsResponse(cards);
+        output.writeObject(s);
+        output.flush();
+    }
+
+    @Override
+    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
+        System.out.println("Sono in ClientHandler, mi arriva questo mapping e lo devo girare al client ");
+        for( Integer i : map.keySet() ){
+            System.out.println("-" + i + " Name:  " + map.get(i) );
+        }
+
+
+        ResponseMessage s = new NumToPlayerResponse(map);
+        output.writeObject(s);
+        output.flush();
+    }
+
+    @Override
+    public void setState(String state) throws IOException {
+        ResponseMessage s = new setStateMessage(state);
+        output.writeObject(s);
+        output.flush();
+    }
+
+    private void startCheckingMessages() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(200);
+                    ResponseMessage s = miniModel.popOut();
+
+                    if(s!=null){
+                       output.writeObject(s);
+                       output.flush();
+                    }
+                } catch (InterruptedException e) {
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+    }
+
     public void runVirtualView() throws IOException, ClassNotFoundException {
         synchronized (this) {
             try {
@@ -76,7 +182,7 @@ public class ClientHandler  implements VirtualView {
                         String mayToken = ((CheckNameMessage) DP_message).checkNameMessageAction();
 
                         if(mayToken.equals("true")){
-                            this.token = common.createTokenSocket(((CheckNameMessage) DP_message).nome);
+                            this.token = common.createTokenSocket(this);
 
                         } else if (mayToken.equals("false")) {
 
@@ -84,7 +190,8 @@ public class ClientHandler  implements VirtualView {
                             this.token = mayToken;
                             int port = common.getPort(token);
                             Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                            this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                            this.rmi_controller.connectSocket(this);
                             client_is_connected = true;
                             startSendingHeartbeats();
                         }
@@ -96,29 +203,57 @@ public class ClientHandler  implements VirtualView {
 
                     }else
                     if((DP_message instanceof CreateGame)){
+                        ((CreateGame) DP_message).setClientHandler(this);
                        int port =  ((CreateGame) DP_message).actionCreateGameMessage();
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                        this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
-                        MyMessageFinal message = new MyMessageFinal("Creazione Player e Game andati a buon fine");
-                        output.writeObject(message);
-                        output.flush();
+
+                        startCheckingMessages();
+                        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                    //    this.rmi_controller.connectSocket(this);
                         startSendingHeartbeats();
+
                     }
                     else if(DP_message instanceof FindRMIControllerMessage){
+                        ((FindRMIControllerMessage) DP_message).setClientHandler(this);
                        if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
-                           System.out.println(token);
+                           //System.out.println(token);
                            int port = common.getPort(token);
                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                           this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
-                           MyMessageFinal message = new MyMessageFinal("true");
-                           output.writeObject(message);
+                           this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+                           ResponseMessage s = new CheckRmiResponse(true);
+                           output.writeObject(s);
                            output.flush();
                            startSendingHeartbeats();
+                           startCheckingMessages();
+                       //    this.rmi_controller.connectSocket(this);
                        }else{
-                           MyMessageFinal message = new MyMessageFinal("false");
-                           output.writeObject(message);
+                           ResponseMessage s = new CheckRmiResponse(false);
+                           output.writeObject(s);
                            output.flush();
                        }
+                    }else if(DP_message instanceof getGoalCard){
+                        boolean isPresent = ((getGoalCard) DP_message).getGoalCardAction();
+                        ResponseMessage s = new checkGoalCardPresent(isPresent);
+                        output.writeObject(s);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof getListGoalCard){
+                        List<Goal> list_goal_card = ((getListGoalCard) DP_message).actionGetListGoalCard();
+                        ResponseMessage s = new getListGoalCardResponse(list_goal_card);
+                        output.writeObject(s);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof getStartingCard) {
+                        PlayCard starting_card = ((getStartingCard) DP_message).getStartingCardAction();
+                        ResponseMessage s = new StartingCardResponse(starting_card);
+                        output.writeObject(s);
+                        output.flush();
+                    }
+                    else if(DP_message instanceof firstCardIsPlaced) {
+                        boolean isPlaced = ((firstCardIsPlaced) DP_message).firstCardIsPlacedAction();
+                        ResponseMessage s = new checkStartingCardSelected(isPlaced);
+                        output.writeObject(s);
+                        output.flush();
                     }
                     else{
                         DP_message.action();
@@ -139,16 +274,6 @@ public class ClientHandler  implements VirtualView {
         }
     }
 
-    @Override
-    public void showValue(String message) {
-        synchronized (this) {
-         //   this.view.showValue(message);
-        }
-    }
 
-    @Override
-    public void reportError(String details) {
-
-    }
 
 }

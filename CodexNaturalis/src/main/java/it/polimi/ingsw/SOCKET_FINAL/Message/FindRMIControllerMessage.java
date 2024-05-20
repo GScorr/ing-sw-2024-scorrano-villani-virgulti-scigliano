@@ -1,10 +1,10 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -25,11 +25,12 @@ public class FindRMIControllerMessage implements Message, Serializable {
     ObjectOutputStream output;
 
     public Common_Server common;
-    public VirtualRmiController rmi_controller;
+    public VirtualGameServer rmi_controller;
+    public VirtualView clientHandler;
 
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 
@@ -38,6 +39,10 @@ public class FindRMIControllerMessage implements Message, Serializable {
     }
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public void setClientHandler(VirtualView clientHandler) {
+        this.clientHandler = clientHandler;
     }
 
     public void setController(Controller controller) {
@@ -58,8 +63,8 @@ public class FindRMIControllerMessage implements Message, Serializable {
         this.player_name = player_name;
     }
 
-    public boolean actionFindRmi() throws RemoteException {
-       return common.findRmiControllerSocket(id,token,player_name);
+    public boolean actionFindRmi() throws IOException {
+       return common.findRmiControllerSocket(id,token,player_name, clientHandler);
     }
 
     @Override

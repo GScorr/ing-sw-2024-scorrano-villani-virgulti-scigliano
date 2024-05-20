@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CONTROLLER;
 
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
@@ -118,11 +119,14 @@ public class GameController implements GameSubject, Serializable {
     public boolean isAlone(){
         boolean num = false;
         int num_disconnected = 0;
+
         for ( int i = 0 ; i < game.getMax_num_player(); i++ )
         {
             if (game.getGet_player_index().get(i).isDisconnected()) num_disconnected++;
         }
-        if(  (game.getMax_num_player() - num_disconnected == 1) || (game.getMax_num_player() - num_disconnected == 0) ) num = true;
+        if(  (game.getMax_num_player() - num_disconnected == 1) || (game.getMax_num_player() - num_disconnected == 0) ){
+            num = true;
+        }
         return num;
     }
 
@@ -505,4 +509,7 @@ public class GameController implements GameSubject, Serializable {
         }
     }
 
+    public void insertMessageinChat(int i, ChatMessage message) {
+        game.insertMessageinChat(i,message);
+    }
 }
