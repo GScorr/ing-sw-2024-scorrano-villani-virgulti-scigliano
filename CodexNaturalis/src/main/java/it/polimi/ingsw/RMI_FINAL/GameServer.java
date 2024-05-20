@@ -321,15 +321,15 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     //SEND TO CLIENT
     public synchronized void showCardsInCenter(String token) throws IOException {
-        if(token_manager.getTokens().get(token)!=null) {
+        if(token_manager.getTokens().containsKey(token)) {
             token_manager.getTokens().get(token).printString("\nCarte oro: ");
         }
-        else{
+        else if(token_manager.getSocketTokens().containsKey(token)){
             token_manager.getSocketTokens().get(token).printString("\nCarte oro: ");
         }
         int i = 1;
         for(PlayCard c : controller.getGame().getCars_in_center().getGold_list()){
-            if(token_manager.getTokens().get(token)!=null) {
+            if(token_manager.getTokens().containsKey(token)) {
                 token_manager.getTokens().get(token).printString(String.valueOf(i));
                 token_manager.getTokens().get(token).showCard(c);
             }
@@ -339,13 +339,19 @@ public class GameServer implements VirtualGameServer, Serializable {
             }
             i++;
         }
-        token_manager.getTokens().get(token).printString("\nCarte risorsa: ");
+        if(token_manager.getTokens().containsKey(token)) {
+            token_manager.getTokens().get(token).printString("\nCarte risorsa :");
+        }
+        else if(token_manager.getSocketTokens().containsKey(token)){
+            token_manager.getSocketTokens().get(token).printString("\nCarte risorsa :");
+        }
+
         for(PlayCard c : controller.getGame().getCars_in_center().getResource_list()){
-            if(token_manager.getTokens().get(token)!=null) {
+            if(token_manager.getTokens().containsKey(token)) {
                 token_manager.getTokens().get(token).printString(String.valueOf(i));
                 token_manager.getTokens().get(token).showCard(c);
             }
-            else{
+            else if(token_manager.getSocketTokens().containsKey(token)){
                 token_manager.getSocketTokens().get(token).printString(String.valueOf(i));
                 token_manager.getSocketTokens().get(token).showCard(c);
             }

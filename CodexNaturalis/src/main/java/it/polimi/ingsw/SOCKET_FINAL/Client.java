@@ -120,6 +120,9 @@ public class Client implements VirtualView {
                             if ( s instanceof ErrorMessage){
                                 System.out.println(s.getMessage());
                             }
+                            if(s instanceof showCenterCardsResponse){
+                                showCardInCenter(((showCenterCardsResponse) s).card);
+                            }
                         }
 
                     };
