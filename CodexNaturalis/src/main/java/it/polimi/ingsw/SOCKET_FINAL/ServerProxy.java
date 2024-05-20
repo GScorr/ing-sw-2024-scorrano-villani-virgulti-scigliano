@@ -41,6 +41,7 @@ public class ServerProxy implements VirtualServer {
         output.flush();
     }
 
+    //bisogna che lo cambi e togli questa risposta : MyMessageFinal response = (MyMessageFinal) input.readObject();
     public String checkName(String name) throws IOException, ClassNotFoundException {
         Message DP_message = new CheckNameMessage(name);
         output.writeObject(DP_message);
