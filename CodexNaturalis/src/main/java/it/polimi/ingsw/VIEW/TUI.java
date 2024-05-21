@@ -8,7 +8,6 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.StringCostant;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
@@ -47,9 +46,8 @@ public class TUI implements Serializable {
     private void waitFullGame() throws IOException, InterruptedException {
         if(client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
             System.out.print("[WAIT FOR OTHER PLAYERS]\n");
-            while (client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
+            while (client.getMiniModel().getState().equals("NOT_INITIALIZED"))
                 buffering();
-            }
             System.out.println("\n[GAME IS FULL, YOU ARE ABOUT TO START]!\n");
         }
         client.setGameFieldMiniModel();
@@ -60,20 +58,6 @@ public class TUI implements Serializable {
         client.startCheckingMessages();
     }
 
-    private void buffering() throws  InterruptedException{
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("/");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("|");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("\\");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("-");
-    }
 
     private String selectNamePlayer() throws IOException, NotBoundException {
         Scanner scan = new Scanner(System.in);
@@ -141,7 +125,7 @@ public class TUI implements Serializable {
                 flag=true;
             }
             else{
-                System.out.println("Wrong number, please insert again");
+                System.out.println("[ERROR] WRONG INSERT");
             }
         } while(!flag);
     }
@@ -357,5 +341,22 @@ public class TUI implements Serializable {
 
     }
 
-    private void showCardsInCenter() throws IOException {client.getGameServer().showCardsInCenter(client.getToken());}
+    private void showCardsInCenter() throws IOException {
+        client.getGameServer().showCardsInCenter(client.getToken());}
+
+    private void buffering() throws  InterruptedException{
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("/");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("|");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("\\");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("-");
+    }
+
 }
