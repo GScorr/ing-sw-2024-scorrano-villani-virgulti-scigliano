@@ -10,6 +10,7 @@ import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Game.IndexRequestManagerF;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.*;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
@@ -419,6 +420,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     decision = scan.nextInt();
                     scan.nextLine();
                 }while( !chatChoice(decision));
+
                 break;
             case ( 3 ):
                 return true;}
@@ -426,14 +428,35 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     private boolean chatChoice(int decision) throws RemoteException {
-        switch(decision) {
-            case (0):
-                miniModel.showFirstChat();
-                return true;
-            case (5):
-                rmi_controller.chattingMoment(1,2,insertMessage());
+        Scanner scan = new Scanner(System.in);
+        if(!miniModel.showchat(decision)){
+            return false;
         }
-        return true;
+        int choice = 0;
+        while(true) {
+            while (choice < 1 || choice > 2) {
+                System.out.println("Do you want to send a message?");
+                System.out.println("1- Yes");
+                System.out.println("2- No, close the chat");
+                choice = scan.nextInt();
+                scan.nextLine();
+            }
+            if (choice == 1) {
+                System.out.println("Insert message: ");
+                String message = scan.nextLine();
+                if(decision==miniModel.getNum_players()){
+                    rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+                }
+                else{
+                    rmi_controller.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message, miniModel.getMy_player()));
+                }
+                System.out.println("Message sent successfully!");
+                miniModel.showchat(decision);
+            } else {
+                return true;
+            }
+        }
+
     }
 
     private ChatMessage insertMessage() {
@@ -562,6 +585,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     public void insertNumPlayers(int numPlayersMatch) throws RemoteException{
         miniModel.setNum_players(numPlayersMatch);
+    }
+
+    public void insertPlayer(Player player) throws RemoteException{
+        miniModel.setMy_player(player);
     }
 
 

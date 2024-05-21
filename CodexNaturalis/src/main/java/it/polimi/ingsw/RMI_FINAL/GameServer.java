@@ -68,6 +68,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         index_to_token.put(id, p_token);
         token_manager.getTokens().get(p_token).insertId(id);
         token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
+        token_manager.getTokens().get(p_token).insertPlayer(token_to_player.get(p_token));
         setAllStates();
         return true;
     }
@@ -292,10 +293,21 @@ public class GameServer implements VirtualGameServer, Serializable {
         String t1 = index_to_token.get(id1);
         String t2 = index_to_token.get(id2);
         controller.insertMessageinChat(chatmanager.getChatIndex(id1,id2),message);
-        updatechats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
+        updatePrivateChats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
     }
 
-    private void updatechats(String token1, String token2, int idx, ChatMessage message) throws RemoteException {
+    public synchronized void chattingGlobal(ChatMessage message) throws RemoteException{
+        controller.insertMessageinChat(7,message);
+        updatePublicChats(message);
+    }
+
+    private void updatePublicChats(ChatMessage message) throws RemoteException{
+        for (String t : token_to_player.keySet()){
+                token_manager.getTokens().get(t).addChat(7, message);
+        }
+    }
+
+    private void updatePrivateChats(String token1, String token2, int idx, ChatMessage message) throws RemoteException {
         for (String t : token_to_player.keySet()){
             token_to_index.get(t);
             if(t.equals(token1) || t.equals(token2)){

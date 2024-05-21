@@ -7,6 +7,7 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
@@ -29,6 +30,8 @@ public class MiniModel implements Serializable {
 
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
+
+    private Player my_player;
     private List<Chat> chat = new ArrayList<>();
 
     private ChatIndexManager chat_manager = new ChatIndexManager();
@@ -45,7 +48,7 @@ public class MiniModel implements Serializable {
         this.chatmenu.add("");
         this.chatmenu.add("");
         this.chatmenu.add("");
-        for (int i=0; i<5; i++){
+        for (int i=0; i<7; i++){
             chat.add(new Chat());
         }
     }
@@ -83,6 +86,13 @@ public class MiniModel implements Serializable {
         cards_in_hand = cards;
     }
 
+    public void setMy_player(Player my_player) {
+        this.my_player = my_player;
+    }
+
+    public Player getMy_player() {
+        return my_player;
+    }
 
     public void showCards() throws RemoteException{
         for( PlayCard card : cards_in_hand) showCard(card);
@@ -120,7 +130,7 @@ public class MiniModel implements Serializable {
         int i=1;
         while(i<=num_players){
             if(i!=my_index){
-                this.chatmenu.set(i,i + "\n-CHAT WITH PLAYER " + i+1);
+                this.chatmenu.set(i,i + "\n-CHAT WITH PLAYER " + i);
             }
             i++;
         }
@@ -169,6 +179,14 @@ public class MiniModel implements Serializable {
 
     public void setNumToPlayer(HashMap<Integer, String> map){
         this.num_to_player = map;
+    }
+
+    public int getMy_index() {
+        return my_index;
+    }
+
+    public int getNum_players() {
+        return num_players;
     }
 
     private void showField(GameField field) throws RemoteException {
@@ -230,5 +248,23 @@ public class MiniModel implements Serializable {
 
     public void setNum_players(int num_players) {
         this.num_players = num_players;
+    }
+
+    public boolean showchat(int decision) {
+        if(decision>num_players+1 || decision==my_index){
+            System.out.println("Wrong choice, insert again");
+            return false;
+        }
+        if(decision==num_players){
+            for(ChatMessage c : chat.get(7).getChat()){
+                System.out.println(c.player.getName() + "- " + c.message);
+            }
+        }
+        else{
+            for(ChatMessage c : chat.get(chat_manager.getChatIndex(my_index,decision)).getChat()){
+                System.out.println(c.player.getName() + "- " + c.message);
+            }
+        }
+        return true;
     }
 }

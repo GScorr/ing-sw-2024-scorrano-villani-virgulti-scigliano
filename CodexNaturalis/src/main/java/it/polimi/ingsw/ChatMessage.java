@@ -12,4 +12,10 @@ public class ChatMessage implements Serializable {
     public ChatMessage(String message) {
         this.message = message;
     }
+
+
+    public ChatMessage(String message, Player player) {
+        this.message = message;
+        this.player = player;
+    }
 }
