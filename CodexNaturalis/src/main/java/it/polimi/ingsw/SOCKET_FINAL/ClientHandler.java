@@ -84,6 +84,7 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new showCenterCardsResponse(card);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
@@ -113,6 +114,7 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new setGameFieldResponse(fields);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 
     private void CopyshowField(GameField field) throws RemoteException {
@@ -172,6 +174,7 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new setCardsResponse(cards);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 
     @Override
@@ -179,6 +182,7 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new NumToPlayerResponse(map);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 
     @Override
@@ -186,6 +190,7 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new setStateMessage(state);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 
     private void startCheckingMessages() {
@@ -197,6 +202,7 @@ public class ClientHandler  implements VirtualView {
                     if(s!=null){
                        output.writeObject(s);
                        output.flush();
+                       output.reset();
                     }
                 } catch (InterruptedException e) {
 

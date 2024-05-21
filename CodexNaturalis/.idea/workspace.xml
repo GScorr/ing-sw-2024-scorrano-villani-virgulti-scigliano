@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Non so perchè il menu di merda e il field non si aggiornano correttamente">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Problemi di scambio tra Rmi e Socket, il campo è emblematico, servirebbe copiare l'oggetto e da mandare quello copiato">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/NumToPlayerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/NumToPlayerResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/ResponseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/ResponseMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/setCardsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/setCardsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/setGameFieldResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/setGameFieldResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/view/ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/view/ViewTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +163,7 @@
       <recent name="it.polimi.ingsw.MODEL.Game.State" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Server">
+  <component name="RunManager" selected="Application.Common_Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -271,8 +265,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Common_Client" />
+        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
@@ -310,15 +304,8 @@
       <workItem from="1715087112111" duration="7364000" />
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
-      <workItem from="1716224885933" duration="14192000" />
-    </task>
-    <task id="LOCAL-00087" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1714239037426</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1714239037426</updated>
+      <workItem from="1716224885933" duration="14478000" />
+      <workItem from="1716293791938" duration="552000" />
     </task>
     <task id="LOCAL-00088" summary="aggiornamento">
       <option name="closed" value="true" />
@@ -704,7 +691,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716233121654</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="Problemi di scambio tra Rmi e Socket, il campo è emblematico, servirebbe copiare l'oggetto e da mandare quello copiato">
+      <option name="closed" value="true" />
+      <created>1716246499172</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1716246499173</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -716,6 +711,18 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="114" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="92" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="90" />
+                </map>
+              </option>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -734,7 +741,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="heartbeat" />
     <MESSAGE value="gestione disconnessione e riconnessione" />
     <MESSAGE value="aggiornamento e prima scrittura Front END Socket" />
     <MESSAGE value="modularizzazione cli" />
@@ -759,7 +765,8 @@
     <MESSAGE value="Draw from Cards in center works" />
     <MESSAGE value="Il campo viene preso solo di un player" />
     <MESSAGE value="Non so perchè il menu di merda e il field non si aggiornano correttamente" />
-    <option name="LAST_COMMIT_MESSAGE" value="Non so perchè il menu di merda e il field non si aggiornano correttamente" />
+    <MESSAGE value="Problemi di scambio tra Rmi e Socket, il campo è emblematico, servirebbe copiare l'oggetto e da mandare quello copiato" />
+    <option name="LAST_COMMIT_MESSAGE" value="Problemi di scambio tra Rmi e Socket, il campo è emblematico, servirebbe copiare l'oggetto e da mandare quello copiato" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
