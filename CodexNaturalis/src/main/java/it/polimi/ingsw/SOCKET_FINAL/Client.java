@@ -196,7 +196,7 @@ public class Client implements VirtualViewF {
         }
     }
 
-    private void newGame_notavailable(String playerName) throws RemoteException {
+    private void newGame_notavailable(String playerName) throws IOException {
         Scanner scan = new Scanner(System.in);
         System.out.println(string_costant.new_game_creation);
         String game_name = scan.nextLine();
@@ -235,7 +235,7 @@ public class Client implements VirtualViewF {
         }
     }
 
-    private void newGame(String player_name) throws RemoteException {
+    private void newGame(String player_name) throws IOException {
         Scanner scan = new Scanner(System.in);
         System.out.print(string_costant.game_creation);
         String game_name = scan.nextLine();
@@ -572,7 +572,7 @@ public class Client implements VirtualViewF {
     }
 
     @Override
-    public void reportMessage(String details) throws RemoteException {
+    public void reportMessage(String details) throws IOException {
 
     }
 
@@ -581,12 +581,12 @@ public class Client implements VirtualViewF {
     }
 
     @Override
-    public void showUpdate(GameField game_field) throws RemoteException {
+    public void showUpdate(GameField game_field) throws IOException {
 
     }
 
 
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
@@ -626,11 +626,11 @@ public class Client implements VirtualViewF {
     }
 
     @Override
-    public void pushBack(ResponseMessage message) throws RemoteException {
+    public void pushBack(ResponseMessage message) throws IOException {
 
     }
 
-    public void showField(GameField field) throws RemoteException {
+    public void showField(GameField field) throws IOException {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 
@@ -678,56 +678,56 @@ public class Client implements VirtualViewF {
     }
 
     @Override
-    public void printString(String s) throws RemoteException {
+    public void printString(String s) throws IOException {
 
     }
 
     @Override
-    public void setGameField(List<GameField> games) throws RemoteException {
+    public void setGameField(List<GameField> games) throws IOException {
 
     }
 
     @Override
-    public MiniModel getMiniModel() throws RemoteException {
+    public MiniModel getMiniModel() throws IOException {
         return null;
     }
 
     @Override
-    public void setCards(List<PlayCard> cards) throws RemoteException {
+    public void setCards(List<PlayCard> cards) throws IOException {
 
     }
 
     @Override
-    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException {
+    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
 
     }
 
     @Override
-    public void setState(String state) throws RemoteException {
+    public void setState(String state) throws IOException {
 
     }
 
     @Override
-    public void addChat(int idx, ChatMessage message) throws RemoteException {
+    public void addChat(int idx, ChatMessage message) throws IOException {
 
     }
 
     @Override
-    public void insertId(int id) throws RemoteException {
+    public void insertId(int id) throws IOException {
 
     }
 
     @Override
-    public void insertNumPlayers(int numPlayersMatch) throws RemoteException {
+    public void insertNumPlayers(int numPlayersMatch) throws IOException {
 
     }
 
     @Override
-    public void insertPlayer(Player player) throws RemoteException {
+    public void insertPlayer(Player player) throws IOException {
 
     }
 
-    public void showCardInCenter(PlayCard card) throws RemoteException {
+    public void showCardInCenter(PlayCard card) throws IOException {
 
         Side front = card.getFrontSide();
 
@@ -777,7 +777,7 @@ public class Client implements VirtualViewF {
                 return true;}
         return true;
     }
-    private void buffering() throws RemoteException, InterruptedException{
+    private void buffering() throws IOException, InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("/");
