@@ -61,21 +61,15 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     //GAME FLOW
 
-    private String selectNamePlayer() throws IOException, NotBoundException {
-        Scanner scan = new Scanner(System.in);
-        String player_name = " ";
-        String isnew;
-        boolean flag;
-        do{
-            System.out.print(stringcostant.choose_name_player);
-            player_name = scan.nextLine();
-            isnew = server.checkName(player_name,this);
+    public int checkName(String player_name) throws IOException, NotBoundException {
+        int flag;
+            String isnew = server.checkName(player_name,this);
             if(isnew.equals("true")) {
-                flag = true;
+                flag = 1;
                 newClient = true;
                 this.token = server.createToken(this);}
             else if(isnew.equals("false")){
-                flag=false;
+                flag=0;
                 System.out.println(stringcostant.name_is_not_valid);}
             else{
                 this.token = isnew;
@@ -83,39 +77,22 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
-                flag=true;
+                flag=2;
                 newClient = false;
                 startSendingHeartbeats();
-                System.out.println(player_name + " RECONNETED!");
             }
-        } while(!flag);
-        return player_name;
+        return flag;
     }
     private void gameAccess(String player_name) throws IOException, NotBoundException {
         if(newClient) {
             makeChoice(player_name);
             System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");}
     }
-    private void makeChoice(String player_name) throws IOException, NotBoundException {
+    public boolean areThereFreeGames () throws IOException, NotBoundException {
         if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
-            newGame(player_name,false);
-            return;
+            return false;
         }
-        Scanner scan = new Scanner(System.in);
-        int done=0;
-        while(done==0) {
-            System.out.println("\n-'new' CREATE NEW GAME \n-'old' JOIN EXISTING GAME");
-            String decision = scan.nextLine();
-            if (decision.equalsIgnoreCase("old")) {
-                done = 1;
-                chooseMatch(player_name);
-            } else if (decision.equalsIgnoreCase("new")) {
-                done=1;
-                newGame(player_name,true);
-            } else {
-                System.out.println("\n[ERROR] WRONG INSERT!");
-            }
-        }
+        return true;
     }
     private void chooseMatch(String player_name) throws IOException, NotBoundException {
         Scanner scan = new Scanner(System.in);
@@ -136,32 +113,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
         rmi_controller.connectRMI(this);
     }
-    private void newGame(String player_name, boolean empty) throws IOException {
-        Scanner scan = new Scanner(System.in);
-        if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
-        System.out.print("\nCHOOSE GAME NAME  > ");
-        String game_name = scan.nextLine();
-        int numplayers;
-        boolean flag;
-        do {
-            flag = false;
-            System.out.print("\nCHOOSE NUMBER OF PLAYERS ( 2 - 4 ) > ");
-            numplayers = scan.nextInt();
 
-            try {
+    public List<SocketRmiControllerObject> getFreeGames() throws RemoteException {
+        return server.getFreeGamesSocket();
+    }
+    public void createGame(String game_name, int numplayers, String player_name) throws IOException, NotBoundException {
                 int port;
                 port = server.createGame(game_name, numplayers, token, player_name,this);
                 Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
-
-            } catch (ControllerException e) {
-                System.err.print(e.getMessage() + "\n");
-                flag = true;
-            } catch (NotBoundException e) {
-                throw new RuntimeException(e);
-            }
-        } while(flag);
     }
     
     private void waitFullGame() throws IOException, InterruptedException {

@@ -8,6 +8,8 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
+import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -31,4 +33,14 @@ public interface VirtualViewF extends Remote {
     public void insertNumPlayers(int numPlayersMatch) throws RemoteException;
 
     public void insertPlayer(Player player) throws RemoteException;
+
+    //public int selectNamePlayer() throws IOException, NotBoundException;
+
+    public int checkName(String playerName) throws IOException, NotBoundException;
+
+    public boolean areThereFreeGames () throws IOException, NotBoundException;
+
+    public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException;
+
+    public List<SocketRmiControllerObject> getFreeGames() throws RemoteException;
 }
