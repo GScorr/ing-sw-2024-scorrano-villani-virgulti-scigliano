@@ -11,4 +11,9 @@ public class ErrorMessage extends ResponseMessage{
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public void action(){
+        System.out.println(message);
+    }
 }
