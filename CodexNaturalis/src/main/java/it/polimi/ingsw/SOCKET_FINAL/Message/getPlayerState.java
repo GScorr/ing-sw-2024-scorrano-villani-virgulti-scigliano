@@ -51,6 +51,6 @@ public class getPlayerState implements Message, Serializable {
         MyMessageFinal message = new MyMessageFinal(state);
         output.writeObject(message);
         output.flush();
-
+        output.reset();
     }
 }

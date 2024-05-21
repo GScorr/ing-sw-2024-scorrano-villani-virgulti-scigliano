@@ -56,5 +56,6 @@ public class getGoldDeckSize implements Message, Serializable {
         ResponseMessage s = new CheckGoldDeckSize(check);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 }
