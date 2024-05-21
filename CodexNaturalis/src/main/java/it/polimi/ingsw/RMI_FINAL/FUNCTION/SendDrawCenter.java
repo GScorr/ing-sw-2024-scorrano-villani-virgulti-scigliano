@@ -8,7 +8,6 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 
 import java.io.IOException;
-import java.rmi.IOException;
 
 public class SendDrawCenter implements SendFunction{
     String token;
@@ -19,7 +18,7 @@ public class SendDrawCenter implements SendFunction{
         this.index = index;
     }
     @Override
-    public ResponseMessage action(GameServer server) throws IOException {
+    public ResponseMessage action(GameServer server) {
         ResponseMessage message;
         try{
             server.peachFromCardsInCenter(token, index);

@@ -18,7 +18,6 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.IOException;
 import java.util.*;
 
 public class GameServer implements VirtualGameServer, Serializable {
@@ -170,16 +169,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     setAllStates();
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
                                 }
                             }
                             if ( tmp.getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD") && !tmp.isFirstPlaced()) {
                                 try {
                                     chooseStartingCard(s, true);
                                     setAllStates();
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
@@ -244,7 +239,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 }
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
-                            } catch (InterruptedException | IOException e) {
+                            } catch (InterruptedException e) {
                                 throw new RuntimeException(e);
                             }
                         }}catch (RuntimeException e){}

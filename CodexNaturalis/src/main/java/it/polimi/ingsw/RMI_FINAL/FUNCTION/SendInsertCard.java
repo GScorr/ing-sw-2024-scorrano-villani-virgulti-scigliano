@@ -8,7 +8,6 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
 
 import java.io.IOException;
-import java.rmi.IOException;
 
 public class SendInsertCard implements SendFunction{
 
@@ -28,7 +27,7 @@ public class SendInsertCard implements SendFunction{
     }
 
     @Override
-    public ResponseMessage action(GameServer server) throws IOException {
+    public ResponseMessage action(GameServer server)  {
         ResponseMessage message;
         try{
             server.insertCard(token, index, x , y, flipped);

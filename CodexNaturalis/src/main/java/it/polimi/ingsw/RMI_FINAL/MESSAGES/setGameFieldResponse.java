@@ -5,7 +5,6 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.MODEL.GameField;
 
-import java.rmi.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

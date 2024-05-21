@@ -11,7 +11,7 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.rmi.Remote;
-import java.rmi.IOException;
+
 import java.util.List;
 import java.util.Map;
 

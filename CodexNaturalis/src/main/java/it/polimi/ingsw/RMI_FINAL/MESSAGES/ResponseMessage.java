@@ -2,8 +2,8 @@ package it.polimi.ingsw.RMI_FINAL.MESSAGES;
 
 import it.polimi.ingsw.MiniModel;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.IOException;
 
 public abstract class ResponseMessage implements Serializable {
     String message;

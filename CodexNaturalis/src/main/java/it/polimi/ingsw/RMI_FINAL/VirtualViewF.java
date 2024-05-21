@@ -12,7 +12,6 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
-import java.rmi.IOException;
 import java.util.HashMap;
 import java.util.List;
 
