@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ClientHandler  implements VirtualView {
-    private MiniModel miniModel =  new MiniModel();
+    public MiniModel miniModel =  new MiniModel();
     final Server server;
     final ObjectInputStream input;
     final ObjectOutputStream output;
@@ -124,14 +124,16 @@ public class ClientHandler  implements VirtualView {
 
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
-        System.out.println("Sono in ClientHandler, mi arriva questo mapping e lo devo girare al client ");
-        for( Integer i : map.keySet() ){
-            System.out.println("-" + i + " Name:  " + map.get(i) );
-        }
+        System.out.println("Sono in ClientHandler, mi arriva questo mapping e lo devo girare al client " + map.size());
 
 
         ResponseMessage s = new NumToPlayerResponse(map);
+
+
         output.writeObject(s);
+        for( Integer i : ((NumToPlayerResponse)s).getMap().keySet() ){
+            System.out.println("-" + i + " Name:  " + map.get(i) );
+        }
         output.flush();
     }
 
