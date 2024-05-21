@@ -1,6 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
@@ -18,6 +19,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,7 +29,6 @@ public class ClientHandler  implements VirtualView {
     final ObjectInputStream input;
     final ObjectOutputStream output;
 
-    //final VirtualView view;
 
     public Common_Server common;
     public String token;
@@ -80,11 +81,12 @@ public class ClientHandler  implements VirtualView {
 
     @Override
     public void showCard(PlayCard card) throws IOException {
-
+        ResponseMessage s = new showCenterCardsResponse(card);
+        output.writeObject(s);
+        output.flush();
     }
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
-        System.out.println("messaggio inserito in coda " + token);
         miniModel.pushBack(message);
     }
 
@@ -98,14 +100,66 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new StringResponse(string);
         output.writeObject(s);
         output.flush();
-
     }
 
     @Override
     public void setGameField(List<GameField> games) throws IOException {
-        ResponseMessage s = new setGameFieldResponse(games);
+        List<GameField> fields = new ArrayList<>(games);
+        System.out.println("questi i campi che mi arrivano");
+        for (GameField f : fields){
+            CopyshowField(f);
+        }
+        System.out.println("end");
+        ResponseMessage s = new setGameFieldResponse(fields);
         output.writeObject(s);
         output.flush();
+    }
+
+    private void CopyshowField(GameField field) throws RemoteException {
+        boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
+        boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                    nonEmptyRows[i] = true;
+                    nonEmptyCols[j] = true;
+
+
+                    if (i > 0) nonEmptyRows[i - 1] = true;
+                    if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
+                    if (j > 0) nonEmptyCols[j - 1] = true;
+                    if (j < Constants.MATRIXDIM - 1) nonEmptyCols[j + 1] = true;
+                }
+            }
+        }
+
+
+        System.out.print("   ");
+        for (int k = 0; k < Constants.MATRIXDIM; k++) {
+            if (nonEmptyCols[k]) {
+                System.out.print(k + " ");
+            }
+        }
+        System.out.print("\n");
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            if (nonEmptyRows[i]) {
+                System.out.print(i + " ");
+                for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                    if (nonEmptyCols[j]) {
+                        if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
+                        } else {
+                            System.out.print("   ");
+                        }
+                    }
+                }
+                System.out.print("\n");
+            }
+        }
     }
 
     @Override
@@ -138,16 +192,14 @@ public class ClientHandler  implements VirtualView {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(200);
                     ResponseMessage s = miniModel.popOut();
-
                     if(s!=null){
-                        System.out.println("messaggio preso dalla coda " + token);
                        output.writeObject(s);
                        output.flush();
                     }
                 } catch (InterruptedException e) {
-                    System.err.println("impossible to pop out");
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -209,7 +261,7 @@ public class ClientHandler  implements VirtualView {
                     else if(DP_message instanceof FindRMIControllerMessage){
                         ((FindRMIControllerMessage) DP_message).setClientHandler(this);
                        if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
-                           System.out.println(token);
+                           //System.out.println(token);
                            int port = common.getPort(token);
                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));

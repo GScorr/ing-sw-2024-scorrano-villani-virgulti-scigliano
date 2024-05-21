@@ -21,6 +21,7 @@ import it.polimi.ingsw.StringCostant;
 import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -112,13 +113,16 @@ public class Client implements VirtualView {
                         }
                         else {
                             s.setMiniModel(miniModel);
-                            //se non fa nulla è perchè potrebbe non aver preso l'overide
                             s.action();
                             if( s instanceof GameFieldMessage){
                                 showField(((GameFieldMessage) s).getField());
                             }
                             if ( s instanceof ErrorMessage){
                                 System.out.println(s.getMessage());
+                            }
+                            //ce ne devono essere 2 uno per la starting Card, uno per le Central Card
+                            if(s instanceof showCenterCardsResponse){
+                                showCardInCenter(((showCenterCardsResponse) s).card);
                             }
                         }
 
@@ -147,8 +151,6 @@ public class Client implements VirtualView {
 
         chooseStartingCardState();
         manageGame();
-
-
 
     }
 
@@ -254,32 +256,41 @@ public class Client implements VirtualView {
 
     private void chooseMatch(String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-
+        List<Integer> id_games = new ArrayList<>();
         System.out.println(string_costant.list_game_avilable);
          List<SocketRmiControllerObject> games = server.getFreeGame();
 
         for (SocketRmiControllerObject r : games) {
             System.out.println(r.name + " ID:" + r.ID
                     + " " + r.num_player + "/" + r.max_num_player);
+            id_games.add(r.ID);
         }
         do {
             startCheckingMessages();
-            System.out.println(string_costant.Id_game);
-            int ID = scan.nextInt();
+
+            boolean checkId = true;
+            int ID = 0;
+            while(checkId){
+                System.out.println(string_costant.Id_game);
+                ID  = scan.nextInt();
+                if(id_games.contains(ID)){
+                    checkId = false;
+                }else{
+                    System.out.println("ERR: INSERT A VALID ID\n");
+                }
+            }
+
             server.findRmiController(ID, player_name);
             flag_check = true;
-            System.out.println("prima del while");
+
             while (flag_check){
                 Thread.sleep(100);
             }
-
-            System.out.println("uscito dal while");
 
 
         }while(!check);
 
         System.out.println(string_costant.enter);
-
 
     }
 
@@ -323,11 +334,11 @@ public class Client implements VirtualView {
 
             server.getListGoalCard();
             flag_check = true;
-            System.out.println("prima del while chooseGoalList");
+
             while (flag_check){
                 Thread.sleep(100);
             }
-            System.out.println("Dopo del while chooseGoal");
+
 
             System.out.println("\nChoose Goal between :\n 1-" + goalsCard.get(0).toString()
                     + "\n 2-" + goalsCard.get(1).toString());
@@ -353,14 +364,13 @@ public class Client implements VirtualView {
             while(flag_check){
                 Thread.sleep(100);
             }
-
-            showCard(this.startingCard);
             server.startingCardIsPlaced();
             flag_check = true;
             while (flag_check){
                 Thread.sleep(100);
             }
             if(!startingCardChoosed) {
+                showCard(this.startingCard);
                 chooseStartingCard();
             }
             while (miniModel.getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
