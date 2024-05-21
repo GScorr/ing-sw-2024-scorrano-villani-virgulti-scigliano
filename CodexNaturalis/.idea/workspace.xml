@@ -263,8 +263,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Common_Client" />
-        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Common_Server" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
       </list>
@@ -302,14 +302,6 @@
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
       <workItem from="1716224885933" duration="14192000" />
-    </task>
-    <task id="LOCAL-00095" summary="agg">
-      <option name="closed" value="true" />
-      <created>1714920180074</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1714920180074</updated>
     </task>
     <task id="LOCAL-00096" summary="insert card, ma dice empty space">
       <option name="closed" value="true" />
@@ -695,7 +687,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716303176690</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="agg">
+      <option name="closed" value="true" />
+      <created>1716303498240</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1716303498240</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
