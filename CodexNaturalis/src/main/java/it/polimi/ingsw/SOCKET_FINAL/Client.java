@@ -69,12 +69,10 @@ public class Client implements VirtualView {
     private void startCheckingMessages() throws IOException, ClassNotFoundException {
         new Thread(() -> {
             ResponseMessage s;
-
             // Read message type
             while (true) {
                 try {
                     if (((s = (ResponseMessage) input.readObject()) != null)) {
-                        s.setMiniModel(miniModel);
                         if(s instanceof CheckRmiResponse){
                             check = ((CheckRmiResponse) s).check;
                             this.flag_check = false;
@@ -112,22 +110,17 @@ public class Client implements VirtualView {
                         else if ( s instanceof PointResponse){
                             point = ((PointResponse) s).player_point;
                             this.flag_check = false;
-                        }else if ( s instanceof PointResponse){
-                            point = ((PointResponse) s).player_point;
-                            this.flag_check = false;
                         }
-
                         else {
-                            System.out.println(" set state " + miniModel.toString());
                             s.setMiniModel(miniModel);
                             s.action();
-
                             if( s instanceof GameFieldMessage){
                                 showField(((GameFieldMessage) s).getField());
                             }
                             if ( s instanceof ErrorMessage){
                                 System.out.println(s.getMessage());
                             }
+                            //ce ne devono essere 2 uno per la starting Card, uno per le Central Card
                             if(s instanceof showCenterCardsResponse){
                                 showCardInCenter(((showCenterCardsResponse) s).card);
                             }

@@ -1,25 +1,17 @@
 package it.polimi.ingsw.RMI_FINAL.MESSAGES;
-import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-
 import java.util.HashMap;
 
 public class NumToPlayerResponse extends ResponseMessage{
-    private HashMap<Integer, String> map;
+    private  HashMap<Integer, String> actual_map = new HashMap<>();
+
     public NumToPlayerResponse(HashMap<Integer, String> map) {
-        this.map = map;
-        for( Integer i : map.keySet() ){
-            System.out.println("-" + i + " NOMEEEE:  " + map.get(i) );
+        for (int i : map.keySet()){
+            actual_map.put(i,map.get(i));
         }
     }
 
-    public HashMap<Integer, String> getMap() {
-        return map;
-    }
-
-    public void setMap(HashMap<Integer,String> map){ this.map = map;}
-
     @Override
     public  void action(){
-        super.miniModel.setNumToPlayer(map);
+        super.miniModel.setNumToPlayer(actual_map);
     }
 }

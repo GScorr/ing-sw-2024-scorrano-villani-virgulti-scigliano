@@ -1,6 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
@@ -18,16 +19,16 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ClientHandler  implements VirtualView {
-    public MiniModel miniModel =  new MiniModel();
+    private MiniModel miniModel =  new MiniModel();
     final Server server;
     final ObjectInputStream input;
     final ObjectOutputStream output;
 
-    //final VirtualView view;
 
     public Common_Server common;
     public String token;
@@ -83,10 +84,10 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new showCenterCardsResponse(card);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
-
         miniModel.pushBack(message);
     }
 
@@ -100,14 +101,67 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new StringResponse(string);
         output.writeObject(s);
         output.flush();
-
     }
 
     @Override
     public void setGameField(List<GameField> games) throws IOException {
-        ResponseMessage s = new setGameFieldResponse(games);
+        List<GameField> fields = new ArrayList<>(games);
+        System.out.println("questi i campi che mi arrivano");
+        for (GameField f : fields){
+            CopyshowField(f);
+        }
+        System.out.println("end");
+        ResponseMessage s = new setGameFieldResponse(fields);
         output.writeObject(s);
         output.flush();
+        output.reset();
+    }
+
+    private void CopyshowField(GameField field) throws RemoteException {
+        boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
+        boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                    nonEmptyRows[i] = true;
+                    nonEmptyCols[j] = true;
+
+
+                    if (i > 0) nonEmptyRows[i - 1] = true;
+                    if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
+                    if (j > 0) nonEmptyCols[j - 1] = true;
+                    if (j < Constants.MATRIXDIM - 1) nonEmptyCols[j + 1] = true;
+                }
+            }
+        }
+
+
+        System.out.print("   ");
+        for (int k = 0; k < Constants.MATRIXDIM; k++) {
+            if (nonEmptyCols[k]) {
+                System.out.print(k + " ");
+            }
+        }
+        System.out.print("\n");
+
+
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            if (nonEmptyRows[i]) {
+                System.out.print(i + " ");
+                for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                    if (nonEmptyCols[j]) {
+                        if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
+                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
+                        } else {
+                            System.out.print("   ");
+                        }
+                    }
+                }
+                System.out.print("\n");
+            }
+        }
     }
 
     @Override
@@ -120,21 +174,15 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new setCardsResponse(cards);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
-        System.out.println("Sono in ClientHandler, mi arriva questo mapping e lo devo girare al client " + map.size());
-
-
         ResponseMessage s = new NumToPlayerResponse(map);
-
-
         output.writeObject(s);
-        for( Integer i : ((NumToPlayerResponse)s).getMap().keySet() ){
-            System.out.println("-" + i + " Name:  " + map.get(i) );
-        }
         output.flush();
+        output.reset();
     }
 
     @Override
@@ -142,6 +190,7 @@ public class ClientHandler  implements VirtualView {
         ResponseMessage s = new setStateMessage(state);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 
     private void startCheckingMessages() {
@@ -150,10 +199,10 @@ public class ClientHandler  implements VirtualView {
                 try {
                     Thread.sleep(200);
                     ResponseMessage s = miniModel.popOut();
-
                     if(s!=null){
                        output.writeObject(s);
                        output.flush();
+                       output.reset();
                     }
                 } catch (InterruptedException e) {
 

@@ -56,4 +56,6 @@ public interface VirtualGameServer extends Remote {
     public void chattingMoment(int i1, int i2, ChatMessage message) throws RemoteException;
 
     public Map<String, Integer> getToken_to_index() throws RemoteException;
+
+    public void chattingGlobal(ChatMessage message) throws RemoteException;
 }
