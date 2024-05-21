@@ -9,8 +9,6 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
-import it.polimi.ingsw.MODEL.Player.State.PlaceCard;
-import it.polimi.ingsw.RMI_FINAL.RmiController;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,18 +39,15 @@ public class ServerProxy implements VirtualServer {
         Message DP_message = new LunchMessageMessage(message);
         output.writeObject(DP_message);
         output.flush();
-
-
     }
 
+    //bisogna che lo cambi e togli questa risposta : MyMessageFinal response = (MyMessageFinal) input.readObject();
     public String checkName(String name) throws IOException, ClassNotFoundException {
         Message DP_message = new CheckNameMessage(name);
         output.writeObject(DP_message);
         output.flush();
-
         MyMessageFinal response = (MyMessageFinal) input.readObject();
         return response.getContent();
-
     }
 
 
@@ -66,25 +60,17 @@ public class ServerProxy implements VirtualServer {
         return games;
     }
 
-    public  String createGame(String game_name, int num_players, String nome  ) throws IOException, ClassNotFoundException, SocketException {
+    public  void createGame(String game_name, int num_players, String nome  ) throws IOException, ClassNotFoundException, SocketException {
         Message DP_message = new CreateGame(game_name,num_players,nome);
         output.writeObject(DP_message);
         output.flush();
 
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-        return response.getContent();
-
     }
 
-    public boolean findRmiController(Integer id, String player_name) throws IOException, ClassNotFoundException {
-
+    public void findRmiController(Integer id, String player_name) throws IOException, ClassNotFoundException {
         Message DP_message = new FindRMIControllerMessage(id, player_name);
         output.writeObject(DP_message);
         output.flush();
-
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-
-        return response.getContent().compareTo("true") == 0;
 
     }
 
@@ -97,22 +83,17 @@ public class ServerProxy implements VirtualServer {
         return response.getContent();
     }
 
-    public Goal getGoalCard() throws IOException, ClassNotFoundException {
+    public void getGoalCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getGoalCard();
         output.writeObject(DP_mesasage);
         output.flush();
-
-        Goal goal_card = (Goal) input.readObject();
-        return goal_card;
     }
 
-    public List<Goal> getListGoalCard() throws IOException, ClassNotFoundException {
+    public void getListGoalCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getListGoalCard();
         output.writeObject(DP_mesasage);
         output.flush();
 
-        List<Goal> list_goal_card = (List<Goal>) input.readObject();
-        return list_goal_card;
     }
 
     public void chooseGoal(int index) throws IOException {
@@ -122,21 +103,18 @@ public class ServerProxy implements VirtualServer {
 
     }
 
-    public PlayCard getStartingCard() throws IOException, ClassNotFoundException {
+    public void getStartingCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getStartingCard();
         output.writeObject(DP_mesasage);
         output.flush();
-        PlayCard starting_card = (PlayCard) input.readObject();
-        return starting_card;
+
     }
 
-    boolean startingCardIsPlaced() throws IOException, ClassNotFoundException {
+    void startingCardIsPlaced() throws IOException, ClassNotFoundException {
         Message DP_message = new firstCardIsPlaced();
         output.writeObject(DP_message);
         output.flush();
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
 
-        return response.getContent().compareTo("true") == 0;
 
     }
 
@@ -145,7 +123,7 @@ public class ServerProxy implements VirtualServer {
         output.writeObject(DP_message);
         output.flush();
     }
-
+/*
     public GameField getGameField() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getGameField();
         output.writeObject(DP_mesasage);
@@ -153,7 +131,7 @@ public class ServerProxy implements VirtualServer {
         GameField game_field  = (GameField) input.readObject();
         return game_field;
     }
-
+*/
     public List<PlayCard> getCardsInHand() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getCardsInHand();
         output.writeObject(DP_mesasage);
@@ -162,34 +140,31 @@ public class ServerProxy implements VirtualServer {
         return cards_in_hand;
     }
 
-    public void placeCard(int index, int x, int y, boolean flipped) throws IOException {
+    public void placeCard(int index, int x, int y, boolean flipped) throws IOException, ClassNotFoundException {
         Message DP_mesasage = new placeCard(index,x,y,flipped);
         output.writeObject(DP_mesasage);
         output.flush();
     }
 
-    public int getGoldDeckSize() throws IOException, ClassNotFoundException {
+    public void getGoldDeckSize() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getGoldDeckSize();
         output.writeObject(DP_mesasage);
         output.flush();
-        int size  = (int) input.readObject();
-        return size;
+
     }
 
-    public int getResourcesDeckSize() throws IOException, ClassNotFoundException {
+    public void getResourcesDeckSize() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getResourcesDeckSize();
         output.writeObject(DP_mesasage);
         output.flush();
-        int size  = (int) input.readObject();
-        return size;
+
     }
 
-    public List<PlayCard> getCardsInCenter() throws IOException, ClassNotFoundException {
+    public void getCardsInCenter() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getCardsInCenter();
         output.writeObject(DP_mesasage);
         output.flush();
-        List<PlayCard> cards_in_center  = (List<PlayCard>) input.readObject();
-        return cards_in_center;
+
     }
 
     public void peachFromGoldDeck() throws IOException {
@@ -210,26 +185,14 @@ public class ServerProxy implements VirtualServer {
         output.flush();
     }
 
-    public int getPoint() throws IOException, ClassNotFoundException {
+    public void getPoint() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getPoint();
         output.writeObject(DP_mesasage);
         output.flush();
-        int point  = (int) input.readObject();
-        return point;
-    }
-
-    public void receiveHeartbeat() throws IOException {
-        Message DP_message = new receiveHeartbeatMessage();
-        output.writeObject(DP_message);
-        output.flush();
-    }
-
-    public void getRmiController() throws IOException {
-        Message DP_message = new getRmiControllerMessage();
-        output.writeObject(DP_message);
-        output.flush();
 
     }
+
+
 
 
 

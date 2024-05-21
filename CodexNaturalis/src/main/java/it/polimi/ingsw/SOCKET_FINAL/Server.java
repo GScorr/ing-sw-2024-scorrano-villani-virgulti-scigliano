@@ -1,12 +1,13 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
-import it.polimi.ingsw.CONTROLLER.GameController;
+import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.RMI.TokenManagerImplement;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
@@ -15,8 +16,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +25,6 @@ import java.util.List;
 public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     final ServerSocket listenSocket;
-    VirtualServerF serverRmi;
 
     final List<ClientHandler> clients = new ArrayList<>();
 
@@ -36,13 +34,17 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     public TokenManager token_manager = new TokenManager();
 
-    public Server(ServerSocket listenSocket, VirtualServerF serverRmi) throws RemoteException {
+    public Common_Server common;
+
+    public Server(ServerSocket listenSocket, Common_Server common) throws RemoteException {
+        this.common = common;
         this.listenSocket = listenSocket;
-        this.serverRmi = serverRmi;
+
     }
 
     public void runServer() throws IOException, NotBoundException {
-        Socket clientSocket = null;
+
+       Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
             System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
 
@@ -50,7 +52,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
             ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
 
-            ClientHandler handler = new ClientHandler(this, inputStream, outputStream, serverRmi);
+            ClientHandler handler = new ClientHandler(this, inputStream, outputStream,  common );
 
             clients.add(handler);
             new Thread(() -> {
@@ -76,7 +78,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
 
     public static void main(String[] args) throws IOException, NotBoundException {
-        // Server Socket
+       /* // Server Socket
         String host = "127.0.0.1";
         int port = 12345;
 
@@ -88,7 +90,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
         VirtualServerF serverRmi = (VirtualServerF) registry.lookup("VirtualServer");
 
 
-        new Server(listenSocket,serverRmi).runServer();
+        new Server(listenSocket,serverRmi).runServer();*/
     }
 
     @Override
@@ -112,6 +114,11 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
+    public void pushBack(ResponseMessage message) throws RemoteException {
+
+    }
+
+    @Override
     public void showField(GameField field) throws RemoteException {
 
     }
@@ -120,4 +127,49 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
     public void printString(String s) throws RemoteException {
 
     }
+
+    @Override
+    public void setGameField(List<GameField> games) throws RemoteException {
+
+    }
+
+    public MiniModel getMiniModel() throws RemoteException{
+        return null;
+    }
+
+    @Override
+    public void setCards(List<PlayCard> cards) throws RemoteException {
+
+    }
+
+    @Override
+    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException {
+
+    }
+
+    @Override
+    public void setState(String state) throws RemoteException {
+
+    }
+
+    @Override
+    public void addChat(int idx, ChatMessage message) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertId(int id) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertNumPlayers(int numPlayersMatch) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertPlayer(Player player) throws RemoteException {
+
+    }
+
 }
