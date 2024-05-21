@@ -262,7 +262,7 @@ public class ClientHandler  implements VirtualViewF {
                         } else{
                             this.token = mayToken;
                             int port = common.getPort(token);
-                            Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                            Registry registry = LocateRegistry.getRegistry("192.168.39.78", port);
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                             this.rmi_controller.connectSocket(this);
                             client_is_connected = true;
@@ -278,7 +278,7 @@ public class ClientHandler  implements VirtualViewF {
                     if((DP_message instanceof CreateGame)){
                         ((CreateGame) DP_message).setClientHandler(this);
                        int port =  ((CreateGame) DP_message).actionCreateGameMessage();
-                        Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                        Registry registry = LocateRegistry.getRegistry("192.168.39.78", port);
 
                         startCheckingMessages();
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
@@ -291,7 +291,7 @@ public class ClientHandler  implements VirtualViewF {
                        if( ((FindRMIControllerMessage)DP_message).actionFindRmi()){
                            //System.out.println(token);
                            int port = common.getPort(token);
-                           Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                           Registry registry = LocateRegistry.getRegistry("192.168.39.78", port);
                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                            ResponseMessage s = new CheckRmiResponse(true);
                            output.writeObject(s);
