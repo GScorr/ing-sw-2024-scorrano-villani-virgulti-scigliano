@@ -22,6 +22,7 @@ import it.polimi.ingsw.StringCostant;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.Buffer;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import java.util.Scanner;
 public class Client implements VirtualViewF {
 
     boolean flag_check;
+    boolean place_flag_check;
     boolean check;
 
     boolean checkSizeGoldDeck;
@@ -118,6 +120,7 @@ public class Client implements VirtualViewF {
                             s.action();
                             if( s instanceof GameFieldMessage){
                                 showField(((GameFieldMessage) s).getField());
+                                place_flag_check = false;
                             }
                             if ( s instanceof ErrorMessage){
                                 System.out.println(s.getMessage());
@@ -484,7 +487,12 @@ public class Client implements VirtualViewF {
                     scan.nextLine();
                     if (x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM) {
                         server.placeCard(choice, x, y, flipped);
-                        Thread.sleep(750);
+                         place_flag_check = true;
+                        while(place_flag_check){
+                            Thread.sleep(750);
+                            buffering();
+                        }
+
                     } else {
                         System.err.println("\n[COORDINATES OUT OF BOUND]!");
                     }
