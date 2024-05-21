@@ -74,7 +74,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             else{
                 this.token = isnew;
                 int port = server.getPort(token);
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
                 flag=2;
@@ -109,7 +109,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             check = server.findRmiController(ID, token, player_name,this);
         }while(!check);
         int port = server.getPort(token);
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
         rmi_controller.connectRMI(this);
     }
@@ -120,7 +120,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void createGame(String game_name, int numplayers, String player_name) throws IOException, NotBoundException {
                 int port;
                 port = server.createGame(game_name, numplayers, token, player_name,this);
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+                Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
     }
@@ -388,7 +388,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         return true;
     }
 
-    private boolean chatChoice(int decision) throws RemoteException {
+    private boolean chatChoice(int decision) throws IOException {
         Scanner scan = new Scanner(System.in);
         if(!miniModel.showchat(decision)){
             return false;
