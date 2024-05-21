@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
@@ -14,6 +15,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendInsertCard;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.*;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.Message.firstCardIsPlaced;
 import it.polimi.ingsw.StringCostant;
 
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-public class Client implements VirtualView {
+public class Client implements VirtualViewF {
 
     boolean flag_check;
     boolean check;
@@ -194,7 +196,7 @@ public class Client implements VirtualView {
         }
     }
 
-    private void newGame_notavailable(String playerName) throws RemoteException {
+    private void newGame_notavailable(String playerName) throws IOException {
         Scanner scan = new Scanner(System.in);
         System.out.println(string_costant.new_game_creation);
         String game_name = scan.nextLine();
@@ -233,7 +235,7 @@ public class Client implements VirtualView {
         }
     }
 
-    private void newGame(String player_name) throws RemoteException {
+    private void newGame(String player_name) throws IOException {
         Scanner scan = new Scanner(System.in);
         System.out.print(string_costant.game_creation);
         String game_name = scan.nextLine();
@@ -574,7 +576,6 @@ public class Client implements VirtualView {
 
     }
 
-    @Override
     public void showValue(String message) {
         System.out.println(message);
     }
@@ -585,7 +586,7 @@ public class Client implements VirtualView {
     }
 
 
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
@@ -629,7 +630,7 @@ public class Client implements VirtualView {
 
     }
 
-    public void showField(GameField field) throws RemoteException {
+    public void showField(GameField field) throws IOException {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 
@@ -706,7 +707,27 @@ public class Client implements VirtualView {
 
     }
 
-    public void showCardInCenter(PlayCard card) throws RemoteException {
+    @Override
+    public void addChat(int idx, ChatMessage message) throws IOException {
+
+    }
+
+    @Override
+    public void insertId(int id) throws IOException {
+
+    }
+
+    @Override
+    public void insertNumPlayers(int numPlayersMatch) throws IOException {
+
+    }
+
+    @Override
+    public void insertPlayer(Player player) throws IOException {
+
+    }
+
+    public void showCardInCenter(PlayCard card) throws IOException {
 
         Side front = card.getFrontSide();
 
@@ -756,7 +777,7 @@ public class Client implements VirtualView {
                 return true;}
         return true;
     }
-    private void buffering() throws RemoteException, InterruptedException{
+    private void buffering() throws IOException, InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("/");

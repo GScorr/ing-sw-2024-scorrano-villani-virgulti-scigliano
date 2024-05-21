@@ -134,7 +134,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public void addQueue(SendFunction function) throws RemoteException{functQueue.add(function);}
 
     //END GAME
-    public void getFinalStandings(String token) throws RemoteException{
+    public void getFinalStandings(String token) throws IOException {
         int i = 1;
         for(Player p : controller.getPlayer_list()){
             token_manager.getTokens().get(token).printString(i + "- " + p.getName());
@@ -290,25 +290,25 @@ public class GameServer implements VirtualGameServer, Serializable {
         return list;
     }
 
-    public synchronized void chattingMoment(int id1, int id2, ChatMessage message) throws RemoteException {
+    public synchronized void chattingMoment(int id1, int id2, ChatMessage message) throws IOException {
         String t1 = index_to_token.get(id1);
         String t2 = index_to_token.get(id2);
         controller.insertMessageinChat(chatmanager.getChatIndex(id1,id2),message);
         updatePrivateChats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
     }
 
-    public synchronized void chattingGlobal(ChatMessage message) throws RemoteException{
+    public synchronized void chattingGlobal(ChatMessage message) throws IOException {
         controller.insertMessageinChat(6,message);
         updatePublicChats(message);
     }
 
-    private void updatePublicChats(ChatMessage message) throws RemoteException{
+    private void updatePublicChats(ChatMessage message) throws IOException {
         for (String t : token_to_player.keySet()){
                 token_manager.getTokens().get(t).addChat(6, message);
         }
     }
 
-    private void updatePrivateChats(String token1, String token2, int idx, ChatMessage message) throws RemoteException {
+    private void updatePrivateChats(String token1, String token2, int idx, ChatMessage message) throws IOException {
         for (String t : token_to_player.keySet()){
             token_to_index.get(t);
             if(t.equals(token1) || t.equals(token2)){
@@ -389,7 +389,7 @@ public class GameServer implements VirtualGameServer, Serializable {
 
 
     //CONNECT
-    public synchronized void connectSocket(VirtualView clientSocket)throws RemoteException{this.clientsSocket.add(clientSocket);}
+    public synchronized void connectSocket(VirtualViewF clientSocket)throws RemoteException{this.clientsRMI.add(clientSocket);}
     @Override
     public synchronized void connectRMI(VirtualViewF client)throws RemoteException{this.clientsRMI.add(client);}
 

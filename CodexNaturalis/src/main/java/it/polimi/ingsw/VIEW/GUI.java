@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.VIEW;
 
 
 import javafx.application.Application;
@@ -42,8 +42,12 @@ public class GUI extends Application {
     public void start(Stage primaryStage) throws IOException {
 
 
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
-        Parent root = loader.load();
+
+        System.out.println(loader.getLocation());
+        Parent root;
+        root = loader.load();
 
         primaryStage.setTitle("CodexNaturalis - Login");
 
@@ -55,7 +59,9 @@ public class GUI extends Application {
 
 
 
+
     }
+
 
 
 

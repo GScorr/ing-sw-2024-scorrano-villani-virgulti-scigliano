@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
@@ -22,9 +23,9 @@ public class CreateGame implements Message, Serializable {
     public Common_Server common;
     public VirtualGameServer rmi_controller;
 
-    public VirtualView clientHandler;
+    public VirtualViewF clientHandler;
 
-    public void setClientHandler(VirtualView clientHandler) {
+    public void setClientHandler(VirtualViewF clientHandler) {
         this.clientHandler = clientHandler;
     }
 
@@ -60,7 +61,8 @@ public class CreateGame implements Message, Serializable {
     }
     public int actionCreateGameMessage() throws IOException {
         int port;
-        port = common.createGameSocket(game_name,num_players,token,name_p, clientHandler);
+        //port = common.createGameSocket(game_name,num_players,token,name_p, clientHandler);
+        port = common.createGame(game_name,num_players,token,name_p,clientHandler);
         return port;
     }
 

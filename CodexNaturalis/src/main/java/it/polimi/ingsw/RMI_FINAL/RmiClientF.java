@@ -427,7 +427,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         return true;
     }
 
-    private boolean chatChoice(int decision) throws RemoteException {
+    private boolean chatChoice(int decision) throws IOException {
         Scanner scan = new Scanner(System.in);
         if(!miniModel.showchat(decision)){
             return false;

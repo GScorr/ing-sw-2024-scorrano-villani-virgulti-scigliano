@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
@@ -26,7 +27,7 @@ public class FindRMIControllerMessage implements Message, Serializable {
 
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-    public VirtualView clientHandler;
+    public VirtualViewF clientHandler;
 
 
     @Override
@@ -41,7 +42,7 @@ public class FindRMIControllerMessage implements Message, Serializable {
         this.token = token;
     }
 
-    public void setClientHandler(VirtualView clientHandler) {
+    public void setClientHandler(VirtualViewF clientHandler) {
         this.clientHandler = clientHandler;
     }
 
@@ -64,7 +65,8 @@ public class FindRMIControllerMessage implements Message, Serializable {
     }
 
     public boolean actionFindRmi() throws IOException {
-       return common.findRmiControllerSocket(id,token,player_name, clientHandler);
+        return common.findRmiController(id,token,player_name,clientHandler);
+      // return common.findRmiControllerSocket(id,token,player_name, clientHandler);
     }
 
     @Override

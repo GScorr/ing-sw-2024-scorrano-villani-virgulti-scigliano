@@ -51,6 +51,6 @@ public class getGameField implements Message, Serializable {
         GameField game_field = rmi_controller.getTtoP().get(token).getGameField();
         output.writeObject(game_field);
         output.flush();
-
+        output.reset();
     }
 }
