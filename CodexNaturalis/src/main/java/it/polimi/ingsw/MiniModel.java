@@ -11,9 +11,8 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
-import java.io.Serializable;
-import java.rmi.IOException;
-import java.util.*;
+import java.io.IOException;
+import java.io.Serializable;import java.util.*;
 
 public class MiniModel implements Serializable {
     int my_index;

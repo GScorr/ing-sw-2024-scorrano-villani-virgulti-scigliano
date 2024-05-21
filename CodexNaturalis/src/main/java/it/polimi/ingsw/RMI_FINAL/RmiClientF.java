@@ -47,7 +47,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         this.server.connect(this);
         new TUI(this);
     }
-    
+
 
     //GAME FLOW
 

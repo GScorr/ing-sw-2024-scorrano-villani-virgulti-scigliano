@@ -8,7 +8,6 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.rmi.NotBoundException;
-import java.rmi.IOException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
