@@ -19,12 +19,9 @@ public interface VirtualView extends Serializable {
     public void showCard(PlayCard card) throws IOException;
     public void pushBack(ResponseMessage message) throws IOException;
     public void showField(GameField field) throws IOException;
-
     public void printString(String s) throws IOException;
-
     public void setGameField(List<GameField> games) throws IOException;
     public MiniModel getMiniModel() throws IOException;
-
     public void setCards(List<PlayCard> cards) throws IOException;
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException;
     public void setState(String state) throws IOException;
