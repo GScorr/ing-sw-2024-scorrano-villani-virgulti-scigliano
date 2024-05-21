@@ -53,6 +53,6 @@ public class getPoint implements Message, Serializable {
         ResponseMessage s = new PointResponse(point);
         output.writeObject(s);
         output.flush();
-
+        output.reset();
     }
 }

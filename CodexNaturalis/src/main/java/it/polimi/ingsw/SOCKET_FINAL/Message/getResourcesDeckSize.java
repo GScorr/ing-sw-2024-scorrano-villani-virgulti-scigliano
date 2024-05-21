@@ -56,6 +56,6 @@ public class getResourcesDeckSize implements Message, Serializable {
         ResponseMessage s = new CheckResourcesDeckSize(check);
         output.writeObject(s);
         output.flush();
-
+        output.reset();
     }
 }

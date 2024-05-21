@@ -52,6 +52,6 @@ public class getCardsInHand implements Message, Serializable {
         List<PlayCard> cards_in_hands = rmi_controller.getTtoP().get(token).getCardsInHand();
         output.writeObject(cards_in_hands);
         output.flush();
-
+        output.reset();
     }
 }

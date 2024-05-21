@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
@@ -14,6 +15,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendInsertCard;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.*;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.Message.firstCardIsPlaced;
 import it.polimi.ingsw.StringCostant;
 
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-public class Client implements VirtualView {
+public class Client implements VirtualViewF {
 
     boolean flag_check;
     boolean check;
@@ -570,17 +572,16 @@ public class Client implements VirtualView {
     }
 
     @Override
-    public void reportMessage(String details) throws IOException {
+    public void reportMessage(String details) throws RemoteException {
 
     }
 
-    @Override
     public void showValue(String message) {
         System.out.println(message);
     }
 
     @Override
-    public void showUpdate(GameField game_field) throws IOException {
+    public void showUpdate(GameField game_field) throws RemoteException {
 
     }
 
@@ -625,7 +626,7 @@ public class Client implements VirtualView {
     }
 
     @Override
-    public void pushBack(ResponseMessage message) throws IOException {
+    public void pushBack(ResponseMessage message) throws RemoteException {
 
     }
 
@@ -677,32 +678,52 @@ public class Client implements VirtualView {
     }
 
     @Override
-    public void printString(String s) throws IOException {
+    public void printString(String s) throws RemoteException {
 
     }
 
     @Override
-    public void setGameField(List<GameField> games) throws IOException {
+    public void setGameField(List<GameField> games) throws RemoteException {
 
     }
 
     @Override
-    public MiniModel getMiniModel() throws IOException {
+    public MiniModel getMiniModel() throws RemoteException {
         return null;
     }
 
     @Override
-    public void setCards(List<PlayCard> cards) throws IOException {
+    public void setCards(List<PlayCard> cards) throws RemoteException {
 
     }
 
     @Override
-    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
+    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException {
 
     }
 
     @Override
-    public void setState(String state) throws IOException {
+    public void setState(String state) throws RemoteException {
+
+    }
+
+    @Override
+    public void addChat(int idx, ChatMessage message) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertId(int id) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertNumPlayers(int numPlayersMatch) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertPlayer(Player player) throws RemoteException {
 
     }
 
