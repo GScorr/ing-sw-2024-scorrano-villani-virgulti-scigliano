@@ -18,7 +18,7 @@ import java.util.Map;
 public interface VirtualGameServer extends Remote {
     public boolean getFull() throws RemoteException;
 
-    public void connectSocket(VirtualView clientSocket) throws RemoteException;
+    public void connectSocket(VirtualViewF clientSocket) throws RemoteException;
     public void connectRMI(VirtualViewF client)throws RemoteException;
     public List<VirtualViewF> getClientsRMI() throws RemoteException;
     public Map<String, Player> getTtoP() throws RemoteException;
@@ -48,14 +48,14 @@ public interface VirtualGameServer extends Remote {
 
     public void getPoints(String token) throws IOException;
 
-    public void getFinalStandings(String token) throws RemoteException;
+    public void getFinalStandings(String token) throws IOException;
 
     public List<GameField> getGameFields(String token) throws RemoteException;
 
 
-    public void chattingMoment(int i1, int i2, ChatMessage message) throws RemoteException;
+    public void chattingMoment(int i1, int i2, ChatMessage message) throws IOException;
 
     public Map<String, Integer> getToken_to_index() throws RemoteException;
 
-    public void chattingGlobal(ChatMessage message) throws RemoteException;
+    public void chattingGlobal(ChatMessage message) throws IOException;
 }
