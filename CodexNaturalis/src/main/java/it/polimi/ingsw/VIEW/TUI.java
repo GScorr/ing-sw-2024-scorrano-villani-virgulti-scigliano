@@ -1,6 +1,7 @@
 package it.polimi.ingsw.VIEW;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.GameServer;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,6 +23,8 @@ public class TUI implements Serializable {
 
     private StringCostant stringcostant = new StringCostant();
     private boolean newClient;
+
+    public List<Integer> id_games = new ArrayList<>();
 
     public TUI(VirtualViewF client) {
         this.client = client;
@@ -35,6 +39,43 @@ public class TUI implements Serializable {
         chooseGoalState();
         chooseStartingCardState();
         manageGame();
+    }
+
+    private void startSendingHeartbeats() {
+        client.startSendingHeartbeats();
+    }
+
+    private void waitFullGame() throws IOException, InterruptedException {
+
+        Scanner scan = new Scanner(System.in);
+        if(client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
+            System.out.print("[WAIT FOR OTHER PLAYERS]\n");
+            while (client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
+                buffering();
+            }
+            System.out.println("\n[GAME IS FULL, YOU ARE ABOUT TO START]!\n");
+        }
+        client.setGameFieldMiniModel();
+        startCheckingMessages();
+    }
+
+    private void startCheckingMessages() {
+        client.startCheckingMessages();
+    }
+
+    private void buffering() throws IOException, InterruptedException{
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("/");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("|");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("\\");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("-");
     }
 
     private String selectNamePlayer() throws IOException, NotBoundException {
@@ -111,21 +152,79 @@ public class TUI implements Serializable {
 
     private void chooseMatch(String player_name) throws IOException, NotBoundException {
         Scanner scan = new Scanner(System.in);
-        boolean check;
+        boolean check = false;
         System.out.println("\nEXISTING GAMES: ");
-        List<SocketRmiControllerObject> partite = client.getFreeGames();
-        for ( VirtualGameServer r : partite) {
-            System.out.println( r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
-                    + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player() );
+        List<SocketRmiControllerObject> games = client.getFreeGames();
+        for (SocketRmiControllerObject r : games) {
+            System.out.println(r.name + " ID:" + r.ID
+                    + " " + r.num_player + "/" + r.max_num_player);
+            id_games.add(r.ID);
         }
         do {
             System.out.println("\nINSERT GAME ID > ");
             int ID = scan.nextInt();
-            check = server.findRmiController(ID, token, player_name,this);
+            check = client.findRmiController(ID, player_name);
         }while(!check);
-        int port = server.getPort(token);
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-        rmi_controller.connectRMI(this);
+        client.connectGameServer();
     }
+
+    private void chooseGoalState() throws IOException, InterruptedException {
+        if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
+            if(client.isGoalCardPlaced()){
+                chooseGoal();
+                System.out.println("\nYOU CHOOSE :" + client.getGoalPlaced());
+            }
+            while (client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
+                buffering();
+            }
+        }
+    }
+
+    private void chooseGoal() throws IOException {
+        Scanner scan = new Scanner(System.in);
+        int done=0;
+        while(done==0) {
+            System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + client.getFirstGoal()
+                    + "\n 2-" + client.getSecondGoal());
+            String choice = scan.nextLine();
+            if (choice.equals("1")) {
+                done=1;
+                client.chooseGoal(0);
+            } else if (choice.equals("2")){
+                done=1;
+                client.chooseGoal(1);
+            } else System.out.println("[ERROR] WRONG INSERT!");
+        }
+    }
+
+    private void chooseStartingCardState() throws IOException, InterruptedException {
+        if(client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            if(!client.isFirstPlaced()) {
+                chooseStartingCard();
+            }
+            while (client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+                buffering();
+            }
+        }
+    }
+
+    private void chooseStartingCard() throws IOException{
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
+        client.showStartingCard();
+        int done=0;
+        while(done==0){
+            System.out.println("\n-'B' FOR BACK SIDE \n-'F' FOR FRONT SIDE:");
+            String dec = scan.nextLine();
+            if (dec.equals("F")||dec.equals("f")){
+                done=1;
+                client.chooseStartingCard(false);
+            } else if (dec.equals("B")||dec.equals("b")){
+                done=1;
+                client.chooseStartingCard(true);
+            }
+            else System.out.println("[ERROR] WRONG INSERT!");
+        }
+    }
+
 }

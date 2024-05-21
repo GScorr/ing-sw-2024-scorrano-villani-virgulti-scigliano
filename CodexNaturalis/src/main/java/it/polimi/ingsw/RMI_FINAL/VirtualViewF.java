@@ -43,4 +43,29 @@ public interface VirtualViewF extends Remote {
     public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException;
 
     public List<SocketRmiControllerObject> getFreeGames() throws RemoteException;
+
+    public boolean findRmiController(int id, String playerName) throws IOException;
+
+    public void connectGameServer() throws RemoteException, NotBoundException;
+    public void startSendingHeartbeats();
+
+    public void setGameFieldMiniModel() throws RemoteException;
+
+    public void startCheckingMessages();
+
+    public boolean isGoalCardPlaced() throws RemoteException;
+
+    public String getGoalPlaced();
+
+    String getFirstGoal();
+
+    String getSecondGoal();
+
+    void chooseGoal(int i) throws IOException;
+
+    void showStartingCard() throws IOException;
+
+    void chooseStartingCard(boolean b) throws IOException;
+
+    boolean isFirstPlaced() throws RemoteException;
 }

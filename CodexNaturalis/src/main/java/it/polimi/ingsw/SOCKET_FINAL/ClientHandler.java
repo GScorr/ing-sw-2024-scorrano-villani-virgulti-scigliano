@@ -49,7 +49,7 @@ public class ClientHandler  implements VirtualViewF {
 
     }
 
-    private void startSendingHeartbeats() {
+    public void startSendingHeartbeats() {
         new Thread(() -> {
             while (client_is_connected) {
                 try {
@@ -215,7 +215,7 @@ public class ClientHandler  implements VirtualViewF {
 
     }
 
-    private void startCheckingMessages() {
+    public void startCheckingMessages() {
         new Thread(() -> {
             while (true) {
                 try {
