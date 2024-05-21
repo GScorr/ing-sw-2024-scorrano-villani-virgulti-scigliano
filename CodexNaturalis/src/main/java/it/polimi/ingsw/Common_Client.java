@@ -43,7 +43,7 @@ public class Common_Client {
 
                         new Client(inputStream, outputStream).run();
                     }catch (IOException e) {
-                        System.out.println("impossibile creare socket input / output");
+                        System.err.println(e.getMessage());
                         return;
                     }
                     break;
