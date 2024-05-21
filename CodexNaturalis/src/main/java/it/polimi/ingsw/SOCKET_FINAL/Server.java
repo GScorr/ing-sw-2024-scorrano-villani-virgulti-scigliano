@@ -4,6 +4,7 @@ import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
@@ -163,6 +164,11 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public void insertNumPlayers(int numPlayersMatch) throws RemoteException {
+
+    }
+
+    @Override
+    public void insertPlayer(Player player) throws RemoteException {
 
     }
 
