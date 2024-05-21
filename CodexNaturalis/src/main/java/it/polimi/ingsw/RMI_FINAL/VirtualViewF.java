@@ -4,6 +4,7 @@ import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
@@ -35,4 +36,6 @@ public interface VirtualViewF extends Remote {
     public void insertId(int id) throws RemoteException;
 
     public void insertNumPlayers(int numPlayersMatch) throws RemoteException;
+
+    public void insertPlayer(Player player) throws RemoteException;
 }
