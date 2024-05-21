@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.IOException;
@@ -37,10 +38,14 @@ public interface VirtualViewF extends Remote {
     //public int selectNamePlayer() throws IOException, NotBoundException;
 
     public int checkName(String playerName) throws IOException, NotBoundException;
-
+    public void manageGame(boolean endgame) throws IOException, InterruptedException;
     public boolean areThereFreeGames () throws IOException, NotBoundException;
 
     public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException;
-
+    public VirtualGameServer getGameServer() throws IOException;
     public List<SocketRmiControllerObject> getFreeGames() throws RemoteException;
+    public void ChatChoice(String message, int decision) throws IOException;
+    public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException;
+    public void drawCard(SendFunction function) throws IOException, InterruptedException;
+    public String getToken() throws IOException;
 }

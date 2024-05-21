@@ -453,7 +453,7 @@ public class Client implements VirtualViewF {
 
     }
 
-    private void selectAndInsertCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public void selectAndInsertCard() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int decision;
 
