@@ -6,7 +6,7 @@ import it.polimi.ingsw.SOCKET.Token.TokenManagerS;
 
 import java.io.*;
 import java.net.Socket;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 import java.util.Scanner;
 public class ClientS implements VirtualViewS{
 

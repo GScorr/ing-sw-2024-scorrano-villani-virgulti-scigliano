@@ -4,7 +4,6 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -14,22 +13,22 @@ import java.util.concurrent.BlockingQueue;
 
 public class RmiServerF implements VirtualServerF {
     private Common_Server common;
-    public RmiServerF(Common_Server common) throws RemoteException {
+    public RmiServerF(Common_Server common) throws IOException {
         this.common = common;
         common.startHeartbeatChecker();}
     @Override
-    public synchronized void connect(VirtualViewF client)throws RemoteException{common.connect(client);}
+    public synchronized void connect(VirtualViewF client)throws IOException{common.connect(client);}
     @Override
-    public String createToken(VirtualViewF client) throws RemoteException {return common.createToken(client);}
+    public String createToken(VirtualViewF client) throws IOException {return common.createToken(client);}
 
 
 
-    public String createTokenSocket(VirtualView client) throws RemoteException {return common.createTokenSocket(client);}
+    public String createTokenSocket(VirtualView client) throws IOException {return common.createTokenSocket(client);}
     @Override
-    public Map<String, Player> getTtoP() throws RemoteException {return common.getTtoP();}
+    public Map<String, Player> getTtoP() throws IOException {return common.getTtoP();}
     @Override
-    public Map<String, GameServer> getTtoR() throws RemoteException {return common.getTtoR();}
-    public Map<Integer, GameServer> getListRmiController() throws RemoteException {return common.getListRmiController();}
+    public Map<String, GameServer> getTtoR() throws IOException {return common.getTtoR();}
+    public Map<Integer, GameServer> getListRmiController() throws IOException {return common.getListRmiController();}
     @Override
     public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
         return common.createGame( name , num_player, p_token, player_name, client);}
@@ -38,21 +37,21 @@ public class RmiServerF implements VirtualServerF {
     public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {return common.addPlayer(game_id, p_token, name, client);}
     public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {return common.addPlayerSocket(game_id, p_token, name, client);}
     @Override
-    public List<VirtualViewF> getListClient() throws RemoteException {return common.getListClient();}
+    public List<VirtualViewF> getListClient() throws IOException {return common.getListClient();}
     //returns the list of all game controllers that are accessible ( not full )
     @Override
-    public List<GameServer> getFreeGames() throws RemoteException {return common.getFreeGames();}
+    public List<GameServer> getFreeGames() throws IOException {return common.getFreeGames();}
     //return 0 if the name is free, 1 if the name is already used by an active player, 2 if the player is coming back
-    public List<SocketRmiControllerObject> getFreeGamesSocket() throws RemoteException {return common.getFreeGamesSocket();}
+    public List<SocketRmiControllerObject> getFreeGamesSocket() throws IOException {return common.getFreeGamesSocket();}
     @Override
-    public String checkName(String name, VirtualViewF client) throws RemoteException {return common.checkName(name, client);}
-    //private Object waitAnswer(String token, Integer idRequest) throws RemoteException {return token_to_rmi.get(token).getAnswer(idRequest);}
+    public String checkName(String name, VirtualViewF client) throws IOException {return common.checkName(name, client);}
+    //private Object waitAnswer(String token, Integer idRequest) throws IOException {return token_to_rmi.get(token).getAnswer(idRequest);}
     @Override
-    public int getPort(String token) throws RemoteException {return common.getPort(token);}
+    public int getPort(String token) throws IOException {return common.getPort(token);}
     @Override
     public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {return  common.findRmiController(game_id, p_token, player_name, client);}
     public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws IOException {return common.findRmiControllerSocket(game_id, p_token, player_name, client);}
-    /*private void broadcastUpdateThread() throws InterruptedException, RemoteException {
+    /*private void broadcastUpdateThread() throws InterruptedException, IOException {
         while ( !updates.isEmpty() ){
             String update = updates.take();
             synchronized (this){
@@ -72,14 +71,14 @@ public class RmiServerF implements VirtualServerF {
         }
     }*/
     @Override
-    public GameServer getRmiController(String token) throws RemoteException{return common.getRmiController(token);}
+    public GameServer getRmiController(String token) throws IOException{return common.getRmiController(token);}
     @Override
-    public void receiveHeartbeat(String token) throws RemoteException {common.receiveHeartbeat(token);}
+    public void receiveHeartbeat(String token) throws IOException {common.receiveHeartbeat(token);}
 
 
 
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) throws IOException {
       /*  final String serverName = "VirtualServer";
         VirtualServerF server = new RmiServerF();
         VirtualServerF stub = (VirtualServerF) UnicastRemoteObject.exportObject(server,0);

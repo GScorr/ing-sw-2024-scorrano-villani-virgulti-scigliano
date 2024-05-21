@@ -8,7 +8,7 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
+
 
 public class SendDrawGold implements SendFunction{
     String token;
@@ -17,7 +17,7 @@ public class SendDrawGold implements SendFunction{
     }
 
     @Override
-    public ResponseMessage action(GameServer server) throws RemoteException {
+    public ResponseMessage action(GameServer server){
         ResponseMessage message;
         try{
             server.peachFromGoldDeck(token);
