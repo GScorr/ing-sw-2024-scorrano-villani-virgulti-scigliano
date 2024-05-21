@@ -60,5 +60,6 @@ public class GetFreeGames implements Message, Serializable {
 
         output.writeObject(games);
         output.flush();
+        output.reset();
     }
 }

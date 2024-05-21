@@ -59,6 +59,6 @@ public class getGoalCard implements Message, Serializable {
         Goal goal_card = rmi_controller.getTtoP().get(token).getGoalCard();
         output.writeObject(goal_card);
         output.flush();
-
+        output.reset();
     }
 }
