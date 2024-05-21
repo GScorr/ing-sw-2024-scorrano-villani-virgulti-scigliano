@@ -7,7 +7,7 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 import java.util.HashMap;
 import java.util.List;
 

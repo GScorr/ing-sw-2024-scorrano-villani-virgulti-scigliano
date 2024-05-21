@@ -18,10 +18,10 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 import it.polimi.ingsw.StringCostant;
+import it.polimi.ingsw.VIEW.TUI;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -45,19 +45,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     public void run() throws IOException, InterruptedException, NotBoundException {
         this.server.connect(this);
-        runCli();
+        new TUI(this);
     }
-
-    private void runCli() throws IOException, InterruptedException, NotBoundException {
-        String player_name = selectNamePlayer();
-        gameAccess(player_name);
-        startSendingHeartbeats();
-        waitFullGame();
-        chooseGoalState();
-        chooseStartingCardState();
-        manageGame();
-    }
-
+    
 
     //GAME FLOW
 
@@ -83,11 +73,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         return flag;
     }
-    private void gameAccess(String player_name) throws IOException, NotBoundException {
+    /*private void gameAccess(String player_name) throws IOException, NotBoundException {
         if(newClient) {
             makeChoice(player_name);
             System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");}
-    }
+    }*/
     public boolean areThereFreeGames () throws IOException, NotBoundException {
         if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
             return false;
@@ -114,7 +104,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         rmi_controller.connectRMI(this);
     }
 
-    public List<SocketRmiControllerObject> getFreeGames() throws RemoteException {
+    public List<SocketRmiControllerObject> getFreeGames() throws IOException {
         return server.getFreeGamesSocket();
     }
     public void createGame(String game_name, int numplayers, String player_name) throws IOException, NotBoundException {
@@ -208,11 +198,65 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Thread.sleep(750);
     }
 
+    public boolean findRmiController(int id, String player_name) throws IOException {
+        return server.findRmiController(id, token, player_name,this);
+    }
+
+    public void connectGameServer() throws IOException, NotBoundException {
+        int port = server.getPort(token);
+        Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
+        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+        rmi_controller.connectRMI(this);
+    }
+
+    public boolean isGoalCardPlaced() throws IOException {
+        if(rmi_controller.getTtoP().get(token).getGoalCard()==null){
+            return true;
+        }
+        return false;
+    }
+
+    public String getGoalPlaced() throws IOException {
+        return rmi_controller.getTtoP().get(token).getGoalCard().toString();
+    }
+
+    @Override
+    public String getFirstGoal() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString();
+    }
+
+    @Override
+    public String getSecondGoal() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1).toString();
+    }
+
+    @Override
+    public void chooseGoal(int i) throws IOException {
+        rmi_controller.chooseGoal(token,i);
+    }
+
+    @Override
+    public void showStartingCard() throws IOException {
+        rmi_controller.showStartingCard(token);
+    }
+
+    @Override
+    public void chooseStartingCard(boolean b) throws IOException {
+        rmi_controller.chooseStartingCard(token,b);
+    }
+
+    @Override
+    public boolean isFirstPlaced() throws IOException {
+        return rmi_controller.getTtoP().get(token).isFirstPlaced();
+    }
+
+
+
 
 
     // THREADS
 
-    private void startCheckingMessages() {
+    public void startCheckingMessages() {
         new Thread(() -> {
             while (true) {
                 try {
@@ -236,7 +280,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }).start();
     }
 
-    private void startSendingHeartbeats() {
+    public void startSendingHeartbeats() {
         new Thread(() -> {
             int cracked = 0;
             while (true) {
@@ -251,6 +295,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 }
             }
         }).start();
+    }
+
+    public void setGameFieldMiniModel() throws IOException {
+        miniModel.setGameField(rmi_controller.getGameFields(token));
     }
 
 
@@ -388,21 +436,23 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
     public void printString(String s) {System.out.println(s);}
 
-    public void addChat(int idx, ChatMessage message) throws RemoteException{
+    public void addChat(int idx, ChatMessage message) throws IOException{
         miniModel.addChat(idx, message);
     }
 
-    public void insertId(int id) throws RemoteException{
+    public void insertId(int id) throws IOException{
         miniModel.setMy_index(id);
     }
 
-    public void insertNumPlayers(int numPlayersMatch) throws RemoteException{
+    public void insertNumPlayers(int numPlayersMatch) throws IOException{
         miniModel.setNum_players(numPlayersMatch);
     }
 
-    public void insertPlayer(Player player) throws RemoteException{
+    public void insertPlayer(Player player) throws IOException{
         miniModel.setMy_player(player);
     }
+
+
 
 
     //MAIN

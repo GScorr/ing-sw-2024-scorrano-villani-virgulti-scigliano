@@ -31,8 +31,9 @@ public class TUI implements Serializable {
 
     public List<Integer> id_games = new ArrayList<>();
 
-    public TUI(VirtualViewF client) {
+    public TUI(VirtualViewF client) throws NotBoundException, IOException, InterruptedException {
         this.client = client;
+        runCli();
     }
 
 

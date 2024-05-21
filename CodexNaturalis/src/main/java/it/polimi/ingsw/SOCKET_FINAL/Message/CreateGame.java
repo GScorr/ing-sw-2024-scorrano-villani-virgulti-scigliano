@@ -9,7 +9,7 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 
 public class CreateGame implements Message, Serializable {
 

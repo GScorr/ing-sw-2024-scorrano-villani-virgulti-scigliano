@@ -19,7 +19,7 @@ import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 
 import java.io.*;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class ClientHandler  implements VirtualViewF {
     public boolean client_is_connected = true;
 
 
-    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common ) throws RemoteException, NotBoundException {
+    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common ) throws IOException, NotBoundException {
         this.server = server;
         this.input = input;
         this.output = output;
@@ -55,7 +55,7 @@ public class ClientHandler  implements VirtualViewF {
                 try {
                     Thread.sleep(100);
                     common.receiveHeartbeat(token);
-                } catch (RemoteException | InterruptedException e) {
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }

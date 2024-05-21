@@ -5,10 +5,10 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.SOCKET_FINAL.Message.Message;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 
 public interface SendFunction extends Serializable {
 
-    public default ResponseMessage action(GameServer server) throws RemoteException{ return null;}
+    public default ResponseMessage action(GameServer server) throws IOException{ return null;}
 
 }

@@ -12,7 +12,7 @@ import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 import java.util.*;
 
 public class MiniModel implements Serializable {
@@ -76,7 +76,7 @@ public class MiniModel implements Serializable {
         }
     }
 
-    public void showGameField(int pos) throws RemoteException {
+    public void showGameField(int pos) throws IOException {
         showField(game_fields.get(pos));
     }
 
@@ -94,7 +94,7 @@ public class MiniModel implements Serializable {
         return my_player;
     }
 
-    public void showCards() throws RemoteException{
+    public void showCards() throws IOException{
         for( PlayCard card : cards_in_hand) showCard(card);
     }
 
@@ -138,7 +138,7 @@ public class MiniModel implements Serializable {
         //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
 
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
@@ -189,7 +189,7 @@ public class MiniModel implements Serializable {
         return num_players;
     }
 
-    private void showField(GameField field) throws RemoteException {
+    private void showField(GameField field) throws IOException {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 
