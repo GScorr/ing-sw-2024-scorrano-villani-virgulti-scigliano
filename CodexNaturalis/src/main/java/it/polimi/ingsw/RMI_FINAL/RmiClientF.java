@@ -80,7 +80,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             else{
                 this.token = isnew;
                 int port = server.getPort(token);
-                Registry registry = LocateRegistry.getRegistry("192.168.39.78", port);
+                Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
                 flag=true;
@@ -132,7 +132,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             check = server.findRmiController(ID, token, player_name,this);
         }while(!check);
         int port = server.getPort(token);
-        Registry registry = LocateRegistry.getRegistry("192.168.39.78", port);
+        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
         rmi_controller.connectRMI(this);
     }
@@ -151,7 +151,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             try {
                 int port;
                 port = server.createGame(game_name, numplayers, token, player_name,this);
-                Registry registry = LocateRegistry.getRegistry("192.168.39.78", port);
+                Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                 this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                 rmi_controller.connectRMI(this);
 
