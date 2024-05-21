@@ -297,13 +297,13 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     public synchronized void chattingGlobal(ChatMessage message) throws RemoteException{
-        controller.insertMessageinChat(7,message);
+        controller.insertMessageinChat(6,message);
         updatePublicChats(message);
     }
 
     private void updatePublicChats(ChatMessage message) throws RemoteException{
         for (String t : token_to_player.keySet()){
-                token_manager.getTokens().get(t).addChat(7, message);
+                token_manager.getTokens().get(t).addChat(6, message);
         }
     }
 

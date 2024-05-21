@@ -130,7 +130,7 @@ public class MiniModel implements Serializable {
         int i=1;
         while(i<=num_players){
             if(i!=my_index){
-                this.chatmenu.set(i,i + "\n-CHAT WITH PLAYER " + i);
+                this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + i);
             }
             i++;
         }
@@ -255,8 +255,8 @@ public class MiniModel implements Serializable {
             System.out.println("Wrong choice, insert again");
             return false;
         }
-        if(decision==num_players){
-            for(ChatMessage c : chat.get(7).getChat()){
+        if(decision==num_players+1){
+            for(ChatMessage c : chat.get(6).getChat()){
                 System.out.println(c.player.getName() + "- " + c.message);
             }
         }

@@ -444,7 +444,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             if (choice == 1) {
                 System.out.println("Insert message: ");
                 String message = scan.nextLine();
-                if(decision==miniModel.getNum_players()){
+                if(decision==miniModel.getNum_players()+1){
                     rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
                 }
                 else{
@@ -452,6 +452,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 }
                 System.out.println("Message sent successfully!");
                 miniModel.showchat(decision);
+                choice = 0;
             } else {
                 return true;
             }
