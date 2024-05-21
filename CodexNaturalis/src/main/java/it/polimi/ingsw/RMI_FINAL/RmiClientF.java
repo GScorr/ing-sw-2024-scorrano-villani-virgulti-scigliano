@@ -193,7 +193,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             else System.out.println("[ERROR] WRONG INSERT!");
         }
     }
-    public void manageGame(boolean endgame) throws IOException, InterruptedException {
+    public void manageGame(boolean endgame) throws IOException {
         if(endgame) rmi_controller.getPoints(token);
         else rmi_controller.getFinalStandings(token);
     }
