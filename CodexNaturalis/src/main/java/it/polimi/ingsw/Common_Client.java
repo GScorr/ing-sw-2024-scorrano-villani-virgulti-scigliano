@@ -26,14 +26,14 @@ public class Common_Client {
             switch (choose) {
                 case("0"):
                     
-                    Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
+                    Registry registry = LocateRegistry.getRegistry("192.168.39.59", 1234);
                     VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
 
                     new RmiClientF(server).run();
                     break;
 
                 case("1"):
-                    String host = "127.0.0.1";
+                    String host = "192.168.39.59";
                     int port = 12345;
 
                     Socket serverSocket = new Socket(host, port);
