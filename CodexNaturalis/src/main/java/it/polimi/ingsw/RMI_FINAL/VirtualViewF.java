@@ -6,6 +6,7 @@ import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.IOException;
@@ -41,31 +42,11 @@ public interface VirtualViewF extends Remote {
     public boolean areThereFreeGames () throws IOException, NotBoundException;
 
     public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException;
-
-    public List<SocketRmiControllerObject> getFreeGames() throws RemoteException;
-
-    public boolean findRmiController(int id, String playerName) throws IOException;
-
-    public void connectGameServer() throws RemoteException, NotBoundException;
-    public void startSendingHeartbeats();
-
-    public void setGameFieldMiniModel() throws RemoteException;
-
-    public void startCheckingMessages();
-
-    public boolean isGoalCardPlaced() throws RemoteException;
-
-    public String getGoalPlaced();
-
-    String getFirstGoal();
-
-    String getSecondGoal();
-
-    void chooseGoal(int i) throws IOException;
-
-    void showStartingCard() throws IOException;
-
-    void chooseStartingCard(boolean b) throws IOException;
-
-    boolean isFirstPlaced() throws RemoteException;
+    public void manageGame(boolean endgame) throws IOException;
+    public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException;
+    public void drawCard(SendFunction function) throws IOException, InterruptedException;
+    public void ChatChoice(String message, int decision) throws IOException;
+    public List<SocketRmiControllerObject> getFreeGames() throws IOException;
+    public VirtualGameServer getGameServer() throws IOException;
+    public String getToken() ;
 }
