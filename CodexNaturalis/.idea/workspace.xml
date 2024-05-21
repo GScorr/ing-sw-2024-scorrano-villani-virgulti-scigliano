@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="agg" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -162,7 +160,7 @@
       <recent name="it.polimi.ingsw.MODEL.Game.State" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUI">
+  <component name="RunManager" selected="Application.Common_Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -264,9 +262,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Common_Server" />
-        <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
       </list>
@@ -304,22 +302,6 @@
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
       <workItem from="1716224885933" duration="14192000" />
-    </task>
-    <task id="LOCAL-00093" summary="agg">
-      <option name="closed" value="true" />
-      <created>1714814725403</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1714814725403</updated>
-    </task>
-    <task id="LOCAL-00094" summary="agg">
-      <option name="closed" value="true" />
-      <created>1714919082134</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1714919082134</updated>
     </task>
     <task id="LOCAL-00095" summary="agg">
       <option name="closed" value="true" />
@@ -697,7 +679,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716300695717</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="agg">
+      <option name="closed" value="true" />
+      <created>1716302601957</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1716302601957</updated>
+    </task>
+    <task id="LOCAL-00143" summary="agg">
+      <option name="closed" value="true" />
+      <created>1716303176690</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1716303176690</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
