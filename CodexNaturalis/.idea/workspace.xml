@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,12 +230,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RmiClientF" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.RMI_FINAL.RmiClientF" />
+    <configuration name="it.polimi.ingsw.view.GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.view.GUI" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.RMI_FINAL.MESSAGES.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -256,8 +258,8 @@
     </configuration>
     <list>
       <item itemvalue="Application.ClientS" />
+      <item itemvalue="Application.it.polimi.ingsw.view.GUI" />
       <item itemvalue="Application.GUI" />
-      <item itemvalue="Application.RmiClientF" />
       <item itemvalue="Application.Common_Client" />
       <item itemvalue="Application.Common_Server" />
       <item itemvalue="Application.Client" />
@@ -265,10 +267,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GUI" />
+        <item itemvalue="Application.it.polimi.ingsw.view.GUI" />
         <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Client" />
-        <item itemvalue="Application.RmiClientF" />
       </list>
     </recent_temporary>
   </component>
