@@ -12,7 +12,7 @@ module PSP31 {
     exports it.polimi.ingsw.VIEW;
     exports it.polimi.ingsw.SOCKET_FINAL;
     exports it.polimi.ingsw.RMI_FINAL;
-    exports it.polimi.ingsw.RMI;
+
     exports it.polimi.ingsw.CONSTANTS;
     exports it.polimi.ingsw.CONTROLLER;
 
@@ -25,5 +25,6 @@ module PSP31 {
     opens it.polimi.ingsw.VIEW.CONTROLLER to javafx.fxml;
     opens it.polimi.ingsw.VIEW to javafx.fxml;
     exports it.polimi.ingsw.RMI_FINAL.MESSAGES;
+    exports it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess;
 
 }

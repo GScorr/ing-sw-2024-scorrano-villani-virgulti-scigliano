@@ -15,18 +15,18 @@ import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.rmi.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 
-public class ServerProxy implements VirtualServer {
+public class ServerProxy implements VirtualServer, Serializable {
 
     public ObjectOutputStream output;
     public ObjectInputStream input;
 
-    public ServerProxy(ObjectOutputStream output, ObjectInputStream input) throws IOException {
+    public ServerProxy(ObjectOutputStream output) throws IOException {
         this.output = output;
-        this.input = input;
+
     }
 
 
@@ -42,29 +42,23 @@ public class ServerProxy implements VirtualServer {
     }
 
     //bisogna che lo cambi e togli questa risposta : MyMessageFinal response = (MyMessageFinal) input.readObject();
-    public String checkName(String name) throws IOException, ClassNotFoundException {
+    public void checkName(String name) throws IOException, ClassNotFoundException {
         Message DP_message = new CheckNameMessage(name);
         output.writeObject(DP_message);
         output.flush();
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-        return response.getContent();
     }
 
 
-    public List<SocketRmiControllerObject> getFreeGame() throws IOException, ClassNotFoundException {
+    public void getFreeGame() throws IOException, ClassNotFoundException {
         Message DP_message = new GetFreeGames();
         output.writeObject(DP_message);
         output.flush();
-
-        List<SocketRmiControllerObject> games  = (List<SocketRmiControllerObject>) input.readObject();
-        return games;
     }
 
     public  void createGame(String game_name, int num_players, String nome  ) throws IOException, ClassNotFoundException, SocketException {
         Message DP_message = new CreateGame(game_name,num_players,nome);
         output.writeObject(DP_message);
         output.flush();
-
     }
 
     public void findRmiController(Integer id, String player_name) throws IOException, ClassNotFoundException {
@@ -74,26 +68,17 @@ public class ServerProxy implements VirtualServer {
 
     }
 
-    public String getPlayerState() throws IOException, ClassNotFoundException {
-        Message DP_mesasage = new getPlayerState();
-        output.writeObject(DP_mesasage);
-        output.flush();
-
-        MyMessageFinal response = (MyMessageFinal) input.readObject();
-        return response.getContent();
-    }
-
     public void getGoalCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getGoalCard();
         output.writeObject(DP_mesasage);
         output.flush();
+        System.out.println("Server Proxy getGoalCard Message sent");
     }
 
     public void getListGoalCard() throws IOException, ClassNotFoundException {
         Message DP_mesasage = new getListGoalCard();
         output.writeObject(DP_mesasage);
         output.flush();
-
     }
 
     public void chooseGoal(int index) throws IOException {
@@ -312,4 +297,9 @@ public class ServerProxy implements VirtualServer {
     }
 
 
+    public void connectGame() throws IOException {
+        Message DP_Message = new connectGame();
+        output.writeObject(DP_Message);
+        output.flush();
+    }
 }

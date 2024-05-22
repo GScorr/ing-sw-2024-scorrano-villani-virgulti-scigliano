@@ -9,8 +9,7 @@ import it.polimi.ingsw.MODEL.Game.State.*;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
-import it.polimi.ingsw.MODEL.Player.PlayerObserver;
-import it.polimi.ingsw.RMI.IndexManager;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -37,13 +37,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private boolean newClient;
     private MiniModel miniModel =  new MiniModel();
     private StringCostant stringcostant = new StringCostant();
-    
+
 
     public RmiClientF(VirtualServerF server) throws IOException {
         this.server = server;
     }
 
-    public void run() throws IOException, InterruptedException, NotBoundException {
+    public void run() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         this.server.connect(this);
         new TUI(this);
     }
@@ -323,7 +323,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }
     }
     //MAIN
-    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException {
+    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, 1);
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
         new RmiClientF(server).run();

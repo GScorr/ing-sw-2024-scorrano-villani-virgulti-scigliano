@@ -1,4 +1,6 @@
-package it.polimi.ingsw.RMI_FINAL.MESSAGES;
+package it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess;
+
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 public class setStateMessage extends ResponseMessage {
     private String state;
@@ -17,6 +19,6 @@ public class setStateMessage extends ResponseMessage {
 
     @Override
     public void action() {
-        super.miniModel.setState(state);
+        super.client.miniModel.setState(state);
     }
 }

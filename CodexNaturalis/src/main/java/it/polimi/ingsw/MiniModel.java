@@ -35,7 +35,7 @@ public class MiniModel implements Serializable {
 
     private ChatIndexManager chat_manager = new ChatIndexManager();
     public MiniModel() {
-        this.state = "NOT_INITIALIZED";
+        this.state = "NOT_IN_A_GAME";
         this.not_read = 0;
         this.menu.add("");
         this.menu.add("");

@@ -2,103 +2,44 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
-public class ClientProxy implements VirtualView {
-    final ObjectOutputStream output;
+public class ClientProxy  {
+    final ObjectInputStream input;
 
-    public ClientProxy(ObjectOutputStream output) {
-        this.output = output;
+    // when a message is sent to server, Client has to receive a response. Thsi variable represent the response from the serverr, in fact they are passed to clientProxy
+    boolean flag_check;
+    boolean place_flag_check;
+    boolean check;
+
+    boolean checkSizeGoldDeck;
+    boolean checkSizeResourcesDeck;
+    int point;
+
+    boolean GoalCardisPresent;
+    List<Goal> goalsCard;
+
+    PlayCard startingCard;
+    boolean startingCardChoosed;
+
+    Goal goal_choosed;
+
+    public ClientProxy(ObjectInputStream input) {
+        this.input = input;
+    }
+
+    public void  startCheckingMessages() throws IOException,ClassNotFoundException{
+        new Thread( () -> {
+
+        }).start();
     }
 
 
-    public void reportError(String errore){
-        /*
-        output.println("errore");
-        output.println(errore);
-        output.flush();
 
-         */
-    }
-
-    @Override
-    public void reportMessage(String details) throws IOException {
-
-    }
-
-    @Override
-    public void showCard(PlayCard card) throws IOException {
-
-    }
-
-    @Override
-    public void pushBack(ResponseMessage message) throws IOException {
-
-    }
-
-    @Override
-    public void showField(GameField field) throws IOException {
-
-    }
-
-    @Override
-    public void printString(String s) throws IOException {
-
-    }
-
-    @Override
-    public void setGameField(List<GameField> games) throws IOException {
-
-    }
-
-    @Override
-    public MiniModel getMiniModel() throws IOException {
-        return null;
-    }
-
-    @Override
-    public void setCards(List<PlayCard> cards) throws IOException {
-
-    }
-
-    @Override
-    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
-
-    }
-
-    @Override
-    public void setState(String state) throws IOException {
-
-    }
-
-    public void showMessage(String message){
-        /*
-        output.println("update_message");
-        output.println(message);
-        output.flush();
-
-         */
-    }
-    @Override
-    public void showValue(String number) {
-        /*
-        output.println("update_number");
-        output.println(number);
-        output.flush();
-
-         */
-    }
-
-    @Override
-    public void showUpdate(GameField game_field) throws IOException {
-
-    }
 }
