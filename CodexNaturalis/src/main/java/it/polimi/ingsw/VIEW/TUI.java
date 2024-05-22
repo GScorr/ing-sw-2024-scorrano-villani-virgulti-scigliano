@@ -184,6 +184,7 @@ public class TUI implements Serializable {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
+
             System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + client.getFirstGoal()
                     + "\n 2-" + client.getSecondGoal());
             String choice = scan.nextLine();

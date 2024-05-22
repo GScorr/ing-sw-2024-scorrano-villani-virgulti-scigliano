@@ -634,7 +634,7 @@ public class Client implements VirtualViewF {
     }
 
     @Override
-    public void pushBack(ResponseMessage message) throws IOException {
+    public void pushBack(ResponseMessage message) {
 
     }
 
