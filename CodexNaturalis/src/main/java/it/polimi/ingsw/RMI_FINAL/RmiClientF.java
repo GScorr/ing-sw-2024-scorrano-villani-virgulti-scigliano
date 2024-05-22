@@ -88,7 +88,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         rmi_controller.connectRMI(this);
     }
 
-
     public void manageGame(boolean endgame) throws IOException {
         if(endgame) rmi_controller.getPoints(token);
         else rmi_controller.getFinalStandings(token);

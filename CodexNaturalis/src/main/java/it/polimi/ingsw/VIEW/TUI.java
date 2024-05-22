@@ -154,7 +154,6 @@ public class TUI implements Serializable {
 
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
             if(client.isGoalCardPlaced()){
-
                 chooseGoal();
                 System.out.println("\nYOU CHOOSE :" + client.getGoalPlaced());
             }

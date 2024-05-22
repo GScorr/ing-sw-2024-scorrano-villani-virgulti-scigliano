@@ -47,7 +47,6 @@ public class ClientHandler  implements VirtualViewF {
         this.server = server;
         this.input = input;
         this.output = output;
-       // this.view = new ClientProxy(output);
        this.common = common;
 
     }
@@ -209,6 +208,7 @@ public class ClientHandler  implements VirtualViewF {
                     Thread.sleep(200);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
+                        System.out.println("ClientHandler, messaggio dalla coda preso");
                        output.writeObject(s);
                        output.flush();
                        output.reset();
@@ -333,10 +333,6 @@ public class ClientHandler  implements VirtualViewF {
                     } else if (DP_message instanceof FindRMIControllerMessage) {
                         ((FindRMIControllerMessage) DP_message).setClientHandler(this);
                         if (((FindRMIControllerMessage) DP_message).actionFindRmi()) {
-                            //System.out.println(token);
-                            int port = common.getPort(token);
-                            Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
-                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                             ResponseMessage s = new CheckRmiResponse(true);
                             output.writeObject(s);
                             output.flush();
@@ -348,18 +344,20 @@ public class ClientHandler  implements VirtualViewF {
                             output.reset();
                         }
                     } else if (DP_message instanceof connectGame) {
+                         startCheckingMessages();
+                        int port = common.getPort(token);
+                        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
+                        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                         startSendingHeartbeats();
-                        startCheckingMessages();
-                        this.rmi_controller.addPlayer(token,name,this,false);
-                        this.rmi_controller.connectSocket(this);
+
                     } else if (DP_message instanceof getGoalCard) {
-                        System.out.println("messaggio di getGoalCard ricevuto ");
+
                         boolean isPresent = ((getGoalCard) DP_message).getGoalCardAction();
                         ResponseMessage s = new checkGoalCardPresent(isPresent);
                         output.writeObject(s);
                         output.flush();
                         output.reset();
-
+                        System.out.println("ClientHandler received getGoalCard Message and send a checkGoalCardPresent ResponseMessage");
                     } else if (DP_message instanceof getListGoalCard) {
                         List<Goal> list_goal_card = ((getListGoalCard) DP_message).actionGetListGoalCard();
                         ResponseMessage s = new getListGoalCardResponse(list_goal_card);

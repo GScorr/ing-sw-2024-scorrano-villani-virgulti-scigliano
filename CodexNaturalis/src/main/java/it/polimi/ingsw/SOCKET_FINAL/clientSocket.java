@@ -39,7 +39,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     ObjectInputStream input;
 
 
-    // when a message is sent to server, Client has to receive a response. Thsi variable represent the response from the serverr, in fact they are passed to clientProxy
+    
     public boolean flag_check;
     public boolean check;
     public boolean starting_card_is_placed;

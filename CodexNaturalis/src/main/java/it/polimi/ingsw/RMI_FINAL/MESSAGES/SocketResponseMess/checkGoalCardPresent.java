@@ -11,6 +11,7 @@ public class checkGoalCardPresent extends ResponseMessage {
 
     @Override
     public void action(){
+        System.out.println("checkGoalCardIsPresente action ");
         super.client.GoalCardisPresent = this.isPresent;
         super.client.flag_check = false;
     }
