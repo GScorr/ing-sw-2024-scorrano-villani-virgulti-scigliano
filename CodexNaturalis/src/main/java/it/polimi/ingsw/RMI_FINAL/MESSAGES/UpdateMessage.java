@@ -17,4 +17,9 @@ public class UpdateMessage extends ResponseMessage{
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public void action(){
+        System.out.println(message);
+    }
 }

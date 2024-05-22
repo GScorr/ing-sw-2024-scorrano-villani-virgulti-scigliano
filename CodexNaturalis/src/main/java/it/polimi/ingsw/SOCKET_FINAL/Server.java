@@ -15,7 +15,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     public Common_Server common;
 
-    public Server(ServerSocket listenSocket, Common_Server common) throws RemoteException {
+    public Server(ServerSocket listenSocket, Common_Server common) throws IOException {
         this.common = common;
         this.listenSocket = listenSocket;
 
@@ -94,81 +94,81 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public void showUpdate(GameField game_field) throws RemoteException {
+    public void showUpdate(GameField game_field) throws IOException {
 
     }
 
     @Override
-    public void reportError(String details) throws RemoteException {
+    public void reportError(String details) throws IOException {
 
     }
 
     @Override
-    public void reportMessage(String details) throws RemoteException {
+    public void reportMessage(String details) throws IOException {
 
     }
 
     @Override
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) throws IOException {
 
     }
 
     @Override
-    public void pushBack(ResponseMessage message) throws RemoteException {
+    public void pushBack(ResponseMessage message) throws IOException {
 
     }
 
     @Override
-    public void showField(GameField field) throws RemoteException {
+    public void showField(GameField field) throws IOException {
 
     }
 
     @Override
-    public void printString(String s) throws RemoteException {
+    public void printString(String s) throws IOException {
 
     }
 
     @Override
-    public void setGameField(List<GameField> games) throws RemoteException {
+    public void setGameField(List<GameField> games) throws IOException {
 
     }
 
-    public MiniModel getMiniModel() throws RemoteException{
+    public MiniModel getMiniModel() throws IOException{
         return null;
     }
 
     @Override
-    public void setCards(List<PlayCard> cards) throws RemoteException {
+    public void setCards(List<PlayCard> cards) throws IOException {
 
     }
 
     @Override
-    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException {
+    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
 
     }
 
     @Override
-    public void setState(String state) throws RemoteException {
+    public void setState(String state) throws IOException {
 
     }
 
     @Override
-    public void addChat(int idx, ChatMessage message) throws RemoteException {
+    public void addChat(int idx, ChatMessage message) throws IOException {
 
     }
 
     @Override
-    public void insertId(int id) throws RemoteException {
+    public void insertId(int id) throws IOException {
 
     }
 
     @Override
-    public void insertNumPlayers(int numPlayersMatch) throws RemoteException {
+    public void insertNumPlayers(int numPlayersMatch) throws IOException {
 
     }
 
     @Override
-    public void insertPlayer(Player player) throws RemoteException {
+    public void insertPlayer(Player player) throws IOException {
 
     }
 

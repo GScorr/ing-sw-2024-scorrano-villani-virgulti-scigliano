@@ -15,7 +15,7 @@ import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 import java.util.List;
 
 
@@ -225,7 +225,7 @@ public class ServerProxy implements VirtualServer {
     }
 
 
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
@@ -264,7 +264,7 @@ public class ServerProxy implements VirtualServer {
 
     }
 
-    public void showField(GameField field) throws RemoteException {
+    public void showField(GameField field) throws IOException {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 

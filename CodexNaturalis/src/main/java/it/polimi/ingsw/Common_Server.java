@@ -8,7 +8,6 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -25,11 +24,11 @@ public class Common_Server {
     private final Map<String, Long> lastHeartbeatTime = new HashMap<>();
     public Common_Server(){}
 
-    public String createToken(VirtualViewF client) throws RemoteException {return token_manager.generateToken(client);}
-    public String createTokenSocket(VirtualView client) throws RemoteException {return token_manager.generateTokenSocket(client);}
-    public Map<String, Player> getTtoP() throws RemoteException {return token_to_player;}
-    public Map<String, GameServer> getTtoR() throws RemoteException {return token_to_rmi;}
-    public Map<Integer, GameServer> getListRmiController() throws RemoteException {return rmi_controllers;}
+    public String createToken(VirtualViewF client) throws IOException {return token_manager.generateToken(client);}
+    public String createTokenSocket(VirtualView client) throws IOException {return token_manager.generateTokenSocket(client);}
+    public Map<String, Player> getTtoP() throws IOException {return token_to_player;}
+    public Map<String, GameServer> getTtoR() throws IOException {return token_to_rmi;}
+    public Map<Integer, GameServer> getListRmiController() throws IOException {return rmi_controllers;}
 
     public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
         int port = getAvailablePort();
@@ -64,8 +63,8 @@ public class Common_Server {
         rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
         return true;}
 
-    public List<VirtualViewF> getListClient() throws RemoteException {return clients;}
-    public List<GameServer> getFreeGames() throws RemoteException {
+    public List<VirtualViewF> getListClient() throws IOException {return clients;}
+    public List<GameServer> getFreeGames() throws IOException {
         if( rmi_controllers.isEmpty() ) return null;
         List<GameServer> free = new ArrayList<>();
         for ( Integer id : rmi_controllers.keySet() )
@@ -74,7 +73,7 @@ public class Common_Server {
 
     }
 
-    public List<SocketRmiControllerObject> getFreeGamesSocket() throws RemoteException {
+    public List<SocketRmiControllerObject> getFreeGamesSocket() throws IOException {
         if (rmi_controllers.isEmpty()) return null;
         List<SocketRmiControllerObject> free = new ArrayList<>();
         for (Integer id : rmi_controllers.keySet()) {
@@ -87,7 +86,7 @@ public class Common_Server {
         return free;
     }
 
-    public String checkName(String name, VirtualViewF client) throws RemoteException {
+    public String checkName(String name, VirtualViewF client) throws IOException {
 
         for ( Integer i : rmi_controllers.keySet() )
         {
@@ -109,7 +108,7 @@ public class Common_Server {
         return "true";
     }
 
-    public int getPort(String token) throws RemoteException {
+    public int getPort(String token) throws IOException {
 
         return token_to_rmi.get(token).getPort();
     }
@@ -139,11 +138,11 @@ public class Common_Server {
         if( token_manager.getTokens().containsKey(p_token) ) token_manager.getTokens().get(p_token).reportError(error);
         return false;
     }
-    public GameServer getRmiController(String token) throws RemoteException{return token_to_rmi.get(token);}
+    public GameServer getRmiController(String token) throws IOException{return token_to_rmi.get(token);}
 
-    public void receiveHeartbeat(String token) throws RemoteException {lastHeartbeatTime.put(token, System.currentTimeMillis());}
+    public void receiveHeartbeat(String token) throws IOException {lastHeartbeatTime.put(token, System.currentTimeMillis());}
 
-    private synchronized void checkHeartbeats() throws RemoteException{
+    private synchronized void checkHeartbeats() throws IOException{
         long currentTime = System.currentTimeMillis();
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
@@ -159,20 +158,20 @@ public class Common_Server {
         }
     }
 
-    public void startHeartbeatChecker() throws RemoteException{
+    public void startHeartbeatChecker() throws IOException{
         new Thread(() -> {
             while (true) {
                 try {
                     Thread.sleep(1000); // Controlla gli "heartbeats" ogni 5 secondi
                     checkHeartbeats();
-                } catch (InterruptedException | RemoteException e) {
+                } catch (InterruptedException | IOException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
 
-    public synchronized void connect(VirtualViewF client)throws RemoteException{this.clients.add(client);}
+    public synchronized void connect(VirtualViewF client)throws IOException{this.clients.add(client);}
 
     public static void main(String[] args) throws IOException, NotBoundException {
 

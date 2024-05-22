@@ -23,7 +23,7 @@ import it.polimi.ingsw.StringCostant;
 import java.io.*;
 import java.net.Socket;
 import java.nio.Buffer;
-import java.rmi.RemoteException;
+import java.rmi.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -456,7 +456,7 @@ public class Client implements VirtualViewF {
 
     }
 
-    private void selectAndInsertCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public void selectAndInsertCard() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int decision;
 

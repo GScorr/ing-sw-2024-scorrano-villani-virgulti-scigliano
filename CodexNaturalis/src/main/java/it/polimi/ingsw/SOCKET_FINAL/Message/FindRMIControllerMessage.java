@@ -10,8 +10,6 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
-
 public class FindRMIControllerMessage implements Message, Serializable {
 
     public Integer id;
