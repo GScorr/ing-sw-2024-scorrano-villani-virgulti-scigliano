@@ -126,7 +126,6 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){ c.pushBack(message);}
-        System.out.println("Sono inseriti : "+clientsSocket.size());
         for (VirtualView c : clientsSocket){
 
             c.pushBack(message);}}

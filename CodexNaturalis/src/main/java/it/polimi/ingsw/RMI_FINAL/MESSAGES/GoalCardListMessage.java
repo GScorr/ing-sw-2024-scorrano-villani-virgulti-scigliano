@@ -11,8 +11,5 @@ public class GoalCardListMessage extends ResponseMessage{
         this.list_goal_card = list_goal_card;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
+
 }

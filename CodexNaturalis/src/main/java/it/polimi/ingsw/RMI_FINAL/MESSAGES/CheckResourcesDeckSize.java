@@ -8,8 +8,4 @@ public class CheckResourcesDeckSize extends ResponseMessage{
     }
 
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
 }

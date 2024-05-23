@@ -15,14 +15,13 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.NotBoundException;
-import java.rmi.IOException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class Server extends UnicastRemoteObject implements VirtualViewF {
+public class Server extends UnicastRemoteObject  {
 
     final ServerSocket listenSocket;
 
@@ -47,7 +46,6 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
        Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
             System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
-
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
@@ -93,83 +91,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
         new Server(listenSocket,serverRmi).runServer();*/
     }
 
-    @Override
-    public void showUpdate(GameField game_field) throws IOException {
-
-    }
-
-    @Override
-    public void reportError(String details) throws IOException {
-
-    }
-
-    @Override
-    public void reportMessage(String details) throws IOException {
-
-    }
-
-    @Override
-    public void showCard(PlayCard card) throws IOException {
-
-    }
-
-    @Override
-    public void pushBack(ResponseMessage message) throws IOException {
-
-    }
-
-    @Override
-    public void showField(GameField field) throws IOException {
-
-    }
-
-    @Override
-    public void printString(String s) throws IOException {
-
-    }
-
-    @Override
-    public void setGameField(List<GameField> games) throws IOException {
-
-    }
-
     public MiniModel getMiniModel() throws IOException{
         return null;
     }
-
-    @Override
-    public void setCards(List<PlayCard> cards) throws IOException {
-
-    }
-
-    @Override
-    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
-
-    }
-
-    @Override
-    public void setState(String state) throws IOException {
-
-    }
-
-    @Override
-    public void addChat(int idx, ChatMessage message) throws IOException {
-
-    }
-
-    @Override
-    public void insertId(int id) throws IOException {
-
-    }
-
-    @Override
-    public void insertNumPlayers(int numPlayersMatch) throws IOException {
-
-    }
-
-    @Override
-    public void insertPlayer(Player player) throws IOException {
-
-    }
-
 }

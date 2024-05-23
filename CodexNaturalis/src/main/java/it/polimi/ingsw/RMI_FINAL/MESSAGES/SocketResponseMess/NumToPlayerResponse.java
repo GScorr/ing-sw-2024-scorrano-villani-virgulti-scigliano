@@ -1,7 +1,9 @@
-package it.polimi.ingsw.RMI_FINAL.MESSAGES;
+package it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+
 import java.util.HashMap;
 
-public class NumToPlayerResponse extends ResponseMessage{
+public class NumToPlayerResponse extends ResponseMessage {
     private  HashMap<Integer, String> actual_map = new HashMap<>();
 
     public NumToPlayerResponse(HashMap<Integer, String> map) {
@@ -12,6 +14,6 @@ public class NumToPlayerResponse extends ResponseMessage{
 
     @Override
     public  void action(){
-        super.miniModel.setNumToPlayer(actual_map);
+        super.client.miniModel.setNumToPlayer(actual_map);
     }
 }

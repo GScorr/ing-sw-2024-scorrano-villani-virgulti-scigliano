@@ -13,10 +13,7 @@ public class UpdateMessage extends ResponseMessage{
         this.gamefield = gamefield;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
+
 
     @Override
     public void action(){

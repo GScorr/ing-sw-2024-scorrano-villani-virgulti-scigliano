@@ -1,6 +1,8 @@
-package it.polimi.ingsw.RMI_FINAL.MESSAGES;
+package it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess;
 
-public class StringResponse extends ResponseMessage{
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+
+public class StringResponse extends ResponseMessage {
     public String string;
 
     public StringResponse(String string) {
@@ -8,10 +10,6 @@ public class StringResponse extends ResponseMessage{
     }
 
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
 
     public void action(){
         System.out.println(string);

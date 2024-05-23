@@ -1,22 +1,29 @@
 package it.polimi.ingsw.RMI_FINAL.MESSAGES;
 
 import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class ResponseMessage implements Serializable {
-    String message;
-    MiniModel miniModel;
-    public String getMessage() {
-        return message;
+    public clientSocket client;
+    List<SocketRmiControllerObject> free_games_Socket;
+    protected MiniModel miniModel;
+
+    public void setClient(clientSocket client){
+        this.client = client;
     }
-    public void setMessage(String message){
-        this.message = message;
+
+    public void setFree_games(List<SocketRmiControllerObject> free_games) {
+        this.free_games_Socket = free_games;
     }
-    public void setMiniModel(MiniModel miniModel){
-        this.miniModel = miniModel;
-    }
-    public void action() throws IOException {};
+
+    public void action() throws IOException {
+
+    };
 
 }
