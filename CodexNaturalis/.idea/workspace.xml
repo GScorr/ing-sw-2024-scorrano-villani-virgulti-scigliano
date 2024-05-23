@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="fix bug TUI e RMI CLIENT, modificati alcuni metodi di VirtualViewF e relative implementazioni">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/clientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/clientSocket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +166,7 @@
       <recent name="it.polimi.ingsw.MODEL.Game" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Client">
+  <component name="RunManager" selected="Application.Common_Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -307,6 +310,14 @@
       <workItem from="1716224885933" duration="14192000" />
       <workItem from="1716395753198" duration="142000" />
       <workItem from="1716397301820" duration="3628000" />
+    </task>
+    <task id="LOCAL-00099" summary="aggiorn">
+      <option name="closed" value="true" />
+      <created>1715288533206</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1715288533206</updated>
     </task>
     <task id="LOCAL-00100" summary="aggiorn">
       <option name="closed" value="true" />
@@ -692,15 +703,7 @@
       <option name="project" value="LOCAL" />
       <updated>1716395618858</updated>
     </task>
-    <task id="LOCAL-00148" summary="fix bug TUI e RMI CLIENT, modificati alcuni metodi di VirtualViewF e relative implementazioni">
-      <option name="closed" value="true" />
-      <created>1716471159457</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1716471159457</updated>
-    </task>
-    <option name="localTasksCounter" value="149" />
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -735,6 +738,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="modularizzazione cli" />
     <MESSAGE value="modularizzazione clih" />
     <MESSAGE value="insert card, ma dice empty space" />
     <MESSAGE value="insert card successful" />
@@ -759,8 +763,7 @@
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="manage game TUI" />
     <MESSAGE value="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)" />
-    <MESSAGE value="fix bug TUI e RMI CLIENT, modificati alcuni metodi di VirtualViewF e relative implementazioni" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug TUI e RMI CLIENT, modificati alcuni metodi di VirtualViewF e relative implementazioni" />
+    <option name="LAST_COMMIT_MESSAGE" value="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

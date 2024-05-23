@@ -275,8 +275,8 @@ public class ClientHandler  implements VirtualViewF {
     public void runVirtualView() throws IOException, ClassNotFoundException {
         synchronized (this) {
             try {
-                Message DP_message = null;
-                // Read message type
+                Message DP_message;
+
                 while ((DP_message = (Message) input.readObject()) != null) {
                     if (token != null) {
                         DP_message.setToken(token);
@@ -349,9 +349,7 @@ public class ClientHandler  implements VirtualViewF {
                         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                         startSendingHeartbeats();
-
                     } else if (DP_message instanceof getGoalCard) {
-
                         boolean isPresent = ((getGoalCard) DP_message).getGoalCardAction();
                         ResponseMessage s = new checkGoalCardPresent(isPresent);
                         output.writeObject(s);

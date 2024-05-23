@@ -37,8 +37,6 @@ public class clientSocket implements VirtualViewF, Serializable {
     private ServerProxy server_proxy;
 
     ObjectInputStream input;
-
-
     
     public boolean flag_check;
     public boolean check;
@@ -61,7 +59,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
 
     public clientSocket(ObjectInputStream input, ObjectOutputStream output) throws IOException, ClassNotFoundException {
-        this.server_proxy = new ServerProxy(output );
+        this.server_proxy = new ServerProxy(output);
         this.input = input;
     }
 
@@ -73,7 +71,7 @@ public class clientSocket implements VirtualViewF, Serializable {
                 throw new RuntimeException(e);
             }
         }).start();
-        new TUI(this);
+        new TUI(this).runCli();
     }
 
     //Thread that receive the input Object from the server
@@ -251,7 +249,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     public boolean isGoalCardPlaced() throws IOException, ClassNotFoundException, InterruptedException {
         server_proxy.getGoalCard();
         waitResponse();
-        return this.GoalCardisPresent;
+        return ! this.GoalCardisPresent;
     }
 
     @Override
