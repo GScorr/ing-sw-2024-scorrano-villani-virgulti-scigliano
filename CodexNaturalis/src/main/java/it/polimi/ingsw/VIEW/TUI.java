@@ -30,15 +30,15 @@ public class TUI implements Serializable {
 
 
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
-        String player_name = selectNamePlayer();
-        gameAccess(player_name);
-        //startSendingHeartbeats();
-        waitFullGame();
-        chooseGoalState();
-        chooseStartingCardState();
-        manageGame();
+            String player_name = selectNamePlayer();
+            gameAccess(player_name);
+            //startSendingHeartbeats();
+            waitFullGame();
+            chooseGoalState();
+            chooseStartingCardState();
+            manageGame();
     }
-    
+
     public void setToken(String token){this.token =token;}
 
     /*private void startSendingHeartbeats() {
