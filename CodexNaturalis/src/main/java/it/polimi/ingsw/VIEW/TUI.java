@@ -152,7 +152,11 @@ public class TUI implements Serializable {
     private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
 
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
-            if(client.isGoalCardPlaced()){
+            System.out.println("prova 0");
+            boolean checkGoal = client.isGoalCardPlaced();
+            System.out.println("prova 1");
+            if(checkGoal){
+                System.out.println("prova 2");
                 chooseGoal();
                 System.out.println("\nYOU CHOOSE :" + client.getGoalPlaced());
             }
@@ -166,9 +170,13 @@ public class TUI implements Serializable {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-
+            /*
             System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + client.getFirstGoal()
                     + "\n 2-" + client.getSecondGoal());
+             */
+
+            client.getFirstGoal();
+            System.out.println("TUI :  client.getFistGoal andato a buon fine ");
             String choice = scan.nextLine();
             if (choice.equals("1")) {
                 done=1;

@@ -63,10 +63,8 @@ public class ServerProxy implements  Serializable {
     }
 
     public void getGoalCard() throws IOException, ClassNotFoundException {
-
         Message DP_message = new getGoalCard();
         sendMessage(DP_message);
-        System.out.println("serverProxy GoalCard Message sent");
     }
 
     public void getListGoalCard() throws IOException, ClassNotFoundException {
