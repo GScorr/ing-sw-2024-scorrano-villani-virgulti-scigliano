@@ -494,7 +494,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     public void waitResponse() throws InterruptedException {
         flag_check = true;
         while(flag_check){
-            Thread.sleep(730);
+            Thread.sleep(200);
         }
     }
 

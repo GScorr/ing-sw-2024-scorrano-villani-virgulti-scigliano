@@ -163,7 +163,7 @@ public class ClientHandler  implements VirtualViewF {
                 } catch (InterruptedException e) {
 
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+
                 }
             }
         }).start();
