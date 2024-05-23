@@ -69,6 +69,8 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
         token_manager.getTokens().get(p_token).insertPlayer(token_to_player.get(p_token));
         setAllStates();
+        //--riga aggiunta da Fra
+        clientsRMI.add(client);
         return true;
     }
     public synchronized Player createPlayer(String p_token,String playerName, boolean b) throws IOException{
@@ -76,6 +78,8 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_to_player.put(p_token , p);
         return p;
     }
+
+    //questa funzione non dovrebbe essere più usata
     public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException {
         if(controller.getFull() )
             return false;

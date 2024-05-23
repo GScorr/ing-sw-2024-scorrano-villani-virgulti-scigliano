@@ -12,7 +12,6 @@ import java.util.List;
 public abstract class ResponseMessage implements Serializable {
     public clientSocket client;
     List<SocketRmiControllerObject> free_games_Socket;
-    protected MiniModel miniModel;
 
     public void setClient(clientSocket client){
         this.client = client;

@@ -16,6 +16,6 @@ public class setCardsResponse extends ResponseMessage {
 
     @Override
     public void action(){
-        super.miniModel.setCards(this.cards);
+        super.client.miniModel.setCards(this.cards);
     };
 }

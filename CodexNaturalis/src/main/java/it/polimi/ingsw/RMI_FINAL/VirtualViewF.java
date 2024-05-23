@@ -76,4 +76,11 @@ public interface VirtualViewF extends Remote {
 
     public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException;
 
+    String getToken() throws InterruptedException, IOException;
+
+    boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException;
+
+    boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException;
+
+    void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException;
 }

@@ -154,8 +154,20 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         return rmi_controller.getTtoP().get(token).isFirstPlaced();
     }
 
+    @Override
+    public String getToken() throws InterruptedException, IOException {
+        return null;
+    }
 
+    @Override
+    public boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
+        return false;
+    }
 
+    @Override
+    public boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
+        return false;
+    }
 
 
     // THREADS
@@ -218,7 +230,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
 
-    private void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
+    public void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
     public void printString(String s) {System.out.println(s);}
 
     public void addChat(int idx, ChatMessage message) throws IOException{

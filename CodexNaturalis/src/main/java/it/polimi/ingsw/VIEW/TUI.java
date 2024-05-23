@@ -7,6 +7,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 import it.polimi.ingsw.StringCostant;
 import java.io.IOException;
 import java.io.Serializable;
@@ -152,11 +153,9 @@ public class TUI implements Serializable {
     private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
 
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
-            System.out.println("prova 0");
             boolean checkGoal = client.isGoalCardPlaced();
-            System.out.println("prova 1");
+
             if(checkGoal){
-                System.out.println("prova 2");
                 chooseGoal();
                 System.out.println("\nYOU CHOOSE :" + client.getGoalPlaced());
             }
@@ -170,13 +169,10 @@ public class TUI implements Serializable {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-            /*
-            System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + client.getFirstGoal()
-                    + "\n 2-" + client.getSecondGoal());
-             */
-
-            client.getFirstGoal();
-            System.out.println("TUI :  client.getFistGoal andato a buon fine ");
+            String first_goal = client.getFirstGoal();
+            String second_goal = client.getSecondGoal();
+            System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + first_goal
+                    + "\n 2-" + second_goal);
             String choice = scan.nextLine();
             if (choice.equals("1")) {
                 done=1;
@@ -264,11 +260,14 @@ public class TUI implements Serializable {
         }
     }
 
-    private void drawCard() throws IOException, InterruptedException {
+    private void drawCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\n DRAW A CARD FROM: ");
-        if(client.getGameServer().getController().getGame().getGold_deck().getNumber()>0){System.out.println("1. GOLD DECK");}
-        if (client.getGameServer().getController().getGame().getResources_deck().getNumber()>0){System.out.println("2. RESOURCE DECK");}
+        boolean goldDeck_present = client.isGoldDeckPresent();
+        boolean resourceDeck_present = client.isResourceDeckPresent();
+
+        if(goldDeck_present){System.out.println("1. GOLD DECK");}
+        if (resourceDeck_present){System.out.println("2. RESOURCE DECK");}
         System.out.println("3. CENTRAL CARDS DECK");
         int num = -1;
         SendFunction function = null;
@@ -276,20 +275,42 @@ public class TUI implements Serializable {
             if(num != -1) System.err.println("[ERROR] OUT OF BOUND");
             String numstring = scan.nextLine();
             num = Integer.parseInt(numstring);
-            switch (num){
-                case(1):
-                    function = new SendDrawGold(token);
-                    break;
-                case(2):
-                    function = new SendDrawResource(token);
-                    break;
-                case(3):
-                    showCardsInCenter();
-                    System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
-                    String choicestr = scan.nextLine();
-                    int index = Integer.parseInt(choicestr);
-                    function = new SendDrawCenter(token, index-1);
-                    break;
+
+            // --------- da cambiare questa parte di codice secondo quello fatto da Fra
+            if(client instanceof clientSocket){
+                String token_socket = client.getToken();
+                switch (num) {
+                    case (1):
+                        function = new SendDrawGold(token_socket);
+                        break;
+                    case (2):
+                        function = new SendDrawResource(token_socket);
+                        break;
+                    case (3):
+                        showCardsInCenter();
+                        System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
+                        String choicestr = scan.nextLine();
+                        int index = Integer.parseInt(choicestr);
+                        function = new SendDrawCenter(token_socket, index - 1);
+                        break;
+                }
+            }
+            else {
+                switch (num) {
+                    case (1):
+                        function = new SendDrawGold(token);
+                        break;
+                    case (2):
+                        function = new SendDrawResource(token);
+                        break;
+                    case (3):
+                        showCardsInCenter();
+                        System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
+                        String choicestr = scan.nextLine();
+                        int index = Integer.parseInt(choicestr);
+                        function = new SendDrawCenter(token, index - 1);
+                        break;
+                }
             }
         }while ( num < 0 || num > 3);
         client.drawCard(function);
@@ -352,8 +373,14 @@ public class TUI implements Serializable {
 
     }
 
-    private void showCardsInCenter() throws IOException {
-        client.getGameServer().showCardsInCenter(token);}
+    private void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
+        if(client instanceof clientSocket){
+            client.showCardsInCenter();
+        }
+        else{
+            client.getGameServer().showCardsInCenter(token);}
+        }
+
 
     private void buffering() throws  InterruptedException{
         Thread.sleep(1000);

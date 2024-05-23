@@ -114,64 +114,12 @@ public class ClientHandler  implements VirtualViewF {
 
     @Override
     public void setGameField(List<GameField> games) throws IOException {
-        List<GameField> fields = new ArrayList<>(games);
-        System.out.println("questi i campi che mi arrivano");
-        for (GameField f : fields){
-            CopyshowField(f);
-        }
-        System.out.println("end");
-        ResponseMessage s = new setGameFieldResponse(fields);
+        ResponseMessage s = new setGameFieldResponse(games);
         output.writeObject(s);
         output.flush();
         output.reset();
     }
 
-    private void CopyshowField(GameField field) throws IOException {
-        boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
-        boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
-
-
-        for (int i = 0; i < Constants.MATRIXDIM; i++) {
-            for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
-                    nonEmptyRows[i] = true;
-                    nonEmptyCols[j] = true;
-
-
-                    if (i > 0) nonEmptyRows[i - 1] = true;
-                    if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
-                    if (j > 0) nonEmptyCols[j - 1] = true;
-                    if (j < Constants.MATRIXDIM - 1) nonEmptyCols[j + 1] = true;
-                }
-            }
-        }
-
-
-        System.out.print("   ");
-        for (int k = 0; k < Constants.MATRIXDIM; k++) {
-            if (nonEmptyCols[k]) {
-                System.out.print(k + " ");
-            }
-        }
-        System.out.print("\n");
-
-
-        for (int i = 0; i < Constants.MATRIXDIM; i++) {
-            if (nonEmptyRows[i]) {
-                System.out.print(i + " ");
-                for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                    if (nonEmptyCols[j]) {
-                        if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
-                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
-                        } else {
-                            System.out.print("   ");
-                        }
-                    }
-                }
-                System.out.print("\n");
-            }
-        }
-    }
 
     @Override
     public MiniModel getMiniModel() throws IOException {
@@ -208,7 +156,6 @@ public class ClientHandler  implements VirtualViewF {
                     Thread.sleep(200);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
-                        System.out.println("ClientHandler, messaggio dalla coda preso");
                        output.writeObject(s);
                        output.flush();
                        output.reset();
@@ -272,10 +219,16 @@ public class ClientHandler  implements VirtualViewF {
         return false;
     }
 
+    @Override
+    public String getToken() throws InterruptedException {
+        return null;
+    }
+
+
     public void runVirtualView() throws IOException, ClassNotFoundException {
         synchronized (this) {
             try {
-                Message DP_message;
+                Message DP_message = null;
 
                 while ((DP_message = (Message) input.readObject()) != null) {
                     if (token != null) {
@@ -323,12 +276,17 @@ public class ClientHandler  implements VirtualViewF {
 
                      else if ((DP_message instanceof CreateGame)) {
                         ((CreateGame) DP_message).setClientHandler(this);
-                        int port = ((CreateGame) DP_message).actionCreateGameMessage();
-                        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                         startCheckingMessages();
+                        int port = ((CreateGame) DP_message).actionCreateGameMessage();
+
+                        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
+                        System.out.println(token + "dentro la chiamata a CreateGame, registry line accepted");
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                        this.rmi_controller.connectSocket(this);
+                        System.out.println(token + "dentro la chiamata a CreateGame, this.rmi_controller accepted");
+                        //this.rmi_controller.connectRMI(this);
+                       // System.out.println(token + "dentro la chiamata a CreateGame, connectSocket accepted");
                         startSendingHeartbeats();
+                        System.out.println(token + "dentro la chiamata a CreateGame, startingSendingHearbits");
 
                     } else if (DP_message instanceof FindRMIControllerMessage) {
                         ((FindRMIControllerMessage) DP_message).setClientHandler(this);
@@ -355,7 +313,6 @@ public class ClientHandler  implements VirtualViewF {
                         output.writeObject(s);
                         output.flush();
                         output.reset();
-                        System.out.println("ClientHandler received getGoalCard Message and send a checkGoalCardPresent ResponseMessage");
                     } else if (DP_message instanceof getListGoalCard) {
                         List<Goal> list_goal_card = ((getListGoalCard) DP_message).actionGetListGoalCard();
                         ResponseMessage s = new getListGoalCardResponse(list_goal_card);
@@ -466,6 +423,20 @@ public class ClientHandler  implements VirtualViewF {
 
 
 
+    @Override
+    public boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
+        return false;
+    }
+
+    @Override
+    public boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
+        return false;
+    }
+
+    @Override
+    public void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
+
+    }
 
 
 }

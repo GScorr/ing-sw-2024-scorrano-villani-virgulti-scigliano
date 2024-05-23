@@ -8,4 +8,10 @@ public class CheckGoldDeckSize extends ResponseMessage{
     }
 
 
+    public void action(){
+        super.client.checkSizeGoldDeck = checkSize;
+        super.client.flag_check = false;
+    }
+
+
 }

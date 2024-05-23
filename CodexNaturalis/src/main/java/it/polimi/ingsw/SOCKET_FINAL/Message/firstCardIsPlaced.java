@@ -62,6 +62,7 @@ public class firstCardIsPlaced implements Message, Serializable {
 
         output.writeObject(message);
         output.flush();
+        output.reset();
 
     }
 }
