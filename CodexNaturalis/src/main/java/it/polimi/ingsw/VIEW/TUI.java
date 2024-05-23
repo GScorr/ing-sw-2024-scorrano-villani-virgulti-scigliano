@@ -33,18 +33,13 @@ public class TUI implements Serializable {
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
             String player_name = selectNamePlayer();
             gameAccess(player_name);
-            //startSendingHeartbeats();
             waitFullGame();
             chooseGoalState();
             chooseStartingCardState();
             manageGame();
     }
 
-    public void setToken(String token){this.token =token;}
 
-    /*private void startSendingHeartbeats() {
-        client.startSendingHeartbeats();
-    }*/
 
     private void waitFullGame() throws IOException, InterruptedException {
         if(client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
@@ -271,47 +266,29 @@ public class TUI implements Serializable {
         System.out.println("3. CENTRAL CARDS DECK");
         int num = -1;
         SendFunction function = null;
+        String token_client;
         do{
             if(num != -1) System.err.println("[ERROR] OUT OF BOUND");
             String numstring = scan.nextLine();
             num = Integer.parseInt(numstring);
+            if(client instanceof clientSocket) token_client = client.getToken();
+            else token_client = token;
+            switch (num) {
+                case (1):
+                    function = new SendDrawGold(token_client);
+                    break;
+                case (2):
+                    function = new SendDrawResource(token_client);
+                    break;
+                case (3):
+                    showCardsInCenter();
+                    System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
+                    String choicestr = scan.nextLine();
+                    int index = Integer.parseInt(choicestr);
+                    function = new SendDrawCenter(token_client, index - 1);
+                    break;
+            }
 
-            // --------- da cambiare questa parte di codice secondo quello fatto da Fra
-            if(client instanceof clientSocket){
-                String token_socket = client.getToken();
-                switch (num) {
-                    case (1):
-                        function = new SendDrawGold(token_socket);
-                        break;
-                    case (2):
-                        function = new SendDrawResource(token_socket);
-                        break;
-                    case (3):
-                        showCardsInCenter();
-                        System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
-                        String choicestr = scan.nextLine();
-                        int index = Integer.parseInt(choicestr);
-                        function = new SendDrawCenter(token_socket, index - 1);
-                        break;
-                }
-            }
-            else {
-                switch (num) {
-                    case (1):
-                        function = new SendDrawGold(token);
-                        break;
-                    case (2):
-                        function = new SendDrawResource(token);
-                        break;
-                    case (3):
-                        showCardsInCenter();
-                        System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
-                        String choicestr = scan.nextLine();
-                        int index = Integer.parseInt(choicestr);
-                        function = new SendDrawCenter(token, index - 1);
-                        break;
-                }
-            }
         }while ( num < 0 || num > 3);
         client.drawCard(function);
     }
@@ -396,5 +373,6 @@ public class TUI implements Serializable {
         System.out.print("\b");
         System.out.print("-");
     }
+    public void setToken(String token){this.token =token;}
 
 }

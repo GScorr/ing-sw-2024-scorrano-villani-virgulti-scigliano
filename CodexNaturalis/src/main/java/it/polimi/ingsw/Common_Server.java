@@ -32,7 +32,7 @@ public class Common_Server {
 
     public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
         int port = getAvailablePort();
-        GameServer gameServer = new GameServer(name,num_player,port);
+        GameServer gameServer = new GameServer(name,num_player,port,this);
         gameServer.addPlayer(p_token,player_name, client,true);
         VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
@@ -44,19 +44,6 @@ public class Common_Server {
     }
 
     private int getAvailablePort(){port++;return port;}
-    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws IOException {
-        int port = getAvailablePort();
-        GameServer gameServer = new GameServer(name,num_player,port);
-        gameServer.addPlayerSocket(p_token,player_name, client,true);
-        VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
-        Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
-        registry.rebind(String.valueOf(port), serverStub);
-        token_to_rmi.put( p_token, gameServer);
-        rmi_controllers.put(gameServer.getController().getGame().getIndex_game(), gameServer);
-        System.out.println(port);
-        return port;
-    }
-
     public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
     public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {
         rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
@@ -112,6 +99,21 @@ public class Common_Server {
         return token_to_rmi.get(token).getPort();
     }
 
+    public void removeGameServer(GameServer gs){
+        for( String tok : token_to_rmi.keySet() ) {
+            if( token_to_rmi.get(tok).equals(gs) ) {
+                token_to_rmi.remove(tok);
+            }
+        }
+        for( Integer i : rmi_controllers.keySet() ){
+            if( rmi_controllers.get(i).equals(gs) )
+            {
+                System.out.println("Elimino");
+                rmi_controllers.remove(i);
+            }
+        }
+    }
+
     public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {
 
         GameServer index = rmi_controllers.get(game_id);
@@ -125,18 +127,6 @@ public class Common_Server {
         token_manager.getTokens().get(p_token).reportError(error);
         return false;
     }
-    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws IOException {
-
-        GameServer index = rmi_controllers.get(game_id);
-        if (index != null && !rmi_controllers.get(game_id).getFull())
-        {
-            token_to_rmi.put(p_token , index );
-            return addPlayerSocket(game_id, p_token, player_name, client);
-        }
-        String error = "\nWRONG ID : Not Available Game\n";
-        if( token_manager.getTokens().containsKey(p_token) ) token_manager.getTokens().get(p_token).reportError(error);
-        return false;
-    }
     public GameServer getRmiController(String token) throws IOException{return token_to_rmi.get(token);}
 
     public void receiveHeartbeat(String token) throws IOException {lastHeartbeatTime.put(token, System.currentTimeMillis());}
@@ -146,13 +136,15 @@ public class Common_Server {
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
-                if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
+                if(token_to_rmi.get(key)!=null ){
+                if( token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                 token_to_rmi.get(key).getTtoP().get(key).disconnect();
                 System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
                 token_manager.deleteVW(key);
                 token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );
                 token_to_rmi.get(key).clientsSocket.remove( token_to_rmi.get(key).token_manager.getSocketTokens().get(key)  );
                 token_to_rmi.get(key).token_manager.deleteVW(key);
+            }
             }
         }
     }
