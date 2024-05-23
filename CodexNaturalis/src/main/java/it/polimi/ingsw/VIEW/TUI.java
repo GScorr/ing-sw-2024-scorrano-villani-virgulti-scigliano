@@ -20,28 +20,30 @@ public class TUI implements Serializable {
 
     private final StringCostant stringcostant = new StringCostant();
     private boolean newClient;
-
+    private String token;
     public List<Integer> id_games = new ArrayList<>();
 
     public TUI(VirtualViewF client) throws NotBoundException, IOException, InterruptedException, ClassNotFoundException {
         this.client = client;
-        runCli();
+
     }
 
 
-    private void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
+    public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         String player_name = selectNamePlayer();
         gameAccess(player_name);
-        startSendingHeartbeats();
+        //startSendingHeartbeats();
         waitFullGame();
         chooseGoalState();
         chooseStartingCardState();
         manageGame();
     }
+    
+    public void setToken(String token){this.token =token;}
 
-    private void startSendingHeartbeats() {
+    /*private void startSendingHeartbeats() {
         client.startSendingHeartbeats();
-    }
+    }*/
 
     private void waitFullGame() throws IOException, InterruptedException {
         if(client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
@@ -51,13 +53,10 @@ public class TUI implements Serializable {
             System.out.println("\n[GAME IS FULL, YOU ARE ABOUT TO START]!\n");
         }
         client.setGameFieldMiniModel();
-        startCheckingMessages();
+        //startCheckingMessages();
     }
 
     // questa è da mettere all'interno del client (SOCKET or RMI)
-    private void startCheckingMessages() {
-        client.startCheckingMessages();
-    }
 
 
     private String selectNamePlayer() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
@@ -271,17 +270,17 @@ public class TUI implements Serializable {
             num = Integer.parseInt(numstring);
             switch (num){
                 case(1):
-                    function = new SendDrawGold(client.getToken());
+                    function = new SendDrawGold(token);
                     break;
                 case(2):
-                    function = new SendDrawResource(client.getToken());
+                    function = new SendDrawResource(token);
                     break;
                 case(3):
                     showCardsInCenter();
                     System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
                     String choicestr = scan.nextLine();
                     int index = Integer.parseInt(choicestr);
-                    function = new SendDrawCenter(client.getToken(), index-1);
+                    function = new SendDrawCenter(token, index-1);
                     break;
             }
         }while ( num < 0 || num > 3);
@@ -346,7 +345,7 @@ public class TUI implements Serializable {
     }
 
     private void showCardsInCenter() throws IOException {
-        client.getGameServer().showCardsInCenter(client.getToken());}
+        client.getGameServer().showCardsInCenter(token);}
 
     private void buffering() throws  InterruptedException{
         Thread.sleep(1000);

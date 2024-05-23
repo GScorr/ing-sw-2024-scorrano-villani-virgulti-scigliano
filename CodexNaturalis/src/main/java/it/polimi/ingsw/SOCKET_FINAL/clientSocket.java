@@ -236,27 +236,15 @@ public class clientSocket implements VirtualViewF, Serializable {
         return null;
     }
 
-    @Override
-    public String getToken() {
-        return null;
-    }
 
 
 
-    @Override
-    public void startSendingHeartbeats() {
-
-    }
 
     @Override
     public void setGameFieldMiniModel() throws IOException {
 
     }
 
-    @Override
-    public void startCheckingMessages() {
-
-    }
 
 
     @Override
