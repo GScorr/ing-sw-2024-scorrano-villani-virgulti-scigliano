@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="manage game TUI">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +49,9 @@
         <option name="url" value="https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -305,14 +308,6 @@
       <workItem from="1715169457705" duration="3889000" />
       <workItem from="1715285029805" duration="627000" />
       <workItem from="1716224885933" duration="14192000" />
-    </task>
-    <task id="LOCAL-00098" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1715079713844</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1715079713844</updated>
     </task>
     <task id="LOCAL-00099" summary="aggiorn">
       <option name="closed" value="true" />
@@ -698,7 +693,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716332851457</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1716333114025</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1716333114025</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -751,9 +754,9 @@
     <MESSAGE value="Non so perchè il menu di merda e il field non si aggiornano correttamente" />
     <MESSAGE value="prima prova chat def" />
     <MESSAGE value="agg" />
-    <MESSAGE value="aggiornamento" />
     <MESSAGE value="manage game TUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="manage game TUI" />
+    <MESSAGE value="aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
