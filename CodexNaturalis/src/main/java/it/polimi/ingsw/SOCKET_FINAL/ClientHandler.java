@@ -466,10 +466,6 @@ public class ClientHandler  implements VirtualViewF {
         return null;
     }
 
-    @Override
-    public String getToken() {
-        return null;
-    }
 
 
 

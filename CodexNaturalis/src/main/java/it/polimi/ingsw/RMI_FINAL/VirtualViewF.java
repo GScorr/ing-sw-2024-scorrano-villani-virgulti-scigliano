@@ -47,11 +47,10 @@ public interface VirtualViewF extends Remote {
     public void ChatChoice(String message, int decision) throws IOException;
     public List<SocketRmiControllerObject> getFreeGames() throws IOException, ClassNotFoundException, InterruptedException;
     public VirtualGameServer getGameServer() throws IOException;
-    public String getToken() ;
 
-    public void startSendingHeartbeats();
+    //public void startSendingHeartbeats();
     public void setGameFieldMiniModel() throws IOException;
-    public void startCheckingMessages();
+    //public void startCheckingMessages();
 
     public boolean findRmiController(int id, String player_name) throws IOException, ClassNotFoundException, InterruptedException;
 
