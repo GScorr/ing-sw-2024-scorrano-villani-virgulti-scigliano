@@ -52,10 +52,12 @@ public class clientSocket implements VirtualViewF, Serializable {
     public List<Goal> goalsCard;
 
     public PlayCard startingCard;
-    public boolean startingCardChoosed;
+
 
     public Goal goal_choosed;
 
+    TUI terminal_interface;
+    public String token;
 
 
     public clientSocket(ObjectInputStream input, ObjectOutputStream output) throws IOException, ClassNotFoundException {
@@ -71,7 +73,8 @@ public class clientSocket implements VirtualViewF, Serializable {
                 throw new RuntimeException(e);
             }
         }).start();
-        new TUI(this).runCli();
+        terminal_interface = new TUI(this);
+        terminal_interface.runCli();
     }
 
     //Thread that receive the input Object from the server
@@ -215,11 +218,15 @@ public class clientSocket implements VirtualViewF, Serializable {
     @Override
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException {
         server_proxy.placeCard(choice,x,y,flipped);
+        waitResponse();
     }
 
     @Override
     public void drawCard(SendFunction function) throws IOException, InterruptedException {
-
+        server_proxy.drawCard(function);
+        while (this.miniModel.getState().equals("DRAW_CARD")){
+            buffering();
+        }
     }
 
     @Override
@@ -292,6 +299,33 @@ public class clientSocket implements VirtualViewF, Serializable {
         server_proxy.startingCardIsPlaced();
         waitResponse();
         return this.starting_card_is_placed;
+    }
+
+    @Override
+    public String getToken() throws InterruptedException, IOException {
+        server_proxy.getToken();
+        waitResponse();
+        return this.token;
+    }
+
+    @Override
+    public boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
+        server_proxy.isGoldDeckPresent();
+        waitResponse();
+        return this.checkSizeGoldDeck;
+    }
+
+    @Override
+    public boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
+        server_proxy.isResourceDeckPresent();
+        waitResponse();
+        return this.checkSizeResourcesDeck;
+    }
+
+    @Override
+    public void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
+        server_proxy.getCardsInCenter();
+        waitResponse();
     }
 
 

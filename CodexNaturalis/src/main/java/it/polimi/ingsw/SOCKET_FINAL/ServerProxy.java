@@ -9,6 +9,7 @@ import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
 
@@ -98,13 +99,13 @@ public class ServerProxy implements  Serializable {
         sendMessage(DP_message);
     }
 
-    public void getGoldDeckSize() throws IOException, ClassNotFoundException {
+    public void isGoldDeckPresent() throws IOException, ClassNotFoundException {
         Message DP_message = new getGoldDeckSize();
         sendMessage(DP_message);
 
     }
 
-    public void getResourcesDeckSize() throws IOException, ClassNotFoundException {
+    public void isResourceDeckPresent() throws IOException, ClassNotFoundException {
         Message DP_message = new getResourcesDeckSize();
         sendMessage(DP_message);
     }
@@ -114,7 +115,7 @@ public class ServerProxy implements  Serializable {
         sendMessage(DP_message);
 
     }
-
+/*
     public void peachFromGoldDeck() throws IOException {
         Message DP_message = new peachFromGoldDeck();
         sendMessage(DP_message);
@@ -129,7 +130,12 @@ public class ServerProxy implements  Serializable {
         Message DP_message = new peachFromCardsInCenter(index);
         sendMessage(DP_message);
     }
+*/
 
+    public void drawCard(SendFunction function) throws IOException {
+        Message DP_message = new drawCard(function);
+        sendMessage(DP_message);
+    }
     public void getPoint() throws IOException, ClassNotFoundException {
         Message DP_message = new getPoint();
         sendMessage(DP_message);
@@ -141,4 +147,8 @@ public class ServerProxy implements  Serializable {
         sendMessage(DP_message);
     }
 
+    public void getToken() throws IOException {
+        Message DP_message = new getToken();
+        sendMessage(DP_message);
+    }
 }

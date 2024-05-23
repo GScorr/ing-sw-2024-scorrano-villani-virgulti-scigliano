@@ -1,5 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL.MESSAGES;
 
+import java.io.IOException;
+
 public class CheckResourcesDeckSize extends ResponseMessage{
     public boolean checkSize;
 
@@ -8,4 +10,9 @@ public class CheckResourcesDeckSize extends ResponseMessage{
     }
 
 
+    @Override
+    public void action() throws IOException {
+        super.client.checkSizeResourcesDeck = this.checkSize;
+        super.client.flag_check = false;
+    }
 }
