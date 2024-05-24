@@ -3,15 +3,13 @@ package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.EndGame;
 import it.polimi.ingsw.MODEL.Player.State.PState;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
@@ -26,29 +24,24 @@ public class GameServer implements VirtualGameServer, Serializable {
     public TokenManagerF token_manager = new TokenManagerImplementF();
     public HashMap<Integer, String> num_to_player = new HashMap<>();
     public Map<String, Player> token_to_player = new HashMap<>();
-
     public GameController controller;
     public Queue<SendFunction> functQueue = new LinkedList<>();
     private final int port;
-
     private int id = 0;
-    //public Map<String, PState> token_to_state_deadline = new HashMap<>();ù
-
     public ChatIndexManager chatmanager = new ChatIndexManager();
-
-
     public Map<String,Integer> token_to_index = new HashMap<>();
     public Map<Integer,String> index_to_token = new HashMap<>();
-
+    private Common_Server server;
 
 
     //CONSTRUCTOR
-    public GameServer(String name, int numPlayer, int port) throws IOException {
+    public GameServer(String name, int numPlayer, int port, Common_Server commonServer) throws IOException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         playDisconnected();
         checkDeadline();
         this.port = port;
+        this.server = commonServer;
     }
 
 
@@ -130,10 +123,8 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){ c.pushBack(message);}
-        for (VirtualView c : clientsSocket){
-
-            c.pushBack(message);}}
-    public void addQueue(SendFunction function) throws IOException{functQueue.add(function);}
+    }
+    public void addQueue(SendFunction function) {functQueue.add(function);}
 
     //END GAME
     public void getFinalStandings(String token) throws IOException {
@@ -215,22 +206,21 @@ public class GameServer implements VirtualGameServer, Serializable {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                if(token_to_player.size()>=controller.getGame().getMax_num_player()) {
+                if(token_to_player.size() >= controller.getGame().getMax_num_player()) {
 
-                    synchronized (this) {
+
+                        int last_man_standing = 0;
                         try{if (controller.isAlone()) {
-                            for (String t : token_to_player.keySet()) {
-                                if (!token_to_player.get(t).isDisconnected()) {
-                                    tokenalive = t;
-                                }
-                            }
                             try {
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED!"));
-                                int countdown = 15;
+                                int countdown = 45;
+
                                 while( countdown > 0 && controller.isAlone()) {
-                                    broadcastMessage(new UpdateMessage("\b"+countdown + "SECONDS LEFT"));
+                                    broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
+                                    for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
+                                    if ( last_man_standing == 0 ) server.removeGameServer(this);
                                     countdown--;
-                                    Thread.sleep(1000);
+                                    Thread.sleep(900);
                                 }
                                 if ( countdown == 0 ) {
                                     for (String t : token_to_player.keySet()) {
@@ -239,14 +229,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                                         if ( token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
                                         end = false;
                                     }
-                                }
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            } catch (InterruptedException e) {
+                                }else{broadcastMessage(new UpdateMessage("PLAYER RECONNECTED CONTINUE YOUR GAME")); }
+                            } catch (IOException | InterruptedException e) {
                                 throw new RuntimeException(e);
                             }
-                        }}catch (RuntimeException e){}
-                    }
+                        }}catch (RuntimeException ignored){}
+
                 }
             }
         }).start();

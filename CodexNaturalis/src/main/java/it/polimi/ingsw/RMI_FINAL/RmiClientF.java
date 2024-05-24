@@ -62,7 +62,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             int port = server.getPort(token);
             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-            rmi_controller.connectRMI(this);
+            //rmi_controller.connectRMI(this);
             flag=2;
 
         }
@@ -82,7 +82,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         port = server.createGame(game_name, numplayers, token, player_name,this);
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-        rmi_controller.connectRMI(this);
+        //rmi_controller.connectRMI(this);
         //startSendingHeartbeats();
         startCheckingMessages();
     }
@@ -111,7 +111,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         int port = server.getPort(token);
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-        rmi_controller.connectRMI(this);
+        //rmi_controller.connectRMI(this);
         startCheckingMessages();
         //startSendingHeartbeats();
     }
@@ -155,18 +155,18 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public String getToken() throws InterruptedException, IOException {
+    public String getToken()  {
         return null;
     }
 
     @Override
-    public boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
-        return false;
+    public boolean isGoldDeckPresent() throws IOException {
+        return rmi_controller.getController().getGame().getGold_deck().getNumber()>0;
     }
 
     @Override
-    public boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
-        return false;
+    public boolean isResourceDeckPresent() throws IOException {
+        return rmi_controller.getController().getGame().getResources_deck().getNumber()>0;
     }
 
 
