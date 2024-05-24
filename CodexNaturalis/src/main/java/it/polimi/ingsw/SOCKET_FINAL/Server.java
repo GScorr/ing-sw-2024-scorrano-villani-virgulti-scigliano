@@ -8,7 +8,6 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 import java.io.*;
@@ -26,8 +25,6 @@ public class Server extends UnicastRemoteObject  {
     final ServerSocket listenSocket;
 
     final List<ClientHandler> clients = new ArrayList<>();
-
-    public HashMap<String, Giocatore> token_map = new HashMap<>();
 
     public ArrayList<String> names = new ArrayList<>();
 
