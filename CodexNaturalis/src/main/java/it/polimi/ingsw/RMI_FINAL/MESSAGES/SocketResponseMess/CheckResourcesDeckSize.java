@@ -1,8 +1,10 @@
-package it.polimi.ingsw.RMI_FINAL.MESSAGES;
+package it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess;
+
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.IOException;
 
-public class CheckResourcesDeckSize extends ResponseMessage{
+public class CheckResourcesDeckSize extends ResponseMessage {
     public boolean checkSize;
 
     public CheckResourcesDeckSize(boolean check) {

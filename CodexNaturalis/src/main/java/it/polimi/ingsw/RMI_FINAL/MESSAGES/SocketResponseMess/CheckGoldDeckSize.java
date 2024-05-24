@@ -1,6 +1,8 @@
-package it.polimi.ingsw.RMI_FINAL.MESSAGES;
+package it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess;
 
-public class CheckGoldDeckSize extends ResponseMessage{
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+
+public class CheckGoldDeckSize extends ResponseMessage {
     public boolean checkSize;
 
     public CheckGoldDeckSize(boolean check) {
