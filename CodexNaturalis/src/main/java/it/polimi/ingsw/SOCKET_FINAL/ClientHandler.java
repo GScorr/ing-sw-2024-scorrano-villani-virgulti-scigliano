@@ -259,10 +259,10 @@ public class ClientHandler  implements VirtualViewF {
 
                         } else {
                             this.token = mayToken;
+                            startCheckingMessages();
                             int port = common.getPort(token);
                             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                            this.rmi_controller.connectSocket(this);
                             client_is_connected = true;
                             ResponseMessage s = new checkNameResponse(2);
                             output.writeObject(s);
@@ -280,14 +280,8 @@ public class ClientHandler  implements VirtualViewF {
                         int port = ((CreateGame) DP_message).actionCreateGameMessage();
 
                         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
-                        System.out.println(token + "dentro la chiamata a CreateGame, registry line accepted");
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                        System.out.println(token + "dentro la chiamata a CreateGame, this.rmi_controller accepted");
-                        //this.rmi_controller.connectRMI(this);
-                       // System.out.println(token + "dentro la chiamata a CreateGame, connectSocket accepted");
                         startSendingHeartbeats();
-                        System.out.println(token + "dentro la chiamata a CreateGame, startingSendingHearbits");
-
                     } else if (DP_message instanceof FindRMIControllerMessage) {
                         ((FindRMIControllerMessage) DP_message).setClientHandler(this);
                         if (((FindRMIControllerMessage) DP_message).actionFindRmi()) {
