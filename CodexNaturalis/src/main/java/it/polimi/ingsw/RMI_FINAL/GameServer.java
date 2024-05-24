@@ -16,6 +16,7 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.rmi.NoSuchObjectException;
 import java.util.*;
 
 public class GameServer implements VirtualGameServer, Serializable {
@@ -169,25 +170,19 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseStartingCard(s, true);
                                     setAllStates();
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                } catch (IOException e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("PLACE_CARD")) {
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                } catch (IOException e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("DRAW_CARD")){
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                } catch (IOException e) {}
                             }
                         }
                     }
@@ -213,13 +208,17 @@ public class GameServer implements VirtualGameServer, Serializable {
                         try{if (controller.isAlone()) {
                             for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
                             if ( last_man_standing == 0 ) server.removeGameServer(this);
+                            last_man_standing = 0;
                             try {
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED!"));
                                 int countdown = 45;
                                 while( countdown > 0 && controller.isAlone()) {
                                     broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
                                     for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
-                                    if ( last_man_standing == 0 ) server.removeGameServer(this);
+                                    System.out.println(last_man_standing);
+                                    if ( last_man_standing == 0 ) {
+                                        server.removeGameServer(this);
+                                    }
                                     countdown--;
                                     Thread.sleep(900);
                                 }
@@ -234,7 +233,9 @@ public class GameServer implements VirtualGameServer, Serializable {
                             } catch (IOException | InterruptedException e) {
                                 throw new RuntimeException(e);
                             }
-                        }}catch (RuntimeException ignored){}
+                        }}catch (RuntimeException ignored){} catch (NoSuchObjectException e) {
+                            throw new RuntimeException(e);
+                        }
 
                 }
             }

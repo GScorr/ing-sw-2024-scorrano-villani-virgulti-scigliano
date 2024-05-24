@@ -62,9 +62,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             int port = server.getPort(token);
             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-            //rmi_controller.connectRMI(this);
+            rmi_controller.connectRMI(this);
             flag=2;
-
         }
         startSendingHeartbeats();
         tui.setToken(token);

@@ -7,6 +7,7 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -99,7 +100,7 @@ public class Common_Server {
         return token_to_rmi.get(token).getPort();
     }
 
-    public void removeGameServer(GameServer gs){
+    public void removeGameServer(GameServer gs) throws NoSuchObjectException {
         for( String tok : token_to_rmi.keySet() ) {
             if( token_to_rmi.get(tok).equals(gs) ) {
                 token_to_rmi.remove(tok);
@@ -108,7 +109,8 @@ public class Common_Server {
         for( Integer i : rmi_controllers.keySet() ){
             if( rmi_controllers.get(i).equals(gs) )
             {
-                System.out.println("Delete server -> " + rmi_controllers.remove(i));
+                System.out.println("GAME SERVER DELETE -> " + rmi_controllers.get(i));
+                UnicastRemoteObject.unexportObject(rmi_controllers.get(i), true);
                 rmi_controllers.remove(i);
             }
         }
