@@ -162,7 +162,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     chooseGoal(s, 1);
                                     setAllStates();
                                 } catch (IOException e) {
-                                    throw new RuntimeException(e);
+                                    System.out.println(e.getMessage());
                                 }
                             }
                             if ( tmp.getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD") && !tmp.isFirstPlaced()) {
@@ -211,10 +211,11 @@ public class GameServer implements VirtualGameServer, Serializable {
 
                         int last_man_standing = 0;
                         try{if (controller.isAlone()) {
+                            for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
+                            if ( last_man_standing == 0 ) server.removeGameServer(this);
                             try {
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED!"));
                                 int countdown = 45;
-
                                 while( countdown > 0 && controller.isAlone()) {
                                     broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
                                     for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }

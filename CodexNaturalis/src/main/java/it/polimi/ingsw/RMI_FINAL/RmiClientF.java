@@ -31,7 +31,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private final StringCostant stringcostant = new StringCostant();
     private TUI tui;
 
-    public RmiClientF(VirtualServerF server) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
+    public RmiClientF(VirtualServerF server) throws IOException {
         this.server = server;
     }
 

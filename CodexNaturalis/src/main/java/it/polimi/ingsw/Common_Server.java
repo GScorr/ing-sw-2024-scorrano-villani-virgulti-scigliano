@@ -108,7 +108,7 @@ public class Common_Server {
         for( Integer i : rmi_controllers.keySet() ){
             if( rmi_controllers.get(i).equals(gs) )
             {
-                System.out.println("Elimino");
+                System.out.println("Delete server -> " + rmi_controllers.remove(i));
                 rmi_controllers.remove(i);
             }
         }
