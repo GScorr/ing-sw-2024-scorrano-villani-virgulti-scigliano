@@ -57,7 +57,7 @@ public class FindRMIControllerMessage implements Message, Serializable {
         this.player_name = player_name;
     }
 
-    public boolean actionFindRmi() throws IOException {
+    public boolean actionFindRmi() throws IOException, InterruptedException {
         return common.findRmiController(id,token,player_name,clientHandler);
     }
 

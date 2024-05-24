@@ -7,6 +7,7 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -30,7 +31,7 @@ public class Common_Server {
     public Map<String, GameServer> getTtoR() throws IOException {return token_to_rmi;}
     public Map<Integer, GameServer> getListRmiController() throws IOException {return rmi_controllers;}
 
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port,this);
         gameServer.addPlayer(p_token,player_name, client,true);
@@ -44,8 +45,8 @@ public class Common_Server {
     }
 
     private int getAvailablePort(){port++;return port;}
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException, InterruptedException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException, InterruptedException {
         rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
         return true;}
 
@@ -99,7 +100,7 @@ public class Common_Server {
         return token_to_rmi.get(token).getPort();
     }
 
-    public void removeGameServer(GameServer gs){
+    public void removeGameServer(GameServer gs) throws NoSuchObjectException {
         for( String tok : token_to_rmi.keySet() ) {
             if( token_to_rmi.get(tok).equals(gs) ) {
                 token_to_rmi.remove(tok);
@@ -108,13 +109,15 @@ public class Common_Server {
         for( Integer i : rmi_controllers.keySet() ){
             if( rmi_controllers.get(i).equals(gs) )
             {
-                System.out.println("Delete server -> " + rmi_controllers.remove(i));
+                System.out.println("GAME SERVER DELETE -> " + rmi_controllers.get(i));
+                UnicastRemoteObject.unexportObject(rmi_controllers.get(i), true);
+                rmi_controllers.remove(i);
                 rmi_controllers.remove(i);
             }
         }
     }
 
-    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
 
         GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
@@ -141,8 +144,8 @@ public class Common_Server {
                 token_to_rmi.get(key).getTtoP().get(key).disconnect();
                 System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
                 token_manager.deleteVW(key);
+                try{token_to_rmi.get(key).checkEndDisconnect();}catch (ConcurrentModificationException ignored){}
                 token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );
-                token_to_rmi.get(key).clientsSocket.remove( token_to_rmi.get(key).token_manager.getSocketTokens().get(key)  );
                 token_to_rmi.get(key).token_manager.deleteVW(key);
             }
             }
