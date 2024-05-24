@@ -361,7 +361,7 @@ public class TUI implements Serializable {
         }
 
 
-    private void buffering() throws  InterruptedException{
+    public void buffering() throws  InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
         System.out.print("/");
