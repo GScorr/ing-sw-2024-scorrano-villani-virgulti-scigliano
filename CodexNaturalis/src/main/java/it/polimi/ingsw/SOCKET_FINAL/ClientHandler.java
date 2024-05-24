@@ -272,8 +272,8 @@ public class ClientHandler  implements VirtualViewF {
                     DP_message.setCommonServer(this.common);
 
                     if ((DP_message instanceof CheckNameMessage)) {
-                        String mayToken = ((CheckNameMessage) DP_message).checkNameMessageAction();
-                        System.out.println(mayToken);
+                        String nome = ((CheckNameMessage) DP_message).nome;
+                        String mayToken =  common.checkName(nome,this);
                         if (mayToken.equals("true")) {
                             this.name = ((CheckNameMessage) DP_message).nome;
                             this.token = common.createToken(this);
@@ -286,7 +286,6 @@ public class ClientHandler  implements VirtualViewF {
                             output.writeObject(s);
                             output.flush();
                             output.reset();
-
                         } else {
                             this.token = mayToken;
                             startCheckingMessages();
