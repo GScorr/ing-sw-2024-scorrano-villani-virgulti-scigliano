@@ -42,6 +42,11 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
     public void putPair(String s, VirtualViewF client){
         tokens.put(s,client);
     }
+
+    public VirtualViewF getVal(String token){
+        return tokens.get(token);
+    }
+
     public Map<String, VirtualViewF> getTokens(){
         return this.tokens;
     }

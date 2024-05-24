@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Disconnesioni Socket sembrano funzionare" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="fix bugs disconnessione">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -160,7 +162,7 @@
       <recent name="it.polimi.ingsw.MODEL.Game" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Client">
+  <component name="RunManager" selected="Application.Common_Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -304,14 +306,6 @@
       <workItem from="1716224885933" duration="14192000" />
       <workItem from="1716395753198" duration="142000" />
       <workItem from="1716397301820" duration="3628000" />
-    </task>
-    <task id="LOCAL-00105" summary="cambio common server">
-      <option name="closed" value="true" />
-      <created>1715443892635</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1715443892635</updated>
     </task>
     <task id="LOCAL-00106" summary="inizio lavori common server, passaggio funzioni">
       <option name="closed" value="true" />
@@ -689,15 +683,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716544870998</updated>
     </task>
-    <task id="LOCAL-00153" summary="Disconnesioni Socket sembrano funzionare">
+    <task id="LOCAL-00153" summary="fix bugs disconnessione">
       <option name="closed" value="true" />
-      <created>1716561508279</created>
+      <created>1716562143350</created>
       <option name="number" value="00153" />
       <option name="presentableId" value="LOCAL-00153" />
       <option name="project" value="LOCAL" />
-      <updated>1716561508280</updated>
+      <updated>1716562143350</updated>
     </task>
-    <option name="localTasksCounter" value="154" />
+    <task id="LOCAL-00154" summary="fix bugs disconnessione">
+      <option name="closed" value="true" />
+      <created>1716562187869</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1716562187869</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -732,6 +734,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="insert card successful" />
     <MESSAGE value="aggiorn" />
     <MESSAGE value="cambio common server" />
     <MESSAGE value="inizio lavori common server, passaggio funzioni" />
@@ -756,8 +759,7 @@
     <MESSAGE value="agiornamento" />
     <MESSAGE value="bug fixing tui, rmi client, game server" />
     <MESSAGE value="fix bugs disconnessione" />
-    <MESSAGE value="Disconnesioni Socket sembrano funzionare" />
-    <option name="LAST_COMMIT_MESSAGE" value="Disconnesioni Socket sembrano funzionare" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bugs disconnessione" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

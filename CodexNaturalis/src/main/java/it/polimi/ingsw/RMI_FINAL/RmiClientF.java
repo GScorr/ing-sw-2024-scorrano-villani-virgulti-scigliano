@@ -62,7 +62,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             int port = server.getPort(token);
             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-            rmi_controller.connectRMI(this);
+            //rmi_controller.connectRMI(this);
             flag=2;
         }
         startSendingHeartbeats();
@@ -191,9 +191,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     Thread.sleep(150);
                     server.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
-                    if(cracked==0) {
-                        cracked = 1;
-                        System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
+                        System.err.println("\n              [SERVER ERROR] \n           SERVER DISCONNECTED");
+                        while(true) {
+                            try {tui.buffering();} catch (InterruptedException ignored) {}
                     }
                 }
             }
