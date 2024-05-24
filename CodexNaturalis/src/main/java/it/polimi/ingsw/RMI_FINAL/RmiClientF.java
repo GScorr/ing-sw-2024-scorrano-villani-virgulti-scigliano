@@ -76,7 +76,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
     public List<SocketRmiControllerObject> getFreeGames() throws IOException {return server.getFreeGamesSocket();}
-    public void createGame(String game_name, int numplayers, String player_name) throws IOException, NotBoundException {
+    public void createGame(String game_name, int numplayers, String player_name) throws IOException, NotBoundException, InterruptedException {
         int port;
         port = server.createGame(game_name, numplayers, token, player_name,this);
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
@@ -88,7 +88,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
     public void manageGame(boolean endgame) throws IOException {
-        if(endgame) rmi_controller.getPoints(token);
+        if(!endgame) rmi_controller.getPoints(token);
         else rmi_controller.getFinalStandings(token);
     }
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException {
@@ -102,7 +102,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Thread.sleep(750);
     }
 
-    public boolean findRmiController(int id, String player_name) throws IOException {
+    public boolean findRmiController(int id, String player_name) throws IOException, InterruptedException {
         return server.findRmiController(id, token, player_name,this);
     }
 
@@ -134,7 +134,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public void chooseGoal(int i) throws IOException {
+    public void chooseGoal(int i) throws IOException, InterruptedException {
         rmi_controller.chooseGoal(token,i);
     }
 
@@ -144,7 +144,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public void chooseStartingCard(boolean b) throws IOException {
+    public void chooseStartingCard(boolean b) throws IOException, InterruptedException {
         rmi_controller.chooseStartingCard(token,b);
     }
 
@@ -155,7 +155,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public String getToken()  {
-        return null;
+        return this.token;
     }
 
     @Override

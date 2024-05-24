@@ -26,10 +26,10 @@ public class RmiServerF implements VirtualServerF {
     public Map<String, GameServer> getTtoR() throws IOException {return common.getTtoR();}
     public Map<Integer, GameServer> getListRmiController() throws IOException {return common.getListRmiController();}
     @Override
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
         return common.createGame( name , num_player, p_token, player_name, client);}
     @Override
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {return common.addPlayer(game_id, p_token, name, client);}
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException, InterruptedException {return common.addPlayer(game_id, p_token, name, client);}
     @Override
     public List<VirtualViewF> getListClient() throws IOException {return common.getListClient();}
     //returns the list of all game controllers that are accessible ( not full )
@@ -43,7 +43,7 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public int getPort(String token) throws IOException {return common.getPort(token);}
     @Override
-    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {return  common.findRmiController(game_id, p_token, player_name, client);}
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {return  common.findRmiController(game_id, p_token, player_name, client);}
 
     @Override
     public GameServer getRmiController(String token) throws IOException{return common.getRmiController(token);}

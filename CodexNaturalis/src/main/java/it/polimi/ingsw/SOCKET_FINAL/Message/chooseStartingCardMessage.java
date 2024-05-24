@@ -51,7 +51,7 @@ public class chooseStartingCardMessage implements Message, Serializable {
     }
 
     @Override
-    public void action() throws IOException {
+    public void action() throws IOException, InterruptedException {
         rmi_controller.chooseStartingCard(token,flipped);
     }
 

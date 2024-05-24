@@ -340,6 +340,8 @@ public class ClientHandler  implements VirtualViewF {
             } catch (NotBoundException e) {
                 client_is_connected = false;
                 throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }

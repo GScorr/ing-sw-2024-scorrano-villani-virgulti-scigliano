@@ -31,12 +31,12 @@ public class TUI implements Serializable {
 
 
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
-            String player_name = selectNamePlayer();
-            gameAccess(player_name);
-            waitFullGame();
-            chooseGoalState();
-            chooseStartingCardState();
-            manageGame();
+        String player_name = selectNamePlayer();
+        gameAccess(player_name);
+        waitFullGame();
+        chooseGoalState();
+        chooseStartingCardState();
+        manageGame();
     }
 
 
@@ -65,11 +65,11 @@ public class TUI implements Serializable {
             flag = client.checkName(player_name);
             if(flag==0){
                 System.out.println(stringcostant.name_is_not_valid);
-                newClient=false;
+                newClient=true;
             }
             else if(flag==2) {
                 System.out.println(player_name + " RECONNECTED!");
-                newClient=true;
+                newClient=false;
             }
             else{
                 newClient=true;
@@ -81,8 +81,10 @@ public class TUI implements Serializable {
     private void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if(newClient) {
             makeChoice(player_name);
-            System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");}
+            System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");
+        }
     }
+
 
     private void makeChoice(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if (!client.areThereFreeGames()) {
@@ -146,7 +148,7 @@ public class TUI implements Serializable {
     }
 
     private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
-
+        while( client.getMiniModel().getState().equals("NOT_IN_A_GAME") ){ buffering();}
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
             boolean checkGoal = client.isGoalCardPlaced();
 
