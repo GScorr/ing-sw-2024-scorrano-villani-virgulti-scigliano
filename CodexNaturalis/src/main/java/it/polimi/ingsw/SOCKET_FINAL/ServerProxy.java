@@ -3,6 +3,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 
 import it.polimi.ingsw.CONSTANTS.Constants;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
@@ -149,6 +150,16 @@ public class ServerProxy implements  Serializable {
 
     public void getToken() throws IOException {
         Message DP_message = new getToken();
+        sendMessage(DP_message);
+    }
+
+    public void chattingGlobal(ChatMessage chatMessage) throws IOException {
+        Message DP_message = new chatGlobal(chatMessage);
+        sendMessage(DP_message);
+    }
+
+    public void chattingMoment(int myIndex, int decision, ChatMessage chatMessage) throws IOException {
+        Message DP_message = new chatMoment(myIndex,decision,chatMessage);
         sendMessage(DP_message);
     }
 }

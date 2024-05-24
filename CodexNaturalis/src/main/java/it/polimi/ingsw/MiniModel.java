@@ -250,6 +250,7 @@ public class MiniModel implements Serializable {
     }
 
     public boolean showchat(int decision) {
+        System.out.println("Il numero di player è " + num_players);
         if(decision>num_players+1 || decision==my_index){
             System.out.println("Wrong choice, insert again");
             return false;

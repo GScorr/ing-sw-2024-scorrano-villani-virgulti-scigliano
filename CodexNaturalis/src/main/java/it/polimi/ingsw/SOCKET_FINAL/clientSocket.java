@@ -58,7 +58,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     TUI terminal_interface;
     public String token;
-
+    private boolean flag_Server_Disconneted = false;
 
     public clientSocket(ObjectInputStream input, ObjectOutputStream output) throws IOException, ClassNotFoundException {
         this.server_proxy = new ServerProxy(output);
@@ -88,9 +88,13 @@ public class clientSocket implements VirtualViewF, Serializable {
                         s.action();
                     }
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    if(! flag_Server_Disconneted){
+                        System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
+                        flag_Server_Disconneted = true;
+                    }
+
                 } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("errore startCheckingMessagesSocket ");
                 }
             }
         }).start();
@@ -235,7 +239,12 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void ChatChoice(String message, int decision) throws IOException {
-
+        if(decision==miniModel.getNum_players()+1){
+            server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+        }
+        else{
+            server_proxy.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message,miniModel.getMy_player()));
+        }
     }
 
 
