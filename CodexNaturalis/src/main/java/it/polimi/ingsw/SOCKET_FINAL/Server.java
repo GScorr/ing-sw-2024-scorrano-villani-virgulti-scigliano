@@ -35,7 +35,7 @@ public class Server extends UnicastRemoteObject  {
     public Server(ServerSocket listenSocket, Common_Server common) throws IOException {
         this.common = common;
         this.listenSocket = listenSocket;
-
+       // common.startHeartbeatChecker();
     }
 
     public void runServer() throws IOException, NotBoundException {

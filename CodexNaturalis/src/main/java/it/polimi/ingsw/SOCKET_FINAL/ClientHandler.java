@@ -34,14 +34,12 @@ public class ClientHandler  implements VirtualViewF {
     final ObjectInputStream input;
     final ObjectOutputStream output;
 
-
     public Common_Server common;
     public String token;
     public String name;
 
     private VirtualGameServer rmi_controller;
     public boolean client_is_connected = true;
-
 
     public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common ) throws IOException, NotBoundException {
         this.server = server;
@@ -110,6 +108,7 @@ public class ClientHandler  implements VirtualViewF {
         ResponseMessage s = new StringResponse(string);
         output.writeObject(s);
         output.flush();
+        output.reset();
     }
 
     @Override
@@ -148,6 +147,37 @@ public class ClientHandler  implements VirtualViewF {
         output.writeObject(s);
         output.flush();
         output.reset();
+    }
+
+
+
+    @Override
+    public void addChat(int idx, ChatMessage message) throws IOException {
+        ResponseMessage s = new addChatResponse(idx,message);
+        output.writeObject(s);
+        output.flush();
+        output.reset();
+    }
+
+    @Override
+    public void insertId(int id) throws IOException {
+        ResponseMessage s = new insertIdResponse(id);
+        output.writeObject(s);
+        output.flush();
+        output.reset();
+    }
+
+    @Override
+    public void insertPlayer(Player player) throws IOException {
+        ResponseMessage s = new insertPlayerResponse(player);
+        output.writeObject(s);
+        output.flush();
+        output.reset();
+    }
+
+    @Override
+    public void insertNumPlayers(int numPlayersMatch) throws IOException {
+        ResponseMessage s = new NumPlayerResponse(numPlayersMatch);
     }
     public void startCheckingMessages() {
         new Thread(() -> {
@@ -350,25 +380,6 @@ public class ClientHandler  implements VirtualViewF {
     // --------------------- THESE METHODS ARE NEVER CALLED -------------------
 
 
-    @Override
-    public void addChat(int idx, ChatMessage message) throws IOException {
-
-    }
-
-    @Override
-    public void insertId(int id) throws IOException {
-
-    }
-
-    @Override
-    public void insertNumPlayers(int numPlayersMatch) throws IOException {
-
-    }
-
-    @Override
-    public void insertPlayer(Player player) throws IOException {
-
-    }
 
     @Override
     public int checkName(String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {

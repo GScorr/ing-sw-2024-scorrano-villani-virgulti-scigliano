@@ -4,9 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="fix bugs disconnessione">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Socket aggiunta disconnessioni">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/SocketResponseMess/NumPlayerResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/SocketResponseMess/addChatResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/SocketResponseMess/insertIdResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/SocketResponseMess/insertPlayerResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chatGlobal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chatMoment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ServerProxy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/clientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/clientSocket.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -308,14 +318,7 @@
       <workItem from="1716224885933" duration="14192000" />
       <workItem from="1716395753198" duration="142000" />
       <workItem from="1716397301820" duration="3628000" />
-    </task>
-    <task id="LOCAL-00102" summary="aggiorn">
-      <option name="closed" value="true" />
-      <created>1715359435348</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1715359435348</updated>
+      <workItem from="1716556715584" duration="2481000" />
     </task>
     <task id="LOCAL-00103" summary="aggiorn">
       <option name="closed" value="true" />
@@ -701,7 +704,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716542474004</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="Socket aggiunta disconnessioni">
+      <option name="closed" value="true" />
+      <created>1716544858379</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1716544858379</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,7 +747,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="insert card successful" />
     <MESSAGE value="aggiorn" />
     <MESSAGE value="cambio common server" />
     <MESSAGE value="inizio lavori common server, passaggio funzioni" />
@@ -761,7 +771,8 @@
     <MESSAGE value="agiornamento" />
     <MESSAGE value="bug fixing tui, rmi client, game server" />
     <MESSAGE value="fix bugs disconnessione" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bugs disconnessione" />
+    <MESSAGE value="Socket aggiunta disconnessioni" />
+    <option name="LAST_COMMIT_MESSAGE" value="Socket aggiunta disconnessioni" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

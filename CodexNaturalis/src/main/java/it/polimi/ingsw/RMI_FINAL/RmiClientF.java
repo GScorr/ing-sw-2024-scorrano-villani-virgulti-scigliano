@@ -229,7 +229,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public VirtualGameServer getGameServer(){ return rmi_controller;}
 
 
-
     public void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
     public void printString(String s) {System.out.println(s);}
 
