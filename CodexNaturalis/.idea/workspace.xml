@@ -163,7 +163,7 @@
       <recent name="it.polimi.ingsw.MODEL.Game" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Client">
+  <component name="RunManager" selected="Application.Common_Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />

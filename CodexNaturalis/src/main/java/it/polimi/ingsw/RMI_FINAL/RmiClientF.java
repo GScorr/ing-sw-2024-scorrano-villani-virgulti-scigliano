@@ -191,7 +191,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     Thread.sleep(150);
                     server.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
-                        System.err.println("\n            [SERVER ERROR] \n           SERVER DISCONNECTED");
+                        System.err.println("\n              [SERVER ERROR] \n           SERVER DISCONNECTED");
                         while(true) {
                             try {tui.buffering();} catch (InterruptedException ignored) {}
                     }
