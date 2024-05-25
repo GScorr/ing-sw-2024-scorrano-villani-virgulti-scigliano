@@ -39,6 +39,12 @@ public class GameController {
     private ImageView card1, card2, card3;
     private boolean c1, c2, c3;
 
+    private double initialX;
+    private double initialY;
+    private double initialTranslateX;
+    private double initialTranslateY;
+
+
     public void handleShowChatAction() { //imposto la visibilità del box della chat
         chatBox.setVisible(!chatBox.isVisible());
     }
@@ -127,6 +133,39 @@ public class GameController {
         File file = new File("src/resources/img/"+code+"/00"+numCarta+".png");
         Image image = new Image(file.toURI().toString());
         card.setImage(image);
+    }
+
+    // Metodo chiamato quando il mouse viene premuto sulla carta
+    @FXML
+    public void onMousePressedHandler(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getTarget();
+        initialX = event.getSceneX();
+        initialY = event.getSceneY();
+        initialTranslateX = imageView.getTranslateX();
+        initialTranslateY = imageView.getTranslateY();
+    }
+
+    // Metodo chiamato quando la carta viene trascinata
+    @FXML
+    public void onMouseDraggedHandler(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getTarget();
+        double offsetX = event.getSceneX() - initialX;
+        double offsetY = event.getSceneY() - initialY;
+        imageView.setTranslateX(initialTranslateX + offsetX);
+        imageView.setTranslateY(initialTranslateY + offsetY);
+    }
+
+    // Metodo chiamato quando il mouse viene rilasciato dopo il trascinamento della carta
+    @FXML
+    public void onMouseReleasedHandler(MouseEvent event) {
+
+        ImageView imageView = (ImageView) event.getTarget();
+        double offsetX = event.getSceneX() - initialX;
+        double offsetY = event.getSceneY() - initialY;
+        imageView.setTranslateX(initialTranslateX + offsetX);
+        imageView.setTranslateY(initialTranslateY + offsetY);
+
+
     }
 
 
