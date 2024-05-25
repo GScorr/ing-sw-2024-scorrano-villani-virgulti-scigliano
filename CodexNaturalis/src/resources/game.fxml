@@ -10,10 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.BorderPane?>
 
 <AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.CONTROLLER.GameController">
+
    <children>
       <!-- StackPane per lo sfondo del tavolo -->
       <StackPane prefHeight="1024.0" prefWidth="1024.0">
@@ -24,13 +25,38 @@
          </ImageView>
       </StackPane>
 
-      <!-- Resto del tuo layout -->
+      <!-- Aggiungi questo codice sotto gli altri nodi all'interno di AnchorPane -->
+      <Pane fx:id="campoDaGioco" layoutX="212.0" layoutY="100.0" prefHeight="620.0" prefWidth="640.0" style="-fx-background-color: rgba(144,238,144,0.13); -fx-border-color: black;">
+         <!-- Qui puoi aggiungere gli elementi del campo da gioco, come carte o altri elementi -->
+      </Pane>
 
       <!-- Bottone per mostrare il punteggio -->
       <Button id="ShowScoreTable" fx:id="showScoreTable" layoutX="33.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowTableScore" prefHeight="30.0" prefWidth="128.0" text="Show score table" />
 
       <!-- Bottone per mostrare la chat -->
       <Button id="ShowChat" fx:id="showChat" layoutX="864.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowChatAction" prefHeight="30.0" prefWidth="128.0" text="Show chat" />
+
+
+      <!-- Spazio per le immagini -->
+      <VBox layoutX="864.0" layoutY="73.0" prefHeight="200.0" prefWidth="128.0" spacing="5">
+         <!-- Immagine 1 -->
+         <ImageView fitHeight="80.0" fitWidth="128.0" fx:id="commonGoal1" preserveRatio="true" onMouseClicked="#clickOnGoal"/>
+         <!-- Immagine 2 -->
+         <ImageView fitHeight="80.0" fitWidth="128.0" fx:id="commonGoal2" preserveRatio="true" onMouseClicked="#clickOnGoal"/>
+         <!-- Immagine 3 -->
+         <ImageView fitHeight="80.0" fitWidth="128.0" fx:id="Goal1" preserveRatio="true" visible="false" onMouseClicked="#clickOnGoal"/>
+         <!-- Immagine 4 -->
+         <ImageView fitHeight="80.0" fitWidth="128.0" fx:id="Goal2" preserveRatio="true" visible="false" onMouseClicked="#clickOnGoal"/>
+         <!-- Immagine 5 -->
+         <ImageView fitHeight="80.0" fitWidth="128.0" fx:id="startingCard" preserveRatio="true"
+                    onMousePressed="#onMousePressedHandler"
+                    onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
+      </VBox>
+
+      <!-- Bottone per scegliere gli obbiettivi -->
+      <Button id="chooseGoal" fx:id="chooseGoal" mnemonicParsing="false"
+              onAction="#showGoalToChose" prefHeight="30.0" prefWidth="128.0" text="chooseGoal" visible="true"
+              AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
 
       <!-- Box per la chat -->
       <VBox fx:id="chatBox" layoutX="585.0" layoutY="73.0" prefHeight="400.0" prefWidth="407.0" visible="false">
@@ -59,29 +85,36 @@
          </image>
       </ImageView>
 
-      <!-- HBox per le carte in mano -->
-      <HBox id="cardsInHandsFrontSide" layoutX="212.0" layoutY="820.0" prefHeight="194.0" prefWidth="600.0" spacing="10" alignment="CENTER">
-         <!-- Carta 1 -->
-         <Pane id="card1F" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;">
+      <HBox layoutX="350.0" layoutY="400.0" prefHeight="100.0" prefWidth="200.0">
+         <ImageView fitHeight="196.0" fitWidth="200.0" fx:id="chooseGoal1" preserveRatio="true" visible="false" onMouseClicked="#clickOnChoosedGoal"/>
+         <ImageView fitHeight="196.0" fitWidth="200.0" fx:id="chooseGoal2" preserveRatio="true" visible="false" onMouseClicked="#clickOnChoosedGoal"/>
+      </HBox>
+
+      <!-- Contenitore per le carte incorniciate -->
+      <VBox layoutX="212.0" layoutY="820.0" prefHeight="214.0" prefWidth="620.0" style="-fx-border-color: white; -fx-border-width: 2; -fx-padding: 10;">
+         <!-- HBox per le carte in mano -->
+         <HBox id="cardsInHandsFrontSide" prefHeight="194.0" prefWidth="600.0" spacing="10" alignment="CENTER">
+            <!-- Carta 1 -->
             <children>
                <ImageView id="card1" fx:id="card1" fitHeight="196.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
-                          onMouseClicked="#changeSide" onMousePressed="#onMousePressedHandler" onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
+                          onMousePressed="#onMousePressedHandler"
+                          onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
             </children>
-         </Pane>
-         <!-- Carta 2 -->
-         <Pane id="card2F" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;"  >
+            <!-- Carta 2 -->
             <children>
                <ImageView id="card2" fx:id="card2" fitHeight="196.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
-                          onMouseClicked="#changeSide" onMousePressed="#onMousePressedHandler" onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
+                          onMousePressed="#onMousePressedHandler"
+                          onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
             </children>
-         </Pane>
-         <!-- Carta 3 -->
-         <Pane id="card3F" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;">
+            <!-- Carta 3 -->
             <children>
                <ImageView id="card3" fx:id="card3" fitHeight="196.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
-                          onMouseClicked="#changeSide" onMousePressed="#onMousePressedHandler" onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
+                          onMousePressed="#onMousePressedHandler"
+                          onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
             </children>
-         </Pane>
-      </HBox>
+         </HBox>
+      </VBox>
    </children>
+
+
 </AnchorPane>
