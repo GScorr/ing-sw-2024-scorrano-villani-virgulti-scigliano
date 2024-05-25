@@ -11,54 +11,77 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.StackPane?>
+
 <AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.CONTROLLER.GameController">
-<children>
-   <Button id="ShowScoreTable" fx:id="showScoreTable" layoutX="33.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowTableScore" prefHeight="30.0" prefWidth="128.0" text="Show score table" />
-   <Button id="ShowChat" fx:id="showChat" layoutX="864.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowChatAction" prefHeight="30.0" prefWidth="128.0" text="Show chat" />
-   <!-- Nodo per la chat -->
+   <children>
+      <!-- StackPane per lo sfondo del tavolo -->
+      <StackPane prefHeight="1024.0" prefWidth="1024.0">
+         <ImageView fx:id="table" fitWidth="1024.0" fitHeight="1024.0" preserveRatio="false">
+            <image>
+               <Image url="@img/backgroundTable.png" />
+            </image>
+         </ImageView>
+      </StackPane>
+
+      <!-- Resto del tuo layout -->
+
+      <!-- Bottone per mostrare il punteggio -->
+      <Button id="ShowScoreTable" fx:id="showScoreTable" layoutX="33.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowTableScore" prefHeight="30.0" prefWidth="128.0" text="Show score table" />
+
+      <!-- Bottone per mostrare la chat -->
+      <Button id="ShowChat" fx:id="showChat" layoutX="864.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowChatAction" prefHeight="30.0" prefWidth="128.0" text="Show chat" />
+
+      <!-- Box per la chat -->
       <VBox fx:id="chatBox" layoutX="585.0" layoutY="73.0" prefHeight="400.0" prefWidth="407.0" visible="false">
-         <!-- Lista per visualizzare i messaggi -->
+         <!-- Lista dei messaggi -->
          <ListView fx:id="chatMessages" prefHeight="300.0" prefWidth="400.0" />
 
-         <!-- Campo di testo per l'input del messaggio -->
+         <!-- Campo di testo per l'input dei messaggi -->
          <HBox>
             <TextField fx:id="messageInput" prefHeight="30.0" prefWidth="300.0" promptText="Scrivi messaggio">
                <font>
                   <Font size="14.0" />
-               </font></TextField>
+               </font>
+            </TextField>
             <Button onAction="#handleSendMessage" prefHeight="30.0" prefWidth="106.0" text="Send Message">
                <font>
                   <Font size="13.0" />
-               </font></Button>
+               </font>
+            </Button>
          </HBox>
       </VBox>
+
+      <!-- Immagine del punteggio -->
       <ImageView fx:id="tableScoreImage" fitHeight="611.0" fitWidth="454.0" layoutX="59.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@img/scoreTable.png" />
          </image>
       </ImageView>
-   <HBox id="cardsInHandsFrontSide" layoutX="212.0" layoutY="820.0" prefHeight="194.0" prefWidth="600.0" spacing="10" alignment="CENTER">
-      <children>
+
+      <!-- HBox per le carte in mano -->
+      <HBox id="cardsInHandsFrontSide" layoutX="212.0" layoutY="820.0" prefHeight="194.0" prefWidth="600.0" spacing="10" alignment="CENTER">
+         <!-- Carta 1 -->
          <Pane id="card1F" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;">
             <children>
                <ImageView id="card1" fx:id="card1" fitHeight="196.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
-                          onMouseClicked="#changeSide"/>
+                          onMouseClicked="#changeSide" onMousePressed="#onMousePressedHandler" onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
             </children>
          </Pane>
+         <!-- Carta 2 -->
          <Pane id="card2F" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;"  >
             <children>
                <ImageView id="card2" fx:id="card2" fitHeight="196.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
-                          onMouseClicked="#changeSide"/>
+                          onMouseClicked="#changeSide" onMousePressed="#onMousePressedHandler" onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
             </children>
          </Pane>
+         <!-- Carta 3 -->
          <Pane id="card3F" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;">
             <children>
                <ImageView id="card3" fx:id="card3" fitHeight="196.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
-                          onMouseClicked="#changeSide"/>
+                          onMouseClicked="#changeSide" onMousePressed="#onMousePressedHandler" onMouseDragged="#onMouseDraggedHandler" onMouseReleased="#onMouseReleasedHandler"/>
             </children>
          </Pane>
-      </children>
-   </HBox>
-
-</children>
+      </HBox>
+   </children>
 </AnchorPane>
