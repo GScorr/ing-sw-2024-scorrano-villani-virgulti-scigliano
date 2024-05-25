@@ -36,45 +36,51 @@ public interface VirtualViewF extends Remote {
 
     //public int selectNamePlayer() throws IOException, NotBoundException;
 
-    public int checkName(String playerName) throws IOException, NotBoundException;
+    public int checkName(String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
 
-    public boolean areThereFreeGames () throws IOException, NotBoundException;
+    public boolean areThereFreeGames () throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
 
-    public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException;
+    public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
     public void manageGame(boolean endgame) throws IOException;
-    public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException;
+    public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException;
     public void drawCard(SendFunction function) throws IOException, InterruptedException;
     public void ChatChoice(String message, int decision) throws IOException;
-    public List<SocketRmiControllerObject> getFreeGames() throws IOException;
+    public List<SocketRmiControllerObject> getFreeGames() throws IOException, ClassNotFoundException, InterruptedException;
     public VirtualGameServer getGameServer() throws IOException;
-    public String getToken() ;
 
-    public void startSendingHeartbeats();
+    //public void startSendingHeartbeats();
     public void setGameFieldMiniModel() throws IOException;
-    public void startCheckingMessages();
+    //public void startCheckingMessages();
 
-    public boolean findRmiController(int id, String player_name) throws IOException;
+    public boolean findRmiController(int id, String player_name) throws IOException, ClassNotFoundException, InterruptedException;
 
-    public void connectGameServer() throws IOException, NotBoundException;
+    public void connectGameServer() throws IOException, NotBoundException, InterruptedException;
 
-    public boolean isGoalCardPlaced() throws IOException;
+    public boolean isGoalCardPlaced() throws IOException, ClassNotFoundException, InterruptedException;
 
     public String getGoalPlaced() throws IOException;
 
 
-    public String getFirstGoal() throws IOException;
+    public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException;
 
 
     public String getSecondGoal() throws IOException;
 
-    public void chooseGoal(int i) throws IOException;
+    public void chooseGoal(int i) throws IOException, InterruptedException;
 
 
-    public void showStartingCard() throws IOException;
+    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException;
 
 
-    public void chooseStartingCard(boolean b) throws IOException;
+    public void chooseStartingCard(boolean b) throws IOException, InterruptedException;
 
-    public boolean isFirstPlaced() throws IOException;
+    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException;
 
+    String getToken() throws InterruptedException, IOException;
+
+    boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException;
+
+    boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException;
+
+    void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException;
 }

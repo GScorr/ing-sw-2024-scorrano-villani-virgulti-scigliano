@@ -20,22 +20,16 @@ public class RmiServerF implements VirtualServerF {
     public synchronized void connect(VirtualViewF client)throws IOException{common.connect(client);}
     @Override
     public String createToken(VirtualViewF client) throws IOException {return common.createToken(client);}
-
-
-
-    public String createTokenSocket(VirtualView client) throws IOException {return common.createTokenSocket(client);}
     @Override
     public Map<String, Player> getTtoP() throws IOException {return common.getTtoP();}
     @Override
     public Map<String, GameServer> getTtoR() throws IOException {return common.getTtoR();}
     public Map<Integer, GameServer> getListRmiController() throws IOException {return common.getListRmiController();}
     @Override
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
         return common.createGame( name , num_player, p_token, player_name, client);}
-    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws IOException {return common.createGameSocket(name, num_player, p_token, player_name, client);}
     @Override
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {return common.addPlayer(game_id, p_token, name, client);}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {return common.addPlayerSocket(game_id, p_token, name, client);}
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException, InterruptedException {return common.addPlayer(game_id, p_token, name, client);}
     @Override
     public List<VirtualViewF> getListClient() throws IOException {return common.getListClient();}
     //returns the list of all game controllers that are accessible ( not full )
@@ -49,27 +43,8 @@ public class RmiServerF implements VirtualServerF {
     @Override
     public int getPort(String token) throws IOException {return common.getPort(token);}
     @Override
-    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {return  common.findRmiController(game_id, p_token, player_name, client);}
-    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws IOException {return common.findRmiControllerSocket(game_id, p_token, player_name, client);}
-    /*private void broadcastUpdateThread() throws InterruptedException, IOException {
-        while ( !updates.isEmpty() ){
-            String update = updates.take();
-            synchronized (this){
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {return  common.findRmiController(game_id, p_token, player_name, client);}
 
-                List<String> tokens = new ArrayList<>();
-                GameServer gc = token_to_rmi.get(update);
-
-                for( String t : token_to_rmi.keySet() )
-                    if( token_to_rmi.get(t).equals(gc) ) tokens.add(t);
-
-                for(String t: tokens){
-                    token_manager.getTokens().get(t).showUpdate( token_to_player.get(update).getGameField() );
-                }
-
-            }
-
-        }
-    }*/
     @Override
     public GameServer getRmiController(String token) throws IOException{return common.getRmiController(token);}
     @Override
@@ -79,13 +54,6 @@ public class RmiServerF implements VirtualServerF {
 
 
     public static void main(String[] args) throws IOException {
-      /*  final String serverName = "VirtualServer";
-        VirtualServerF server = new RmiServerF();
-        VirtualServerF stub = (VirtualServerF) UnicastRemoteObject.exportObject(server,0);
-        port=1099;
-        Registry registry = LocateRegistry.createRegistry(1);
-        registry.rebind(serverName,stub);
-        System.out.println("[SUCCESSFUL] : server connected. ");*/
     }
 
 }

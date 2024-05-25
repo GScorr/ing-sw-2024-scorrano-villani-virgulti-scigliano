@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET_FINAL.Client;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 
 
 import java.io.*;
@@ -41,7 +41,7 @@ public class Common_Client {
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
 
-                        new Client(inputStream, outputStream).run();
+                        new clientSocket(inputStream, outputStream).run();
                     }catch (IOException e) {
                         System.err.println(e.getMessage());
                         return;

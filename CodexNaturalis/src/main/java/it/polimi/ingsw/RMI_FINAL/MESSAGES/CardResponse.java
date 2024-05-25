@@ -10,11 +10,6 @@ public class CardResponse extends ResponseMessage{
     }
 
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
-
     public PlayCard CardResponseAction(){
         return this.card;
     }

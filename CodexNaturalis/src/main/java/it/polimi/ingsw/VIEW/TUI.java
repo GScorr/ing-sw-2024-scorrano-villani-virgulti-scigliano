@@ -1,93 +1,63 @@
 package it.polimi.ingsw.VIEW;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
-import it.polimi.ingsw.CONTROLLER.ControllerException;
-import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
-import it.polimi.ingsw.RMI_FINAL.GameServer;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
-import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 import it.polimi.ingsw.StringCostant;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class TUI implements Serializable {
-    private VirtualViewF client;
+    private final VirtualViewF client;
 
-    private StringCostant stringcostant = new StringCostant();
+    private final StringCostant stringcostant = new StringCostant();
     private boolean newClient;
-
+    private String token;
     public List<Integer> id_games = new ArrayList<>();
 
-    public TUI(VirtualViewF client) throws NotBoundException, IOException, InterruptedException {
+    public TUI(VirtualViewF client) throws NotBoundException, IOException, InterruptedException, ClassNotFoundException {
         this.client = client;
-        runCli();
+
     }
 
 
-    private void runCli() throws IOException, InterruptedException, NotBoundException {
+    public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         String player_name = selectNamePlayer();
         gameAccess(player_name);
-        startSendingHeartbeats();
         waitFullGame();
         chooseGoalState();
         chooseStartingCardState();
         manageGame();
     }
 
-    private void startSendingHeartbeats() {
-        client.startSendingHeartbeats();
-    }
+
 
     private void waitFullGame() throws IOException, InterruptedException {
-
-        Scanner scan = new Scanner(System.in);
         if(client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
             System.out.print("[WAIT FOR OTHER PLAYERS]\n");
-            while (client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
+            while (client.getMiniModel().getState().equals("NOT_INITIALIZED"))
                 buffering();
-            }
             System.out.println("\n[GAME IS FULL, YOU ARE ABOUT TO START]!\n");
         }
         client.setGameFieldMiniModel();
-        startCheckingMessages();
+        //startCheckingMessages();
     }
 
-    private void startCheckingMessages() {
-        client.startCheckingMessages();
-    }
+    // questa è da mettere all'interno del client (SOCKET or RMI)
 
-    private void buffering() throws IOException, InterruptedException{
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("/");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("|");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("\\");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("-");
-    }
 
-    private String selectNamePlayer() throws IOException, NotBoundException {
+    private String selectNamePlayer() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        String player_name = " ";
-        String isnew;
+        String player_name ;
         int flag;
         do{
             System.out.print(stringcostant.choose_name_player);
@@ -95,11 +65,11 @@ public class TUI implements Serializable {
             flag = client.checkName(player_name);
             if(flag==0){
                 System.out.println(stringcostant.name_is_not_valid);
-                newClient=false;
+                newClient=true;
             }
             else if(flag==2) {
-                System.out.println(player_name + " RECONNETED!");
-                newClient=true;
+                System.out.println(player_name + " RECONNECTED!");
+                newClient=false;
             }
             else{
                 newClient=true;
@@ -108,13 +78,15 @@ public class TUI implements Serializable {
         return player_name;
     }
 
-    private void gameAccess(String player_name) throws IOException, NotBoundException {
+    private void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if(newClient) {
             makeChoice(player_name);
-            System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");}
+            System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");
+        }
     }
 
-    private void makeChoice(String player_name) throws IOException, NotBoundException {
+
+    private void makeChoice(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if (!client.areThereFreeGames()) {
             newGame(player_name,false);
             return;
@@ -136,7 +108,7 @@ public class TUI implements Serializable {
         }
     }
 
-    private void newGame(String player_name, boolean empty) throws IOException, NotBoundException {
+    private void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
         System.out.print("\nCHOOSE GAME NAME  > ");
@@ -151,14 +123,14 @@ public class TUI implements Serializable {
                 flag=true;
             }
             else{
-                System.out.println("Wrong number, please insert again");
+                System.out.println("[ERROR] WRONG INSERT");
             }
         } while(!flag);
     }
 
-    private void chooseMatch(String player_name) throws IOException, NotBoundException {
+    private void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        boolean check = false;
+        boolean check ;
         System.out.println("\nEXISTING GAMES: ");
         List<SocketRmiControllerObject> games = client.getFreeGames();
         for (SocketRmiControllerObject r : games) {
@@ -171,12 +143,16 @@ public class TUI implements Serializable {
             int ID = scan.nextInt();
             check = client.findRmiController(ID, player_name);
         }while(!check);
+        //qui c'è un errore ( anche in Socket non è gestito il caso di errore )
         client.connectGameServer();
     }
 
-    private void chooseGoalState() throws IOException, InterruptedException {
+    private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
+        while( client.getMiniModel().getState().equals("NOT_IN_A_GAME") ){ buffering();}
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
-            if(client.isGoalCardPlaced()){
+            boolean checkGoal = client.isGoalCardPlaced();
+
+            if(checkGoal){
                 chooseGoal();
                 System.out.println("\nYOU CHOOSE :" + client.getGoalPlaced());
             }
@@ -186,12 +162,14 @@ public class TUI implements Serializable {
         }
     }
 
-    private void chooseGoal() throws IOException {
+    private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int done=0;
         while(done==0) {
-            System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + client.getFirstGoal()
-                    + "\n 2-" + client.getSecondGoal());
+            String first_goal = client.getFirstGoal();
+            String second_goal = client.getSecondGoal();
+            System.out.println("\nCHOOSE YOUR GOAL:\n 1-" + first_goal
+                    + "\n 2-" + second_goal);
             String choice = scan.nextLine();
             if (choice.equals("1")) {
                 done=1;
@@ -203,7 +181,7 @@ public class TUI implements Serializable {
         }
     }
 
-    private void chooseStartingCardState() throws IOException, InterruptedException {
+    private void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
         if(client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             if(!client.isFirstPlaced()) {
                 chooseStartingCard();
@@ -214,7 +192,7 @@ public class TUI implements Serializable {
         }
     }
 
-    private void chooseStartingCard() throws IOException{
+    private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
         client.showStartingCard();
@@ -235,41 +213,39 @@ public class TUI implements Serializable {
 
 
 
-    private void manageGame() throws IOException, InterruptedException {
-        boolean end = false;
+    private void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
         while( !client.getMiniModel().getState().equals("END_GAME") ){
             while (client.getMiniModel().getState().equals("WAIT_TURN")) {
-                menuChoice("KEEP WAITING");
+                menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());
                 buffering();
             }
             if (client.getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
             else if (client.getMiniModel().getState().equals("DRAW_CARD")) {
-                menuChoice("DRAW CARD");
+                menuChoice("DRAW CARD", client.getMiniModel().getState());
                 drawCard();
             }
             System.out.println("\nEND OF YOUR TURN !");
-            client.manageGame(end);
+            client.manageGame(false);
         }
-        end = true;
         System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
-        client.manageGame(end);
+        client.manageGame(true);
     }
 
-    private void selectAndInsertCard() throws IOException, InterruptedException {
+    private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
-        int choice,x,y;
+        int choice=-1,x,y;
         String flip;
         boolean flipped;
         while ( client.getMiniModel().getState().equals("PLACE_CARD") ){
-            menuChoice("PLACE CARD");
+            menuChoice("PLACE CARD",client.getMiniModel().getState());
             do{
+                if(choice != -1) System.err.println("[ERROR] INCORRECT INSERT");
                 System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
                 String choicestring = scan.nextLine();
                 choice = Integer.parseInt(choicestring);
                 System.out.println("\nCHOOSE SIDE (B,F): ");
                 flip = scan.nextLine();
-                if( flip.equals('B') || flip.equals('b') ) flipped = true;
-                else flipped = false;
+                flipped = (flip.equals("B") || flip.equals("b"));
                 System.out.println("\nCHOOSE COORDINATES: ");
                 x = scan.nextInt();
                 y = scan.nextInt();
@@ -281,47 +257,53 @@ public class TUI implements Serializable {
         }
     }
 
-    private void drawCard() throws IOException, InterruptedException {
+    private void drawCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\n DRAW A CARD FROM: ");
-        if(client.getGameServer().getController().getGame().getGold_deck().getNumber()>0){System.out.println("1. GOLD DECK");}
-        if (client.getGameServer().getController().getGame().getResources_deck().getNumber()>0){System.out.println("2. RESOURCE DECK");}
+        boolean goldDeck_present = client.isGoldDeckPresent();
+        boolean resourceDeck_present = client.isResourceDeckPresent();
+
+        if(goldDeck_present){System.out.println("1. GOLD DECK");}
+        if (resourceDeck_present){System.out.println("2. RESOURCE DECK");}
         System.out.println("3. CENTRAL CARDS DECK");
         int num = -1;
         SendFunction function = null;
+        String token_client;
         do{
             if(num != -1) System.err.println("[ERROR] OUT OF BOUND");
             String numstring = scan.nextLine();
             num = Integer.parseInt(numstring);
-            switch (num){
-                case(1):
-                    function = new SendDrawGold(client.getToken());
+            if(client instanceof clientSocket) token_client = client.getToken();
+            else token_client = token;
+            switch (num) {
+                case (1):
+                    function = new SendDrawGold(token_client);
                     break;
-                case(2):
-                    function = new SendDrawResource(client.getToken());
+                case (2):
+                    function = new SendDrawResource(token_client);
                     break;
-                case(3):
+                case (3):
                     showCardsInCenter();
                     System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
                     String choicestr = scan.nextLine();
                     int index = Integer.parseInt(choicestr);
-                    function = new SendDrawCenter(client.getToken(), index-1);
+                    function = new SendDrawCenter(token_client, index - 1);
                     break;
             }
+
         }while ( num < 0 || num > 3);
         client.drawCard(function);
     }
 
 
-    private void menuChoice(String message) throws IOException {
+    private void menuChoice(String message, String current_state) throws IOException {
         Scanner scan = new Scanner(System.in);
-        do {
             client.getMiniModel().printMenu(message);
             int choice = scan.nextInt();
             switch (choice) {
                 case (0):
                     client.getMiniModel().printNumToField();
-                    Integer i = scan.nextInt();
+                    int i = scan.nextInt();
                     client.getMiniModel().showGameField(i);
                     break;
                 case (1):
@@ -338,9 +320,9 @@ public class TUI implements Serializable {
                 case (3):
                     return;
                 default:
-                    System.err.println("[ERROR] INSERIMENTO ERRATO");
+                    System.err.println("[ERROR] WRONG INSERT");
             }
-        }while(true);
+            menuChoice(message, current_state);
     }
 
     private boolean chatChoice(int decision) throws IOException {
@@ -369,5 +351,29 @@ public class TUI implements Serializable {
 
     }
 
-    private void showCardsInCenter() throws IOException {client.getGameServer().showCardsInCenter(client.getToken());}
+    private void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
+        if(client instanceof clientSocket){
+            client.showCardsInCenter();
+        }
+        else{
+            client.getGameServer().showCardsInCenter(token);}
+        }
+
+
+    public void buffering() throws  InterruptedException{
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("/");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("|");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("\\");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("-");
+    }
+    public void setToken(String token){this.token =token;}
+
 }

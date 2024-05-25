@@ -1,6 +1,8 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.freeGamesResponse;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
@@ -49,16 +51,13 @@ public class GetFreeGames implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-
         List<SocketRmiControllerObject> games = common.getFreeGamesSocket();
-
         if( server == null){
             System.out.println("error");
             return;
         }
-
-
-        output.writeObject(games);
+        ResponseMessage s = new freeGamesResponse(games);
+        output.writeObject(s);
         output.flush();
         output.reset();
     }

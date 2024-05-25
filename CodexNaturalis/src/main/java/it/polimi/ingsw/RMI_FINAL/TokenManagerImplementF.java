@@ -39,6 +39,13 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
         else if ( Socket_tokens.containsKey(token) ) { Socket_tokens.remove(token);}
     }
 
+    public void putPair(String s, VirtualViewF client){
+        tokens.put(s,client);
+    }
+
+    public VirtualViewF getVal(String token){
+        return tokens.get(token);
+    }
 
     public Map<String, VirtualViewF> getTokens(){
         return this.tokens;
