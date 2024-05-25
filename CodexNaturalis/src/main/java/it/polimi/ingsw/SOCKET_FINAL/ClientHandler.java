@@ -178,6 +178,9 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void insertNumPlayers(int numPlayersMatch) throws IOException {
         ResponseMessage s = new NumPlayerResponse(numPlayersMatch);
+        output.writeObject(s);
+        output.flush();
+        output.reset();
     }
     public void startCheckingMessages() {
         new Thread(() -> {
