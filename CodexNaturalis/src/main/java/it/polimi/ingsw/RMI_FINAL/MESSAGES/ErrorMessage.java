@@ -7,8 +7,9 @@ public class ErrorMessage extends ResponseMessage{
         this.message = message;
     }
 
+
     @Override
-    public String getMessage() {
-        return message;
+    public void action(){
+        System.out.println(message);
     }
 }

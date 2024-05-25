@@ -2,6 +2,8 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.getCardsInCenterResponse;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -52,6 +54,9 @@ public class getCardsInCenter implements Message, Serializable {
     @Override
     public void action() throws IOException {
         rmi_controller.showCardsInCenter(token);
-
+        ResponseMessage message = new getCardsInCenterResponse();
+        output.writeObject(message);
+        output.flush();
+        output.reset();
     }
 }

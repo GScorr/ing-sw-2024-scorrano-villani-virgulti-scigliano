@@ -1,8 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET_FINAL.Client;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 
 
 import java.io.*;
@@ -26,25 +27,23 @@ public class Common_Client {
             switch (choose) {
                 case("0"):
                     
-                    Registry registry = LocateRegistry.getRegistry("192.168.39.78", 1234);
+                    Registry registry = LocateRegistry.getRegistry(Constants.IPV4, 1234);
                     VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
 
                     new RmiClientF(server).run();
                     break;
 
                 case("1"):
-                    String host = "192.168.39.78";
                     int port = 12345;
-
-                    Socket serverSocket = new Socket(host, port);
+                    Socket serverSocket = new Socket(Constants.IPV4, port);
                     try{
 
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
 
-                        new Client(inputStream, outputStream).run();
+                        new clientSocket(inputStream, outputStream).run();
                     }catch (IOException e) {
-                        System.out.println("impossibile creare socket input / output");
+                        System.err.println(e.getMessage());
                         return;
                     }
                     break;

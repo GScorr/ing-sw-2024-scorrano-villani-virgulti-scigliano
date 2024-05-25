@@ -1,7 +1,7 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.CheckResourcesDeckSize;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.CheckResourcesDeckSize;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;

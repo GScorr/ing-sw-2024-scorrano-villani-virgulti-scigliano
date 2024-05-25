@@ -7,8 +7,8 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -25,17 +25,16 @@ public class Common_Server {
     private final Map<String, Long> lastHeartbeatTime = new HashMap<>();
     public Common_Server(){}
 
-    public String createToken(VirtualViewF client) throws RemoteException {return token_manager.generateToken(client);}
-    public String createTokenSocket(VirtualView client) throws RemoteException {return token_manager.generateTokenSocket(client);}
-    public Map<String, Player> getTtoP() throws RemoteException {return token_to_player;}
-    public Map<String, GameServer> getTtoR() throws RemoteException {return token_to_rmi;}
-    public Map<Integer, GameServer> getListRmiController() throws RemoteException {return rmi_controllers;}
+    public String createToken(VirtualViewF client) throws IOException {return token_manager.generateToken(client);}
+    public String createTokenSocket(VirtualView client) throws IOException {return token_manager.generateTokenSocket(client);}
+    public Map<String, Player> getTtoP() throws IOException {return token_to_player;}
+    public Map<String, GameServer> getTtoR() throws IOException {return token_to_rmi;}
+    public Map<Integer, GameServer> getListRmiController() throws IOException {return rmi_controllers;}
 
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException {
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
         int port = getAvailablePort();
-        GameServer gameServer = new GameServer(name,num_player,port);
-        gameServer.
-                addPlayer(p_token,player_name, client,true);
+        GameServer gameServer = new GameServer(name,num_player,port,this);
+        gameServer.addPlayer(p_token,player_name, client,true);
         VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
         Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
         registry.rebind(String.valueOf(port), serverStub);
@@ -46,26 +45,13 @@ public class Common_Server {
     }
 
     private int getAvailablePort(){port++;return port;}
-    public int createGameSocket(String name, int num_player, String p_token, String player_name, VirtualView client) throws IOException {
-        int port = getAvailablePort();
-        GameServer gameServer = new GameServer(name,num_player,port);
-        gameServer.addPlayerSocket(p_token,player_name, client,true);
-        VirtualGameServer serverStub = (VirtualGameServer) UnicastRemoteObject.exportObject(gameServer, 0);
-        Registry registry = LocateRegistry.createRegistry(port); // Connect to existing registry
-        registry.rebind(String.valueOf(port), serverStub);
-        token_to_rmi.put( p_token, gameServer);
-        rmi_controllers.put(gameServer.getController().getGame().getIndex_game(), gameServer);
-        System.out.println(port);
-        return port;
-    }
-
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException {
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException, InterruptedException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException, InterruptedException {
         rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
         return true;}
 
-    public List<VirtualViewF> getListClient() throws RemoteException {return clients;}
-    public List<GameServer> getFreeGames() throws RemoteException {
+    public List<VirtualViewF> getListClient() throws IOException {return clients;}
+    public List<GameServer> getFreeGames() throws IOException {
         if( rmi_controllers.isEmpty() ) return null;
         List<GameServer> free = new ArrayList<>();
         for ( Integer id : rmi_controllers.keySet() )
@@ -74,7 +60,7 @@ public class Common_Server {
 
     }
 
-    public List<SocketRmiControllerObject> getFreeGamesSocket() throws RemoteException {
+    public List<SocketRmiControllerObject> getFreeGamesSocket() throws IOException {
         if (rmi_controllers.isEmpty()) return null;
         List<SocketRmiControllerObject> free = new ArrayList<>();
         for (Integer id : rmi_controllers.keySet()) {
@@ -87,7 +73,7 @@ public class Common_Server {
         return free;
     }
 
-    public String checkName(String name, VirtualViewF client) throws RemoteException {
+    public String checkName(String name, VirtualViewF client) throws IOException {
 
         for ( Integer i : rmi_controllers.keySet() )
         {
@@ -109,12 +95,29 @@ public class Common_Server {
         return "true";
     }
 
-    public int getPort(String token) throws RemoteException {
+    public int getPort(String token) throws IOException {
 
         return token_to_rmi.get(token).getPort();
     }
 
-    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException {
+    public void removeGameServer(GameServer gs) throws NoSuchObjectException {
+        for( String tok : token_to_rmi.keySet() ) {
+            if( token_to_rmi.get(tok).equals(gs) ) {
+                token_to_rmi.remove(tok);
+            }
+        }
+        for( Integer i : rmi_controllers.keySet() ){
+            if( rmi_controllers.get(i).equals(gs) )
+            {
+                System.out.println("GAME SERVER DELETE -> " + rmi_controllers.get(i));
+                UnicastRemoteObject.unexportObject(rmi_controllers.get(i), true);
+                rmi_controllers.remove(i);
+                rmi_controllers.remove(i);
+            }
+        }
+    }
+
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
 
         GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
@@ -127,52 +130,40 @@ public class Common_Server {
         token_manager.getTokens().get(p_token).reportError(error);
         return false;
     }
-    public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name, VirtualView client) throws IOException {
+    public GameServer getRmiController(String token) throws IOException{return token_to_rmi.get(token);}
 
-        GameServer index = rmi_controllers.get(game_id);
-        if (index != null && !rmi_controllers.get(game_id).getFull())
-        {
-            token_to_rmi.put(p_token , index );
-            return addPlayerSocket(game_id, p_token, player_name, client);
-        }
-        String error = "\nWRONG ID : Not Available Game\n";
-        if( token_manager.getTokens().containsKey(p_token) ) token_manager.getTokens().get(p_token).reportError(error);
-        return false;
-    }
-    public GameServer getRmiController(String token) throws RemoteException{return token_to_rmi.get(token);}
+    public void receiveHeartbeat(String token) throws IOException {lastHeartbeatTime.put(token, System.currentTimeMillis());}
 
-    public void receiveHeartbeat(String token) throws RemoteException {lastHeartbeatTime.put(token, System.currentTimeMillis());}
-
-    private synchronized void checkHeartbeats() throws RemoteException{
+    private synchronized void checkHeartbeats() throws IOException{
         long currentTime = System.currentTimeMillis();
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
-                if(token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
+                if(token_to_rmi.get(key)!=null ){if( token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                 token_to_rmi.get(key).getTtoP().get(key).disconnect();
                 System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
-                token_manager.deleteVW(key);
+                token_manager.deleteVW(key);}
+                    if(token_to_rmi.get(key)!=null ){try{token_to_rmi.get(key).checkEndDisconnect();}catch (ConcurrentModificationException ignored){}
                 token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );
-                token_to_rmi.get(key).clientsSocket.remove( token_to_rmi.get(key).token_manager.getSocketTokens().get(key)  );
-                token_to_rmi.get(key).token_manager.deleteVW(key);
+                token_to_rmi.get(key).token_manager.deleteVW(key);}
             }
         }
     }
 
-    public void startHeartbeatChecker() throws RemoteException{
+    public void startHeartbeatChecker() throws IOException{
         new Thread(() -> {
             while (true) {
                 try {
                     Thread.sleep(1000); // Controlla gli "heartbeats" ogni 5 secondi
                     checkHeartbeats();
-                } catch (InterruptedException | RemoteException e) {
+                } catch (InterruptedException | IOException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
 
-    public synchronized void connect(VirtualViewF client)throws RemoteException{this.clients.add(client);}
+    public synchronized void connect(VirtualViewF client)throws IOException{this.clients.add(client);}
 
     public static void main(String[] args) throws IOException, NotBoundException {
 

@@ -11,51 +11,51 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
+
 import java.util.List;
 import java.util.Map;
 
 public interface VirtualGameServer extends Remote {
-    public boolean getFull() throws RemoteException;
+    public boolean getFull() throws IOException;
 
-    public void connectSocket(VirtualViewF clientSocket) throws RemoteException;
-    public void connectRMI(VirtualViewF client)throws RemoteException;
-    public List<VirtualViewF> getClientsRMI() throws RemoteException;
-    public Map<String, Player> getTtoP() throws RemoteException;
-    public GameController getController() throws RemoteException;
-    public Player createPlayer(String pla, String playerName, boolean b) throws RemoteException;
-    public boolean addPlayer(String p_token, String name, VirtualViewF client, boolean is) throws IOException;
-    public void chooseGoal(String token, int index) throws IOException;
-    public void chooseStartingCard(String token, boolean flip) throws IOException;
-    public void checkQueue() throws RemoteException;
-    public void addQueue(SendFunction function) throws RemoteException;
-    public int getPort() throws RemoteException;
+    public void connectSocket(VirtualViewF clientSocket) throws IOException;
+    public void connectRMI(VirtualViewF client)throws IOException;
+    public List<VirtualViewF> getClientsRMI() throws IOException;
+    public Map<String, Player> getTtoP() throws IOException;
+    public GameController getController() throws IOException;
+    public Player createPlayer(String pla, String playerName, boolean b) throws IOException;
+    public boolean addPlayer(String p_token, String name, VirtualViewF client, boolean is) throws IOException, InterruptedException;
+    public void chooseGoal(String token, int index) throws IOException, InterruptedException;
+    public void chooseStartingCard(String token, boolean flip) throws IOException, InterruptedException;
+    public void checkQueue() throws IOException;
+    public void addQueue(SendFunction function) throws IOException;
+    public int getPort() throws IOException;
     public void showStartingCard(String token) throws IOException;
 
-    public void insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException, ControllerException;
+    public void insertCard(String token, int index, int x, int y, boolean flipped) throws IOException, ControllerException;
 
-    public void peachFromGoldDeck(String token) throws RemoteException;
+    public void peachFromGoldDeck(String token) throws IOException;
 
-    public void peachFromResourceDeck(String token) throws RemoteException;
+    public void peachFromResourceDeck(String token) throws IOException;
 
 
     public void showCardsInCenter(String token) throws IOException;
 
 
-    public void wakeUp(String s, VirtualViewF client)throws RemoteException;
+    public void wakeUp(String s, VirtualViewF client)throws IOException;
 
-    public void peachFromCardsInCenter(String token, int index) throws RemoteException;
+    public void peachFromCardsInCenter(String token, int index) throws IOException;
 
     public void getPoints(String token) throws IOException;
 
     public void getFinalStandings(String token) throws IOException;
 
-    public List<GameField> getGameFields(String token) throws RemoteException;
+    public List<GameField> getGameFields(String token) throws IOException;
 
 
     public void chattingMoment(int i1, int i2, ChatMessage message) throws IOException;
 
-    public Map<String, Integer> getToken_to_index() throws RemoteException;
+    public Map<String, Integer> getToken_to_index() throws IOException;
 
     public void chattingGlobal(ChatMessage message) throws IOException;
 }

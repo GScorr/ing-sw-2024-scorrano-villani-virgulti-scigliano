@@ -3,22 +3,20 @@ package it.polimi.ingsw.RMI_FINAL;
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.EndGame;
 import it.polimi.ingsw.MODEL.Player.State.PState;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.RemoteException;
+import java.rmi.NoSuchObjectException;
 import java.util.*;
 
 public class GameServer implements VirtualGameServer, Serializable {
@@ -27,35 +25,30 @@ public class GameServer implements VirtualGameServer, Serializable {
     public TokenManagerF token_manager = new TokenManagerImplementF();
     public HashMap<Integer, String> num_to_player = new HashMap<>();
     public Map<String, Player> token_to_player = new HashMap<>();
-
     public GameController controller;
     public Queue<SendFunction> functQueue = new LinkedList<>();
     private final int port;
-
     private int id = 0;
-    //public Map<String, PState> token_to_state_deadline = new HashMap<>();ù
-
     public ChatIndexManager chatmanager = new ChatIndexManager();
-
-
     public Map<String,Integer> token_to_index = new HashMap<>();
     public Map<Integer,String> index_to_token = new HashMap<>();
-
+    private Common_Server server;
 
 
     //CONSTRUCTOR
-    public GameServer(String name, int numPlayer, int port) throws RemoteException {
+    public GameServer(String name, int numPlayer, int port, Common_Server commonServer) throws IOException {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         playDisconnected();
         checkDeadline();
         this.port = port;
+        this.server = commonServer;
     }
 
 
     //GAME FLOW
     @Override
-    public synchronized boolean addPlayer(String p_token, String name, VirtualViewF client, boolean isFirst ) throws IOException {
+    public synchronized boolean addPlayer(String p_token, String name, VirtualViewF client, boolean isFirst ) throws IOException, InterruptedException {
         if(controller.getFull() )
         {String error = "\nGAME IS FULL\n";
             token_manager.getTokens().get(p_token).reportError(error);
@@ -70,14 +63,18 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
         token_manager.getTokens().get(p_token).insertPlayer(token_to_player.get(p_token));
         setAllStates();
+        //--riga aggiunta da Fra
+        clientsRMI.add(client);
         return true;
     }
-    public synchronized Player createPlayer(String p_token,String playerName, boolean b) throws RemoteException{
+    public synchronized Player createPlayer(String p_token,String playerName, boolean b) throws IOException{
         Player p = controller.createPlayer(playerName,b);
         token_to_player.put(p_token , p);
         return p;
     }
-    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException {
+
+    //questa funzione non dovrebbe essere più usata
+    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException, InterruptedException {
         if(controller.getFull() )
             return false;
         createPlayer(p_token, name, isFirst);
@@ -88,13 +85,13 @@ public class GameServer implements VirtualGameServer, Serializable {
         return true;
     }
     @Override
-    public void chooseGoal(String token, int index) throws IOException {
+    public void chooseGoal(String token, int index) throws IOException, InterruptedException {
         controller.playerChooseGoal(token_to_player.get(token), index);
         setAllStates();
     }
 
     @Override
-    public synchronized void chooseStartingCard(String token, boolean flip) throws IOException {
+    public synchronized void chooseStartingCard(String token, boolean flip) throws IOException, InterruptedException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
         Integer index = 0;
         if( token_manager.getTokens().containsKey(token) ){token_manager.getTokens().get(token).setCards(token_to_player.get(token).getCardsInHand());}
@@ -110,13 +107,13 @@ public class GameServer implements VirtualGameServer, Serializable {
         setAllStates();
     }
 
-    public synchronized void insertCard(String token, int index, int x, int y, boolean flipped) throws RemoteException, ControllerException {
+    public synchronized void insertCard(String token, int index, int x, int y, boolean flipped) throws IOException, ControllerException {
         token_to_player.get(token).getCardsInHand().get(index).flipCard(flipped);
         controller.statePlaceCard(token_to_player.get(token), index, x, y);
     }
 
     //QUEUE FUNCTIONS
-    public void checkQueue() throws RemoteException {
+    public void checkQueue() throws IOException {
         new Thread(() -> {while (true) {
                 try {
                     Thread.sleep(100);
@@ -127,11 +124,8 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){ c.pushBack(message);}
-        System.out.println("Sono inseriti : "+clientsSocket.size());
-        for (VirtualView c : clientsSocket){
-
-            c.pushBack(message);}}
-    public void addQueue(SendFunction function) throws RemoteException{functQueue.add(function);}
+    }
+    public void addQueue(SendFunction function) {functQueue.add(function);}
 
     //END GAME
     public void getFinalStandings(String token) throws IOException {
@@ -140,18 +134,21 @@ public class GameServer implements VirtualGameServer, Serializable {
             token_manager.getTokens().get(token).printString(i + "- " + p.getName());
             i++;
         }
+        server.removeGameServer(this);
     }
 
     //DISCONNECTION
     public void wakeUp(String name, VirtualViewF client){
         for( String s : token_to_player.keySet()){
-            if(token_to_player.get(s).getName().equals(name) )  {
+            if( token_to_player.get(s).getName().equals(name) )  {
+                System.out.println("Reconnect");
                 token_to_player.get(s).connect();
                 //token_manager.getTokens().remove(s);
-                token_manager.getTokens().put(s, client );}}
+                token_manager.putPair( s , client );
+                clientsRMI.add(client);}}
     }
 
-  private  void playDisconnected() throws RemoteException {
+  private  void playDisconnected() throws IOException {
           new Thread(() -> {
             Player tmp;
             while(true) {
@@ -168,37 +165,27 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseGoal(s, 1);
                                     setAllStates();
-                                } catch (RemoteException e) {
-                                    throw new RuntimeException(e);
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
+                                } catch (IOException | InterruptedException e) {
+                                    System.out.println(e.getMessage());
                                 }
                             }
                             if ( tmp.getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD") && !tmp.isFirstPlaced()) {
                                 try {
                                     chooseStartingCard(s, true);
                                     setAllStates();
-                                } catch (RemoteException e) {
-                                    throw new RuntimeException(e);
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                } catch (IOException | InterruptedException e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("PLACE_CARD")) {
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                } catch (IOException | InterruptedException e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("DRAW_CARD")){
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                } catch (IOException | InterruptedException e) {}
                             }
                         }
                     }
@@ -217,38 +204,38 @@ public class GameServer implements VirtualGameServer, Serializable {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                if(token_to_player.size()>=controller.getGame().getMax_num_player()) {
+                if(token_to_player.size() >= controller.getGame().getMax_num_player()) {
 
-                    synchronized (this) {
+
+                        int last_man_standing = 0;
                         try{if (controller.isAlone()) {
-                            for (String t : token_to_player.keySet()) {
-                                if (!token_to_player.get(t).isDisconnected()) {
-                                    tokenalive = t;
-                                }
-                            }
+                            checkEndDisconnect();
                             try {
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED!"));
-                                int countdown = 15;
+                                int countdown = 45;
                                 while( countdown > 0 && controller.isAlone()) {
-                                    broadcastMessage(new UpdateMessage("\b"+countdown + "SECONDS LEFT"));
+                                    broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
+                                    checkEndDisconnect();
                                     countdown--;
-                                    Thread.sleep(1000);
+                                    Thread.sleep(900);
                                 }
                                 if ( countdown == 0 ) {
                                     for (String t : token_to_player.keySet()) {
                                         PState end_game = new EndGame(token_to_player.get(t));
                                         token_to_player.get(t).setPlayer_state(end_game);
-                                        if ( token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
+                                        if ( !token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
                                         end = false;
                                     }
-                                }
-                            } catch (RemoteException e) {
-                                throw new RuntimeException(e);
-                            } catch (InterruptedException | IOException e) {
+                                }else{
+                                    setAllStates();
+                                    broadcastMessage(new UpdateMessage("PLAYER RECONNECTED CONTINUE YOUR GAME")); }
+                            } catch (IOException | InterruptedException e) {
                                 throw new RuntimeException(e);
                             }
-                        }}catch (RuntimeException e){}
-                    }
+                        }}catch (RuntimeException ignored){} catch (NoSuchObjectException e) {
+                            throw new RuntimeException(e);
+                        }
+
                 }
             }
         }).start();
@@ -257,9 +244,9 @@ public class GameServer implements VirtualGameServer, Serializable {
 
 
     //DRAW CARD METHODS
-    public synchronized void peachFromGoldDeck(String token) throws RemoteException{controller.playerPeachCardFromGoldDeck(token_to_player.get(token));}
-    public synchronized void peachFromResourceDeck(String token) throws RemoteException{controller.playerPeachCardFromResourcesDeck(token_to_player.get(token));}
-    public synchronized void peachFromCardsInCenter(String token, int index) throws RemoteException{controller.playerPeachFromCardsInCenter(token_to_player.get(token), index);}
+    public synchronized void peachFromGoldDeck(String token) throws IOException{controller.playerPeachCardFromGoldDeck(token_to_player.get(token));}
+    public synchronized void peachFromResourceDeck(String token) throws IOException{controller.playerPeachCardFromResourcesDeck(token_to_player.get(token));}
+    public synchronized void peachFromCardsInCenter(String token, int index) throws IOException{controller.playerPeachFromCardsInCenter(token_to_player.get(token), index);}
 
 
 
@@ -268,20 +255,17 @@ public class GameServer implements VirtualGameServer, Serializable {
         if(token_manager.getTokens().get(token)!=null) {
             token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
         }
-        else{
-            token_manager.getSocketTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
-        }
     }
-    public synchronized List<VirtualViewF> getClientsRMI() throws RemoteException{return clientsRMI;}
-    public synchronized Map<String, Player> getTtoP() throws RemoteException{return token_to_player;}
-    public synchronized GameController getController() throws RemoteException{return controller;}
-    public  boolean getFull()  throws RemoteException {return controller.getFull();}
+    public synchronized List<VirtualViewF> getClientsRMI() throws IOException{return clientsRMI;}
+    public synchronized Map<String, Player> getTtoP() throws IOException{return token_to_player;}
+    public synchronized GameController getController() throws IOException{return controller;}
+    public  boolean getFull()  throws IOException {return controller.getFull();}
     public int getPort(){return port;}
 
     public int getNumPlayersMatch(){
         return controller.getGame().getMax_num_player();
     }
-    public List<GameField> getGameFields(String token) throws RemoteException{
+    public List<GameField> getGameFields(String token) throws IOException{
         List<GameField> list = new ArrayList<>();
         list.add(0, token_to_player.get(token).getGameField());
         for ( String t : token_to_player.keySet() ){
@@ -317,20 +301,16 @@ public class GameServer implements VirtualGameServer, Serializable {
         }
     }
 
-    public Map<String, Integer> getToken_to_index() throws RemoteException{
+    public Map<String, Integer> getToken_to_index() throws IOException{
         return token_to_index;
     }
 
     //SETTER
-    private void setAllStates() throws IOException {
+    private void setAllStates() throws IOException, InterruptedException {
         for (String t : token_to_player.keySet()){
-            if(token_manager.getTokens().containsKey(t)) {
-                token_manager.getTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                token_manager.getTokens().get(t).setNumToPlayer(num_to_player);
-            }
-            else if( token_manager.getSocketTokens().containsKey(t)){
-                token_manager.getSocketTokens().get(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                token_manager.getSocketTokens().get(t).setNumToPlayer(num_to_player);
+            if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
+                token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
+                token_manager.getVal(t).setNumToPlayer(num_to_player);
             }
         }
     }
@@ -386,12 +366,18 @@ public class GameServer implements VirtualGameServer, Serializable {
         }
     }
 
-
+    public void checkEndDisconnect() throws NoSuchObjectException {
+        int last_man_standing = 0;
+        for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
+        if ( last_man_standing == 0 ) {
+            server.removeGameServer(this);
+        }
+    }
 
     //CONNECT
-    public synchronized void connectSocket(VirtualViewF clientSocket)throws RemoteException{this.clientsRMI.add(clientSocket);}
+    public synchronized void connectSocket(VirtualViewF clientSocket)throws IOException{this.clientsRMI.add(clientSocket);}
     @Override
-    public synchronized void connectRMI(VirtualViewF client)throws RemoteException{this.clientsRMI.add(client);}
+    public synchronized void connectRMI(VirtualViewF client)throws IOException{this.clientsRMI.add(client);}
 
 
 }

@@ -4,6 +4,8 @@ import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendInsertCard;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.placeCardResponse;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
@@ -57,6 +59,10 @@ public class placeCard implements Message, Serializable {
     public void action() throws IOException, ControllerException {
         SendFunction function = new SendInsertCard(token, index-1, x,y,flipped);
         rmi_controller.addQueue(function);
+        ResponseMessage message = new placeCardResponse();
+        output.writeObject(message);
+        output.flush();
+        output.reset();
     }
 
 }

@@ -9,7 +9,6 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
 
 public class CreateGame implements Message, Serializable {
 
@@ -59,7 +58,7 @@ public class CreateGame implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public int actionCreateGameMessage() throws IOException {
+    public int actionCreateGameMessage() throws IOException, InterruptedException {
         int port;
         //port = common.createGameSocket(game_name,num_players,token,name_p, clientHandler);
         port = common.createGame(game_name,num_players,token,name_p,clientHandler);

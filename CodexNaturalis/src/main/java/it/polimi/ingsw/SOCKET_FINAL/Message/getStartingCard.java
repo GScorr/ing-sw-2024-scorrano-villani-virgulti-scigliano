@@ -52,9 +52,6 @@ public class getStartingCard implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-        PlayCard starting_card = rmi_controller.getTtoP().get(token).getStartingCard();
-        output.writeObject(starting_card);
-        output.flush();
-        output.reset();
+
     }
 }

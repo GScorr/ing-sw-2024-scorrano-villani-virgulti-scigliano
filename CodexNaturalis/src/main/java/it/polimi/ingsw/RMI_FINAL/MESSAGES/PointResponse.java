@@ -10,10 +10,7 @@ public class PointResponse extends ResponseMessage{
     }
 
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
+
 
 
 

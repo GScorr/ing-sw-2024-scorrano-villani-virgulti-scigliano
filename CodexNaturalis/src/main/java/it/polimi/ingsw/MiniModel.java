@@ -11,9 +11,8 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
-import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.util.*;
+import java.io.IOException;
+import java.io.Serializable;import java.util.*;
 
 public class MiniModel implements Serializable {
     int my_index;
@@ -36,7 +35,7 @@ public class MiniModel implements Serializable {
 
     private ChatIndexManager chat_manager = new ChatIndexManager();
     public MiniModel() {
-        this.state = "NOT_INITIALIZED";
+        this.state = "NOT_IN_A_GAME";
         this.not_read = 0;
         this.menu.add("");
         this.menu.add("");
@@ -76,7 +75,7 @@ public class MiniModel implements Serializable {
         }
     }
 
-    public void showGameField(int pos) throws RemoteException {
+    public void showGameField(int pos) throws IOException {
         showField(game_fields.get(pos));
     }
 
@@ -94,7 +93,7 @@ public class MiniModel implements Serializable {
         return my_player;
     }
 
-    public void showCards() throws RemoteException{
+    public void showCards() throws IOException{
         for( PlayCard card : cards_in_hand) showCard(card);
     }
 
@@ -138,7 +137,7 @@ public class MiniModel implements Serializable {
         //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
 
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
@@ -189,7 +188,7 @@ public class MiniModel implements Serializable {
         return num_players;
     }
 
-    private void showField(GameField field) throws RemoteException {
+    private void showField(GameField field) throws IOException {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 
@@ -251,6 +250,7 @@ public class MiniModel implements Serializable {
     }
 
     public boolean showchat(int decision) {
+        System.out.println("Il numero di player è " + num_players);
         if(decision>num_players+1 || decision==my_index){
             System.out.println("Wrong choice, insert again");
             return false;

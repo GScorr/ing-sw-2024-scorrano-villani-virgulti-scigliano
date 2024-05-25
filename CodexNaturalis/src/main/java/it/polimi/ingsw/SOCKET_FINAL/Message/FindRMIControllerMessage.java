@@ -3,15 +3,12 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
-
 public class FindRMIControllerMessage implements Message, Serializable {
 
     public Integer id;
@@ -20,7 +17,6 @@ public class FindRMIControllerMessage implements Message, Serializable {
     public  String token;
 
 
-    public Controller controller;
     public Server server;
 
     ObjectOutputStream output;
@@ -46,9 +42,6 @@ public class FindRMIControllerMessage implements Message, Serializable {
         this.clientHandler = clientHandler;
     }
 
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
 
     public void setServer(Server server) {
         this.server = server;
@@ -64,9 +57,8 @@ public class FindRMIControllerMessage implements Message, Serializable {
         this.player_name = player_name;
     }
 
-    public boolean actionFindRmi() throws IOException {
+    public boolean actionFindRmi() throws IOException, InterruptedException {
         return common.findRmiController(id,token,player_name,clientHandler);
-      // return common.findRmiControllerSocket(id,token,player_name, clientHandler);
     }
 
     @Override

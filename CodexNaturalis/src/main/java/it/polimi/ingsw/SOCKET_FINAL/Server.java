@@ -8,27 +8,23 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Giocatore;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class Server extends UnicastRemoteObject implements VirtualViewF {
+public class Server extends UnicastRemoteObject  {
 
     final ServerSocket listenSocket;
 
     final List<ClientHandler> clients = new ArrayList<>();
-
-    public HashMap<String, Giocatore> token_map = new HashMap<>();
 
     public ArrayList<String> names = new ArrayList<>();
 
@@ -36,10 +32,10 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
 
     public Common_Server common;
 
-    public Server(ServerSocket listenSocket, Common_Server common) throws RemoteException {
+    public Server(ServerSocket listenSocket, Common_Server common) throws IOException {
         this.common = common;
         this.listenSocket = listenSocket;
-
+        common.startHeartbeatChecker();
     }
 
     public void runServer() throws IOException, NotBoundException {
@@ -47,7 +43,6 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
        Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
             System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
-
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
@@ -93,83 +88,7 @@ public class Server extends UnicastRemoteObject implements VirtualViewF {
         new Server(listenSocket,serverRmi).runServer();*/
     }
 
-    @Override
-    public void showUpdate(GameField game_field) throws RemoteException {
-
-    }
-
-    @Override
-    public void reportError(String details) throws RemoteException {
-
-    }
-
-    @Override
-    public void reportMessage(String details) throws RemoteException {
-
-    }
-
-    @Override
-    public void showCard(PlayCard card) throws RemoteException {
-
-    }
-
-    @Override
-    public void pushBack(ResponseMessage message) throws RemoteException {
-
-    }
-
-    @Override
-    public void showField(GameField field) throws RemoteException {
-
-    }
-
-    @Override
-    public void printString(String s) throws RemoteException {
-
-    }
-
-    @Override
-    public void setGameField(List<GameField> games) throws RemoteException {
-
-    }
-
-    public MiniModel getMiniModel() throws RemoteException{
+    public MiniModel getMiniModel() throws IOException{
         return null;
     }
-
-    @Override
-    public void setCards(List<PlayCard> cards) throws RemoteException {
-
-    }
-
-    @Override
-    public void setNumToPlayer(HashMap<Integer, String> map) throws RemoteException {
-
-    }
-
-    @Override
-    public void setState(String state) throws RemoteException {
-
-    }
-
-    @Override
-    public void addChat(int idx, ChatMessage message) throws RemoteException {
-
-    }
-
-    @Override
-    public void insertId(int id) throws RemoteException {
-
-    }
-
-    @Override
-    public void insertNumPlayers(int numPlayersMatch) throws RemoteException {
-
-    }
-
-    @Override
-    public void insertPlayer(Player player) throws RemoteException {
-
-    }
-
 }

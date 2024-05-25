@@ -55,7 +55,7 @@ public class chooseGoalMessage implements Message, Serializable {
 
 
     @Override
-    public void action() throws IOException {
+    public void action() throws IOException, InterruptedException {
         rmi_controller.chooseGoal(token,index);
 
     }

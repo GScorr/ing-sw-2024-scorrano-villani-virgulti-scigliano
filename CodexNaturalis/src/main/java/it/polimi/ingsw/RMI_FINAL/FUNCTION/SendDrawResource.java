@@ -9,7 +9,6 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
 public class SendDrawResource implements SendFunction{
 
@@ -21,7 +20,7 @@ public class SendDrawResource implements SendFunction{
     }
 
     @Override
-    public ResponseMessage action(GameServer server) throws RemoteException {
+    public ResponseMessage action(GameServer server) {
         ResponseMessage message;
         try{
             server.peachFromResourceDeck(token);
