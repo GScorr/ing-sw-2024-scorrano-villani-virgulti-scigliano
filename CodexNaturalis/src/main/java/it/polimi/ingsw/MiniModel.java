@@ -125,17 +125,26 @@ public class MiniModel implements Serializable {
 
 
 
-    public void setChatMenu() {
+   public void setChatMenu() {
         int i=1;
-        while(i<=num_players){
-            if(i!=my_index){
-                this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + i);
-            }
-            i++;
-        }
-        this.chatmenu.set(i,i + "- PUBLIC CHAT");
+        if(num_players > 2){
+            for( i = 1; i<=num_players; ++i){
+            if( i!=my_index ) this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + num_to_player.get(i-1));}
+            this.chatmenu.set(i,i + "- PUBLIC CHAT");
+        }else{ this.chatmenu.set(i+1,i + "- PUBLIC CHAT"); }
+
         //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
+
+    /* public void setChatMenu(){
+        if( num_players == 2 ) this.chatmenu.set(2,1 + "- PUBLIC CHAT\n");
+        else{
+            for ( Integer i : num_to_player.keySet() ){
+                if( i!=my_index ) this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + num_to_player.get(i));
+            }
+            this.chatmenu.set(num_players,num_players + "- PUBLIC CHAT");
+        }
+    }*/
 
     public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
@@ -250,7 +259,6 @@ public class MiniModel implements Serializable {
     }
 
     public boolean showchat(int decision) {
-        System.out.println("Il numero di player è " + num_players);
         if(decision>num_players+1 || decision==my_index){
             System.out.println("Wrong choice, insert again");
             return false;

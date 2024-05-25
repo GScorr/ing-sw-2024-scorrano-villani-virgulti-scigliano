@@ -298,7 +298,6 @@ public class TUI implements Serializable {
 
     private void menuChoice(String message, String current_state) throws IOException {
         Scanner scan = new Scanner(System.in);
-        do {
             client.getMiniModel().printMenu(message);
             int choice = scan.nextInt();
             switch (choice) {
@@ -323,7 +322,7 @@ public class TUI implements Serializable {
                 default:
                     System.err.println("[ERROR] WRONG INSERT");
             }
-        }while( current_state.equals(client.getMiniModel().getState()) );
+            menuChoice(message, current_state);
     }
 
     private boolean chatChoice(int decision) throws IOException {
