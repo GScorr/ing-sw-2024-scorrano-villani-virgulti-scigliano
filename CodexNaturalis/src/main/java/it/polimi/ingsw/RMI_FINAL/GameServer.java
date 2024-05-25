@@ -138,14 +138,19 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     //DISCONNECTION
-    public void wakeUp(String name, VirtualViewF client){
+    public void wakeUp(String name, VirtualViewF client) throws IOException {
         for( String s : token_to_player.keySet()){
             if( token_to_player.get(s).getName().equals(name) )  {
+                String token = s;
                 System.out.println("Reconnect");
                 token_to_player.get(s).connect();
                 //token_manager.getTokens().remove(s);
                 token_manager.putPair( s , client );
-                clientsRMI.add(client);}}
+                clientsRMI.add(client);
+                token_manager.getTokens().get(s).insertId(id);
+                token_manager.getTokens().get(s).insertNumPlayers(getNumPlayersMatch());
+                token_manager.getTokens().get(s).insertPlayer(token_to_player.get(s));
+                }}
     }
 
   private  void playDisconnected() throws IOException {
