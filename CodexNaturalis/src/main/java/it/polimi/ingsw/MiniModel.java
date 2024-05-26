@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.Serializable;import java.util.*;
 
 public class MiniModel implements Serializable {
+    int unread_total = 0;
     int my_index;
     int num_players;
     List<GameField> game_fields ;
@@ -58,6 +59,10 @@ public class MiniModel implements Serializable {
     public void addChat(int idx, ChatMessage message) {
         chat.get(idx).addMessage(message);
         not_read.set(idx,not_read.get(idx)+1);
+        unread_total=0;
+        for(Integer i : not_read){
+            unread_total=unread_total+i;
+        }
     }
 
     //public void setNotReadMessages(int nr){ this.not_read = nr;}
@@ -125,7 +130,7 @@ public class MiniModel implements Serializable {
     public void setMenu() {
         this.menu.set(0, ("\n0- SHOW FIELD"));
         this.menu.set(1, "1- SHOW CARDS IN HAND" );
-        this.menu.set(2, "2- OPEN CHAT(S)");
+        this.menu.set(2, "2- OPEN CHAT(S)" + " - Unread messages (" + unread_total + ")");
         this.menu.set(3, "3- " + turndecision);
     }
 
@@ -135,9 +140,9 @@ public class MiniModel implements Serializable {
         int i=1;
         if(num_players > 2){
             for( i = 1; i<=num_players; ++i){
-                if( i!=my_index ) this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + num_to_player.get(i-1) + " - New messages (" + not_read.get(chat_manager.getChatIndex(my_index,i)) + ")");}
+                if( i!=my_index ) this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + num_to_player.get(i) + " - New messages (" + not_read.get(chat_manager.getChatIndex(my_index,i)) + ")");}
             this.chatmenu.set(i,i + "- PUBLIC CHAT" + " - New messages (" + not_read.get(6) + ")");
-        }else{ this.chatmenu.set(i+1,i + "- PUBLIC CHAT" + " - New messages (" + not_read.get(6) + ")"); }
+        }else{ this.chatmenu.set(i,i + "- PUBLIC CHAT" + " - New messages (" + not_read.get(6) + ")"); }
 
         //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
@@ -270,19 +275,39 @@ public class MiniModel implements Serializable {
 
 
     public boolean showchat(int decision) {
-        if(decision>num_players+1 || decision==my_index){
-            System.out.println("Wrong choice, insert again");
-            return false;
-        }
-        if(decision==num_players+1){
-            not_read.set(6,0);
-            for(ChatMessage c : chat.get(6).getChat()){
-                System.out.println(c.player.getName() + "- " + c.message);
+        if(num_players!=2){
+            if(decision>num_players+1 || decision==my_index){
+                System.out.println("Wrong choice, insert again");
+                return false;
+            }
+            if(decision==num_players+1){
+                not_read.set(6,0);
+                unread_total=0;
+                for(Integer i : not_read){
+                    unread_total=unread_total+i;
+                }
+                for(ChatMessage c : chat.get(6).getChat()){
+                    System.out.println(c.player.getName() + "- " + c.message);
+                }
+            }
+            else {
+                not_read.set(chat_manager.getChatIndex(my_index, decision), 0);
+                unread_total=0;
+                for(Integer i : not_read){
+                    unread_total=unread_total+i;
+                }
+                for (ChatMessage c : chat.get(chat_manager.getChatIndex(my_index, decision)).getChat()) {
+                    System.out.println(c.player.getName() + "- " + c.message);
+                }
             }
         }
         else{
-            not_read.set(chat_manager.getChatIndex(my_index,decision),0);
-            for(ChatMessage c : chat.get(chat_manager.getChatIndex(my_index,decision)).getChat()){
+            not_read.set(6,0);
+            unread_total=0;
+            for(Integer i : not_read){
+                unread_total=unread_total+i;
+            }
+            for(ChatMessage c : chat.get(6).getChat()){
                 System.out.println(c.player.getName() + "- " + c.message);
             }
         }
