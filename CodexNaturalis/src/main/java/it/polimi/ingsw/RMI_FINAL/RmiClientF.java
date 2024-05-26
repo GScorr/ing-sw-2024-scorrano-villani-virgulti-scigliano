@@ -125,7 +125,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public String getFirstGoal() throws IOException {
-        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().getFirst().toString();
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString();
     }
 
     @Override
