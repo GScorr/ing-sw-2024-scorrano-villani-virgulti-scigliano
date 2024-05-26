@@ -32,6 +32,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public ChatIndexManager chatmanager = new ChatIndexManager();
     public Map<String,Integer> token_to_index = new HashMap<>();
     public Map<Integer,String> index_to_token = new HashMap<>();
+    public HashMap<Integer,String> index_to_name = new HashMap<>();
     private Common_Server server;
 
 
@@ -59,6 +60,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         id++;
         token_to_index.put(p_token,id);
         index_to_token.put(id, p_token);
+        index_to_name.put(id,name);
         token_manager.getTokens().get(p_token).insertId(id);
         token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
         token_manager.getTokens().get(p_token).insertPlayer(token_to_player.get(p_token));
@@ -150,6 +152,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 token_manager.getTokens().get(s).insertId(id);
                 token_manager.getTokens().get(s).insertNumPlayers(getNumPlayersMatch());
                 token_manager.getTokens().get(s).insertPlayer(token_to_player.get(s));
+                token_manager.getTokens().get(s).setNumToPlayer(index_to_name);
                 }}
     }
 
@@ -314,7 +317,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                token_manager.getVal(t).setNumToPlayer(num_to_player);
+                token_manager.getVal(t).setNumToPlayer(index_to_name);
             }
         }
     }
