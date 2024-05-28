@@ -49,6 +49,6 @@ public class chatGlobal implements Message, Serializable {
 
     @Override
     public void action() throws IOException {
-        rmi_controller.chattingGlobal(this.chatMessage);
+        rmi_controller.chattingGlobal(1, this.chatMessage);
     }
 }

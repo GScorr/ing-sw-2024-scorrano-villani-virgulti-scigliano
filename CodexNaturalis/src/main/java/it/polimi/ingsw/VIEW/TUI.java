@@ -326,6 +326,7 @@ public class TUI implements Serializable {
     }
 
     private boolean chatChoice(int decision) throws IOException {
+        client.getMiniModel().setStop_chat(false);
         Scanner scan = new Scanner(System.in);
         if(!client.getMiniModel().showchat(decision)){
             return false;
@@ -333,9 +334,7 @@ public class TUI implements Serializable {
         int choice = 0;
         while(true) {
             while (choice < 1 || choice > 2) {
-                System.out.println("DO YOU WANT TO SEND A MESSAGE?");
-                System.out.println("1- YES");
-                System.out.println("2- NO [CLOSE CHAT]");
+                System.out.println("DO YOU WANT TO SEND A MESSAGE?     1- YES      2- NO [CLOSE CHAT] ");
                 choice = scan.nextInt();
                 scan.nextLine();
             }
@@ -344,9 +343,10 @@ public class TUI implements Serializable {
                 String message = scan.nextLine();
                 client.ChatChoice(message, decision);
                 System.out.println("[SUCCESS] MESSAGE SENT!");
-                client.getMiniModel().showchat(decision);
                 choice = 0;
-            } else return true;
+            } else {
+                client.getMiniModel().setStop_chat(true);
+                return true;}
         }
 
     }
