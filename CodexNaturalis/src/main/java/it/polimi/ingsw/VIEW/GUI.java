@@ -29,6 +29,11 @@ import static javafx.application.Application.launch;
 
 public class GUI extends Application {
 
+    /**
+     * elementi che si adattano in base alla dimensione della pagina?
+     * coordinate delle carte strane, da controllare
+     */
+
     public static void main( String[] args ) {
         launch(args);
     }
@@ -44,7 +49,7 @@ public class GUI extends Application {
 
         primaryStage.setTitle("CodexNaturalis - Login");
 
-        Scene scene = new Scene(root, 1024, 1000); // Crea una nuova scena con il nodo radice
+        Scene scene = new Scene(root, 1024, 720); // Crea una nuova scena con il nodo radice
         primaryStage.setScene(scene); // Imposta la scena nel palcoscenico
 
         primaryStage.show();
