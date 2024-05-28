@@ -37,7 +37,7 @@ public class LoginController {
             lobbyController.setUsername(username);
 
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root, 1024, 700));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

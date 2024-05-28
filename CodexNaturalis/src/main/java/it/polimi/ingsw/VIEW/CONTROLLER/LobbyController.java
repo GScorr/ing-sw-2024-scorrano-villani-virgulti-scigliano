@@ -29,7 +29,7 @@ public class LobbyController {
 
 
             Stage stage = (Stage) partitaProva.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root, 1024, 1000));
             stage.show();
         } catch (
                 IOException e) {

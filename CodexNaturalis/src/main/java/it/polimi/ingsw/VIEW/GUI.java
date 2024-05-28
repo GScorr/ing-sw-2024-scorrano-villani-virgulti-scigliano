@@ -25,14 +25,14 @@ import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-
 import static javafx.application.Application.launch;
 
 public class GUI extends Application {
 
-    Button button;
-    Label label;
-    ImageView score_table;
+    /**
+     * elementi che si adattano in base alla dimensione della pagina?
+     * coordinate delle carte strane, da controllare
+     */
 
     public static void main( String[] args ) {
         launch(args);
@@ -40,8 +40,6 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-
-
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
 
@@ -51,79 +49,11 @@ public class GUI extends Application {
 
         primaryStage.setTitle("CodexNaturalis - Login");
 
-        Scene scene = new Scene(root); // Crea una nuova scena con il nodo radice
+        Scene scene = new Scene(root, 1024, 720); // Crea una nuova scena con il nodo radice
         primaryStage.setScene(scene); // Imposta la scena nel palcoscenico
 
         primaryStage.show();
 
-
-
-
-
     }
-
-
-
-
-/*
-        VBox vbox = new VBox();
-
-        HBox top = new HBox();
-
-        top.setAlignment(Pos.CENTER);
-
-        button = new Button("Nascondi campo");
-        label = new Label("premi qui per far sparire il campo: ");
-
-
-        AnchorPane bottom = new AnchorPane();
-        top.getChildren().addAll(label, button);
-
-        File file = new File("src/resources/img/scoreTable.jpg");
-
-
-        Image image = new Image(file.toURI().toString());
-
-        score_table = new ImageView(image);
-
-        score_table.setFitHeight(512);
-        score_table.setFitWidth(279);
-
-        bottom.getChildren().add(score_table);
-        bottom.setMaxSize(1024, 1024);
-
-        AnchorPane.setTopAnchor(score_table, 1d);
-        //AnchorPane.setRightAnchor(score_table, 1d);
-        AnchorPane.setLeftAnchor(score_table, 256d);
-        //AnchorPane.setRightAnchor(score_table, 100d);
-        //AnchorPane.setBottomAnchor(score_table, 100d);
-
-        button.setOnAction(e -> {
-            if (bottom.getChildren().contains(score_table)) {
-                bottom.getChildren().remove(score_table);
-                button.setText("scopri campo");
-                label.setText("premi qui per far comparire il campo: ");
-            } else {
-                bottom.getChildren().add(score_table);
-                button.setText("Nascondi campo");
-                label.setText("premi qui per far scomparire il campo: ");
-            }
-
-        });
-
-        vbox.setAlignment(Pos.BASELINE_CENTER);
-        vbox.getChildren().addAll(top, bottom);
-
-        Scene scene = new Scene(vbox, 1024, 1024); //crea una nuova scena visualizzabile
-
-        primaryStage.setTitle("Prova");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-    }
-
- */
-
-
 
 }
