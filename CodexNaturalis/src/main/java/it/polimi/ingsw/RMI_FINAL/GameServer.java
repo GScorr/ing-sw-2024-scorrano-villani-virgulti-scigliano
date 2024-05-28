@@ -32,6 +32,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public ChatIndexManager chatmanager = new ChatIndexManager();
     public Map<String,Integer> token_to_index = new HashMap<>();
     public Map<Integer,String> index_to_token = new HashMap<>();
+    public HashMap<Integer,String> index_to_name = new HashMap<>();
     private Common_Server server;
 
 
@@ -59,6 +60,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         id++;
         token_to_index.put(p_token,id);
         index_to_token.put(id, p_token);
+        index_to_name.put(id,name);
         token_manager.getTokens().get(p_token).insertId(id);
         token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
         token_manager.getTokens().get(p_token).insertPlayer(token_to_player.get(p_token));
@@ -98,9 +100,9 @@ public class GameServer implements VirtualGameServer, Serializable {
         if(token_manager.getSocketTokens().containsKey(token)){token_manager.getSocketTokens().get(token).setCards(token_to_player.get(token).getCardsInHand());}
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) ){
-            token_manager.getTokens().get(t).setGameField(getGameFields(t));
+                token_manager.getTokens().get(t).setGameField(getGameFields(t));
+                //token_manager.getTokens().get(t).insertId(index);
             }
-            if(token_manager.getSocketTokens().containsKey(t)) token_manager.getSocketTokens().get(t).setGameField(getGameFields(t));
             num_to_player.put(index, token_to_player.get(t).getName() );
             index++;
         }
@@ -138,14 +140,20 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     //DISCONNECTION
-    public void wakeUp(String name, VirtualViewF client){
+    public void wakeUp(String name, VirtualViewF client) throws IOException {
         for( String s : token_to_player.keySet()){
             if( token_to_player.get(s).getName().equals(name) )  {
+                String token = s;
                 System.out.println("Reconnect");
                 token_to_player.get(s).connect();
                 //token_manager.getTokens().remove(s);
                 token_manager.putPair( s , client );
-                clientsRMI.add(client);}}
+                clientsRMI.add(client);
+                token_manager.getTokens().get(s).insertId(id);
+                token_manager.getTokens().get(s).insertNumPlayers(getNumPlayersMatch());
+                token_manager.getTokens().get(s).insertPlayer(token_to_player.get(s));
+                token_manager.getTokens().get(s).setNumToPlayer(index_to_name);
+                }}
     }
 
   private  void playDisconnected() throws IOException {
@@ -267,10 +275,9 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
     public List<GameField> getGameFields(String token) throws IOException{
         List<GameField> list = new ArrayList<>();
-        list.add(0, token_to_player.get(token).getGameField());
-        for ( String t : token_to_player.keySet() ){
-            if( !t.equals(token)) list.add(token_to_player.get(t).getGameField());
-        }
+        for ( String t : token_to_player.keySet() )
+            list.add(token_to_player.get(t).getGameField());
+
         return list;
     }
 
@@ -310,7 +317,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
-                token_manager.getVal(t).setNumToPlayer(num_to_player);
+                token_manager.getVal(t).setNumToPlayer(index_to_name);
             }
         }
     }
