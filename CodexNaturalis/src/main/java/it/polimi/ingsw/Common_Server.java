@@ -139,13 +139,14 @@ public class Common_Server {
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
-                if(token_to_rmi.get(key)!=null ){if( token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
-                token_to_rmi.get(key).getTtoP().get(key).disconnect();
-                System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
-                token_manager.deleteVW(key);}
-                    if(token_to_rmi.get(key)!=null ){try{token_to_rmi.get(key).checkEndDisconnect();}catch (ConcurrentModificationException ignored){}
-                token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );
-                token_to_rmi.get(key).token_manager.deleteVW(key);}
+                try{
+                    if(token_to_rmi.get(key)!=null ){if( token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
+                    token_to_rmi.get(key).getTtoP().get(key).disconnect();
+                    System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
+                    token_manager.deleteVW(key);}
+                        if(token_to_rmi.get(key)!=null ){try{token_to_rmi.get(key).checkEndDisconnect();}catch (ConcurrentModificationException ignored){}
+                    token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );
+                    token_to_rmi.get(key).token_manager.deleteVW(key);}}catch (NullPointerException ignore){}
             }
         }
     }
