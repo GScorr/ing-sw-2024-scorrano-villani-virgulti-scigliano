@@ -1,4 +1,4 @@
-package it.polimi.ingsw.VIEW;
+package it.polimi.ingsw.view.GUI;
 
 
 import javafx.application.Application;
@@ -32,6 +32,10 @@ public class GUI extends Application {
     /**
      * elementi che si adattano in base alla dimensione della pagina?
      * coordinate delle carte strane, da controllare
+     * todo:
+     *  mettere tutti i cambi scena public void nomeScena(){
+     *      guarda dentro src/main/java/it/polimi/ingsw/view/gui/Gui.java
+     *  }
      */
 
     public static void main( String[] args ) {

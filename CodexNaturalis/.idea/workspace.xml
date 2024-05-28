@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Bozza gui funzionante + appunti">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CONTROLLER/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CONTROLLER/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/CONTROLLER/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/CONTROLLER/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/showScoreTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/CONTROLLER/showScoreTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Lobby.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Test/scoreTable.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Test/scoreTable.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/game.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,11 +226,11 @@
       </method>
     </configuration>
     <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.VIEW.GUI" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.view.GUI.GUI" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.VIEW.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.view.GUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -308,22 +317,8 @@
       <workItem from="1716395753198" duration="142000" />
       <workItem from="1716397301820" duration="3628000" />
       <workItem from="1716646297287" duration="2177000" />
-    </task>
-    <task id="LOCAL-00111" summary="inizio mini model">
-      <option name="closed" value="true" />
-      <created>1715714956109</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1715714956109</updated>
-    </task>
-    <task id="LOCAL-00112" summary="inizio mini model">
-      <option name="closed" value="true" />
-      <created>1715716613180</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1715716613180</updated>
+      <workItem from="1716900295278" duration="1142000" />
+      <workItem from="1716911414273" duration="3009000" />
     </task>
     <task id="LOCAL-00113" summary="inizio mini model">
       <option name="closed" value="true" />
@@ -701,7 +696,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716728461585</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="Bozza gui funzionante + appunti">
+      <option name="closed" value="true" />
+      <created>1716885392962</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1716885392962</updated>
+    </task>
+    <task id="LOCAL-00161" summary="Bozza gui funzionante + appunti">
+      <option name="closed" value="true" />
+      <created>1716885447946</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1716885447946</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,8 +747,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cambio common server" />
-    <MESSAGE value="inizio lavori common server, passaggio funzioni" />
     <MESSAGE value="Socket final with Big Black Server" />
     <MESSAGE value="inizio mini model" />
     <MESSAGE value="non lo leggerà nessuno ma abbiamo fatto cose belle" />
@@ -761,7 +770,9 @@
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="prova" />
     <MESSAGE value="notreadmesaages" />
-    <option name="LAST_COMMIT_MESSAGE" value="notreadmesaages" />
+    <MESSAGE value="Tutto funzionante" />
+    <MESSAGE value="Bozza gui funzionante + appunti" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bozza gui funzionante + appunti" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
