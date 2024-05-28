@@ -1,13 +1,10 @@
-package it.polimi.ingsw.VIEW.CONTROLLER;
+package it.polimi.ingsw.view.GUI.CONTROLLER;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert.AlertType;
@@ -22,9 +19,23 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
+    private ProgressIndicator loadingIndicator;
+
+    @FXML
     private void handleLoginButtonAction(ActionEvent event) {
         String username = usernameField.getText();
-        loadLobby(username);
+       // loadLobby(username);
+        loadingIndicator.setVisible(true);
+        showLoginPopup("ciao", "sono il popup");
+
+    }
+
+    private void showLoginPopup(String title, String message) {
+        // Mostra un popup di conferma del login
+        Alert alert = new Alert(AlertType.INFORMATION, message, ButtonType.OK);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.showAndWait();
     }
 
     private void loadLobby(String username) {
@@ -37,7 +48,7 @@ public class LoginController {
             lobbyController.setUsername(username);
 
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root, 1024, 1000));
+            stage.setScene(new Scene(root, 1024, 700));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

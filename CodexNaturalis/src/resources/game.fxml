@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.CONTROLLER.GameController">
+<AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CONTROLLER.GameController">
 
    <children>
       <!-- StackPane per lo sfondo del tavolo -->
@@ -91,7 +91,7 @@
       </HBox>
 
       <!-- Contenitore per le carte incorniciate -->
-      <VBox layoutX="212.0" layoutY="820.0" prefHeight="214.0" prefWidth="620.0" style="-fx-border-color: white; -fx-border-width: 2; -fx-padding: 10;">
+      <VBox layoutX="212.0" layoutY="650.0" prefHeight="214.0" prefWidth="620.0" style="-fx-border-color: white; -fx-border-width: 2; -fx-padding: 10;">
          <!-- HBox per le carte in mano -->
          <HBox id="cardsInHandsFrontSide" prefHeight="194.0" prefWidth="600.0" spacing="10" alignment="CENTER">
             <!-- Carta 1 -->
