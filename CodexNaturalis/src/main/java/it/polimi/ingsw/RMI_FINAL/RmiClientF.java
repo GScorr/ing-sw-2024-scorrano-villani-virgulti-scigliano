@@ -125,7 +125,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     @Override
     public String getFirstGoal() throws IOException {
-        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().getFirst().toString();
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString();
     }
 
     @Override
@@ -213,8 +213,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     // HELP FUNCTIONS
     public void ChatChoice(String message, int decision) throws IOException {
-        if(decision==miniModel.getNum_players()+1){rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));}
-        else{rmi_controller.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message, miniModel.getMy_player()));}
+        if(miniModel.getNum_players()!=2) {
+            if (decision == miniModel.getNum_players() + 1) {
+                rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+            } else {
+                rmi_controller.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message, miniModel.getMy_player()));
+            }
+        }
+        else{
+            rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+        }
     }
 
     @Override
