@@ -1,5 +1,5 @@
 package it.polimi.ingsw.VIEW;
-
+import org.fusesource.jansi.AnsiConsole;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -31,6 +31,7 @@ public class TUI implements Serializable {
 
 
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
+        AnsiConsole.systemInstall();
         String player_name = selectNamePlayer();
         gameAccess(player_name);
         waitFullGame();
@@ -61,6 +62,10 @@ public class TUI implements Serializable {
         int flag;
         do{
             System.out.print(stringcostant.choose_name_player);
+            System.out.println("lmt");
+            Thread.sleep(1000);
+            System.out.print("\033\143");
+            System.out.println("squajati");
             player_name = scan.nextLine();
             flag = client.checkName(player_name);
             if(flag==0){
