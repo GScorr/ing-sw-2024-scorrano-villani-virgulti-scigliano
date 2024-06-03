@@ -1,4 +1,7 @@
-package it.polimi.ingsw.view.GUI.CONTROLLER;
+
+package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
+
+
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

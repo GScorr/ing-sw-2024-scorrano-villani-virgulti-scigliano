@@ -215,13 +215,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void ChatChoice(String message, int decision) throws IOException {
         if(miniModel.getNum_players()!=2) {
             if (decision == miniModel.getNum_players() + 1) {
-                rmi_controller.chattingGlobal(miniModel.getMy_index(), new ChatMessage(message, miniModel.getMy_player()));
+                rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
             } else {
                 rmi_controller.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message, miniModel.getMy_player()));
             }
         }
         else{
-            rmi_controller.chattingGlobal(miniModel.getMy_index(), new ChatMessage(message, miniModel.getMy_player()));
+            rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
         }
     }
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.VIEW.GraficInterterface;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
@@ -12,11 +13,12 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.*;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 
+import it.polimi.ingsw.VIEW.GuiPackage.GUI;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import it.polimi.ingsw.VIEW.TUI;
 
 import java.io.IOException;
@@ -56,16 +58,20 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     public Goal goal_choosed;
 
-    TUI terminal_interface;
+    GraficInterterface terminal_interface;
     public String token;
     private boolean flag_Server_Disconneted = false;
+
+
+
+
 
     public clientSocket(ObjectInputStream input, ObjectOutputStream output) throws IOException, ClassNotFoundException {
         this.server_proxy = new ServerProxy(output);
         this.input = input;
     }
 
-        public void run() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+    public void runTUI() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
         new Thread(() -> {
             try {
                 startCheckingMessagesSocket();
@@ -76,6 +82,22 @@ public class clientSocket implements VirtualViewF, Serializable {
         terminal_interface = new TUI(this);
         terminal_interface.runCli();
     }
+
+    public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        new Thread(() -> {
+            try {
+                startCheckingMessagesSocket();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+        terminal_interface = new GUI(scene);
+        terminal_interface.runCli();
+    }
+
+
+
+
 
     //Thread that receive the input Object from the server
     public void  startCheckingMessagesSocket() throws IOException,ClassNotFoundException{

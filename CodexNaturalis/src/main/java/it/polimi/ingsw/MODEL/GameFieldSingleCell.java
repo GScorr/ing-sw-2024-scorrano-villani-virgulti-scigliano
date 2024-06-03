@@ -27,8 +27,8 @@ public class GameFieldSingleCell implements Serializable {
     private PlayCard card;
     private AnglesEnum value;
     private PlayCard card_down;
-    private List<AnglesEnum> values = new ArrayList<>(); //probably useless, but I'm waiting for the GUI
-    private List<EdgeEnum> edges = new ArrayList<>(); //probably useless, but I'm waiting for the GUI
+    private List<AnglesEnum> values = new ArrayList<>(); //probably useless, but I'm waiting for the Gui_Initialization
+    private List<EdgeEnum> edges = new ArrayList<>(); //probably useless, but I'm waiting for the Gui_Initialization
 
 //card_down means the angles that the card will cover -mirko-
     public GameFieldSingleCell(boolean filled, PlayCard card, AnglesEnum value, PlayCard card_down) {
@@ -112,7 +112,7 @@ public class GameFieldSingleCell implements Serializable {
     public List<EdgeEnum> getEdges() {
         return edges;
     }
-    //next methods are probably useless, but I'm waiting for the GUI
+    //next methods are probably useless, but I'm waiting for the Gui_Initialization
     public void setValues(AnglesEnum value, int index) {
         values.add(index,value);
     }

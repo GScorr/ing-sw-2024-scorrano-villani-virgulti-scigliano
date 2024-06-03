@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CONTROLLER.GameController">
+<AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController">
 
    <children>
       <!-- StackPane per lo sfondo del tavolo -->
       <StackPane prefHeight="1024.0" prefWidth="1024.0">
          <ImageView fx:id="table" fitWidth="1024.0" fitHeight="1024.0" preserveRatio="false">
             <image>
-               <Image url="@img/backgroundTable.png" />
+               <Image url="@../img/backgroundTable.png" />
             </image>
          </ImageView>
       </StackPane>
@@ -81,7 +81,7 @@
       <!-- Immagine del punteggio -->
       <ImageView fx:id="tableScoreImage" fitHeight="611.0" fitWidth="454.0" layoutX="59.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@img/scoreTable.png" />
+            <Image url="@../img/scoreTable.png" />
          </image>
       </ImageView>
 

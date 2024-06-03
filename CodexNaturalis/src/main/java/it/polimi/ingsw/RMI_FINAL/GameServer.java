@@ -286,18 +286,15 @@ public class GameServer implements VirtualGameServer, Serializable {
         String t2 = index_to_token.get(id2);
         controller.insertMessageinChat(chatmanager.getChatIndex(id1,id2),message);
         updatePrivateChats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
-        token_manager.getVal(t2).printString("[NEW MESSAGE FROM " + token_to_player.get(t1).getName() + " ]");
     }
 
-    public synchronized void chattingGlobal(int my_id, ChatMessage message) throws IOException {
+    public synchronized void chattingGlobal(ChatMessage message) throws IOException {
         controller.insertMessageinChat(6,message);
-        updatePublicChats(my_id, message);
+        updatePublicChats(message);
     }
 
-    private void updatePublicChats(int id, ChatMessage message) throws IOException {
-        String t1 = index_to_token.get(id);
+    private void updatePublicChats(ChatMessage message) throws IOException {
         for (String t : token_to_player.keySet()){
-            token_manager.getVal(t).printString("[NEW MESSAGE FROM " + token_to_player.get(t1).getName() + " ]");
                 token_manager.getTokens().get(t).addChat(6, message);
         }
     }

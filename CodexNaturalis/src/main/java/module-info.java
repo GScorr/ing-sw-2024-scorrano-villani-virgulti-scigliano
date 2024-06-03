@@ -22,10 +22,12 @@ module PSP31 {
     // exports it.polimi.ingsw
 
     exports it.polimi.ingsw;
-    exports it.polimi.ingsw.VIEW.CONTROLLER;
-    opens it.polimi.ingsw.VIEW.CONTROLLER to javafx.fxml;
+    exports it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
+    opens it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER to javafx.fxml;
     opens it.polimi.ingsw.VIEW to javafx.fxml;
     exports it.polimi.ingsw.RMI_FINAL.MESSAGES;
     exports it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess;
+    exports it.polimi.ingsw.VIEW.GuiPackage;
+    opens it.polimi.ingsw.VIEW.GuiPackage to javafx.fxml;
 
 }
