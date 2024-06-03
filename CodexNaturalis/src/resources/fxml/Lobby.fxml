@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="wallpaper" prefHeight="1024.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="it.polimi.ingsw.VIEW.CONTROLLER.LobbyController">
+<AnchorPane id="wallpaper" prefHeight="1024.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.LobbyController">
             <Label fx:id="usernameLabel" layoutX="14.0" layoutY="86.0" prefHeight="55.0" prefWidth="205.0" text="Welcome!">
       <font>
          <Font size="18.0" />

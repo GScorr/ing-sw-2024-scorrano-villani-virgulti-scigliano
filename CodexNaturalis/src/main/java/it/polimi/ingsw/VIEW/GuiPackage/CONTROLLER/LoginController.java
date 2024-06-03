@@ -1,19 +1,17 @@
-package it.polimi.ingsw.VIEW.CONTROLLER;
+package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert.AlertType;
+
 import java.io.IOException;
 
-public class LoginController {
+public class LoginController extends GenericSceneController {
 
     @FXML
     private TextField usernameField;
@@ -24,13 +22,13 @@ public class LoginController {
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
         String username = usernameField.getText();
-        loadLobby(username);
+       // loadLobby(username);
     }
 
     private void loadLobby(String username) {
         try {
             // Carica la nuova scena
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Lobby.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Lobby.fxml"));
             Parent root = loader.load();
 
             LobbyController lobbyController = loader.getController();

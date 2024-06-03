@@ -1,4 +1,4 @@
-package it.polimi.ingsw.VIEW.CONTROLLER;
+package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +24,7 @@ public class LobbyController {
     public void handleGameButtonAction() {
         try {
             // Carica la nuova scena
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/game.fxml"));
             Parent root = loader.load();
 
 

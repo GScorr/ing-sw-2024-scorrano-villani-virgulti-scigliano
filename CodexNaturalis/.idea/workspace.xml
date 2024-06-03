@@ -5,8 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GraficInterterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/AlertSceneController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GenericSceneController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/GUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/Gui_Initialization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/SceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2024_00_24_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2024_00_24__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CONTROLLER/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CONTROLLER/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Common_Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Common_Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameFieldSingleCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/clientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/clientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/CONTROLLER/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/CONTROLLER/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/CONTROLLER/showScoreTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/showScoreTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Lobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/Lobby.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/login_scene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Test/scoreTable.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Test/scoreTable.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +169,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources/fxml" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="it.polimi.ingsw.SOCKET_FINAL.Message" />
     </key>
@@ -163,7 +188,7 @@
       <recent name="it.polimi.ingsw.MODEL.Game" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUI">
+  <component name="RunManager" selected="Application.Common_Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -195,7 +220,7 @@
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.VIEW.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -208,7 +233,7 @@
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.VIEW.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -216,8 +241,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.VIEW.GUI" />
+    <configuration name="Gui_Initialization" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.VIEW.GuiPackage.Gui_Initialization" />
       <module name="PSP30" />
       <extension name="coverage">
         <pattern>
@@ -257,7 +282,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.ClientS" />
-      <item itemvalue="Application.GUI" />
+      <item itemvalue="Application.Gui_Initialization" />
       <item itemvalue="Application.RmiClientF" />
       <item itemvalue="Application.Common_Client" />
       <item itemvalue="Application.Common_Server" />
@@ -265,9 +290,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.Common_Server" />
+        <item itemvalue="Application.Gui_Initialization" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
       </list>
@@ -308,6 +333,8 @@
       <workItem from="1716395753198" duration="142000" />
       <workItem from="1716397301820" duration="3628000" />
       <workItem from="1716646297287" duration="2177000" />
+      <workItem from="1717229459671" duration="8957000" />
+      <workItem from="1717420351528" duration="4340000" />
     </task>
     <task id="LOCAL-00111" summary="inizio mini model">
       <option name="closed" value="true" />
@@ -782,82 +809,82 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalStrategyTest.ic" NAME="GoalStrategyTest Coverage Results" MODIFIED="1713632012406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameFieldControllerTest.ic" NAME="GameFieldControllerTest Coverage Results" MODIFIED="1713632338601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerChooseGoal.ic" NAME="GameControllerTest.playerChooseGoal Coverage Results" MODIFIED="1713272545604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_statePlaceCard.ic" NAME="GameControllerTest.statePlaceCard Coverage Results" MODIFIED="1713272585536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalDiagonalTest.ic" NAME="GoalDiagonalTest Coverage Results" MODIFIED="1713631923778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1713631507351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Player.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$CenterCardsTest.ic" NAME="CenterCardsTest Coverage Results" MODIFIED="1713632061105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromResourcesDeck.ic" NAME="GameControllerTest.playerPeachCardFromResourcesDeck Coverage Results" MODIFIED="1713613769329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameFieldControllerTest_goldPointsCount.ic" NAME="GameFieldControllerTest.goldPointsCount Coverage Results" MODIFIED="1713274770770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalTripleTest.ic" NAME="GoalTripleTest Coverage Results" MODIFIED="1713632028814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerSelectStartingCard.ic" NAME="GameControllerTest.playerSelectStartingCard Coverage Results" MODIFIED="1713272558414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_EndGame.ic" NAME="GameControllerTest.EndGame Coverage Results" MODIFIED="1713624002757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_statePlaceCard.ic" NAME="GameControllerTest.statePlaceCard Coverage Results" MODIFIED="1713613786847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$CenterCardsTest_drawResourceCard.ic" NAME="CenterCardsTest.drawResourceCard Coverage Results" MODIFIED="1713632039355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalDoubleGoldTest.ic" NAME="GoalDoubleGoldTest Coverage Results" MODIFIED="1713631638314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalStrategyTest.ic" NAME="GoalStrategyTest Coverage Results" MODIFIED="1713632012406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachFromCardsInCenter.ic" NAME="GameControllerTest.playerPeachFromCardsInCenter Coverage Results" MODIFIED="1713613297646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckGoalCardTest.ic" NAME="DeckGoalCardTest Coverage Results" MODIFIED="1713632073555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckTest.ic" NAME="DeckTest Coverage Results" MODIFIED="1713632114538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GoalFeatherPenPaperTest.ic" NAME="GoalFeatherPenPaperTest Coverage Results" MODIFIED="1713631975267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1713631507351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Player.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalLFigureTest.ic" NAME="GoalLFigureTest Coverage Results" MODIFIED="1713631999375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createErrorPlayer.ic" NAME="GameControllerTest.createErrorPlayer Coverage Results" MODIFIED="1713780269877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckGoalCardTest.ic" NAME="DeckGoalCardTest Coverage Results" MODIFIED="1713632073555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_EndGame.ic" NAME="GameControllerTest.EndGame Coverage Results" MODIFIED="1713624002757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest.ic" NAME="GameControllerTest Coverage Results" MODIFIED="1713622274923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalLFigureTest.ic" NAME="GoalLFigureTest Coverage Results" MODIFIED="1713631999375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalDoubleGoldTest.ic" NAME="GoalDoubleGoldTest Coverage Results" MODIFIED="1713631638314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest.ic" NAME="GameControllerTest Coverage Results" MODIFIED="1713780295174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1713629259313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Game.*</FILTER>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalTripleTest.ic" NAME="GoalTripleTest Coverage Results" MODIFIED="1713632028814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromResourcesDeck.ic" NAME="GameControllerTest.playerPeachCardFromResourcesDeck Coverage Results" MODIFIED="1713613769329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromGoldDeck.ic" NAME="GameControllerTest.playerPeachCardFromGoldDeck Coverage Results" MODIFIED="1713272359559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_checkNumPlayer.ic" NAME="GameControllerTest.checkNumPlayer Coverage Results" MODIFIED="1713272531642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckTest.ic" NAME="DeckTest Coverage Results" MODIFIED="1713632114538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerSelectStartingCard.ic" NAME="GameControllerTest.playerSelectStartingCard Coverage Results" MODIFIED="1713272558414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalDiagonalTest.ic" NAME="GoalDiagonalTest Coverage Results" MODIFIED="1713631923778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$CenterCardsTest_drawResourceCard.ic" NAME="CenterCardsTest.drawResourceCard Coverage Results" MODIFIED="1713632039355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1713629259313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Game.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameTest_insertPlayer.ic" NAME="GameTest.insertPlayer Coverage Results" MODIFIED="1713632307461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.Game.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromGoldDeck.ic" NAME="GameControllerTest.playerPeachCardFromGoldDeck Coverage Results" MODIFIED="1713613777775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerChooseGoal.ic" NAME="GameControllerTest.playerChooseGoal Coverage Results" MODIFIED="1713272545604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameFieldControllerTest_goldPointsCount.ic" NAME="GameFieldControllerTest.goldPointsCount Coverage Results" MODIFIED="1713274770770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachFromCardsInCenter.ic" NAME="GameControllerTest.playerPeachFromCardsInCenter Coverage Results" MODIFIED="1713613297646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
   </component>
