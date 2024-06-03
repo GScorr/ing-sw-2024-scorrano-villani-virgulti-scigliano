@@ -62,10 +62,6 @@ public class TUI implements Serializable {
         int flag;
         do{
             System.out.print(stringcostant.choose_name_player);
-            System.out.println("lmt");
-            Thread.sleep(1000);
-            System.out.print("\033\143");
-            System.out.println("squajati");
             player_name = scan.nextLine();
             flag = client.checkName(player_name);
             if(flag==0){
