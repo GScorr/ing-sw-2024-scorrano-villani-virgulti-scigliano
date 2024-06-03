@@ -8,6 +8,8 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.VIEW.GraficInterterface;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -33,6 +35,8 @@ public interface VirtualViewF extends Remote {
     public void insertNumPlayers(int numPlayersMatch) throws IOException;
 
     public void insertPlayer(Player player) throws IOException;
+
+    public GraficInterterface getTerminal_interface() throws IOException;
 
     //public int selectNamePlayer() throws IOException, NotBoundException;
 
@@ -83,4 +87,6 @@ public interface VirtualViewF extends Remote {
     boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException;
 
     void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException;
+
+    void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException;
 }

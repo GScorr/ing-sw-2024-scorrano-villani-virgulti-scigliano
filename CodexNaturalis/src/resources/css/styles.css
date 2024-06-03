@@ -1,0 +1,32 @@
+.waiting-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.message {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666;
+    -fx-padding: 0 20;
+    -fx-text-alignment: center;
+}
+
+.cancel-button {
+    -fx-background-color: #ff5252;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #ff1744;
+}
