@@ -1,5 +1,5 @@
 package it.polimi.ingsw.VIEW;
-
+import org.fusesource.jansi.AnsiConsole;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -30,7 +30,18 @@ public class TUI implements Serializable, GraficInterterface {
     }
 
 
+    @Override
+    public void printError(String error) {
+        System.err.println(error);
+    }
+
+    @Override
+    public void setUsername(String username) {
+
+    }
+
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
+        AnsiConsole.systemInstall();
         String player_name = selectNamePlayer();
         gameAccess(player_name);
         waitFullGame();
@@ -78,6 +89,10 @@ public class TUI implements Serializable, GraficInterterface {
         return player_name;
     }
 
+    public void setNewClient(boolean newClient) {
+        this.newClient = newClient;
+    }
+
     public void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if(newClient) {
             makeChoice(player_name);
@@ -108,7 +123,7 @@ public class TUI implements Serializable, GraficInterterface {
         }
     }
 
-    private void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
         System.out.print("\nCHOOSE GAME NAME  > ");
@@ -128,7 +143,7 @@ public class TUI implements Serializable, GraficInterterface {
         } while(!flag);
     }
 
-    private void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         boolean check ;
         System.out.println("\nEXISTING GAMES: ");
@@ -229,6 +244,11 @@ public class TUI implements Serializable, GraficInterterface {
         }
         System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         client.manageGame(true);
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 
     private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {

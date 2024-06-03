@@ -64,7 +64,9 @@ public class Gui_Initialization extends Application {
                     Registry registry = LocateRegistry.getRegistry(Constants.IPV4, 1234);
                     VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
 
-                    new RmiClientF(server).run();
+                    client = new RmiClientF(server);
+                    scene.setClient(client);
+                            client.runGUI(this.scene);
                     break;
 
                 case("1"):
@@ -75,7 +77,9 @@ public class Gui_Initialization extends Application {
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
 
-                        new clientSocket(inputStream, outputStream).runGUI(this.scene);
+                        client = new clientSocket(inputStream, outputStream);
+                        scene.setClient(client);
+                                client.runGUI(this.scene);
                     }catch (IOException e) {
                         System.err.println(e.getMessage());
                         return;
@@ -110,7 +114,6 @@ public class Gui_Initialization extends Application {
         scene.setStage(stage);
         GUISocketOrRmi();
 
-        this.gameAcces();
 
     }
 

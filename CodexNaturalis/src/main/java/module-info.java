@@ -8,6 +8,7 @@ module PSP31 {
     requires javafx.controls;
     requires javafx.media;
     requires com.google.gson;
+    requires org.fusesource.jansi;
     exports it.polimi.ingsw.MODEL;
     exports it.polimi.ingsw.VIEW;
     exports it.polimi.ingsw.SOCKET_FINAL;
