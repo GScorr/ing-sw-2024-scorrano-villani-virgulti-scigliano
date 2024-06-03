@@ -62,9 +62,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             int port = server.getPort(token);
             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-            //rmi_controller.connectRMI(this);
             flag=2;
+            startCheckingMessages();
         }
+
         startSendingHeartbeats();
         tui.setToken(token);
         return flag;
@@ -81,8 +82,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         port = server.createGame(game_name, numplayers, token, player_name,this);
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-        //rmi_controller.connectRMI(this);
-        //startSendingHeartbeats();
         startCheckingMessages();
     }
 
@@ -110,9 +109,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         int port = server.getPort(token);
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-        //rmi_controller.connectRMI(this);
         startCheckingMessages();
-        //startSendingHeartbeats();
     }
 
     public boolean isGoalCardPlaced() throws IOException {
@@ -178,7 +175,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null) s.action();
                 } catch (IOException e) {throw new RuntimeException(e);}
-                try {Thread.sleep(100);} catch (InterruptedException e) {throw new RuntimeException(e);}
+                try {Thread.sleep(200);} catch (InterruptedException e) {}
             }
         }).start();
     }

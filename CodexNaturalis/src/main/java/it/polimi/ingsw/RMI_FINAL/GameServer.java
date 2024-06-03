@@ -125,8 +125,9 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     private void broadcastMessage(ResponseMessage message) throws IOException {
-        System.out.println(clientsRMI.size());
-        for (VirtualViewF c : clientsRMI){ c.pushBack(message);}
+        for (VirtualViewF c : clientsRMI){
+            System.out.println("mando il messaggio al client " + c.toString() +  message.toString());
+            c.pushBack(message);}
     }
     public void addQueue(SendFunction function) {functQueue.add(function);}
 
@@ -144,16 +145,14 @@ public class GameServer implements VirtualGameServer, Serializable {
     public void wakeUp(String name, VirtualViewF client) throws IOException {
         for( String s : token_to_player.keySet()){
             if( token_to_player.get(s).getName().equals(name) )  {
-                String token = s;
+                token_manager.putPair(s,client);
                 System.out.println("Reconnect");
-                token_to_player.get(token).connect();
-                //token_manager.getTokens().remove(s);
-                token_manager.putPair(token,client);
+                token_to_player.get(s).connect();
                 clientsRMI.add(client);
-                token_manager.getVal(token).insertId(id);
-                token_manager.getVal(token).insertNumPlayers(getNumPlayersMatch());
-                token_manager.getVal(token).insertPlayer(token_to_player.get(s));
-                token_manager.getVal(token).setNumToPlayer(index_to_name);
+                token_manager.getVal(s).insertId(id);
+                token_manager.getVal(s).insertNumPlayers(getNumPlayersMatch());
+                token_manager.getVal(s).insertPlayer(token_to_player.get(s));
+                token_manager.getVal(s).setNumToPlayer(index_to_name);
                 }
         }
     }
@@ -222,7 +221,6 @@ public class GameServer implements VirtualGameServer, Serializable {
                             try {
                                 int countdown = 45;
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown));
-                                System.out.println("AFTER : " + controller.isAlone() );
                                 while( countdown > 0 && controller.isAlone()) {
                                     broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
                                     checkEndDisconnect();

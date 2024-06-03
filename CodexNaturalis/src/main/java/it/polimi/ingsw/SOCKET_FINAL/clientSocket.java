@@ -103,24 +103,24 @@ public class clientSocket implements VirtualViewF, Serializable {
     public void  startCheckingMessagesSocket() throws IOException,ClassNotFoundException{
         new Thread( () -> {
             ResponseMessage s;
+            int k = 0;
             while(true) {
                 try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    if (((s = (ResponseMessage) input.readObject()) != null)) {
+                    if ( ( ( s = (ResponseMessage) input.readObject() ) != null)) {
                         s.setClient(this);
                         s.action();
                     }
                 } catch (IOException ignored) {
-                    System.out.println("ERRRORE RICONNESSIONE");
+
+                    if( k == 0 ) System.out.println("err");
+                    k = 1 ;
                 } catch (ClassNotFoundException e) {
                     System.out.println("errore startCheckingMessagesSocket ");
                 }
                 catch( ClassCastException e ){
-                    System.out.println("cast except");
+                    System.out.println(e);
+                }try {Thread.sleep(100);} catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();

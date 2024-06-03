@@ -59,7 +59,7 @@ public class ClientHandler  implements VirtualViewF {
                 } catch (IOException | InterruptedException e) {
 
                     if( k == 0) System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
-                    k = 1;
+                    System.err.println("\n              [SERVER ERROR] \n           SERVER DISCONNECTED");
                 }
             }
         }).start();
