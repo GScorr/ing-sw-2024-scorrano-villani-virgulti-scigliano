@@ -105,18 +105,22 @@ public class clientSocket implements VirtualViewF, Serializable {
             ResponseMessage s;
             while(true) {
                 try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
                     if (((s = (ResponseMessage) input.readObject()) != null)) {
                         s.setClient(this);
                         s.action();
                     }
-                } catch (IOException e) {
-                    if(! flag_Server_Disconneted){
-                        System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
-                        flag_Server_Disconneted = true;
-                    }
-
+                } catch (IOException ignored) {
+                    System.out.println("ERRRORE RICONNESSIONE");
                 } catch (ClassNotFoundException e) {
                     System.out.println("errore startCheckingMessagesSocket ");
+                }
+                catch( ClassCastException e ){
+                    System.out.println("cast except");
                 }
             }
         }).start();

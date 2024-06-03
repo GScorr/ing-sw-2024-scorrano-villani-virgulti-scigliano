@@ -52,11 +52,14 @@ public class ClientHandler  implements VirtualViewF {
     public void startSendingHeartbeats() {
         new Thread(() -> {
             while (client_is_connected) {
+                int k = 0;
                 try {
                     Thread.sleep(100);
                     common.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
+
+                    if( k == 0) System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
+                    k = 1;
                 }
             }
         }).start();
