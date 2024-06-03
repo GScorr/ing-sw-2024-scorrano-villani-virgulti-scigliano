@@ -1,5 +1,6 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
+
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;

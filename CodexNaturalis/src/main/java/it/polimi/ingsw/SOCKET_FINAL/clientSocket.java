@@ -261,12 +261,17 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void ChatChoice(String message, int decision) throws IOException {
-        if(decision==miniModel.getNum_players()+1){
-            server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
-        }
-        else{
-            server_proxy.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message,miniModel.getMy_player()));
-        }
+       if(miniModel.getNum_players() != 2){
+           if(decision==miniModel.getNum_players()+1){
+               server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+           }
+           else{
+               server_proxy.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message,miniModel.getMy_player()));
+           }
+       } else{
+           server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+       }
+
     }
 
 

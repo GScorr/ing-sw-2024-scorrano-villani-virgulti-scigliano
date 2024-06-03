@@ -289,6 +289,7 @@ public class MiniModel implements Serializable {
                 for(ChatMessage c : chat.get(6).getChat()){
                     System.out.println(c.player.getName() + "- " + c.message);
                 }
+                keepCheckChat(chat.get(6));
             }
             else {
                 not_read.set(chat_manager.getChatIndex(my_index, decision), 0);
@@ -299,6 +300,7 @@ public class MiniModel implements Serializable {
                 for (ChatMessage c : chat.get(chat_manager.getChatIndex(my_index, decision)).getChat()) {
                     System.out.println(c.player.getName() + "- " + c.message);
                 }
+                keepCheckChat(chat.get(chat_manager.getChatIndex(my_index, decision)));
             }
         }
         else{
@@ -310,9 +312,35 @@ public class MiniModel implements Serializable {
             for(ChatMessage c : chat.get(6).getChat()){
                 System.out.println(c.player.getName() + "- " + c.message);
             }
+            keepCheckChat(chat.get(6));
         }
         return true;
     }
 
+    private boolean stop_chat;
+
+    public void setStop_chat(boolean b){
+        stop_chat = b;
+    }
+    private void keepCheckChat(Chat current_chat){
+        new Thread(() -> {
+            System.out.println("sono un nuovo thread");
+            int in_size = current_chat.getChat().size();
+            while (!stop_chat) {
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                //in_size = current_chat.getChat().size();
+                if ( current_chat.getChat().size() > in_size ){
+                    for ( int i = in_size ; i < current_chat.getChat().size() ; ++i  )
+                        System.out.println(current_chat.getChat().get(i).player.getName() + "- " + current_chat.getChat().get(i).message);
+                    in_size = current_chat.getChat().size();
+                }
+
+            }
+        }).start();
+    }
 
 }

@@ -1,3 +1,4 @@
+
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import javafx.fxml.FXML;
