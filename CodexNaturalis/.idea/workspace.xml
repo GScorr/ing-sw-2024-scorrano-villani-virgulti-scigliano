@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Bozza gui funzionante + appunti">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2024_00_24_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2024_00_24__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -312,14 +307,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1716900295278" duration="1142000" />
       <workItem from="1716911414273" duration="3009000" />
-    </task>
-    <task id="LOCAL-00113" summary="inizio mini model">
-      <option name="closed" value="true" />
-      <created>1715716681464</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1715716681464</updated>
     </task>
     <task id="LOCAL-00114" summary="inizio mini model">
       <option name="closed" value="true" />
@@ -705,7 +692,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716885447946</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary=".">
+      <option name="closed" value="true" />
+      <created>1717421869409</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1717421869409</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -740,7 +735,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Socket final with Big Black Server" />
     <MESSAGE value="inizio mini model" />
     <MESSAGE value="non lo leggerà nessuno ma abbiamo fatto cose belle" />
     <MESSAGE value="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel" />
@@ -765,7 +759,8 @@
     <MESSAGE value="notreadmesaages" />
     <MESSAGE value="Tutto funzionante" />
     <MESSAGE value="Bozza gui funzionante + appunti" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bozza gui funzionante + appunti" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
