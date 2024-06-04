@@ -39,7 +39,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     private ServerProxy server_proxy;
 
     ObjectInputStream input;
-    
+
     public boolean flag_check;
     public boolean check;
     public boolean starting_card_is_placed;
@@ -103,24 +103,20 @@ public class clientSocket implements VirtualViewF, Serializable {
     public void  startCheckingMessagesSocket() throws IOException,ClassNotFoundException{
         new Thread( () -> {
             ResponseMessage s;
-            int k = 0;
             while(true) {
                 try {
-                    if ( ( ( s = (ResponseMessage) input.readObject() ) != null)) {
+                    if (((s = (ResponseMessage) input.readObject()) != null)) {
                         s.setClient(this);
                         s.action();
                     }
-                } catch (IOException ignored) {
+                } catch (IOException e) {
+                    if(! flag_Server_Disconneted){
+                        System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
+                        flag_Server_Disconneted = true;
+                    }
 
-                    if( k == 0 ) System.out.println("err");
-                    k = 1 ;
                 } catch (ClassNotFoundException e) {
                     System.out.println("errore startCheckingMessagesSocket ");
-                }
-                catch( ClassCastException e ){
-                    System.out.println(e);
-                }try {Thread.sleep(100);} catch (InterruptedException e) {
-                    throw new RuntimeException(e);
                 }
             }
         }).start();
@@ -265,16 +261,16 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void ChatChoice(String message, int decision) throws IOException {
-       if(miniModel.getNum_players() != 2){
-           if(decision==miniModel.getNum_players()+1){
-               server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
-           }
-           else{
-               server_proxy.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message,miniModel.getMy_player()));
-           }
-       } else{
-           server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
-       }
+        if(miniModel.getNum_players() != 2){
+            if(decision==miniModel.getNum_players()+1){
+                server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+            }
+            else{
+                server_proxy.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message,miniModel.getMy_player()));
+            }
+        } else{
+            server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+        }
 
     }
 
