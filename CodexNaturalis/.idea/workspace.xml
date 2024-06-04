@@ -4,11 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="risoluzione problemi riconnessione e riconnessioni multiple:&#10;testati rmi-rmi rmi-soc soc-rmi soc-soc">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_list_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_list_scene.fxml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="La lista di free games è vista dalla GUI e si entra in waitFullGames">
+      <change beforePath="$PROJECT_DIR$/src/resources/Test/scoreTable.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Test/scoreTable.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/001.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/011.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/021.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/031.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/031.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/041.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/041.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/051.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/051.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/066.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/066.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/BACKSIDE/073.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/BACKSIDE/073.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/FRONTSIDE/001.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/FRONTSIDE/001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/FRONTSIDE/002.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/FRONTSIDE/002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/FRONTSIDE/003.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/FRONTSIDE/003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/GOALCARDbackSide/087.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/GOALCARDbackSide/087.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/GOALCARDforntSide/087.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/GOALCARDforntSide/087.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/GOALCARDforntSide/088.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/GOALCARDforntSide/088.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/GOALCARDforntSide/089.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/GOALCARDforntSide/089.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/GOALCARDforntSide/090.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/GOALCARDforntSide/090.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDbackSide/081.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDbackSide/081.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDbackSide/082.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDbackSide/082.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDbackSide/083.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDbackSide/083.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDbackSide/084.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDbackSide/084.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDbackSide/085.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDbackSide/085.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDbackSide/086.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDbackSide/086.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDfrontSide/081.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDfrontSide/081.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDfrontSide/082.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDfrontSide/082.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDfrontSide/083.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDfrontSide/083.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDfrontSide/084.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDfrontSide/084.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDfrontSide/085.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDfrontSide/085.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/STARTINGCARDfrontSide/086.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/STARTINGCARDfrontSide/086.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/backgroundTable.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/backgroundTable.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/loginBackground.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/loginBackground.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/img/scoreTable.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/imgMirk/scoreTable.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +179,8 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources" />
+      <recent name="$PROJECT_DIR$/src/resources/img/Card" />
       <recent name="$PROJECT_DIR$/src/resources/fxml" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -315,14 +346,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00113" summary="inizio mini model">
-      <option name="closed" value="true" />
-      <created>1715716681464</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1715716681464</updated>
     </task>
     <task id="LOCAL-00114" summary="inizio mini model">
       <option name="closed" value="true" />
@@ -708,7 +731,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717439108819</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="La lista di free games è vista dalla GUI e si entra in waitFullGames">
+      <option name="closed" value="true" />
+      <created>1717496843392</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1717496843393</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -743,7 +774,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Socket final with Big Black Server" />
     <MESSAGE value="inizio mini model" />
     <MESSAGE value="non lo leggerà nessuno ma abbiamo fatto cose belle" />
     <MESSAGE value="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel" />
@@ -768,7 +798,8 @@
     <MESSAGE value="creazione primo collegamento GUI" />
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="risoluzione problemi riconnessione e riconnessioni multiple:&#10;testati rmi-rmi rmi-soc soc-rmi soc-soc" />
-    <option name="LAST_COMMIT_MESSAGE" value="risoluzione problemi riconnessione e riconnessioni multiple:&#10;testati rmi-rmi rmi-soc soc-rmi soc-soc" />
+    <MESSAGE value="La lista di free games è vista dalla GUI e si entra in waitFullGames" />
+    <option name="LAST_COMMIT_MESSAGE" value="La lista di free games è vista dalla GUI e si entra in waitFullGames" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
