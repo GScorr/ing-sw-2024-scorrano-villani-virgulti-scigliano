@@ -8,20 +8,20 @@ import javafx.stage.Stage;
 /**
  * This class implements the controller of a generic Alert Scene.
  */
-public class AlertSceneController extends GenericSceneController {
+public class MessageSceneController extends GenericSceneController {
     @FXML
-    private Label alertTitle;
+    private Label messageTitle;
     @FXML
-    private Label alertMessage;
+    private Label messageMessage;
     private SceneController controller;
     private Stage stage;
 
-    public void setAlertTitle(String title) {
-        alertTitle.setText(title);
+    public void setMessageTitle(String title) {
+        messageTitle.setText(title);
     }
 
-    public void setAlertMessage(String message) {
-        alertMessage.setText(message);
+    public void setMessageMessage(String message) {
+        messageMessage.setText(message);
     }
 
     public void setStage(Stage stage) {
@@ -33,7 +33,6 @@ public class AlertSceneController extends GenericSceneController {
     private void handleOkAction() {
         if (stage != null) {
             stage.close();
-            controller.getActiveController().emptyField();
         }
     }
 

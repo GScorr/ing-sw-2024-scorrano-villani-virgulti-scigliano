@@ -195,6 +195,11 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
+    public GraficInterterface getTerminal_interface() throws IOException{
+        return terminal_interface;
+    }
+
+    @Override
     public int checkName(String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         server_proxy.checkName(playerName);
         waitResponse();

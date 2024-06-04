@@ -17,6 +17,8 @@ import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
+import it.polimi.ingsw.VIEW.GraficInterterface;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 
 
 import java.io.*;
@@ -173,6 +175,11 @@ public class ClientHandler  implements VirtualViewF {
         output.writeObject(s);
         output.flush();
         output.reset();
+    }
+
+    @Override
+    public GraficInterterface getTerminal_interface() throws IOException{
+        return null;
     }
 
     @Override
@@ -444,6 +451,11 @@ public class ClientHandler  implements VirtualViewF {
 
     @Override
     public void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
+
+    }
+
+    @Override
+    public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
 
     }
 
