@@ -6,16 +6,29 @@ import it.polimi.ingsw.MODEL.GameField;
 import java.io.Serializable;
 
 public class Goal implements Serializable {
+
+
     private GoalStrategy goalType;
     private AnglesEnum resource;
     private int points;
     private String string;
+
+    public  String front_side_path;
+    public  String back_side_path;
 
     public Goal(GoalStrategy goalType,int points,AnglesEnum resource, String string) {
         this.goalType = goalType;
         this.points = points;
         this.resource=resource;
         this.string = string;
+    }
+
+    public void setFront_side_path(String front_side_path) {
+        this.front_side_path = front_side_path;
+    }
+
+    public void setBack_side_path(String back_side_path) {
+        this.back_side_path = back_side_path;
     }
 
     public void setGoalType(GoalStrategy goalType) {

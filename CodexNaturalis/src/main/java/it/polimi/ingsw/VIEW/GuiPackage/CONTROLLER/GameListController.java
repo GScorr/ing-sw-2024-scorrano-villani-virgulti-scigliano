@@ -52,15 +52,21 @@ public class GameListController extends GenericSceneController{
         gameListContainer.getChildren().clear(); // Clear existing buttons
         for (SocketRmiControllerObject game : games) {
             Button button = new Button(game.name + " - Players: " + game.num_player + "/" + game.max_num_player);
-            button.setOnAction(event -> handleGameButtonClick(game));
+            button.setOnAction(event -> {
+                try {
+                    handleGameButtonClick(game);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             gameListContainer.getChildren().add(button);
         }
     }
 
-    private void handleGameButtonClick(SocketRmiControllerObject game) {
-        // Handle button click, e.g., join the selected game
-        System.out.println("Joining game: " + game.name);
-        // You can add more logic here to join the selected game
+    private void handleGameButtonClick(SocketRmiControllerObject game) throws IOException, InterruptedException {
+        super.client.getTerminal_interface().waitFullGame();
     }
 
 }

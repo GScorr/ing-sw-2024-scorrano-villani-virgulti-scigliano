@@ -20,7 +20,7 @@
       <StackPane prefHeight="1024.0" prefWidth="1024.0">
          <ImageView fx:id="table" fitWidth="1024.0" fitHeight="1024.0" preserveRatio="false">
             <image>
-               <Image url="@../img/backgroundTable.png" />
+               <Image url="@../imgMirk/backgroundTable.png" />
             </image>
          </ImageView>
       </StackPane>
@@ -81,7 +81,7 @@
       <!-- Immagine del punteggio -->
       <ImageView fx:id="tableScoreImage" fitHeight="611.0" fitWidth="454.0" layoutX="59.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../img/scoreTable.png" />
+            <Image url="@../imgMirk/scoreTable.png" />
          </image>
       </ImageView>
 

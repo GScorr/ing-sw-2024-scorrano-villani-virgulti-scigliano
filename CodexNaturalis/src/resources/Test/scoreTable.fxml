@@ -10,7 +10,7 @@
        <Button fx:id="showImageButton" layoutX="238.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Nascondi immagine" />
       <ImageView id="scoreTable" fx:id="myImageView" fitHeight="514.0" fitWidth="514.0" layoutX="172.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/scoreTable.png" />
+            <Image url="@../imgMirk/scoreTable.png" />
          </image>
       </ImageView>
 

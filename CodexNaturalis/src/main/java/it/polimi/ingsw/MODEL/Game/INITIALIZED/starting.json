@@ -21,7 +21,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/starting_front/0.81.png",
+    "back_img_path": "@Card/BACK/starting_back/0.81.png"
   },
   {
     "color":"NONE",
@@ -45,7 +47,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/starting_front/0.82.png",
+    "back_img_path": "@Card/BACK/starting_back/0.82.png"
   },
   {
     "color":"NONE",
@@ -69,7 +73,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/starting_front/0.83.png",
+    "back_img_path": "@Card/BACK/starting_back/0.83.png"
   },
   {
     "color":"NONE",
@@ -93,7 +99,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/starting_front/0.84.png",
+    "back_img_path": "@Card/BACK/starting_back/0.84.png"
   },
   {
     "color":"NONE",
@@ -117,7 +125,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/starting_front/0.85.png",
+    "back_img_path": "@Card/BACK/starting_back/0.85.png"
   },
   {
     "color":"NONE",
@@ -141,7 +151,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/starting_front/0.86.png",
+    "back_img_path": "@Card/BACK/starting_back/0.86.png"
   }
 
 ]

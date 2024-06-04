@@ -115,15 +115,18 @@ public class Game implements Serializable {
     // scelta max_num_player
     public Game( /* DeckGoalCard goal_deck */ int max_num_player) {
         this.creation = new DeckCreation();
+
+        /*  DECK NON MISCHIATO
         this.gold_deck = new Deck(creation.getGoldDeck());
         this.resources_deck = new Deck(creation.getResourcesDeck());
+         */
 
-        /*  -- DECK MISCHIATO NON UTILE PER I TEST, POI BISOGNERÀ TORNARE AL DECK MISCHIATO
 
+        //Deck Mischiato
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
 
-         */
+
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;

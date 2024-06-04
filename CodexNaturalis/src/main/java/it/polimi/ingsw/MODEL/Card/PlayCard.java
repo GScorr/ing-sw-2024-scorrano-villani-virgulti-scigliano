@@ -13,6 +13,10 @@ import java.io.Serializable;
 public abstract class  PlayCard implements Serializable {
     private final Side front_side ;
     private final  Side back_side;
+
+    public  String front_side_path;
+    public  String back_side_path;
+
     public boolean flipped;
 
     public final CentralEnum colore;
@@ -27,6 +31,14 @@ public abstract class  PlayCard implements Serializable {
         this.colore = back_side.getCentral_resource();
     }
 
+
+    public void setFront_side_path(String front_side_path) {
+        this.front_side_path = front_side_path;
+    }
+
+    public void setBack_side_path(String back_side_path) {
+        this.back_side_path = back_side_path;
+    }
 
     public void flipCard(boolean flipped){
         this.flipped = flipped;
