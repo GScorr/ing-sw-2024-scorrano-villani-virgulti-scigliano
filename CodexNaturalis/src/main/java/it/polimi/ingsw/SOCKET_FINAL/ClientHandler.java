@@ -47,21 +47,18 @@ public class ClientHandler  implements VirtualViewF {
         this.server = server;
         this.input = input;
         this.output = output;
-       this.common = common;
+        this.common = common;
 
     }
 
     public void startSendingHeartbeats() {
         new Thread(() -> {
             while (client_is_connected) {
-                int k = 0;
                 try {
                     Thread.sleep(100);
                     common.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
-
-                    if( k == 0) System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
-                    System.err.println("\n              [SERVER ERROR] \n           SERVER DISCONNECTED");
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -199,9 +196,9 @@ public class ClientHandler  implements VirtualViewF {
                     Thread.sleep(200);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
-                       output.writeObject(s);
-                       output.flush();
-                       output.reset();
+                        output.writeObject(s);
+                        output.flush();
+                        output.reset();
                     }
                 } catch (InterruptedException e) {
 
@@ -316,7 +313,7 @@ public class ClientHandler  implements VirtualViewF {
 
                     }
 
-                     else if ((DP_message instanceof CreateGame)) {
+                    else if ((DP_message instanceof CreateGame)) {
                         ((CreateGame) DP_message).setClientHandler(this);
                         startCheckingMessages();
                         int port = ((CreateGame) DP_message).actionCreateGameMessage();
@@ -338,7 +335,7 @@ public class ClientHandler  implements VirtualViewF {
                             output.reset();
                         }
                     } else if (DP_message instanceof connectGame) {
-                         startCheckingMessages();
+                        startCheckingMessages();
                         int port = common.getPort(token);
                         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
