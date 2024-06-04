@@ -81,7 +81,6 @@ public class Common_Server {
             {
                 Player p = rmi_controllers.get(i).getController().getGame().getGet_player_index().get(j);
                 if ( p.getName().equals(name) && p.isDisconnected() ) {
-                    System.out.println("STA PER SVEGLIARSI");
                     rmi_controllers.get(i).wakeUp(name,client);
                     for ( String s : rmi_controllers.get(i).getTtoP().keySet() )
                     {

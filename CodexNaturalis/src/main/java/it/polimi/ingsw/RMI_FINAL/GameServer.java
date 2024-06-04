@@ -163,7 +163,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             Player tmp;
             while(true) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(400);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
