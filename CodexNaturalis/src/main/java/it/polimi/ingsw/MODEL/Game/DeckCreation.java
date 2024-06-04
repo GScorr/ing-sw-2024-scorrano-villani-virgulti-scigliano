@@ -149,6 +149,13 @@ public class DeckCreation implements Serializable {
             Side back_side = new Side(enum_angleRightUp,enum_angleRightDown,enum_angleLeftUp,enum_angleLeftDown,c_1,c_2,c_3);
             int point = singleCard.get("point").getAsInt();
             ResourceCard tmp = new ResourceCard(front_side,back_side,false,point);
+
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
             deck_resources.add(tmp);
         }
     }
@@ -207,6 +214,13 @@ public class DeckCreation implements Serializable {
             BonusEnum bonus = BonusEnum.valueOf(singleCard.get("point_bonus").getAsString());
 
             GoldCard tmp = new GoldCard(front_side,back_side,false,point,costraint,bonus);
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_gold.add(tmp);
         }
     }
@@ -261,6 +275,14 @@ public class DeckCreation implements Serializable {
             Side back_side = new Side(enum_angleRightUp,enum_angleRightDown,enum_angleLeftUp,enum_angleLeftDown,c_1,c_2,c_3);
             int point = singleCard.get("point").getAsInt();
             StartingCard tmp = new StartingCard(front_side,back_side,false);
+
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_starting.add(tmp);
         }
     }
@@ -292,6 +314,13 @@ public class DeckCreation implements Serializable {
                     break;
             }
             Goal tmp = new Goal(strategy,point,enum_resource,string);
+
+            //-- GUI file path
+            String front_side_path = singlegoal.get("front_img_path").getAsString();
+            String back_side_path = singlegoal.get("back_img_path").getAsString();
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_goal.add(tmp);
         }
     }

@@ -3,97 +3,128 @@
     "goalType": "GoalDiagonal",
     "resource": "MUSHROOMS",
     "points": 2,
-    "string": " 3 MUSHROOMS DIAGONAL Y = X "
+    "string": " 3 MUSHROOMS DIAGONAL Y = X ",
+    "front_img_path": "@Card/FRONT/goal_front/087.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalDiagonal",
     "resource": "PLANT",
     "points": 2,
-    "string": "3 PLANTS DIAGONAL Y = - X"
+    "string": "3 PLANTS DIAGONAL Y = - X",
+    "front_img_path": "@Card/FRONT/goal_front/088.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalDiagonal",
     "resource": "ANIMAL",
     "points": 2,
-    "string": "3 ANIMALS DIAGONAL Y = X"
+    "string": "3 ANIMALS DIAGONAL Y = X",
+    "front_img_path": "@Card/FRONT/goal_front/089.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalDiagonal",
     "resource": "INSECTS",
     "points": 2,
-    "string": "3 INSECTS DIAGONAL Y = -X"
+    "string": "3 INSECTS DIAGONAL Y = -X",
+    "front_img_path": "@Card/FRONT/goal_front/090.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "MUSHROOMS",
     "points": 3,
-    "string": " L FIGURE MUSHROOMS "
+    "string": " L FIGURE MUSHROOMS ",
+    "front_img_path": "@Card/FRONT/goal_front/091.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "PLANT",
     "points": 3,
-    "string": " L FIGURE PLANTS "
+    "string": " L FIGURE PLANTS ",
+    "front_img_path": "@Card/FRONT/goal_front/092.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "ANIMAL",
     "points": 3,
-    "string": " L FIGURE ANIMALS "
+    "string": " L FIGURE ANIMALS ",
+    "front_img_path": "@Card/FRONT/goal_front/093.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalLFigure",
     "resource": "INSECTS",
     "points": 3,
-    "string": " L FIGURE INSECTS "
+    "string": " L FIGURE INSECTS ",
+    "front_img_path": "@Card/FRONT/goal_front/094.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalTriple",
     "resource": "MUSHROOMS",
     "points": 2,
-    "string": "TRIPLE MUSHROOMS"
+    "string": "TRIPLE MUSHROOMS",
+    "front_img_path": "@Card/FRONT/goal_front/095.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalTriple",
     "resource": "PLANT",
     "points": 2,
-    "string": "TRIPLE PLANTS"
-
+    "string": "TRIPLE PLANTS",
+    "front_img_path": "@Card/FRONT/goal_front/096.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalTriple",
     "resource": "ANIMAL",
     "points": 2,
-    "string": "TRIPLE ANIMALS"
+    "string": "TRIPLE ANIMALS",
+    "front_img_path": "@Card/FRONT/goal_front/097.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalTriple",
     "resource": "INSECTS",
     "points": 2,
-    "string": "TRIPLE INSECTS"
+    "string": "TRIPLE INSECTS",
+    "front_img_path": "@Card/FRONT/goal_front/098.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalFeatherPenPaper",
     "resource": "MIX",
     "points": 2,
-    "string": "ONE FEATHER, ONE PAPER, ONE INKER"
+    "string": "ONE FEATHER, ONE PAPER, ONE INKER",
+    "front_img_path": "@Card/FRONT/goal_front/099.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalDoubleGold",
     "resource": "FEATHER",
     "points": 2,
-    "string": "DOUBLE FEATHER"
+    "string": "DOUBLE FEATHER",
+    "front_img_path": "@Card/FRONT/goal_front/100.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalDoubleGold",
     "resource": "PEN",
     "points": 2,
-    "string": "DOUBLE INKER"
+    "string": "DOUBLE INKER",
+    "front_img_path": "@Card/FRONT/goal_front/101.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   },
   {
     "goalType": "GoalDoubleGold",
     "resource": "PAPER",
     "points": 2,
-    "string": "DOUBLE PAPER"
+    "string": "DOUBLE PAPER",
+    "front_img_path": "@Card/FRONT/goal_front/102.png",
+    "back_img_path": "@Card/BACK/goal_back/0.88.png"
   }
 ]

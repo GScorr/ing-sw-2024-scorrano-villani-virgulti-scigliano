@@ -21,7 +21,9 @@
         "central2": "NONE",
         "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.01.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -45,7 +47,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.02.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -69,7 +73,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.03.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -93,7 +99,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.04.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -117,7 +125,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.05.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -141,7 +151,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.06.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -165,7 +177,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.07.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -189,7 +203,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.08.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -213,7 +229,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.09.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
   {
     "color":"MUSHROOMS",
@@ -237,7 +255,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.10.png",
+    "back_img_path": "@Card/BACK/resource_back/0.01.png"
   },
 
 
@@ -263,7 +283,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.11.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -287,7 +309,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.12.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -311,7 +335,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.13.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -335,7 +361,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.14.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -359,7 +387,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.15.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -383,7 +413,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.16.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -407,7 +439,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.17.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -431,7 +465,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.18.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -455,7 +491,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.19.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
   {
     "color":"PLANT",
@@ -479,7 +517,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.20.png",
+    "back_img_path": "@Card/BACK/resource_back/0.11.png"
   },
 
   {
@@ -504,7 +544,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.21.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -528,7 +570,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.22.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -552,7 +596,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.23.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -576,7 +622,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.24.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -600,7 +648,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.25.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -624,7 +674,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.26.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -648,7 +700,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.27.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -672,7 +726,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.28.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -696,7 +752,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.29.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
   {
     "color":"ANIMAL",
@@ -720,7 +778,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.30.png",
+    "back_img_path": "@Card/BACK/resource_back/0.21.png"
   },
 
 
@@ -747,7 +807,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.31.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -771,7 +833,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.32.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -795,7 +859,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.33.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -819,7 +885,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.34.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -843,7 +911,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.35.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -867,7 +937,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.36.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -891,7 +963,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "@Card/FRONT/resource_front/0.37.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -915,7 +989,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.38.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -939,7 +1015,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.39.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   },
   {
     "color":"INSECTS",
@@ -963,7 +1041,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "@Card/FRONT/resource_front/0.40.png",
+    "back_img_path": "@Card/BACK/resource_back/0.31.png"
   }
 
 ]
