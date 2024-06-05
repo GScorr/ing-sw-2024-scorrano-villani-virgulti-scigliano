@@ -95,14 +95,52 @@ public class GUI implements GraficInterterface {
 
     @Override
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
-
+        if(scene.getClient().getMiniModel().getState().equals("CHOOSE_GOAL")) {
+            boolean checkGoal = scene.getClient().isGoalCardPlaced();
+            if(checkGoal){
+                chooseGoal();
+                //System.out.println("\nYOU CHOOSE :" + scene.getClient().getGoalPlaced());
+            }
+            /*while (scene.getClient().getMiniModel().getState().equals("CHOOSE_GOAL")) {
+                buffering();
+            }*/
+        }
+    }
+    private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
+        Platform.runLater(() -> scene.changeRootPane("choose_goal_state.fxml"));
     }
 
     @Override
     public void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
-
+        if(scene.getClient().getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            if(!scene.getClient().isFirstPlaced()) {
+                chooseStartingCard();
+            }
+            /*while (client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+                buffering();
+            }*/
+        }
     }
 
+    private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+        Platform.runLater(() -> scene.changeRootPane("alert_scene.fxml"));
+        /*Scanner scan = new Scanner(System.in);
+        System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
+        client.showStartingCard();
+        int done=0;
+        while(done==0){
+            System.out.println("\n-'B' FOR BACK SIDE \n-'F' FOR FRONT SIDE:");
+            String dec = scan.nextLine();
+            if (dec.equals("F")||dec.equals("f")){
+                done=1;
+                client.chooseStartingCard(false);
+            } else if (dec.equals("B")||dec.equals("b")){
+                done=1;
+                client.chooseStartingCard(true);
+            }
+            else System.out.println("[ERROR] WRONG INSERT!");
+        }*/
+    }
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
 

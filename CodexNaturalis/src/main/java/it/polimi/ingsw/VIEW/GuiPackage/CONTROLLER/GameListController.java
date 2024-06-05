@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.util.List;
 
 public class GameListController extends GenericSceneController{
@@ -19,7 +20,7 @@ public class GameListController extends GenericSceneController{
 
     private List<SocketRmiControllerObject> games;
 
-    public void initialize() throws IOException, ClassNotFoundException, InterruptedException {
+    public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
 
 
         new Thread(() -> {
@@ -59,13 +60,17 @@ public class GameListController extends GenericSceneController{
                     throw new RuntimeException(e);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
+                } catch (NotBoundException e) {
+                    throw new RuntimeException(e);
                 }
             });
             gameListContainer.getChildren().add(button);
         }
     }
 
-    private void handleGameButtonClick(SocketRmiControllerObject game) throws IOException, InterruptedException {
+    private void handleGameButtonClick(SocketRmiControllerObject game) throws IOException, InterruptedException, NotBoundException {
+        super.client.findRmiController(ID, player_name);
+        super.client.connectGameServer();
         super.client.getTerminal_interface().waitFullGame();
     }
 

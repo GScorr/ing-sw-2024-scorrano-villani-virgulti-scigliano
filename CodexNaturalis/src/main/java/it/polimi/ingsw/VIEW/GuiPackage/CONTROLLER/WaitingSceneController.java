@@ -2,6 +2,7 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ public class WaitingSceneController extends GenericSceneController{
     @FXML
     private Button cancelButton;
 
+    private SceneController controller;
     @FXML
     public void initialize() {
         System.out.println("awa");
@@ -36,9 +38,11 @@ public class WaitingSceneController extends GenericSceneController{
                     throw new RuntimeException(e);
                 }
                 try {
-                    if (!super.client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
+                    System.out.println(super.client.getMiniModel().getState());
+                    if (!super.client.getMiniModel().getState().equals("NOT_INITIALIZED") && !client.getMiniModel().getState().equals("NOT_IN_A_GAME")) {
                         client.setGameFieldMiniModel();
-                        super.scene_controller.showMessage("SUCCESS","Your game is about to start!");
+                        System.out.println("fatto");
+                        //controller.showMessage("SUCCESS","Your game is about to start!");
                         client.getTerminal_interface().chooseGoalState();
                         break;
                     };
@@ -63,5 +67,9 @@ public class WaitingSceneController extends GenericSceneController{
 
     public void updateWaitingMessage(String message) {
         waitingMessage.setText(message);
+    }
+
+    public void setController (SceneController scene){
+        this.controller = scene;
     }
 }

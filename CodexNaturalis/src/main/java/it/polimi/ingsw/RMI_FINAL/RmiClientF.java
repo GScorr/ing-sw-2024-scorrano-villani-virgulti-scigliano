@@ -7,6 +7,7 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.*;
@@ -114,7 +115,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Thread.sleep(750);
     }
 
-    public boolean findRmiController(int id, String player_name) throws IOException, InterruptedException {
+    public boolean
+    findRmiController(int id, String player_name) throws IOException, InterruptedException {
         return server.findRmiController(id, token, player_name,this);
     }
 
@@ -140,6 +142,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     @Override
     public String getFirstGoal() throws IOException {
         return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString();
+    }
+    public Goal getFirstGoalCard() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0);
+    }
+
+    public Goal getSecondGoalCard() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1);
     }
 
     @Override
