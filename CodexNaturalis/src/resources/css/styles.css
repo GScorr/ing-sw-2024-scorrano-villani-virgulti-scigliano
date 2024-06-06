@@ -1,0 +1,60 @@
+.waiting-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.message {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666;
+    -fx-padding: 0 20;
+    -fx-text-alignment: center;
+}
+
+.cancel-button {
+    -fx-background-color: #ff5252;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #ff1744;
+}
+
+.choose-goal-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.header {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.card {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0, 0, 0);
+    -fx-padding: 10;
+    -fx-border-color: #333; /* Colore del bordo */
+    -fx-border-width: 2px; /* Spessore del bordo */
+    -fx-border-radius: 5px; /* Arrotondamento del bordo */
+}
+
+.card:hover {
+    -fx-scale-x: 1.05; /* Ingrandisce leggermente l'immagine su passaggio del mouse */
+    -fx-scale-y: 1.05; /* Ingrandisce leggermente l'immagine su passaggio del mouse */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 0);
+}

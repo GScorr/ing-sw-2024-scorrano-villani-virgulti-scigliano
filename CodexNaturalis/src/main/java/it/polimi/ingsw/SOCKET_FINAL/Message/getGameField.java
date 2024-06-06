@@ -1,9 +1,8 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
-import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
@@ -15,17 +14,17 @@ public class getGameField implements Message, Serializable {
     public Server server;
     public String token;
     ObjectOutputStream output;
-    public VirtualServerF rmi_server;
-    public VirtualRmiController rmi_controller;
+    public Common_Server common;
+    public VirtualGameServer rmi_controller;
 
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 
-    public void setRmiServer(VirtualServerF rmi_server) {
-        this.rmi_server = rmi_server;
+    public void setCommonServer(Common_Server common){
+        this.common = common;
     }
 
 
@@ -52,6 +51,6 @@ public class getGameField implements Message, Serializable {
         GameField game_field = rmi_controller.getTtoP().get(token).getGameField();
         output.writeObject(game_field);
         output.flush();
-
+        output.reset();
     }
 }

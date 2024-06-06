@@ -1,4 +1,6 @@
 package it.polimi.ingsw.MODEL.Game;
+import it.polimi.ingsw.Chat;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
@@ -7,8 +9,7 @@ import it.polimi.ingsw.MODEL.Game.State.*;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
-import it.polimi.ingsw.MODEL.Player.PlayerObserver;
-import it.polimi.ingsw.RMI.IndexManager;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class Game implements Serializable {
     private CenterCards cards_in_center;
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
-
+    private List<Chat> chats = new ArrayList<>();
 
 
     private GameState not_initialized = new NotInitialized(this),
@@ -114,20 +115,26 @@ public class Game implements Serializable {
     // scelta max_num_player
     public Game( /* DeckGoalCard goal_deck */ int max_num_player) {
         this.creation = new DeckCreation();
+
+        /*  DECK NON MISCHIATO
         this.gold_deck = new Deck(creation.getGoldDeck());
         this.resources_deck = new Deck(creation.getResourcesDeck());
+         */
 
-        /*  -- DECK MISCHIATO NON UTILE PER I TEST, POI BISOGNERÀ TORNARE AL DECK MISCHIATO
 
+        //Deck Mischiato
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
 
-         */
+
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
         this.index_game = IndexManagerF.getNextIndex();
+        for(int i=0; i<7; i++){
+            chats.add(new Chat());
+        }
     }
 
     public Game( /* DeckGoalCard goal_deck */ String name, int max_num_player) {
@@ -140,6 +147,9 @@ public class Game implements Serializable {
         this.actual_state = not_initialized;
         this.index_game = IndexManagerF.getNextIndex();
         this.name = name;
+        for(int i=0; i<7; i++){
+            chats.add(new Chat());
+        }
     }
 
 
@@ -264,5 +274,9 @@ public class Game implements Serializable {
 
     public Integer getIndex_game() {
         return index_game;
+    }
+
+    public void insertMessageinChat(int i, ChatMessage message){
+        chats.get(i).addMessage(message);
     }
 }

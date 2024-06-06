@@ -1,13 +1,14 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
-import it.polimi.ingsw.RMI_FINAL.VirtualRmiController;
-import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET.GiocoProva.Controller;
+import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.rmi.RemoteException;
 
 public class CreateGame implements Message, Serializable {
 
@@ -18,18 +19,22 @@ public class CreateGame implements Message, Serializable {
     public String game_name;
     int num_players;
 
-    public VirtualServerF rmi_server;
-    public VirtualRmiController rmi_controller;
+    public Common_Server common;
+    public VirtualGameServer rmi_controller;
 
+    public VirtualViewF clientHandler;
+
+    public void setClientHandler(VirtualViewF clientHandler) {
+        this.clientHandler = clientHandler;
+    }
 
     @Override
-    public void setRmiController(VirtualRmiController rmi_controller) {
+    public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
 
-
-    public void setRmiServer(VirtualServerF rmi_server) {
-        this.rmi_server = rmi_server;
+    public void setCommonServer(Common_Server common){
+            this.common = common;
     }
 
     public void setToken(String token){
@@ -53,9 +58,10 @@ public class CreateGame implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public int actionCreateGameMessage() throws RemoteException {
+    public int actionCreateGameMessage() throws IOException, InterruptedException {
         int port;
-        port = rmi_server.createGameSocket(game_name,num_players,token,name_p);
+        //port = common.createGameSocket(game_name,num_players,token,name_p, clientHandler);
+        port = common.createGame(game_name,num_players,token,name_p,clientHandler);
         return port;
     }
 

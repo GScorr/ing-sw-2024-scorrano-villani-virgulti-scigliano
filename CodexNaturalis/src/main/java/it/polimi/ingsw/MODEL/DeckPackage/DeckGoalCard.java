@@ -20,7 +20,7 @@ public class DeckGoalCard implements Serializable {
         if(cards.size()>0){
             return cards.pop();
         }
-        else throw new EmptyDeckException("errore mazzo vuoto in drawCard in DeckGoalCard");
+        else throw new EmptyDeckException("GOLD DECK IS EMPTY");
     }
 
     public Goal seeFirstCard(){return cards.getFirst();}

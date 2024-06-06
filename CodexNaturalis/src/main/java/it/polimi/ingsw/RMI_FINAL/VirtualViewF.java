@@ -1,24 +1,96 @@
 package it.polimi.ingsw.RMI_FINAL;
 
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Game.Game;
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
+import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.VIEW.GraficInterterface;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 
+import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.List;
 
 public interface VirtualViewF extends Remote {
-    //todo da modificare
-    public void showUpdate(GameField game_field) throws RemoteException;
-    public void reportError(String details) throws RemoteException;
-    public void reportMessage(String details) throws  RemoteException;
-    public void showCard(PlayCard card) throws RemoteException;
+    public void showUpdate(GameField game_field) throws IOException;
+    public void reportError(String details) throws IOException;
+    public void reportMessage(String details) throws  IOException;
+    public void showCard(PlayCard card) throws IOException;
+    public void pushBack(ResponseMessage message) throws IOException;
+    public void showField(GameField field) throws IOException;
+    public void printString(String s) throws IOException;
+    public void setGameField(List<GameField> games) throws IOException;
+    public MiniModel getMiniModel() throws IOException;
+    public void setCards(List<PlayCard> cards) throws IOException;
+    public void setNumToPlayer(HashMap<Integer, String> map) throws IOException;
+    public void setState(String state) throws IOException;
+    public void addChat(int idx, ChatMessage message) throws IOException;
+    public void insertId(int id) throws IOException;
+    public void insertNumPlayers(int numPlayersMatch) throws IOException;
 
-    public void showField(GameField field) throws RemoteException;
+    public void insertPlayer(Player player) throws IOException;
 
-    public void printString(String s) throws RemoteException;
+    public GraficInterterface getTerminal_interface() throws IOException;
+
+    //public int selectNamePlayer() throws IOException, NotBoundException;
+
+    public int checkName(String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
+
+    public boolean areThereFreeGames () throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
+
+    public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
+    public void manageGame(boolean endgame) throws IOException;
+    public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException;
+    public void drawCard(SendFunction function) throws IOException, InterruptedException;
+    public void ChatChoice(String message, int decision) throws IOException;
+    public List<SocketRmiControllerObject> getFreeGames() throws IOException, ClassNotFoundException, InterruptedException;
+    public VirtualGameServer getGameServer() throws IOException;
+
+    //public void startSendingHeartbeats();
+    public void setGameFieldMiniModel() throws IOException;
+    //public void startCheckingMessages();
+
+    public boolean findRmiController(int id, String player_name) throws IOException, ClassNotFoundException, InterruptedException;
+
+    public void connectGameServer() throws IOException, NotBoundException, InterruptedException;
+
+    public boolean isGoalCardPlaced() throws IOException, ClassNotFoundException, InterruptedException;
+
+    public String getGoalPlaced() throws IOException;
 
 
+    public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException;
 
+
+    public String getSecondGoal() throws IOException;
+
+    public void chooseGoal(int i) throws IOException, InterruptedException;
+
+    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException;
+    public Goal getSecondGoalCard() throws IOException;
+
+
+    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException;
+
+
+    public void chooseStartingCard(boolean b) throws IOException, InterruptedException;
+
+    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException;
+
+    String getToken() throws InterruptedException, IOException;
+
+    boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException;
+
+    boolean isResourceDeckPresent() throws IOException, ClassNotFoundException, InterruptedException;
+
+    void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException;
+
+    void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException;
 }

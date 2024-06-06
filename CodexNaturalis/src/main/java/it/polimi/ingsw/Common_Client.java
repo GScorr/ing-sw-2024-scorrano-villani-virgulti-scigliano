@@ -1,8 +1,10 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
-import it.polimi.ingsw.SOCKET_FINAL.Client;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
+import it.polimi.ingsw.VIEW.GuiPackage.Gui_Initialization;
 
 
 import java.io.*;
@@ -14,42 +16,86 @@ import java.util.Scanner;
 
 public class Common_Client {
 
-    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
-
+    private static void TUISocketOrRmi() throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
-        int choose=-1;
-        do{
-            if(choose != -1 ) System.err.println("[INSERT ERROR]");
+        String choose="-1";
 
+        do{
+
+            if( !choose.equals("-1") ) System.err.println("[INSERT ERROR]");
             System.out.println("CHOOSE A CONNECTION : \n 0 -> RMI \n 1 -> SOCKET ");
-            choose = scan.nextInt();
+            choose = scan.nextLine();
             switch (choose) {
-                case(0):
-                    Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1234);
+                case("0"):
+
+                    Registry registry = LocateRegistry.getRegistry(Constants.IPV4, 1234);
                     VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
-                    printLogo();
+
                     new RmiClientF(server).run();
                     break;
 
-                case(1):
-                    String host = "127.0.0.1";
+                case("1"):
                     int port = 12345;
-                    printLogo();
-                    Socket serverSocket = new Socket(host, port);
+                    Socket serverSocket = new Socket(Constants.IPV4, port);
                     try{
 
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
 
-                        new Client(inputStream, outputStream).run();
+                        new clientSocket(inputStream, outputStream).runTUI();
                     }catch (IOException e) {
-                        System.out.println("impossibile creare socket input / output");
+                        System.err.println(e.getMessage());
                         return;
                     }
                     break;
             }
-        }while( choose != 0  && choose != 1);
+        }while( !choose.equals("0")  && !choose.equals("1"));
     }
+
+
+    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
+        printLogo();
+
+        Scanner scan = new Scanner(System.in);
+        String choose="-1";
+
+        do{
+
+            if( !choose.equals("-1") ) System.err.println("[INSERT ERROR]");
+            System.out.println("CHOOSE A INTERFACE  : \n 0 -> TUI \n 1 -> Gui_Initialization ");
+            choose = scan.nextLine();
+            switch (choose) {
+                case("0"):
+                    TUISocketOrRmi();
+                    break;
+
+                case("1"):
+                    Gui_Initialization guiInitialization = new Gui_Initialization();
+                    guiInitialization.runGui(null);
+                    break;
+            }
+        }while( !choose.equals("0")  && !choose.equals("1"));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private static void printLogo() throws IOException {
         System.out.println("\n" +
@@ -62,8 +108,8 @@ public class Common_Client {
                 "                            \\:\\  \\  \\/__/ \\:\\  \\ /:/  / \\:\\  \\ /:/  / \\:\\~\\:\\ \\/__/ \\::::/~~/~                          \n" +
                 "                             \\:\\  \\        \\:\\  /:/  /   \\:\\  /:/  /   \\:\\ \\:\\__\\    ~~|:|~~|                           \n" +
                 "                              \\:\\  \\        \\:\\/:/  /     \\:\\/:/  /     \\:\\ \\/__/      |:|  |                           \n" +
-                "                               \\:\\__\\        \\::/  /       \\::/__/       \\:\\__\\        |:|  |                           \n" +
-                "                                \\/__/         \\/__/         ~~            \\/__/         \\|__|                           \n" +
+                "                               \\:\\__\\        \\::/  /       \\::/  /       \\:\\__\\        |:|  |                           \n" +
+                "                                \\/__/         \\/__/         \\/__/         \\/__/         \\|__|                           \n" +
                 "      ___           ___           ___           ___           ___           ___           ___                   ___     \n" +
                 "     /\\__\\         /\\  \\         /\\  \\         /\\__\\         /\\  \\         /\\  \\         /\\__\\      ___        /\\  \\    \n" +
                 "    /::|  |       /::\\  \\        \\:\\  \\       /:/  /        /::\\  \\       /::\\  \\       /:/  /     /\\  \\      /::\\  \\   \n" +

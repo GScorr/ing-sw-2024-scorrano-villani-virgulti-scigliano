@@ -1,410 +1,289 @@
 package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
-import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
-import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
+import it.polimi.ingsw.MODEL.Player.Player;
+import it.polimi.ingsw.MiniModel;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.*;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.StringCostant;
+import it.polimi.ingsw.VIEW.GraficInterterface;
+import it.polimi.ingsw.VIEW.GuiPackage.GUI;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
+import it.polimi.ingsw.VIEW.TUI;
 
-import java.net.MalformedURLException;
-import java.rmi.AlreadyBoundException;
+import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
     private String token;
-    private VirtualRmiController rmi_controller;
-    private boolean newClient;
+    private VirtualGameServer rmi_controller;
+    private final MiniModel miniModel =  new MiniModel();
+    private final StringCostant stringcostant = new StringCostant();
+    private TUI tui;
+    private GraficInterterface terminal_interface;
 
-    public RmiClientF(VirtualServerF server) throws RemoteException {
+    @Override
+    public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        this.server.connect(this);
+        terminal_interface = new GUI(scene);
+        terminal_interface.runCli();
+    }
+
+    public RmiClientF(VirtualServerF server) throws IOException {
         this.server = server;
     }
 
-    public void run() throws RemoteException, InterruptedException, NotBoundException {
+    public void run() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         this.server.connect(this);
+        terminal_interface = new TUI(this);
         runCli();
     }
 
-    private void runCli() throws RemoteException, InterruptedException, NotBoundException {
-        String player_name = selectNamePlayer();
-        gameAccess(player_name);
-        if(newClient) {
-            startSendingHeartbeats();
-            waitFullGame();
-            chooseGoalState();
-            chooseStartingCardState();
+
+    private void runCli() throws NotBoundException, IOException, InterruptedException, ClassNotFoundException {
+        terminal_interface.runCli();
+    }
+
+    //GAME FLOW
+
+    public int checkName(String player_name) throws IOException, NotBoundException {
+        int flag;
+            String isnew = server.checkName(player_name,this);
+        if(isnew.equals("true")) {
+            flag = 1;
+            this.token = server.createToken(this);}
+        else if(isnew.equals("false")){
+            flag=0;
+            terminal_interface.printError(stringcostant.name_is_not_valid);
+            //System.err.println(stringcostant.name_is_not_valid);
+            }
+        else{
+            this.token = isnew;
+            int port = server.getPort(token);
+            Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
+            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+            flag=2;
+            startCheckingMessages();
         }
-        manageGame();
+
+        startSendingHeartbeats();
+        terminal_interface.setToken(token);
+        return flag;
     }
 
-    private void manageGame() throws RemoteException, InterruptedException {
-        while(!rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("END_GAME")) {
-            if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
-                System.out.println("\nAspetta il tuo turno ");
-                while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("WAIT_TURN")) {
-                    buffering();
-                }
-            }
-            if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("PLACE_CARD")) {
-                System.out.println("TI STO PER MOSTRARE LE CARTE");
-                rmi_controller.showPlayerCards(token);
-                selectAndInsertCard();
-            }
-            if (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("DRAW_CARD")) {
-                drawCard();
-            }
-            rmi_controller.getPoints(token);
-            System.out.println("\nFine turno!");
-        }
-        System.out.println("Fine game!\nClassifica finale:\n");
-        rmi_controller.getFinalStandings(token);
+    public boolean areThereFreeGames () throws IOException {
+        return server.getFreeGames() != null && !server.getFreeGames().isEmpty();
     }
 
-    public void printString(String s) throws RemoteException{
-        System.out.println(s);
+
+    public List<SocketRmiControllerObject> getFreeGames() throws IOException {return server.getFreeGamesSocket();}
+    public void createGame(String game_name, int numplayers, String player_name) throws IOException, NotBoundException, InterruptedException {
+        int port;
+        port = server.createGame(game_name, numplayers, token, player_name,this);
+        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
+        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+        startCheckingMessages();
     }
 
-    private void drawCard() throws RemoteException {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("\n Pesca una carta, i mazzi disponibili sono: ");
-        if(rmi_controller.getController().getGame().getGold_deck().getNumber()>0){
-            System.out.println("1. Mazzo carte Oro");
-        }
-        if (rmi_controller.getController().getGame().getResources_deck().getNumber()>0){
-            System.out.println("2. Mazzo carte Risorsa");
-        }
-        System.out.println("3. Carte al centro");
-        System.out.println("Inserisci 1, 2, o 3, per visualizzare carte al centro: ");
-        String numstring = scan.nextLine();
-        int num = Integer.parseInt(numstring);
-        boolean done = false;
-        while(!done){
-            if(num==1){
-                done = true;
-                rmi_controller.peachFromGoldDeck(token);
-            } else if (num==2) {
-                done = true;
-                rmi_controller.peachFromResourceDeck(token);
-            } else if (num==3) {
-                done=true;
-                showCardsInCenter();
-                System.out.println("Scegli indice carta da pescare: ");
-                String choicestr = scan.nextLine();
-                int index = Integer.parseInt(choicestr);
-                rmi_controller.peachFromCardsInCenter(token, index-1);
-            } else{
-                System.out.println("\n Inserimento errato!");
-            }
-        }
+
+    public void manageGame(boolean endgame) throws IOException {
+        if(!endgame) rmi_controller.getPoints(token);
+        else rmi_controller.getFinalStandings(token);
+    }
+    public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException {
+        SendFunction function = new SendInsertCard(token, choice-1, x,y,flipped);
+        rmi_controller.addQueue(function);
+        Thread.sleep(750);
     }
 
-    private void showCardsInCenter() throws RemoteException {
-        rmi_controller.showCardsInCenter(token);
-        //rmi_controller.showCardsInCenter(rmi_controller.getController().getGame().getCars_in_center().getGold_list(),token);
+    public void drawCard(SendFunction function) throws IOException, InterruptedException {
+        rmi_controller.addQueue(function);
+        Thread.sleep(750);
     }
 
-    private void selectAndInsertCard() throws RemoteException {
-        Scanner scan = new Scanner(System.in);
-        boolean done = false;
-        while(!done) {
-            System.out.println("\nScegli la tua carta (1,2,3): ");
-            String choicestring = scan.nextLine();
-            int choice = Integer.parseInt(choicestring);
-            if(choice>=1 && choice<=3){
-                    System.out.println("\nScegli orientamento (B,F): ");
-                    String flip = scan.nextLine();
-                    if(flip.equals("B") || flip.equals("F")){
-                        boolean flipped = false;
-                        if(flip.equals("B")){
-                            flipped = true;
-                        }
-                            System.out.println("\nInserisci coordinate x e y di inserimento carta: ");
-                            int x = scan.nextInt();
-                            int y = scan.nextInt();
-                            scan.nextLine();
-                            if(x>=0 && x<Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM){
-                                try {
-                                    rmi_controller.insertCard(token, choice - 1, x, y, flipped);
-                                    done = true;
-                                }
-                                catch (ControllerException e){
-                                    e.getMessage();
-                                }
-                            }
-                            else{
-                                System.out.println("\nInserimento sbagliato!");
-                            }
-                    }
-                    else{
-                        System.out.println("\nInserimento sbagliato!");
-                    }
-            }
-            else{
-                System.out.println("\nInserimento sbagliato!");
-            }
-        }
-        rmi_controller.showGameField(token);
+    public boolean
+    findRmiController(int id, String player_name) throws IOException, InterruptedException {
+        return server.findRmiController(id, token, player_name,this);
     }
 
-    private void gameAccess(String player_name) throws RemoteException, NotBoundException, InterruptedException {
-        if(newClient) {
-                makeChoice(player_name);
-                System.out.print("creazione Player andata a buon fine!\n");}
+    public void connectGameServer() throws IOException, NotBoundException {
+        int port = server.getPort(token);
+        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
+        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
+        startCheckingMessages();
     }
 
-    private String selectNamePlayer() throws RemoteException, NotBoundException {
-        Scanner scan = new Scanner(System.in);
-        String player_name = " ";
-        String isnew;
-        boolean flag;
-        // Creo giocatore
-        do{
-            System.out.print("\nScegli nome Player > ");
-            player_name = scan.nextLine();
-            isnew = server.checkName(player_name,this);
-            if(isnew.equals("true")) {
-                flag = true;
-                newClient = true;
-                this.token = server.createToken(this);
-            }
-            else if(isnew.equals("false")){
-                flag=false;
-                System.out.println("Giocatore già presente, reinserisci nome!");
-            }
-            else{
-                this.token = isnew;
-                int port = server.getPort(token);
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
-                flag=true;
-                newClient = false;
-                startSendingHeartbeats();
-                System.out.println(player_name + " riconnesso!");
-            }
-        } while(!flag);
-        return player_name;
+    public boolean isGoalCardPlaced() throws IOException {
+        return rmi_controller.getTtoP().get(token).getGoalCard() == null;
     }
 
-    private void chooseStartingCardState() throws RemoteException, InterruptedException {
-        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-            if(!rmi_controller.getTtoP().get(token).isFirstPlaced()) {
-                chooseStartingCard();
-            }
-            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_SIDE_FIRST_CARD")) {
-                buffering();
-            }
-        }
+    public String getGoalPlaced() throws IOException {
+        return rmi_controller.getTtoP().get(token).getGoalCard().toString();
     }
 
-    private void chooseGoalState() throws RemoteException, InterruptedException {
-        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-            if(rmi_controller.getTtoP().get(token).getGoalCard()==null) {
-                chooseGoal();
-                System.out.println("\nHai scelto :" + rmi_controller.getTtoP().get(token).getGoalCard().toString());
-            }
-            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("CHOOSE_GOAL")) {
-                buffering();
-            }
-        }
+    public GraficInterterface getTerminal_interface() throws IOException{
+        return terminal_interface;
     }
 
-    private void waitFullGame() throws RemoteException, InterruptedException {
-        if(rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-            System.out.print("Aspetta il riempimento partita -");
-            while (rmi_controller.getTtoP().get(token).getActual_state().getNameState().equals("NOT_INITIALIZED")) {
-                buffering();
-            }
-            System.out.println("\nEhi la tua partita è piena!\n");
-        }
+    @Override
+    public String getFirstGoal() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString();
+    }
+    public Goal getFirstGoalCard() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0);
     }
 
-    private void startSendingHeartbeats() {
+    public Goal getSecondGoalCard() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1);
+    }
+
+    @Override
+    public String getSecondGoal() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1).toString();
+    }
+
+    @Override
+    public void chooseGoal(int i) throws IOException, InterruptedException {
+        rmi_controller.chooseGoal(token,i);
+    }
+
+    @Override
+    public void showStartingCard() throws IOException {
+        rmi_controller.showStartingCard(token);
+    }
+
+    @Override
+    public void chooseStartingCard(boolean b) throws IOException, InterruptedException {
+        rmi_controller.chooseStartingCard(token,b);
+    }
+
+    @Override
+    public boolean isFirstPlaced() throws IOException {
+        return rmi_controller.getTtoP().get(token).isFirstPlaced();
+    }
+
+    @Override
+    public String getToken()  {
+        return this.token;
+    }
+
+    @Override
+    public boolean isGoldDeckPresent() throws IOException {
+        return rmi_controller.getController().getGame().getGold_deck().getNumber()>0;
+    }
+
+    @Override
+    public boolean isResourceDeckPresent() throws IOException {
+        return rmi_controller.getController().getGame().getResources_deck().getNumber()>0;
+    }
+
+
+    // THREADS
+
+    public void startCheckingMessages() {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(50);
+                    ResponseMessage s = miniModel.popOut();
+                    if(s!=null) s.action();
+                } catch (IOException e) {throw new RuntimeException(e);}
+                try {Thread.sleep(200);} catch (InterruptedException e) {}
+            }
+        }).start();
+    }
+
+    public void startSendingHeartbeats() {
+        new Thread(() -> {
+            int cracked = 0;
+            while (true) {
+                try {
+                    Thread.sleep(150);
                     server.receiveHeartbeat(token);
-                } catch (RemoteException | InterruptedException e) {
-                    System.err.println("impossible to start heartbeats");
+                } catch (IOException | InterruptedException e) {
+                        System.err.println("\n              [SERVER ERROR] \n           SERVER DISCONNECTED");
+                        while(true) {
+                            try {terminal_interface.buffering();} catch (InterruptedException ignored) {}
+                    }
                 }
             }
         }).start();
     }
 
-    private void chooseStartingCard() throws RemoteException{
-        Scanner scan = new Scanner(System.in);
-        System.out.println("\nScegli lato carta iniziale:\n");
-        rmi_controller.showStartingCard(token);
-        int done=0;
-        while(done==0){
-            System.out.println("\nInserisci B per scegliere Back Side o F per scegliere Front side:");
-            String dec = scan.nextLine();
-            if (dec.equals("F")){
-                done=1;
-                rmi_controller.chooseStartingCard(token,false);
-            } else if (dec.equals("B")){
-                done=1;
-                rmi_controller.chooseStartingCard(token,true);
-            }
-            else System.out.println("Inserimento errato!");
-        }
-        rmi_controller.showGameField(token);
-    }
+    public void setGameFieldMiniModel() throws IOException {miniModel.setGameField(rmi_controller.getGameFields(token));}
 
-    private void buffering() throws RemoteException, InterruptedException{
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("/");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("|");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("\\");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("-");
-    }
+    //SETTERS
 
-    private void chooseGoal() throws RemoteException{
-        Scanner scan = new Scanner(System.in);
-        int done=0;
-        while(done==0) {
-            System.out.println("\nScegli obiettivo tra:\n 1-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString()
-                    + "\n 2-" + rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1).toString());
-            String choice = scan.nextLine();
-            if (choice.equals("1")) {
-                done=1;
-                rmi_controller.chooseGoal(token,0);
-            } else if (choice.equals("2")){
-                done=1;
-                rmi_controller.chooseGoal(token,1);
-            } else System.out.println("Inserimento errato!");
-        }
-    }
+    public void setGameField(List<GameField> games){miniModel.setGameField(games);}
+    public void setCards(List<PlayCard> cards){miniModel.setCards(cards);}
+    public void pushBack(ResponseMessage message){miniModel.pushBack(message);}
+    public void setState(String state){ miniModel.setState(state);}
+    public void setNumToPlayer(HashMap<Integer, String> map){miniModel.setNumToPlayer(map);}
 
-    private void makeChoice(String player_name) throws RemoteException, NotBoundException {
-        if (server.getFreeGames() == null || server.getFreeGames().isEmpty()) {
-            newGame_notavailable(player_name);
-            return;
-        }
-        Scanner scan = new Scanner(System.in);
-        int done=0;
-        while(done==0) {
-            System.out.println("\nDigita 'new' per creare una nuova partita, 'old' per entrare in una delle partite disponibili");
-            String decision = scan.nextLine();
-            if (decision.equalsIgnoreCase("old")) {
-                done = 1;
-                chooseMatch(player_name);
-            } else if (decision.equalsIgnoreCase("new")) {
-                done=1;
-                newGame(player_name);
+
+    // HELP FUNCTIONS
+    public void ChatChoice(String message, int decision) throws IOException {
+        if(miniModel.getNum_players()!=2) {
+            if (decision == miniModel.getNum_players() + 1) {
+                rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
             } else {
-                System.out.println("\nInserimento errato!");
+                rmi_controller.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message, miniModel.getMy_player()));
             }
+        }
+        else{
+            rmi_controller.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
         }
     }
 
-    private void chooseMatch(String player_name) throws RemoteException, NotBoundException {
-        Scanner scan = new Scanner(System.in);
-        boolean check;
-            System.out.println("\nElenco partite disponibili: ");
-            List<RmiController> partite = server.getFreeGames();
-            for ( VirtualRmiController r : partite) {
-                System.out.println( r.getController().getGame().getName() + " ID:" + r.getController().getGame().getIndex_game()
-                        + " " + r.getController().getGame().getNumPlayer() + "/" + r.getController().getGame().getMax_num_player() );
-            }
-            do {
-                System.out.println("\nInserisci ID partita in cui entrare");
-                int ID = scan.nextInt();
-                check = server.findRmiController(ID, token, player_name,this);
-            }while(!check);
-        int port = server.getPort(token);
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-        this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
+    @Override
+    public void showUpdate(GameField gamefield) {}
+    @Override
+    public void reportError(String details) {System.err.print("\n[ERROR] " + details + "\n> ");}
+    @Override
+    public void reportMessage(String details) {System.out.print("\n[ERROR] " + details + "\n> ");}
+
+    public MiniModel getMiniModel() {return miniModel;}
+    public VirtualGameServer getGameServer(){ return rmi_controller;}
+
+
+    public void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
+
+
+
+    public void printString(String s) {System.out.println(s);}
+
+    public void addChat(int idx, ChatMessage message) throws IOException{
+        miniModel.addChat(idx, message);
     }
 
-    private void newGame(String player_name) throws RemoteException {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("\nScegli nome Partita > ");
-        String game_name = scan.nextLine();
-        int numplayers=4;
-        boolean flag;
-        do {
-            flag = false;
-            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-            numplayers = scan.nextInt();
-
-            try {
-                int port;
-                port = server.createGame(game_name, numplayers, token, player_name,this);
-                System.out.println("porta" + port);
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
-
-            } catch (ControllerException e) {
-                System.err.print(e.getMessage() + "\n");
-                flag = true;
-            } catch (NotBoundException e) {
-                throw new RuntimeException(e);
-            }
-        } while(flag);
+    public void insertId(int id) throws IOException{
+        miniModel.setMy_index(id);
     }
 
-    private void newGame_notavailable(String playerName) throws RemoteException {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("\nNon esiste nessuna partita disponibile, creane una nuova!");
-        System.out.print("\nScegli nome Partita > ");
-        String game_name = scan.nextLine();
-        boolean flag;
-        do {
-            flag = false;
-            System.out.print("\nScegli numero giocatori partita (da 2 a 4) > ");
-            int numplayers = scan.nextInt();
-            try {
-                int port;
-                port = server.createGame(game_name, numplayers, token, playerName,this);
-                System.out.println("porta" + port);
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", port);
-                this.rmi_controller = (VirtualRmiController) registry.lookup(String.valueOf(port));
-
-            } catch (ControllerException e) {
-                System.err.print(e.getMessage() + "\n");
-                flag = true;
-            } catch (NotBoundException e) {
-                throw new RuntimeException(e);
-            }
-        } while(flag);
+    public void insertNumPlayers(int numPlayersMatch) throws IOException{
+        miniModel.setNum_players(numPlayersMatch);
     }
+
+    public void insertPlayer(Player player) throws IOException{
+        miniModel.setMy_player(player);
+    }
+
 
     @Override
-    public void showUpdate(GameField gamefield) throws RemoteException {
-
-    }
-
-    @Override
-    public void reportError(String details) throws RemoteException {
-        System.err.print("\n[ERROR] " + details + "\n> ");
-    }
-
-    @Override
-    public void reportMessage(String details) throws RemoteException {
-        System.out.print("\n[ERROR] " + details + "\n> ");
-
-    }
-
-    @Override
-    public void showCard(PlayCard card) throws RemoteException {
+    public void showCard(PlayCard card) {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
 
@@ -434,7 +313,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         //System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
         if ( card instanceof GoldCard ){
             System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " | " +
-                "  " + card.getCostraint().toString()  + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n ");
+                    "  " + card.getCostraint().toString()  + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n ");
         }else{
             System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " |              " + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n " );
         }
@@ -442,8 +321,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.out.println("----------------------------\n\n");
 
     }
-
-    public void showField(GameField field) throws RemoteException {
+    public void showField(GameField field) {
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 
@@ -489,13 +367,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
-
-
-
-    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, InterruptedException {
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);
+    //MAIN
+    public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
+        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, 1);
         VirtualServerF server = (VirtualServerF) registry.lookup("VirtualServer");
         new RmiClientF(server).run();
     }
+
 }
 

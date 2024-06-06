@@ -47,11 +47,10 @@ public class CenterCards implements Serializable {
             gold_list.remove(index);
             return tmp;
         }
-
     }
 
     public PlayCard drawResourceCard(int index){
-        if(resource_list.size()>0){
+        if(!resource_list.isEmpty()){
             PlayCard tmp = resource_list.get(index);
             resource_list.remove(index);
             resource_list.add(insertFromResourcesDeck(index));
