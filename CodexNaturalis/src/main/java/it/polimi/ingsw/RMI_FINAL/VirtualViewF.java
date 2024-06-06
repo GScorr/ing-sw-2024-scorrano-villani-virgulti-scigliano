@@ -65,6 +65,8 @@ public interface VirtualViewF extends Remote {
 
     public String getGoalPlaced() throws IOException;
 
+    public PlayCard showStartingCardGUI() throws IOException, ClassNotFoundException, InterruptedException;
+
 
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException;
 

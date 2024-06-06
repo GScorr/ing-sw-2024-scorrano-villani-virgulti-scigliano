@@ -310,6 +310,13 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
+    public PlayCard showStartingCardGUI() throws IOException, ClassNotFoundException, InterruptedException {
+        server_proxy.getStartingCard();
+        waitResponse();
+        return startingCard;
+    }
+
+    @Override
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException {
         server_proxy.getListGoalCard();
         waitResponse();

@@ -123,7 +123,7 @@ public class GUI implements GraficInterterface {
     }
 
     private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
-        Platform.runLater(() -> scene.changeRootPane("alert_scene.fxml"));
+        Platform.runLater(() -> scene.changeRootPane("starting_card.fxml"));
         /*Scanner scan = new Scanner(System.in);
         System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
         client.showStartingCard();
@@ -143,7 +143,22 @@ public class GUI implements GraficInterterface {
     }
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
-
+        Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
+        /*while( !client.getMiniModel().getState().equals("END_GAME") ){
+            while (client.getMiniModel().getState().equals("WAIT_TURN")) {
+                menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());
+                buffering();
+            }
+            if (client.getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
+            else if (client.getMiniModel().getState().equals("DRAW_CARD")) {
+                menuChoice("DRAW CARD", client.getMiniModel().getState());
+                drawCard();
+            }
+            System.out.println("\nEND OF YOUR TURN !");
+            client.manageGame(false);
+        }
+        System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
+        client.manageGame(true);*/
     }
 
     @Override

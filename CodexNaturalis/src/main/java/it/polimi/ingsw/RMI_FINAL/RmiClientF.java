@@ -165,6 +165,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void showStartingCard() throws IOException {
         rmi_controller.showStartingCard(token);
     }
+    public PlayCard showStartingCardGUI() throws IOException{
+       return rmi_controller.showStartingCardGUI(token);
+    }
 
     @Override
     public void chooseStartingCard(boolean b) throws IOException, InterruptedException {

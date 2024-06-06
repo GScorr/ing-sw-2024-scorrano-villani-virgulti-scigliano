@@ -58,4 +58,6 @@ public interface VirtualGameServer extends Remote {
     public Map<String, Integer> getToken_to_index() throws IOException;
 
     public void chattingGlobal(ChatMessage message) throws IOException;
+
+    PlayCard showStartingCardGUI(String token)  throws IOException;
 }

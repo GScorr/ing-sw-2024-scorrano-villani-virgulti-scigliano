@@ -230,6 +230,11 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
+    public PlayCard showStartingCardGUI() throws IOException {
+        return null;
+    }
+
+    @Override
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException {
         return null;
     }
