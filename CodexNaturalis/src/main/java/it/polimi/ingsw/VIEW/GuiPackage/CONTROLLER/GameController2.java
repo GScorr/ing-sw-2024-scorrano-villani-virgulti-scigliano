@@ -1,69 +1,57 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
-import it.polimi.ingsw.MODEL.Card.PlayCard;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import it.polimi.ingsw.CONSTANTS.Constants;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 import java.io.IOException;
 
-public class GameController2 extends GenericSceneController{
+public class GameController2 extends GenericSceneController {
 
     @FXML
-    private ImageView imageView;
-
-    private StringProperty imagePath = new SimpleStringProperty();
-
-    public String getImagePath() {
-        return imagePath.get();
-    }
-
-    public void setImagePath(String path) {
-        this.imagePath.set(path);
-    }
+    private GridPane gameGrid;
 
     @FXML
-    private void handleTopLeft() {
-        showAlert("Hai cliccato in alto a sinistra");
+    public void startInitialize() throws IOException {
+        // Initialize the 45x45 grid with images
+        for (int i = 0; i < 44; i++) {
+            for (int j = 0; j < 44; j++) {
+                if(client.getMiniModel().getMyGameField().getCell(i,j, Constants.MATRIXDIM).getCard().back_side_path != null) {
+                    if(client.getMiniModel().getMyGameField().getCell(i,j, Constants.MATRIXDIM).getCard().equals(client.getMiniModel().getMyGameField().getCell(i+1,j+1, Constants.MATRIXDIM).getCard())) {
+                        System.out.println(client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard() + " " + i + " " + j);
+                        if (client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+                            addImageToGrid(i, j, client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
+                        } else {
+
+                            addImageToGrid(i, j, client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    @FXML
-    private void handleTopRight() {
-        showAlert("Hai cliccato in alto a destra");
-    }
+    private void addImageToGrid(int row, int col, String imagePath) {
 
-    @FXML
-    private void handleBottomLeft() {
-        showAlert("Hai cliccato in basso a sinistra");
-    }
-
-    @FXML
-    private void handleBottomRight() {
-        showAlert("Hai cliccato in basso a destra");
-    }
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informazione");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    @FXML
-    public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
-        // Ottenere l'immagine dalla funzione showStartingCardGUI()
-        PlayCard startingCard = client.showStartingCardGUI();
-        String imagePath = startingCard.front_side_path;
         File file = new File(imagePath);
         Image image = new Image(file.toURI().toString());
 
-        // Imposta l'immagine nell'ImageView
-        imageView.setImage(image);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(20 * 2);
+        imageView.setFitHeight(20 * 2);
+        imageView.setPreserveRatio(true);
+
+        Pane pane = new Pane(imageView);
+        pane.setPrefSize(20 * 2, 20 * 2);
+        pane.setMinSize(20 * 2, 20 * 2);
+        pane.setMaxSize(20 * 2, 20 * 2);
+
+        gameGrid.add(pane, col, row);
     }
 }

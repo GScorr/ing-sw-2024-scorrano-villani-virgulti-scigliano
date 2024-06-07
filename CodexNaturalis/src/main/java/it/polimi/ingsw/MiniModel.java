@@ -88,6 +88,10 @@ public class MiniModel implements Serializable {
         showField(game_fields.get(pos));
     }
 
+    public GameField getMyGameField() throws IOException {
+        return game_fields.get(0);
+    }
+
     public void setGameField(List<GameField> game){game_fields = game;}
 
     public void setCards(List<PlayCard> cards){
