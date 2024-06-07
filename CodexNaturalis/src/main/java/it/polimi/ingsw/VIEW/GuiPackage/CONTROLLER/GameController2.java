@@ -1,6 +1,7 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,17 +20,29 @@ public class GameController2 extends GenericSceneController {
 
     @FXML
     public void startInitialize() throws IOException {
+        int count = 1;
+        while(count<=client.getMiniModel().getMyGameField().card_inserted){
         // Initialize the 45x45 grid with images
-        for (int i = 0; i < 44; i++) {
-            for (int j = 0; j < 44; j++) {
-                if(client.getMiniModel().getMyGameField().getCell(i,j, Constants.MATRIXDIM).getCard().back_side_path != null) {
-                    if(client.getMiniModel().getMyGameField().getCell(i,j, Constants.MATRIXDIM).getCard().equals(client.getMiniModel().getMyGameField().getCell(i+1,j+1, Constants.MATRIXDIM).getCard())) {
-                        System.out.println(client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard() + " " + i + " " + j);
+        for (int i = 0; i < 45; i++) {
+            for (int j = 0; j < 45; j++) {
+                    if(client.getMiniModel().getMyGameField().getCell(i,j, Constants.MATRIXDIM).getOrder_above()==count) {
+                        count++;
                         if (client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+
                             addImageToGrid(i, j, client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
                         } else {
-
                             addImageToGrid(i, j, client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                        }
+                    }
+                    else if(client.getMiniModel().getMyGameField().getCell(i,j, Constants.MATRIXDIM).getOrder_below()==count){
+                        count++;
+                        if (client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
+                            System.out.println(client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+
+                            addImageToGrid(i, j, client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+                        } else {
+                            System.out.println(client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
+                            addImageToGrid(i, j, client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
                         }
                     }
                 }
@@ -54,4 +67,6 @@ public class GameController2 extends GenericSceneController {
 
         gameGrid.add(pane, col, row);
     }
+
+
 }
