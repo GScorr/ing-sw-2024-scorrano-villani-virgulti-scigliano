@@ -15,7 +15,6 @@ public class Goal implements Serializable {
 
     public  String front_side_path;
     public  String back_side_path;
-
     public Goal(GoalStrategy goalType,int points,AnglesEnum resource, String string) {
         this.goalType = goalType;
         this.points = points;
@@ -58,4 +57,6 @@ public class Goal implements Serializable {
     public String toString(){
         return string;
     }
+
+
 }

@@ -4,6 +4,7 @@ import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
@@ -64,6 +65,8 @@ public interface VirtualViewF extends Remote {
 
     public String getGoalPlaced() throws IOException;
 
+    public PlayCard showStartingCardGUI() throws IOException, ClassNotFoundException, InterruptedException;
+
 
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException;
 
@@ -71,6 +74,9 @@ public interface VirtualViewF extends Remote {
     public String getSecondGoal() throws IOException;
 
     public void chooseGoal(int i) throws IOException, InterruptedException;
+
+    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException;
+    public Goal getSecondGoalCard() throws IOException;
 
 
     public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException;

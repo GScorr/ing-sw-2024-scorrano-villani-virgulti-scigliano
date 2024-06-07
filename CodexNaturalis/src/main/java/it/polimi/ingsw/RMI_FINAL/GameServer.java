@@ -374,6 +374,10 @@ public class GameServer implements VirtualGameServer, Serializable {
         }
     }
 
+    public PlayCard showStartingCardGUI(String token) throws IOException{
+        return token_to_player.get(token).getStartingCard();
+    }
+
     public void checkEndDisconnect() throws NoSuchObjectException {
         int last_man_standing = 0;
         for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }

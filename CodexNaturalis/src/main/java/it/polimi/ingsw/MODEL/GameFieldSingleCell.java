@@ -24,6 +24,9 @@ public class GameFieldSingleCell implements Serializable {
     //fine carta trasparente
 */
     private boolean filled;
+
+    private int order_above = 0;
+    private int order_below = 0;
     private PlayCard card;
     private AnglesEnum value;
     private PlayCard card_down;
@@ -118,5 +121,21 @@ public class GameFieldSingleCell implements Serializable {
     }
     public void setEdges(EdgeEnum value, int index) {
         edges.add(index,value);
+    }
+
+    public int getOrder_above() {
+        return order_above;
+    }
+
+    public int getOrder_below() {
+        return order_below;
+    }
+
+    public void setOrder_above(int order_above) {
+        this.order_above = order_above;
+    }
+
+    public void setOrder_below(int order_below) {
+        this.order_below = order_below;
     }
 }

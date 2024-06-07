@@ -66,9 +66,14 @@ public class SceneController {
             activeScene = new Scene(root,1500,750);
             activeScene.setRoot(root);
             activeController.setController(this);
+            activeController.startInitialize();
             stage.setScene(activeScene);
             stage.show();
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         return controller;

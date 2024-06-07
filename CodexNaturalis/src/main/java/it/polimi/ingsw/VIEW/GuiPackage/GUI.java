@@ -1,7 +1,13 @@
 package it.polimi.ingsw.VIEW.GuiPackage;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 import it.polimi.ingsw.VIEW.GraficInterterface;
 import javafx.application.Platform;
 
@@ -95,17 +101,214 @@ public class GUI implements GraficInterterface {
 
     @Override
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
-
+        if(scene.getClient().getMiniModel().getState().equals("CHOOSE_GOAL")) {
+            boolean checkGoal = scene.getClient().isGoalCardPlaced();
+            if(checkGoal){
+                chooseGoal();
+                //System.out.println("\nYOU CHOOSE :" + scene.getClient().getGoalPlaced());
+            }
+            /*while (scene.getClient().getMiniModel().getState().equals("CHOOSE_GOAL")) {
+                buffering();
+            }*/
+        }
+    }
+    private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
+        Platform.runLater(() -> scene.changeRootPane("choose_goal_state.fxml"));
     }
 
     @Override
     public void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
+        if(scene.getClient().getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+            if(!scene.getClient().isFirstPlaced()) {
+                chooseStartingCard();
+            }
+            /*while (client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
+                buffering();
+            }*/
+        }
+    }
+
+    private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+        Platform.runLater(() -> scene.changeRootPane("starting_card.fxml"));
+        /*Scanner scan = new Scanner(System.in);
+        System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
+        client.showStartingCard();
+        int done=0;
+        while(done==0){
+            System.out.println("\n-'B' FOR BACK SIDE \n-'F' FOR FRONT SIDE:");
+            String dec = scan.nextLine();
+            if (dec.equals("F")||dec.equals("f")){
+                done=1;
+                client.chooseStartingCard(false);
+            } else if (dec.equals("B")||dec.equals("b")){
+                done=1;
+                client.chooseStartingCard(true);
+            }
+            else System.out.println("[ERROR] WRONG INSERT!");
+        }*/
+    }
+    @Override
+    public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
+        
+        while( !scene.getClient().getMiniModel().getState().equals("END_GAME") ){
+            Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
+            while (scene.getClient().getMiniModel().getState().equals("WAIT_TURN")) {
+                menuChoice("GO IN WAITING MODE", scene.getClient().getMiniModel().getState());
+                buffering();
+            }
+            if (scene.getClient().getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
+            else if (scene.getClient().getMiniModel().getState().equals("DRAW_CARD")) {
+                menuChoice("DRAW CARD", scene.getClient().getMiniModel().getState());
+                drawCard();
+            }
+            System.out.println("\nEND OF YOUR TURN !");
+            scene.getClient().manageGame(false);
+        }
+        System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
+        scene.getClient().manageGame(true);
+        /*while( !client.getMiniModel().getState().equals("END_GAME") ){
+            while (client.getMiniModel().getState().equals("WAIT_TURN")) {
+                menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());
+                buffering();
+            }
+            if (client.getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
+            else if (client.getMiniModel().getState().equals("DRAW_CARD")) {
+                menuChoice("DRAW CARD", client.getMiniModel().getState());
+                drawCard();
+            }
+            System.out.println("\nEND OF YOUR TURN !");
+            client.manageGame(false);
+        }
+        System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
+        client.manageGame(true);*/
+    }
+
+    private void menuChoice(String message, String current_state) throws IOException {
+        Scanner scan = new Scanner(System.in);
+        scene.getClient().getMiniModel().printMenu(message);
+        int choice = scan.nextInt();
+        switch (choice) {
+            case (0):
+                scene.getClient().getMiniModel().printNumToField();
+                int i = scan.nextInt();
+                scene.getClient().getMiniModel().showGameField(i);
+                break;
+            case (1):
+                scene.getClient().getMiniModel().showCards();
+                break;
+            case (2):
+                scene.getClient().getMiniModel().uploadChat();
+                int decision;
+                do {
+                    decision = scan.nextInt();
+                    scan.nextLine();
+                } while (!chatChoice(decision));
+                break;
+            case (3):
+                return;
+            default:
+                System.err.println("[ERROR] WRONG INSERT");
+        }
+        menuChoice(message, current_state);
+    }
+
+    private boolean chatChoice(int decision) throws IOException {
+        scene.getClient().getMiniModel().setStop_chat(false);
+        Scanner scan = new Scanner(System.in);
+        if(!scene.getClient().getMiniModel().showchat(decision)){
+            return false;
+        }
+        int choice = 0;
+        while(true) {
+            while (choice < 1 || choice > 2) {
+                System.out.println("DO YOU WANT TO SEND A MESSAGE?     1- YES      2- NO [CLOSE CHAT] ");
+                choice = scan.nextInt();
+                scan.nextLine();
+            }
+            if (choice == 1) {
+                System.out.println("INSERT MESSAGE: ");
+                String message = scan.nextLine();
+                scene.getClient().ChatChoice(message, decision);
+                System.out.println("[SUCCESS] MESSAGE SENT!");
+                choice = 0;
+            } else {
+                scene.getClient().getMiniModel().setStop_chat(true);
+                return true;}
+        }
 
     }
 
-    @Override
-    public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
 
+    private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
+        Scanner scan = new Scanner(System.in);
+        int choice=-1,x,y;
+        String flip;
+        boolean flipped;
+        while ( scene.getClient().getMiniModel().getState().equals("PLACE_CARD") ){
+            menuChoice("PLACE CARD",scene.getClient().getMiniModel().getState());
+            do{
+                if(choice != -1) System.err.println("[ERROR] INCORRECT INSERT");
+                System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
+                String choicestring = scan.nextLine();
+                choice = Integer.parseInt(choicestring);
+                System.out.println("\nCHOOSE SIDE (B,F): ");
+                flip = scan.nextLine();
+                flipped = (flip.equals("B") || flip.equals("b"));
+                System.out.println("\nCHOOSE COORDINATES: ");
+                x = scan.nextInt();
+                y = scan.nextInt();
+                scan.nextLine();
+            }while( !(choice>=1 && choice<=3) ||
+                    !(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f") ) ||
+                    !(x>=0 && x< Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM ));
+            scene.getClient().selectAndInsertCard(choice,x,y,flipped);
+        }
+    }
+
+    private void drawCard() throws IOException, InterruptedException, ClassNotFoundException {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n DRAW A CARD FROM: ");
+        boolean goldDeck_present = scene.getClient().isGoldDeckPresent();
+        boolean resourceDeck_present = scene.getClient().isResourceDeckPresent();
+
+        if(goldDeck_present){System.out.println("1. GOLD DECK");}
+        if (resourceDeck_present){System.out.println("2. RESOURCE DECK");}
+        System.out.println("3. CENTRAL CARDS DECK");
+        int num = -1;
+        SendFunction function = null;
+        String token_client;
+        do{
+            if(num != -1) System.err.println("[ERROR] OUT OF BOUND");
+            String numstring = scan.nextLine();
+            num = Integer.parseInt(numstring);
+            if(scene.getClient() instanceof clientSocket) token_client = scene.getClient().getToken();
+            else token_client = token;
+            switch (num) {
+                case (1):
+                    function = new SendDrawGold(token_client);
+                    break;
+                case (2):
+                    function = new SendDrawResource(token_client);
+                    break;
+                case (3):
+                    showCardsInCenter();
+                    System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
+                    String choicestr = scan.nextLine();
+                    int index = Integer.parseInt(choicestr);
+                    function = new SendDrawCenter(token_client, index - 1);
+                    break;
+            }
+
+        }while ( num < 0 || num > 3);
+        scene.getClient().drawCard(function);
+    }
+
+    private void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
+        if(scene.getClient() instanceof clientSocket){
+            scene.getClient().showCardsInCenter();
+        }
+        else{
+            scene.getClient().getGameServer().showCardsInCenter(token);}
     }
 
     @Override

@@ -1,0 +1,113 @@
+package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
+
+import java.io.File;
+import java.io.IOException;
+
+public class ChooseStartingController extends GenericSceneController {
+
+    @FXML
+    private ImageView card1;
+
+    @FXML
+    private ImageView card2;
+
+    @FXML
+    private Label bottomLabel;
+
+    private Timeline bufferingTimeline;
+
+    public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
+        System.out.println(client.showStartingCardGUI().front_side_path);
+        System.out.println(client.showStartingCardGUI().back_side_path);
+        File file = new File(client.showStartingCardGUI().front_side_path);
+        Image image = new Image(file.toURI().toString());
+        card1.setImage(image);
+        file = new File(client.showStartingCardGUI().back_side_path);
+        image = new Image(file.toURI().toString());
+        card2.setImage(image);
+    }
+
+    @FXML
+    private void handleCard1Click(MouseEvent event) throws IOException, InterruptedException {
+        System.out.println("Card 1 selected");
+        client.chooseStartingCard(false);
+        showBufferingLabel();
+        checkClientState();
+    }
+
+    @FXML
+    private void handleCard2Click(MouseEvent event) throws IOException, InterruptedException {
+        System.out.println("Card 2 selected");
+        client.chooseStartingCard(true);
+        showBufferingLabel();
+        checkClientState();
+    }
+
+    private void showBufferingLabel() {
+        Platform.runLater(() -> {
+            bottomLabel.setText("Buffering... Please wait.");
+
+            // Inizializza l'animazione di buffering dinamico
+            bufferingTimeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, e -> bottomLabel.setText("Buffering... Please wait")),
+                    new KeyFrame(Duration.seconds(1), e -> bottomLabel.setText("Buffering. Please wait.")),
+                    new KeyFrame(Duration.seconds(2), e -> bottomLabel.setText("Buffering.. Please wait.")),
+                    new KeyFrame(Duration.seconds(3), e -> bottomLabel.setText("Buffering... Please wait."))
+            );
+            bufferingTimeline.setCycleCount(Animation.INDEFINITE);
+            bufferingTimeline.play();
+        });
+    }
+
+    private void hideBufferingLabel() {
+        Platform.runLater(() -> {
+            // Stop the buffering animation
+            if (bufferingTimeline != null) {
+                bufferingTimeline.stop();
+            }
+            // Clear the bottom label text
+            bottomLabel.setText("");
+        });
+    }
+
+    private void checkClientState() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    if (!client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) break;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    Thread.sleep(600); // Adjust delay as needed
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            // Quando lo stato cambia, nascondi l'etichetta di buffering
+            hideBufferingLabel();
+            try {
+                super.client.getTerminal_interface().manageGame();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            // Cambia scena
+        }).start();
+    }
+}

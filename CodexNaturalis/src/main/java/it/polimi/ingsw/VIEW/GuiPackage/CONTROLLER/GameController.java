@@ -14,12 +14,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 
-public class GameController {
+public class GameController extends GenericSceneController{
+
+    @FXML
+    private StackPane cell_1_1;
+    @FXML
+    private StackPane cell_1_2;
+    @FXML
+    private StackPane cell_2_1;
+    @FXML
+    private StackPane cell_2_2;
 
     private Button showTableScore;
 
@@ -148,6 +159,28 @@ public class GameController {
         startingCard.setImage(image);
         sideStartingCard=true;
 
+    }
+    public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
+        loadStartingCard();
+    }
+    public void loadStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+        // Ottieni la carta dal client
+        ImageView startingCard = new ImageView();
+
+        File file = new File(client.showStartingCardGUI().back_side_path);
+        Image image = new Image(file.toURI().toString());
+
+        startingCard.setImage(image);
+
+        // Aggiungi la carta alle celle specificate
+        cell_1_1.getChildren().add(startingCard);
+        cell_1_2.getChildren().add(startingCard);
+        cell_2_1.getChildren().add(startingCard);
+        cell_2_2.getChildren().add(startingCard);
+
+        // Aggiungi logica per visualizzare correttamente la carta
+        startingCard.setFitHeight(cell_1_1.getHeight() * 2); // Adatta l'altezza
+        startingCard.setFitWidth(cell_1_1.getWidth() * 2); // Adatta la larghezza
     }
 
     @FXML

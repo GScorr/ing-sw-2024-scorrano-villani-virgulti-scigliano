@@ -13,6 +13,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.BorderPane?>
 
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController">
 
    <children>
@@ -25,10 +28,56 @@
          </ImageView>
       </StackPane>
 
-      <!-- Aggiungi questo codice sotto gli altri nodi all'interno di AnchorPane -->
       <Pane fx:id="campoDaGioco" layoutX="212.0" layoutY="100.0" prefHeight="620.0" prefWidth="640.0" style="-fx-background-color: rgba(144,238,144,0.13); -fx-border-color: black;">
-         <!-- Qui puoi aggiungere gli elementi del campo da gioco, come carte o altri elementi -->
+         <!-- Griglia 5x5 per visualizzare le carte -->
+         <GridPane fx:id="gameGrid" layoutX="20.0" layoutY="20.0" prefHeight="600.0" prefWidth="600.0">
+            <!-- Definizione delle colonne e delle righe della griglia -->
+            <columnConstraints>
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+            </rowConstraints>
+
+            <!-- Celle della griglia -->
+            <children>
+               <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="cell_0_0" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="cell_0_1" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="cell_0_2" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="3" GridPane.rowIndex="0" fx:id="cell_0_3" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="4" GridPane.rowIndex="0" fx:id="cell_0_4" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="cell_1_0" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="cell_1_1" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="cell_1_2" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="cell_1_3" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="4" GridPane.rowIndex="1" fx:id="cell_1_4" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="0" GridPane.rowIndex="2" fx:id="cell_2_0" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="cell_2_1" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="cell_2_2" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="cell_2_3" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="4" GridPane.rowIndex="2" fx:id="cell_2_4" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="0" GridPane.rowIndex="3" fx:id="cell_3_0" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="cell_3_1" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="2" GridPane.rowIndex="3" fx:id="cell_3_2" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="cell_3_3" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="4" GridPane.rowIndex="3" fx:id="cell_3_4" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="0" GridPane.rowIndex="4" fx:id="cell_4_0" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="cell_4_1" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="cell_4_2" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="3" GridPane.rowIndex="4" fx:id="cell_4_3" style="-fx-border-color: black;" />
+               <StackPane GridPane.columnIndex="4" GridPane.rowIndex="4" fx:id="cell_4_4" style="-fx-border-color: black;" />
+            </children>
+         </GridPane>
       </Pane>
+      <!-- Aggiungi questo codice sotto gli altri nodi all'interno di AnchorPane -->
 
       <!-- Bottone per mostrare il punteggio -->
       <Button id="ShowScoreTable" fx:id="showScoreTable" layoutX="33.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowTableScore" prefHeight="30.0" prefWidth="128.0" text="Show score table" />
