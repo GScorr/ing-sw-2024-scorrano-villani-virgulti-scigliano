@@ -126,7 +126,6 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){
-            System.out.println("mando il messaggio al client " + c.toString() +  message.toString());
             c.pushBack(message);}
     }
     public void addQueue(SendFunction function) {functQueue.add(function);}
@@ -222,11 +221,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                             try {
                                 int countdown = 45;
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown));
+                                Thread.sleep(1500);
                                 while( countdown > 0 && controller.isAlone()) {
                                     broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
                                     checkEndDisconnect();
                                     countdown--;
-                                    Thread.sleep(900);
+                                    Thread.sleep(1000);
                                 }
                                 if ( countdown == 0 ) {
                                     for (String t : token_to_player.keySet()) {

@@ -104,6 +104,7 @@ public class clientSocket implements VirtualViewF, Serializable {
         new Thread( () -> {
             ResponseMessage s;
             while(true) {
+                try {Thread.sleep(200);} catch (InterruptedException e) {}
                 try {
                     if (((s = (ResponseMessage) input.readObject()) != null)) {
                         s.setClient(this);
@@ -111,7 +112,8 @@ public class clientSocket implements VirtualViewF, Serializable {
                     }
                 } catch (IOException e) {
                     if(! flag_Server_Disconneted){
-                        System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
+                        System.err.println("                 [SERVER ERROR]\n" +
+                                           "                 TRY NEW LOG IN   "  );
                         flag_Server_Disconneted = true;
                     }
 
