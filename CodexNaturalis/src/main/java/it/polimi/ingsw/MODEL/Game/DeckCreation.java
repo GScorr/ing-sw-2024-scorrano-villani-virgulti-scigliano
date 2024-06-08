@@ -374,7 +374,8 @@ public class DeckCreation implements Serializable {
 
     public Deque<PlayCard> getMixStartingDeck(){
         mixUpStartingDeck();
-        return new ArrayDeque<PlayCard>(deck_starting);
+        Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>(deck_starting);
+        return res_deck;
     }
 
     public static void main(String[] args) {
