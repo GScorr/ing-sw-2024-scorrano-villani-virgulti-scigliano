@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -313,6 +317,14 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
+    </task>
+    <task id="LOCAL-00121" summary="eliminazione wrapper">
+      <option name="closed" value="true" />
+      <created>1715968193190</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1715968193190</updated>
     </task>
     <task id="LOCAL-00122" summary="eliminazione wrapper">
       <option name="closed" value="true" />
@@ -690,23 +702,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717851192186</updated>
     </task>
-    <task id="LOCAL-00169" summary="aggiornamento">
+    <task id="LOCAL-00169" summary="qualcosa inizia ad andare">
       <option name="closed" value="true" />
-      <created>1717857097560</created>
+      <created>1717856728416</created>
       <option name="number" value="00169" />
       <option name="presentableId" value="LOCAL-00169" />
       <option name="project" value="LOCAL" />
-      <updated>1717857097560</updated>
+      <updated>1717856728416</updated>
     </task>
-    <task id="LOCAL-00170" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1717857117985</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1717857117985</updated>
-    </task>
-    <option name="localTasksCounter" value="171" />
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,12 +765,12 @@
     <MESSAGE value="prova" />
     <MESSAGE value="notreadmesaages" />
     <MESSAGE value="creazione primo collegamento GUI" />
+    <MESSAGE value="aggiornamento" />
     <MESSAGE value="risoluzione problemi riconnessione e riconnessioni multiple:&#10;testati rmi-rmi rmi-soc soc-rmi soc-soc" />
     <MESSAGE value="." />
     <MESSAGE value="startingcard gamefield printed" />
     <MESSAGE value="qualcosa inizia ad andare" />
-    <MESSAGE value="aggiornamento" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="qualcosa inizia ad andare" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
