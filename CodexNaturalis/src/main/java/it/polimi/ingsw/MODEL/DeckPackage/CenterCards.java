@@ -18,6 +18,12 @@ public class CenterCards implements Serializable {
         this.resources_deck = resources_deck;
     }
 
+    public Deck getGold(){
+        return gold_deck;
+    }
+    public Deck getResource(){
+        return resources_deck;
+    }
     public void setGold_list(List<PlayCard> gold_list) {
         this.gold_list = gold_list;
     }

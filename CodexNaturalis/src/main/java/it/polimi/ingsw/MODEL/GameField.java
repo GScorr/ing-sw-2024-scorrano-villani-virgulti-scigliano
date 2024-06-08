@@ -1,6 +1,7 @@
 package it.polimi.ingsw.MODEL;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
@@ -9,12 +10,7 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import java.io.Serializable;
 
 //Class for the matrix field of each player
-/*@Davide   XXX= DONE
-* TODO:
-*  - finisci metodo check placeable       XXX
-*  - implementa metodo add e sub risorse  XXX
-*  - gestione errori
-*  - implementa gestione punti per carte risorsa e non XXX
+/*@Davide
 * */
 public class GameField implements Serializable {
     public int card_inserted = 0;
@@ -148,6 +144,8 @@ public class GameField implements Serializable {
             //System.out.println(field[x][y].getCard().getSide().getAngleRightDown());
         }
 
+
+
         //insert card in the 4 cells
         field[x][y].setFilled(true);
         field[x][y].setCard(card);
@@ -194,7 +192,7 @@ public class GameField implements Serializable {
                 num_of_plant++; break;
             case INSECTS:
                 num_of_insect++; break;
-            case NONE:
+            default:
                 break;
         }
     }
@@ -236,6 +234,19 @@ public class GameField implements Serializable {
             case FEATHER:
                 num_of_feather--; break;
         }
+    }
+
+    public synchronized void startingCardResourcesAdder( StartingCard card){
+
+        //Add for each side and for the central resource(if it exist) their counter
+        addOne( card.getSide().getCentral_resource() );
+        addOne( card.getSide().getCentral_resource2() );
+        addOne( card.getSide().getCentral_resource3() );
+        addOne( card.getSide().getAngleLeftUp() );
+        addOne( card.getSide().getAngleLeftDown() );
+        addOne( card.getSide().getAngleRightDown() );
+        addOne( card.getSide().getAngleRightUp() );
+
     }
 
 
