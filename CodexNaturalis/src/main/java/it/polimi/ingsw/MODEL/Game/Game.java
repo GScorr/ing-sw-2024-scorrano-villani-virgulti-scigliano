@@ -18,17 +18,9 @@ import java.util.List;
 import java.util.Map;
 /*
 @Davide
-TODO:
-
 
 
 @Fra
-
-TODO:
-     -bisogna definire un END_GAME state
-
-
-
 */
 
 
