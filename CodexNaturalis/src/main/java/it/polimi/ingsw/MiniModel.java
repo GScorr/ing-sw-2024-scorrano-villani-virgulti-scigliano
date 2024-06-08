@@ -95,7 +95,13 @@ public class MiniModel implements Serializable {
     }
 
     public GameField getMyGameField() throws IOException {
-        return game_fields.get();
+        GameField field = null;
+        for(GameField g : game_fields){
+            if(g.getPlayer().getName().equals(my_player.getName())){
+                field = g;
+            }
+        }
+        return field;
     }
 
     public void setGameField(List<GameField> game){game_fields = game;}
