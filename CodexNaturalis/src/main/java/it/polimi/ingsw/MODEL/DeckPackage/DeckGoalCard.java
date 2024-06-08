@@ -22,6 +22,10 @@ public class DeckGoalCard implements Serializable {
         else throw new EmptyDeckException("GOAL DECK IS EMPTY");
     }
 
+    public Deque<Goal> getCards(){
+        return cards;
+    }
+
     public Goal seeFirstCard(){return cards.getFirst();}
 
     public int getNumber(){
