@@ -288,6 +288,10 @@ public class DeckCreation implements Serializable {
     }
 
     public void creteGoalDeck(){
+        deck_goal.clear();
+        deck_gold.clear();
+        deck_resources.clear();
+        deck_starting.clear();
         for (JsonElement element : goal_jsonArray) {
             JsonObject singlegoal = element.getAsJsonObject();
             String resource = singlegoal.get("resource").getAsString();
@@ -334,6 +338,10 @@ public class DeckCreation implements Serializable {
         return new ArrayDeque<Goal>(deck_goal);
     }
     public Deque<Goal> getMixGoalDeck(){
+        System.out.println("PRE MIX : "+ deck_goal.size());
+        /*for( Goal g : deck_goal ){
+            System.out.println(g.getGoalType().toString());
+        }*/
         mixUpGoalDeck();
         return new ArrayDeque<Goal>(deck_goal);
     }

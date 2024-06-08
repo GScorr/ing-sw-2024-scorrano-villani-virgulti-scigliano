@@ -103,8 +103,7 @@ public class Game implements Serializable {
         return resources_deck;
     }
 
-    //crezione dei deck
-    // scelta max_num_player
+    //da cancellare -- chiedere a fra
     public Game( /* DeckGoalCard goal_deck */ int max_num_player) {
         this.creation = new DeckCreation();
 
@@ -135,6 +134,7 @@ public class Game implements Serializable {
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
+
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
         this.index_game = IndexManagerF.getNextIndex();
@@ -167,7 +167,6 @@ public class Game implements Serializable {
 
     }
 
-    //prima di chiamare questo metodo devo vedere se i Players sono >= 2 &&  < 4 (non possono mai essere per metodo InsertPlayer)
     public void initializedGame(){
 
                 distributeStartingCard();
@@ -215,6 +214,7 @@ public class Game implements Serializable {
     private void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
+
     }
 
     private void distributeTwoGoalsToPlayer(){
@@ -223,6 +223,7 @@ public class Game implements Serializable {
             tmp.add(goal_deck.drawCard());
             tmp.add(goal_deck.drawCard());
             get_player_index.get(i).setInitialGoalCards(tmp);
+
         }
     }
 
