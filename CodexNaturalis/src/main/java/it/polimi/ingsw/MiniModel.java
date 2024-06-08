@@ -97,7 +97,7 @@ public class MiniModel implements Serializable {
     }
 
     public GameField getMyGameField() throws IOException {
-        return game_fields.get(0);
+        return game_fields.get();
     }
 
     public void setGameField(List<GameField> game){game_fields = game;}

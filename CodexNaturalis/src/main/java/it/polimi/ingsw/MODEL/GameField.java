@@ -124,7 +124,7 @@ public class GameField implements Serializable {
         }
         if( !field[x+1][y].isEmpty() ){
             field[x+1][y].setCardDown(field[x+1][y].getCard());
-            field[x+1][y].setOrder_below(field[x][y].getOrder_above());
+            field[x+1][y].setOrder_below(field[x+1][y].getOrder_above());
             field[x+1][y].setValues( card.getSide().getAngleLeftDown(), 1);
             field[x+1][y].setEdges( EdgeEnum.LEFTDOWN, 1);
             //System.out.println("cella riga sotto");
@@ -132,7 +132,7 @@ public class GameField implements Serializable {
         }
         if( !field[x][y+1].isEmpty() ){
             field[x][y+1].setCardDown(field[x][y+1].getCard());
-            field[x][y+1].setOrder_below(field[x][y].getOrder_above());
+            field[x][y+1].setOrder_below(field[x][y+1].getOrder_above());
             field[x][y+1].setValues( card.getSide().getAngleRightUp(), 1);
             field[x][y+1].setEdges( EdgeEnum.RIGHTUP, 1);
             //System.out.println("cella colonna a dx");
@@ -140,7 +140,7 @@ public class GameField implements Serializable {
         }
         if( !field[x+1][y+1].isEmpty() ){
             field[x+1][y+1].setCardDown(field[x+1][y+1].getCard());
-            field[x+1][y+1].setOrder_below(field[x][y].getOrder_above());
+            field[x+1][y+1].setOrder_below(field[x+1][y+1].getOrder_above());
             field[x+1][y+1].setValues( card.getSide().getAngleRightDown(), 1 );
             field[x+1][y+1].setEdges( EdgeEnum.RIGHTDOWN, 1);
             //System.out.println("cella colonna + riga +1");
