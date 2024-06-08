@@ -127,7 +127,7 @@ public class Player implements PlayerObserver, Serializable {
             }
         }
 
-        this.game_field = new GameField(array_single_cell);
+        this.game_field = new GameField(array_single_cell, this);
 
     }
     /*

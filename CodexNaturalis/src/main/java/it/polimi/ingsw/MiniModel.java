@@ -85,6 +85,7 @@ public class MiniModel implements Serializable {
     }
 
     public void showGameField(int pos) throws IOException {
+        System.out.println("#ANIMALS : " + game_fields.get(pos).getNumOfAnimal());
         System.out.println("#PLANTS : " + game_fields.get(pos).getNumOfPlant());
         System.out.println("#INSECTS : " + game_fields.get(pos).getNumOfInsect());
         System.out.println("#MUSHROOMS : " + game_fields.get(pos).getNumOfMushroom());
@@ -95,8 +96,13 @@ public class MiniModel implements Serializable {
     }
 
     public GameField getMyGameField() throws IOException {
-        return game_fields.get(0);
-
+        GameField field = null;
+        for(GameField g : game_fields){
+            if(g.getPlayer().getName().equals(my_player.getName())){
+                field = g;
+            }
+        }
+        return field;
     }
 
     public void setGameField(List<GameField> game){game_fields = game;}

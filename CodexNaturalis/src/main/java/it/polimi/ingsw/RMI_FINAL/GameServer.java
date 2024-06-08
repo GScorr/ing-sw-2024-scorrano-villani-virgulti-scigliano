@@ -34,6 +34,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public Map<Integer,String> index_to_token = new HashMap<>();
     public HashMap<Integer,String> index_to_name = new HashMap<>();
     private Common_Server server;
+    private int id_game_server = 0;
 
 
     //CONSTRUCTOR
