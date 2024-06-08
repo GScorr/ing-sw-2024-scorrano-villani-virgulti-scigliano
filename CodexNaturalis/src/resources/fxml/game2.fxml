@@ -8,7 +8,7 @@
     <children>
         <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true">
             <content>
-                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="20" vgap="5">
+                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="26.5" vgap="5.5">
                     <columnConstraints>
                         <!-- Repeat for 45 columns -->
                         <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
