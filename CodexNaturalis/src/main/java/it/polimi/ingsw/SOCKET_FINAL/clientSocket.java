@@ -2,6 +2,8 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.VIEW.GraficInterterface;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
@@ -173,6 +175,11 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void setState(String state) throws IOException {
+
+    }
+
+    @Override
+    public void setCenterCards(CenterCards cards, CentralEnum res, CentralEnum gold) throws IOException {
 
     }
 

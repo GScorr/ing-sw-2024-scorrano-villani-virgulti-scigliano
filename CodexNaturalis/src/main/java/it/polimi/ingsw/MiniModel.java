@@ -6,6 +6,8 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -16,6 +18,8 @@ import java.io.IOException;
 import java.io.Serializable;import java.util.*;
 
 public class MiniModel implements Serializable {
+
+
     int unread_total = 0;
     int my_index;
     int num_players;
@@ -31,6 +35,12 @@ public class MiniModel implements Serializable {
 
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
+
+    private CentralEnum top_resource;
+
+    private CentralEnum top_gold;
+
+    private CenterCards cards_in_center;
 
     private Player my_player;
     private List<Chat> chat = new ArrayList<>();
@@ -107,6 +117,12 @@ public class MiniModel implements Serializable {
     }
 
     public void setGameField(List<GameField> game){game_fields = game;}
+
+    public void setCardsInCenter( CenterCards cards_in_center , CentralEnum res , CentralEnum gold){
+        this.cards_in_center = cards_in_center;
+        this.top_resource = res;
+        this.top_gold = gold;
+    }
 
     public void setCards(List<PlayCard> cards){
         cards_in_hand = cards;

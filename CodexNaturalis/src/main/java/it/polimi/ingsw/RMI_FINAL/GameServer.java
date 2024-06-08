@@ -5,6 +5,7 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.EndGame;
@@ -317,10 +318,17 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     //SETTER
     private void setAllStates() throws IOException, InterruptedException {
+        CentralEnum topres;
+        CentralEnum topgold;
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
+                if (controller.getGame().getGold_deck().cards.isEmpty()) topgold = CentralEnum.NONE;
+                else topgold = controller.getGame().getGold_deck().cards.getFirst().getColore();
+                if (controller.getGame().getResources_deck().cards.isEmpty()) topres = CentralEnum.NONE;
+                else topres = controller.getGame().getResources_deck().cards.getFirst().getColore();
+                token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(), topres , topgold);
             }
         }
     }
