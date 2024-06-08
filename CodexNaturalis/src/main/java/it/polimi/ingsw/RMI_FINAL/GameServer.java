@@ -114,6 +114,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public synchronized void insertCard(String token, int index, int x, int y, boolean flipped) throws IOException, ControllerException {
         token_to_player.get(token).getCardsInHand().get(index).flipCard(flipped);
         controller.statePlaceCard(token_to_player.get(token), index, x, y);
+        token_manager.getVal(token).setCards( token_to_player.get(token).getCardsInHand() );
     }
 
     //QUEUE FUNCTIONS
