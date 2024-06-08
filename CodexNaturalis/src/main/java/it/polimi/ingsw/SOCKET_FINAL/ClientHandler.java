@@ -319,10 +319,11 @@ public class ClientHandler  implements VirtualViewF {
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                             client_is_connected = true;
                             ResponseMessage s = new checkNameResponse(2);
+                            startSendingHeartbeats();
                             output.writeObject(s);
                             output.flush();
                             output.reset();
-                            startSendingHeartbeats();
+
                         }
 
 

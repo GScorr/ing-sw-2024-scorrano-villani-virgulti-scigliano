@@ -126,7 +126,6 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){
-            System.out.println("mando il messaggio al client " + c.toString() +  message.toString());
             c.pushBack(message);}
     }
     public void addQueue(SendFunction function) {functQueue.add(function);}
@@ -138,7 +137,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             token_manager.getTokens().get(token).printString(i + "- " + p.getName());
             i++;
         }
-        server.removeGameServer(this);
+        endConnection();
     }
 
     //DISCONNECTION
@@ -163,7 +162,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             Player tmp;
             while(true) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(400);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -222,11 +221,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                             try {
                                 int countdown = 45;
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown));
+                                Thread.sleep(1500);
                                 while( countdown > 0 && controller.isAlone()) {
                                     broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
                                     checkEndDisconnect();
                                     countdown--;
-                                    Thread.sleep(900);
+                                    Thread.sleep(1000);
                                 }
                                 if ( countdown == 0 ) {
                                     for (String t : token_to_player.keySet()) {
@@ -234,6 +234,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                         token_to_player.get(t).setPlayer_state(end_game);
                                         if ( !token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
                                         end = false;
+                                        endConnection();
                                     }
                                 }else{
                                     setAllStates();
@@ -262,7 +263,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     //GETTER
     public void getPoints(String token) throws IOException {
         if(token_manager.getTokens().get(token)!=null) {
-            token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
+            token_manager.getTokens().get(token).printString("  TOTAL POINTS    :" + token_to_player.get(token).getPlayerPoints());
         }
     }
     public synchronized List<VirtualViewF> getClientsRMI() throws IOException{return clientsRMI;}
@@ -384,6 +385,10 @@ public class GameServer implements VirtualGameServer, Serializable {
         if ( last_man_standing == 0 ) {
             server.removeGameServer(this);
         }
+    }
+
+    public void endConnection() throws NoSuchObjectException {
+            server.removeGameServer(this);
     }
 
     //CONNECT

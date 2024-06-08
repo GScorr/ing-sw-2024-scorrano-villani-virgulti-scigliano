@@ -4,10 +4,6 @@ import java.util.Map;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.Player.Player;
 
-/*
-TODO:
-    private/public sugli attributi qua sotto
- */
 
 public class PieceField {
     Player player1,player2,player3,player4;
