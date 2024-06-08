@@ -5,7 +5,7 @@
     "points": 2,
     "string": " 3 MUSHROOMS DIAGONAL Y = X ",
     "front_img_path": "src/resources/Card/FRONT/goal_front/087.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalDiagonal",
@@ -13,7 +13,7 @@
     "points": 2,
     "string": "3 PLANTS DIAGONAL Y = - X",
     "front_img_path": "src/resources/Card/FRONT/goal_front/088.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalDiagonal",
@@ -21,7 +21,7 @@
     "points": 2,
     "string": "3 ANIMALS DIAGONAL Y = X",
     "front_img_path": "src/resources/Card/FRONT/goal_front/089.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalDiagonal",
@@ -29,7 +29,7 @@
     "points": 2,
     "string": "3 INSECTS DIAGONAL Y = -X",
     "front_img_path": "src/resources/Card/FRONT/goal_front/090.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalLFigure",
@@ -37,7 +37,7 @@
     "points": 3,
     "string": " L FIGURE MUSHROOMS ",
     "front_img_path": "src/resources/Card/FRONT/goal_front/091.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalLFigure",
@@ -45,7 +45,7 @@
     "points": 3,
     "string": " L FIGURE PLANTS ",
     "front_img_path": "src/resources/Card/FRONT/goal_front/092.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalLFigure",
@@ -53,7 +53,7 @@
     "points": 3,
     "string": " L FIGURE ANIMALS ",
     "front_img_path": "src/resources/Card/FRONT/goal_front/093.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalLFigure",
@@ -61,7 +61,7 @@
     "points": 3,
     "string": " L FIGURE INSECTS ",
     "front_img_path": "src/resources/Card/FRONT/goal_front/094.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalTriple",
@@ -69,7 +69,7 @@
     "points": 2,
     "string": "TRIPLE MUSHROOMS",
     "front_img_path": "src/resources/Card/FRONT/goal_front/095.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalTriple",
@@ -77,7 +77,7 @@
     "points": 2,
     "string": "TRIPLE PLANTS",
     "front_img_path": "src/resources/Card/FRONT/goal_front/096.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalTriple",
@@ -85,7 +85,7 @@
     "points": 2,
     "string": "TRIPLE ANIMALS",
     "front_img_path": "src/resources/Card/FRONT/goal_front/097.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalTriple",
@@ -93,7 +93,7 @@
     "points": 2,
     "string": "TRIPLE INSECTS",
     "front_img_path": "src/resources/Card/FRONT/goal_front/098.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalFeatherPenPaper",
@@ -101,7 +101,7 @@
     "points": 2,
     "string": "ONE FEATHER, ONE PAPER, ONE INKER",
     "front_img_path": "src/resources/Card/FRONT/goal_front/099.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalDoubleGold",
@@ -109,7 +109,7 @@
     "points": 2,
     "string": "DOUBLE FEATHER",
     "front_img_path": "src/resources/Card/FRONT/goal_front/100.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalDoubleGold",
@@ -117,7 +117,7 @@
     "points": 2,
     "string": "DOUBLE INKER",
     "front_img_path": "src/resources/Card/FRONT/goal_front/101.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   },
   {
     "goalType": "GoalDoubleGold",
@@ -125,6 +125,6 @@
     "points": 2,
     "string": "DOUBLE PAPER",
     "front_img_path": "src/resources/Card/FRONT/goal_front/102.png",
-    "back_img_path": "src/resources/Card/BACK/goal_back/0.88.png"
+    "back_img_path": "src/resources/Card/BACK/goal_back/088.png"
   }
 ]

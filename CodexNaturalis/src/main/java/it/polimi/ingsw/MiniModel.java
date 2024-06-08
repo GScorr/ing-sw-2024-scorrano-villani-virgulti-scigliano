@@ -33,6 +33,10 @@ public class MiniModel implements Serializable {
     private List<String> menu = new LinkedList<>();
     private List<String> chatmenu = new LinkedList<>();
 
+    public List<PlayCard> getCards_in_hand() {
+        return cards_in_hand;
+    }
+
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
 
