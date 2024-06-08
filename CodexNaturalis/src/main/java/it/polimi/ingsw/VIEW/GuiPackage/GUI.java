@@ -158,8 +158,14 @@ public class GUI implements GraficInterterface {
             }
             if (scene.getClient().getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
             else if (scene.getClient().getMiniModel().getState().equals("DRAW_CARD")) {
+            /*
                 menuChoice("DRAW CARD", scene.getClient().getMiniModel().getState());
                 drawCard();
+             */
+                Platform.runLater(() -> scene.changeRootPane("game.fxml"));
+                while ( scene.getClient().getMiniModel().getState().equals("DRAW_CARD")){
+                    Thread.sleep(1000);
+                }
             }
             System.out.println("\nEND OF YOUR TURN !");
             scene.getClient().manageGame(false);

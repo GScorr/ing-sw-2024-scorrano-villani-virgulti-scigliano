@@ -50,7 +50,7 @@ public class GameController extends GenericSceneController{
     private TextField messageInput;
 
     @FXML
-    private ImageView card1, card2, card3;
+    private ImageView card1, card2, card3,resource_deck, gold_deck, center_card0,center_card1, center_card2, center_card3 ;
     private boolean c1, c2, c3; //true quando sono frontside
 
     @FXML
@@ -132,19 +132,19 @@ public class GameController extends GenericSceneController{
         file = new File("src/resources/img/GOALCARDforntSide/087.png");
         image = new Image(file.toURI().toString());
 
-        commonGoal1.setImage(image);
+        //commonGoal1.setImage(image);
 
 
         file = new File("src/resources/img/GOALCARDforntSide/088.png");
         image = new Image(file.toURI().toString());
 
-        commonGoal2.setImage(image);
+        //commonGoal2.setImage(image);
 
 
         file = new File("src/resources/img/GOALCARDforntSide/089.png");
         image = new Image(file.toURI().toString());
 
-        Goal1.setImage(image);
+    /*    Goal1.setImage(image);
         chooseGoal1.setImage(image);
 
         file = new File("src/resources/img/GOALCARDforntSide/090.png");
@@ -152,6 +152,8 @@ public class GameController extends GenericSceneController{
 
         Goal2.setImage(image);
         chooseGoal2.setImage(image);
+
+     */
 
         file = new File("src/resources/img/STARTINGCARDfrontSide/081.png");
         image = new Image(file.toURI().toString());
