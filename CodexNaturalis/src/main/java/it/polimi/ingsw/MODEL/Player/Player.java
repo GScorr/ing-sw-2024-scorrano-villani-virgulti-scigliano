@@ -63,7 +63,8 @@ public class Player implements PlayerObserver, Serializable {
     private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     //rendi questo private, mi serviva per i test renderlo pubblico
-    public final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+    public PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
@@ -277,6 +278,8 @@ public class Player implements PlayerObserver, Serializable {
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
+        tc.setBack_side_path(null);
+        tc.setFront_side_path(null);
         cards_in_hand.set(index, tc);
     }
 

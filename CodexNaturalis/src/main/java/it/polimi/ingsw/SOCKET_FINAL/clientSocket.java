@@ -250,7 +250,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException {
-        server_proxy.placeCard(choice,x,y,flipped);
+        server_proxy.placeCard(choice - 1,x,y,flipped);
         waitResponse();
 
         // time that I have to wait for receive the next State, NB : next state could be both PlaceCard or DrawCard

@@ -57,7 +57,7 @@ public class placeCard implements Message, Serializable {
 
     @Override
     public void action() throws IOException, ControllerException {
-        SendFunction function = new SendInsertCard(token, index-1, x,y,flipped);
+        SendFunction function = new SendInsertCard(token, index, x,y,flipped);
         rmi_controller.addQueue(function);
         ResponseMessage message = new placeCardResponse();
         output.writeObject(message);

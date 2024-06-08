@@ -50,7 +50,7 @@ public class GameController extends GenericSceneController{
     private TextField messageInput;
 
     @FXML
-    private ImageView card1, card2, card3,resource_deck, gold_deck, center_card0,center_card1, center_card2, center_card3 ;
+
     private boolean c1, c2, c3; //true quando sono frontside
 
     @FXML
@@ -111,40 +111,25 @@ public class GameController extends GenericSceneController{
     // Metodo per caricare un'immagine dinamicamente
     public void initialize() {
 
-        File file = new File("src/resources/img/FRONTSIDE/001.png");
-        Image image = new Image(file.toURI().toString());
-
-        card1.setImage(image);
-        c1=true; //se true carta front
-
-        file = new File("src/resources/img/FRONTSIDE/002.png");
-        image = new Image(file.toURI().toString());
-
-        card2.setImage(image);
-        c2=true;
-
-        file = new File("src/resources/img/FRONTSIDE/003.png");
-        image = new Image(file.toURI().toString());
-
-        card3.setImage(image);
-        c3=true;
+        File file ;
+        Image image;
 
         file = new File("src/resources/img/GOALCARDforntSide/087.png");
         image = new Image(file.toURI().toString());
 
-        //commonGoal1.setImage(image);
+        commonGoal1.setImage(image);
 
 
         file = new File("src/resources/img/GOALCARDforntSide/088.png");
         image = new Image(file.toURI().toString());
 
-        //commonGoal2.setImage(image);
+        commonGoal2.setImage(image);
 
 
         file = new File("src/resources/img/GOALCARDforntSide/089.png");
         image = new Image(file.toURI().toString());
 
-    /*    Goal1.setImage(image);
+        Goal1.setImage(image);
         chooseGoal1.setImage(image);
 
         file = new File("src/resources/img/GOALCARDforntSide/090.png");
@@ -152,8 +137,6 @@ public class GameController extends GenericSceneController{
 
         Goal2.setImage(image);
         chooseGoal2.setImage(image);
-
-     */
 
         file = new File("src/resources/img/STARTINGCARDfrontSide/081.png");
         image = new Image(file.toURI().toString());

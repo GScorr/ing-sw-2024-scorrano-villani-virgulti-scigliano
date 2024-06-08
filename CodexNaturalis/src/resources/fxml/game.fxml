@@ -11,7 +11,7 @@
    <children>
       <!-- StackPane per lo sfondo del tavolo -->
       <StackPane prefHeight="1024.0" prefWidth="1024.0">
-         <ImageView fx:id="table" fitHeight="2048.0" fitWidth="2048.0" preserveRatio="false">
+         <ImageView fx:id="table" fitHeight="2048.0" fitWidth="1854.0" preserveRatio="false">
             <image>
                <Image url="@../imgMirk/backgroundTable.png" />
             </image>
@@ -77,58 +77,24 @@
 
 
       <!-- Spazio per le immagini -->
-      <VBox layoutX="1163.0" layoutY="73.0" prefHeight="518.0" prefWidth="300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="500.0">
-         <ImageView fx:id="resource_deck" fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickOnGoal" preserveRatio="true">
-            <image>
-               <Image url="@../Card/FRONT/goal_front/087.png" />
-            </image>
-         </ImageView>
-         <ImageView fx:id="gold_deck" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../Card/FRONT/goal_front/089.png" />
-            </image>
-            <VBox.margin>
-               <Insets top="30.0" />
-            </VBox.margin>
-         </ImageView>
+      <VBox layoutX="864.0" layoutY="73.0" prefHeight="200.0" prefWidth="128.0" spacing="5">
+         <!-- Immagine 1 -->
+         <ImageView fx:id="commonGoal1" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" />
+         <!-- Immagine 2 -->
+         <ImageView fx:id="commonGoal2" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" />
+         <!-- Immagine 3 -->
+         <ImageView fx:id="Goal1" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" visible="false" />
+         <!-- Immagine 4 -->
+         <ImageView fx:id="Goal2" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" visible="false" />
+         <!-- Immagine 5 -->
+         <ImageView fx:id="startingCard" fitHeight="80.0" fitWidth="128.0" onMouseDragged="#onMouseDraggedHandler" onMousePressed="#onMousePressedHandler" onMouseReleased="#onMouseReleasedHandler" preserveRatio="true" />
       </VBox>
 
-      <!-- Spazio per le immagini -->
-      <VBox layoutX="1500.0" layoutY="73.0" prefHeight="1036.0" prefWidth="300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="1600.0" AnchorPane.topAnchor="300.0">
-         <ImageView fx:id="center_card0" fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickOnGoal" preserveRatio="true">
-            <image>
-               <Image url="@../Card/FRONT/goal_front/087.png" />
-            </image>
-         </ImageView>
-         <ImageView fx:id="center_card1" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../Card/FRONT/goal_front/089.png" />
-            </image>
-            <VBox.margin>
-               <Insets top="30.0" />
-            </VBox.margin>
-         </ImageView>
-         <ImageView fx:id="center_card2" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../Card/FRONT/goal_front/089.png" />
-            </image>
-            <VBox.margin>
-               <Insets top="30.0" />
-            </VBox.margin>
-         </ImageView>
-         <ImageView fx:id="center_card3" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../Card/FRONT/goal_front/089.png" />
-            </image>
-            <VBox.margin>
-               <Insets top="30.0" />
-            </VBox.margin>
-         </ImageView>
-      </VBox>
-
+      <!-- Bottone per scegliere gli obbiettivi -->
+      <Button id="chooseGoal" fx:id="chooseGoal" mnemonicParsing="false" onAction="#showGoalToChose" prefHeight="30.0" prefWidth="128.0" text="chooseGoal" visible="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
 
       <!-- Box per la chat -->
-      <VBox fx:id="chatBox" layoutX="585.0" layoutY="73.0" prefHeight="2000.0" prefWidth="407.0" style="-fx-background-color: black; -fx-background-image:  ;" visible="false" AnchorPane.leftAnchor="1000.0">
+      <VBox fx:id="chatBox" layoutX="585.0" layoutY="73.0" prefHeight="400.0" prefWidth="407.0" visible="false">
          <!-- Lista dei messaggi -->
          <ListView fx:id="chatMessages" prefHeight="300.0" prefWidth="400.0" />
 
@@ -159,33 +125,79 @@
          <ImageView fx:id="chooseGoal2" fitHeight="196.0" fitWidth="200.0" onMouseClicked="#clickOnChoosedGoal" preserveRatio="true" visible="false" />
       </HBox>
 
-      <!-- Contenitore per le carte incorniciate -->
-      <VBox layoutX="212.0" layoutY="650.0" prefHeight="214.0" prefWidth="620.0" style="-fx-border-color: white; -fx-border-width: 2; -fx-padding: 10;" AnchorPane.bottomAnchor="500.0">
-         <!-- HBox per le carte in mano -->
-         <HBox id="cardsInHandsFrontSide" alignment="CENTER" prefHeight="194.0" prefWidth="600.0" spacing="10">
-            <!-- Carta 1 -->
-            <children>
-               <ImageView id="card1" fx:id="card1" fitHeight="196.0" fitWidth="200.0" onMouseDragged="#onMouseDraggedHandler" onMousePressed="#onMousePressedHandler" onMouseReleased="#onMouseReleasedHandler" pickOnBounds="true" preserveRatio="true" />
-            </children>
-            <!-- Carta 2 -->
-            <children>
-               <ImageView id="card2" fx:id="card2" fitHeight="196.0" fitWidth="200.0" onMouseDragged="#onMouseDraggedHandler" onMousePressed="#onMousePressedHandler" onMouseReleased="#onMouseReleasedHandler" pickOnBounds="true" preserveRatio="true" />
-            </children>
-            <!-- Carta 3 -->
-            <children>
-               <ImageView id="card3" fx:id="card3" fitHeight="196.0" fitWidth="200.0" onMouseDragged="#onMouseDraggedHandler" onMousePressed="#onMousePressedHandler" onMouseReleased="#onMouseReleasedHandler" pickOnBounds="true" preserveRatio="true" />
-            </children>
-         </HBox>
 
+
+      <!-- Spazio per le immagini -->
+      <VBox layoutX="1163.0" layoutY="73.0" prefHeight="518.0" prefWidth="300.0" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="350.0">
+         <ImageView fx:id="resource_deck" fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickOnGoal" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/087.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="gold_deck" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
       </VBox>
 
+      <!-- Spazio per le immagini -->
+      <VBox layoutX="1500.0" layoutY="73.0" prefHeight="1036.0" prefWidth="300.0" AnchorPane.leftAnchor="1600.0" AnchorPane.topAnchor="300.0">
+         <ImageView fx:id="center_card0" fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickOnGoal" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/087.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="center_card1" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
+         <ImageView fx:id="center_card2" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
+         <ImageView fx:id="center_card3" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
+      </VBox>
+      <VBox layoutX="266.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="259.0" prefWidth="1098.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="1600.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10">  <ImageView fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Card/FRONT/goal_front/088.png" />
+               </image>
+            </ImageView>
+               <ImageView fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../Card/FRONT/goal_front/088.png" />
+                  </image>
+               </ImageView>
+               <ImageView fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../Card/FRONT/goal_front/088.png" />
+                  </image>
+               </ImageView>
+            </HBox>
+         </children>
+      </VBox>
 
    </children>
-
-
-
-
-
 
 
 </AnchorPane>
