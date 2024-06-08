@@ -103,6 +103,7 @@ public class DeckCreation implements Serializable {
     }
 
     public void creteResourceDeck(){
+        deck_resources.clear();
         for (JsonElement element : resources_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -164,6 +165,8 @@ public class DeckCreation implements Serializable {
     }
 
     public void creteGoldDeck(){
+        deck_gold.clear();
+
         for (JsonElement element : gold_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -229,6 +232,8 @@ public class DeckCreation implements Serializable {
     }
 
     public void creteStartingDeck(){
+
+        deck_starting.clear();
         for (JsonElement element : starting_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -289,9 +294,7 @@ public class DeckCreation implements Serializable {
 
     public void creteGoalDeck(){
         deck_goal.clear();
-        deck_gold.clear();
-        deck_resources.clear();
-        deck_starting.clear();
+
         for (JsonElement element : goal_jsonArray) {
             JsonObject singlegoal = element.getAsJsonObject();
             String resource = singlegoal.get("resource").getAsString();
