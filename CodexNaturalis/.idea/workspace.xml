@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/081.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/081.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/082.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/082.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/083.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/083.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/084.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/084.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/085.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/085.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/086.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/BACK/starting_back/086.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/081.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/081.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/082.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/082.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/083.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/083.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/084.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/084.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/085.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/085.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/086.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Card/FRONT/starting_front/086.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,14 +317,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00118" summary="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel">
-      <option name="closed" value="true" />
-      <created>1715900618753</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1715900618753</updated>
     </task>
     <task id="LOCAL-00119" summary="aggiornamento">
       <option name="closed" value="true" />
@@ -721,7 +702,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717844683951</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="qualcosa inizia ad andare">
+      <option name="closed" value="true" />
+      <created>1717845935439</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1717845935439</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

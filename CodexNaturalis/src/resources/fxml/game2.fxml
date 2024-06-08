@@ -55,9 +55,11 @@
                         <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
                         <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
                         <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
                     </columnConstraints>
                     <rowConstraints>
                         <!-- Repeat for 45 rows -->
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
                         <RowConstraints minHeight="33.1" prefHeight="33.1" />
                         <RowConstraints minHeight="33.1" prefHeight="33.1" />
                         <RowConstraints minHeight="33.1" prefHeight="33.1" />
