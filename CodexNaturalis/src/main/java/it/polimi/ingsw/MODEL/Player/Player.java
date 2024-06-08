@@ -2,6 +2,7 @@ package it.polimi.ingsw.MODEL.Player;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
@@ -335,6 +336,7 @@ public class Player implements PlayerObserver, Serializable {
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 22, 22);
+            game_field.startingCardResourcesAdder((StartingCard) starting_card);
             firstPlaced = true;
     }
 
