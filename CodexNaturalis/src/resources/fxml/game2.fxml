@@ -6,105 +6,105 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
     <children>
-        <GridPane fx:id="gameGrid" alignment="CENTER" hgap="0" vgap="0">
-            <columnConstraints>
-                <!-- Repeat for 45 columns -->
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-            </columnConstraints>
-            <rowConstraints>
-                <!-- Repeat for 45 rows -->
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                <RowConstraints minHeight="33.1" prefHeight="33.1" />
-
-            </rowConstraints>
-        </GridPane>
-
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <content>
+                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="0" vgap="0">
+                    <columnConstraints>
+                        <!-- Repeat for 45 columns -->
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <!-- Repeat for 45 rows -->
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                    </rowConstraints>
+                </GridPane>
+            </content>
+        </ScrollPane>
     </children>
 </AnchorPane>
