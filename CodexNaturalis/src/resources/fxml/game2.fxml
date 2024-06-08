@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
     <children>
-        <ScrollPane fitToWidth="true" fitToHeight="true">
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true">
             <content>
                 <GridPane fx:id="gameGrid" alignment="CENTER" hgap="0" vgap="0">
                     <columnConstraints>

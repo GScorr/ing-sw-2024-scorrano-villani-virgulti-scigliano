@@ -85,19 +85,23 @@ public class MiniModel implements Serializable {
     }
 
     public void showGameField(int pos) throws IOException {
-        pos = pos - 1 ;
-        System.out.println(Constants.ANSI_BLUE + " #ANIMALS : " + game_fields.get(pos).getNumOfAnimal() + Constants.ANSI_RESET);
-        System.out.println(Constants.ANSI_GREEN + " #PLANTS : " + game_fields.get(pos).getNumOfPlant() + Constants.ANSI_RESET);
-        System.out.println(Constants.ANSI_PURPLE + " #INSECTS : " + game_fields.get(pos).getNumOfInsect() + Constants.ANSI_RESET);
-        System.out.println(Constants.ANSI_RED + " #MUSHROOMS : " + game_fields.get(pos).getNumOfMushroom() + Constants.ANSI_RESET);
-        System.out.println(Constants.ANSI_YELLOW + " ###PAPERS : " + game_fields.get(pos).getNumOfPaper() + Constants.ANSI_RESET);
-        System.out.println(Constants.ANSI_YELLOW + " ###FEATHERS : " + game_fields.get(pos).getNumOfFeather() + Constants.ANSI_RESET);
-        System.out.println(Constants.ANSI_YELLOW + " ###INKS : " + game_fields.get(pos).getNumOfPen() + Constants.ANSI_RESET);
+        System.out.println("#PLANTS : " + game_fields.get(pos).getNumOfPlant());
+        System.out.println("#INSECTS : " + game_fields.get(pos).getNumOfInsect());
+        System.out.println("#MUSHROOMS : " + game_fields.get(pos).getNumOfMushroom());
+        System.out.println("###PAPERS : " + game_fields.get(pos).getNumOfPaper());
+        System.out.println("###FEATHERS : " + game_fields.get(pos).getNumOfFeather());
+        System.out.println("###INKS : " + game_fields.get(pos).getNumOfPen());
         showField(game_fields.get(pos));
     }
 
     public GameField getMyGameField() throws IOException {
-        return game_fields.get(0);
+        GameField field = null;
+        for(GameField g : game_fields){
+            if(g.getPlayer().getName().equals(my_player.getName())){
+                field = g;
+            }
+        }
+        return field;
     }
 
     public void setGameField(List<GameField> game){game_fields = game;}
@@ -155,8 +159,19 @@ public class MiniModel implements Serializable {
                 if( i!=my_index ) this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + num_to_player.get(i) + " - New messages (" + not_read.get(chat_manager.getChatIndex(my_index,i)) + ")");}
             this.chatmenu.set(i,i + "- PUBLIC CHAT" + " - New messages (" + not_read.get(6) + ")");
         }else{ this.chatmenu.set(i,i + "- PUBLIC CHAT" + " - New messages (" + not_read.get(6) + ")"); }
+
+        //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
 
+    /* public void setChatMenu(){
+        if( num_players == 2 ) this.chatmenu.set(2,1 + "- PUBLIC CHAT\n");
+        else{
+            for ( Integer i : num_to_player.keySet() ){
+                if( i!=my_index ) this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + num_to_player.get(i));
+            }
+            this.chatmenu.set(num_players,num_players + "- PUBLIC CHAT");
+        }
+    }*/
 
     public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
@@ -245,7 +260,7 @@ public class MiniModel implements Serializable {
                 for (int j = 0; j < Constants.MATRIXDIM; j++) {
                     if (nonEmptyCols[j]) {
                         if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
-                            System.out.print( field.getCell(i, j, Constants.MATRIXDIM).getShort_value() );
+                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
                         } else {
                             System.out.print("   ");
                         }
@@ -256,6 +271,12 @@ public class MiniModel implements Serializable {
         }
     }
 
+    public void showFirstChat() {
+        for(ChatMessage c : chat.get(0).getChat()){
+            System.out.println(c.message);
+        }
+    }
+
     public void setMy_index(int my_index) {
         this.my_index = my_index;
     }
@@ -263,6 +284,10 @@ public class MiniModel implements Serializable {
     public void setNum_players(int num_players) {
         this.num_players = num_players;
     }
+
+
+
+
 
 
     public boolean showchat(int decision) {
@@ -333,40 +358,5 @@ public class MiniModel implements Serializable {
             }
         }).start();
     }
-
-    private void chooseColor( String color ){
-        switch (color){
-            case("EM"):
-                System.out.print(Constants.ANSI_LIGHT_GRAY_BACKGROUND + "   " + Constants.ANSI_RESET);
-                break;
-            case("PL"):
-                System.out.print(Constants.ANSI_GREEN_BACKGROUND + "   " + Constants.ANSI_RESET);
-                break;
-            case("AN"):
-                System.out.print(Constants.ANSI_BLUE_BACKGROUND + "   " + Constants.ANSI_RESET);
-                break;
-            case("MU"):
-                System.out.print(Constants.ANSI_RED_BACKGROUND + "   " + Constants.ANSI_RESET);
-                break;
-            case("IN"):
-                System.out.print(Constants.ANSI_PURPLE_BACKGROUND + "   " + Constants.ANSI_RESET);
-                break;
-            case("FE"):
-                System.out.print(Constants.ANSI_YELLOW_BACKGROUND + " F " + Constants.ANSI_RESET);
-                break;
-            case("PE"):
-                System.out.print(Constants.ANSI_YELLOW_BACKGROUND + " I " + Constants.ANSI_RESET);
-                break;
-            case("PA"):
-                System.out.print(Constants.ANSI_YELLOW_BACKGROUND + " P " + Constants.ANSI_RESET);
-                break;
-            case("NO"):
-                System.out.print("   " + Constants.ANSI_RESET);
-                break;
-
-        }
-    }
-
-
 
 }

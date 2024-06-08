@@ -28,8 +28,9 @@ public class GameField implements Serializable {
     private int num_of_pen;
     private int num_of_feather;
 
-    public GameField(GameFieldSingleCell[][] field) {
+    public GameField(GameFieldSingleCell[][] field, Player player) {
         this.field = field;
+        this.player = player;
     }
 
     public void setField(GameFieldSingleCell[][] field) {
