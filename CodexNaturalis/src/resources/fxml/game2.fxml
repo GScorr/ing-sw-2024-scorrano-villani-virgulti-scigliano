@@ -145,7 +145,7 @@
         </VBox>
     </right>
 
-    <!-- VBox for the decks at the right -->
+    <!-- VBox for the decks at the left -->
     <left>
         <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" spacing="10">
             <Label text="Cards in HAND:" />
