@@ -58,7 +58,7 @@ public class CreateGame implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public int actionCreateGameMessage() throws IOException, InterruptedException {
+    public int actionCreateGameMessage() throws IOException, InterruptedException, ClassNotFoundException {
         int port;
         //port = common.createGameSocket(game_name,num_players,token,name_p, clientHandler);
         port = common.createGame(game_name,num_players,token,name_p,clientHandler);

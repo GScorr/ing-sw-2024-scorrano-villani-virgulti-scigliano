@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class GUI implements GraficInterterface {
 
     public boolean newClient;
+    private boolean in_game = false;
     SceneController scene;
     String username;
     private String token;
@@ -93,6 +94,16 @@ public class GUI implements GraficInterterface {
         Platform.runLater(() -> scene.changeRootPane("game_list_scene.fxml"));
     }
 
+    @Override
+    public boolean getInGame() {
+        return in_game;
+    }
+
+    @Override
+    public void guiManageGame() throws IOException, InterruptedException, ClassNotFoundException {
+        this.manageGame();
+    }
+
 
     @Override
     public void waitFullGame() throws IOException, InterruptedException {
@@ -149,6 +160,7 @@ public class GUI implements GraficInterterface {
     }
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
+        in_game = true;
         if(!scene.getClient().getMiniModel().getState().equals("END_GAME") ){
             Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
         }else{
@@ -328,6 +340,8 @@ public class GUI implements GraficInterterface {
     public String getName() {
         return this.username;
     }
+
+
 
     public void setToken(String token){this.token =token;}
 

@@ -158,7 +158,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public void chooseGoal(int i) throws IOException, InterruptedException {
+    public void chooseGoal(int i) throws IOException, InterruptedException, ClassNotFoundException {
         rmi_controller.chooseGoal(token,i);
     }
 
@@ -171,7 +171,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public void chooseStartingCard(boolean b) throws IOException, InterruptedException {
+    public void chooseStartingCard(boolean b) throws IOException, InterruptedException, ClassNotFoundException {
         rmi_controller.chooseStartingCard(token,b);
     }
 
