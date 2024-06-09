@@ -24,6 +24,7 @@ public class GameField implements Serializable {
     private int num_of_pen;
     private int num_of_feather;
 
+
     public GameField(GameFieldSingleCell[][] field, Player player) {
         this.field = field;
         this.player = player;
@@ -248,6 +249,11 @@ public class GameField implements Serializable {
         addOne( card.getSide().getAngleRightUp() );
 
     }
+
+    public int getPlayerPoints(){
+        return player.getPlayerPoints();
+    }
+
 
 
 }
