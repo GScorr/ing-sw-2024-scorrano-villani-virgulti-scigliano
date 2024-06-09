@@ -65,6 +65,7 @@ public class GameController2 extends GenericSceneController {
         imageView.setFitHeight(33.1 * 2);
 
         StackPane stackPane = new StackPane();
+        imageView.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;");
         stackPane.getChildren().add(imageView);
 
         gameGrid.add(stackPane, col, row, 2, 2); // Occupy 2 columns and 2 rows
