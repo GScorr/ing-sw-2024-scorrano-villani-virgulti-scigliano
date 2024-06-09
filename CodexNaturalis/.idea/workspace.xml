@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento fra mi ha hypato">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="piccolo change per carta trasparente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -316,14 +315,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00125" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1716050143909</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1716050143909</updated>
     </task>
     <task id="LOCAL-00126" summary="aggiornamento funzioni disconnessioni">
       <option name="closed" value="true" />
@@ -709,7 +700,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717883345722</updated>
     </task>
-    <option name="localTasksCounter" value="174" />
+    <task id="LOCAL-00174" summary="piccolo change per carta trasparente">
+      <option name="closed" value="true" />
+      <created>1717884569652</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1717884569653</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -744,7 +743,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Aggiornamento" />
     <MESSAGE value="aggiornamento funzioni disconnessioni" />
     <MESSAGE value="non funzionerà mai" />
     <MESSAGE value="cose per fra" />
@@ -769,7 +767,8 @@
     <MESSAGE value="fix minor bugs" />
     <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
     <MESSAGE value="aggiornamento fra mi ha hypato" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiornamento fra mi ha hypato" />
+    <MESSAGE value="piccolo change per carta trasparente" />
+    <option name="LAST_COMMIT_MESSAGE" value="piccolo change per carta trasparente" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
