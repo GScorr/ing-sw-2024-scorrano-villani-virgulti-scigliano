@@ -12,10 +12,10 @@ import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.io.Serializable;
 
-//import javax.smartcardio.Card;
 
 
 public class GameFieldController implements Serializable {
+
     private GameField player_field;
     private Player player;
 
@@ -23,6 +23,13 @@ public class GameFieldController implements Serializable {
         return player;
     }
 
+    /**
+     * Creates a GameFieldController for a specific player.
+     *
+     * This controller manages the interaction between the player and their game field.
+     *
+     * @param player The player for whom this controller is created.
+     */
     public GameFieldController(Player player) {
         this.player = player;
         this.player_field = player.getGameField();
@@ -32,9 +39,32 @@ public class GameFieldController implements Serializable {
         return player_field;
     }
 
+    /**
+     * generic error
+     */
     String errore = "Impossible insert a card in this position: ";
-    // Function to check if the card can be placed,
-    // Return false if you can't, true if you can
+
+    /**
+     * Checks if a card can be placed on the game field at a specified location (x, y).
+     * <p>
+     * This method throws exceptions for various invalid placement scenarios, including:
+     * </p>
+     * <ul>
+     *   <li>Card completely covers another card or gets completely covered by existing cards.</li>
+     *   <li>Card is placed on an empty space (no existing cards to connect with).</li>
+     *   <li>Existing cards have invalid angles (potentially defined as AnglesEnum.NONE).</li>
+     *   <li>Card violates specific constraints for Gold Cards (if applicable).</li>
+     * </ul>
+     * <p>
+     * It updates player points based on the placed card type
+     * </p>
+     *
+     * @param card The PlayCard object representing the card to be placed.
+     * @param x The x-coordinate on the game field for placement.
+     * @param y The y-coordinate on the game field for placement.
+     * @return True if the card can be placed, false otherwise.
+     * @throws ControllerException If the card placement is invalid (various error codes).
+     */
     public synchronized boolean checkPlacing(PlayCard card,int x, int y){
         //Check that the card we are trying to place doesn't completely cover another card and that the sides of the cards aren't completely covered (all 4 of them)
         if   (  (player_field.getField()[x][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() )&& player_field.getField()[x][y].isFilled())||
@@ -42,22 +72,18 @@ public class GameFieldController implements Serializable {
                 (player_field.getField()[x][y].getCard().equals( player_field.getField()[x+1][y].getCard() ) && player_field.getField()[x][y].isFilled())    ||
                 (player_field.getField()[x+1][y].getCard().equals( player_field.getField()[x+1][y+1].getCard() ) && player_field.getField()[x+1][y].isFilled()) ||
                 (player_field.getField()[x][y+1].getCard().equals( player_field.getField()[x+1][y+1].getCard() )&& player_field.getField()[x][y+1].isFilled())){
-            //System.out.println("a");
             throw new ControllerException(11,errore + "another Card is already insert in this position ");
             }
-
         // Check that there is at least one card in the space ( you can't place a card in an empty space )
         if(     !player_field.getField()[x][y].isEmpty()   ||
                 !player_field.getField()[x+1][y].isEmpty() ||
                 !player_field.getField()[x][y+1].isEmpty() ||
                 !player_field.getField()[x+1][y+1].isEmpty()) {
-            //System.out.println("b");
             //Check if the card(s) that exist(s) have a valid angle that is not NONE --> check what is NONE in AnglesEnum  (if you don't understand this there is an equivalent if in the end**)
             if ((!player_field.getField()[x][y].isEmpty() && player_field.getField()[x][y].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x + 1][y].isEmpty() && player_field.getField()[x + 1][y].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x][y + 1].isEmpty() && player_field.getField()[x][y + 1].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x + 1][y + 1].isEmpty() && player_field.getField()[x + 1][y + 1].getValue().equals(AnglesEnum.NONE))){
-                //System.out.println("c");
                 throw new ControllerException(13,errore + "The Cards already in the field doesn't have a valid angle ");}
             else {
                 if (card instanceof GoldCard) {
@@ -72,15 +98,18 @@ public class GameFieldController implements Serializable {
                     player.addPoints(resourcePointsCount(((ResourceCard) card)));
                 resourcePointsChange(card, x, y);
                 return true;
-
             }
         }else{
             throw new ControllerException(12,errore + "Card insert in an empty space ");
         }
 
     }
-    //check for all constraints of Gold Card,
-    // given a value of the constraint
+
+    /**
+     * Checks if the given constraint for a Gold Card is satisfied by the player's game field.
+     * @param val The Constraint value representing the specific constraint to check.
+     * @return True if the constraint is met, false otherwise.
+     */
     private synchronized boolean checkGoldConstraints(Costraint val){
         return switch (val) {
             case FIVEINS -> player_field.getNumOfInsect() >= 5;
@@ -118,7 +147,17 @@ public class GameFieldController implements Serializable {
             default -> true;
         };
     }
+
+
     //count number of points if the card is Gold and has bonus related to number of stuff
+
+    /**
+     * count number of points if the card is Gold and has bonus related to number of stuff
+     * @param card
+     * @param x
+     * @param y
+     * @return
+     */
     public synchronized int goldPointsCount(GoldCard card, int x, int y){
         switch ( card.getPointBonus() ){
             case NONE: return 0;
