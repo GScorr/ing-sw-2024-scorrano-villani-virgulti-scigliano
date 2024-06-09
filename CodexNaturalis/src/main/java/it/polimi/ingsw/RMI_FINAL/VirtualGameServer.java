@@ -24,9 +24,9 @@ public interface VirtualGameServer extends Remote {
     public Map<String, Player> getTtoP() throws IOException;
     public GameController getController() throws IOException;
     public Player createPlayer(String pla, String playerName, boolean b) throws IOException;
-    public boolean addPlayer(String p_token, String name, VirtualViewF client, boolean is) throws IOException, InterruptedException;
-    public void chooseGoal(String token, int index) throws IOException, InterruptedException;
-    public void chooseStartingCard(String token, boolean flip) throws IOException, InterruptedException;
+    public boolean addPlayer(String p_token, String name, VirtualViewF client, boolean is) throws IOException, InterruptedException, ClassNotFoundException;
+    public void chooseGoal(String token, int index) throws IOException, InterruptedException, ClassNotFoundException;
+    public void chooseStartingCard(String token, boolean flip) throws IOException, InterruptedException, ClassNotFoundException;
     public void checkQueue() throws IOException;
     public void addQueue(SendFunction function) throws IOException;
     public int getPort() throws IOException;

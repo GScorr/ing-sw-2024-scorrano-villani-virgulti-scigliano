@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 
 public interface Message  {
     static int id = 0;
-    void action() throws IOException, InterruptedException;
+    void action() throws IOException, InterruptedException, ClassNotFoundException;
 
     void setServer(Server server);
     void setOutput(ObjectOutputStream output);

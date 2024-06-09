@@ -52,6 +52,7 @@
                 <MenuItem text="About" />
             </Menu>
         </MenuBar>
+
     </top>
 
     <!-- Play Area in the center -->
@@ -168,10 +169,10 @@
             <ImageView fx:id="gold_deck" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleGoldDeckClick"/>
             <ImageView fx:id="resurce_deck" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleResourceDeckClick"/>
             <Label text="Central Cards:" />
-            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_0Click" />
-            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_1Click"/>
-            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_2Click"/>
-            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_3Click"/>
+            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_0Click" />
+            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_1Click"/>
+            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_2Click"/>
+            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_3Click"/>
         </VBox>
     </right>
 

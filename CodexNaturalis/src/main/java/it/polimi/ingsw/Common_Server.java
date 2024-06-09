@@ -31,7 +31,7 @@ public class Common_Server {
     public Map<String, GameServer> getTtoR() throws IOException {return token_to_rmi;}
     public Map<Integer, GameServer> getListRmiController() throws IOException {return rmi_controllers;}
 
-    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
+    public int createGame(String name, int num_player, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException, ClassNotFoundException {
         int port = getAvailablePort();
         GameServer gameServer = new GameServer(name,num_player,port,this);
         gameServer.addPlayer(p_token,player_name, client,true);
@@ -45,8 +45,8 @@ public class Common_Server {
     }
 
     private int getAvailablePort(){port++;return port;}
-    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException, InterruptedException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
-    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException, InterruptedException {
+    public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException, InterruptedException, ClassNotFoundException {rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);return true;}
+    public boolean addPlayerSocket(Integer game_id, String p_token, String name, VirtualView client) throws IOException, InterruptedException, ClassNotFoundException {
         rmi_controllers.get(game_id).addPlayerSocket(p_token,name,client,false);
         return true;}
 
@@ -116,7 +116,7 @@ public class Common_Server {
         }
     }
 
-    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {
+    public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException, ClassNotFoundException {
 
         GameServer index = rmi_controllers.get(game_id);
         if (index != null && !rmi_controllers.get(game_id).getFull())
