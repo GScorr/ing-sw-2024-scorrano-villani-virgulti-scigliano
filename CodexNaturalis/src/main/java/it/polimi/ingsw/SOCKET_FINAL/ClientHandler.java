@@ -261,7 +261,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
-    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public Goal getFirstGoalCard() throws IOException, InterruptedException {
         return null;
     }
 
@@ -271,7 +271,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
-    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public void showStartingCard() throws IOException, InterruptedException {
 
     }
 
@@ -281,7 +281,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
-    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException {
+    public boolean isFirstPlaced() throws IOException, InterruptedException {
         return false;
     }
 

@@ -167,10 +167,6 @@ public class TUI implements Serializable, GraficInterterface {
         return false;
     }
 
-    @Override
-    public void guiManageGame() throws IOException, InterruptedException, ClassNotFoundException {
-
-    }
 
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
         while( client.getMiniModel().getState().equals("NOT_IN_A_GAME") ){ buffering();}
