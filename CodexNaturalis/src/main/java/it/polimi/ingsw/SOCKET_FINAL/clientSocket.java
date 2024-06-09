@@ -179,7 +179,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
-    public void setCenterCards(CenterCards cards, CentralEnum res, CentralEnum gold) throws IOException {
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
 
     }
 

@@ -237,7 +237,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void setState(String state){ miniModel.setState(state);}
 
     @Override
-    public void setCenterCards(CenterCards cards, CentralEnum res , CentralEnum gold) throws IOException {
+    public void setCenterCards(CenterCards cards, PlayCard res , PlayCard gold) throws IOException {
         miniModel.setCardsInCenter(cards,res,gold);
     }
 

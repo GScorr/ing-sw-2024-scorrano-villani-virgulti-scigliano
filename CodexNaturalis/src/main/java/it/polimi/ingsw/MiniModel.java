@@ -40,9 +40,9 @@ public class MiniModel implements Serializable {
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
 
-    private CentralEnum top_resource;
+    private PlayCard top_resource;
 
-    private CentralEnum top_gold;
+    private PlayCard top_gold;
 
     private CenterCards cards_in_center;
 
@@ -80,6 +80,19 @@ public class MiniModel implements Serializable {
     }
 
     //public void setNotReadMessages(int nr){ this.not_read = nr;}
+
+
+    public PlayCard getTop_resource() {
+        return top_resource;
+    }
+
+    public PlayCard getTop_gold() {
+        return top_gold;
+    }
+
+    public CenterCards getCards_in_center() {
+        return cards_in_center;
+    }
 
     public Queue<ResponseMessage> getQueue(){ return messages; }
 
@@ -122,7 +135,7 @@ public class MiniModel implements Serializable {
 
     public void setGameField(List<GameField> game){game_fields = game;}
 
-    public void setCardsInCenter( CenterCards cards_in_center , CentralEnum res , CentralEnum gold){
+    public void setCardsInCenter( CenterCards cards_in_center , PlayCard res , PlayCard gold){
         this.cards_in_center = cards_in_center;
         this.top_resource = res;
         this.top_gold = gold;
@@ -380,5 +393,8 @@ public class MiniModel implements Serializable {
             }
         }).start();
     }
+
+
+
 
 }

@@ -325,11 +325,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
-                if (controller.getGame().getGold_deck().cards.isEmpty()) topgold = CentralEnum.NONE;
-                else topgold = controller.getGame().getGold_deck().cards.getFirst().getColore();
-                if (controller.getGame().getResources_deck().cards.isEmpty()) topres = CentralEnum.NONE;
-                else topres = controller.getGame().getResources_deck().cards.getFirst().getColore();
-                token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(), topres , topgold);
+                token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),  controller.getGame().getResources_deck().cards.getFirst() , controller.getGame().getGold_deck().cards.getFirst());
             }
         }
     }

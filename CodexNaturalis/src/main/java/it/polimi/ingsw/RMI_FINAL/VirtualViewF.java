@@ -33,7 +33,7 @@ public interface VirtualViewF extends Remote {
     public void setCards(List<PlayCard> cards) throws IOException;
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException;
     public void setState(String state) throws IOException;
-    public void setCenterCards(CenterCards cards, CentralEnum res , CentralEnum gold) throws IOException;
+    public void setCenterCards(CenterCards cards, PlayCard res , PlayCard gold) throws IOException;
     public void addChat(int idx, ChatMessage message) throws IOException;
     public void insertId(int id) throws IOException;
     public void insertNumPlayers(int numPlayersMatch) throws IOException;

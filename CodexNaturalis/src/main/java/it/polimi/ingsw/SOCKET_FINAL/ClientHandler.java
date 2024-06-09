@@ -156,7 +156,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
-    public void setCenterCards(CenterCards cards, CentralEnum res, CentralEnum gold) throws IOException {
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
         ResponseMessage s = new setCenterCardsResponde(cards, res,gold);
         output.writeObject(s);
         output.flush();
