@@ -319,13 +319,13 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     //SETTER
     private void setAllStates() throws IOException, InterruptedException {
+        CentralEnum topres;
+        CentralEnum topgold;
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
-                token_manager.getVal(t).setCenterCards( controller.getGame().getCars_in_center(),
-                        controller.getGame().getResources_deck().cards.getFirst(),
-                        controller.getGame().getGold_deck().cards.getFirst());
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
+                token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),  controller.getGame().getResources_deck().cards.getFirst() , controller.getGame().getGold_deck().cards.getFirst());
             }
         }
     }

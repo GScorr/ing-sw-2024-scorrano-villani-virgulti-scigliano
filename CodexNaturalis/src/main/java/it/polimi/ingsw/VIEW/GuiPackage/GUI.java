@@ -149,10 +149,9 @@ public class GUI implements GraficInterterface {
     }
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
-        if( !scene.getClient().getMiniModel().getState().equals("END_GAME") ){
+        if(!scene.getClient().getMiniModel().getState().equals("END_GAME") ){
             Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
         }else{
-            Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
             System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         }
 
