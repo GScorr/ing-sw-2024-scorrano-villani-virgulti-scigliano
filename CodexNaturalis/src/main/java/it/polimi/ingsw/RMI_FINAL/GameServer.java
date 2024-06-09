@@ -51,7 +51,7 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     //GAME FLOW
     @Override
-    public synchronized boolean addPlayer(String p_token, String name, VirtualViewF client, boolean isFirst ) throws IOException, InterruptedException, ClassNotFoundException {
+    public synchronized boolean addPlayer(String p_token, String name, VirtualViewF client, boolean isFirst ) throws IOException, InterruptedException {
         if(controller.getFull() )
         {String error = "\nGAME IS FULL\n";
             token_manager.getTokens().get(p_token).reportError(error);
@@ -78,7 +78,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     //questa funzione non dovrebbe essere più usata
-    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException, InterruptedException, ClassNotFoundException {
+    public synchronized boolean addPlayerSocket(String p_token, String name, VirtualView client,boolean isFirst ) throws IOException, InterruptedException {
         if(controller.getFull() )
             return false;
         createPlayer(p_token, name, isFirst);
@@ -89,13 +89,13 @@ public class GameServer implements VirtualGameServer, Serializable {
         return true;
     }
     @Override
-    public void chooseGoal(String token, int index) throws IOException, InterruptedException, ClassNotFoundException {
+    public void chooseGoal(String token, int index) throws IOException, InterruptedException {
         controller.playerChooseGoal(token_to_player.get(token), index);
         setAllStates();
     }
 
     @Override
-    public synchronized void chooseStartingCard(String token, boolean flip) throws IOException, InterruptedException, ClassNotFoundException {
+    public synchronized void chooseStartingCard(String token, boolean flip) throws IOException, InterruptedException {
         controller.playerSelectStartingCard(token_to_player.get(token), flip);
         Integer index = 0;
         if( token_manager.getTokens().containsKey(token) ){token_manager.getTokens().get(token).setCards(token_to_player.get(token).getCardsInHand());}
@@ -177,7 +177,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseGoal(s, 1);
                                     setAllStates();
-                                } catch (IOException | InterruptedException | ClassNotFoundException e) {
+                                } catch (IOException | InterruptedException  e) {
                                     System.out.println(e.getMessage());
                                 }
                             }
@@ -185,19 +185,19 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseStartingCard(s, true);
                                     setAllStates();
-                                } catch (IOException | InterruptedException | ClassNotFoundException e) {}
+                                } catch (IOException | InterruptedException  e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("PLACE_CARD")) {
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException | InterruptedException | ClassNotFoundException e) {}
+                                } catch (IOException | InterruptedException e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("DRAW_CARD")){
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException | InterruptedException | ClassNotFoundException e) {}
+                                } catch (IOException | InterruptedException  e) {}
                             }
                         }
                     }
@@ -242,7 +242,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 }else{
                                     setAllStates();
                                     broadcastMessage(new UpdateMessage("PLAYER RECONNECTED CONTINUE YOUR GAME")); }
-                            } catch (IOException | InterruptedException | ClassNotFoundException e) {
+                            } catch (IOException | InterruptedException  e) {
                                 throw new RuntimeException(e);
                             }
                         }}catch (RuntimeException ignored){} catch (NoSuchObjectException e) {
@@ -318,7 +318,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     //SETTER
-    private void setAllStates() throws IOException, InterruptedException, ClassNotFoundException {
+    private void setAllStates() throws IOException, InterruptedException {
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
                 token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),
@@ -326,7 +326,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                                          controller.getGame().getGold_deck().cards.getFirst());
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
-                if ( token_manager.getVal(t).getTerminal_interface().getInGame() ) token_manager.getVal(t).getTerminal_interface().guiManageGame();
+                //if ( token_manager.getVal(t).getTerminal_interface().getInGame() ) token_manager.getVal(t).getTerminal_interface().guiManageGame();
             }
         }
     }

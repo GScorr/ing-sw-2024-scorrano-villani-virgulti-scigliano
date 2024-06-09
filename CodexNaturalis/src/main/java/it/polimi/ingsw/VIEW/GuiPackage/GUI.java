@@ -99,10 +99,7 @@ public class GUI implements GraficInterterface {
         return in_game;
     }
 
-    @Override
-    public void guiManageGame() throws IOException, InterruptedException, ClassNotFoundException {
-        this.manageGame();
-    }
+
 
 
     @Override

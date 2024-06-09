@@ -76,18 +76,18 @@ public interface VirtualViewF extends Remote {
 
     public String getSecondGoal() throws IOException;
 
-    public void chooseGoal(int i) throws IOException, InterruptedException, ClassNotFoundException;
+    public void chooseGoal(int i) throws IOException, InterruptedException;
 
-    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException;
+    public Goal getFirstGoalCard() throws IOException, InterruptedException;
     public Goal getSecondGoalCard() throws IOException;
 
 
-    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException;
+    public void showStartingCard() throws IOException, InterruptedException;
 
 
-    public void chooseStartingCard(boolean b) throws IOException, InterruptedException, ClassNotFoundException;
+    public void chooseStartingCard(boolean b) throws IOException, InterruptedException;
 
-    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException;
+    public boolean isFirstPlaced() throws IOException, InterruptedException;
 
     String getToken() throws InterruptedException, IOException;
 
