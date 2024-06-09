@@ -26,9 +26,9 @@
 
     <!-- Play Area in the center -->
     <center>
-        <ScrollPane fx:id="scrollPane" fitToHeight="false" fitToWidth="false" maxWidth="1000.0" pannable="true" prefHeight="450.0">
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1000.0" pannable="true" prefHeight="450.0">
             <content>
-                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="20" prefHeight="1500" prefWidth="1500" vgap="5">
+                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="22.5" prefHeight="1500" prefWidth="1500" vgap="5">
                     <columnConstraints>
                         <!-- Repeat for 45 columns -->
                         <ColumnConstraints minWidth="49.65" prefWidth="49.65" />

@@ -448,7 +448,7 @@ public class GameController2 extends GenericSceneController {
         loadingAlert.show();
 
         // Crea un timeline per chiudere l'alert dopo 1 secondo
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             loadingAlert.close();
         }));
 
