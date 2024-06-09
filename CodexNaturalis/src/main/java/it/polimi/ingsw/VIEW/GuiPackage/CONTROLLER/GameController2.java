@@ -9,9 +9,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +21,23 @@ import java.io.IOException;
 import java.util.*;
 
 public class GameController2 extends GenericSceneController {
+    @FXML
+    private Button openChatButton;
+
+    @FXML
+    private Button showChat;
+
+    @FXML
+    private TextField messageInput;
+
+    @FXML
+    private ImageView tableScoreImage;
+
+    @FXML
+    private VBox chatBox;
+
+    @FXML
+    private ListView<String> chatMessages;
 
     public ImageView gold_deck;
     public ImageView resurce_deck;
@@ -58,6 +73,14 @@ public class GameController2 extends GenericSceneController {
     private boolean just_pressed = false;
     String token_client;
     private SendFunction function;
+
+    @FXML
+    private ToggleButton chatToggleButton;
+
+    @FXML
+    private void toggleChatVisibility() {
+        chatBox.setVisible(chatToggleButton.isSelected());
+    }
 
 
     
@@ -537,5 +560,26 @@ public class GameController2 extends GenericSceneController {
 
 
 
+    }
+
+    public void handleShowChatAction() { //imposto la visibilità del box della chat
+        chatBox.setVisible(!chatBox.isVisible());
+    }
+
+    @FXML
+    private void handleSendMessage() {
+        String message = messageInput.getText();
+        if (!message.isEmpty()) {
+            addMessageToChat("You: " + message);
+            // Qui potresti gestire l'invio del messaggio al server o ad altri giocatori
+            messageInput.clear(); // Pulisce il campo di input del messaggio dopo l'invio
+        }
+    }
+
+    // Funzione per aggiungere un messaggio alla ListView della chat
+    private void addMessageToChat(String message) {
+        chatMessages.getItems().add(message);
+        // Scrolle la ListView in modo che l'ultimo messaggio sia visibile
+        chatMessages.scrollTo(chatMessages.getItems().size() - 1);
     }
 }

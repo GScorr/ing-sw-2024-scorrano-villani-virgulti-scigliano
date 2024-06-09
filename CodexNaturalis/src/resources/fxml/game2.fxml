@@ -4,7 +4,37 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.text.Font?>
 <BorderPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
+
+    <!-- Box per la chat -->
+    <bottom>
+        <VBox fx:id="chatBox" prefHeight="400.0" prefWidth="1500.0" visible="false">
+            <!-- Lista dei messaggi -->
+            <ListView fx:id="chatMessages" prefHeight="300.0" prefWidth="1500.0" />
+
+            <!-- Campo di testo per l'input dei messaggi -->
+            <HBox>
+                <TextField fx:id="messageInput" prefHeight="30.0" prefWidth="300.0" promptText="Scrivi messaggio">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Button onAction="#handleSendMessage" prefHeight="30.0" prefWidth="106.0" text="Send Message">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+            </HBox>
+        </VBox>
+    </bottom>
+
+    <!-- Button to toggle chat visibility -->
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" padding="10">
+            <ToggleButton text="Show/Hide Chat" onAction="#toggleChatVisibility"/>
+        </HBox>
+    </bottom>
 
     <!-- Menu at the top -->
     <top>
@@ -28,7 +58,7 @@
     <center>
         <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1000.0" pannable="true" prefHeight="450.0">
             <content>
-                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="22.5" prefHeight="1500" prefWidth="1500" vgap="5">
+                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="25.5" prefHeight="1500" prefWidth="1500" vgap="5">
                     <columnConstraints>
                         <!-- Repeat for 45 columns -->
                         <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
@@ -157,5 +187,7 @@
             <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard3Click"  onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released"/>
         </VBox>
     </left>
+
+
 
 </BorderPane>
