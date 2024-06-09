@@ -6,12 +6,18 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.*;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.StringCostant;
+import it.polimi.ingsw.VIEW.GraficInterterface;
+import it.polimi.ingsw.VIEW.GuiPackage.GUI;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import it.polimi.ingsw.VIEW.TUI;
 
 import java.io.IOException;
@@ -30,6 +36,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private final MiniModel miniModel =  new MiniModel();
     private final StringCostant stringcostant = new StringCostant();
     private TUI tui;
+    private GraficInterterface terminal_interface;
+
+    @Override
+    public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        this.server.connect(this);
+        terminal_interface = new GUI(scene);
+        terminal_interface.runCli();
+    }
 
     public RmiClientF(VirtualServerF server) throws IOException {
         this.server = server;
@@ -37,13 +51,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     public void run() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         this.server.connect(this);
-        tui = new TUI(this);
+        terminal_interface = new TUI(this);
         runCli();
     }
 
 
     private void runCli() throws NotBoundException, IOException, InterruptedException, ClassNotFoundException {
-        tui.runCli();
+        terminal_interface.runCli();
     }
 
     //GAME FLOW
@@ -56,17 +70,19 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             this.token = server.createToken(this);}
         else if(isnew.equals("false")){
             flag=0;
-            System.err.println(stringcostant.name_is_not_valid);}
+            terminal_interface.printError(stringcostant.name_is_not_valid);
+            }
         else{
             this.token = isnew;
             int port = server.getPort(token);
             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-            rmi_controller.connectRMI(this);
             flag=2;
+            startCheckingMessages();
         }
+
         startSendingHeartbeats();
-        tui.setToken(token);
+        terminal_interface.setToken(token);
         return flag;
     }
 
@@ -81,8 +97,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         port = server.createGame(game_name, numplayers, token, player_name,this);
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-        //rmi_controller.connectRMI(this);
-        //startSendingHeartbeats();
         startCheckingMessages();
     }
 
@@ -102,7 +116,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         Thread.sleep(750);
     }
 
-    public boolean findRmiController(int id, String player_name) throws IOException, InterruptedException {
+    public boolean
+    findRmiController(int id, String player_name) throws IOException, InterruptedException {
         return server.findRmiController(id, token, player_name,this);
     }
 
@@ -110,9 +125,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         int port = server.getPort(token);
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-        //rmi_controller.connectRMI(this);
         startCheckingMessages();
-        //startSendingHeartbeats();
     }
 
     public boolean isGoalCardPlaced() throws IOException {
@@ -123,9 +136,20 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         return rmi_controller.getTtoP().get(token).getGoalCard().toString();
     }
 
+    public GraficInterterface getTerminal_interface() throws IOException{
+        return terminal_interface;
+    }
+
     @Override
     public String getFirstGoal() throws IOException {
         return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0).toString();
+    }
+    public Goal getFirstGoalCard() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(0);
+    }
+
+    public Goal getSecondGoalCard() throws IOException {
+        return rmi_controller.getTtoP().get(this.token).getInitial_goal_cards().get(1);
     }
 
     @Override
@@ -134,7 +158,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     @Override
-    public void chooseGoal(int i) throws IOException, InterruptedException {
+    public void chooseGoal(int i) throws IOException, InterruptedException, ClassNotFoundException {
         rmi_controller.chooseGoal(token,i);
     }
 
@@ -142,9 +166,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void showStartingCard() throws IOException {
         rmi_controller.showStartingCard(token);
     }
+    public PlayCard showStartingCardGUI() throws IOException{
+       return rmi_controller.showStartingCardGUI(token);
+    }
 
     @Override
-    public void chooseStartingCard(boolean b) throws IOException, InterruptedException {
+    public void chooseStartingCard(boolean b) throws IOException, InterruptedException, ClassNotFoundException {
         rmi_controller.chooseStartingCard(token,b);
     }
 
@@ -178,7 +205,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null) s.action();
                 } catch (IOException e) {throw new RuntimeException(e);}
-                try {Thread.sleep(100);} catch (InterruptedException e) {throw new RuntimeException(e);}
+                try {Thread.sleep(200);} catch (InterruptedException e) {}
             }
         }).start();
     }
@@ -193,7 +220,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
                 } catch (IOException | InterruptedException e) {
                         System.err.println("\n              [SERVER ERROR] \n           SERVER DISCONNECTED");
                         while(true) {
-                            try {tui.buffering();} catch (InterruptedException ignored) {}
+                            try {terminal_interface.buffering();} catch (InterruptedException ignored) {}
                     }
                 }
             }
@@ -208,6 +235,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void setCards(List<PlayCard> cards){miniModel.setCards(cards);}
     public void pushBack(ResponseMessage message){miniModel.pushBack(message);}
     public void setState(String state){ miniModel.setState(state);}
+
+    @Override
+    public void setCenterCards(CenterCards cards, PlayCard res , PlayCard gold) throws IOException {
+        miniModel.setCardsInCenter(cards,res,gold);
+    }
+
     public void setNumToPlayer(HashMap<Integer, String> map){miniModel.setNumToPlayer(map);}
 
 
@@ -237,6 +270,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
     public void showCardsInCenter() throws IOException {rmi_controller.showCardsInCenter(token);}
+
+
+
     public void printString(String s) {System.out.println(s);}
 
     public void addChat(int idx, ChatMessage message) throws IOException{

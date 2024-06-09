@@ -18,17 +18,9 @@ import java.util.List;
 import java.util.Map;
 /*
 @Davide
-TODO:
-
 
 
 @Fra
-
-TODO:
-     -bisogna definire un END_GAME state
-
-
-
 */
 
 
@@ -111,19 +103,21 @@ public class Game implements Serializable {
         return resources_deck;
     }
 
-    //crezione dei deck
-    // scelta max_num_player
+    //da cancellare -- chiedere a fra
     public Game( /* DeckGoalCard goal_deck */ int max_num_player) {
         this.creation = new DeckCreation();
+
+        /*  DECK NON MISCHIATO
         this.gold_deck = new Deck(creation.getGoldDeck());
         this.resources_deck = new Deck(creation.getResourcesDeck());
+         */
 
-        /*  -- DECK MISCHIATO NON UTILE PER I TEST, POI BISOGNERÀ TORNARE AL DECK MISCHIATO
 
+        //Deck Mischiato
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
 
-         */
+
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
@@ -140,6 +134,7 @@ public class Game implements Serializable {
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
+
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
         this.index_game = IndexManagerF.getNextIndex();
@@ -172,7 +167,6 @@ public class Game implements Serializable {
 
     }
 
-    //prima di chiamare questo metodo devo vedere se i Players sono >= 2 &&  < 4 (non possono mai essere per metodo InsertPlayer)
     public void initializedGame(){
 
                 distributeStartingCard();
@@ -220,6 +214,7 @@ public class Game implements Serializable {
     private void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
+
     }
 
     private void distributeTwoGoalsToPlayer(){
@@ -228,6 +223,7 @@ public class Game implements Serializable {
             tmp.add(goal_deck.drawCard());
             tmp.add(goal_deck.drawCard());
             get_player_index.get(i).setInitialGoalCards(tmp);
+
         }
     }
 
@@ -276,4 +272,7 @@ public class Game implements Serializable {
     public void insertMessageinChat(int i, ChatMessage message){
         chats.get(i).addMessage(message);
     }
+
+
+
 }

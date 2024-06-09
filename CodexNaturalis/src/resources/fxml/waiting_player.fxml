@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.WaitingSceneController" spacing="20" alignment="CENTER" styleClass="waiting-scene">
+    <Label text="Waiting for Players..." styleClass="title" />
+    <ProgressIndicator fx:id="progressIndicator" prefWidth="80" prefHeight="80" />
+    <Label fx:id="waitingMessage" text="Currently waiting for other players to join..." wrapText="true" styleClass="message" />
+    <Button text="Cancel" onAction="#handleCancelAction" styleClass="cancel-button" />
+</VBox>

@@ -1,5 +1,5 @@
 package it.polimi.ingsw.VIEW;
-
+import org.fusesource.jansi.AnsiConsole;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TUI implements Serializable {
+public class TUI implements Serializable, GraficInterterface {
     private final VirtualViewF client;
 
     private final StringCostant stringcostant = new StringCostant();
@@ -30,7 +30,18 @@ public class TUI implements Serializable {
     }
 
 
+    @Override
+    public void printError(String error) {
+        System.err.println(error);
+    }
+
+    @Override
+    public void setUsername(String username) {
+
+    }
+
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
+        AnsiConsole.systemInstall();
         String player_name = selectNamePlayer();
         gameAccess(player_name);
         waitFullGame();
@@ -41,7 +52,7 @@ public class TUI implements Serializable {
 
 
 
-    private void waitFullGame() throws IOException, InterruptedException {
+    public void waitFullGame() throws IOException, InterruptedException {
         if(client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
             System.out.print("[WAIT FOR OTHER PLAYERS]\n");
             while (client.getMiniModel().getState().equals("NOT_INITIALIZED"))
@@ -55,7 +66,7 @@ public class TUI implements Serializable {
     // questa è da mettere all'interno del client (SOCKET or RMI)
 
 
-    private String selectNamePlayer() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public String selectNamePlayer() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         String player_name ;
         int flag;
@@ -78,7 +89,11 @@ public class TUI implements Serializable {
         return player_name;
     }
 
-    private void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public void setNewClient(boolean newClient) {
+        this.newClient = newClient;
+    }
+
+    public void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if(newClient) {
             makeChoice(player_name);
             System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");
@@ -108,7 +123,7 @@ public class TUI implements Serializable {
         }
     }
 
-    private void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
         System.out.print("\nCHOOSE GAME NAME  > ");
@@ -128,7 +143,7 @@ public class TUI implements Serializable {
         } while(!flag);
     }
 
-    private void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         boolean check ;
         System.out.println("\nEXISTING GAMES: ");
@@ -147,7 +162,17 @@ public class TUI implements Serializable {
         client.connectGameServer();
     }
 
-    private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
+    @Override
+    public boolean getInGame() {
+        return false;
+    }
+
+    @Override
+    public void guiManageGame() throws IOException, InterruptedException, ClassNotFoundException {
+
+    }
+
+    public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
         while( client.getMiniModel().getState().equals("NOT_IN_A_GAME") ){ buffering();}
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
             boolean checkGoal = client.isGoalCardPlaced();
@@ -181,7 +206,7 @@ public class TUI implements Serializable {
         }
     }
 
-    private void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
+    public void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
         if(client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             if(!client.isFirstPlaced()) {
                 chooseStartingCard();
@@ -213,7 +238,7 @@ public class TUI implements Serializable {
 
 
 
-    private void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
+    public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
         while( !client.getMiniModel().getState().equals("END_GAME") ){
             while (client.getMiniModel().getState().equals("WAIT_TURN")) {
                 menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());
@@ -229,6 +254,11 @@ public class TUI implements Serializable {
         }
         System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         client.manageGame(true);
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 
     private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
@@ -326,6 +356,7 @@ public class TUI implements Serializable {
     }
 
     private boolean chatChoice(int decision) throws IOException {
+        client.getMiniModel().setStop_chat(false);
         Scanner scan = new Scanner(System.in);
         if(!client.getMiniModel().showchat(decision)){
             return false;
@@ -333,9 +364,7 @@ public class TUI implements Serializable {
         int choice = 0;
         while(true) {
             while (choice < 1 || choice > 2) {
-                System.out.println("DO YOU WANT TO SEND A MESSAGE?");
-                System.out.println("1- YES");
-                System.out.println("2- NO [CLOSE CHAT]");
+                System.out.println("DO YOU WANT TO SEND A MESSAGE?     1- YES      2- NO [CLOSE CHAT] ");
                 choice = scan.nextInt();
                 scan.nextLine();
             }
@@ -344,9 +373,10 @@ public class TUI implements Serializable {
                 String message = scan.nextLine();
                 client.ChatChoice(message, decision);
                 System.out.println("[SUCCESS] MESSAGE SENT!");
-                client.getMiniModel().showchat(decision);
                 choice = 0;
-            } else return true;
+            } else {
+                client.getMiniModel().setStop_chat(true);
+                return true;}
         }
 
     }

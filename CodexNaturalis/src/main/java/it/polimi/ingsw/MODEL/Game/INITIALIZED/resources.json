@@ -12,16 +12,18 @@
       "central3": "NONE"
     },
     "back_side": {
-        "angle_right_up": "EMPTY",
-        "angle_right_down": "EMPTY",
-        "angle_left_up": "EMPTY",
-        "angle_left_down": "EMPTY",
+      "angle_right_up": "EMPTY",
+      "angle_right_down": "EMPTY",
+      "angle_left_up": "EMPTY",
+      "angle_left_down": "EMPTY",
 
-        "central1": "MUSHROOMS",
-        "central2": "NONE",
-        "central3": "NONE"
+      "central1": "MUSHROOMS",
+      "central2": "NONE",
+      "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/001.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -45,7 +47,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/002.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -69,7 +73,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/003.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -93,7 +99,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/004.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -117,7 +125,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/005.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -141,7 +151,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/006.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -165,7 +177,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/007.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -189,7 +203,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/008.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -213,7 +229,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/009.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
   {
     "color":"MUSHROOMS",
@@ -237,7 +255,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/010.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/001.png"
   },
 
 
@@ -263,7 +283,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/011.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -287,7 +309,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/012.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -311,7 +335,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/013.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -335,7 +361,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/014.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -359,7 +387,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/015.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -383,7 +413,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/016.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -407,7 +439,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/017.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -431,7 +465,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/018.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -455,7 +491,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/019.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
   {
     "color":"PLANT",
@@ -479,7 +517,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/020.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/011.png"
   },
 
   {
@@ -504,7 +544,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/021.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -528,7 +570,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/022.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -552,7 +596,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/023.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -576,7 +622,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/024.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -600,7 +648,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/025.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -624,7 +674,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/026.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -648,7 +700,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/027.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -672,7 +726,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/028.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -696,7 +752,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/029.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
   {
     "color":"ANIMAL",
@@ -720,7 +778,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/030.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/021.png"
   },
 
 
@@ -747,7 +807,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/031.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -771,7 +833,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/032.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -795,7 +859,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/033.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -819,7 +885,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/034.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -843,7 +911,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/035.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -867,7 +937,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/036.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -891,7 +963,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 0
+    "point": 0,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/037.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -915,7 +989,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/038.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -939,7 +1015,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/039.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   },
   {
     "color":"INSECTS",
@@ -963,7 +1041,9 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "point": 1
+    "point": 1,
+    "front_img_path": "src/resources/Card/FRONT/resource_front/040.png",
+    "back_img_path": "src/resources/Card/BACK/resource_back/031.png"
   }
 
 ]

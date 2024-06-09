@@ -5,6 +5,8 @@ import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -17,6 +19,8 @@ import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.Message.*;
+import it.polimi.ingsw.VIEW.GraficInterterface;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 
 
 import java.io.*;
@@ -45,7 +49,7 @@ public class ClientHandler  implements VirtualViewF {
         this.server = server;
         this.input = input;
         this.output = output;
-       this.common = common;
+        this.common = common;
 
     }
 
@@ -133,6 +137,8 @@ public class ClientHandler  implements VirtualViewF {
         output.reset();
     }
 
+
+
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
         ResponseMessage s = new NumToPlayerResponse(map);
@@ -149,6 +155,13 @@ public class ClientHandler  implements VirtualViewF {
         output.reset();
     }
 
+    @Override
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
+        ResponseMessage s = new setCenterCardsResponde(cards, res,gold);
+        output.writeObject(s);
+        output.flush();
+        output.reset();
+    }
 
 
     @Override
@@ -176,6 +189,11 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
+    public GraficInterterface getTerminal_interface() throws IOException{
+        return null;
+    }
+
+    @Override
     public void insertNumPlayers(int numPlayersMatch) throws IOException {
         ResponseMessage s = new NumPlayerResponse(numPlayersMatch);
         output.writeObject(s);
@@ -189,9 +207,9 @@ public class ClientHandler  implements VirtualViewF {
                     Thread.sleep(200);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
-                       output.writeObject(s);
-                       output.flush();
-                       output.reset();
+                        output.writeObject(s);
+                        output.flush();
+                        output.reset();
                     }
                 } catch (InterruptedException e) {
 
@@ -223,6 +241,11 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
+    public PlayCard showStartingCardGUI() throws IOException {
+        return null;
+    }
+
+    @Override
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException {
         return null;
     }
@@ -235,6 +258,16 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void chooseGoal(int i) throws IOException {
 
+    }
+
+    @Override
+    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException {
+        return null;
+    }
+
+    @Override
+    public Goal getSecondGoalCard() throws IOException {
+        return null;
     }
 
     @Override
@@ -297,16 +330,17 @@ public class ClientHandler  implements VirtualViewF {
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                             client_is_connected = true;
                             ResponseMessage s = new checkNameResponse(2);
+                            startSendingHeartbeats();
                             output.writeObject(s);
                             output.flush();
                             output.reset();
-                            startSendingHeartbeats();
+
                         }
 
 
                     }
 
-                     else if ((DP_message instanceof CreateGame)) {
+                    else if ((DP_message instanceof CreateGame)) {
                         ((CreateGame) DP_message).setClientHandler(this);
                         startCheckingMessages();
                         int port = ((CreateGame) DP_message).actionCreateGameMessage();
@@ -328,7 +362,7 @@ public class ClientHandler  implements VirtualViewF {
                             output.reset();
                         }
                     } else if (DP_message instanceof connectGame) {
-                         startCheckingMessages();
+                        startCheckingMessages();
                         int port = common.getPort(token);
                         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
@@ -444,6 +478,11 @@ public class ClientHandler  implements VirtualViewF {
 
     @Override
     public void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
+
+    }
+
+    @Override
+    public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
 
     }
 

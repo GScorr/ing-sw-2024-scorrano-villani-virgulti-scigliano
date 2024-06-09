@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="1024.0" prefWidth="1024.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController">
+
+   <children>
+      <!-- StackPane per lo sfondo del tavolo -->
+      <StackPane prefHeight="1024.0" prefWidth="1024.0">
+         <ImageView fx:id="table" fitHeight="2048.0" fitWidth="1854.0" preserveRatio="false">
+            <image>
+               <Image url="@../imgMirk/backgroundTable.png" />
+            </image>
+         </ImageView>
+      </StackPane>
+
+      <Pane fx:id="campoDaGioco" layoutX="212.0" layoutY="100.0" prefHeight="620.0" prefWidth="640.0" style="-fx-background-color: rgba(144,238,144,0.13); -fx-border-color: black;">
+         <!-- Griglia 5x5 per visualizzare le carte -->
+         <GridPane fx:id="gameGrid" layoutX="20.0" layoutY="20.0" prefHeight="600.0" prefWidth="600.0">
+            <!-- Definizione delle colonne e delle righe della griglia -->
+            <columnConstraints>
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+               <ColumnConstraints percentWidth="20" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+               <RowConstraints percentHeight="20" />
+            </rowConstraints>
+
+            <!-- Celle della griglia -->
+            <children>
+               <StackPane fx:id="cell_0_0" style="-fx-border-color: black;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <StackPane fx:id="cell_0_1" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+               <StackPane fx:id="cell_0_2" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+               <StackPane fx:id="cell_0_3" style="-fx-border-color: black;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+               <StackPane fx:id="cell_0_4" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+               <StackPane fx:id="cell_1_0" style="-fx-border-color: black;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+               <StackPane fx:id="cell_1_1" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <StackPane fx:id="cell_1_2" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+               <StackPane fx:id="cell_1_3" style="-fx-border-color: black;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+               <StackPane fx:id="cell_1_4" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+               <StackPane fx:id="cell_2_0" style="-fx-border-color: black;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+               <StackPane fx:id="cell_2_1" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <StackPane fx:id="cell_2_2" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               <StackPane fx:id="cell_2_3" style="-fx-border-color: black;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+               <StackPane fx:id="cell_2_4" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+               <StackPane fx:id="cell_3_0" style="-fx-border-color: black;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+               <StackPane fx:id="cell_3_1" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               <StackPane fx:id="cell_3_2" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               <StackPane fx:id="cell_3_3" style="-fx-border-color: black;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+               <StackPane fx:id="cell_3_4" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+               <StackPane fx:id="cell_4_0" style="-fx-border-color: black;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+               <StackPane fx:id="cell_4_1" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               <StackPane fx:id="cell_4_2" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+               <StackPane fx:id="cell_4_3" style="-fx-border-color: black;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+               <StackPane fx:id="cell_4_4" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            </children>
+         </GridPane>
+      </Pane>
+      <!-- Aggiungi questo codice sotto gli altri nodi all'interno di AnchorPane -->
+
+      <!-- Bottone per mostrare il punteggio -->
+      <Button id="ShowScoreTable" fx:id="showScoreTable" layoutX="33.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowTableScore" prefHeight="30.0" prefWidth="128.0" text="Show score table" />
+
+      <!-- Bottone per mostrare la chat -->
+      <Button id="ShowChat" fx:id="showChat" layoutX="864.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleShowChatAction" prefHeight="30.0" prefWidth="128.0" text="Show chat" />
+
+
+      <!-- Spazio per le immagini -->
+      <VBox layoutX="864.0" layoutY="73.0" prefHeight="200.0" prefWidth="128.0" spacing="5">
+         <!-- Immagine 1 -->
+         <ImageView fx:id="commonGoal1" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" />
+         <!-- Immagine 2 -->
+         <ImageView fx:id="commonGoal2" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" />
+         <!-- Immagine 3 -->
+         <ImageView fx:id="Goal1" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" visible="false" />
+         <!-- Immagine 4 -->
+         <ImageView fx:id="Goal2" fitHeight="80.0" fitWidth="128.0" onMouseClicked="#clickOnGoal" preserveRatio="true" visible="false" />
+         <!-- Immagine 5 -->
+         <ImageView fx:id="startingCard" fitHeight="80.0" fitWidth="128.0" onMouseDragged="#onMouseDraggedHandler" onMousePressed="#onMousePressedHandler" onMouseReleased="#onMouseReleasedHandler" preserveRatio="true" />
+      </VBox>
+
+      <!-- Bottone per scegliere gli obbiettivi -->
+      <Button id="chooseGoal" fx:id="chooseGoal" mnemonicParsing="false" onAction="#showGoalToChose" prefHeight="30.0" prefWidth="128.0" text="chooseGoal" visible="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+
+      <!-- Box per la chat -->
+      <VBox fx:id="chatBox" layoutX="585.0" layoutY="73.0" prefHeight="400.0" prefWidth="407.0" visible="false">
+         <!-- Lista dei messaggi -->
+         <ListView fx:id="chatMessages" prefHeight="300.0" prefWidth="400.0" />
+
+         <!-- Campo di testo per l'input dei messaggi -->
+         <HBox>
+            <TextField fx:id="messageInput" prefHeight="30.0" prefWidth="300.0" promptText="Scrivi messaggio">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button onAction="#handleSendMessage" prefHeight="30.0" prefWidth="106.0" text="Send Message">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </HBox>
+      </VBox>
+
+      <!-- Immagine del punteggio -->
+      <ImageView fx:id="tableScoreImage" fitHeight="611.0" fitWidth="454.0" layoutX="59.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imgMirk/scoreTable.png" />
+         </image>
+      </ImageView>
+
+      <HBox layoutX="350.0" layoutY="400.0" prefHeight="100.0" prefWidth="200.0">
+         <ImageView fx:id="chooseGoal1" fitHeight="196.0" fitWidth="200.0" onMouseClicked="#clickOnChoosedGoal" preserveRatio="true" visible="false" />
+         <ImageView fx:id="chooseGoal2" fitHeight="196.0" fitWidth="200.0" onMouseClicked="#clickOnChoosedGoal" preserveRatio="true" visible="false" />
+      </HBox>
+
+
+
+      <!-- Spazio per le immagini -->
+      <VBox layoutX="1163.0" layoutY="73.0" prefHeight="518.0" prefWidth="300.0" AnchorPane.leftAnchor="1000.0" AnchorPane.topAnchor="350.0">
+         <ImageView fx:id="resource_deck" fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickOnGoal" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/087.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="gold_deck" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
+      </VBox>
+
+      <!-- Spazio per le immagini -->
+      <VBox layoutX="1500.0" layoutY="73.0" prefHeight="1036.0" prefWidth="300.0" AnchorPane.leftAnchor="1600.0" AnchorPane.topAnchor="300.0">
+         <ImageView fx:id="center_card0" fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#clickOnGoal" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/087.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="center_card1" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
+         <ImageView fx:id="center_card2" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
+         <ImageView fx:id="center_card3" fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Card/FRONT/goal_front/089.png" />
+            </image>
+            <VBox.margin>
+               <Insets top="30.0" />
+            </VBox.margin>
+         </ImageView>
+      </VBox>
+      <VBox layoutX="266.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="259.0" prefWidth="1098.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="1600.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10">  <ImageView fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Card/FRONT/goal_front/088.png" />
+               </image>
+            </ImageView>
+               <ImageView fitHeight="259.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../Card/FRONT/goal_front/088.png" />
+                  </image>
+               </ImageView>
+               <ImageView fitHeight="259.0" fitWidth="366.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../Card/FRONT/goal_front/088.png" />
+                  </image>
+               </ImageView>
+            </HBox>
+         </children>
+      </VBox>
+
+   </children>
+
+
+</AnchorPane>

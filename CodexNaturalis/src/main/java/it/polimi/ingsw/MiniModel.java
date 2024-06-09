@@ -6,6 +6,8 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -16,6 +18,8 @@ import java.io.IOException;
 import java.io.Serializable;import java.util.*;
 
 public class MiniModel implements Serializable {
+
+
     int unread_total = 0;
     int my_index;
     int num_players;
@@ -29,8 +33,18 @@ public class MiniModel implements Serializable {
     private List<String> menu = new LinkedList<>();
     private List<String> chatmenu = new LinkedList<>();
 
+    public List<PlayCard> getCards_in_hand() {
+        return cards_in_hand;
+    }
+
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
+
+    private PlayCard top_resource;
+
+    private PlayCard top_gold;
+
+    private CenterCards cards_in_center;
 
     private Player my_player;
     private List<Chat> chat = new ArrayList<>();
@@ -67,6 +81,19 @@ public class MiniModel implements Serializable {
 
     //public void setNotReadMessages(int nr){ this.not_read = nr;}
 
+
+    public PlayCard getTop_resource() {
+        return top_resource;
+    }
+
+    public PlayCard getTop_gold() {
+        return top_gold;
+    }
+
+    public CenterCards getCards_in_center() {
+        return cards_in_center;
+    }
+
     public Queue<ResponseMessage> getQueue(){ return messages; }
 
     public void pushBack(ResponseMessage mess){
@@ -85,10 +112,34 @@ public class MiniModel implements Serializable {
     }
 
     public void showGameField(int pos) throws IOException {
+        pos = pos -1 ;
+        System.out.println("#ANIMALS : " + game_fields.get(pos).getNumOfAnimal());
+        System.out.println("#PLANTS : " + game_fields.get(pos).getNumOfPlant());
+        System.out.println("#INSECTS : " + game_fields.get(pos).getNumOfInsect());
+        System.out.println("#MUSHROOMS : " + game_fields.get(pos).getNumOfMushroom());
+        System.out.println("###PAPERS : " + game_fields.get(pos).getNumOfPaper());
+        System.out.println("###FEATHERS : " + game_fields.get(pos).getNumOfFeather());
+        System.out.println("###INKS : " + game_fields.get(pos).getNumOfPen());
         showField(game_fields.get(pos));
     }
 
+    public GameField getMyGameField() throws IOException {
+        GameField field = null;
+        for(GameField g : game_fields){
+            if(g.getPlayer().getName().equals(my_player.getName())){
+                field = g;
+            }
+        }
+        return field;
+    }
+
     public void setGameField(List<GameField> game){game_fields = game;}
+
+    public void setCardsInCenter( CenterCards cards_in_center , PlayCard res , PlayCard gold){
+        this.cards_in_center = cards_in_center;
+        this.top_resource = res;
+        this.top_gold = gold;
+    }
 
     public void setCards(List<PlayCard> cards){
         cards_in_hand = cards;
@@ -289,6 +340,7 @@ public class MiniModel implements Serializable {
                 for(ChatMessage c : chat.get(6).getChat()){
                     System.out.println(c.player.getName() + "- " + c.message);
                 }
+                keepCheckChat(chat.get(6));
             }
             else {
                 not_read.set(chat_manager.getChatIndex(my_index, decision), 0);
@@ -299,6 +351,7 @@ public class MiniModel implements Serializable {
                 for (ChatMessage c : chat.get(chat_manager.getChatIndex(my_index, decision)).getChat()) {
                     System.out.println(c.player.getName() + "- " + c.message);
                 }
+                keepCheckChat(chat.get(chat_manager.getChatIndex(my_index, decision)));
             }
         }
         else{
@@ -310,9 +363,38 @@ public class MiniModel implements Serializable {
             for(ChatMessage c : chat.get(6).getChat()){
                 System.out.println(c.player.getName() + "- " + c.message);
             }
+            keepCheckChat(chat.get(6));
         }
         return true;
     }
+
+    private boolean stop_chat;
+
+    public void setStop_chat(boolean b){
+        stop_chat = b;
+    }
+    private void keepCheckChat(Chat current_chat){
+        new Thread(() -> {
+            System.out.println("sono un nuovo thread");
+            int in_size = current_chat.getChat().size();
+            while (!stop_chat) {
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                //in_size = current_chat.getChat().size();
+                if ( current_chat.getChat().size() > in_size ){
+                    for ( int i = in_size ; i < current_chat.getChat().size() ; ++i  )
+                        System.out.println(current_chat.getChat().get(i).player.getName() + "- " + current_chat.getChat().get(i).message);
+                    in_size = current_chat.getChat().size();
+                }
+
+            }
+        }).start();
+    }
+
+
 
 
 }

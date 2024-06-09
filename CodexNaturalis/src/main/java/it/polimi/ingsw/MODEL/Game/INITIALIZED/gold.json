@@ -24,7 +24,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/041.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -52,7 +55,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/042.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -80,7 +86,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/043.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -108,7 +117,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/044.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -136,7 +148,9 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+    "front_img_path": "src/resources/Card/FRONT/gold_front/045.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -164,7 +178,9 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+    "front_img_path": "src/resources/Card/FRONT/gold_front/046.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -192,7 +208,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/047.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -220,7 +239,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/048.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -248,7 +270,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/049.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -276,7 +301,10 @@
       "central1": "MUSHROOMS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/050.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
 
@@ -305,7 +333,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/051.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -333,7 +364,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/052.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -361,7 +395,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/053.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -389,7 +426,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/054.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -417,7 +457,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/055.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -445,7 +488,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/056.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -473,7 +519,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/057.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -501,7 +550,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/058.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -529,7 +581,11 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/059.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -557,7 +613,10 @@
       "central1": "PLANT",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/060.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
 
@@ -586,7 +645,9 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+    "front_img_path": "src/resources/Card/FRONT/gold_front/061.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -614,7 +675,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/062.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -642,7 +706,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/063.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -670,7 +737,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/064.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -698,7 +768,11 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/065.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -726,7 +800,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/066.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -754,7 +831,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/067.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -782,7 +862,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/068.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -810,7 +893,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/069.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -838,7 +924,10 @@
       "central1": "ANIMAL",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/070.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
 
@@ -867,7 +956,10 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/071.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -895,7 +987,10 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/072.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -923,7 +1018,10 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/073.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -951,7 +1049,9 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+    "front_img_path": "src/resources/Card/FRONT/gold_front/074.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -979,7 +1079,9 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+    "front_img_path": "src/resources/Card/FRONT/gold_front/075.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1007,7 +1109,10 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/076.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1035,7 +1140,9 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+    "front_img_path": "src/resources/Card/FRONT/gold_front/077.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1063,7 +1170,10 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/078.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1091,7 +1201,9 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+    "front_img_path": "src/resources/Card/FRONT/gold_front/079.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1119,7 +1231,10 @@
       "central1": "INSECTS",
       "central2": "NONE",
       "central3": "NONE"
-    }
+    },
+
+    "front_img_path": "src/resources/Card/FRONT/gold_front/080.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   }
 ]

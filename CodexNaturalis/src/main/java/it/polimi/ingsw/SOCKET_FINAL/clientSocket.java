@@ -2,6 +2,9 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
+import it.polimi.ingsw.VIEW.GraficInterterface;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
@@ -12,11 +15,12 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.*;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 
+import it.polimi.ingsw.VIEW.GuiPackage.GUI;
+import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import it.polimi.ingsw.VIEW.TUI;
 
 import java.io.IOException;
@@ -37,7 +41,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     private ServerProxy server_proxy;
 
     ObjectInputStream input;
-    
+
     public boolean flag_check;
     public boolean check;
     public boolean starting_card_is_placed;
@@ -56,16 +60,20 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     public Goal goal_choosed;
 
-    TUI terminal_interface;
+    GraficInterterface terminal_interface;
     public String token;
     private boolean flag_Server_Disconneted = false;
+
+
+
+
 
     public clientSocket(ObjectInputStream input, ObjectOutputStream output) throws IOException, ClassNotFoundException {
         this.server_proxy = new ServerProxy(output);
         this.input = input;
     }
 
-        public void run() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+    public void runTUI() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
         new Thread(() -> {
             try {
                 startCheckingMessagesSocket();
@@ -77,11 +85,28 @@ public class clientSocket implements VirtualViewF, Serializable {
         terminal_interface.runCli();
     }
 
+    public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        new Thread(() -> {
+            try {
+                startCheckingMessagesSocket();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+        terminal_interface = new GUI(scene);
+        terminal_interface.runCli();
+    }
+
+
+
+
+
     //Thread that receive the input Object from the server
     public void  startCheckingMessagesSocket() throws IOException,ClassNotFoundException{
         new Thread( () -> {
             ResponseMessage s;
             while(true) {
+                try {Thread.sleep(200);} catch (InterruptedException e) {}
                 try {
                     if (((s = (ResponseMessage) input.readObject()) != null)) {
                         s.setClient(this);
@@ -89,7 +114,8 @@ public class clientSocket implements VirtualViewF, Serializable {
                     }
                 } catch (IOException e) {
                     if(! flag_Server_Disconneted){
-                        System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
+                        System.err.println("                 [SERVER ERROR]\n" +
+                                           "                 TRY NEW LOG IN   "  );
                         flag_Server_Disconneted = true;
                     }
 
@@ -153,6 +179,11 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
+
+    }
+
+    @Override
     public void addChat(int idx, ChatMessage message) throws IOException {
 
     }
@@ -170,6 +201,11 @@ public class clientSocket implements VirtualViewF, Serializable {
     @Override
     public void insertPlayer(Player player) throws IOException {
 
+    }
+
+    @Override
+    public GraficInterterface getTerminal_interface() throws IOException{
+        return terminal_interface;
     }
 
     @Override
@@ -221,7 +257,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException {
-        server_proxy.placeCard(choice,x,y,flipped);
+        server_proxy.placeCard(choice - 1,x,y,flipped);
         waitResponse();
 
         // time that I have to wait for receive the next State, NB : next state could be both PlaceCard or DrawCard
@@ -239,12 +275,17 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void ChatChoice(String message, int decision) throws IOException {
-        if(decision==miniModel.getNum_players()+1){
+        if(miniModel.getNum_players() != 2){
+            if(decision==miniModel.getNum_players()+1){
+                server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
+            }
+            else{
+                server_proxy.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message,miniModel.getMy_player()));
+            }
+        } else{
             server_proxy.chattingGlobal(new ChatMessage(message, miniModel.getMy_player()));
         }
-        else{
-            server_proxy.chattingMoment(miniModel.getMy_index(), decision, new ChatMessage(message,miniModel.getMy_player()));
-        }
+
     }
 
 
@@ -278,6 +319,13 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
+    public PlayCard showStartingCardGUI() throws IOException, ClassNotFoundException, InterruptedException {
+        server_proxy.getStartingCard();
+        waitResponse();
+        return startingCard;
+    }
+
+    @Override
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException {
         server_proxy.getListGoalCard();
         waitResponse();
@@ -293,6 +341,18 @@ public class clientSocket implements VirtualViewF, Serializable {
     public void chooseGoal(int i) throws IOException {
         this.goal_choosed = goalsCard.get(i);
         server_proxy.chooseGoal(i);
+    }
+
+    @Override
+    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException {
+        server_proxy.getListGoalCard();
+        waitResponse();
+        return goalsCard.get(0);
+    }
+
+    @Override
+    public Goal getSecondGoalCard() throws IOException {
+        return goalsCard.get(1);
     }
 
     @Override

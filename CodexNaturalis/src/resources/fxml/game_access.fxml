@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameAccessController">
+    <children>
+        <!-- Sfondo dell'immagine -->
+        <!-- <ImageView fitHeight="1024.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@img/loginBackground.png" />
+            </image>
+        </ImageView> -->
+
+        <!-- Etichetta Nome Game -->
+        <Label layoutX="288.0" layoutY="188.0" prefHeight="53.0" prefWidth="204.0" text="Nome Game:" textFill="#040404">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <!-- Campo di testo per il nome del game -->
+        <TextField fx:id="gameNameField" layoutX="512.0" layoutY="164.0" prefHeight="42.0" prefWidth="244.0"
+                   style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-border-color: black; -fx-border-width: 5px;">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </TextField>
+
+        <!-- Etichetta Numero di Giocatori -->
+        <Label layoutX="288.0" layoutY="288.0" prefHeight="53.0" prefWidth="204.0" text="Numero di Giocatori:" textFill="#040404">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <!-- ComboBox per selezionare il numero di giocatori -->
+        <ComboBox fx:id="playerNumberComboBox" layoutX="512.0" layoutY="264.0" prefHeight="42.0" prefWidth="244.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="2" />
+                    <String fx:value="3" />
+                    <String fx:value="4" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Pulsante Crea Game -->
+        <Button fx:id="createGameButton" layoutX="390.0" layoutY="435.0" onAction="#handleCreateGameButtonAction" prefHeight="77.0" prefWidth="244.0" text="Crea Game">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

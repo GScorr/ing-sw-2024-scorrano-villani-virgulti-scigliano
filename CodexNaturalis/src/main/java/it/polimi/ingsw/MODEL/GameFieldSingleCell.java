@@ -24,11 +24,14 @@ public class GameFieldSingleCell implements Serializable {
     //fine carta trasparente
 */
     private boolean filled;
+
+    private int order_above = 0;
+    private int order_below = 0;
     private PlayCard card;
     private AnglesEnum value;
     private PlayCard card_down;
-    private List<AnglesEnum> values = new ArrayList<>(); //probably useless, but I'm waiting for the GUI
-    private List<EdgeEnum> edges = new ArrayList<>(); //probably useless, but I'm waiting for the GUI
+    private List<AnglesEnum> values = new ArrayList<>(); //probably useless, but I'm waiting for the Gui_Initialization
+    private List<EdgeEnum> edges = new ArrayList<>(); //probably useless, but I'm waiting for the Gui_Initialization
 
 //card_down means the angles that the card will cover -mirko-
     public GameFieldSingleCell(boolean filled, PlayCard card, AnglesEnum value, PlayCard card_down) {
@@ -112,11 +115,27 @@ public class GameFieldSingleCell implements Serializable {
     public List<EdgeEnum> getEdges() {
         return edges;
     }
-    //next methods are probably useless, but I'm waiting for the GUI
+    //next methods are probably useless, but I'm waiting for the Gui_Initialization
     public void setValues(AnglesEnum value, int index) {
         values.add(index,value);
     }
     public void setEdges(EdgeEnum value, int index) {
         edges.add(index,value);
+    }
+
+    public int getOrder_above() {
+        return order_above;
+    }
+
+    public int getOrder_below() {
+        return order_below;
+    }
+
+    public void setOrder_above(int order_above) {
+        this.order_above = order_above;
+    }
+
+    public void setOrder_below(int order_below) {
+        this.order_below = order_below;
     }
 }

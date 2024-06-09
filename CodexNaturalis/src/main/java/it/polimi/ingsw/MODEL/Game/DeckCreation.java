@@ -103,6 +103,7 @@ public class DeckCreation implements Serializable {
     }
 
     public void creteResourceDeck(){
+        deck_resources.clear();
         for (JsonElement element : resources_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -149,6 +150,13 @@ public class DeckCreation implements Serializable {
             Side back_side = new Side(enum_angleRightUp,enum_angleRightDown,enum_angleLeftUp,enum_angleLeftDown,c_1,c_2,c_3);
             int point = singleCard.get("point").getAsInt();
             ResourceCard tmp = new ResourceCard(front_side,back_side,false,point);
+
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
             deck_resources.add(tmp);
         }
     }
@@ -157,6 +165,8 @@ public class DeckCreation implements Serializable {
     }
 
     public void creteGoldDeck(){
+        deck_gold.clear();
+
         for (JsonElement element : gold_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -207,6 +217,13 @@ public class DeckCreation implements Serializable {
             BonusEnum bonus = BonusEnum.valueOf(singleCard.get("point_bonus").getAsString());
 
             GoldCard tmp = new GoldCard(front_side,back_side,false,point,costraint,bonus);
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_gold.add(tmp);
         }
     }
@@ -215,6 +232,8 @@ public class DeckCreation implements Serializable {
     }
 
     public void creteStartingDeck(){
+
+        deck_starting.clear();
         for (JsonElement element : starting_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -261,11 +280,21 @@ public class DeckCreation implements Serializable {
             Side back_side = new Side(enum_angleRightUp,enum_angleRightDown,enum_angleLeftUp,enum_angleLeftDown,c_1,c_2,c_3);
             int point = singleCard.get("point").getAsInt();
             StartingCard tmp = new StartingCard(front_side,back_side,false);
+
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_starting.add(tmp);
         }
     }
 
     public void creteGoalDeck(){
+        deck_goal.clear();
+
         for (JsonElement element : goal_jsonArray) {
             JsonObject singlegoal = element.getAsJsonObject();
             String resource = singlegoal.get("resource").getAsString();
@@ -273,7 +302,7 @@ public class DeckCreation implements Serializable {
             int point = singlegoal.get("points").getAsInt();
             String string = singlegoal.get("string").getAsString();
             String strategyString = singlegoal.get("goalType").getAsString();
-            GoalStrategy strategy = new GoalDiagonal(); //inizializzata per evitare errori
+            GoalStrategy strategy = new GoalDiagonal();
             switch(strategyString){
                 case "GoalDiagonal":
                     strategy = new GoalDiagonal();
@@ -292,6 +321,13 @@ public class DeckCreation implements Serializable {
                     break;
             }
             Goal tmp = new Goal(strategy,point,enum_resource,string);
+
+            //-- GUI file path
+            String front_side_path = singlegoal.get("front_img_path").getAsString();
+            String back_side_path = singlegoal.get("back_img_path").getAsString();
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_goal.add(tmp);
         }
     }
@@ -302,15 +338,15 @@ public class DeckCreation implements Serializable {
         Collections.shuffle(deck_starting);
     }
     public Deque<Goal> getGoalDeck(){
-        Deque<Goal> g_deck = new ArrayDeque<Goal>();
-        g_deck.addAll(deck_goal);
-        return g_deck;
+        return new ArrayDeque<Goal>(deck_goal);
     }
     public Deque<Goal> getMixGoalDeck(){
-        Deque<Goal> g_deck = new ArrayDeque<Goal>();
+        System.out.println("PRE MIX : "+ deck_goal.size());
+        /*for( Goal g : deck_goal ){
+            System.out.println(g.getGoalType().toString());
+        }*/
         mixUpGoalDeck();
-        g_deck.addAll(deck_goal);
-        return g_deck;
+        return new ArrayDeque<Goal>(deck_goal);
     }
     public Deque<PlayCard> getResourcesDeck(){
         Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
@@ -348,9 +384,8 @@ public class DeckCreation implements Serializable {
     }
 
     public Deque<PlayCard> getMixStartingDeck(){
-        Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
         mixUpStartingDeck();
-        res_deck.addAll(deck_starting);
+        Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>(deck_starting);
         return res_deck;
     }
 
