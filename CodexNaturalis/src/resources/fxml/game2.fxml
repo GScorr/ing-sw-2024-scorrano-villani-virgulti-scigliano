@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
 
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
-    <children>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">            <content>
-                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="26.5" vgap="5.5">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
+
+    <!-- Menu at the top -->
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="New Game" />
+                <MenuItem text="Save Game" />
+                <MenuItem text="Load Game" />
+                <MenuItem text="Exit" />
+            </Menu>
+            <Menu text="Options">
+                <MenuItem text="Settings" />
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About" />
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <!-- Play Area in the center -->
+    <center>
+        <ScrollPane fx:id="scrollPane" fitToHeight="false" fitToWidth="false" maxWidth="1000.0" pannable="true" prefHeight="450.0">
+            <content>
+                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="20" prefHeight="1500" prefWidth="1500" vgap="5">
                     <columnConstraints>
                         <!-- Repeat for 45 columns -->
                         <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
@@ -107,5 +128,34 @@
                 </GridPane>
             </content>
         </ScrollPane>
-    </children>
-</AnchorPane>
+
+    </center>
+
+    <!-- VBox for the decks at the right -->
+    <right>
+        <VBox fx:id="deckBox" alignment="CENTER" maxWidth="500.0" spacing="10">
+            <Label text="Decks:" />
+            <ImageView fx:id="gold_deck" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleGoldDeckClick"/>
+            <ImageView fx:id="resurce_deck" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleResourceDeckClick"/>
+            <Label text="Central Cards:" />
+            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_0Click" />
+            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_1Click"/>
+            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_2Click"/>
+            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_3Click"/>
+        </VBox>
+    </right>
+
+    <!-- VBox for the decks at the right -->
+    <left>
+        <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" spacing="10">
+            <Label text="Cards in HAND:" />
+            <Label text="Carta 1:" />
+            <ImageView fx:id="handCard1" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard1Click"  onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released"/>
+            <Label text="Carta 2:" />
+            <ImageView fx:id="handCard2" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard2Click"  onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released"/>
+            <Label text="Carta 3:" />
+            <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard3Click"  onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released"/>
+        </VBox>
+    </left>
+
+</BorderPane>

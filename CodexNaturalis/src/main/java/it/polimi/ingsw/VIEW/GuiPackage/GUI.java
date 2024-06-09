@@ -149,23 +149,36 @@ public class GUI implements GraficInterterface {
     }
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
-        
-        while( !scene.getClient().getMiniModel().getState().equals("END_GAME") ){
+        if(!scene.getClient().getMiniModel().getState().equals("END_GAME") ){
             Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
-            while (scene.getClient().getMiniModel().getState().equals("WAIT_TURN")) {
-                menuChoice("GO IN WAITING MODE", scene.getClient().getMiniModel().getState());
-                buffering();
-            }
-            if (scene.getClient().getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
-            else if (scene.getClient().getMiniModel().getState().equals("DRAW_CARD")) {
-                menuChoice("DRAW CARD", scene.getClient().getMiniModel().getState());
-                drawCard();
-            }
-            System.out.println("\nEND OF YOUR TURN !");
-            scene.getClient().manageGame(false);
+        }else{
+            System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         }
-        System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
-        scene.getClient().manageGame(true);
+
+//        while( !scene.getClient().getMiniModel().getState().equals("END_GAME") ){
+//
+//
+//            while (scene.getClient().getMiniModel().getState().equals("WAIT_TURN")) {
+//                menuChoice("GO IN WAITING MODE", scene.getClient().getMiniModel().getState());
+//                buffering();
+//            }
+//            if (scene.getClient().getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
+//            else if (scene.getClient().getMiniModel().getState().equals("DRAW_CARD")) {
+//                /*
+//                    menuChoice("DRAW CARD", scene.getClient().getMiniModel().getState());
+//                    drawCard();
+//                 */
+//                Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
+//                while ( scene.getClient().getMiniModel().getState().equals("DRAW_CARD")){
+//                    Thread.sleep(1000);
+//                }
+//        }
+//            System.out.println("\nEND OF YOUR TURN !");
+//            scene.getClient().manageGame(false);
+//        }
+
+ //       System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
+  //      scene.getClient().manageGame(true);
         /*while( !client.getMiniModel().getState().equals("END_GAME") ){
             while (client.getMiniModel().getState().equals("WAIT_TURN")) {
                 menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());

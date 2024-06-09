@@ -6,6 +6,8 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -16,6 +18,8 @@ import java.io.IOException;
 import java.io.Serializable;import java.util.*;
 
 public class MiniModel implements Serializable {
+
+
     int unread_total = 0;
     int my_index;
     int num_players;
@@ -29,8 +33,18 @@ public class MiniModel implements Serializable {
     private List<String> menu = new LinkedList<>();
     private List<String> chatmenu = new LinkedList<>();
 
+    public List<PlayCard> getCards_in_hand() {
+        return cards_in_hand;
+    }
+
     private String turndecision;
     private Queue<ResponseMessage> messages = new LinkedList<>();
+
+    private PlayCard top_resource;
+
+    private PlayCard top_gold;
+
+    private CenterCards cards_in_center;
 
     private Player my_player;
     private List<Chat> chat = new ArrayList<>();
@@ -67,6 +81,19 @@ public class MiniModel implements Serializable {
 
     //public void setNotReadMessages(int nr){ this.not_read = nr;}
 
+
+    public PlayCard getTop_resource() {
+        return top_resource;
+    }
+
+    public PlayCard getTop_gold() {
+        return top_gold;
+    }
+
+    public CenterCards getCards_in_center() {
+        return cards_in_center;
+    }
+
     public Queue<ResponseMessage> getQueue(){ return messages; }
 
     public void pushBack(ResponseMessage mess){
@@ -85,6 +112,7 @@ public class MiniModel implements Serializable {
     }
 
     public void showGameField(int pos) throws IOException {
+        pos = pos -1 ;
         System.out.println("#ANIMALS : " + game_fields.get(pos).getNumOfAnimal());
         System.out.println("#PLANTS : " + game_fields.get(pos).getNumOfPlant());
         System.out.println("#INSECTS : " + game_fields.get(pos).getNumOfInsect());
@@ -106,6 +134,12 @@ public class MiniModel implements Serializable {
     }
 
     public void setGameField(List<GameField> game){game_fields = game;}
+
+    public void setCardsInCenter( CenterCards cards_in_center , PlayCard res , PlayCard gold){
+        this.cards_in_center = cards_in_center;
+        this.top_resource = res;
+        this.top_gold = gold;
+    }
 
     public void setCards(List<PlayCard> cards){
         cards_in_hand = cards;
@@ -359,5 +393,8 @@ public class MiniModel implements Serializable {
             }
         }).start();
     }
+
+
+
 
 }

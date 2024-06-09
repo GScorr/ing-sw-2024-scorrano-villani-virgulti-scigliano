@@ -33,7 +33,6 @@ public class GameFieldController implements Serializable {
     }
 
     String errore = "Impossible insert a card in this position: ";
-    // TODO capire come collegare a MODEL
     // Function to check if the card can be placed,
     // Return false if you can't, true if you can
     public synchronized boolean checkPlacing(PlayCard card,int x, int y){
@@ -63,7 +62,7 @@ public class GameFieldController implements Serializable {
             else {
                 if (card instanceof GoldCard) {
                     if (!checkGoldConstraints(card.getCostraint())) {
-                        throw new ControllerException(14,errore + "Gold Costraint requirement not met ");
+                        throw new ControllerException(14,errore + "Gold Costraint requirement not matched ");
                     }
                     else {
                         player.addPoints(goldPointsCount((GoldCard) card, x, y));

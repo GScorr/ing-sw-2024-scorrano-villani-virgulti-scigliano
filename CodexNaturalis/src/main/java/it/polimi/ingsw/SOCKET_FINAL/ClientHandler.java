@@ -5,6 +5,8 @@ import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -135,6 +137,8 @@ public class ClientHandler  implements VirtualViewF {
         output.reset();
     }
 
+
+
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
         ResponseMessage s = new NumToPlayerResponse(map);
@@ -151,6 +155,13 @@ public class ClientHandler  implements VirtualViewF {
         output.reset();
     }
 
+    @Override
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
+        ResponseMessage s = new setCenterCardsResponde(cards, res,gold);
+        output.writeObject(s);
+        output.flush();
+        output.reset();
+    }
 
 
     @Override

@@ -2,6 +2,8 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.VIEW.GraficInterterface;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
@@ -177,6 +179,11 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
+
+    }
+
+    @Override
     public void addChat(int idx, ChatMessage message) throws IOException {
 
     }
@@ -250,7 +257,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException {
-        server_proxy.placeCard(choice,x,y,flipped);
+        server_proxy.placeCard(choice - 1,x,y,flipped);
         waitResponse();
 
         // time that I have to wait for receive the next State, NB : next state could be both PlaceCard or DrawCard

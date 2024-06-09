@@ -272,4 +272,7 @@ public class Game implements Serializable {
     public void insertMessageinChat(int i, ChatMessage message){
         chats.get(i).addMessage(message);
     }
+
+
+
 }

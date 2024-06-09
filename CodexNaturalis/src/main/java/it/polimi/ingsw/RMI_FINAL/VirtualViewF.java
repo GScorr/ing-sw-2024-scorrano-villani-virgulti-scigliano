@@ -2,6 +2,8 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
@@ -31,6 +33,7 @@ public interface VirtualViewF extends Remote {
     public void setCards(List<PlayCard> cards) throws IOException;
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException;
     public void setState(String state) throws IOException;
+    public void setCenterCards(CenterCards cards, PlayCard res , PlayCard gold) throws IOException;
     public void addChat(int idx, ChatMessage message) throws IOException;
     public void insertId(int id) throws IOException;
     public void insertNumPlayers(int numPlayersMatch) throws IOException;

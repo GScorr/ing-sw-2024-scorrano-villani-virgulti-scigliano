@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="piccolo change per carta trasparente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/SocketResponseMess/checkGoalCardPresent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/MESSAGES/SocketResponseMess/checkGoalCardPresent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +22,8 @@
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -170,7 +169,7 @@
       <recent name="it.polimi.ingsw.MODEL.Game" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Client">
+  <component name="RunManager" selected="Application.Common_Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -317,30 +316,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00123" summary="Modifica token maps inside GameServer">
-      <option name="closed" value="true" />
-      <created>1716044862611</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1716044862612</updated>
-    </task>
-    <task id="LOCAL-00124" summary="Aggiornamento">
-      <option name="closed" value="true" />
-      <created>1716045145078</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1716045145078</updated>
-    </task>
-    <task id="LOCAL-00125" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1716050143909</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1716050143909</updated>
     </task>
     <task id="LOCAL-00126" summary="aggiornamento funzioni disconnessioni">
       <option name="closed" value="true" />
@@ -702,15 +677,39 @@
       <option name="project" value="LOCAL" />
       <updated>1717857368162</updated>
     </task>
-    <task id="LOCAL-00171" summary="qualcosa inizia ad andare">
+    <task id="LOCAL-00171" summary="fix minor bugs">
       <option name="closed" value="true" />
-      <created>1717859035463</created>
+      <created>1717867443741</created>
       <option name="number" value="00171" />
       <option name="presentableId" value="LOCAL-00171" />
       <option name="project" value="LOCAL" />
-      <updated>1717859035464</updated>
+      <updated>1717867443741</updated>
     </task>
-    <option name="localTasksCounter" value="172" />
+    <task id="LOCAL-00172" summary="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel">
+      <option name="closed" value="true" />
+      <created>1717876498638</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1717876498638</updated>
+    </task>
+    <task id="LOCAL-00173" summary="aggiornamento fra mi ha hypato">
+      <option name="closed" value="true" />
+      <created>1717883345722</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1717883345722</updated>
+    </task>
+    <task id="LOCAL-00174" summary="piccolo change per carta trasparente">
+      <option name="closed" value="true" />
+      <created>1717884569652</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1717884569653</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +723,7 @@
             <State>
               <option name="CUSTOM_BOOLEAN_PROPERTIES">
                 <map>
-                  <entry key="Show.Git.Branches" value="false" />
+                  <entry key="Show.Git.Branches" value="true" />
                 </map>
               </option>
               <option name="FILTERS">
@@ -745,10 +744,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="altri cambiamenti, aggiunta menu e fine queueuzzazione delle funzioni, ampliato il MiniModel" />
-    <MESSAGE value="eliminazione wrapper" />
-    <MESSAGE value="Modifica token maps inside GameServer" />
-    <MESSAGE value="Aggiornamento" />
     <MESSAGE value="aggiornamento funzioni disconnessioni" />
     <MESSAGE value="non funzionerà mai" />
     <MESSAGE value="cose per fra" />
@@ -765,12 +760,16 @@
     <MESSAGE value="prova" />
     <MESSAGE value="notreadmesaages" />
     <MESSAGE value="creazione primo collegamento GUI" />
-    <MESSAGE value="aggiornamento" />
     <MESSAGE value="risoluzione problemi riconnessione e riconnessioni multiple:&#10;testati rmi-rmi rmi-soc soc-rmi soc-soc" />
     <MESSAGE value="." />
     <MESSAGE value="startingcard gamefield printed" />
     <MESSAGE value="qualcosa inizia ad andare" />
-    <option name="LAST_COMMIT_MESSAGE" value="qualcosa inizia ad andare" />
+    <MESSAGE value="aggiornamento" />
+    <MESSAGE value="fix minor bugs" />
+    <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
+    <MESSAGE value="aggiornamento fra mi ha hypato" />
+    <MESSAGE value="piccolo change per carta trasparente" />
+    <option name="LAST_COMMIT_MESSAGE" value="piccolo change per carta trasparente" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
