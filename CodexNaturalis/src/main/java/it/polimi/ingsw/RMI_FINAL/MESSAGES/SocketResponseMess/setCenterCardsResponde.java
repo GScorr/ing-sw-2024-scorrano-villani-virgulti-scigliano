@@ -10,11 +10,11 @@ import java.util.List;
 
 public class setCenterCardsResponde extends ResponseMessage {
     public CenterCards cards ;
-    public CentralEnum res;
+    public PlayCard res;
 
-    public CentralEnum gold;
+    public PlayCard gold;
 
-    public setCenterCardsResponde( CenterCards cards, CentralEnum res, CentralEnum gold) {
+    public setCenterCardsResponde( CenterCards cards, PlayCard res, PlayCard gold) {
         this.cards = cards;
         this.res = res;
         this.gold = gold;

@@ -2,6 +2,10 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
+import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -20,12 +24,12 @@ import java.util.*;
 
 public class GameController2 extends GenericSceneController {
 
-    public ImageView deck1;
-    public ImageView deck2;
-    public ImageView deck3;
-    public ImageView deck4;
-    public ImageView deck5;
-    public ImageView deck6;
+    public ImageView gold_deck;
+    public ImageView resurce_deck;
+    public ImageView center_card_0;
+    public ImageView center_card_1;
+    public ImageView center_card_2;
+    public ImageView center_card_3;
     public VBox handBox;
     public ImageView handCard1;
     public ImageView handCard2;
@@ -52,12 +56,14 @@ public class GameController2 extends GenericSceneController {
     // Definisci una variabile per memorizzare se il clic è stato mantenuto o meno
     private boolean clickHeld = false;
     private boolean just_pressed = false;
+    String token_client;
+    private SendFunction function;
 
 
     
 
     @FXML
-    public void startInitialize() throws IOException {
+    public void startInitialize() throws IOException, InterruptedException {
         Set<Integer> visibleRows = new HashSet<>();
         Set<Integer> visibleCols = new HashSet<>();
 
@@ -142,6 +148,49 @@ public class GameController2 extends GenericSceneController {
             handCard3.setImage(card_3_front);
         }
 
+        if(super.client.getMiniModel().getTop_gold() == null){
+            file = new File("src/resources/Card/Bianco.png");
+            image = new Image(file.toURI().toString());
+            this.gold_deck.setImage(image);
+        }else{
+            file = new File(super.client.getMiniModel().getTop_gold().back_side_path);
+            image = new Image(file.toURI().toString());
+            this.gold_deck.setImage(image);
+        }
+
+        if(super.client.getMiniModel().getTop_resource() == null){
+            file = new File("src/resources/Card/Bianco.png");
+            image = new Image(file.toURI().toString());
+            this.resurce_deck.setImage(image);
+        }else{
+            file = new File(super.client.getMiniModel().getTop_resource().back_side_path);
+            image = new Image(file.toURI().toString());
+            this.resurce_deck.setImage(image);
+        }
+
+        PlayCard card0 = super.client.getMiniModel().getCards_in_center().getResource_list().get(0);
+        PlayCard card1 = super.client.getMiniModel().getCards_in_center().getResource_list().get(1);
+        PlayCard card2 = super.client.getMiniModel().getCards_in_center().getGold_list().get(0);
+        PlayCard card3 = super.client.getMiniModel().getCards_in_center().getGold_list().get(1);
+
+
+        file = new File(card0.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_0.setImage(image);
+
+        file = new File(card1.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_1.setImage(image);
+
+        file = new File(card2.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_2.setImage(image);
+
+        file = new File(card3.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_3.setImage(image);
+
+        token_client = client.getToken();
 
     }
 
@@ -398,12 +447,75 @@ public class GameController2 extends GenericSceneController {
         loadingAlert.show();
 
         // Crea un timeline per chiudere l'alert dopo 1 secondo
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
             loadingAlert.close();
         }));
 
         // Fa partire il timeline
         timeline.setCycleCount(1);
         timeline.play();
+    }
+
+    private void sendFunction(SendFunction function) throws IOException, InterruptedException, ClassNotFoundException {
+        client.drawCard(function);
+        showLoadingPopup();
+        client.getTerminal_interface().manageGame();
+    }
+
+    public void handleGoldDeckClick(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
+        if(errorDrawState() == false){
+            function = new SendDrawGold(token_client);
+            sendFunction(function);
+        }
+    }
+
+
+
+    public void handleResourceDeckClick(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
+        if(errorDrawState() == false){
+            function = new SendDrawResource(token_client);
+            sendFunction(function);
+        }
+    }
+
+    public void handleCenterCard_0Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
+        if(errorDrawState() == false){
+            int index = 1;
+            function = new SendDrawCenter(token_client, index - 1);
+            sendFunction(function);
+        }
+    }
+
+    public void handleCenterCard_1Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
+        if(errorDrawState() == false){
+            int index = 2;
+            function = new SendDrawCenter(token_client, index - 1);
+            sendFunction(function);
+        }
+    }
+
+    public void handleCenterCard_2Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
+        if(errorDrawState() == false){
+            int index = 3;
+            function = new SendDrawCenter(token_client, index - 1);
+            sendFunction(function);
+        }
+    }
+
+    public void handleCenterCard_3Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
+        if(errorDrawState() == false){
+            int index = 4;
+            function = new SendDrawCenter(token_client, index - 1);
+            sendFunction(function);
+        }
+    }
+
+
+    private boolean errorDrawState() throws IOException {
+        if(! super.client.getMiniModel().getState().equals("DRAW_CARD")){
+            showError("IS NOT YOUR TURN, WAIT !!! ");
+            return true;
+        }
+        else return false;
     }
 }
