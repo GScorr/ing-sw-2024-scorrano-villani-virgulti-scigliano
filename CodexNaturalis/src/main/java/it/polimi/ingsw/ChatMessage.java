@@ -5,8 +5,8 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import java.io.Serializable;
 
 public class ChatMessage implements Serializable {
-    String message;
-    Player player;
+    public String message;
+    public Player player;
 
 
     public ChatMessage(String message) {

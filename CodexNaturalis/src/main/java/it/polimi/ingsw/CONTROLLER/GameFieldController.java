@@ -13,10 +13,13 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import java.io.Serializable;
 
 
-
+/**
+ * Manages interaction between a player and their game field.
+ */
 public class GameFieldController implements Serializable {
 
     private GameField player_field;
+
     private Player player;
 
     public Player getPlayer() {
@@ -148,15 +151,18 @@ public class GameFieldController implements Serializable {
         };
     }
 
-
-    //count number of points if the card is Gold and has bonus related to number of stuff
-
     /**
-     * count number of points if the card is Gold and has bonus related to number of stuff
-     * @param card
-     * @param x
-     * @param y
-     * @return
+     * Calculates point bonuses for placed Gold Cards based on card type and field state.
+     * <p>
+     * This method evaluates the specific conditions and constraints of the placed Gold Card
+     * to determine the number of bonus points awarded. The evaluation considers the card's type
+     * and the current state of the game field at the specified coordinates.
+     * </p>
+     *
+     * @param card The GoldCard object representing the placed card.
+     * @param x The x-coordinate on the game field for the placed card.
+     * @param y The y-coordinate on the game field for the placed card.
+     * @return The number of points awarded based on the Gold Card's point bonus.
      */
     public synchronized int goldPointsCount(GoldCard card, int x, int y){
         switch ( card.getPointBonus() ){
@@ -176,12 +182,33 @@ public class GameFieldController implements Serializable {
         }
         return 0;
     }
-    //count number of points for resource cards
+
+    /**
+     * count number of points for resource cards
+     * @param card
+     * @return
+     */
     public synchronized int resourcePointsCount(ResourceCard card){
         return card.getPoint();
     }
-    //check all the resources num that the field will have after putting the card,
-    // given the card and the position
+
+    /**
+     * <p>
+     * This method adds resource points based on the placed card's side information:
+     * </p>
+     * <ul>
+     *   <li>Central resource (if present)</li>
+     *   <li>Angle resources (Left Up, Left Down, Right Down, Right Up)</li>
+     * </ul>
+     * <p>
+     * It then subtracts resource points from previously occupied spaces on the field (if not empty).
+     * </p>
+     *
+     * @param card The PlayCard object representing the placed card.
+     * @param x The x-coordinate on the game field for the placed card.
+     * @param y The y-coordinate on the game field for the placed card.
+     */
+
     public synchronized void resourcePointsChange(PlayCard card, int x, int y){
 
         //Add for each side and for the central resource(if it exist) their counter

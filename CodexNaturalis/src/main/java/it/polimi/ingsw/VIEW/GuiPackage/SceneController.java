@@ -1,6 +1,7 @@
 package it.polimi.ingsw.VIEW.GuiPackage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.AlertSceneController;
+import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChatController;
 import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GenericSceneController;
 import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.MessageSceneController;
 import javafx.event.Event;
@@ -132,6 +133,34 @@ public class SceneController {
         alertSceneController.setStage(stage);
         alertSceneController.setController(this);
 
+
+        stage.showAndWait();
+    }
+
+    public void showChat(String title, int idx, VirtualViewF client, int decision) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chat_scene.fxml"));
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ChatController chatController = loader.getController();
+        chatController.setTitle(title);
+
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+
+        chatController.setStage(stage);
+        chatController.setIdx(idx);
+        chatController.setClient(client);
+        chatController.setController(this);
+        chatController.startInitialize();
+        chatController.setDecision(decision);
 
         stage.showAndWait();
     }

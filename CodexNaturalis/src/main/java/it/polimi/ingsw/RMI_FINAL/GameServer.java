@@ -328,6 +328,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
                 //if ( token_manager.getVal(t).getTerminal_interface().getInGame() ) token_manager.getVal(t).getTerminal_interface().guiManageGame();
             }
+
         }
     }
 
