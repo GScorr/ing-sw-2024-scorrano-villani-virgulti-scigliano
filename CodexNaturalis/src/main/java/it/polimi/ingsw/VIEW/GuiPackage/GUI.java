@@ -93,7 +93,10 @@ public class GUI implements GraficInterterface {
         Platform.runLater(() -> scene.changeRootPane("game_list_scene.fxml"));
     }
 
-
+    @Override
+    public boolean getInGame() {
+        return false;
+    }
 
 
     @Override

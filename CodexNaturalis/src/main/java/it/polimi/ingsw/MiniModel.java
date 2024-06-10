@@ -408,9 +408,9 @@ public class MiniModel implements Serializable {
         return not_read;
     }
 
-    public HashMap<Integer, String> getNum_to_player() {
+    /*public HashMap<Integer, String> getNum_to_player() {
         return num_to_player;
-    }
+    }*/
 
     public List<String> getMenu() {
         return menu;
