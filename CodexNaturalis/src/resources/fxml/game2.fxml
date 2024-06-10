@@ -146,10 +146,10 @@
             <ImageView fx:id="gold_deck" fitHeight="133" fitWidth="100" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
             <ImageView fx:id="resurce_deck" fitHeight="133" fitWidth="100" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
             <Label text="Central Cards:" />
-            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
-            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
-            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
-            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
+            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
+            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
+            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
+            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
         </VBox>
     </right>
 
