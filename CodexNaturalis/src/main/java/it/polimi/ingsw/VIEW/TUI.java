@@ -162,6 +162,11 @@ public class TUI implements Serializable, GraficInterterface {
         client.connectGameServer();
     }
 
+    @Override
+    public void guiGoManageGame() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+
+    }
+
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
         while( client.getMiniModel().getState().equals("NOT_IN_A_GAME") ){ buffering();}
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {

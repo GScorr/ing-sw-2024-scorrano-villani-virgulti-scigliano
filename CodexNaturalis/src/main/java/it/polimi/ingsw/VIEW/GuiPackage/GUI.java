@@ -93,6 +93,11 @@ public class GUI implements GraficInterterface {
         Platform.runLater(() -> scene.changeRootPane("game_list_scene.fxml"));
     }
 
+    @Override
+    public void guiGoManageGame() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+        this.manageGame();
+    }
+
 
     @Override
     public void waitFullGame() throws IOException, InterruptedException {
@@ -147,10 +152,21 @@ public class GUI implements GraficInterterface {
             else System.out.println("[ERROR] WRONG INSERT!");
         }*/
     }
+
+    public void place_card(){
+        Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
+    }
+
+    public void wait_turn(){
+        Platform.runLater(() -> scene.changeRootPane("game_wait.fxml"));
+    }
+
+
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
         if(!scene.getClient().getMiniModel().getState().equals("END_GAME") ){
-            Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
+           if( scene.getClient().getMiniModel().getState().equals("PLACE_CARD")  || scene.getClient().getMiniModel().getState().equals("DRAW_CARD") ) this.place_card();
+           else this.wait_turn();
         }else{
             System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         }

@@ -23,7 +23,7 @@ public class MiniModel implements Serializable {
     int unread_total = 0;
     int my_index;
     int num_players;
-    List<GameField> game_fields ;
+    public List<GameField> game_fields ;
     private List<Integer> not_read = new ArrayList<>();
     private List<PlayCard> cards_in_hand;
 
@@ -92,6 +92,10 @@ public class MiniModel implements Serializable {
 
     public CenterCards getCards_in_center() {
         return cards_in_center;
+    }
+
+    public HashMap<Integer, String> getNum_to_player() {
+        return num_to_player;
     }
 
     public Queue<ResponseMessage> getQueue(){ return messages; }
