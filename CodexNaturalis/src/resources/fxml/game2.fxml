@@ -3,38 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
 <BorderPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
 
-    <!-- Box per la chat -->
-    <bottom>
-        <VBox fx:id="chatBox" prefHeight="400.0" prefWidth="1500.0" visible="false">
-            <!-- Lista dei messaggi -->
-            <ListView fx:id="chatMessages" prefHeight="300.0" prefWidth="1500.0" />
-
-            <!-- Campo di testo per l'input dei messaggi -->
-            <HBox>
-                <TextField fx:id="messageInput" prefHeight="30.0" prefWidth="300.0" promptText="Scrivi messaggio">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </TextField>
-                <Button onAction="#handleSendMessage" prefHeight="30.0" prefWidth="106.0" text="Send Message">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                </Button>
-            </HBox>
-        </VBox>
-    </bottom>
-
-    <!-- Button to toggle chat visibility -->
-    <bottom>
-        <HBox alignment="CENTER_RIGHT" padding="10">
-            <ToggleButton text="Show/Hide Chat" onAction="#toggleChatVisibility"/>
-        </HBox>
-    </bottom>
 
     <!-- Menu at the top -->
     <top>
@@ -51,13 +23,18 @@
             <Menu text="Help">
                 <MenuItem text="About" />
             </Menu>
+            <Menu fx:id="chatsMenu" text="Chats">
+            </Menu>
         </MenuBar>
+
 
     </top>
 
+
     <!-- Play Area in the center -->
     <center>
-        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1000.0" pannable="true" prefHeight="450.0">
+
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1160.0" pannable="true" prefHeight="929.0" prefWidth="1109.0">
             <content>
                 <GridPane fx:id="gameGrid" alignment="CENTER" hgap="25.5" prefHeight="1500" prefWidth="1500" vgap="5">
                     <columnConstraints>
@@ -164,15 +141,15 @@
 
     <!-- VBox for the decks at the right -->
     <right>
-        <VBox fx:id="deckBox" alignment="CENTER" maxWidth="500.0" spacing="10">
+        <VBox fx:id="deckBox" alignment="CENTER" maxWidth="500.0" prefHeight="888.0" prefWidth="300.0" spacing="10">
             <Label text="Decks:" />
-            <ImageView fx:id="gold_deck" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleGoldDeckClick"/>
-            <ImageView fx:id="resurce_deck" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleResourceDeckClick"/>
+            <ImageView fx:id="gold_deck" fitHeight="133" fitWidth="100" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
+            <ImageView fx:id="resurce_deck" fitHeight="133" fitWidth="100" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
             <Label text="Central Cards:" />
-            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_0Click" />
-            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" preserveRatio="true"  onMouseClicked="#handleCenterCard_1Click"/>
-            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_2Click"/>
-            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCenterCard_3Click"/>
+            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
+            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
+            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
+            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
         </VBox>
     </right>
 
@@ -181,13 +158,14 @@
         <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" spacing="10">
             <Label text="Cards in HAND:" />
             <Label text="Carta 1:" />
-            <ImageView fx:id="handCard1" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard1Click"  onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released"/>
+            <ImageView fx:id="handCard1" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
             <Label text="Carta 2:" />
-            <ImageView fx:id="handCard2" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard2Click"  onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released"/>
+            <ImageView fx:id="handCard2" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
             <Label text="Carta 3:" />
-            <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard3Click"  onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released"/>
+            <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
         </VBox>
     </left>
+
 
 
 

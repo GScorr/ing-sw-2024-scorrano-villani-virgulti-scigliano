@@ -92,9 +92,6 @@ public class MiniModel implements Serializable {
         return cards_in_center;
     }
 
-    public HashMap<Integer, String> getNum_to_player() {
-        return num_to_player;
-    }
 
     public Queue<ResponseMessage> getQueue(){ return messages; }
 
@@ -375,7 +372,7 @@ public class MiniModel implements Serializable {
     public void setStop_chat(boolean b){
         stop_chat = b;
     }
-    private void keepCheckChat(Chat current_chat){
+    public void keepCheckChat(Chat current_chat){
         new Thread(() -> {
             System.out.println("sono un nuovo thread");
             int in_size = current_chat.getChat().size();
@@ -396,7 +393,108 @@ public class MiniModel implements Serializable {
         }).start();
     }
 
+    public int getUnread_total() {
+        return unread_total;
+    }
+
+    public List<GameField> getGame_fields() {
+        return game_fields;
+    }
+
+    public List<Integer> getNot_read() {
+        return not_read;
+    }
+
+    /*public HashMap<Integer, String> getNum_to_player() {
+        return num_to_player;
+    }*/
+
+    public List<String> getMenu() {
+        return menu;
+    }
+
+    public List<String> getChatmenu() {
+        return chatmenu;
+    }
+
+    public String getTurndecision() {
+        return turndecision;
+    }
+
+    public Queue<ResponseMessage> getMessages() {
+        return messages;
+    }
+
+    public List<Chat> getChat() {
+        return chat;
+    }
+
+    public ChatIndexManager getChat_manager() {
+        return chat_manager;
+    }
 
 
+    public boolean isStop_chat() {
+        return stop_chat;
+    }
 
+    public void setUnread_total(int unread_total) {
+        this.unread_total = unread_total;
+    }
+
+    public void setGame_fields(List<GameField> game_fields) {
+        this.game_fields = game_fields;
+    }
+
+    public void setNot_read(List<Integer> not_read) {
+        this.not_read = not_read;
+    }
+
+    public void setCards_in_hand(List<PlayCard> cards_in_hand) {
+        this.cards_in_hand = cards_in_hand;
+    }
+
+    public void setNum_to_player(HashMap<Integer, String> num_to_player) {
+        this.num_to_player = num_to_player;
+    }
+
+    public void setMenu(List<String> menu) {
+        this.menu = menu;
+    }
+
+    public void setChatmenu(List<String> chatmenu) {
+        this.chatmenu = chatmenu;
+    }
+
+    public void setTurndecision(String turndecision) {
+        this.turndecision = turndecision;
+    }
+
+    public void setMessages(Queue<ResponseMessage> messages) {
+        this.messages = messages;
+    }
+
+    public void setTop_resource(PlayCard top_resource) {
+        this.top_resource = top_resource;
+    }
+
+    public void setTop_gold(PlayCard top_gold) {
+        this.top_gold = top_gold;
+    }
+
+    public void setCards_in_center(CenterCards cards_in_center) {
+        this.cards_in_center = cards_in_center;
+    }
+
+    public void setChat(List<Chat> chat) {
+        this.chat = chat;
+    }
+
+    public void setChat_manager(ChatIndexManager chat_manager) {
+        this.chat_manager = chat_manager;
+    }
+
+    public HashMap<Integer, String> getNum_to_player() {
+        return num_to_player;
+    }
 }

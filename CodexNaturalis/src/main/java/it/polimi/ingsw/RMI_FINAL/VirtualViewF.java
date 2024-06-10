@@ -98,4 +98,6 @@ public interface VirtualViewF extends Remote {
     void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException;
 
     void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException;
+
+
 }
