@@ -46,7 +46,7 @@ public enum Costraint {
     FIVEPLANT,
     FIVEANIM,
     FIVEINS,
-
+    FIVEMUSH,
     /**
      * No constraint
      */
