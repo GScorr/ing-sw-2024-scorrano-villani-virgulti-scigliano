@@ -378,6 +378,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
+
+
+
     //MAIN
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, 1);

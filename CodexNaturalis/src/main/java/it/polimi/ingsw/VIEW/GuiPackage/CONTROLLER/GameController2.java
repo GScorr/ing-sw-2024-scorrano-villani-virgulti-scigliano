@@ -1,7 +1,9 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
+import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
@@ -24,6 +26,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private Button openChatButton;
 
+    private ChatIndexManager chat_manager = new ChatIndexManager();
+
     @FXML
     private Button showChat;
 
@@ -35,6 +39,16 @@ public class GameController2 extends GenericSceneController {
 
     @FXML
     private VBox chatBox;
+
+    @FXML
+    private VBox chatBox2;
+
+    @FXML
+    private Menu chatsMenu;
+
+
+    @FXML
+    private VBox chatContainer;
 
     @FXML
     private ListView<String> chatMessages;
@@ -77,10 +91,64 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private ToggleButton chatToggleButton;
 
-    @FXML
-    private void toggleChatVisibility() {
-        chatBox.setVisible(chatToggleButton.isSelected());
+
+
+    // Aggiunge un nuovo chat item al menu "Chats"
+    public void addChatItem(String chatName, int chatId) {
+        MenuItem chatItem = new MenuItem(chatName);
+        chatItem.setUserData(chatId);
+        chatItem.setOnAction(event -> {
+            try {
+                showChat(chatName, chatId);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        chatsMenu.getItems().add(chatItem);
     }
+
+    private void updateUnreadTotal() throws IOException {
+        client.getMiniModel().setUnread_total(0);
+        for (Integer i : client.getMiniModel().getNot_read()) {
+            client.getMiniModel().setUnread_total(client.getMiniModel().getUnread_total() + i);
+        }
+    }
+
+    // Aggiunge un messaggio alla chat box
+    private void addMessageToChatBox(String message) {
+        Label messageLabel = new Label(message);
+        messageLabel.setWrapText(true);
+        chatBox.getChildren().add(messageLabel);
+    }
+
+
+
+    // Mostra un popup quando un chat item è premuto
+    private void showChat(String chatName, int chatId) throws IOException {
+
+        /*chatBox.getChildren().clear();  //
+        chatBox.setVisible(true);
+        System.out.println("chat is now visible: " + chatBox.isVisible());*/
+
+        if (client.getMiniModel().getNum_players() != 2) {
+            if (chatId == client.getMiniModel().getNum_players() + 1) {
+                client.getMiniModel().getNot_read().set(6, 0);
+                updateUnreadTotal();
+                scene_controller.showChat("Chat", 6, client, chatId);
+            } else {
+                client.getMiniModel().getNot_read().set(chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), 0);
+                updateUnreadTotal();
+                scene_controller.showChat("Chat", chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), client, chatId);
+            }
+        } else {
+            client.getMiniModel().getNot_read().set(6, 0);
+            updateUnreadTotal();
+            scene_controller.showChat("Chat", 6, client, chatId);
+
+        }
+    }
+
+
 
 
     
@@ -128,6 +196,17 @@ public class GameController2 extends GenericSceneController {
         updateCardsCenter();
 
         token_client = client.getToken();
+
+
+            int i=1;
+            if(client.getMiniModel().getNum_players() > 2){
+                for( i = 1; i<=client.getMiniModel().getNum_players(); ++i){
+                    if( i!=client.getMiniModel().getMy_index() ) addChatItem("-CHAT WITH PLAYER " + client.getMiniModel().getNum_to_player().get(i) + " - New messages (" + client.getMiniModel().getNot_read().get(chat_manager.getChatIndex(client.getMiniModel().getMy_index(),i)) + ")", i);}
+                addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+            }else{ addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+            }
+
+            //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
 
     }
 
@@ -562,24 +641,5 @@ public class GameController2 extends GenericSceneController {
 
     }
 
-    public void handleShowChatAction() { //imposto la visibilità del box della chat
-        chatBox.setVisible(!chatBox.isVisible());
-    }
 
-    @FXML
-    private void handleSendMessage() {
-        String message = messageInput.getText();
-        if (!message.isEmpty()) {
-            addMessageToChat("You: " + message);
-            // Qui potresti gestire l'invio del messaggio al server o ad altri giocatori
-            messageInput.clear(); // Pulisce il campo di input del messaggio dopo l'invio
-        }
-    }
-
-    // Funzione per aggiungere un messaggio alla ListView della chat
-    private void addMessageToChat(String message) {
-        chatMessages.getItems().add(message);
-        // Scrolle la ListView in modo che l'ultimo messaggio sia visibile
-        chatMessages.scrollTo(chatMessages.getItems().size() - 1);
-    }
 }

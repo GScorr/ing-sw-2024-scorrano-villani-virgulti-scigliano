@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChatController">
+    <Label fx:id="titleLabel" alignment="CENTER" text="Chat Title" />
+    <ListView fx:id="chatMessagesListView" VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets bottom="10.0" />
+        </VBox.margin>
+    </ListView>
+    <HBox spacing="5.0">
+        <TextField fx:id="messageInputField" HBox.hgrow="ALWAYS" promptText="Type your message..." />
+        <Button fx:id="sendButton" text="Send" onMouseClicked="#handleSendMessage"  />
+    </HBox>
+</VBox>
