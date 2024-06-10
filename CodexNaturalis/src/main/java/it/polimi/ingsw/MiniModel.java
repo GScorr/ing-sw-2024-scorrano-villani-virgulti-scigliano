@@ -92,9 +92,6 @@ public class MiniModel implements Serializable {
         return cards_in_center;
     }
 
-    public HashMap<Integer, String> getNum_to_player() {
-        return num_to_player;
-    }
 
     public Queue<ResponseMessage> getQueue(){ return messages; }
 
