@@ -10,17 +10,20 @@ public class DeckGoalCard implements Serializable {
 
     private Deque<Goal> cards;
 
-    //il deck
     public DeckGoalCard(Deque<Goal> cards){
         this.cards = cards;
     }
 
 
     public Goal drawCard(){
-        if(cards.size()>0){
-            return cards.pop();
+        if(!cards.isEmpty()){
+            return cards.removeFirst();
         }
-        else throw new EmptyDeckException("GOLD DECK IS EMPTY");
+        else throw new EmptyDeckException("GOAL DECK IS EMPTY");
+    }
+
+    public Deque<Goal> getCards(){
+        return cards;
     }
 
     public Goal seeFirstCard(){return cards.getFirst();}

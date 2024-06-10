@@ -5,6 +5,8 @@ import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -135,6 +137,8 @@ public class ClientHandler  implements VirtualViewF {
         output.reset();
     }
 
+
+
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
         ResponseMessage s = new NumToPlayerResponse(map);
@@ -151,6 +155,13 @@ public class ClientHandler  implements VirtualViewF {
         output.reset();
     }
 
+    @Override
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
+        ResponseMessage s = new setCenterCardsResponde(cards, res,gold);
+        output.writeObject(s);
+        output.flush();
+        output.reset();
+    }
 
 
     @Override
@@ -230,6 +241,11 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
+    public PlayCard showStartingCardGUI() throws IOException {
+        return null;
+    }
+
+    @Override
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException {
         return null;
     }
@@ -245,7 +261,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
-    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public Goal getFirstGoalCard() throws IOException, InterruptedException {
         return null;
     }
 
@@ -255,7 +271,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
-    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public void showStartingCard() throws IOException, InterruptedException {
 
     }
 
@@ -265,7 +281,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
-    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException {
+    public boolean isFirstPlaced() throws IOException, InterruptedException {
         return false;
     }
 
@@ -314,10 +330,11 @@ public class ClientHandler  implements VirtualViewF {
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                             client_is_connected = true;
                             ResponseMessage s = new checkNameResponse(2);
+                            startSendingHeartbeats();
                             output.writeObject(s);
                             output.flush();
                             output.reset();
-                            startSendingHeartbeats();
+
                         }
 
 

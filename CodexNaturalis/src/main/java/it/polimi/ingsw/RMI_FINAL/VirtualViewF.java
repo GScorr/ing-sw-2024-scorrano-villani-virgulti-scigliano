@@ -2,6 +2,8 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
@@ -31,6 +33,7 @@ public interface VirtualViewF extends Remote {
     public void setCards(List<PlayCard> cards) throws IOException;
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException;
     public void setState(String state) throws IOException;
+    public void setCenterCards(CenterCards cards, PlayCard res , PlayCard gold) throws IOException;
     public void addChat(int idx, ChatMessage message) throws IOException;
     public void insertId(int id) throws IOException;
     public void insertNumPlayers(int numPlayersMatch) throws IOException;
@@ -65,6 +68,8 @@ public interface VirtualViewF extends Remote {
 
     public String getGoalPlaced() throws IOException;
 
+    public PlayCard showStartingCardGUI() throws IOException, ClassNotFoundException, InterruptedException;
+
 
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException;
 
@@ -73,16 +78,16 @@ public interface VirtualViewF extends Remote {
 
     public void chooseGoal(int i) throws IOException, InterruptedException;
 
-    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException;
+    public Goal getFirstGoalCard() throws IOException, InterruptedException;
     public Goal getSecondGoalCard() throws IOException;
 
 
-    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException;
+    public void showStartingCard() throws IOException, InterruptedException;
 
 
     public void chooseStartingCard(boolean b) throws IOException, InterruptedException;
 
-    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException;
+    public boolean isFirstPlaced() throws IOException, InterruptedException;
 
     String getToken() throws InterruptedException, IOException;
 

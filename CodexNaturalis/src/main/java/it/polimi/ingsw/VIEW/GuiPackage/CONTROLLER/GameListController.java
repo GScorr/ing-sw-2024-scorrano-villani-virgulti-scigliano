@@ -62,14 +62,16 @@ public class GameListController extends GenericSceneController{
                     throw new RuntimeException(e);
                 } catch (NotBoundException e) {
                     throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
             });
             gameListContainer.getChildren().add(button);
         }
     }
 
-    private void handleGameButtonClick(SocketRmiControllerObject game) throws IOException, InterruptedException, NotBoundException {
-        super.client.findRmiController(ID, player_name);
+    private void handleGameButtonClick(SocketRmiControllerObject game) throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
+        super.client.findRmiController(game.ID, super.client.getTerminal_interface().getName());
         super.client.connectGameServer();
         super.client.getTerminal_interface().waitFullGame();
     }

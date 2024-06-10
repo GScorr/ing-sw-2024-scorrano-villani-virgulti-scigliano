@@ -69,7 +69,7 @@ public class ServerProxy implements  Serializable {
         sendMessage(DP_message);
     }
 
-    public void getListGoalCard() throws IOException, ClassNotFoundException {
+    public void getListGoalCard() throws IOException {
         Message DP_message = new getListGoalCard();
         sendMessage(DP_message);
     }
@@ -79,12 +79,12 @@ public class ServerProxy implements  Serializable {
         sendMessage(DP_message);
     }
 
-    public void getStartingCard() throws IOException, ClassNotFoundException {
+    public void getStartingCard() throws IOException {
         Message DP_message = new getStartingCard();
         sendMessage(DP_message);
     }
 
-    void startingCardIsPlaced() throws IOException, ClassNotFoundException {
+    void startingCardIsPlaced() throws IOException {
         Message DP_message = new firstCardIsPlaced();
         sendMessage(DP_message);
     }

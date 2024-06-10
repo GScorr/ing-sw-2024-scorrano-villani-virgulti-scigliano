@@ -1,4 +1,5 @@
 package it.polimi.ingsw.VIEW;
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import org.fusesource.jansi.AnsiConsole;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
@@ -162,6 +163,12 @@ public class TUI implements Serializable, GraficInterterface {
         client.connectGameServer();
     }
 
+    @Override
+    public boolean getInGame() {
+        return false;
+    }
+
+
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
         while( client.getMiniModel().getState().equals("NOT_IN_A_GAME") ){ buffering();}
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
@@ -231,15 +238,18 @@ public class TUI implements Serializable, GraficInterterface {
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
         while( !client.getMiniModel().getState().equals("END_GAME") ){
             while (client.getMiniModel().getState().equals("WAIT_TURN")) {
-                menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());
+                menuChoice("CONTINUE ", client.getMiniModel().getState());
                 buffering();
             }
-            if (client.getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
+
+            if (client.getMiniModel().getState().equals("PLACE_CARD")) {
+                selectAndInsertCard();}
             else if (client.getMiniModel().getState().equals("DRAW_CARD")) {
                 menuChoice("DRAW CARD", client.getMiniModel().getState());
                 drawCard();
             }
             System.out.println("\nEND OF YOUR TURN !");
+            //System.out.println("YOU CURRENTLY HAVE [ " + client.getMiniModel().getMyGameField().getPlayerPoints() + " ] POINTS !");
             client.manageGame(false);
         }
         System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
@@ -320,6 +330,7 @@ public class TUI implements Serializable, GraficInterterface {
         Scanner scan = new Scanner(System.in);
             client.getMiniModel().printMenu(message);
             int choice = scan.nextInt();
+
             switch (choice) {
                 case (0):
                     client.getMiniModel().printNumToField();
@@ -338,6 +349,10 @@ public class TUI implements Serializable, GraficInterterface {
                     } while (!chatChoice(decision));
                     break;
                 case (3):
+                    if( client.getMiniModel().getState().equals(PlayerState.WAIT_TURN.toString()) ){
+                        System.out.println(" IT'S NOT YOUR TURN YET, WAIT FOR THE NOTIFICATION OF END TURN ");
+                        menuChoice(message, current_state);
+                    }
                     return;
                 default:
                     System.err.println("[ERROR] WRONG INSERT");

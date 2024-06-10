@@ -22,8 +22,8 @@
       "central3": "NONE"
     },
     "point": 0,
-    "front_img_path": "@Card/FRONT/starting_front/0.81.png",
-    "back_img_path": "@Card/BACK/starting_back/0.81.png"
+    "front_img_path": "src/resources/Card/FRONT/starting_front/081.png",
+    "back_img_path": "src/resources/Card/BACK/starting_back/081.png"
   },
   {
     "color":"NONE",
@@ -48,8 +48,8 @@
       "central3": "NONE"
     },
     "point": 0,
-    "front_img_path": "@Card/FRONT/starting_front/0.82.png",
-    "back_img_path": "@Card/BACK/starting_back/0.82.png"
+    "front_img_path": "src/resources/Card/FRONT/starting_front/082.png",
+    "back_img_path": "src/resources/Card/BACK/starting_back/082.png"
   },
   {
     "color":"NONE",
@@ -74,8 +74,8 @@
       "central3": "NONE"
     },
     "point": 0,
-    "front_img_path": "@Card/FRONT/starting_front/0.83.png",
-    "back_img_path": "@Card/BACK/starting_back/0.83.png"
+    "front_img_path": "src/resources/Card/FRONT/starting_front/083.png",
+    "back_img_path": "src/resources/Card/BACK/starting_back/083.png"
   },
   {
     "color":"NONE",
@@ -100,8 +100,8 @@
       "central3": "NONE"
     },
     "point": 0,
-    "front_img_path": "@Card/FRONT/starting_front/0.84.png",
-    "back_img_path": "@Card/BACK/starting_back/0.84.png"
+    "front_img_path": "src/resources/Card/FRONT/starting_front/084.png",
+    "back_img_path": "src/resources/Card/BACK/starting_back/084.png"
   },
   {
     "color":"NONE",
@@ -126,8 +126,8 @@
       "central3": "NONE"
     },
     "point": 0,
-    "front_img_path": "@Card/FRONT/starting_front/0.85.png",
-    "back_img_path": "@Card/BACK/starting_back/0.85.png"
+    "front_img_path": "src/resources/Card/FRONT/starting_front/085.png",
+    "back_img_path": "src/resources/Card/BACK/starting_back/085.png"
   },
   {
     "color":"NONE",
@@ -152,8 +152,8 @@
       "central3": "NONE"
     },
     "point": 0,
-    "front_img_path": "@Card/FRONT/starting_front/0.86.png",
-    "back_img_path": "@Card/BACK/starting_back/0.86.png"
+    "front_img_path": "src/resources/Card/FRONT/starting_front/086.png",
+    "back_img_path": "src/resources/Card/BACK/starting_back/086.png"
   }
 
 ]

@@ -1,8 +1,9 @@
 package it.polimi.ingsw.MODEL.ENUM;
 
 
+import java.io.Serializable;
 
-public enum AnglesEnum{
+public enum AnglesEnum implements Serializable {
     ANIMAL,
     MUSHROOMS,
     INSECTS,

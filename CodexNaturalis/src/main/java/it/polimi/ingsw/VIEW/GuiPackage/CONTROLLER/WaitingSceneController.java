@@ -38,7 +38,6 @@ public class WaitingSceneController extends GenericSceneController{
                     throw new RuntimeException(e);
                 }
                 try {
-                    System.out.println(super.client.getMiniModel().getState());
                     if (!super.client.getMiniModel().getState().equals("NOT_INITIALIZED") && !client.getMiniModel().getState().equals("NOT_IN_A_GAME")) {
                         client.setGameFieldMiniModel();
                         System.out.println("fatto");

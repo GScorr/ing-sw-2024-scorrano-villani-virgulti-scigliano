@@ -26,8 +26,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.41.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/041.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -57,8 +57,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.42.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/042.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -88,8 +88,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.43.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/043.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -119,8 +119,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.44.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/044.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -149,8 +149,8 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "front_img_path": "@Card/FRONT/gold_front/0.45.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/045.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -179,8 +179,8 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "front_img_path": "@Card/FRONT/gold_front/0.46.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/046.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -210,8 +210,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.47.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/047.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -241,8 +241,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.48.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/048.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -272,8 +272,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.49.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/049.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
   {
@@ -303,8 +303,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.50.png",
-    "back_img_path": "@Card/BACK/gold_back/0.41.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/050.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/041.png"
 
   },
 
@@ -335,8 +335,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.51.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/051.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -366,8 +366,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.52.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/052.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -397,8 +397,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.53.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/053.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -428,8 +428,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.54.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/054.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -459,8 +459,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.55.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/055.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -490,8 +490,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.56.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/056.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -521,8 +521,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.57.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/057.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -552,8 +552,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.58.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/058.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -584,8 +584,8 @@
     },
 
 
-    "front_img_path": "@Card/FRONT/gold_front/0.59.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/059.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
   {
@@ -615,8 +615,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.60.png",
-    "back_img_path": "@Card/BACK/gold_back/0.51.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/060.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/051.png"
 
   },
 
@@ -646,8 +646,8 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "front_img_path": "@Card/FRONT/gold_front/0.61.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/061.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -677,8 +677,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.62.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/062.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -708,8 +708,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.63.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/063.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -739,8 +739,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.64.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/064.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -771,8 +771,8 @@
     },
 
 
-    "front_img_path": "@Card/FRONT/gold_front/0.65.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/065.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -802,8 +802,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.66.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/066.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -833,8 +833,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.67.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/067.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -864,8 +864,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.68.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/068.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -895,8 +895,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.69.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/069.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
   {
@@ -926,8 +926,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.70.png",
-    "back_img_path": "@Card/BACK/gold_back/0.61.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/070.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/061.png"
 
   },
 
@@ -958,8 +958,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.71.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/071.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -989,8 +989,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.72.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/072.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1020,8 +1020,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.73.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/073.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1050,8 +1050,8 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "front_img_path": "@Card/FRONT/gold_front/0.74.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/074.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1080,8 +1080,8 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "front_img_path": "@Card/FRONT/gold_front/0.75.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/075.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1111,8 +1111,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.76.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/076.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1141,8 +1141,8 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "front_img_path": "@Card/FRONT/gold_front/0.77.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/077.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1172,8 +1172,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.78.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/078.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1202,8 +1202,8 @@
       "central2": "NONE",
       "central3": "NONE"
     },
-    "front_img_path": "@Card/FRONT/gold_front/0.79.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/079.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   },
   {
@@ -1233,8 +1233,8 @@
       "central3": "NONE"
     },
 
-    "front_img_path": "@Card/FRONT/gold_front/0.80.png",
-    "back_img_path": "@Card/BACK/gold_back/0.71.png"
+    "front_img_path": "src/resources/Card/FRONT/gold_front/080.png",
+    "back_img_path": "src/resources/Card/BACK/gold_back/071.png"
 
   }
 ]

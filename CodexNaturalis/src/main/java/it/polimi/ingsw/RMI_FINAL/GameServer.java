@@ -5,6 +5,7 @@ import it.polimi.ingsw.CONTROLLER.GameController;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.EndGame;
@@ -34,6 +35,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public Map<Integer,String> index_to_token = new HashMap<>();
     public HashMap<Integer,String> index_to_name = new HashMap<>();
     private Common_Server server;
+    private int id_game_server = 0;
 
 
     //CONSTRUCTOR
@@ -112,6 +114,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public synchronized void insertCard(String token, int index, int x, int y, boolean flipped) throws IOException, ControllerException {
         token_to_player.get(token).getCardsInHand().get(index).flipCard(flipped);
         controller.statePlaceCard(token_to_player.get(token), index, x, y);
+        token_manager.getVal(token).setCards( token_to_player.get(token).getCardsInHand() );
     }
 
     //QUEUE FUNCTIONS
@@ -126,7 +129,6 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     private void broadcastMessage(ResponseMessage message) throws IOException {
         for (VirtualViewF c : clientsRMI){
-            System.out.println("mando il messaggio al client " + c.toString() +  message.toString());
             c.pushBack(message);}
     }
     public void addQueue(SendFunction function) {functQueue.add(function);}
@@ -138,7 +140,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             token_manager.getTokens().get(token).printString(i + "- " + p.getName());
             i++;
         }
-        server.removeGameServer(this);
+        endConnection();
     }
 
     //DISCONNECTION
@@ -163,7 +165,7 @@ public class GameServer implements VirtualGameServer, Serializable {
             Player tmp;
             while(true) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(400);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -175,7 +177,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseGoal(s, 1);
                                     setAllStates();
-                                } catch (IOException | InterruptedException e) {
+                                } catch (IOException | InterruptedException  e) {
                                     System.out.println(e.getMessage());
                                 }
                             }
@@ -183,7 +185,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseStartingCard(s, true);
                                     setAllStates();
-                                } catch (IOException | InterruptedException e) {}
+                                } catch (IOException | InterruptedException  e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("PLACE_CARD")) {
                                 controller.nextStatePlayer();
@@ -195,7 +197,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException | InterruptedException e) {}
+                                } catch (IOException | InterruptedException  e) {}
                             }
                         }
                     }
@@ -222,11 +224,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                             try {
                                 int countdown = 45;
                                 broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown));
+                                Thread.sleep(1500);
                                 while( countdown > 0 && controller.isAlone()) {
                                     broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
                                     checkEndDisconnect();
                                     countdown--;
-                                    Thread.sleep(900);
+                                    Thread.sleep(1000);
                                 }
                                 if ( countdown == 0 ) {
                                     for (String t : token_to_player.keySet()) {
@@ -234,11 +237,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                                         token_to_player.get(t).setPlayer_state(end_game);
                                         if ( !token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
                                         end = false;
+                                        endConnection();
                                     }
                                 }else{
                                     setAllStates();
                                     broadcastMessage(new UpdateMessage("PLAYER RECONNECTED CONTINUE YOUR GAME")); }
-                            } catch (IOException | InterruptedException e) {
+                            } catch (IOException | InterruptedException  e) {
                                 throw new RuntimeException(e);
                             }
                         }}catch (RuntimeException ignored){} catch (NoSuchObjectException e) {
@@ -262,7 +266,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     //GETTER
     public void getPoints(String token) throws IOException {
         if(token_manager.getTokens().get(token)!=null) {
-            token_manager.getTokens().get(token).printString("Totale punti:" + token_to_player.get(token).getPlayerPoints());
+            token_manager.getTokens().get(token).printString("  TOTAL POINTS    :" + token_to_player.get(token).getPlayerPoints());
         }
     }
     public synchronized List<VirtualViewF> getClientsRMI() throws IOException{return clientsRMI;}
@@ -317,8 +321,12 @@ public class GameServer implements VirtualGameServer, Serializable {
     private void setAllStates() throws IOException, InterruptedException {
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
+                token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),
+                                                        controller.getGame().getResources_deck().cards.getFirst() ,
+                                                         controller.getGame().getGold_deck().cards.getFirst());
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
+                //if ( token_manager.getVal(t).getTerminal_interface().getInGame() ) token_manager.getVal(t).getTerminal_interface().guiManageGame();
             }
         }
     }
@@ -374,12 +382,20 @@ public class GameServer implements VirtualGameServer, Serializable {
         }
     }
 
+    public PlayCard showStartingCardGUI(String token) throws IOException{
+        return token_to_player.get(token).getStartingCard();
+    }
+
     public void checkEndDisconnect() throws NoSuchObjectException {
         int last_man_standing = 0;
         for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
         if ( last_man_standing == 0 ) {
             server.removeGameServer(this);
         }
+    }
+
+    public void endConnection() throws NoSuchObjectException {
+            server.removeGameServer(this);
     }
 
     //CONNECT

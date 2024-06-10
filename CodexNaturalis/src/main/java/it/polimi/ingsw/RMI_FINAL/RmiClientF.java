@@ -6,6 +6,8 @@ import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -69,7 +71,6 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         else if(isnew.equals("false")){
             flag=0;
             terminal_interface.printError(stringcostant.name_is_not_valid);
-            //System.err.println(stringcostant.name_is_not_valid);
             }
         else{
             this.token = isnew;
@@ -165,6 +166,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void showStartingCard() throws IOException {
         rmi_controller.showStartingCard(token);
     }
+    public PlayCard showStartingCardGUI() throws IOException{
+       return rmi_controller.showStartingCardGUI(token);
+    }
 
     @Override
     public void chooseStartingCard(boolean b) throws IOException, InterruptedException {
@@ -231,6 +235,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void setCards(List<PlayCard> cards){miniModel.setCards(cards);}
     public void pushBack(ResponseMessage message){miniModel.pushBack(message);}
     public void setState(String state){ miniModel.setState(state);}
+
+    @Override
+    public void setCenterCards(CenterCards cards, PlayCard res , PlayCard gold) throws IOException {
+        miniModel.setCardsInCenter(cards,res,gold);
+    }
+
     public void setNumToPlayer(HashMap<Integer, String> map){miniModel.setNumToPlayer(map);}
 
 

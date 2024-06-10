@@ -81,7 +81,6 @@ public class Common_Server {
             {
                 Player p = rmi_controllers.get(i).getController().getGame().getGet_player_index().get(j);
                 if ( p.getName().equals(name) && p.isDisconnected() ) {
-                    System.out.println("STA PER SVEGLIARSI");
                     rmi_controllers.get(i).wakeUp(name,client);
                     for ( String s : rmi_controllers.get(i).getTtoP().keySet() )
                     {
@@ -97,23 +96,22 @@ public class Common_Server {
     }
 
     public int getPort(String token) throws IOException {
-
         return token_to_rmi.get(token).getPort();
     }
 
     public void removeGameServer(GameServer gs) throws NoSuchObjectException {
-        for( String tok : token_to_rmi.keySet() ) {
-            if( token_to_rmi.get(tok).equals(gs) ) {
-                token_to_rmi.remove(tok);
-            }
-        }
+
         for( Integer i : rmi_controllers.keySet() ){
             if( rmi_controllers.get(i).equals(gs) )
             {
                 System.out.println("GAME SERVER DELETE -> " + rmi_controllers.get(i));
                 UnicastRemoteObject.unexportObject(rmi_controllers.get(i), true);
                 rmi_controllers.remove(i);
-                rmi_controllers.remove(i);
+            }
+        }
+        for( String tok : token_to_rmi.keySet() ) {
+            if( token_to_rmi.get(tok).equals(gs) ) {
+                token_to_rmi.remove(tok);
             }
         }
     }
@@ -156,7 +154,7 @@ public class Common_Server {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(1000); // Controlla gli "heartbeats" ogni 5 secondi
+                    Thread.sleep(3000); // Controlla gli "heartbeats" ogni 5 secondi
                     checkHeartbeats();
                 } catch (InterruptedException | IOException e) {
                     e.printStackTrace();

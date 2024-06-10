@@ -2,6 +2,7 @@ package it.polimi.ingsw.MODEL.Player;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
+import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
@@ -63,7 +64,8 @@ public class Player implements PlayerObserver, Serializable {
     private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     //rendi questo private, mi serviva per i test renderlo pubblico
-    public final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+    public PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand;
     private PlayerState player_state;
@@ -127,7 +129,7 @@ public class Player implements PlayerObserver, Serializable {
             }
         }
 
-        this.game_field = new GameField(array_single_cell);
+        this.game_field = new GameField(array_single_cell, this);
 
     }
     /*
@@ -277,6 +279,8 @@ public class Player implements PlayerObserver, Serializable {
     }
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
+        tc.setBack_side_path(null);
+        tc.setFront_side_path(null);
         cards_in_hand.set(index, tc);
     }
 
@@ -335,6 +339,7 @@ public class Player implements PlayerObserver, Serializable {
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 22, 22);
+            game_field.startingCardResourcesAdder((StartingCard) starting_card);
             firstPlaced = true;
     }
 

@@ -2,6 +2,8 @@ package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
+import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
+import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.VIEW.GraficInterterface;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
@@ -104,6 +106,7 @@ public class clientSocket implements VirtualViewF, Serializable {
         new Thread( () -> {
             ResponseMessage s;
             while(true) {
+                try {Thread.sleep(200);} catch (InterruptedException e) {}
                 try {
                     if (((s = (ResponseMessage) input.readObject()) != null)) {
                         s.setClient(this);
@@ -111,7 +114,8 @@ public class clientSocket implements VirtualViewF, Serializable {
                     }
                 } catch (IOException e) {
                     if(! flag_Server_Disconneted){
-                        System.err.println("[SERVER ERROR] SERVER DISCONNECTED");
+                        System.err.println("                 [SERVER ERROR]\n" +
+                                           "                 TRY NEW LOG IN   "  );
                         flag_Server_Disconneted = true;
                     }
 
@@ -171,6 +175,11 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void setState(String state) throws IOException {
+
+    }
+
+    @Override
+    public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
 
     }
 
@@ -248,7 +257,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException {
-        server_proxy.placeCard(choice,x,y,flipped);
+        server_proxy.placeCard(choice - 1,x,y,flipped);
         waitResponse();
 
         // time that I have to wait for receive the next State, NB : next state could be both PlaceCard or DrawCard
@@ -310,6 +319,13 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
+    public PlayCard showStartingCardGUI() throws IOException, ClassNotFoundException, InterruptedException {
+        server_proxy.getStartingCard();
+        waitResponse();
+        return startingCard;
+    }
+
+    @Override
     public String getFirstGoal() throws IOException, ClassNotFoundException, InterruptedException {
         server_proxy.getListGoalCard();
         waitResponse();
@@ -328,7 +344,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
-    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public Goal getFirstGoalCard() throws IOException, InterruptedException {
         server_proxy.getListGoalCard();
         waitResponse();
         return goalsCard.get(0);
@@ -340,7 +356,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
-    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public void showStartingCard() throws IOException, InterruptedException {
         server_proxy.getStartingCard();
         waitResponse();
         showStartingCardHelper(this.startingCard);
@@ -352,7 +368,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
-    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException {
+    public boolean isFirstPlaced() throws IOException, InterruptedException {
         server_proxy.startingCardIsPlaced();
         waitResponse();
         return this.starting_card_is_placed;

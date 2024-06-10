@@ -7,10 +7,7 @@ import java.util.EmptyStackException;
 
 /*
 * @Francesco Virgulti
-* TODO:
-*  - getNumber()
-*  - Implementa anche le sottoclassi
-* */
+*/
 public class Deck implements Serializable {
     public Deque<PlayCard> cards;
 
@@ -21,10 +18,10 @@ public class Deck implements Serializable {
 
 
     public PlayCard drawCard(){
-        if(cards.size()>0){
-            return cards.pop();
+        if(!cards.isEmpty()){
+            return cards.removeFirst();
         }
-        else throw new EmptyDeckException("errore mazzo vuoto in DrawCard in Deck");
+        else throw new EmptyDeckException("EMPTY DECK");
     }
     public PlayCard seeFirstCard(){return cards.getFirst();}
 

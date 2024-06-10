@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChooseGoalController" spacing="20" alignment="CENTER" styleClass="choose-goal-scene">
-    <Label text="Choose your goal" styleClass="header"/>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChooseStartingController" spacing="20" alignment="CENTER" styleClass="choose-goal-scene">
+    <Label text="Choose the orientation of the starting card" styleClass="header"/>
     <HBox spacing="20" alignment="CENTER">
         <ImageView fx:id="card1" fitWidth="300" fitHeight="400" preserveRatio="true" onMouseClicked="#handleCard1Click" styleClass="card"/>
         <ImageView fx:id="card2" fitWidth="300" fitHeight="400" preserveRatio="true" onMouseClicked="#handleCard2Click" styleClass="card"/>
