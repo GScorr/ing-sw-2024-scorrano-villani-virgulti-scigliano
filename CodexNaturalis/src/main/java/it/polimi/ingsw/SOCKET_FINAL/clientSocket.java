@@ -344,7 +344,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
-    public Goal getFirstGoalCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public Goal getFirstGoalCard() throws IOException, InterruptedException {
         server_proxy.getListGoalCard();
         waitResponse();
         return goalsCard.get(0);
@@ -356,7 +356,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
-    public void showStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+    public void showStartingCard() throws IOException, InterruptedException {
         server_proxy.getStartingCard();
         waitResponse();
         showStartingCardHelper(this.startingCard);
@@ -368,7 +368,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
-    public boolean isFirstPlaced() throws IOException, ClassNotFoundException, InterruptedException {
+    public boolean isFirstPlaced() throws IOException, InterruptedException {
         server_proxy.startingCardIsPlaced();
         waitResponse();
         return this.starting_card_is_placed;

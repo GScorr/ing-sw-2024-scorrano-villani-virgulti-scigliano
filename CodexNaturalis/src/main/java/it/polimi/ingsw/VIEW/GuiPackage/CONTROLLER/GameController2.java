@@ -9,9 +9,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +21,23 @@ import java.io.IOException;
 import java.util.*;
 
 public class GameController2 extends GenericSceneController {
+    @FXML
+    private Button openChatButton;
+
+    @FXML
+    private Button showChat;
+
+    @FXML
+    private TextField messageInput;
+
+    @FXML
+    private ImageView tableScoreImage;
+
+    @FXML
+    private VBox chatBox;
+
+    @FXML
+    private ListView<String> chatMessages;
 
     public ImageView gold_deck;
     public ImageView resurce_deck;
@@ -58,6 +73,14 @@ public class GameController2 extends GenericSceneController {
     private boolean just_pressed = false;
     String token_client;
     private SendFunction function;
+
+    @FXML
+    private ToggleButton chatToggleButton;
+
+    @FXML
+    private void toggleChatVisibility() {
+        chatBox.setVisible(chatToggleButton.isSelected());
+    }
 
 
     
@@ -99,96 +122,10 @@ public class GameController2 extends GenericSceneController {
 
         adjustGridVisibility(visibleRows, visibleCols);
 
-        card_1  = super.client.getMiniModel().getCards_in_hand().get(0);
-        if(card_1.front_side_path != null){
-            //front
-            file = new File(card_1.front_side_path);
-            card_1_front = new Image(file.toURI().toString());
-            handCard1.setImage( card_1_front);
-            System.out.println(card_1.front_side_path);
-            //back
-            file = new File(card_1.back_side_path);
-            card_1_back = new Image(file.toURI().toString());
-        }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_1_front = new Image(file.toURI().toString());
-            card_1_back= new Image(file.toURI().toString());
-            handCard1.setImage( card_1_back);
-        }
 
-        card_2  = super.client.getMiniModel().getCards_in_hand().get(1);
-        if(card_2.front_side_path != null){
-            //front
-            file = new File(card_2.front_side_path);
-            card_2_front = new Image(file.toURI().toString());
-            handCard2.setImage(card_2_front);
-            //back
-            file = new File(card_2.back_side_path);
-            card_2_back = new Image(file.toURI().toString());
-        }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_2_front = new Image(file.toURI().toString());
-            card_2_back = new Image(file.toURI().toString());
-            handCard2.setImage(card_2_front);
-        }
-        card_3  = super.client.getMiniModel().getCards_in_hand().get(2);
-        if(card_3.front_side_path != null){
-            //front
-            file = new File(card_3.front_side_path);
-            card_3_front = new Image(file.toURI().toString());
-            handCard3.setImage(card_3_front);
-
-            //back
-            file = new File(card_3.back_side_path);
-            card_3_back = new Image(file.toURI().toString());
-        }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_3_front = new Image(file.toURI().toString());
-            card_3_back = new Image(file.toURI().toString());
-            handCard3.setImage(card_3_front);
-        }
-
-        if(super.client.getMiniModel().getTop_gold() == null){
-            file = new File("src/resources/Card/Bianco.png");
-            image = new Image(file.toURI().toString());
-            this.gold_deck.setImage(image);
-        }else{
-            file = new File(super.client.getMiniModel().getTop_gold().back_side_path);
-            image = new Image(file.toURI().toString());
-            this.gold_deck.setImage(image);
-        }
-
-        if(super.client.getMiniModel().getTop_resource() == null){
-            file = new File("src/resources/Card/Bianco.png");
-            image = new Image(file.toURI().toString());
-            this.resurce_deck.setImage(image);
-        }else{
-            file = new File(super.client.getMiniModel().getTop_resource().back_side_path);
-            image = new Image(file.toURI().toString());
-            this.resurce_deck.setImage(image);
-        }
-
-        PlayCard card0 = super.client.getMiniModel().getCards_in_center().getResource_list().get(0);
-        PlayCard card1 = super.client.getMiniModel().getCards_in_center().getResource_list().get(1);
-        PlayCard card2 = super.client.getMiniModel().getCards_in_center().getGold_list().get(0);
-        PlayCard card3 = super.client.getMiniModel().getCards_in_center().getGold_list().get(1);
-
-
-        file = new File(card0.front_side_path);
-        image = new Image(file.toURI().toString());
-        this.center_card_0.setImage(image);
-
-        file = new File(card1.front_side_path);
-        image = new Image(file.toURI().toString());
-        this.center_card_1.setImage(image);
-
-        file = new File(card2.front_side_path);
-        image = new Image(file.toURI().toString());
-        this.center_card_2.setImage(image);
-
-        file = new File(card3.front_side_path);
-        image = new Image(file.toURI().toString());
-        this.center_card_3.setImage(image);
+        updateCardsInHand();
+        updateDecks();
+        updateCardsCenter();
 
         token_client = client.getToken();
 
@@ -291,8 +228,8 @@ public class GameController2 extends GenericSceneController {
             if (parts.length == 2) {
                 try {
                     // Parsa le coordinate x e y come numeri interi o numeri decimali
-                    int x = Integer.parseInt(parts[0].trim());
-                    int y = Integer.parseInt(parts[1].trim());
+                    int y = Integer.parseInt(parts[0].trim());
+                    int x = Integer.parseInt(parts[1].trim());
 
                     // Ora puoi utilizzare le coordinate x e y come desideri
                     System.out.println("Coordinate X: " + x);
@@ -448,7 +385,7 @@ public class GameController2 extends GenericSceneController {
         loadingAlert.show();
 
         // Crea un timeline per chiudere l'alert dopo 1 secondo
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             loadingAlert.close();
         }));
 
@@ -467,6 +404,8 @@ public class GameController2 extends GenericSceneController {
         if(errorDrawState() == false){
             function = new SendDrawGold(token_client);
             sendFunction(function);
+            updateDecks();
+
         }
     }
 
@@ -476,38 +415,39 @@ public class GameController2 extends GenericSceneController {
         if(errorDrawState() == false){
             function = new SendDrawResource(token_client);
             sendFunction(function);
+            updateDecks();
         }
     }
 
     public void handleCenterCard_0Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
-        if(errorDrawState() == false){
-            int index = 1;
-            function = new SendDrawCenter(token_client, index - 1);
+        if(!errorDrawState()){
+            function = new SendDrawCenter(token_client, 0);
             sendFunction(function);
+            updateCardsCenter();
         }
     }
 
     public void handleCenterCard_1Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
-            int index = 2;
-            function = new SendDrawCenter(token_client, index - 1);
+            function = new SendDrawCenter(token_client, 1);
             sendFunction(function);
+            updateCardsCenter();
         }
     }
 
     public void handleCenterCard_2Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
-            int index = 3;
-            function = new SendDrawCenter(token_client, index - 1);
+            function = new SendDrawCenter(token_client, 2);
             sendFunction(function);
+            updateCardsCenter();
         }
     }
 
     public void handleCenterCard_3Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
-            int index = 4;
-            function = new SendDrawCenter(token_client, index - 1);
+            function = new SendDrawCenter(token_client, 3);
             sendFunction(function);
+            updateCardsCenter();
         }
     }
 
@@ -518,5 +458,128 @@ public class GameController2 extends GenericSceneController {
             return true;
         }
         else return false;
+    }
+
+    private void updateDecks() throws IOException {
+        if(super.client.getMiniModel().getTop_resource() == null){
+            file = new File("src/resources/Card/Bianco.png");
+            image = new Image(file.toURI().toString());
+            this.resurce_deck.setImage(image);
+        }else{
+            file = new File(super.client.getMiniModel().getTop_resource().back_side_path);
+            image = new Image(file.toURI().toString());
+            this.resurce_deck.setImage(image);
+        }
+
+        if(super.client.getMiniModel().getTop_gold() == null){
+            file = new File("src/resources/Card/Bianco.png");
+            image = new Image(file.toURI().toString());
+            this.gold_deck.setImage(image);
+        }else{
+            file = new File(super.client.getMiniModel().getTop_gold().back_side_path);
+            image = new Image(file.toURI().toString());
+            this.gold_deck.setImage(image);}
+    }
+
+    private void updateCardsCenter() throws IOException {
+
+        PlayCard card0 = super.client.getMiniModel().getCards_in_center().getGold_list().get(0);
+        PlayCard card1 = super.client.getMiniModel().getCards_in_center().getGold_list().get(1);
+        PlayCard card2 = super.client.getMiniModel().getCards_in_center().getResource_list().get(0);
+        PlayCard card3 = super.client.getMiniModel().getCards_in_center().getResource_list().get(1);
+
+
+        file = new File(card0.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_0.setImage(image);
+
+        file = new File(card1.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_1.setImage(image);
+
+        file = new File(card2.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_2.setImage(image);
+
+        file = new File(card3.front_side_path);
+        image = new Image(file.toURI().toString());
+        this.center_card_3.setImage(image);
+    }
+
+    private void updateCardsInHand() throws IOException {
+        card_1  = super.client.getMiniModel().getCards_in_hand().get(0);
+        if(card_1.front_side_path != null){
+            //front
+            file = new File(card_1.front_side_path);
+            card_1_front = new Image(file.toURI().toString());
+            handCard1.setImage( card_1_front);
+            System.out.println(card_1.front_side_path);
+            //back
+            file = new File(card_1.back_side_path);
+            card_1_back = new Image(file.toURI().toString());
+        }else{
+            file = new File("src/resources/Card/Bianco.png");
+            card_1_front = new Image(file.toURI().toString());
+            card_1_back= new Image(file.toURI().toString());
+            handCard1.setImage( card_1_back);
+        }
+
+        card_2  = super.client.getMiniModel().getCards_in_hand().get(1);
+        if(card_2.front_side_path != null){
+            //front
+            file = new File(card_2.front_side_path);
+            card_2_front = new Image(file.toURI().toString());
+            handCard2.setImage(card_2_front);
+            //back
+            file = new File(card_2.back_side_path);
+            card_2_back = new Image(file.toURI().toString());
+        }else{
+            file = new File("src/resources/Card/Bianco.png");
+            card_2_front = new Image(file.toURI().toString());
+            card_2_back = new Image(file.toURI().toString());
+            handCard2.setImage(card_2_front);
+        }
+        card_3  = super.client.getMiniModel().getCards_in_hand().get(2);
+        if(card_3.front_side_path != null){
+            //front
+            file = new File(card_3.front_side_path);
+            card_3_front = new Image(file.toURI().toString());
+            handCard3.setImage(card_3_front);
+
+            //back
+            file = new File(card_3.back_side_path);
+            card_3_back = new Image(file.toURI().toString());
+        }else{
+            file = new File("src/resources/Card/Bianco.png");
+            card_3_front = new Image(file.toURI().toString());
+            card_3_back = new Image(file.toURI().toString());
+            handCard3.setImage(card_3_front);
+        }
+
+
+
+
+
+    }
+
+    public void handleShowChatAction() { //imposto la visibilità del box della chat
+        chatBox.setVisible(!chatBox.isVisible());
+    }
+
+    @FXML
+    private void handleSendMessage() {
+        String message = messageInput.getText();
+        if (!message.isEmpty()) {
+            addMessageToChat("You: " + message);
+            // Qui potresti gestire l'invio del messaggio al server o ad altri giocatori
+            messageInput.clear(); // Pulisce il campo di input del messaggio dopo l'invio
+        }
+    }
+
+    // Funzione per aggiungere un messaggio alla ListView della chat
+    private void addMessageToChat(String message) {
+        chatMessages.getItems().add(message);
+        // Scrolle la ListView in modo che l'ultimo messaggio sia visibile
+        chatMessages.scrollTo(chatMessages.getItems().size() - 1);
     }
 }

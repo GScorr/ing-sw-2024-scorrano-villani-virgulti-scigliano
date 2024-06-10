@@ -177,7 +177,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseGoal(s, 1);
                                     setAllStates();
-                                } catch (IOException | InterruptedException e) {
+                                } catch (IOException | InterruptedException  e) {
                                     System.out.println(e.getMessage());
                                 }
                             }
@@ -185,7 +185,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     chooseStartingCard(s, true);
                                     setAllStates();
-                                } catch (IOException | InterruptedException e) {}
+                                } catch (IOException | InterruptedException  e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("PLACE_CARD")) {
                                 controller.nextStatePlayer();
@@ -197,7 +197,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 controller.nextStatePlayer();
                                 try {
                                     setAllStates();
-                                } catch (IOException | InterruptedException e) {}
+                                } catch (IOException | InterruptedException  e) {}
                             }
                         }
                     }
@@ -242,7 +242,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 }else{
                                     setAllStates();
                                     broadcastMessage(new UpdateMessage("PLAYER RECONNECTED CONTINUE YOUR GAME")); }
-                            } catch (IOException | InterruptedException e) {
+                            } catch (IOException | InterruptedException  e) {
                                 throw new RuntimeException(e);
                             }
                         }}catch (RuntimeException ignored){} catch (NoSuchObjectException e) {
@@ -319,13 +319,14 @@ public class GameServer implements VirtualGameServer, Serializable {
 
     //SETTER
     private void setAllStates() throws IOException, InterruptedException {
-        CentralEnum topres;
-        CentralEnum topgold;
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
+                token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),
+                                                        controller.getGame().getResources_deck().cards.getFirst() ,
+                                                         controller.getGame().getGold_deck().cards.getFirst());
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
-                token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),  controller.getGame().getResources_deck().cards.getFirst() , controller.getGame().getGold_deck().cards.getFirst());
+                //if ( token_manager.getVal(t).getTerminal_interface().getInGame() ) token_manager.getVal(t).getTerminal_interface().guiManageGame();
             }
 
         }

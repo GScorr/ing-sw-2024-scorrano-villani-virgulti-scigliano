@@ -26,9 +26,7 @@ public class MiniModel implements Serializable {
     public List<GameField> game_fields ;
     private List<Integer> not_read = new ArrayList<>();
     private List<PlayCard> cards_in_hand;
-
     private HashMap<Integer, String > num_to_player;
-
     private String state;
     private List<String> menu = new LinkedList<>();
     private List<String> chatmenu = new LinkedList<>();
