@@ -2,32 +2,32 @@ package it.polimi.ingsw.MODEL.Card;
 
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
 
-/*
-* @Virgulti Francesco
-*
-* La StartingCard NON è trattata come una carta normale.
-* Ha comunque un BackSide e un FronSide
-* front_side è simile al front_side delle carte normali
-* il back_side è simile al back_side delle carte normali ma al suo interno è inizializzato il central_resources_list, cioè l'elenco dei central_resources
-*
-* */
+/**
+ * Represents a Starting Card in the game, treated differently from normal PlayCards.
+ *
+ * - front_side functions similarly to regular cards.
+ * - back_side additionally stores a list of central resources specific to StartingCards.
+ *
+ * Extends {@link PlayCard}.
+ */
 public class StartingCard extends PlayCard{
 
+    /**
+     * Creates a new Starting Card.
+     *
+     * @param front_side Front side of the card.
+     * @param back_side Back side of the card.
+     * @param flipped set true if the card is on the backside.
+     */
     public StartingCard(Side front_side, Side back_side, boolean flipped) {
-        // Chiamo il costruttore di default per inizializzare le variabili
         super(front_side,back_side,flipped);
 
     }
 
-
     public  String getType(){return "Starting Card";}
 
-    //override sulle sottoclassi per il point
     public  int getPoint(){return 0;}
 
-    //override sulle sottoclassi per il costraint -> Resource Card tornerà NONE
     public Costraint getCostraint(){return Costraint.NONE;};
-
-
 
 }
