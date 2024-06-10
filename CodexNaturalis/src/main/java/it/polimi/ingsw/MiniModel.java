@@ -493,4 +493,8 @@ public class MiniModel implements Serializable {
     public void setChat_manager(ChatIndexManager chat_manager) {
         this.chat_manager = chat_manager;
     }
+
+    public HashMap<Integer, String> getNum_to_player() {
+        return num_to_player;
+    }
 }
