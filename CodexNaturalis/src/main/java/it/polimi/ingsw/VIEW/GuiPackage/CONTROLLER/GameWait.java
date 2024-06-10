@@ -428,7 +428,7 @@ public class GameWait extends GenericSceneController {
         // Add deck cards to the VBox
         if (deckCard1 != null) {
             String labelText = "GOLD DECK :";
-            String imagePath = deckCard1.front_side_path;
+            String imagePath = deckCard1.back_side_path;
 
             Label cardLabel = new Label(labelText);
             ImageView cardImageView = new ImageView();
@@ -468,7 +468,7 @@ public class GameWait extends GenericSceneController {
 
         if (deckCard2 != null) {
             String labelText = "RESOURCE DECK :";
-            String imagePath = deckCard2.front_side_path;
+            String imagePath = deckCard2.back_side_path;
 
             Label cardLabel = new Label(labelText);
             ImageView cardImageView = new ImageView();
