@@ -8,22 +8,7 @@
 
     <!-- Menu at the top -->
     <top>
-        <MenuBar>
-            <Menu text="File">
-                <MenuItem text="New Game" />
-                <MenuItem text="Save Game" />
-                <MenuItem text="Load Game" />
-                <MenuItem text="Exit" />
-            </Menu>
-            <Menu text="Options">
-                <MenuItem text="Settings" />
-            </Menu>
-            <Menu text="Help">
-                <MenuItem text="About" />
-            </Menu>
-            <Menu fx:id="chatsMenu" onShowing="#handleChatsMenuClick" text="Chats">
-            </Menu>
-        </MenuBar>
+        <fx:include fx:id="HeaderInclude" source="./header.fxml" />
     </top>
 
     <!-- New central menu -->

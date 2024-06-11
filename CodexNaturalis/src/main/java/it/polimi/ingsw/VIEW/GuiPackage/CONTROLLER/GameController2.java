@@ -10,8 +10,9 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class GameController2 extends GenericSceneController {
+
     @FXML
     private Button openChatButton;
 
@@ -88,11 +90,11 @@ public class GameController2 extends GenericSceneController {
     private boolean just_pressed = false;
     String token_client;
     private SendFunction function;
-
     @FXML
     private ToggleButton chatToggleButton;
 
-
+    @FXML
+    private AnchorPane HeaderInclude;
 
     // Aggiunge un nuovo chat item al menu "Chats"
     public void addChatItem(String chatName, int chatId) {
@@ -159,6 +161,16 @@ public class GameController2 extends GenericSceneController {
         Set<Integer> visibleRows = new HashSet<>();
         Set<Integer> visibleCols = new HashSet<>();
 
+        //header
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
+        Parent header = loader.load();
+        HeaderController headerController = loader.getController();
+        headerController.setThe_client(super.client);
+        // Aggiungi l'header alla posizione desiderata nel layout principale
+        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+        ((AnchorPane) HeaderInclude).getChildren().add(header);
+        headerController.startInitializeHeader();
+
         int count = 1;
         int tmp = 0;
         while (count <= client.getMiniModel().getMyGameField().card_inserted) {
@@ -197,47 +209,21 @@ public class GameController2 extends GenericSceneController {
         updateCardsCenter();
 
         token_client = client.getToken();
-        startMenuCheck();
+/*
 
-
+            int i=1;
+            if(client.getMiniModel().getNum_players() > 2){
+                for( i = 1; i<=client.getMiniModel().getNum_players(); ++i){
+                    if( i!=client.getMiniModel().getMy_index() ) addChatItem("-CHAT WITH PLAYER " + client.getMiniModel().getNum_to_player().get(i) + " - New messages (" + client.getMiniModel().getNot_read().get(chat_manager.getChatIndex(client.getMiniModel().getMy_index(),i)) + ")", i);}
+                addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+            }else{ addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+            }
 
             //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
+ */
+  //      scene_controller.getHeader_controller().startInitializeHeader();
 
     }
-
-    @FXML
-    private void handleChatsMenuClick() throws IOException {
-
-
-    }
-
-    private void startMenuCheck() throws IOException {
-        Thread menuUpdater = new Thread(() -> {
-            while (true) {
-
-                chatsMenu.getItems().clear();
-                int i=1;
-                try {
-                    if(client.getMiniModel().getNum_players() > 2){
-                        for( i = 1; i<=client.getMiniModel().getNum_players(); ++i){
-                            if( i!=client.getMiniModel().getMy_index() ) addChatItem("-CHAT WITH PLAYER " + client.getMiniModel().getNum_to_player().get(i) + " - New messages (" + client.getMiniModel().getNot_read().get(chat_manager.getChatIndex(client.getMiniModel().getMy_index(),i)) + ")", i);}
-                        addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
-                    }else{ addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
-                    }
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        menuUpdater.start();
-    }
-
-
 
     private void addImageToGrid(int row, int col, String imagePath) {
          file = new File(imagePath);

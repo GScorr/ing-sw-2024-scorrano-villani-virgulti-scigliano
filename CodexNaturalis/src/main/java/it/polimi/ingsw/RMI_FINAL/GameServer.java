@@ -257,9 +257,13 @@ public class GameServer implements VirtualGameServer, Serializable {
 
 
     //DRAW CARD METHODS
-    public synchronized void peachFromGoldDeck(String token) throws IOException{controller.playerPeachCardFromGoldDeck(token_to_player.get(token));}
-    public synchronized void peachFromResourceDeck(String token) throws IOException{controller.playerPeachCardFromResourcesDeck(token_to_player.get(token));}
-    public synchronized void peachFromCardsInCenter(String token, int index) throws IOException{controller.playerPeachFromCardsInCenter(token_to_player.get(token), index);}
+    public synchronized void peachFromGoldDeck(String token) throws IOException, InterruptedException {
+        controller.playerPeachCardFromGoldDeck(token_to_player.get(token));
+        setAllStates();}
+    public synchronized void peachFromResourceDeck(String token) throws IOException, InterruptedException {controller.playerPeachCardFromResourcesDeck(token_to_player.get(token));
+        setAllStates();}
+    public synchronized void peachFromCardsInCenter(String token, int index) throws IOException, InterruptedException {controller.playerPeachFromCardsInCenter(token_to_player.get(token), index);
+        setAllStates();}
 
 
 
