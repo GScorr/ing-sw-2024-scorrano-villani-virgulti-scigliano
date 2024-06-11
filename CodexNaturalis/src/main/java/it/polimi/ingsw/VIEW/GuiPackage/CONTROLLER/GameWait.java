@@ -2,6 +2,7 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
@@ -28,6 +29,8 @@ import java.util.stream.Collectors;
 
 public class GameWait extends GenericSceneController {
 
+    private ChatIndexManager chat_manager = new ChatIndexManager();
+
     public ImageView gold_deck;
     public ImageView resurce_deck;
     public ImageView center_card_0;
@@ -41,6 +44,9 @@ public class GameWait extends GenericSceneController {
     public VBox deckBox;
     @FXML
     private GridPane gameGrid;
+
+    @FXML
+    private Menu chatsMenu;
 
     File file;
     Image image;
@@ -64,8 +70,50 @@ public class GameWait extends GenericSceneController {
     private SendFunction function;
 
 
-    
 
+    private void showChat(String chatName, int chatId) throws IOException {
+
+        /*chatBox.getChildren().clear();  //
+        chatBox.setVisible(true);
+        System.out.println("chat is now visible: " + chatBox.isVisible());*/
+
+        if (client.getMiniModel().getNum_players() != 2) {
+            if (chatId == client.getMiniModel().getNum_players() + 1) {
+                client.getMiniModel().getNot_read().set(6, 0);
+                updateUnreadTotal();
+                scene_controller.showChat("Chat", 6, client, chatId);
+            } else {
+                client.getMiniModel().getNot_read().set(chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), 0);
+                updateUnreadTotal();
+                scene_controller.showChat("Chat", chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), client, chatId);
+            }
+        } else {
+            client.getMiniModel().getNot_read().set(6, 0);
+            updateUnreadTotal();
+            scene_controller.showChat("Chat", 6, client, chatId);
+
+        }
+    }
+
+    public void addChatItem(String chatName, int chatId) {
+        MenuItem chatItem = new MenuItem(chatName);
+        chatItem.setUserData(chatId);
+        chatItem.setOnAction(event -> {
+            try {
+                showChat(chatName, chatId);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        chatsMenu.getItems().add(chatItem);
+    }
+
+    private void updateUnreadTotal() throws IOException {
+        client.getMiniModel().setUnread_total(0);
+        for (Integer i : client.getMiniModel().getNot_read()) {
+            client.getMiniModel().setUnread_total(client.getMiniModel().getUnread_total() + i);
+        }
+    }
     @FXML
     public void startInitialize() throws IOException, InterruptedException {
 
@@ -142,6 +190,40 @@ public class GameWait extends GenericSceneController {
                 }
             }
         }).start();
+
+        startMenuCheck();
+
+
+    }
+
+    private void startMenuCheck() throws IOException {
+        Thread menuUpdater = new Thread(() -> {
+            while (true) {
+
+                chatsMenu.getItems().clear();
+                int i=1;
+                try {
+                    if(client.getMiniModel().getNum_players() > 2){
+                        for( i = 1; i<=client.getMiniModel().getNum_players(); ++i){
+                            if( i!=client.getMiniModel().getMy_index() ) addChatItem("-CHAT WITH PLAYER " + client.getMiniModel().getNum_to_player().get(i) + " - New messages (" + client.getMiniModel().getNot_read().get(chat_manager.getChatIndex(client.getMiniModel().getMy_index(),i)) + ")", i);}
+                        addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+                    }else{ addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+                    }
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        menuUpdater.start();
+    }
+
+    @FXML
+    private void handleChatsMenuClick() throws IOException {
 
     }
 

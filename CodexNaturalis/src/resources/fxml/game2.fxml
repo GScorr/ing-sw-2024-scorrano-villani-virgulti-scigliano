@@ -23,7 +23,7 @@
             <Menu text="Help">
                 <MenuItem text="About" />
             </Menu>
-            <Menu fx:id="chatsMenu" text="Chats">
+            <Menu fx:id="chatsMenu" onShowing="#handleChatsMenuClick" text="Chats">
             </Menu>
         </MenuBar>
 

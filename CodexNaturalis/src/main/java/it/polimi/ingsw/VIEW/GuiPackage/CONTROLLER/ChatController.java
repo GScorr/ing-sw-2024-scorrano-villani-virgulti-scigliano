@@ -83,6 +83,14 @@ public class ChatController extends GenericSceneController{
             addMessage(chatMessage.player.getName() + ": " + chatMessage.message);
         }
         startChatUpdater();
+
+        messageInputField.setOnAction(event -> {
+            try {
+                handleSendMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     // Metodo per aggiungere un messaggio alla chat

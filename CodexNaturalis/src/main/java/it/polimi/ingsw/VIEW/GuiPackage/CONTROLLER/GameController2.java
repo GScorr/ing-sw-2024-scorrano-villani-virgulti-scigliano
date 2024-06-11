@@ -10,6 +10,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -196,19 +197,47 @@ public class GameController2 extends GenericSceneController {
         updateCardsCenter();
 
         token_client = client.getToken();
+        startMenuCheck();
 
 
-            int i=1;
-            if(client.getMiniModel().getNum_players() > 2){
-                for( i = 1; i<=client.getMiniModel().getNum_players(); ++i){
-                    if( i!=client.getMiniModel().getMy_index() ) addChatItem("-CHAT WITH PLAYER " + client.getMiniModel().getNum_to_player().get(i) + " - New messages (" + client.getMiniModel().getNot_read().get(chat_manager.getChatIndex(client.getMiniModel().getMy_index(),i)) + ")", i);}
-                addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
-            }else{ addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
-            }
 
             //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
 
     }
+
+    @FXML
+    private void handleChatsMenuClick() throws IOException {
+
+
+    }
+
+    private void startMenuCheck() throws IOException {
+        Thread menuUpdater = new Thread(() -> {
+            while (true) {
+
+                chatsMenu.getItems().clear();
+                int i=1;
+                try {
+                    if(client.getMiniModel().getNum_players() > 2){
+                        for( i = 1; i<=client.getMiniModel().getNum_players(); ++i){
+                            if( i!=client.getMiniModel().getMy_index() ) addChatItem("-CHAT WITH PLAYER " + client.getMiniModel().getNum_to_player().get(i) + " - New messages (" + client.getMiniModel().getNot_read().get(chat_manager.getChatIndex(client.getMiniModel().getMy_index(),i)) + ")", i);}
+                        addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+                    }else{ addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
+                    }
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        menuUpdater.start();
+    }
+
+
 
     private void addImageToGrid(int row, int col, String imagePath) {
          file = new File(imagePath);
