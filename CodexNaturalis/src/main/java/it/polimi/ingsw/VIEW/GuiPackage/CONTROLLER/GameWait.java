@@ -10,7 +10,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -63,12 +65,24 @@ public class GameWait extends GenericSceneController {
     String token_client;
     private SendFunction function;
 
+    @FXML
+    private AnchorPane HeaderInclude;
+
 
     
 
     @FXML
     public void startInitialize() throws IOException, InterruptedException {
 
+        //header
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
+        Parent header = loader.load();
+        HeaderController headerController = loader.getController();
+        headerController.setThe_client(super.client);
+        // Aggiungi l'header alla posizione desiderata nel layout principale
+        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+        ((AnchorPane) HeaderInclude).getChildren().add(header);
+        headerController.startInitializeHeader();
 
         card_1  = super.client.getMiniModel().getCards_in_hand().get(0);
         if(card_1.front_side_path != null){
@@ -297,39 +311,6 @@ public class GameWait extends GenericSceneController {
         alert.showAndWait();
     }
 
-    public void showLoadingPopup() {
-        // Crea un alert di tipo INFORMATION per il loading
-        Alert loadingAlert = new Alert(Alert.AlertType.INFORMATION, "Loading...", ButtonType.OK);
-        loadingAlert.setHeaderText(null);
-        loadingAlert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false); // Nasconde il pulsante OK
-
-        // Mostra l'alert
-        loadingAlert.show();
-
-        // Crea un timeline per chiudere l'alert dopo 1 secondo
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-            loadingAlert.close();
-        }));
-
-        // Fa partire il timeline
-        timeline.setCycleCount(1);
-        timeline.play();
-    }
-
-    private void sendFunction(SendFunction function) throws IOException, InterruptedException, ClassNotFoundException {
-        client.drawCard(function);
-        showLoadingPopup();
-        client.getTerminal_interface().manageGame();
-    }
-
-
-    private boolean errorDrawState() throws IOException {
-        if(! super.client.getMiniModel().getState().equals("DRAW_CARD")){
-            showError("IS NOT YOUR TURN, WAIT !!! ");
-            return true;
-        }
-        else return false;
-    }
 
     @FXML
     private void handleViewOpponentFields() throws IOException {
@@ -362,6 +343,8 @@ public class GameWait extends GenericSceneController {
 
     @FXML
     private void handleViewDeck() throws IOException {
+
+
         // Create a new stage for the pop-up
         Stage stage = new Stage();
         stage.setTitle("Deck Cards");
@@ -428,7 +411,7 @@ public class GameWait extends GenericSceneController {
         // Add deck cards to the VBox
         if (deckCard1 != null) {
             String labelText = "GOLD DECK :";
-            String imagePath = deckCard1.front_side_path;
+            String imagePath = deckCard1.back_side_path;
 
             Label cardLabel = new Label(labelText);
             ImageView cardImageView = new ImageView();
@@ -468,7 +451,7 @@ public class GameWait extends GenericSceneController {
 
         if (deckCard2 != null) {
             String labelText = "RESOURCE DECK :";
-            String imagePath = deckCard2.front_side_path;
+            String imagePath = deckCard2.back_side_path;
 
             Label cardLabel = new Label(labelText);
             ImageView cardImageView = new ImageView();
@@ -510,11 +493,11 @@ public class GameWait extends GenericSceneController {
         Scene scene = new Scene(handBox);
         stage.setScene(scene);
 
-        // Make the pop-up modal
-        stage.initModality(Modality.APPLICATION_MODAL);
+        // Optionally, explicitly set the popup to be non-modal (if needed)
+        stage.initModality(Modality.NONE); // This line ensures the stage is non-modal
 
-        // Show the new stage
-        stage.showAndWait();
+        // Show the new stage without waiting
+        stage.show();
     }
     @FXML
     private void handleChat() {
@@ -594,11 +577,11 @@ public class GameWait extends GenericSceneController {
         Scene scene = new Scene(scrollPane);
         stage.setScene(scene);
 
-        // Make the pop-up modal
-        stage.initModality(Modality.APPLICATION_MODAL);
+        // Optionally, explicitly set the popup to be non-modal (if needed)
+        stage.initModality(Modality.NONE); // This line ensures the stage is non-modal
 
-        // Show the new stage
-        stage.showAndWait();
+        // Show the new stage without waiting
+        stage.show();
     }
 
     private void addImageToGrid(GridPane grid, int row, int col, String imagePath) {

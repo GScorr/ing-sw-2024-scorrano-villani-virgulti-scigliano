@@ -11,6 +11,8 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class GameController2 extends GenericSceneController {
+
     @FXML
     private Button openChatButton;
 
@@ -87,11 +90,11 @@ public class GameController2 extends GenericSceneController {
     private boolean just_pressed = false;
     String token_client;
     private SendFunction function;
-
     @FXML
     private ToggleButton chatToggleButton;
 
-
+    @FXML
+    private AnchorPane HeaderInclude;
 
     // Aggiunge un nuovo chat item al menu "Chats"
     public void addChatItem(String chatName, int chatId) {
@@ -158,6 +161,16 @@ public class GameController2 extends GenericSceneController {
         Set<Integer> visibleRows = new HashSet<>();
         Set<Integer> visibleCols = new HashSet<>();
 
+        //header
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
+        Parent header = loader.load();
+        HeaderController headerController = loader.getController();
+        headerController.setThe_client(super.client);
+        // Aggiungi l'header alla posizione desiderata nel layout principale
+        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+        ((AnchorPane) HeaderInclude).getChildren().add(header);
+        headerController.startInitializeHeader();
+
         int count = 1;
         int tmp = 0;
         while (count <= client.getMiniModel().getMyGameField().card_inserted) {
@@ -196,7 +209,7 @@ public class GameController2 extends GenericSceneController {
         updateCardsCenter();
 
         token_client = client.getToken();
-
+/*
 
             int i=1;
             if(client.getMiniModel().getNum_players() > 2){
@@ -207,6 +220,8 @@ public class GameController2 extends GenericSceneController {
             }
 
             //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
+ */
+  //      scene_controller.getHeader_controller().startInitializeHeader();
 
     }
 
