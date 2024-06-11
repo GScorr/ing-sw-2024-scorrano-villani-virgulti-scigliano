@@ -76,11 +76,11 @@ public class GameWait extends GenericSceneController {
 
 
 
-    private void showChat(String chatName, int chatId) throws IOException {
+    /*private void showChat(String chatName, int chatId) throws IOException {
 
         /*chatBox.getChildren().clear();  //
         chatBox.setVisible(true);
-        System.out.println("chat is now visible: " + chatBox.isVisible());*/
+        System.out.println("chat is now visible: " + chatBox.isVisible());
 
         if (client.getMiniModel().getNum_players() != 2) {
             if (chatId == client.getMiniModel().getNum_players() + 1) {
@@ -98,9 +98,9 @@ public class GameWait extends GenericSceneController {
             scene_controller.showChat("Chat", 6, client, chatId);
 
         }
-    }
+    }*/
 
-    public void addChatItem(String chatName, int chatId) {
+    /*public void addChatItem(String chatName, int chatId) {
         MenuItem chatItem = new MenuItem(chatName);
         chatItem.setUserData(chatId);
         chatItem.setOnAction(event -> {
@@ -111,7 +111,7 @@ public class GameWait extends GenericSceneController {
             }
         });
         chatsMenu.getItems().add(chatItem);
-    }
+    }*/
 
     private void updateUnreadTotal() throws IOException {
         client.getMiniModel().setUnread_total(0);
@@ -127,6 +127,7 @@ public class GameWait extends GenericSceneController {
         Parent header = loader.load();
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
+        headerController.setScene(scene_controller);
         // Aggiungi l'header alla posizione desiderata nel layout principale
         // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
         ((AnchorPane) HeaderInclude).getChildren().add(header);
@@ -205,12 +206,12 @@ public class GameWait extends GenericSceneController {
             }
         }).start();
 
-        startMenuCheck();
+        //startMenuCheck();
 
 
     }
 
-    private void startMenuCheck() throws IOException {
+    /*private void startMenuCheck() throws IOException {
         Thread menuUpdater = new Thread(() -> {
             while (true) {
 
@@ -234,7 +235,7 @@ public class GameWait extends GenericSceneController {
             }
         });
         menuUpdater.start();
-    }
+    }*/
 
     @FXML
     private void handleChatsMenuClick() throws IOException {

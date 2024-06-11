@@ -97,7 +97,7 @@ public class GameController2 extends GenericSceneController {
     private AnchorPane HeaderInclude;
 
     // Aggiunge un nuovo chat item al menu "Chats"
-    public void addChatItem(String chatName, int chatId) {
+    /*public void addChatItem(String chatName, int chatId) {
         MenuItem chatItem = new MenuItem(chatName);
         chatItem.setUserData(chatId);
         chatItem.setOnAction(event -> {
@@ -108,7 +108,7 @@ public class GameController2 extends GenericSceneController {
             }
         });
         chatsMenu.getItems().add(chatItem);
-    }
+    }*/
 
     private void updateUnreadTotal() throws IOException {
         client.getMiniModel().setUnread_total(0);
@@ -127,11 +127,11 @@ public class GameController2 extends GenericSceneController {
 
 
     // Mostra un popup quando un chat item è premuto
-    private void showChat(String chatName, int chatId) throws IOException {
+    /*private void showChat(String chatName, int chatId) throws IOException {
 
         /*chatBox.getChildren().clear();  //
         chatBox.setVisible(true);
-        System.out.println("chat is now visible: " + chatBox.isVisible());*/
+        System.out.println("chat is now visible: " + chatBox.isVisible());
 
         if (client.getMiniModel().getNum_players() != 2) {
             if (chatId == client.getMiniModel().getNum_players() + 1) {
@@ -149,7 +149,7 @@ public class GameController2 extends GenericSceneController {
             scene_controller.showChat("Chat", 6, client, chatId);
 
         }
-    }
+    }*/
 
 
 
@@ -166,6 +166,8 @@ public class GameController2 extends GenericSceneController {
         Parent header = loader.load();
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
+        System.out.println("--------------------" + scene_controller);
+        headerController.setScene(scene_controller);
         // Aggiungi l'header alla posizione desiderata nel layout principale
         // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
         ((AnchorPane) HeaderInclude).getChildren().add(header);
