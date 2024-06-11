@@ -137,7 +137,7 @@ public class SceneController {
         stage.showAndWait();
     }
 
-    public void showChat(String title, int idx, VirtualViewF client, int decision) throws IOException {
+    public void showChat(String title, int idx, VirtualViewF client, int decision, HeaderController header) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chat_scene.fxml"));
         Parent parent;
         try {
@@ -149,6 +149,7 @@ public class SceneController {
 
         ChatController chatController = loader.getController();
         chatController.setTitle(title);
+        chatController.setHeader(header);
 
         Stage stage = new Stage();
         stage.setTitle(title);

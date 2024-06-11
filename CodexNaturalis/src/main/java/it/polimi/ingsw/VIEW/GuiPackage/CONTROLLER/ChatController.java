@@ -14,10 +14,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ChatController extends GenericSceneController{
+public class ChatController extends GenericSceneController {
 
     private int decision;
-    private boolean running; // Aggiungere un flag per controllare il thread
+
+    private static boolean chatOpen = false;
+    private volatile boolean running; // Aggiungere un flag per controllare il thread
 
     @FXML
     private Label titleLabel;
@@ -29,6 +31,7 @@ public class ChatController extends GenericSceneController{
     private TextField messageInputField;
 
     private Stage stage;
+    private HeaderController header;
 
     private VirtualViewF client;
     private SceneController controller;
@@ -39,7 +42,14 @@ public class ChatController extends GenericSceneController{
     }
 
     public void setStage(Stage stage) {
+        // Controlla se la finestra di chat è già aperta, se sì, non fare nulla
+
+
         this.stage = stage;
+        // Aggiungi un listener per intercettare l'evento di chiusura della finestra
+        stage.setOnCloseRequest(event -> handleClose());
+
+        // Imposta il flag per indicare che la finestra di chat è stata aperta
     }
 
     public void setClient(VirtualViewF client) {
@@ -74,6 +84,7 @@ public class ChatController extends GenericSceneController{
     private void handleClose() {
         running = false; // Fermare il thread quando la finestra viene chiusa
         stage.close();
+        header.setChatOpen(false);
     }
 
     // Metodo per inizializzare la chat con i messaggi già presenti
@@ -83,6 +94,14 @@ public class ChatController extends GenericSceneController{
             addMessage(chatMessage.player.getName() + ": " + chatMessage.message);
         }
         startChatUpdater();
+
+        messageInputField.setOnAction(event -> {
+            try {
+                handleSendMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     // Metodo per aggiungere un messaggio alla chat
@@ -110,9 +129,13 @@ public class ChatController extends GenericSceneController{
             while (running) {
                 try {
                     Platform.runLater(this::updateChat);
+                    client.getMiniModel().getNot_read().set(idx, 0);
+                    System.out.println("resetto");
                     Thread.sleep(1000); // Aggiorna la chat ogni secondo
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -130,5 +153,9 @@ public class ChatController extends GenericSceneController{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setHeader(HeaderController header) {
+        this.header = header;
     }
 }
