@@ -29,7 +29,7 @@ public class GameFieldMessage extends ResponseMessage{
 
 
     public void showField(GameField field) {
-        System.out.println("\nPLAYER : [ " + field.getPlayer().getName() + " ] JUST PLACED A CARD, THIS IT'S NEW FIELD :\n" );
+        System.out.println("\nPLAYER : [ " + field.getPlayer().getName() + " ] JUST PLACED A CARD, THIS IS HIS NEW FIELD :\n" );
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
 

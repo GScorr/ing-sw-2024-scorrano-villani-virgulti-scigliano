@@ -247,8 +247,8 @@ public class TUI implements Serializable, GraficInterterface {
             else if (client.getMiniModel().getState().equals("DRAW_CARD")) {
                 menuChoice("DRAW CARD", client.getMiniModel().getState());
                 drawCard();
+                System.out.println("\n           END OF YOUR TURN !");
             }
-            System.out.println("\nEND OF YOUR TURN !");
             //System.out.println("YOU CURRENTLY HAVE [ " + client.getMiniModel().getMyGameField().getPlayerPoints() + " ] POINTS !");
             client.manageGame(false);
         }

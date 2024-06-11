@@ -6,6 +6,7 @@ import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.EndGame;
@@ -295,6 +296,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         String t2 = index_to_token.get(id2);
         controller.insertMessageinChat(chatmanager.getChatIndex(id1,id2),message);
         updatePrivateChats(t1, t2, chatmanager.getChatIndex(id1,id2), message);
+        token_manager.getVal(t2).printString( "                                 YOU RECEIVED A MESSAGE FROM [ " +  token_to_player.get(t1).getName() + " ]");
     }
 
     public synchronized void chattingGlobal(ChatMessage message) throws IOException {
@@ -305,6 +307,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     private void updatePublicChats(ChatMessage message) throws IOException {
         for (String t : token_to_player.keySet()){
                 token_manager.getTokens().get(t).addChat(6, message);
+                if( !message.player.getName().equals(token_to_player.get(t).getName()) ) token_manager.getVal(t).printString( "                                 YOU RECEIVED A MESSAGE IN GLOBAL CHAT");
         }
     }
 
@@ -325,6 +328,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     private void setAllStates() throws IOException, InterruptedException {
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
+                if( token_to_player.get(t).getPlayerState().equals(PlayerState.PLACE_CARD) ) token_manager.getVal(t).printString(" [ IT'S YOUR TURN TO PLACE A CARD ]");
                 token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),
                                                         controller.getGame().getResources_deck().cards.getFirst() ,
                                                          controller.getGame().getGold_deck().cards.getFirst());
