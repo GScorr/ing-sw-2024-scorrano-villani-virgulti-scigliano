@@ -312,6 +312,7 @@ public class GameController2 extends GenericSceneController {
             just_pressed = false;
             return;
         }
+        removeAddedImages();
         if(!card_1_flip){
             handCard1.setImage(card_1_back);
             handCard1.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
@@ -332,6 +333,7 @@ public class GameController2 extends GenericSceneController {
             just_pressed = false;
             return;
         }
+        removeAddedImages();
         if(!card_2_flip){
             handCard2.setImage(card_2_back);
             handCard2.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
@@ -348,6 +350,7 @@ public class GameController2 extends GenericSceneController {
             just_pressed = false;
             return;
         }
+        removeAddedImages();
         if(!card_3_flip){
             handCard3.setImage(card_3_back);
             handCard3.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
