@@ -4,8 +4,19 @@ import java.util.Map;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.Player.Player;
 
-
+/**
+ * Represents the game board for placing worker pieces.
+ *
+ * This class manages the placement of worker pieces for four players.
+ * It keeps track of:
+ *  - Player objects and their assigned worker colors
+ *  - Mapping between a color and its current position on the board (0-based index)
+ *  - Mapping between a player and their assigned worker color
+ *  - An array representing the initial worker placement order (clockwise)
+ *
+ */
 public class PieceField {
+
     Player player1,player2,player3,player4;
     Map<Integer,ColorsEnum[]> get_colors_at_position;
     Map<ColorsEnum,Integer> get_position_of_color;

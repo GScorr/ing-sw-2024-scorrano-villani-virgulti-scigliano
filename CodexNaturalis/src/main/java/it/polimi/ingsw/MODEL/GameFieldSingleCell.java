@@ -1,28 +1,27 @@
 package it.polimi.ingsw.MODEL;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Card.ResourceCard;
-import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
-import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Davide
-// Class for the single cell present in the matrix of GameField
+/*
+    todo
+        togliere commenti per la gui
+        e eliminare metodi
+ */
+
+/**
+ * This class manage the single cell of the game field
+ */
 public class GameFieldSingleCell implements Serializable {
-    /*
-    provo a mettere la carta trasparente tc e a considerarla sempre come carta_down,
-    inizio carta trasparente
+
+    /**
+     * Variable used to indicate if the single cell of the game field is filled with a card
      */
- /*   private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    private final PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
-    //fine carta trasparente
-*/
     private boolean filled;
 
     private int order_above = 0;
@@ -33,17 +32,28 @@ public class GameFieldSingleCell implements Serializable {
     private List<AnglesEnum> values = new ArrayList<>(); //probably useless, but I'm waiting for the Gui_Initialization
     private List<EdgeEnum> edges = new ArrayList<>(); //probably useless, but I'm waiting for the Gui_Initialization
 
-//card_down means the angles that the card will cover -mirko-
+
     public GameFieldSingleCell(boolean filled, PlayCard card, AnglesEnum value, PlayCard card_down) {
         this.filled = filled;
         this.card = card;
         this.value = value;
         this.card_down = card_down;
     }
+
+    /**
+     * This method check if the single cell is empty
+     *
+     * @return return true if is empty and false if not
+     */
     public boolean isEmpty() {
         return !filled;
     }
 
+    /**
+     * This method check if the single cell is filled with a card
+     *
+     * @return return true if the card is on the cell and false if not
+     */
     public boolean isFilled() { //ritorna 1 se c'è la carta metodo aggiunto -mirko-
         return filled;
     }
@@ -51,43 +61,44 @@ public class GameFieldSingleCell implements Serializable {
     public void setFilled(boolean filled) {
         this.filled = filled;
     }
+
     public PlayCard getCard() {
-        if(!isFilled() && getValue().equals(AnglesEnum.EMPTY)){ //check se ho tc come carta up
-            //System.out.println("carta trasparente nel getCard");
-            return card; //non sono certo che sia da fare così
-            //ritorno di nuovo la stessa tc in modo che diventi la card_down
+        if(!isFilled() && getValue().equals(AnglesEnum.EMPTY)){
+            return card;
         }
-        //se è filled ritorno la carta che è adesso in up per settarla come down
         else if ( filled ) return card;
-        else { //non dovrei entrare mai in questo ramo salvo errori particolari che analizzerò quando testo questa classe
-        System.out.println("ERROR: THERE IS NO CARD HERE pos " + value); //value = valore dell'angolo nella cella
-        return null;}
+        else {
+            return null;
+        }
     }
+
     public void setCard(PlayCard card) {
         this.card = card;
     }
+
     public AnglesEnum getValue() {
         return value;
     }
+
     public void setValue(AnglesEnum value) {
         this.value = value;
     }
 
-    public PlayCard getCardDown() { //filled=0 angleseenum.empty
+    public PlayCard getCardDown() {
         if(!isFilled() && getValue().equals(AnglesEnum.EMPTY)){
-            //System.out.println("carta trasparente");
-            return card_down; //non sono certo che sia da fare così
+            return card_down;
         }
-        else{ //credo non sia nemmeno più necessario se inizializzo tutte le celle a tc
+        else{
             if ( !isEmpty() ) return card_down;
-            System.out.println("ERROR: THERE IS NO CARD HERE");
             return null;
         }
 
     }
+
     public void setCardDown(PlayCard card) {
         this.card_down = card;
     }
+
     public String getShort_value(){
         switch(value){
             case ANIMAL:
@@ -112,13 +123,17 @@ public class GameFieldSingleCell implements Serializable {
         return " ";
     }
 
+    /* da eliminare
     public List<EdgeEnum> getEdges() {
         return edges;
     }
-    //next methods are probably useless, but I'm waiting for the Gui_Initialization
+
+     */
+
     public void setValues(AnglesEnum value, int index) {
         values.add(index,value);
     }
+
     public void setEdges(EdgeEnum value, int index) {
         edges.add(index,value);
     }
@@ -138,4 +153,5 @@ public class GameFieldSingleCell implements Serializable {
     public void setOrder_below(int order_below) {
         this.order_below = order_below;
     }
+
 }

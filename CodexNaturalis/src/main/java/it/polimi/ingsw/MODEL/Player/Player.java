@@ -20,7 +20,7 @@ import java.util.List;
 
 
 /**
- *
+ * Manages player state, cards, points, and game interaction. Implements PlayerObserver. Serializable.
  */
 public class Player implements PlayerObserver, Serializable {
     private String name;
@@ -71,11 +71,6 @@ public class Player implements PlayerObserver, Serializable {
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
     private boolean firstPlaced = false;
-
-    /*
-    private int fake_state= 0;
-
-     */
 
     public boolean isFirstPlaced() {
         return firstPlaced;
@@ -169,12 +164,6 @@ public class Player implements PlayerObserver, Serializable {
     public void setPlayer_state( PState state){
         this.actual_state=state;
     }
-    /*
-    public void setPlayerEndGame(){
-        this.actual_state = end_game;
-    }
-
-     */
     public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
         this.cards_in_hand = cards_in_hand;
     }
@@ -184,33 +173,35 @@ public class Player implements PlayerObserver, Serializable {
     public void setStartingCard(PlayCard starting_card) {
         this.starting_card = starting_card;
     }
+    /* da eliminare
     public void setGoal_card(Goal goal_card) {
         this.goal_card = goal_card;
     }
+
+     */
     public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
         this.resources_deck = resources_deck;
         this.gold_deck = gold_deck;
         this.cards_in_center = cards_in_center;
     }
 
-    /*
-    * STATE MACHINE
-    * Costructor iniziatialized all the player to NOT_INITIALIZED
-    * Il model del game riesce a cambiare lo stato del player grazie all'PlayerObserver
-    */
+    /**
+     * Updates the player's state to the next appropriate state.
+     *
+     */
     public void update(){
         InitialNextStatePlayer();
     }
 
-    // NOT INITIALIZED => il player entra nella partita e deve attendere che tutti i player entrino e il gioco effettivamente inizi
-    // BEGIN => la classe GAME distribuisce le carte ai Player (e le carte sul tavolo). Sono attivi tutti i metodi di setting delle carte iniziali
-    // CHOOSE_GOAL => scelta dell'obbiettivo
-    // CHOOSE_SIDE_FIRST_CARD => piazza la prima carta
-    // Iniziano i turni di gioco per tutti i player, attenzione a quale player è il primo
-
-    //questi cambiamenti vengono chiamati su tutti i player, perchè contemporaneamente devono eseguire i comandi
-    // Es: tutti  i player devono scegliere "contemporaneamente" (sullo stesso stato di Game)  il loro obbiettivo prima di proseguire il gioco
-    // tutti i  plater devono piazzare la loro starting_car prima di proseguire il gioco con il prossimo stato
+    /**
+     * Initializes the player's state to `NOT_INITIALIZED`.
+     *
+     * NOT INITIALIZED => the player enters the game and must wait for all players to join and the game to actually start
+     * BEGIN => the GAME class distributes the cards to the Players (and the cards on the table). All methods for setting the initial cards are active
+     * CHOOSE_GOAL => choose the objective
+     * CHOOSE_SIDE_FIRST_CARD => place the first card
+     *
+     */
     public void InitialNextStatePlayer(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
@@ -230,13 +221,17 @@ public class Player implements PlayerObserver, Serializable {
                     setPlayer_state(wait_turn);
                 }
                 return;
-
         }
+
     }
 
-    //questi cambiamenti vengono fatti quando:
-    // Il player ha giocato la carta e deve passare da uno stato di
-    // La funzione deve essere chiamata su un singolo player perchè se ci son 3 giocatori, questa dovrà essere chiamata solo su 2, quello che passa da attesa a gioco e quello che passa da gioco a attesa
+    /**
+     * Advances the player's state to the next appropriate state based on their current state.
+     *
+     * This method is called after the player has performed an action and needs to transition
+     * to the next state in the game sequence. It is only called on the player who has
+     * just completed their action, while other players remain in their current state.
+     */
     public void nextStatePlayer(){
         switch(actual_state.getNameState()){
             case "WAIT_TURN" :
@@ -253,18 +248,37 @@ public class Player implements PlayerObserver, Serializable {
         }
     }
 
-
-
     public void setEndGame(){
         setPlayer_state(end_game);
     }
 
+    /**
+     * Places a card from the player's hand onto the game field.
+     *
+     * @param index the index of the card in the player's hand to place
+     * @param flipped whether to flip the card face up (true) or face down (false)
+     * @param x the x-coordinate of the target location on the game field
+     * @param y the y-coordinate of the target location on the game field
+     * @throws InvalidBoundException if the card index is out of bounds
+     * @throws IllegalStateException if the player is not in a state where placing cards is allowed
+     */
     public void placeCard(int index,boolean flipped, int x, int y){
         PlayCard playing_card =  cards_in_hand.get(index);
         playing_card.flipCard(flipped);
         game_field.insertCard(playing_card, x, y);
         removeHandCard(playing_card, index);
     }
+
+    /**
+     * Removes a card from the player's hand at the specified index.
+     *
+     * This method is likely called internally by the `placeCard` method
+     * after a card is successfully placed on the game field.
+     *
+     * @param card the card to remove from the player's hand
+     * @param index the index of the card to remove
+     * @throws InvalidBoundException if the card index is out of bounds
+     */
     private void removeHandCard(PlayCard card, int index){
         this.index_removed_card=index;
         tc.setBack_side_path(null);
@@ -272,6 +286,14 @@ public class Player implements PlayerObserver, Serializable {
         cards_in_hand.set(index, tc);
     }
 
+    /**
+     * Adds points to the player's score based on the played card.
+     *
+     * This method is called after a card is successfully placed on the game field.
+     * The amount of points awarded is determined by the played card's properties.
+     *
+     * @param point the value of the points awarded by the card
+     */
     public void addPoints(int point){
         this.player_points=this.player_points+point;
     }
@@ -280,7 +302,14 @@ public class Player implements PlayerObserver, Serializable {
         this.player_points = player_points;
     }
 
-    //questo metodo serve a peachFrom...  per inserire la carta pescata
+    /**
+     * Inserts a drawn card into the player's hand at a specific index.
+     *
+     * This method is called after a card is successfully drawn from the deck.
+     * The card is inserted at the position where a card was previously removed
+     *
+     * @param card the drawn card to insert into the player's hand
+     */
     private void insertCard(PlayCard card){
         this.side_card_in_hand.put(index_removed_card,false);
         this.cards_in_hand.set(this.index_removed_card, card);
@@ -291,18 +320,18 @@ public class Player implements PlayerObserver, Serializable {
         cards_in_hand.get(index).flipCard(flipp);
     }
 
-    //Una volta che il giocatore ha giocato una carta ne deve pescare una
-    //Il front end sceglierà quale metodo chiamare in base a dove uno clicca
+    /**
+     * draws method
+     */
     public void peachCardFromGoldDeck(){
        insertCard(this.gold_deck.drawCard());
     }
+
     public void peachFromResourcesDeck(){
         insertCard(this.resources_deck.drawCard());
     }
+
     public void peachFromCardsInCenter(int i){
-
-
-
         if(i==0){
             insertCard(cards_in_center.drawGoldCard(0));
         }else if(i==1){
@@ -314,16 +343,23 @@ public class Player implements PlayerObserver, Serializable {
         }
     }
 
-
-
-
-
+    /**
+     * Selects a goal card from the initial choices offered to the player.
+     *
+     * This method is only used during the initial phase of the game, where the player
+     * chooses one of the two goal cards.
+     *
+     * @param i the index of the chosen goal card within the initial options
+     */
     public void selectGoal(int i){
         this.goal_card = initial_goal_cards.get(i);
     }
 
-
-    //this metod select the first side of the starting_card and put it on the field
+    /**
+     * this metod select the side of the starting_card and put it on the field
+     *
+     * @param flipped false when the card is face up, true when it's face down
+     */
     public void selectStartingCard(boolean flipped){
             this.starting_card.flipCard(flipped);
             game_field.insertCard(this.starting_card, 22, 22);
@@ -342,4 +378,5 @@ public class Player implements PlayerObserver, Serializable {
     public void setNum_goal_achieve(int num_goal_achieve) {
         this.num_goal_achieve = num_goal_achieve;
     }
+
 }
