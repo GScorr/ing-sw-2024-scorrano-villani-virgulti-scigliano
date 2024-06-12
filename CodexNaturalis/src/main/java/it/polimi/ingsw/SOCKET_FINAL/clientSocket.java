@@ -343,6 +343,10 @@ public class clientSocket implements VirtualViewF, Serializable {
         server_proxy.chooseGoal(i);
     }
 
+    public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        System.exit(0);
+    }
+
     @Override
     public Goal getFirstGoalCard() throws IOException, InterruptedException {
         server_proxy.getListGoalCard();

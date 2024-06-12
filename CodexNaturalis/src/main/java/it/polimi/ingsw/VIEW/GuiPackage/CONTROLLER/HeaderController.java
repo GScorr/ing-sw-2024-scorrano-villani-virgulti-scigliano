@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -211,8 +212,8 @@ public class HeaderController extends GenericSceneController {
         scoreboardStage.setOnHidden(event -> scoreboardStage = null);
     }
 
-    public void handleDisconnect(ActionEvent actionEvent) {
-       // Platform.exit();
+    public void handleDisconnect(ActionEvent actionEvent) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException {
+        the_client.disconect();
     }
 
 

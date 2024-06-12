@@ -220,6 +220,10 @@ public class ClientHandler  implements VirtualViewF {
         }).start();
     }
 
+    public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+
+    }
+
     @Override
     public boolean findRmiController(int id, String player_name) throws IOException, ClassNotFoundException, InterruptedException {
         return false;
