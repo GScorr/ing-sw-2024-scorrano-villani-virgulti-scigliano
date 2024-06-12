@@ -145,7 +145,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     //DISCONNECTION
-    public void wakeUp(String name, VirtualViewF client) throws IOException {
+    public void wakeUp(String name, VirtualViewF client) throws IOException, InterruptedException {
         for( String s : token_to_player.keySet()){
             String token = s;
             if( token_to_player.get(token).getName().equals(name) )  {
@@ -156,6 +156,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 token_manager.getVal(token).insertId(id);
                 token_manager.getVal(token).insertNumPlayers(getNumPlayersMatch());
                 token_manager.getVal(token).insertPlayer(token_to_player.get(token));
+                setAllStates();
                 //token_manager.getVal(token).setNumToPlayer(index_to_name);
                 }
         }

@@ -22,7 +22,7 @@ public interface VirtualServerF extends Remote {
     public List<VirtualViewF> getListClient() throws IOException;
     public List<GameServer> getFreeGames() throws IOException;
     public List<SocketRmiControllerObject> getFreeGamesSocket() throws IOException;
-    public String checkName(String name, VirtualViewF client) throws IOException;
+    public String checkName(String name, VirtualViewF client) throws IOException, InterruptedException;
     public boolean findRmiController(Integer id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException;
   //  public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws IOException;
     public GameServer getRmiController(String token) throws IOException;

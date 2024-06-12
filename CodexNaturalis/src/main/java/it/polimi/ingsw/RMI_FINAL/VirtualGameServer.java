@@ -42,7 +42,7 @@ public interface VirtualGameServer extends Remote {
     public void showCardsInCenter(String token) throws IOException;
 
 
-    public void wakeUp(String s, VirtualViewF client)throws IOException;
+    public void wakeUp(String s, VirtualViewF client) throws IOException, InterruptedException;
 
     public void peachFromCardsInCenter(String token, int index) throws IOException, InterruptedException;
 
