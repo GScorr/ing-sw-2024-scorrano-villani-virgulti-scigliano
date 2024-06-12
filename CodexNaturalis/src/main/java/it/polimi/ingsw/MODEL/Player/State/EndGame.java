@@ -7,7 +7,13 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class rappresent the end of the game in wich no action are allowed
+ *
+ * the followers method are not implemented in the begin state because no action will be acepted in this state
+ */
 public class EndGame implements PState, Serializable {
+
     Player player;
 
     public EndGame(Player player) {

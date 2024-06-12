@@ -180,7 +180,7 @@ public class MiniModel implements Serializable {
     public void setMenu() {
         this.menu.set(0, ("\n0- SHOW FIELD"));
         this.menu.set(1, "1- SHOW CARDS IN HAND" );
-        this.menu.set(2, "2- OPEN CHAT(S)" + " - Unread messages (" + unread_total + ")");
+        this.menu.set(2, "2- OPEN CHAT(S)" );
         this.menu.set(3, "3- " + turndecision);
     }
 
@@ -374,7 +374,6 @@ public class MiniModel implements Serializable {
     }
     public void keepCheckChat(Chat current_chat){
         new Thread(() -> {
-            System.out.println("sono un nuovo thread");
             int in_size = current_chat.getChat().size();
             while (!stop_chat) {
                 try {
