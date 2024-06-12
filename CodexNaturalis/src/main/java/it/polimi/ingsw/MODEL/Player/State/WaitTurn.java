@@ -7,7 +7,11 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class rappresent the state in wich the player is waiting and no action are allowed
+ */
 public class WaitTurn implements PState, Serializable {
+
     Player player;
 
     public WaitTurn(Player player) {
@@ -28,6 +32,10 @@ public class WaitTurn implements PState, Serializable {
     public boolean setStartingCard(PlayCard starting_card) {
         return false;
     }
+
+    /**
+     * the followers method are not implemented in the begin state because no action will be acepted in this state
+     */
 
     @Override
     public boolean selectGoal(int i) {
@@ -59,6 +67,13 @@ public class WaitTurn implements PState, Serializable {
         return false;
     }
 
+    /**
+     * Select the side of the card.
+     *
+     * @param index the index of the card to place in player's hand.
+     * @param flip whether to flip the card (true) or keep it face down (false)
+     * @return always returns true after calling the player object's method
+     */
     public boolean selectSideCard(int index, boolean flip){
         player.selectSideCard(index,flip);
         return true;

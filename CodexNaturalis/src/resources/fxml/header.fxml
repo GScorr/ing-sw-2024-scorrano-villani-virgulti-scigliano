@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.HeaderController">
+
+        <MenuBar>
+            <Menu text="Disconnected">
+                <MenuItem text="Exit from the game" />
+            </Menu>
+            <Menu text="View GAME FIELDS">
+                <MenuItem text="Settings" />
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="AH FIGLIO DI PUTTANA VOLEVI UN AIUTO" />
+            </Menu>
+            <Menu fx:id="chatsMenu" text="Chats">
+            </Menu>
+            <Menu text="Scoreboard">
+                <MenuItem fx:id="scoreboardView" text="View" onAction="#showScoreboard" />
+            </Menu>
+        </MenuBar>
+
+</AnchorPane>

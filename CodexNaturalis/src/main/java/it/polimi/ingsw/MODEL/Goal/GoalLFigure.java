@@ -7,8 +7,28 @@ import it.polimi.ingsw.MODEL.GameField;
 
 import java.io.Serializable;
 
+/*
+    todo
+        capire cosa fare dei casi commentati
+        come commentare la classe
+        toglierei i commenti di stampa
+ */
+
+
+/**
+ * find the
+ */
 public class GoalLFigure implements GoalStrategy, Serializable {
+
     int counter;
+
+    /**
+     *
+     * @param field the player's game field
+     * @param points the base point value for each resource in the minimum set
+     * @param resource
+     * @return the total number of points earned based on the minimum resource count
+     */
     public int totalPoints(GameField field, int points, AnglesEnum resource) {
         //System.out.println("sono nella classe");
         switch (resource) {
@@ -153,4 +173,5 @@ public class GoalLFigure implements GoalStrategy, Serializable {
         }
         return points*counter;
     }
+
 }

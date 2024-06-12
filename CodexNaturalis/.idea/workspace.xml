@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="aggiornamento">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ColorCoordinatesHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/header.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/header.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,12 +45,14 @@
     &quot;assignee&quot;: &quot;Mirko0109&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git",
-    "accountId": "995fa9e0-3d2d-4d41-9be2-4734f4dc124c"
-  }
-}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="43c6ca95-6b46-4086-9df0-361c0c21238c" />
+        <option name="url" value="https://github.com/GScorr/ing-sw-2024-scorrano-villani-virgulti-scigliano.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -159,11 +164,11 @@
       <recent name="it.polimi.ingsw.MODEL" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER" />
       <recent name="it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess" />
       <recent name="it.polimi.ingsw.SOCKET_FINAL.Message" />
       <recent name="it.polimi.ingsw.RMI_FINAL.MESSAGES" />
       <recent name="it.polimi.ingsw.SOCKET_FINAL" />
-      <recent name="it.polimi.ingsw.MODEL.Game" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Common_Client">
@@ -279,8 +284,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -314,31 +318,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-      <workItem from="1717960174270" duration="342000" />
-    </task>
-    <task id="LOCAL-00128" summary="aggiornamento funzioni disconnessioni">
-      <option name="closed" value="true" />
-      <created>1716052697431</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1716052697431</updated>
-    </task>
-    <task id="LOCAL-00129" summary="aggiornamento funzioni disconnessioni">
-      <option name="closed" value="true" />
-      <created>1716052778765</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1716052778765</updated>
-    </task>
-    <task id="LOCAL-00130" summary="aggiornamento funzioni disconnessioni">
-      <option name="closed" value="true" />
-      <created>1716058670113</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1716058670113</updated>
     </task>
     <task id="LOCAL-00131" summary="aggiornamento funzioni disconnessioni">
       <option name="closed" value="true" />
@@ -700,15 +679,39 @@
       <option name="project" value="LOCAL" />
       <updated>1717930063282</updated>
     </task>
-    <task id="LOCAL-00176" summary="revisione commenti GameController">
+    <task id="LOCAL-00176" summary="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti">
       <option name="closed" value="true" />
-      <created>1717959359795</created>
+      <created>1718033176347</created>
       <option name="number" value="00176" />
       <option name="presentableId" value="LOCAL-00176" />
       <option name="project" value="LOCAL" />
-      <updated>1717959359795</updated>
+      <updated>1718033176347</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti">
+      <option name="closed" value="true" />
+      <created>1718033354308</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1718033354308</updated>
+    </task>
+    <task id="LOCAL-00178" summary=" f">
+      <option name="closed" value="true" />
+      <created>1718049644296</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1718049644297</updated>
+    </task>
+    <task id="LOCAL-00179" summary="fine chat">
+      <option name="closed" value="true" />
+      <created>1718114541355</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1718114541355</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -743,8 +746,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="non funzionerà mai" />
-    <MESSAGE value="cose per fra" />
     <MESSAGE value="Draw from Cards in center works" />
     <MESSAGE value="Il campo viene preso solo di un player" />
     <MESSAGE value="Non so perchè il menu di merda e il field non si aggiornano correttamente" />
@@ -767,8 +768,10 @@
     <MESSAGE value="aggiornamento fra mi ha hypato" />
     <MESSAGE value="piccolo change per carta trasparente" />
     <MESSAGE value="aggiornamento" />
-    <MESSAGE value="revisione commenti GameController" />
-    <option name="LAST_COMMIT_MESSAGE" value="revisione commenti GameController" />
+    <MESSAGE value="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti" />
+    <MESSAGE value=" f" />
+    <MESSAGE value="fine chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="fine chat" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

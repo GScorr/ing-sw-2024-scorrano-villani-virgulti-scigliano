@@ -1,5 +1,4 @@
 package it.polimi.ingsw.MODEL.Player;
-import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.Card.StartingCard;
@@ -10,7 +9,6 @@ import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.GameFieldSingleCell;
 import it.polimi.ingsw.MODEL.Goal.Goal;
@@ -20,26 +18,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-/*
-@Francesco Virgulti 16/03
-@Mirko 19/03
-@Francesco 19/03
-* TODO:
-    - Spiega cosa hai fatto con gli stati del Player e perchè sono utili{
-        I metodi che non influenzano lo stato devono essere chiamata dallo PState actual_state
-        Gli stati di Player influiscono sulla View => ogni volta che verrà cambiato lo stato del Player verrà notificata questa cosa alla view che cambierà
-        Per questo è importante chiamare i metodi di Player direttamente da Game => non cambia solo lo stato del player attuale ma anche degli altri
-        }
-*   -*/
 
-
-
-/* (concetto spiegato  nella classe GAME
-* PLAYER_OBSERVER:
-* PLAYER_SUBJECT
-* */
+/**
+ *
+ */
 public class Player implements PlayerObserver, Serializable {
     private String name;
+
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
@@ -58,13 +43,14 @@ public class Player implements PlayerObserver, Serializable {
 
     public HashMap<Integer,Boolean> side_card_in_hand  = new HashMap<>();
 
-    /*
-    tc -> transparent card, used when a card is removed from cards_in_hands to set the value
+
+
+    /**
+     * tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
     private final Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
     private final Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
-    //rendi questo private, mi serviva per i test renderlo pubblico
-    public PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
+    private PlayCard tc = new ResourceCard(tc_front_side, tc_back_side,false, 0);
 
     private final ColorsEnum color;
     private List<PlayCard> cards_in_hand;
@@ -79,13 +65,17 @@ public class Player implements PlayerObserver, Serializable {
 
     private boolean isDisconnected;
 
-
-    //Questi mazzi servono per pescare
+    /**
+     * This deck are use to draw
+     */
     private CenterCards cards_in_center;
     private Deck gold_deck, resources_deck;
     private boolean firstPlaced = false;
 
+    /*
     private int fake_state= 0;
+
+     */
 
     public boolean isFirstPlaced() {
         return firstPlaced;
@@ -117,6 +107,9 @@ public class Player implements PlayerObserver, Serializable {
         return name;
     }
 
+    /**
+     * create the player field
+     */
     private void createField(){
         Side tc_front_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
         Side tc_back_side = new Side(AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, AnglesEnum.EMPTY, CentralEnum.NONE, CentralEnum.NONE, CentralEnum.NONE);
@@ -128,13 +121,13 @@ public class Player implements PlayerObserver, Serializable {
                 array_single_cell[i][j] = tmp;
             }
         }
-
         this.game_field = new GameField(array_single_cell, this);
-
     }
-    /*
-    getter:
+
+    /**
+     * Getter method
      */
+
     public boolean getIsFirst() {
         return isFirst;
     }
@@ -150,55 +143,50 @@ public class Player implements PlayerObserver, Serializable {
     public List<PlayCard> getCardsInHand() {
         return cards_in_hand;
     }
-
     public PlayCard getStartingCard() {
         return starting_card;
     }
-
     public Goal getGoalCard() {
         return goal_card;
     }
-
     public List<Goal> getInitial_goal_cards() {
         return initial_goal_cards;
     }
-
     public int getPlayerPoints() {
         return player_points;
     }
-
     public Deck getGold_deck() {
         return gold_deck;
     }
-
     public Deck getResources_deck() {
         return resources_deck;
     }
 
-    /*
-                    setter:
-                     */
+    /**
+     * Setter method
+     */
+
     public void setPlayer_state( PState state){
         this.actual_state=state;
     }
+    /*
     public void setPlayerEndGame(){
         this.actual_state = end_game;
     }
+
+     */
     public void setInitialCardsInHand(List<PlayCard> cards_in_hand){
         this.cards_in_hand = cards_in_hand;
     }
     public void setInitialGoalCards(List<Goal> initial_goal_cards){
         this.initial_goal_cards = initial_goal_cards;
     }
-
     public void setStartingCard(PlayCard starting_card) {
         this.starting_card = starting_card;
     }
-
     public void setGoal_card(Goal goal_card) {
         this.goal_card = goal_card;
     }
-
     public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
         this.resources_deck = resources_deck;
         this.gold_deck = gold_deck;

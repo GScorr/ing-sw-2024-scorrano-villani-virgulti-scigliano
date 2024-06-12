@@ -99,6 +99,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
         startCheckingMessages();
     }
+    //a
 
 
     public void manageGame(boolean endgame) throws IOException {
@@ -377,6 +378,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             }
         }
     }
+
+
+
     //MAIN
     public static void main(String[] args) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, 1);

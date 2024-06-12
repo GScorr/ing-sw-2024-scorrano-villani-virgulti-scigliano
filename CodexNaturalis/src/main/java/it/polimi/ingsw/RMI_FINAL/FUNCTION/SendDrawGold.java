@@ -39,6 +39,8 @@ public class SendDrawGold implements SendFunction{
                     e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
         return message;
     }

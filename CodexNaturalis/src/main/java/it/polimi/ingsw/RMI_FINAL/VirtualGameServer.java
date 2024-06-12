@@ -34,9 +34,9 @@ public interface VirtualGameServer extends Remote {
 
     public void insertCard(String token, int index, int x, int y, boolean flipped) throws IOException, ControllerException;
 
-    public void peachFromGoldDeck(String token) throws IOException;
+    public void peachFromGoldDeck(String token) throws IOException, InterruptedException;
 
-    public void peachFromResourceDeck(String token) throws IOException;
+    public void peachFromResourceDeck(String token) throws IOException, InterruptedException;
 
 
     public void showCardsInCenter(String token) throws IOException;
@@ -44,7 +44,7 @@ public interface VirtualGameServer extends Remote {
 
     public void wakeUp(String s, VirtualViewF client)throws IOException;
 
-    public void peachFromCardsInCenter(String token, int index) throws IOException;
+    public void peachFromCardsInCenter(String token, int index) throws IOException, InterruptedException;
 
     public void getPoints(String token) throws IOException;
 

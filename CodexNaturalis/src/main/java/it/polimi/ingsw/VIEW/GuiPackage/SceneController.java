@@ -1,8 +1,6 @@
 package it.polimi.ingsw.VIEW.GuiPackage;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.AlertSceneController;
-import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GenericSceneController;
-import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.MessageSceneController;
+import it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.*;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,6 +20,9 @@ public class SceneController {
     private  Stage stage;
     private  GenericSceneController activeController;
     private VirtualViewF client;
+
+    private HeaderController header_controller;
+
 
     public  void setStage(Stage stage) {
         this.stage = stage;
@@ -136,6 +137,35 @@ public class SceneController {
         stage.showAndWait();
     }
 
+    public void showChat(String title, int idx, VirtualViewF client, int decision, HeaderController header) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chat_scene.fxml"));
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ChatController chatController = loader.getController();
+        chatController.setTitle(title);
+        chatController.setHeader(header);
+
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+
+        chatController.setStage(stage);
+        chatController.setIdx(idx);
+        chatController.setClient(client);
+        chatController.setController(this);
+        chatController.startInitialize();
+        chatController.setDecision(decision);
+
+        stage.show();
+    }
+
     public void showMessage(String title, String message) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/message_scene.fxml"));
         Parent parent;
@@ -159,9 +189,16 @@ public class SceneController {
         messageSceneController.setController(this);
 
 
-        stage.showAndWait();
+        stage.show();
     }
 
+    public void setHeader_controller(HeaderController header_controller) {
+        this.header_controller = header_controller;
+    }
+
+    public HeaderController getHeader_controller() {
+        return header_controller;
+    }
 
     public void setClient(VirtualViewF client) {
         this.client = client;

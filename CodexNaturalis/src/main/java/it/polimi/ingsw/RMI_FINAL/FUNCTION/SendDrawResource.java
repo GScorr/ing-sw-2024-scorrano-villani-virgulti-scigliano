@@ -1,6 +1,7 @@
 package it.polimi.ingsw.RMI_FINAL.FUNCTION;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.Game.Game;
 import it.polimi.ingsw.RMI_FINAL.GameServer;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
@@ -24,7 +25,8 @@ public class SendDrawResource implements SendFunction{
         ResponseMessage message;
         try{
             server.peachFromResourceDeck(token);
-            message = new UpdateMessage("Card inserted!");
+            message = new UpdateMessage(server.token_to_player.get(token).getName() + " ENDED HIS TURN !");
+
             if(server.token_manager.getTokens().containsKey(token)) server.token_manager.getTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
             else if(server.token_manager.getSocketTokens().containsKey(token)) server.token_manager.getSocketTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
             for (String t : server.token_to_player.keySet()){
@@ -36,6 +38,8 @@ public class SendDrawResource implements SendFunction{
             message = new ErrorMessage(server.token_to_player.get(token).getName() +
                     e.getMessage());
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         return message;
