@@ -30,6 +30,13 @@ import java.util.*;
 
 public class GameController2 extends GenericSceneController {
 
+    public Label num_animal;
+    public Label num_mushroom;
+    public Label num_insect;
+    public Label num_plant;
+    public Label num_paper;
+    public Label num_piuma;
+    public Label num_calamaio;
     @FXML
     private Button openChatButton;
 
@@ -216,6 +223,13 @@ public class GameController2 extends GenericSceneController {
         updateCardsInHand();
         updateDecks();
         updateCardsCenter();
+         this.num_animal.setText( String.valueOf( client.getMiniModel().getMyGameField().getNumOfAnimal()));
+         this.num_insect.setText(String.valueOf( client.getMiniModel().getMyGameField().getNumOfInsect()));
+         this.num_mushroom.setText(String.valueOf( client.getMiniModel().getMyGameField().getNumOfMushroom()));
+         this.num_plant.setText(String.valueOf( client.getMiniModel().getMyGameField().getNumOfPlant()));
+         this.num_piuma.setText(String.valueOf( client.getMiniModel().getMyGameField().getNumOfFeather()));
+         this.num_paper.setText(String.valueOf( client.getMiniModel().getMyGameField().getNumOfPaper()));
+         this.num_calamaio.setText(String.valueOf( client.getMiniModel().getMyGameField().getNumOfPen()));
 
         token_client = client.getToken();
 /*
