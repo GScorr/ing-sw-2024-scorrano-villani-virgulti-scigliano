@@ -273,6 +273,14 @@ public class GameController implements GameSubject, Serializable {
             isUniqueName(nome);
         }*/
         Player player = new Player(ColorsEnum.GREEN, nome, isFirst);
+        if(player_list.size()==0){
+        player = new Player(ColorsEnum.GREEN, nome, isFirst);}
+        if(player_list.size()==1){
+             player = new Player(ColorsEnum.RED, nome, isFirst);}
+        if(player_list.size()==2){
+             player = new Player(ColorsEnum.YELLOW, nome, isFirst);}
+        if(player_list.size()==3){
+             player = new Player(ColorsEnum.BLU, nome, isFirst);}
         if(game.getNum_player() == game.getMax_num_player()){
             throw new ControllerException(3,"Maximum number of players reached");
         }

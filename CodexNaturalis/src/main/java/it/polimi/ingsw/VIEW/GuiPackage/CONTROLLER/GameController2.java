@@ -1,6 +1,7 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
+import it.polimi.ingsw.CONTROLLER.GameFieldController;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
@@ -8,10 +9,13 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
+import it.polimi.ingsw.VIEW.GuiPackage.ClickableCardImageView;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -53,6 +57,7 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private VBox chatContainer;
 
+    private ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
     @FXML
     private ListView<String> chatMessages;
 
@@ -95,6 +100,8 @@ public class GameController2 extends GenericSceneController {
 
     @FXML
     private AnchorPane HeaderInclude;
+
+    private List<Node> addedImageViews = new ArrayList<>();
 
     // Aggiunge un nuovo chat item al menu "Chats"
     /*public void addChatItem(String chatName, int chatId) {
@@ -272,30 +279,68 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
+    public void initialize() {
+        // Inizializzazione degli altri componenti...
+
+        // Aggiungi un gestore eventi al GridPane per deselezionare la carta quando si preme su qualsiasi parte del campo di gioco
+        gameGrid.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            // Verifica se la carta è selezionata e deselezionala se necessario
+            deselectCard();
+        });
+        deckBox.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            // Verifica se la carta è selezionata e deselezionala se necessario
+            deselectCard();
+        });
+        handBox.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            // Verifica se il clic non è avvenuto direttamente su una delle carte nella handBox
+            Node clickedNode = event.getPickResult().getIntersectedNode();
+            if (!(clickedNode instanceof ImageView && handBox.getChildren().contains(clickedNode))) {
+                // Se il clic non è su una delle immagini delle carte, deseleziona la carta
+                deselectCard();
+            }
+        });
+    }
+    private void deselectCard() {
+        handCard1.setStyle("-fx-border-width: 0;");
+        handCard2.setStyle("-fx-border-width: 0;");
+        handCard3.setStyle("-fx-border-width: 0;");
+        removeAddedImages();
+    }
+
     public void handleCard1Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
             return;
         }
+        removeAddedImages();
         if(!card_1_flip){
             handCard1.setImage(card_1_back);
+            handCard1.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
+
             card_1_flip = true;
         }else{
             handCard1.setImage(card_1_front);
+            handCard1.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
+
             card_1_flip = false;
         }
     }
+
+
 
     public void handleCard2Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
             return;
         }
+        removeAddedImages();
         if(!card_2_flip){
             handCard2.setImage(card_2_back);
+            handCard2.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
             card_2_flip = true;
         }else{
             handCard2.setImage(card_2_front);
+            handCard2.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
             card_2_flip = false;
         }
     }
@@ -305,11 +350,14 @@ public class GameController2 extends GenericSceneController {
             just_pressed = false;
             return;
         }
+        removeAddedImages();
         if(!card_3_flip){
             handCard3.setImage(card_3_back);
+            handCard3.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
             card_3_flip = true;
         }else{
             handCard3.setImage(card_3_front);
+            handCard3.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
             card_3_flip = false;
         }
     }
@@ -385,10 +433,30 @@ public class GameController2 extends GenericSceneController {
         // Se il clic è stato mantenuto, esegui l'azione desiderata
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+                removeAddedImages();
+                for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
+                    for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
+                        if (helper.checkPlacing(card_1_flip, client.getMiniModel().getCards_in_hand().get(0), client.getMiniModel().getMyGameField(), i, j)) {
+                            addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "src/resources/Card/Bianco.png");
+                            System.out.println(i + " " + j);
+                        }
+
+                    }
+                }
+            }
+            else{
+                if(super.client.getMiniModel().getState().equals("DRAW_CARD")) {
+                    showError("DRAW A CARD !!! ");
+                }
+                else{
+                    showError("IS NOT YOUR TURN, WAIT !!! ");
+                }
+            }
+            /*if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 openPopup(1);
             }else{
                 showError("IS NOT YOUR TURN, WAIT !!! ");
-            }
+            }*/
         } else {
             // Altrimenti, esegui un'altra azione (se necessario)
         }
@@ -420,16 +488,37 @@ public class GameController2 extends GenericSceneController {
         // Se il clic è stato mantenuto, esegui l'azione desiderata
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+                removeAddedImages();
+                for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
+                    for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
+                        if (helper.checkPlacing(card_2_flip, client.getMiniModel().getCards_in_hand().get(1), client.getMiniModel().getMyGameField(), i, j)) {
+                            addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "src/resources/Card/Bianco.png");
+                            System.out.println(i + " " + j);
+                        }
+
+                    }
+                }
+            }
+            else{
+                if(super.client.getMiniModel().getState().equals("DRAW_CARD")) {
+                    showError("DRAW A CARD !!! ");
+                }
+                else{
+                    showError("IS NOT YOUR TURN, WAIT !!! ");
+                }
+            }
+            /*if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 openPopup(2);
             }else{
                 showError("IS NOT YOUR TURN, WAIT !!! ");
-            }
+            }*/
         } else {
             // Altrimenti, esegui un'altra azione (se necessario)
         }
 
         // Reimposta il flag per il prossimo utilizzo
         clickHeld = false;
+
     }
 
     public void handleCard3Pressed(MouseEvent mouseEvent) {
@@ -452,16 +541,36 @@ public class GameController2 extends GenericSceneController {
         // Se il clic è stato mantenuto, esegui l'azione desiderata
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+                removeAddedImages();
+                for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
+                    for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
+                        if (helper.checkPlacing(card_3_flip,client.getMiniModel().getCards_in_hand().get(2), client.getMiniModel().getMyGameField(), i, j)) {
+                            addClickableCardImageToGrid(3, i, j, client.getMiniModel().getCards_in_hand().get(2), "src/resources/Card/Bianco.png");
+                        }
+
+                    }
+                }
+            }
+            else{
+                if(super.client.getMiniModel().getState().equals("DRAW_CARD")) {
+                    showError("DRAW A CARD !!! ");
+                }
+                else{
+                    showError("IS NOT YOUR TURN, WAIT !!! ");
+                }
+            }
+            /*if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 openPopup(3);
             }else{
                 showError("IS NOT YOUR TURN, WAIT !!! ");
-            }
+            }*/
         } else {
             // Altrimenti, esegui un'altra azione (se necessario)
         }
 
         // Reimposta il flag per il prossimo utilizzo
         clickHeld = false;
+
     }
 
     // Metodo per mostrare un messaggio di errore
@@ -656,6 +765,79 @@ public class GameController2 extends GenericSceneController {
 
 
 
+    }
+
+    private void addClickableCardImageToGrid(int i, int row, int col, PlayCard card, String imagePath) {
+        File file = new File(imagePath);
+        Image image = new Image(file.toURI().toString());
+
+        ClickableCardImageView imageView = new ClickableCardImageView(image, card, row, col, i);
+        imageView.setFitWidth(49.65 * 2);
+        imageView.setFitHeight(33.1 * 2);
+
+        StackPane stackPane = new StackPane();
+        imageView.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;");
+        stackPane.getChildren().add(imageView);
+
+        gameGrid.add(stackPane, col, row, 2, 2); // Occupy 2 columns and 2 rows
+
+        // Aggiungi l'imageView alla lista delle immagini aggiunte
+        addedImageViews.add(stackPane);
+
+        // Aggiungi un evento di rilascio del mouse per gestire il clic
+        imageView.setOnMouseReleased(event -> {
+            try {
+                handleCardImageClick(imageView);
+            } catch (IOException | InterruptedException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Animazione di fading
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(1000), stackPane);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        fadeIn.setCycleCount(1);
+        fadeIn.play();
+    }
+
+
+    private void handleCardImageClick(ClickableCardImageView imageView) throws IOException, InterruptedException, ClassNotFoundException {
+        int row = imageView.getRow();
+        int col = imageView.getCol();
+        PlayCard card = imageView.getPlayCard();
+        int i = imageView.getI();
+
+        boolean flipped;
+        if(i == 1){
+            flipped = card_1_flip;
+        } else
+        if (i == 2 ) {
+            flipped = card_2_flip;
+        }else{
+            flipped = card_3_flip;
+        }
+
+        client.selectAndInsertCard(i,row,col,flipped);
+        showLoadingPopup();
+        client.getTerminal_interface().manageGame();
+        // Qui puoi gestire l'evento di clic sull'immagine, utilizzando le coordinate row e col
+        System.out.println("Clicked on image at row: " + row + ", col: " + col);
+        // Puoi anche accedere all'oggetto PlayCard associato all'immagine cliccata
+        System.out.println("Associated PlayCard: " + card);
+    }
+
+    private void removeAddedImages() {
+        for (Node node : addedImageViews) {
+            // Animazione di fading inversa prima di rimuovere l'immagine
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(500), node);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.setCycleCount(1);
+            fadeOut.setOnFinished(event -> gameGrid.getChildren().remove(node));
+            fadeOut.play();
+        }
+        addedImageViews.clear(); // Pulisci la lista
     }
 
 

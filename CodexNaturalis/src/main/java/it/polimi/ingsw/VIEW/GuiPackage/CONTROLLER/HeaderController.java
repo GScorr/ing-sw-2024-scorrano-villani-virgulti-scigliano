@@ -2,11 +2,13 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,6 +33,8 @@ public class HeaderController extends GenericSceneController {
     private VBox chatBox;
 
     private boolean chatOpen = false;
+
+    private Stage opponentFieldStage;
     @FXML
     private Menu chatsMenu;
     private ChatIndexManager chat_manager = new ChatIndexManager();
@@ -38,6 +42,8 @@ public class HeaderController extends GenericSceneController {
     GenericSceneController upper_controller ;
     SceneController scene_controller;
     ColorCoordinatesHelper helper;
+
+    private Stage scoreboardStage;
 
     public void setUpper_controller(GenericSceneController upper_controller) {
         this.upper_controller = upper_controller;
@@ -149,10 +155,18 @@ public class HeaderController extends GenericSceneController {
 
     @FXML
     private void showScoreboard() throws IOException {
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Scoreboard");
-        stage.setResizable(false);
+        // Check if the scoreboard popup is already open
+        if (scoreboardStage != null && scoreboardStage.isShowing()) {
+            return;
+        }
+
+        scoreboardStage = new Stage();
+        scoreboardStage.initModality(Modality.NONE); // Make the window non-blocking
+        scoreboardStage.setTitle("Scoreboard");
+        scoreboardStage.setResizable(false); // Make the window non-resizable
+
+        // Set the owner of the popup stage to the main stage
+        scoreboardStage.initOwner(scene_controller.getActiveScene().getWindow()); // Adjust according to how you access the main stage
 
         File file = new File("src/resources/imgMirk/scoreTable.png");
         Image image = new Image(file.toURI().toString());
@@ -162,18 +176,18 @@ public class HeaderController extends GenericSceneController {
         imageView.setFitHeight(630); // Max height
         imageView.setPreserveRatio(true);
 
-        // Define parameters for circles (example positions and colors)
-        List<CircleData> circles = Arrays.asList(
-                /*for(int i=0;i<client.getMiniModel().getNum_players();i++){
-                new CircleData(,,helper.fromEnumtoColor(client.getMiniModel().getGame_fields().get(i).getPlayer().getColor()));
-        }*/
-                new CircleData(80, 585, 10, Color.BLUE), // x, y, radius, color
-                new CircleData(160, 170, 10, Color.GREEN),
-                new CircleData(240, 305, 10, Color.YELLOW),
-        new CircleData(155, 585, 10, Color.BLACK), // x, y, radius, color
-                new CircleData(230, 585, 10, Color.CHOCOLATE),
-                new CircleData(210, 315, 10, Color.VIOLET)
-        );
+        ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
+        List<CircleData> circles = new ArrayList<>();
+        for (int i = 0; i < the_client.getMiniModel().getNum_players(); i++) {
+            GameField g = the_client.getMiniModel().getGame_fields().get(i);
+            System.out.println(helper.fromEnumtoColor(g.getPlayer().getColor()) + " " + helper.fromPointstoX(g.getPlayer(), g.getPlayer().getColor()) + " " + helper.fromPointstoY(g.getPlayer(), g.getPlayer().getColor()));
+            circles.add(new CircleData(
+                    helper.fromPointstoX(g.getPlayer(), g.getPlayer().getColor()),
+                    helper.fromPointstoY(g.getPlayer(), g.getPlayer().getColor()),
+                    10,
+                    helper.fromEnumtoColor(g.getPlayer().getColor())
+            ));
+        }
 
         Pane circlesPane = new Pane();
         for (CircleData data : circles) {
@@ -190,8 +204,15 @@ public class HeaderController extends GenericSceneController {
         vbox.setSpacing(10);
 
         Scene scene = new Scene(vbox, 315, 630); // Set the scene size to match the max dimensions of the image
-        stage.setScene(scene);
-        stage.show();
+        scoreboardStage.setScene(scene);
+        scoreboardStage.show();
+
+        // Set the event handler to nullify the stage reference when the popup is closed
+        scoreboardStage.setOnHidden(event -> scoreboardStage = null);
+    }
+
+    public void handleDisconnect(ActionEvent actionEvent) {
+       // Platform.exit();
     }
 
 
@@ -206,4 +227,172 @@ public class HeaderController extends GenericSceneController {
             this.color = color;
         }
     }
+
+    @FXML
+    private void handleViewOpponentFields() throws IOException {
+
+        if (opponentFieldStage != null && opponentFieldStage.isShowing()) {
+            return;
+        }
+
+        // Create a list of player descriptions from the map
+
+        List<String> playerDescriptions = the_client.getMiniModel().getNum_to_player().entrySet().stream()
+                .map(entry -> "Player " + entry.getKey() + " Name: " + entry.getValue())
+                .collect(Collectors.toList());
+
+        // Initialize the ChoiceDialog with the list of player descriptions
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(playerDescriptions.get(0), playerDescriptions);
+        dialog.setTitle("Visualizza campo da gioco avversari");
+        dialog.setHeaderText("Quale campo vuoi vedere?");
+        dialog.setContentText("Scegli il giocatore:");
+
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(description -> {
+            // Extract the player number from the selected description
+            int playerNumber = Integer.parseInt(description.split(" ")[1]);
+            // Load and display the selected player's field
+            try {
+                showOpponentField(playerNumber);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
+    @FXML
+    private void showOpponentField(int playerNumber) throws IOException {
+        // Check if the opponent field popup is already open
+
+
+        // Create a new stage for the pop-up
+        opponentFieldStage = new Stage();
+        opponentFieldStage.setTitle("Campo da gioco di Player " + playerNumber + " - " + the_client.getMiniModel().getNum_to_player().get(playerNumber));
+        opponentFieldStage.setResizable(false); // Make the window non-resizable
+
+        // Set the owner of the popup stage to the main stage
+        opponentFieldStage.initOwner(scene_controller.getActiveScene().getWindow()); // Adjust according to how you access the main stage
+
+        // Create a ScrollPane
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToHeight(false);
+        scrollPane.setFitToWidth(false);
+        scrollPane.setMaxWidth(1000.0);
+        scrollPane.setPannable(true);
+        scrollPane.setPrefHeight(450.0);
+
+        // Create the GridPane
+        GridPane gameGrid = new GridPane();
+        gameGrid.setHgap(20);
+        gameGrid.setPrefHeight(1500);
+        gameGrid.setPrefWidth(1500);
+        gameGrid.setVgap(5);
+
+        // Add column and row constraints
+        for (int i = 0; i < 45; i++) {
+            ColumnConstraints col = new ColumnConstraints(49.65);
+            gameGrid.getColumnConstraints().add(col);
+
+            RowConstraints row = new RowConstraints(33.1);
+            gameGrid.getRowConstraints().add(row);
+        }
+
+        // Populate the GridPane with game data
+        Set<Integer> visibleRows = new HashSet<>();
+        Set<Integer> visibleCols = new HashSet<>();
+
+        int count = 1;
+        int tmp = 0;
+        while (count <= the_client.getMiniModel().game_fields.get(playerNumber - 1).card_inserted) {
+            for (int i = 0; i < Constants.MATRIXDIM; i++) {
+                for (int j = 0; j < Constants.MATRIXDIM; j++) {
+                    if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
+                        tmp = count;
+                        count = 1500;
+                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
+                        } else {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                        }
+                        updateVisibleIndices(visibleRows, visibleCols, i, j);
+                    } else if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
+                        tmp = count;
+                        count = 1500;
+                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+                        } else {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
+                        }
+                        updateVisibleIndices(visibleRows, visibleCols, i, j);
+                    }
+                }
+            }
+            count = tmp;
+            count++;
+        }
+
+        adjustGridVisibility(gameGrid, visibleRows, visibleCols);
+
+        // Set the GridPane as the content of the ScrollPane
+        scrollPane.setContent(gameGrid);
+
+        // Set the scene for the new stage
+        Scene scene = new Scene(scrollPane);
+        opponentFieldStage.setScene(scene);
+
+        // Optionally, explicitly set the popup to be non-modal (if needed)
+        opponentFieldStage.initModality(Modality.NONE); // This line ensures the stage is non-modal
+
+        // Show the new stage without waiting
+        opponentFieldStage.show();
+
+        // Set the event handler to nullify the stage reference when the popup is closed
+        opponentFieldStage.setOnHidden(event -> opponentFieldStage = null);
+    }
+
+    private void addImageToGrid(GridPane grid, int row, int col, String imagePath) {
+        File file = new File(imagePath);
+        Image image = new Image(file.toURI().toString());
+
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(49.65 * 2);
+        imageView.setFitHeight(33.1 * 2);
+
+        StackPane stackPane = new StackPane();
+        imageView.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;");
+        stackPane.getChildren().add(imageView);
+        grid.add(stackPane, row, col);
+    }
+
+    private void updateVisibleIndices(Set<Integer> visibleRows, Set<Integer> visibleCols, int row, int col) {
+        for (int i = row - 1; i <= row + 2; i++) {
+            if (i >= 0 && i < Constants.MATRIXDIM) {
+                visibleRows.add(i);
+            }
+        }
+        for (int j = col - 1; j <= col + 2; j++) {
+            if (j >= 0 && j < Constants.MATRIXDIM) {
+                visibleCols.add(j);
+            }
+        }
+    }
+
+    private void adjustGridVisibility(GridPane grid, Set<Integer> visibleRows, Set<Integer> visibleCols) {
+        for (int i = 0; i < Constants.MATRIXDIM; i++) {
+            if (!visibleRows.contains(i)) {
+                grid.getRowConstraints().get(i).setMinHeight(0);
+                grid.getRowConstraints().get(i).setPrefHeight(0);
+                grid.getRowConstraints().get(i).setMaxHeight(0);
+            }
+        }
+        for (int j = 0; j < Constants.MATRIXDIM; j++) {
+            if (!visibleCols.contains(j)) {
+                grid.getColumnConstraints().get(j).setMinWidth(0);
+                grid.getColumnConstraints().get(j).setPrefWidth(0);
+                grid.getColumnConstraints().get(j).setMaxWidth(0);
+            }
+        }
+    }
 }
+

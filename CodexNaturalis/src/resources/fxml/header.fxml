@@ -9,11 +9,10 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.HeaderController">
 
         <MenuBar>
-            <Menu text="Disconnected">
-                <MenuItem text="Exit from the game" />
+            <Menu text="Disconnect" onAction="#handleDisconnect">
             </Menu>
             <Menu text="View GAME FIELDS">
-                <MenuItem text="Settings" />
+                <MenuItem text="View" onAction="#handleViewOpponentFields" />
             </Menu>
             <Menu text="Help">
                 <MenuItem text="AH FIGLIO DI PUTTANA VOLEVI UN AIUTO" />

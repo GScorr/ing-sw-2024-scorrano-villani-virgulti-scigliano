@@ -62,7 +62,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
     //GAME FLOW
 
-    public int checkName(String player_name) throws IOException, NotBoundException {
+    public int checkName(String player_name) throws IOException, NotBoundException, InterruptedException {
         int flag;
             String isnew = server.checkName(player_name,this);
         if(isnew.equals("true")) {

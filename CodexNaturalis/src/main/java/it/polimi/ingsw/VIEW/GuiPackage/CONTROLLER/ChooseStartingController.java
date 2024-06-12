@@ -5,10 +5,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -27,7 +30,24 @@ public class ChooseStartingController extends GenericSceneController {
 
     private Timeline bufferingTimeline;
 
+    @FXML
+    private AnchorPane HeaderInclude;
+
+
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
+
+        //header
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
+        Parent header = loader.load();
+        HeaderController headerController = loader.getController();
+        headerController.setThe_client(super.client);
+        System.out.println("--------------------" + scene_controller);
+        headerController.setScene(scene_controller);
+        // Aggiungi l'header alla posizione desiderata nel layout principale
+        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+        ((AnchorPane) HeaderInclude).getChildren().add(header);
+        headerController.startInitializeHeader();
+
         System.out.println(client.showStartingCardGUI().front_side_path);
         System.out.println(client.showStartingCardGUI().back_side_path);
         File file = new File(client.showStartingCardGUI().front_side_path);
@@ -36,6 +56,11 @@ public class ChooseStartingController extends GenericSceneController {
         file = new File(client.showStartingCardGUI().back_side_path);
         image = new Image(file.toURI().toString());
         card2.setImage(image);
+
+        if(super.client.isFirstPlaced()){
+            showBufferingLabel();
+            checkClientState();
+        }
     }
 
     @FXML
@@ -56,7 +81,9 @@ public class ChooseStartingController extends GenericSceneController {
 
     private void showBufferingLabel() {
         Platform.runLater(() -> {
-            bottomLabel.setText("Buffering... Please wait.");
+            card1.setDisable(true);
+            card2.setDisable(true);
+            bottomLabel.setText("Buffering... Please wait .");
 
             // Inizializza l'animazione di buffering dinamico
             bufferingTimeline = new Timeline(
@@ -71,6 +98,8 @@ public class ChooseStartingController extends GenericSceneController {
     }
 
     private void hideBufferingLabel() {
+        card1.setDisable(true);
+        card2.setDisable(true);
         Platform.runLater(() -> {
             // Stop the buffering animation
             if (bufferingTimeline != null) {

@@ -73,7 +73,7 @@ public class Common_Server {
         return free;
     }
 
-    public String checkName(String name, VirtualViewF client) throws IOException {
+    public String checkName(String name, VirtualViewF client) throws IOException, InterruptedException {
 
         for ( Integer i : rmi_controllers.keySet() )
         {

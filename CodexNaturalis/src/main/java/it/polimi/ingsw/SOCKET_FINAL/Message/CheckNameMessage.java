@@ -49,7 +49,7 @@ public class CheckNameMessage implements Message, Serializable {
 
     }
 
-    public String checkNameMessageAction() throws IOException {
+    public String checkNameMessageAction() throws IOException, InterruptedException {
         String isnew = common.checkName(nome,null);
         return isnew;
     }
