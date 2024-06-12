@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="commentato ClientProxy.java modifiche al Server.java e al ServerProxy.java palese ho scritto qualcosa non giusta" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="eliminazione di ClientProxy.java" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -313,14 +313,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00141" summary="agg">
-      <option name="closed" value="true" />
-      <created>1716300695716</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1716300695717</updated>
     </task>
     <task id="LOCAL-00142" summary="agg">
       <option name="closed" value="true" />
@@ -706,7 +698,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718227859206</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="eliminazione di ClientProxy.java">
+      <option name="closed" value="true" />
+      <created>1718228276123</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1718228276124</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -741,7 +741,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bug fixing tui, rmi client, game server" />
     <MESSAGE value="fix bugs disconnessione" />
     <MESSAGE value="prova" />
     <MESSAGE value="notreadmesaages" />
@@ -766,7 +765,8 @@
     <MESSAGE value="commenti fino a token manager" />
     <MESSAGE value="modifiche al client handler" />
     <MESSAGE value="commentato ClientProxy.java modifiche al Server.java e al ServerProxy.java palese ho scritto qualcosa non giusta" />
-    <option name="LAST_COMMIT_MESSAGE" value="commentato ClientProxy.java modifiche al Server.java e al ServerProxy.java palese ho scritto qualcosa non giusta" />
+    <MESSAGE value="eliminazione di ClientProxy.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="eliminazione di ClientProxy.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
