@@ -50,7 +50,8 @@ public class LoginController extends GenericSceneController {
             }
             else if(flag==2) {
                 client.getTerminal_interface().setNewClient(false);
-                controller.showAlert("Coglione", "Suca");
+                controller.showAlert("Coglione ti sei riconnesso", "Suca");
+                client.getTerminal_interface().gameAccess(name);
             }
             else{
                 client.getTerminal_interface().setNewClient(true);
