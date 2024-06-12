@@ -35,6 +35,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public GameController controller;
     public Queue<SendFunction> functQueue = new LinkedList<>();
     private final int port;
+    private boolean called = false;
     private int id = 0;
     public ChatIndexManager chatmanager = new ChatIndexManager();
     public Map<String,Integer> token_to_index = new HashMap<>();
@@ -221,13 +222,21 @@ public class GameServer implements VirtualGameServer, Serializable {
      * @param token The player's token.
      * @throws IOException If there is an IO error.
      */
-    public void getFinalStandings(String token) throws IOException {
-        int i = 1;
-        for(Player p : controller.getPlayer_list()){
-            token_manager.getTokens().get(token).printString(i + "- " + p.getName());
-            i++;
+    public synchronized void getFinalStandings(String token) throws IOException {
+
+        if( !called ){
+            called = true;
+
+            for( VirtualViewF vw : clientsRMI ){
+                int i = 1;
+                vw.printString("\n[END OF THE GAME]!\nFINAL SCORES:\n" );
+                    for(Player p : controller.getPlayer_list()){
+                        vw.printString(i + "- " + p.getName() );
+                        i++;
+                    }
+            }
+            endConnection();
         }
-        endConnection();
     }
 
     /**
@@ -574,7 +583,7 @@ public class GameServer implements VirtualGameServer, Serializable {
      *
      * @throws NoSuchObjectException
      */
-    public void endConnection() throws NoSuchObjectException {
+    public synchronized void endConnection() throws NoSuchObjectException {
             server.removeGameServer(this);
     }
 

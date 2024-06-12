@@ -109,11 +109,8 @@ public class Common_Server {
                 rmi_controllers.remove(i);
             }
         }
-        for( String tok : token_to_rmi.keySet() ) {
-            if( token_to_rmi.get(tok).equals(gs) ) {
-                token_to_rmi.remove(tok);
-            }
-        }
+
+        token_to_rmi.keySet().removeIf(tok -> token_to_rmi.get(tok).equals(gs));
     }
 
     public boolean findRmiController(Integer game_id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException {

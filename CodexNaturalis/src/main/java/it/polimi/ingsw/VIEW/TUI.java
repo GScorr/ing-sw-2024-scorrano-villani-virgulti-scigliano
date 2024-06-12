@@ -252,7 +252,6 @@ public class TUI implements Serializable, GraficInterterface {
             //System.out.println("YOU CURRENTLY HAVE [ " + client.getMiniModel().getMyGameField().getPlayerPoints() + " ] POINTS !");
             client.manageGame(false);
         }
-        System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         client.manageGame(true);
     }
 
