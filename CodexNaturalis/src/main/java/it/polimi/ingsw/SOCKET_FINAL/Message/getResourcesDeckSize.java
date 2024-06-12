@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to check if the resource deck in the game has any cards remaining.
+ */
 public class getResourcesDeckSize implements Message, Serializable {
 
     public Server server;
@@ -17,7 +20,6 @@ public class getResourcesDeckSize implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -28,16 +30,11 @@ public class getResourcesDeckSize implements Message, Serializable {
         this.common = common;
     }
 
-
-    public getResourcesDeckSize(){
-
-    }
+    public getResourcesDeckSize(){}
 
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -47,6 +44,13 @@ public class getResourcesDeckSize implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Retrieves the size of the resource deck from the RMI controller and sends a
+     * response message indicating whether the deck has any cards remaining
+     * (based on the size being greater than zero).
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         int size = rmi_controller.getController().getGame().getResources_deck().getNumber();
@@ -58,4 +62,5 @@ public class getResourcesDeckSize implements Message, Serializable {
         output.flush();
         output.reset();
     }
+
 }

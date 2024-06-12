@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to choose whether to see their starting
+ * card or keep it hidden during gameplay.
+ */
 public class chooseStartingCardMessage implements Message, Serializable {
 
     public String token;
@@ -40,8 +44,6 @@ public class chooseStartingCardMessage implements Message, Serializable {
         this.flipped = flipped;
     }
 
-
-
     public void setServer(Server server) {
         this.server = server;
     }
@@ -50,6 +52,14 @@ public class chooseStartingCardMessage implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Sends the player's choice (see or hide starting card) to the game logic through
+     * the RMI interface.
+     *
+     * @throws IOException If there is an IO error.
+     * @throws InterruptedException If the thread is interrupted while waiting.
+     * @throws ClassNotFoundException If a class used in the RMI call cannot be found.
+     */
     @Override
     public void action() throws IOException, InterruptedException, ClassNotFoundException {
         rmi_controller.chooseStartingCard(token,flipped);

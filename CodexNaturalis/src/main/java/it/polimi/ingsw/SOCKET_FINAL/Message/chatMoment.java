@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a private chat message sent by a player to another player during their turn
+ * in the game. This message also includes the player's decision (related to gameplay)
+ * and is received by the server and forwarded to the game logic
+ */
 public class chatMoment implements Message, Serializable {
 
     public Server server;
@@ -50,6 +55,10 @@ public class chatMoment implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     @Override
     public void action() throws IOException {
         rmi_controller.chattingMoment(myIndex, decision, chatMessage);

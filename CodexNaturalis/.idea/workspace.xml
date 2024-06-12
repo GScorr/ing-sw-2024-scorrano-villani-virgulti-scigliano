@@ -4,11 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Revisione commenti fine RMI, manca Gameserver">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="commenti fino a token manager">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Common_Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Common_Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CheckNameMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CheckNameMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CreateGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CreateGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CreatePlayerMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/CreatePlayerMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/FindRMIControllerMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/FindRMIControllerMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/GetFreeGames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/GetFreeGames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/LunchMessageMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/LunchMessageMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/MyMessageFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/MyMessageFinal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/ResponseObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/ResponseObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chatGlobal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chatGlobal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chatMoment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chatMoment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chooseGoalMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chooseGoalMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chooseStartingCardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/chooseStartingCardMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/connectGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/connectGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/drawCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/drawCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/firstCardIsPlaced.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/firstCardIsPlaced.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getCardsInCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getCardsInCenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getCardsInHand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getCardsInHand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGoalCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGoldDeckSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getGoldDeckSize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getListGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getListGoalCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getPlayerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getPlayerState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getResourcesDeckSize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getResourcesDeckSize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getRmiControllerMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getRmiControllerMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getStartingCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getStartingCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/getToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromCardsInCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromCardsInCenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromGoldDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromGoldDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromResourcesDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/peachFromResourcesDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/placeCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/placeCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/showGameFieldMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/showGameFieldMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/showStartingCardMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/Message/showStartingCardMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/TokenManager/TokenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/TokenManager/TokenManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +203,7 @@
       <recent name="it.polimi.ingsw.SOCKET_FINAL" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Server">
+  <component name="RunManager" selected="Application.Common_Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -273,8 +305,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Common_Client" />
+        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Gui_Initialization" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
@@ -318,14 +350,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00136" summary="prima prova chat def">
-      <option name="closed" value="true" />
-      <created>1716285147648</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1716285147649</updated>
     </task>
     <task id="LOCAL-00137" summary="prima prova chat def">
       <option name="closed" value="true" />
@@ -711,7 +735,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718212264138</updated>
     </task>
-    <option name="localTasksCounter" value="185" />
+    <task id="LOCAL-00185" summary="commenti gameserver">
+      <option name="closed" value="true" />
+      <created>1718212929787</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1718212929787</updated>
+    </task>
+    <option name="localTasksCounter" value="186" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -746,8 +778,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="agg" />
-    <MESSAGE value="manage game TUI" />
     <MESSAGE value="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)" />
     <MESSAGE value="agiornamento" />
     <MESSAGE value="bug fixing tui, rmi client, game server" />
@@ -771,7 +801,9 @@
     <MESSAGE value="scoreboard finita" />
     <MESSAGE value="CD" />
     <MESSAGE value="Revisione commenti fine RMI, manca Gameserver" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revisione commenti fine RMI, manca Gameserver" />
+    <MESSAGE value="commenti gameserver" />
+    <MESSAGE value="commenti fino a token manager" />
+    <option name="LAST_COMMIT_MESSAGE" value="commenti fino a token manager" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

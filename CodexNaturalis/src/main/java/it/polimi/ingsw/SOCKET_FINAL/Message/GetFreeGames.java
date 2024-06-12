@@ -12,6 +12,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Represents a message sent by the client to request a list of available (free to join) game lobbies.
+ */
 public class GetFreeGames implements Message, Serializable {
 
     public Server server;
@@ -20,7 +23,6 @@ public class GetFreeGames implements Message, Serializable {
     public Common_Server common;
 
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -39,8 +41,6 @@ public class GetFreeGames implements Message, Serializable {
         this.token = token;
     }
 
-
-
     public void setServer(Server server) {
         this.server = server;
     }
@@ -49,6 +49,13 @@ public class GetFreeGames implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Retrieves the list of available game lobbies using the getFreeGamesSocket() method
+     * of the common server and sends a response message containing the list to the client
+     * through the output stream.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         List<SocketRmiControllerObject> games = common.getFreeGamesSocket();
@@ -61,4 +68,5 @@ public class GetFreeGames implements Message, Serializable {
         output.flush();
         output.reset();
     }
+
 }
