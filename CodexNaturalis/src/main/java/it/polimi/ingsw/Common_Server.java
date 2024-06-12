@@ -99,7 +99,7 @@ public class Common_Server {
         return token_to_rmi.get(token).getPort();
     }
 
-    public void removeGameServer(GameServer gs) throws NoSuchObjectException {
+    public synchronized void  removeGameServer(GameServer gs) throws NoSuchObjectException {
 
         for( Integer i : rmi_controllers.keySet() ){
             if( rmi_controllers.get(i).equals(gs) )
