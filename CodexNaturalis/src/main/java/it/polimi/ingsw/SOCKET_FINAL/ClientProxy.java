@@ -1,4 +1,4 @@
-package it.polimi.ingsw.SOCKET_FINAL;
+/*package it.polimi.ingsw.SOCKET_FINAL;
 
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ClientProxy  {
+
     final ObjectInputStream input;
 
     // when a message is sent to server, Client has to receive a response. Thsi variable represent the response from the serverr, in fact they are passed to clientProxy
@@ -43,3 +44,5 @@ public class ClientProxy  {
 
 
 }
+
+ */

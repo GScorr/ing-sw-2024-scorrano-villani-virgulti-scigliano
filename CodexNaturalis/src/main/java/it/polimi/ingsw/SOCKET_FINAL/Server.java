@@ -19,15 +19,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+/**
+ * A class representing the server application in the SOCKET_FINAL package.
+ *
+ */
 public class Server extends UnicastRemoteObject  {
 
     final ServerSocket listenSocket;
 
     final List<ClientHandler> clients = new ArrayList<>();
 
+    //da eliminare
     public ArrayList<String> names = new ArrayList<>();
 
+    //da eliminare
     public TokenManager token_manager = new TokenManager();
 
     public Common_Server common;
@@ -38,6 +43,12 @@ public class Server extends UnicastRemoteObject  {
         common.startHeartbeatChecker();
     }
 
+    /**
+     * Starts the server, listens for incoming client connections, and creates separate threads to handle each client.
+     *
+     * @throws IOException if an I/O error occurs while accepting client connections
+     * @throws NotBoundException if the RMI registry cannot be found
+     */
     public void runServer() throws IOException, NotBoundException {
 
        Socket clientSocket = null;
@@ -45,7 +56,6 @@ public class Server extends UnicastRemoteObject  {
             System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-
 
             ClientHandler handler = new ClientHandler(this, inputStream, outputStream,  common );
 
@@ -62,7 +72,11 @@ public class Server extends UnicastRemoteObject  {
         }
     }
 
-
+    /**
+     * Broadcasts a message to all connected clients.
+     *
+     * @param value the message to broadcast
+     */
     public void broadcastUpdate(String value) {
         synchronized (this.clients) {
             for (var client : this.clients) {
@@ -71,24 +85,14 @@ public class Server extends UnicastRemoteObject  {
         }
     }
 
-
-    public static void main(String[] args) throws IOException, NotBoundException {
-       /* // Server Socket
-        String host = "127.0.0.1";
-        int port = 12345;
-
-        ServerSocket listenSocket = new ServerSocket(port);
-        System.out.println("Common_Server is running...");
-
-        //server Socket connect to ServerRmi as a Client
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1);
-        VirtualServerF serverRmi = (VirtualServerF) registry.lookup("VirtualServer");
-
-
-        new Server(listenSocket,serverRmi).runServer();*/
-    }
-
+    /**
+     * Gets the server's MiniModel object.
+     *
+     * @return the MiniModel object (may throw IOException)
+     * @throws IOException if an I/O error occurs
+     */
     public MiniModel getMiniModel() throws IOException{
         return null;
     }
+
 }
