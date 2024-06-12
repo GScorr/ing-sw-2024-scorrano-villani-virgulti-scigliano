@@ -1,6 +1,5 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
-
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
@@ -32,7 +31,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A class that handles communication between a client and the server in the SOCKET_FINAL package.
+ *
+ */
 public class ClientHandler  implements VirtualViewF {
+
     private MiniModel miniModel =  new MiniModel();
     final Server server;
     final ObjectInputStream input;
@@ -50,9 +54,11 @@ public class ClientHandler  implements VirtualViewF {
         this.input = input;
         this.output = output;
         this.common = common;
-
     }
 
+    /**
+     * Starts a thread to periodically send heartbeats to the server.
+     */
     public void startSendingHeartbeats() {
         new Thread(() -> {
             while (client_is_connected) {
@@ -90,6 +96,11 @@ public class ClientHandler  implements VirtualViewF {
 
     }
 
+    /**
+     *
+     * @param card
+     * @throws IOException
+     */
     @Override
     public void showCard(PlayCard card) throws IOException {
         ResponseMessage s = new showCenterCardsResponse(card);
@@ -97,6 +108,7 @@ public class ClientHandler  implements VirtualViewF {
         output.flush();
         output.reset();
     }
+
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
         miniModel.pushBack(message);
@@ -123,7 +135,6 @@ public class ClientHandler  implements VirtualViewF {
         output.reset();
     }
 
-
     @Override
     public MiniModel getMiniModel() throws IOException {
         return null;
@@ -136,8 +147,6 @@ public class ClientHandler  implements VirtualViewF {
         output.flush();
         output.reset();
     }
-
-
 
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
@@ -162,7 +171,6 @@ public class ClientHandler  implements VirtualViewF {
         output.flush();
         output.reset();
     }
-
 
     @Override
     public void addChat(int idx, ChatMessage message) throws IOException {
@@ -200,6 +208,7 @@ public class ClientHandler  implements VirtualViewF {
         output.flush();
         output.reset();
     }
+
     public void startCheckingMessages() {
         new Thread(() -> {
             while (true) {
@@ -467,8 +476,6 @@ public class ClientHandler  implements VirtualViewF {
     public VirtualGameServer getGameServer() throws IOException {
         return null;
     }
-
-
 
     @Override
     public boolean isGoldDeckPresent() throws IOException, ClassNotFoundException, InterruptedException {
