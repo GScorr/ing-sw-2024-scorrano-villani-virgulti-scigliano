@@ -2,7 +2,11 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import java.io.Serializable;
 
+/**
+ *
+ */
 public class Wrapper implements Serializable {
+
     public Object obj1;
     public Object obj2;
     public Object obj3;
@@ -15,6 +19,7 @@ public class Wrapper implements Serializable {
 
     public Wrapper() {
     }
+
     public Wrapper(Object obj1) {
         this.obj1 = obj1;
     }

@@ -20,7 +20,13 @@ import java.rmi.Remote;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This interface defines methods for a virtual view used in a Remote Method Invocation (RMI) system.
+ * The virtual view acts as a client-side interface, receiving updates and interacting with the game server.
+ *
+ */
 public interface VirtualViewF extends Remote {
+
     public void showUpdate(GameField game_field) throws IOException;
     public void reportError(String details) throws IOException;
     public void reportMessage(String details) throws  IOException;
@@ -42,8 +48,6 @@ public interface VirtualViewF extends Remote {
 
     public GraficInterterface getTerminal_interface() throws IOException;
 
-    //public int selectNamePlayer() throws IOException, NotBoundException;
-
     public int checkName(String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
 
     public boolean areThereFreeGames () throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
@@ -56,9 +60,7 @@ public interface VirtualViewF extends Remote {
     public List<SocketRmiControllerObject> getFreeGames() throws IOException, ClassNotFoundException, InterruptedException;
     public VirtualGameServer getGameServer() throws IOException;
 
-    //public void startSendingHeartbeats();
     public void setGameFieldMiniModel() throws IOException;
-    //public void startCheckingMessages();
 
     public boolean findRmiController(int id, String player_name) throws IOException, ClassNotFoundException, InterruptedException;
 

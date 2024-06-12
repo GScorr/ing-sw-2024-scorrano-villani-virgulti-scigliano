@@ -11,6 +11,13 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
 
 import java.io.IOException;
 
+/**
+ * Remote function to handle drawing a card from the resource deck.
+ *
+ * This class implements the `SendFunction` interface and represents the action
+ * of a player drawing a card from the resource deck.
+ *
+ */
 public class SendDrawResource implements SendFunction{
 
     String token;
@@ -20,6 +27,17 @@ public class SendDrawResource implements SendFunction{
         this.token = token;
     }
 
+    /**
+     * Executes the action of drawing a card from the resource deck and ends the player's turn.
+     *
+     * This method attempts to draw a card from the resource deck for the player
+     * associated with the provided token. It then updates the game state by marking the
+     * player's turn as ended and broadcasts player state updates to all connected clients.
+     *
+     * @param server the game server instance
+     * @return a response message containing either a success message or an error message
+     * @throws RuntimeException if an IOException or InterruptedException occurs
+     */
     @Override
     public ResponseMessage action(GameServer server) {
         ResponseMessage message;
