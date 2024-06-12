@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to request drawing a card.
+ * This message includes a flag indicating whether the player wants to see
+ * the card (flipped) or keep it hidden.
+ */
 public class drawCard implements Message, Serializable {
 
     public Server server;
@@ -47,8 +52,15 @@ public class drawCard implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Adds the draw card function object
+     * to the RMI queue, triggering the card drawing logic on the server-side.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         rmi_controller.addQueue(function);
     }
+
 }

@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Represents a message sent by the client to request the list of cards currently in the center of the game.
+ */
 public class getCardsInCenter implements Message, Serializable {
 
     public Server server;
@@ -21,7 +24,6 @@ public class getCardsInCenter implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -32,7 +34,6 @@ public class getCardsInCenter implements Message, Serializable {
         this.common = common;
     }
 
-
     public getCardsInCenter(){
 
     }
@@ -40,8 +41,6 @@ public class getCardsInCenter implements Message, Serializable {
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -51,6 +50,12 @@ public class getCardsInCenter implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Sends a request to the RMI controller to retrieve the list of cards in the center
+     * using the showCardsInCenter() method.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         rmi_controller.showCardsInCenter(token);

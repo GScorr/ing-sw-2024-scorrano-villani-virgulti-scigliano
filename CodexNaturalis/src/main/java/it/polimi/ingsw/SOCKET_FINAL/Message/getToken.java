@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * This message class likely does not serve a useful purpose in the client-server
+ * communication. Consider if the client already possesses the token upon
+ * connection or if a different message is needed to handle token generation
+ * or retrieval.
+ */
 public class getToken implements Message, Serializable {
 
     public Server server;
@@ -17,7 +23,6 @@ public class getToken implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -28,14 +33,11 @@ public class getToken implements Message, Serializable {
         this.common = common;
     }
 
-
     public getToken(){}
 
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -45,6 +47,12 @@ public class getToken implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * The action() method sends the client's own token back to them
+     * (assuming the token field is set).
+     *
+     * @throws IOException If there is an IO error (should never be thrown).
+     */
     @Override
     public void action() throws IOException {
         ResponseMessage message = new getTokenResponse(this.token);
@@ -52,4 +60,5 @@ public class getToken implements Message, Serializable {
         output.flush();
         output.reset();
     }
+
 }

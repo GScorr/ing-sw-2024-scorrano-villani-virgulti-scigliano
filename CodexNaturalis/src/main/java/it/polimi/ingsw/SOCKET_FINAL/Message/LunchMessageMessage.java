@@ -1,6 +1,5 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
-
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
@@ -8,8 +7,10 @@ import it.polimi.ingsw.SOCKET_FINAL.Server;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/*
+da eliminare probabilmente
+ */
 public class LunchMessageMessage implements Message, Serializable {
-
 
     public Server server;
     public String message, token;

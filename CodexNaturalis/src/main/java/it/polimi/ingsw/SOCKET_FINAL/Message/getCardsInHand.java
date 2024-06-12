@@ -10,6 +10,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Represents a message sent by the client to request the list of cards currently in the player's hand.
+ */
 public class getCardsInHand implements Message, Serializable {
 
     public Server server;
@@ -17,7 +20,6 @@ public class getCardsInHand implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -28,7 +30,6 @@ public class getCardsInHand implements Message, Serializable {
         this.common = common;
     }
 
-
     public getCardsInHand(){
 
     }
@@ -36,8 +37,6 @@ public class getCardsInHand implements Message, Serializable {
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -47,6 +46,13 @@ public class getCardsInHand implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Sends a request to the RMI controller to retrieve the list of cards in the player's hand
+     * using the getCardsInHand() method of the player object associated with the token.
+     * The retrieved list is then sent back to the client through the output stream.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         List<PlayCard> cards_in_hands = rmi_controller.getTtoP().get(token).getCardsInHand();

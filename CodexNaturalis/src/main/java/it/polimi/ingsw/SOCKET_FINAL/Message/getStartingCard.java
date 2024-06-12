@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to request their starting card in the game.
+ */
 public class getStartingCard implements Message, Serializable {
 
     public Server server;
@@ -16,7 +19,6 @@ public class getStartingCard implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -27,7 +29,6 @@ public class getStartingCard implements Message, Serializable {
         this.common = common;
     }
 
-
     public getStartingCard(){
 
     }
@@ -35,8 +36,6 @@ public class getStartingCard implements Message, Serializable {
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -51,7 +50,6 @@ public class getStartingCard implements Message, Serializable {
     }
 
     @Override
-    public void action() throws IOException {
+    public void action() throws IOException {}
 
-    }
 }

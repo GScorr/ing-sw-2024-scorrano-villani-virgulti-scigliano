@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a global chat message sent by a player. This message is received by the server
+ * and forwarded to the game logic.
+ */
 public class chatGlobal implements Message, Serializable {
 
     public Server server;
@@ -47,6 +51,11 @@ public class chatGlobal implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Sends the global chat message to the game logic through the RMI interface.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         rmi_controller.chattingGlobal(this.chatMessage);

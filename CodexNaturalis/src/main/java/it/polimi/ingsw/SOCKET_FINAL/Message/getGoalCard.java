@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to check if they have received a goal card.
+ */
 public class getGoalCard implements Message, Serializable {
 
     public Server server;
@@ -16,7 +19,6 @@ public class getGoalCard implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -27,7 +29,6 @@ public class getGoalCard implements Message, Serializable {
         this.common = common;
     }
 
-
     public getGoalCard(){
 
     }
@@ -36,8 +37,6 @@ public class getGoalCard implements Message, Serializable {
         this.token = token;
     }
 
-
-
     public void setServer(Server server) {
         this.server = server;
     }
@@ -45,6 +44,7 @@ public class getGoalCard implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
+
     public boolean getGoalCardAction() throws IOException{
         Goal goal_card = rmi_controller.getTtoP().get(token).getGoalCard();
         if(goal_card == null){
@@ -54,8 +54,13 @@ public class getGoalCard implements Message, Serializable {
         }
 
     }
-    @Override
-    public void action() throws IOException {
 
-    }
+    /**
+     * The action() method is currently empty.
+     *
+     * @throws IOException If there is an IO error.
+     */
+    @Override
+    public void action() throws IOException {}
+
 }
