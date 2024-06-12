@@ -20,6 +20,9 @@
             </Menu>
             <Menu fx:id="chatsMenu" text="Chats">
             </Menu>
+            <Menu text="Scoreboard">
+                <MenuItem fx:id="scoreboardView" text="View" onAction="#showScoreboard" />
+            </Menu>
         </MenuBar>
 
 </AnchorPane>

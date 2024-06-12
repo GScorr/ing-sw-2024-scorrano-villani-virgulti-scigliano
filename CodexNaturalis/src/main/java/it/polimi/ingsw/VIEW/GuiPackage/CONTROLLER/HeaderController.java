@@ -15,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -35,6 +37,7 @@ public class HeaderController extends GenericSceneController {
     private VirtualViewF the_client;
     GenericSceneController upper_controller ;
     SceneController scene_controller;
+    ColorCoordinatesHelper helper;
 
     public void setUpper_controller(GenericSceneController upper_controller) {
         this.upper_controller = upper_controller;
@@ -142,5 +145,65 @@ public class HeaderController extends GenericSceneController {
     // Aggiorna il flag e restituisce il suo stato
     public boolean isChatOpen() {
         return chatOpen;
+    }
+
+    @FXML
+    private void showScoreboard() throws IOException {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Scoreboard");
+        stage.setResizable(false);
+
+        File file = new File("src/resources/imgMirk/scoreTable.png");
+        Image image = new Image(file.toURI().toString());
+
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(315); // Max width
+        imageView.setFitHeight(630); // Max height
+        imageView.setPreserveRatio(true);
+
+        // Define parameters for circles (example positions and colors)
+        List<CircleData> circles = Arrays.asList(
+                /*for(int i=0;i<client.getMiniModel().getNum_players();i++){
+                new CircleData(,,helper.fromEnumtoColor(client.getMiniModel().getGame_fields().get(i).getPlayer().getColor()));
+        }*/
+                new CircleData(80, 585, 10, Color.BLUE), // x, y, radius, color
+                new CircleData(160, 170, 10, Color.GREEN),
+                new CircleData(240, 305, 10, Color.YELLOW),
+        new CircleData(155, 585, 10, Color.BLACK), // x, y, radius, color
+                new CircleData(230, 585, 10, Color.CHOCOLATE),
+                new CircleData(210, 315, 10, Color.VIOLET)
+        );
+
+        Pane circlesPane = new Pane();
+        for (CircleData data : circles) {
+            Circle circle = new Circle(data.x, data.y, data.radius);
+            circle.setFill(data.color);
+            circlesPane.getChildren().add(circle);
+        }
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(imageView, circlesPane);
+
+        VBox vbox = new VBox(stackPane);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(10);
+
+        Scene scene = new Scene(vbox, 315, 630); // Set the scene size to match the max dimensions of the image
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    private static class CircleData {
+        double x, y, radius;
+        Color color;
+
+        CircleData(double x, double y, double radius, Color color) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.color = color;
+        }
     }
 }
