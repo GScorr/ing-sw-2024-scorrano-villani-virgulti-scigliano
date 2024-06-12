@@ -2,6 +2,11 @@ package it.polimi.ingsw.RMI_FINAL;
 
 import java.io.Serializable;
 
+/**
+ * This class represents a controller object used within a Remote Method Invocation (RMI) system.
+ * It encapsulates information about a game or application managed by RMI. The object can be
+ * serialized and deserialized for transmission across a network.
+ */
 public class SocketRmiControllerObject implements Serializable {
     public String name;
     public int ID;

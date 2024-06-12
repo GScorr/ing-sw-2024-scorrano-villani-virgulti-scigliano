@@ -15,6 +15,11 @@ import java.rmi.Remote;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This interface defines methods for a virtual game server used in a Remote Method Invocation (RMI) system.
+ * The server manages game logic, player interactions, and communication for a game session.
+ *
+ */
 public interface VirtualGameServer extends Remote {
     public boolean getFull() throws IOException;
 

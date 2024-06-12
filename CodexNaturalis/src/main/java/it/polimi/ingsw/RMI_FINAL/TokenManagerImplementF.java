@@ -7,10 +7,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * This class implements the TokenManagerF interface, providing functionalities
+ * for managing tokens used in RMI and socket communication for authentication
+ * and authorization purposes.
+ *
+ */
 public class TokenManagerImplementF implements TokenManagerF, Serializable {
 
     public Map<String, VirtualViewF> tokens = new HashMap<>();
     public  Map<String, VirtualView> Socket_tokens = new HashMap<>();
+
     @Override
     public String generateToken(VirtualViewF clientId) {
         String token = UUID.randomUUID().toString(); // Generate a casual token
@@ -52,4 +59,5 @@ public class TokenManagerImplementF implements TokenManagerF, Serializable {
     }
     public Map<String,VirtualView> getSocketTokens(){return this.Socket_tokens;
     }
+
 }
