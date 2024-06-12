@@ -12,7 +12,7 @@
             <Menu text="Disconnect" onAction="#handleDisconnect">
             </Menu>
             <Menu text="View GAME FIELDS">
-                <MenuItem text="Settings" />
+                <MenuItem text="View" onAction="#handleViewOpponentFields" />
             </Menu>
             <Menu text="Help">
                 <MenuItem text="AH FIGLIO DI PUTTANA VOLEVI UN AIUTO" />

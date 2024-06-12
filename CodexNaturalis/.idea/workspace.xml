@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/ClickableCardImageView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONTROLLER/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ColorCoordinatesHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ColorCoordinatesHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/header.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/header.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,14 +322,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00133" summary="Draw from Cards in center works">
-      <option name="closed" value="true" />
-      <created>1716222415187</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1716222415187</updated>
     </task>
     <task id="LOCAL-00134" summary="Il campo viene preso solo di un player">
       <option name="closed" value="true" />
@@ -711,7 +707,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718184586498</updated>
     </task>
-    <option name="localTasksCounter" value="182" />
+    <task id="LOCAL-00182" summary="scoreboard finita">
+      <option name="closed" value="true" />
+      <created>1718188743154</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1718188743154</updated>
+    </task>
+    <option name="localTasksCounter" value="183" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -746,7 +750,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Il campo viene preso solo di un player" />
     <MESSAGE value="Non so perchè il menu di merda e il field non si aggiornano correttamente" />
     <MESSAGE value="prima prova chat def" />
     <MESSAGE value="agg" />
@@ -771,7 +774,8 @@
     <MESSAGE value="fine chat" />
     <MESSAGE value="inizio coordinate scoreboard" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="scoreboard finita" />
+    <option name="LAST_COMMIT_MESSAGE" value="scoreboard finita" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

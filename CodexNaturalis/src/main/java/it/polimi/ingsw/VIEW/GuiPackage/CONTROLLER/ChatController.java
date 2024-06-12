@@ -18,7 +18,6 @@ public class ChatController extends GenericSceneController {
 
     private int decision;
 
-    private static boolean chatOpen = false;
     private volatile boolean running; // Aggiungere un flag per controllare il thread
 
     @FXML
@@ -42,14 +41,8 @@ public class ChatController extends GenericSceneController {
     }
 
     public void setStage(Stage stage) {
-        // Controlla se la finestra di chat è già aperta, se sì, non fare nulla
-
-
         this.stage = stage;
-        // Aggiungi un listener per intercettare l'evento di chiusura della finestra
         stage.setOnCloseRequest(event -> handleClose());
-
-        // Imposta il flag per indicare che la finestra di chat è stata aperta
     }
 
     public void setClient(VirtualViewF client) {
@@ -64,22 +57,18 @@ public class ChatController extends GenericSceneController {
         this.idx = idx;
     }
 
-    // Metodo per aggiungere un messaggio alla ListView
     public void addMessage(String message) {
         chatMessagesListView.getItems().add(message);
     }
 
-    // Metodo per ottenere il messaggio inserito dall'utente
     public String getMessageInput() {
         return messageInputField.getText();
     }
 
-    // Metodo per pulire il campo di input dopo l'invio
     public void clearMessageInput() {
         messageInputField.clear();
     }
 
-    // Metodo per chiudere la finestra della chat
     @FXML
     private void handleClose() {
         running = false; // Fermare il thread quando la finestra viene chiusa
@@ -87,7 +76,6 @@ public class ChatController extends GenericSceneController {
         header.setChatOpen(false);
     }
 
-    // Metodo per inizializzare la chat con i messaggi già presenti
     public void startInitialize() throws IOException {
         chatMessagesListView.getItems().clear(); // Pulisce la lista
         for (ChatMessage chatMessage : client.getMiniModel().getChat().get(idx).getChat()) {
@@ -104,7 +92,6 @@ public class ChatController extends GenericSceneController {
         });
     }
 
-    // Metodo per aggiungere un messaggio alla chat
     public void addMessageToChat(ChatMessage chatMessage) {
         addMessage(chatMessage.player.getName() + ": " + chatMessage.message);
     }
@@ -122,7 +109,6 @@ public class ChatController extends GenericSceneController {
         this.decision = decision;
     }
 
-    // Metodo per avviare il thread di aggiornamento della chat
     public void startChatUpdater() {
         running = true;
         Thread chatUpdater = new Thread(() -> {
@@ -143,7 +129,6 @@ public class ChatController extends GenericSceneController {
         chatUpdater.start();
     }
 
-    // Metodo per aggiornare la chat
     private void updateChat() {
         chatMessagesListView.getItems().clear();
         try {

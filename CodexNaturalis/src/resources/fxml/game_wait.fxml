@@ -16,7 +16,6 @@
         <VBox alignment="CENTER" spacing="20" prefHeight="450.0">
             <Button text="Visualizza campo da gioco avversari" onAction="#handleViewOpponentFields"/>
             <Button text="Visualizza Deck" onAction="#handleViewDeck"/>
-            <Button text="Chat" onAction="#handleChat"/>
         </VBox>
     </center>
 
