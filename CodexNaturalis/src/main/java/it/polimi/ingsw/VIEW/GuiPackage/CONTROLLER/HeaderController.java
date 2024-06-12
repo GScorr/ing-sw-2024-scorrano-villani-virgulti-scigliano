@@ -2,6 +2,7 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
@@ -39,6 +40,8 @@ public class HeaderController extends GenericSceneController {
     GenericSceneController upper_controller ;
     SceneController scene_controller;
     ColorCoordinatesHelper helper;
+
+    private Stage scoreboardStage;
 
     public void setUpper_controller(GenericSceneController upper_controller) {
         this.upper_controller = upper_controller;
@@ -150,10 +153,18 @@ public class HeaderController extends GenericSceneController {
 
     @FXML
     private void showScoreboard() throws IOException {
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Scoreboard");
-        stage.setResizable(false);
+        // Check if the scoreboard popup is already open
+        if (scoreboardStage != null && scoreboardStage.isShowing()) {
+            return;
+        }
+
+        scoreboardStage = new Stage();
+        scoreboardStage.initModality(Modality.NONE); // Make the window non-blocking
+        scoreboardStage.setTitle("Scoreboard");
+        scoreboardStage.setResizable(false); // Make the window non-resizable
+
+        // Set the owner of the popup stage to the main stage
+        scoreboardStage.initOwner(scene_controller.getActiveScene().getWindow()); // Adjust according to how you access the main stage
 
         File file = new File("src/resources/imgMirk/scoreTable.png");
         Image image = new Image(file.toURI().toString());
@@ -163,18 +174,18 @@ public class HeaderController extends GenericSceneController {
         imageView.setFitHeight(630); // Max height
         imageView.setPreserveRatio(true);
 
-        // Define parameters for circles (example positions and colors)
-        List<CircleData> circles = Arrays.asList(
-                /*for(int i=0;i<client.getMiniModel().getNum_players();i++){
-                new CircleData(,,helper.fromEnumtoColor(client.getMiniModel().getGame_fields().get(i).getPlayer().getColor()));
-        }*/
-                new CircleData(80, 585, 10, Color.BLUE), // x, y, radius, color
-                new CircleData(160, 170, 10, Color.GREEN),
-                new CircleData(240, 305, 10, Color.YELLOW),
-        new CircleData(155, 585, 10, Color.BLACK), // x, y, radius, color
-                new CircleData(230, 585, 10, Color.CHOCOLATE),
-                new CircleData(210, 315, 10, Color.VIOLET)
-        );
+        ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
+        List<CircleData> circles = new ArrayList<>();
+        for (int i = 0; i < the_client.getMiniModel().getNum_players(); i++) {
+            GameField g = the_client.getMiniModel().getGame_fields().get(i);
+            System.out.println(helper.fromEnumtoColor(g.getPlayer().getColor()) + " " + helper.fromPointstoX(g.getPlayer(), g.getPlayer().getColor()) + " " + helper.fromPointstoY(g.getPlayer(), g.getPlayer().getColor()));
+            circles.add(new CircleData(
+                    helper.fromPointstoX(g.getPlayer(), g.getPlayer().getColor()),
+                    helper.fromPointstoY(g.getPlayer(), g.getPlayer().getColor()),
+                    10,
+                    helper.fromEnumtoColor(g.getPlayer().getColor())
+            ));
+        }
 
         Pane circlesPane = new Pane();
         for (CircleData data : circles) {
@@ -191,8 +202,11 @@ public class HeaderController extends GenericSceneController {
         vbox.setSpacing(10);
 
         Scene scene = new Scene(vbox, 315, 630); // Set the scene size to match the max dimensions of the image
-        stage.setScene(scene);
-        stage.show();
+        scoreboardStage.setScene(scene);
+        scoreboardStage.show();
+
+        // Set the event handler to nullify the stage reference when the popup is closed
+        scoreboardStage.setOnHidden(event -> scoreboardStage = null);
     }
 
     public void handleDisconnect(ActionEvent actionEvent) {
