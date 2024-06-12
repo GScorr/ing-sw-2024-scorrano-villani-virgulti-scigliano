@@ -38,7 +38,7 @@ public class RmiServerF implements VirtualServerF {
     //return 0 if the name is free, 1 if the name is already used by an active player, 2 if the player is coming back
     public List<SocketRmiControllerObject> getFreeGamesSocket() throws IOException {return common.getFreeGamesSocket();}
     @Override
-    public String checkName(String name, VirtualViewF client) throws IOException {return common.checkName(name, client);}
+    public String checkName(String name, VirtualViewF client) throws IOException, InterruptedException {return common.checkName(name, client);}
     //private Object waitAnswer(String token, Integer idRequest) throws IOException {return token_to_rmi.get(token).getAnswer(idRequest);}
     @Override
     public int getPort(String token) throws IOException {return common.getPort(token);}
