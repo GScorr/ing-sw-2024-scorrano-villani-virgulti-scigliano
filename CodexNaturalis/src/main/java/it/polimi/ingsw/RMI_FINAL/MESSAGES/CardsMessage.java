@@ -5,6 +5,14 @@ import it.polimi.ingsw.MODEL.GameField;
 
 import java.util.List;
 
+/*
+    todo
+        non so come commentare questa classe
+ */
+
+/**
+ *
+ */
 public class CardsMessage {
     List<PlayCard> cards;
 

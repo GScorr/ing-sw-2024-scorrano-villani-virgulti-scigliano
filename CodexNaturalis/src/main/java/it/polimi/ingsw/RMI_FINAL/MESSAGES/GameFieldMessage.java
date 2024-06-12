@@ -3,7 +3,15 @@ package it.polimi.ingsw.RMI_FINAL.MESSAGES;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.GameField;
 
+/**
+ * Response message for sending the game field information to the client.
+ *
+ * This class extends the `ResponseMessage` class and represents a response
+ * containing a `GameField` object representing the current state of the player's game board.
+ *
+ */
 public class GameFieldMessage extends ResponseMessage{
+
     GameField field;
 
     public GameFieldMessage(GameField field) {
@@ -13,21 +21,31 @@ public class GameFieldMessage extends ResponseMessage{
     public GameField getField() {
         return field;
     }
-
+/*
+da eliminare
     public GameField actionPrintGameField(){
         return field;
     }
+
+ */
 
     public void setField(GameField field) {
         this.field = field;
     }
 
+    /**
+     * Updates the client's model with the game field
+     */
     @Override
     public void action(){
         showField(field);
     }
 
-
+    /**
+     * Prints the game field to the console
+     *
+     * @param field the game field to print
+     */
     public void showField(GameField field) {
         System.out.println("\nPLAYER : [ " + field.getPlayer().getName() + " ] JUST PLACED A CARD, THIS IS HIS NEW FIELD :\n" );
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
@@ -75,4 +93,5 @@ public class GameFieldMessage extends ResponseMessage{
             }
         }
     }
+
 }
