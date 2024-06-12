@@ -7,6 +7,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -192,6 +193,10 @@ public class HeaderController extends GenericSceneController {
         Scene scene = new Scene(vbox, 315, 630); // Set the scene size to match the max dimensions of the image
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void handleDisconnect(ActionEvent actionEvent) {
+       // Platform.exit();
     }
 
 

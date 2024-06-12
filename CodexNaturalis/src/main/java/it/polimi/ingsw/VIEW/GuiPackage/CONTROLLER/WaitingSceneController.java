@@ -40,8 +40,6 @@ public class WaitingSceneController extends GenericSceneController{
                 try {
                     if (!super.client.getMiniModel().getState().equals("NOT_INITIALIZED") && !client.getMiniModel().getState().equals("NOT_IN_A_GAME")) {
                         client.setGameFieldMiniModel();
-                        System.out.println("fatto");
-                        //controller.showMessage("SUCCESS","Your game is about to start!");
                         client.getTerminal_interface().chooseGoalState();
                         break;
                     };
