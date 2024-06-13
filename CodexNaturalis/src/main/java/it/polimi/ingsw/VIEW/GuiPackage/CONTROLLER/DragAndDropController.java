@@ -12,7 +12,12 @@ import javafx.scene.layout.StackPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class implements a drag-and-drop functionality for an FXML scene. It allows dragging an image (`dragImage`)
+ * to a designated drop zone (`dropZone`).
+ */
 public class DragAndDropController extends GenericSceneController implements Initializable {
+
     @FXML
     private ImageView dragImage;
 
@@ -22,6 +27,12 @@ public class DragAndDropController extends GenericSceneController implements Ini
     @FXML
     private AnchorPane rootPane;
 
+    /**
+     * Initializes the controller and sets up drag and drop event handlers.
+     *
+     * @param location The URL of the FXML file.
+     * @param resources The ResourceBundle used to localize the root object.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set up drag gesture for dragImage
@@ -35,7 +46,6 @@ public class DragAndDropController extends GenericSceneController implements Ini
 
             event.consume();
         });
-
         // Set up drag gesture for dropZone
         dropZone.setOnDragOver(event -> {
             if (event.getGestureSource() != dropZone && event.getDragboard().hasImage()) {
@@ -43,7 +53,6 @@ public class DragAndDropController extends GenericSceneController implements Ini
             }
             event.consume();
         });
-
         dropZone.setOnDragDropped(event -> {
             Dragboard dragboard = event.getDragboard();
             boolean success = false;
@@ -61,4 +70,5 @@ public class DragAndDropController extends GenericSceneController implements Ini
             event.consume();
         });
     }
+
 }

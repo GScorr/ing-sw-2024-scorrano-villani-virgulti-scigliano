@@ -11,6 +11,9 @@ import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
+/**
+ * This class implements the controller logic for the game access scene. It handles user interaction for creating a new game.
+ */
 public class GameAccessController extends GenericSceneController {
 
     @FXML
@@ -22,6 +25,17 @@ public class GameAccessController extends GenericSceneController {
     @FXML
     private Button createGameButton;
 
+    /**
+     * Handles the click event on the create game button. It retrieves the game name and player number
+     * from the UI elements, validates the input, and attempts to create the game using the client object.
+     * If successful, it shows a success message and waits for the game to be full.
+     *
+     * @param event The ActionEvent triggered by clicking the create game button.
+     * @throws NotBoundException If the client object is not properly bound.
+     * @throws IOException If there's an I/O error during communication.
+     * @throws ClassNotFoundException If a class related to game creation cannot be found.
+     * @throws InterruptedException If the waiting for the game to be full is interrupted.
+     */
     @FXML
     private void handleCreateGameButtonAction(ActionEvent event) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException {
         String gameName = gameNameField.getText();
@@ -44,6 +58,12 @@ public class GameAccessController extends GenericSceneController {
         // Add your game creation handling code here
     }
 
+    /**
+     * Shows an alert dialog with the provided title and content.
+     *
+     * @param title The title of the alert dialog.
+     * @param content The content message displayed in the alert dialog.
+     */
     private void showAlert(String title, String content) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(title);
@@ -51,4 +71,5 @@ public class GameAccessController extends GenericSceneController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

@@ -17,6 +17,11 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class implements the controller for the "Choose Goal" scene in the game's GUI.
+ * It allows the player to select their desired goal card from two options.
+ *
+ */
 public class ChooseGoalController extends GenericSceneController {
 
     @FXML
@@ -33,17 +38,31 @@ public class ChooseGoalController extends GenericSceneController {
     @FXML
     private AnchorPane HeaderInclude;
 
+    /**
+     * Initializes the scene by:
+     *  - Loading the header scene and setting its controller properties.
+     *  - Loading images for the two goal cards.
+     *  - If the goal card hasn't been placed yet (by the server), shows a buffering message and starts checking the client state.
+     *
+     * @throws IOException If there's an error loading FXML or images.
+     * @throws ClassNotFoundException If there's a class not found exception during header initialization.
+     * @throws InterruptedException If the thread checking client state is interrupted.
+     */
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
 
-        //header
+        /**
+         * header
+         */
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
         Parent header = loader.load();
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
         System.out.println("--------------------" + scene_controller);
         headerController.setScene(scene_controller);
-        // Aggiungi l'header alla posizione desiderata nel layout principale
-        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+
+        // Add the header to the desired position in the main layout
+// For example, if headerInclude is an AnchorPane, you can add the header like this:
+
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
 
@@ -57,8 +76,18 @@ public class ChooseGoalController extends GenericSceneController {
             showBufferingLabel();
             checkClientState();
         }
+
     }
 
+    /**
+     * Handles clicking on the first card image.
+     * Sends a message to the client indicating the chosen goal card (index 0).
+     * Shows a buffering message and starts checking the client state.
+     *
+     * @param event The MouseEvent triggered by clicking the card.
+     * @throws IOException If there's an error communicating with the client.
+     * @throws InterruptedException If the thread checking client state is interrupted.
+     */
     @FXML
     private void handleCard1Click(MouseEvent event) throws IOException, InterruptedException {
         System.out.println("Card 1 selected");
@@ -67,6 +96,15 @@ public class ChooseGoalController extends GenericSceneController {
         checkClientState();
     }
 
+    /**
+     * Handles clicking on the second card image.
+     * Sends a message to the client indicating the chosen goal card (index 1).
+     * Shows a buffering message and starts checking the client state.
+     *
+     * @param event The MouseEvent triggered by clicking the card.
+     * @throws IOException If there's an error communicating with the client.
+     * @throws InterruptedException If the thread checking client state is interrupted.
+     */
     @FXML
     private void handleCard2Click(MouseEvent event) throws IOException, InterruptedException {
         System.out.println("Card 2 selected");
@@ -75,6 +113,10 @@ public class ChooseGoalController extends GenericSceneController {
         checkClientState();
     }
 
+    /**
+     * Shows a "Buffering... Please wait." message at the bottom of the scene and disables the card image views.
+     * Also starts an animation that changes the message text slightly every second.
+     */
     private void showBufferingLabel() {
         Platform.runLater(() -> {
             bottomLabel.setText("Buffering... Please wait.");
@@ -95,6 +137,9 @@ public class ChooseGoalController extends GenericSceneController {
         });
     }
 
+    /**
+     * Hides the buffering message and stops the animation.
+     */
     private void hideBufferingLabel() {
         // Disable the ImageView elements
         card1.setDisable(true);
@@ -109,6 +154,11 @@ public class ChooseGoalController extends GenericSceneController {
         });
     }
 
+    /**
+     * Starts a background thread to periodically check the client state.
+     * The thread keeps checking if the game state is still "CHOOSE_GOAL".
+     * If the state changes, the thread stops the buffering animation, hides the message, and calls the `chooseStartingCardState` method of the terminal interface (likely to handle the next scene).
+     */
     private void checkClientState() {
         new Thread(() -> {
             while (true) {
@@ -123,8 +173,7 @@ public class ChooseGoalController extends GenericSceneController {
                     throw new RuntimeException(e);
                 }
             }
-
-            // Quando lo stato cambia, nascondi l'etichetta di buffering
+            //when the state change hide the buffering label
             hideBufferingLabel();
             try {
                 super.client.getTerminal_interface().chooseStartingCardState();
@@ -135,7 +184,8 @@ public class ChooseGoalController extends GenericSceneController {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            // Cambia scena
+            // change scene
         }).start();
     }
+
 }
