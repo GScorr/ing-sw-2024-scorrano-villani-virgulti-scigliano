@@ -1,12 +1,11 @@
-//package it.polimi.ingsw.SOCKET_FINAL;
+package it.polimi.ingsw.SOCKET_FINAL;
 
 import com.google.gson.Gson;
 
-/*
-probabilomente da eliminare
+/**
+ * SocketException class extends `RuntimeException` and includes an error ID and message.
+ * It also provides a method to convert the exception object to a JSON string for potential network communication.
  */
-
-/*
 public class SocketException extends RuntimeException {
 
     private int id;
@@ -26,11 +25,6 @@ public class SocketException extends RuntimeException {
         return message;
     }
 
-    /**
-     *
-     * @return
-     */
-/*
     public String getJSONErrorMessage() {
         Gson gson = new Gson();
         try {
@@ -40,6 +34,5 @@ public class SocketException extends RuntimeException {
         }
 
     }
-}
 
- */
+}
