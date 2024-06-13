@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class SceneController {
 
-
     //path has to change
     public static final String CARD_IMAGE_PREFIX = "/images/cards/...";
     private String last_fxml;
@@ -137,6 +136,16 @@ public class SceneController {
         stage.showAndWait();
     }
 
+    /**
+     * Opens a new chat scene with a specified title, index, client reference, decision value, and header controller.
+     *
+     * @param title The title of the chat window.
+     * @param idx An index (purpose unclear, requires clarification).
+     * @param client The client object for communication with the server.
+     * @param decision A decision value (purpose unclear, requires clarification).
+     * @param header The header controller associated with the chat scene.
+     * @throws IOException If an I/O error occurs during FXML loading.
+     */
     public void showChat(String title, int idx, VirtualViewF client, int decision, HeaderController header) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chat_scene.fxml"));
         Parent parent;
@@ -166,6 +175,12 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * Opens a new modal window displaying a message with a specified title.
+     *
+     * @param title The title of the message window.
+     * @param message The message content to be displayed.
+     */
     public void showMessage(String title, String message) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/message_scene.fxml"));
         Parent parent;
@@ -204,6 +219,12 @@ public class SceneController {
         this.client = client;
     }
 
+    /**
+     * Reloads the current scene with the previously loaded FXML file.
+     * Assumes `last_fxml` is a member variable storing the path to the last loaded FXML file.
+     *
+     * @throws NullPointerException If `last_fxml` is null.
+     */
     public void reloadPage() {
         changeRootPane(last_fxml);
     }
