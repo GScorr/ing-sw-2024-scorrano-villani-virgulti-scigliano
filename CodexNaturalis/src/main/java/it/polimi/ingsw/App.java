@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
-
+/*
+si può eliminare
+ */
 /**
  * Hello world!
  *

@@ -6,7 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the chat. It keeps track of the players
+ * in the chat and the messages exchanged.
+ *
+ */
 public class Chat implements Serializable {
+
     List<Player> chatters = new ArrayList<>();
     List<ChatMessage> chat = new ArrayList<>();
 

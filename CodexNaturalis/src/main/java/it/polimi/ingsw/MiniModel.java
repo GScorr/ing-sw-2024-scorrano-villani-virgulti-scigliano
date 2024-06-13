@@ -1,14 +1,11 @@
 package it.polimi.ingsw;
 
-
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.Card.Side;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
-import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
-import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
@@ -17,6 +14,10 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import java.io.IOException;
 import java.io.Serializable;import java.util.*;
 
+/**
+ * This class represents a mini-model containing information relevant to the client's view of the game state.
+ *
+ */
 public class MiniModel implements Serializable {
 
 
@@ -48,6 +49,7 @@ public class MiniModel implements Serializable {
     private List<Chat> chat = new ArrayList<>();
 
     private ChatIndexManager chat_manager = new ChatIndexManager();
+
     public MiniModel() {
         this.state = "NOT_IN_A_GAME";
         this.menu.add("");
@@ -68,6 +70,17 @@ public class MiniModel implements Serializable {
         }
     }
 
+    /**
+     * Adds a new chat message to the specified chat conversation.
+     *
+     * @param idx The index of the chat conversation to add the message to.
+     *            - 0: Public chat
+     *            - 1 to num_players: Private chat with a specific player
+     * @param message The ChatMessage object representing the message to be added.
+     *
+     * This method updates the chat history for the specified conversation, increments the unread message count for that conversation,
+     * and recalculates the total number of unread messages across all chats.
+     */
     public void addChat(int idx, ChatMessage message) {
         chat.get(idx).addMessage(message);
         not_read.set(idx,not_read.get(idx)+1);
@@ -76,9 +89,6 @@ public class MiniModel implements Serializable {
             unread_total=unread_total+i;
         }
     }
-
-    //public void setNotReadMessages(int nr){ this.not_read = nr;}
-
 
     public PlayCard getTop_resource() {
         return top_resource;
@@ -92,13 +102,22 @@ public class MiniModel implements Serializable {
         return cards_in_center;
     }
 
-
     public Queue<ResponseMessage> getQueue(){ return messages; }
 
+    /**
+     * Adds a response message to the message queue.
+     *
+     * @param mess The ResponseMessage object representing the message to be added to the queue.
+     */
     public void pushBack(ResponseMessage mess){
         messages.add(mess);
     }
 
+    /**
+     * Retrieves and removes the oldest message from the message queue.
+     *
+     * @return The ResponseMessage object representing the oldest message in the queue, or null if the queue is empty.
+     */
     public ResponseMessage popOut(){
         return messages.poll();
     }
@@ -110,6 +129,12 @@ public class MiniModel implements Serializable {
         }
     }
 
+    /**
+     * Displays the game field of a specified player.
+     *
+     * @param pos The 1-based index of the player whose game field to show.
+     * @throws IOException If an I/O error occurs while printing to the console.
+     */
     public void showGameField(int pos) throws IOException {
         pos = pos -1 ;
         System.out.println("#ANIMALS : " + game_fields.get(pos).getNumOfAnimal());
@@ -122,6 +147,12 @@ public class MiniModel implements Serializable {
         showField(game_fields.get(pos));
     }
 
+    /**
+     * Retrieves the game field associated with the current player.
+     *
+     * @return The game field object representing the current player's game state, or null if the player is not found.
+     * @throws IOException If an I/O error occurs during retrieval.
+     */
     public GameField getMyGameField() throws IOException {
         GameField field = null;
         for(GameField g : game_fields){
@@ -152,10 +183,19 @@ public class MiniModel implements Serializable {
         return my_player;
     }
 
+    /**
+     * Displays all cards in the player's hand on the client-side.
+     * @throws IOException If an I/O error occurs during communication.
+     */
     public void showCards() throws IOException{
         for( PlayCard card : cards_in_hand) showCard(card);
     }
 
+    /**
+     * Prints the available menu options based on the current turn decision.
+     *
+     * @param turndecision The current turn decision string that determines the menu options.
+     */
     public void printMenu(String turndecision){
         this.turndecision = turndecision;
         setMenu();
@@ -164,6 +204,10 @@ public class MiniModel implements Serializable {
         }
     }
 
+    /**
+     * Displays the chat menu options to the user.
+     *
+     */
     public void uploadChat(){
         setChatMenu();
         for ( String m : chatmenu ){
@@ -184,8 +228,6 @@ public class MiniModel implements Serializable {
         this.menu.set(3, "3- " + turndecision);
     }
 
-
-
     public void setChatMenu() {
         int i=1;
         if(num_players > 2){
@@ -197,16 +239,12 @@ public class MiniModel implements Serializable {
         //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
     }
 
-    /* public void setChatMenu(){
-        if( num_players == 2 ) this.chatmenu.set(2,1 + "- PUBLIC CHAT\n");
-        else{
-            for ( Integer i : num_to_player.keySet() ){
-                if( i!=my_index ) this.chatmenu.set(i,i + "-CHAT WITH PLAYER " + num_to_player.get(i));
-            }
-            this.chatmenu.set(num_players,num_players + "- PUBLIC CHAT");
-        }
-    }*/
-
+    /**
+     * Displays the details of a play card on the client-side, including its front and back sides.
+     *
+     * @param card The play card to be displayed.
+     * @throws IOException If an I/O error occurs during display.
+     */
     public void showCard(PlayCard card) throws IOException {
         Side back = card.getBackSide();
         Side front = card.getFrontSide();
@@ -232,16 +270,13 @@ public class MiniModel implements Serializable {
         else {
             System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
         }
-        //System.out.println( " | " + front.getAngleRightUp().toString().charAt(0) + " |\n " );
         System.out.println( " |       | " + front.getCentral_resource().toString().substring(0,2) + front.getCentral_resource2().toString().substring(0,2) + front.getCentral_resource3().toString().substring(0,2) + " |        |\n " );
-        //System.out.println( " | " + front.getAngleLeftDown().toString().charAt(0) + " |       " );
         if ( card instanceof GoldCard ){
             System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " | " +
                     "  " + card.getCostraint().toString()  + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n ");
         }else{
             System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " |              " + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n " );
         }
-        //System.out.println( " | " + front.getAngleRightDown().toString().charAt(0) + " |\n " );
         System.out.println("----------------------------\n\n");
 
     }
@@ -258,18 +293,26 @@ public class MiniModel implements Serializable {
         return num_players;
     }
 
+    /**
+     * Displays the state of a game field on the client-side in a text-based format.
+     *
+     * This method analyzes the game field and identifies rows and columns that contain at least one filled cell.
+     * It then prints a grid-like representation of the field, including row and column indices, and displays the short value
+     * of each filled cell. Empty cells are represented by spaces.
+     *
+     * @param field The game field object to be displayed.
+     * @throws IOException If an I/O error occurs during display.
+     */
     private void showField(GameField field) throws IOException {
+
         boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
         boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
-
 
         for (int i = 0; i < Constants.MATRIXDIM; i++) {
             for (int j = 0; j < Constants.MATRIXDIM; j++) {
                 if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
                     nonEmptyRows[i] = true;
                     nonEmptyCols[j] = true;
-
-
                     if (i > 0) nonEmptyRows[i - 1] = true;
                     if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
                     if (j > 0) nonEmptyCols[j - 1] = true;
@@ -278,7 +321,6 @@ public class MiniModel implements Serializable {
             }
         }
 
-
         System.out.print("   ");
         for (int k = 0; k < Constants.MATRIXDIM; k++) {
             if (nonEmptyCols[k]) {
@@ -286,7 +328,6 @@ public class MiniModel implements Serializable {
             }
         }
         System.out.print("\n");
-
 
         for (int i = 0; i < Constants.MATRIXDIM; i++) {
             if (nonEmptyRows[i]) {
@@ -305,6 +346,10 @@ public class MiniModel implements Serializable {
         }
     }
 
+
+    /*
+    da eliminare
+     */
     public void showFirstChat() {
         for(ChatMessage c : chat.get(0).getChat()){
             System.out.println(c.message);
@@ -319,11 +364,15 @@ public class MiniModel implements Serializable {
         this.num_players = num_players;
     }
 
-
-
-
-
-
+    /**
+     * Displays chat messages based on a user's decision.
+     *
+     * This method validates the user's decision (which player's chat to view) and displays
+     * unread messages from the chosen chat channel. It also updates the unread message count.
+     *
+     * @param decision The index of the player whose chat to view (or a special index for general chat).
+     * @return True if messages were displayed successfully, false otherwise.
+     */
     public boolean showchat(int decision) {
         if(num_players!=2){
             if(decision>num_players+1 || decision==my_index){
@@ -369,9 +418,24 @@ public class MiniModel implements Serializable {
 
     private boolean stop_chat;
 
+    /**
+     * Sets a flag to control whether the chat should be stopped.
+     *
+     * @param b The boolean value to set the `stop_chat` flag. True indicates stopping the chat, false allows it to continue.
+     */
     public void setStop_chat(boolean b){
         stop_chat = b;
     }
+
+    /**
+     * Continuously checks for new messages in a specified chat and displays them if found.
+     *
+     * This method creates a new thread that periodically checks the size of the provided chat's message list.
+     * If the list size has increased since the last check, it iterates through the new messages and prints them to the console.
+     * The checking process continues until the `stop_chat` flag is set to true.
+     *
+     * @param current_chat The chat object to monitor for new messages.
+     */
     public void keepCheckChat(Chat current_chat){
         new Thread(() -> {
             int in_size = current_chat.getChat().size();
@@ -381,7 +445,6 @@ public class MiniModel implements Serializable {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                //in_size = current_chat.getChat().size();
                 if ( current_chat.getChat().size() > in_size ){
                     for ( int i = in_size ; i < current_chat.getChat().size() ; ++i  )
                         System.out.println(current_chat.getChat().get(i).player.getName() + "- " + current_chat.getChat().get(i).message);
@@ -403,10 +466,6 @@ public class MiniModel implements Serializable {
     public List<Integer> getNot_read() {
         return not_read;
     }
-
-    /*public HashMap<Integer, String> getNum_to_player() {
-        return num_to_player;
-    }*/
 
     public List<String> getMenu() {
         return menu;
