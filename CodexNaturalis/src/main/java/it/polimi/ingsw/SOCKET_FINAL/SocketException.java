@@ -1,7 +1,12 @@
-package it.polimi.ingsw.SOCKET_FINAL;
+//package it.polimi.ingsw.SOCKET_FINAL;
 
 import com.google.gson.Gson;
 
+/*
+probabilomente da eliminare
+ */
+
+/*
 public class SocketException extends RuntimeException {
 
     private int id;
@@ -21,6 +26,11 @@ public class SocketException extends RuntimeException {
         return message;
     }
 
+    /**
+     *
+     * @return
+     */
+/*
     public String getJSONErrorMessage() {
         Gson gson = new Gson();
         try {
@@ -30,6 +40,6 @@ public class SocketException extends RuntimeException {
         }
 
     }
-
-
 }
+
+ */
