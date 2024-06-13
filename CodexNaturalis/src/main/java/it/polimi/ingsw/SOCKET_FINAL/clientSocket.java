@@ -484,81 +484,6 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     *
-     * @throws IOException
-     * @throws InterruptedException
-     */
-    private void buffering() throws IOException, InterruptedException{
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("/");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("|");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("\\");
-        Thread.sleep(1000);
-        System.out.print("\b");
-        System.out.print("-");
-    }
-/*
-da eliminare
-    private boolean menuChoice(int choice) throws IOException {
-        Scanner scan = new Scanner(System.in);
-        if ( choice < 0 || choice > 3 ) return false;
-        switch ( choice ){
-            case ( 0 ):
-                miniModel.printNumToField();
-                Integer i = scan.nextInt();
-                miniModel.showGameField(i);
-                break;
-            case( 1 ):
-                miniModel.showCards();
-                break;
-            case ( 2 ):
-                //   miniModel.showChat();
-            case ( 3 ):
-                return true;}
-        return true;
-    }
- */
-
-    /*
-    da eliminare
-    public void showCardInCenterHelper(PlayCard card) throws IOException {
-
-        Side front = card.getFrontSide();
-
-        System.out.println(" You can Only See the FRONT SIDE\n----------------------------");
-
-        if(card instanceof ResourceCard) {
-            System.out.println(" | " + card.getPoint() + " | ");
-            if (card instanceof GoldCard) {
-                System.out.println(" | " + ((GoldCard) card).getPointBonus().toString().substring(0, 2) + " | " + "             | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
-            } else {
-                System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
-            }
-        }
-        else {
-            System.out.println(" | " + front.getAngleLeftUp().toString().substring(0, 2) + " | " + "              | " + front.getAngleRightUp().toString().substring(0, 2) + " |\n ");
-        }
-        System.out.println( " |       | " + front.getCentral_resource().toString().substring(0,2) + front.getCentral_resource2().toString().substring(0,2) + front.getCentral_resource3().toString().substring(0,2) + " |        |\n " );
-        if ( card instanceof GoldCard ){
-            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " | " +
-                    "  " + card.getCostraint().toString()  + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n ");
-        }else{
-            System.out.println( " | " + front.getAngleLeftDown().toString().substring(0,2) + " |              " + " | " + front.getAngleRightDown().toString().substring(0,2) + " |\n " );
-        }
-        System.out.println("----------------------------\n\n");
-
-    }
-
-     */
-
-
-
-    /**
      * Displays a formatted representation of the given PlayCard object, likely for a TUI.
      *
      * @param card The PlayCard object to be displayed.
@@ -597,51 +522,25 @@ da eliminare
         System.out.println("----------------------------\n\n");
     }
 
-/* da elimianare
-    public void showFieldHelper(GameField field) throws IOException {
-        boolean[] nonEmptyRows = new boolean[Constants.MATRIXDIM];
-        boolean[] nonEmptyCols = new boolean[Constants.MATRIXDIM];
-
-        for (int i = 0; i < Constants.MATRIXDIM; i++) {
-            for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
-                    nonEmptyRows[i] = true;
-                    nonEmptyCols[j] = true;
-
-                    if (i > 0) nonEmptyRows[i - 1] = true;
-                    if (i < Constants.MATRIXDIM - 1) nonEmptyRows[i + 1] = true;
-                    if (j > 0) nonEmptyCols[j - 1] = true;
-                    if (j < Constants.MATRIXDIM - 1) nonEmptyCols[j + 1] = true;
-                }
-            }
-        }
-
-        System.out.print("   ");
-        for (int k = 0; k < Constants.MATRIXDIM; k++) {
-            if (nonEmptyCols[k]) {
-                System.out.print(k + " ");
-            }
-        }
-        System.out.print("\n");
-
-        for (int i = 0; i < Constants.MATRIXDIM; i++) {
-            if (nonEmptyRows[i]) {
-                System.out.print(i + " ");
-                for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                    if (nonEmptyCols[j]) {
-                        if (field.getCell(i, j, Constants.MATRIXDIM).isFilled()) {
-                            System.out.print(field.getCell(i, j, Constants.MATRIXDIM).getShort_value() + " ");
-                        } else {
-                            System.out.print("   ");
-                        }
-                    }
-                }
-                System.out.print("\n");
-            }
-        }
+    /**
+     *
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    private void buffering() throws IOException, InterruptedException{
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("/");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("|");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("\\");
+        Thread.sleep(1000);
+        System.out.print("\b");
+        System.out.print("-");
     }
-
- */
 
     /**
      * Waits for a signal indicating a server response has been received.
