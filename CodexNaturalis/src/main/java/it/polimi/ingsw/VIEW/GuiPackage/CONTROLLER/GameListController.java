@@ -11,18 +11,25 @@ import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.util.List;
 
+/**
+ * Game list controller manages UI for available games
+ * and handles player selection of a game to join.
+ */
 public class GameListController extends GenericSceneController{
-
-
 
     @FXML
     private VBox gameListContainer;
 
     private List<SocketRmiControllerObject> games;
 
+    /**
+     * Starts a thread to periodically retrieve available games and update the UI.
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws InterruptedException
+     */
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
-
-
         new Thread(() -> {
             while (true) {
                 try {
@@ -45,10 +52,13 @@ public class GameListController extends GenericSceneController{
                 }
             }
         }).start();
-
     }
 
-    // Create a button for each game and add it to the VBox
+    /**
+     * Updates the game list UI with information from the provided list of games.
+     *
+     * @param games List of SocketRmiControllerObject objects (presumably representing game info)
+     */
     private void updateGameList(List<SocketRmiControllerObject> games) {
         gameListContainer.getChildren().clear(); // Clear existing buttons
         for (SocketRmiControllerObject game : games) {
@@ -70,6 +80,15 @@ public class GameListController extends GenericSceneController{
         }
     }
 
+    /**
+     * Handles the click event on a game button. Attempts to join the selected game.
+     *
+     * @param game SocketRmiControllerObject representing the selected game
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws NotBoundException
+     * @throws ClassNotFoundException
+     */
     private void handleGameButtonClick(SocketRmiControllerObject game) throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         super.client.findRmiController(game.ID, super.client.getTerminal_interface().getName());
         super.client.connectGameServer();

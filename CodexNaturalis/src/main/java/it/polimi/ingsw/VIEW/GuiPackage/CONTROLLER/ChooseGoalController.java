@@ -61,7 +61,7 @@ public class ChooseGoalController extends GenericSceneController {
         headerController.setScene(scene_controller);
 
         // Add the header to the desired position in the main layout
-// For example, if headerInclude is an AnchorPane, you can add the header like this:
+        // For example, if headerInclude is an AnchorPane, you can add the header like this:
 
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
