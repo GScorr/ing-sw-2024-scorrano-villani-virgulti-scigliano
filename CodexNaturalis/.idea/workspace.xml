@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="ripristino SocketException.java non andava più nulla senza" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="rimozione classe Client.java tutta commentata">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/gold.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/gold.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/ClientHandler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -314,23 +318,7 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-      <workItem from="1718263902964" duration="2174000" />
-    </task>
-    <task id="LOCAL-00147" summary="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)">
-      <option name="closed" value="true" />
-      <created>1716395618858</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1716395618858</updated>
-    </task>
-    <task id="LOCAL-00148" summary="agiornamento">
-      <option name="closed" value="true" />
-      <created>1716477794859</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1716477794859</updated>
+      <workItem from="1718263902964" duration="3598000" />
     </task>
     <task id="LOCAL-00149" summary="bug fixing tui, rmi client, game server">
       <option name="closed" value="true" />
@@ -708,7 +696,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718266089113</updated>
     </task>
-    <option name="localTasksCounter" value="196" />
+    <task id="LOCAL-00196" summary="rimozione metodi non usati in clientSocket.java">
+      <option name="closed" value="true" />
+      <created>1718266182646</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1718266182646</updated>
+    </task>
+    <task id="LOCAL-00197" summary="rimozione classe Client.java tutta commentata">
+      <option name="closed" value="true" />
+      <created>1718266282870</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1718266282870</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -743,8 +747,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="risoluzione problemi riconnessione e riconnessioni multiple:&#10;testati rmi-rmi rmi-soc soc-rmi soc-soc" />
-    <MESSAGE value="startingcard gamefield printed" />
     <MESSAGE value="qualcosa inizia ad andare" />
     <MESSAGE value="fix minor bugs" />
     <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
@@ -768,7 +770,9 @@
     <MESSAGE value="metodi da eliminare in clientSocket.java commentati" />
     <MESSAGE value="revisione commenti + metodi da eliminare in clientSocket.java commentati" />
     <MESSAGE value="ripristino SocketException.java non andava più nulla senza" />
-    <option name="LAST_COMMIT_MESSAGE" value="ripristino SocketException.java non andava più nulla senza" />
+    <MESSAGE value="rimozione metodi non usati in clientSocket.java" />
+    <MESSAGE value="rimozione classe Client.java tutta commentata" />
+    <option name="LAST_COMMIT_MESSAGE" value="rimozione classe Client.java tutta commentata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

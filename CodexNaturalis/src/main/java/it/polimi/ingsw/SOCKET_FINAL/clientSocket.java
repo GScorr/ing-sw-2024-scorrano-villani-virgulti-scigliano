@@ -555,7 +555,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * method implemented in ?
+     * Client Handler is responsible only for the methods called by the GameServer
      */
 
     @Override
