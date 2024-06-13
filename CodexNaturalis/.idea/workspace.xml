@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="revisione commenti in ClientHandler.java">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/VirtualView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/SOCKET_FINAL/VirtualView.java" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="revisione commenti">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GenericSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GenericSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -316,23 +321,7 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-      <workItem from="1718263902964" duration="3917000" />
-    </task>
-    <task id="LOCAL-00150" summary="fix bugs disconnessione">
-      <option name="closed" value="true" />
-      <created>1716542474003</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
-      <option name="project" value="LOCAL" />
-      <updated>1716542474004</updated>
-    </task>
-    <task id="LOCAL-00151" summary="fix bugs disconnessione">
-      <option name="closed" value="true" />
-      <created>1716542679192</created>
-      <option name="number" value="00151" />
-      <option name="presentableId" value="LOCAL-00151" />
-      <option name="project" value="LOCAL" />
-      <updated>1716542679192</updated>
+      <workItem from="1718263902964" duration="11046000" />
     </task>
     <task id="LOCAL-00152" summary="fix bugs disconnessione">
       <option name="closed" value="true" />
@@ -710,7 +699,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718267681677</updated>
     </task>
-    <option name="localTasksCounter" value="199" />
+    <task id="LOCAL-00199" summary="revisione commenti in VirtualView.java">
+      <option name="closed" value="true" />
+      <created>1718268091415</created>
+      <option name="number" value="00199" />
+      <option name="presentableId" value="LOCAL-00199" />
+      <option name="project" value="LOCAL" />
+      <updated>1718268091415</updated>
+    </task>
+    <task id="LOCAL-00200" summary="revisione commenti">
+      <option name="closed" value="true" />
+      <created>1718273053863</created>
+      <option name="number" value="00200" />
+      <option name="presentableId" value="LOCAL-00200" />
+      <option name="project" value="LOCAL" />
+      <updated>1718273053863</updated>
+    </task>
+    <option name="localTasksCounter" value="201" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -745,8 +750,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix minor bugs" />
-    <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
     <MESSAGE value="aggiornamento fra mi ha hypato" />
     <MESSAGE value="piccolo change per carta trasparente" />
     <MESSAGE value="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti" />
@@ -770,7 +773,9 @@
     <MESSAGE value="rimozione metodi non usati in clientSocket.java" />
     <MESSAGE value="rimozione classe Client.java tutta commentata" />
     <MESSAGE value="revisione commenti in ClientHandler.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="revisione commenti in ClientHandler.java" />
+    <MESSAGE value="revisione commenti in VirtualView.java" />
+    <MESSAGE value="revisione commenti" />
+    <option name="LAST_COMMIT_MESSAGE" value="revisione commenti" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

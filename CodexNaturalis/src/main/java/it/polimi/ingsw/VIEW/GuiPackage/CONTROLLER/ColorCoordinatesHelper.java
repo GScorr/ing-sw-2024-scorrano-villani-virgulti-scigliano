@@ -1,9 +1,7 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
-import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.MODEL.Card.GoldCard;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.Card.ResourceCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
 import it.polimi.ingsw.MODEL.ENUM.Costraint;
@@ -11,8 +9,20 @@ import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Player.Player;
 import javafx.scene.paint.Color;
 
+/**
+ * This class provides helper methods for color conversion and calculating coordinates
+ * on the game board based on player points and card colors. It also handles
+ * card placement validation considering overlapping cards, empty spaces, valid
+ * card angles, and gold card constraints.
+ */
 public class ColorCoordinatesHelper {
 
+    /**
+     * Converts a ColorsEnum value (e.g., RED, BLU) to a JavaFX Color object.
+     *
+     * @param color The color enum value to convert.
+     * @return The corresponding JavaFX Color object, or null if the color is not found.
+     */
     public Color fromEnumtoColor(ColorsEnum color) {
         switch (color) {
             case RED:
@@ -28,7 +38,14 @@ public class ColorCoordinatesHelper {
         }
     }
 
-
+    /**
+     * Calculates the X coordinate on the game board for placing a card based on the player's points
+     * and the card's color. It considers an offset to avoid overlapping card placements for different colors.
+     *
+     * @param p The player object.
+     * @param color The color of the card to be placed.
+     * @return The X coordinate for the card placement.
+     */
     public int fromPointstoX(Player p, ColorsEnum color) {
         int x = calculateBaseX(p);
         // Adjust x based on color to avoid overlap
@@ -49,7 +66,14 @@ public class ColorCoordinatesHelper {
         return x;
     }
 
-
+    /**
+     * Calculates the Y coordinate on the game board for placing a card based on the player's points
+     * and the card's color. It considers an offset to avoid overlapping card placements for different colors.
+     *
+     * @param p The player object.
+     * @param color The color of the card to be placed.
+     * @return The Y coordinate for the card placement.
+     */
     public int fromPointstoY(Player p, ColorsEnum color) {
         int y = calculateBaseY(p);
         // Adjust y based on color to avoid overlap
@@ -70,6 +94,12 @@ public class ColorCoordinatesHelper {
         return y;
     }
 
+    /**
+     * Calculates the base X coordinate on the game board based on the player's points.
+     *
+     * @param p The player object.
+     * @return The base X coordinate for the player's card placement.
+     */
     private int calculateBaseX(Player p) {
         switch (p.getPlayerPoints()) {
             case 0:
@@ -116,6 +146,12 @@ public class ColorCoordinatesHelper {
         }
     }
 
+    /**
+     * Calculates the base Y coordinate on the game board based on the player's points.
+     *
+     * @param p The player object.
+     * @return The base Y coordinate for the player's card placement.
+     */
     private int calculateBaseY(Player p) {
         switch (p.getPlayerPoints()) {
             case 0:
@@ -165,6 +201,23 @@ public class ColorCoordinatesHelper {
         }
     }
 
+    /**
+     * Checks if a specific card (`card`) can be placed at a given position (`x`, `y`) on the player's game board (`player_field`),
+     * considering various factors:
+     *  * Overlapping cards: Ensures the new card doesn't completely cover existing cards.
+     *  * Empty space: Verifies that the target location isn't empty.
+     *  * Valid card angles: Checks if existing cards at the target location have valid angles (not NONE in the `AnglesEnum`).
+     *  * Gold card constraints: For gold cards, it verifies if the player's field satisfies the card's specific constraint
+     *  (using the `checkGoldConstraints` method) before allowing placement (only applies if the card isn't flipped).
+     *
+     * @param flipped Whether the card is flipped or not.
+     * @param card The card to be placed.
+     * @param player_field The player's game field.
+     * @param x The X coordinate of the target placement location.
+     * @param y The Y coordinate of the target placement location.
+     * @return True if the card can be placed at the specified location, false otherwise.
+     *
+     */
     public synchronized boolean checkPlacing(boolean flipped, PlayCard card, GameField player_field, int x, int y) {
         //Check that the card we are trying to place doesn't completely cover another card and that the sides of the cards aren't completely covered (all 4 of them)
         if ((player_field.getField()[x][y].getCard().equals(player_field.getField()[x + 1][y + 1].getCard()) && player_field.getField()[x][y].isFilled()) ||
@@ -187,7 +240,8 @@ public class ColorCoordinatesHelper {
                     (!player_field.getField()[x + 1][y + 1].isEmpty() && player_field.getField()[x + 1][y + 1].getValue().equals(AnglesEnum.NONE))) {
                 System.out.println("b");
                 return false;
-            } else {
+            }
+            else {
                 if (card instanceof GoldCard) {
                     if(!flipped){
                         if (!checkGoldConstraints(player_field, card.getCostraint())) {
@@ -195,10 +249,7 @@ public class ColorCoordinatesHelper {
                             return false;
                         }
                     }
-
-
                 }
-
             }
         } else {
             return false;
@@ -207,7 +258,13 @@ public class ColorCoordinatesHelper {
         return true;
     }
 
-
+    /**
+     * Checks if the player's game field meets the specific constraint (`val`) required for placing a gold card.
+     *
+     * @param player_field The player's game field.
+     * @param val The constraint to be checked (e.g., FIVEINS requires at least 5 insects on the field).
+     * @return True if the player's field satisfies the constraint, false otherwise.
+     */
     private synchronized boolean checkGoldConstraints(GameField player_field, Costraint val) {
         return switch (val) {
             case FIVEINS -> player_field.getNumOfInsect() >= 5;
@@ -245,4 +302,5 @@ public class ColorCoordinatesHelper {
             default -> true;
         };
     }
+
 }

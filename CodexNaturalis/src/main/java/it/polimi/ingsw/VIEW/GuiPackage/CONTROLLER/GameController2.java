@@ -28,6 +28,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ *
+ */
 public class GameController2 extends GenericSceneController {
 
     public Label num_animal;
@@ -37,6 +40,7 @@ public class GameController2 extends GenericSceneController {
     public Label num_paper;
     public Label num_piuma;
     public Label num_calamaio;
+
     @FXML
     private Button openChatButton;
 
@@ -79,6 +83,7 @@ public class GameController2 extends GenericSceneController {
     public ImageView handCard2;
     public ImageView handCard3;
     public VBox deckBox;
+
     @FXML
     private GridPane gameGrid;
 
@@ -95,9 +100,14 @@ public class GameController2 extends GenericSceneController {
     boolean card_3_flip = false;
     Image card_3_front,card_3_back;
 
-    // Definisci un timer
+    /**
+     * deine a timer
+     */
     private Timer clickTimer;
-    // Definisci una variabile per memorizzare se il clic è stato mantenuto o meno
+
+    /**
+     * Define a variable to save if the click is maintained or not
+     */
     private boolean clickHeld = false;
     private boolean just_pressed = false;
     String token_client;
@@ -124,6 +134,12 @@ public class GameController2 extends GenericSceneController {
         chatsMenu.getItems().add(chatItem);
     }*/
 
+    /**
+     * Updates the total unread message count (`unread_total`) in the client's `MiniModel` by iterating through
+     * individual unread message counts from the `not_read` list and accumulating them into a single value.
+     *
+     * @throws IOException If an I/O error occurs during communication (implementation-dependent).
+     */
     private void updateUnreadTotal() throws IOException {
         client.getMiniModel().setUnread_total(0);
         for (Integer i : client.getMiniModel().getNot_read()) {
@@ -132,15 +148,25 @@ public class GameController2 extends GenericSceneController {
     }
 
     // Aggiunge un messaggio alla chat box
+
+    /**
+     * Adds a new message (`message`) to the chat box UI element.
+     *
+     * @param message The text content of the message to be added.
+     */
     private void addMessageToChatBox(String message) {
         Label messageLabel = new Label(message);
         messageLabel.setWrapText(true);
         chatBox.getChildren().add(messageLabel);
     }
 
+    /*
+    /**
+     * show a popup when a chat item is pressed
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
-
-    // Mostra un popup quando un chat item è premuto
     /*private void showChat(String chatName, int chatId) throws IOException {
 
         /*chatBox.getChildren().clear();  //
@@ -166,10 +192,12 @@ public class GameController2 extends GenericSceneController {
     }*/
 
 
-
-
-    
-
+    /**
+     * Initializes the game board UI and player information.
+     *
+     * @throws IOException If an I/O error occurs during FXML loading.
+     * @throws InterruptedException If the initialization process is interrupted.
+     */
     @FXML
     public void startInitialize() throws IOException, InterruptedException {
         Set<Integer> visibleRows = new HashSet<>();
@@ -182,8 +210,10 @@ public class GameController2 extends GenericSceneController {
         headerController.setThe_client(super.client);
         System.out.println("--------------------" + scene_controller);
         headerController.setScene(scene_controller);
-        // Aggiungi l'header alla posizione desiderata nel layout principale
-        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+
+        // Add the header to the desired position in the main layout
+        // For example, if headerInclude is an AnchorPane, you can add the header like this:
+
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
 
@@ -219,7 +249,6 @@ public class GameController2 extends GenericSceneController {
 
         adjustGridVisibility(visibleRows, visibleCols);
 
-
         updateCardsInHand();
         updateDecks();
         updateCardsCenter();
@@ -248,6 +277,13 @@ public class GameController2 extends GenericSceneController {
 
     }
 
+    /**
+     * Adds an image to the game board grid at the specified location.
+     *
+     * @param row The row index where the image should be placed in the grid.
+     * @param col The column index where the image should be placed in the grid.
+     * @param imagePath The path to the image file to be displayed.
+     */
     private void addImageToGrid(int row, int col, String imagePath) {
          file = new File(imagePath);
          image = new Image(file.toURI().toString());
@@ -263,6 +299,14 @@ public class GameController2 extends GenericSceneController {
         gameGrid.add(stackPane, col, row, 2, 2); // Occupy 2 columns and 2 rows
     }
 
+    /**
+     * Updates the sets of visible rows and columns based on the placement of a card on the game board.
+     *
+     * @param visibleRows A set containing the currently visible row indices in the grid.
+     * @param visibleCols A set containing the currently visible column indices in the grid.
+     * @param row The row index where the card is placed.
+     * @param col The column index where the card is placed.
+     */
     private void updateVisibleIndices(Set<Integer> visibleRows, Set<Integer> visibleCols, int row, int col) {
         for (int i = row - 1; i <= row + 2; i++) {
             if (i >= 0 && i < Constants.MATRIXDIM) {
@@ -276,6 +320,12 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
+    /**
+     * Adjusts the visibility of rows and columns in the game board grid based on the sets of visible indices.
+     *
+     * @param visibleRows A set containing the visible row indices in the grid.
+     * @param visibleCols A set containing the visible column indices in the grid.
+     */
     private void adjustGridVisibility(Set<Integer> visibleRows, Set<Integer> visibleCols) {
         for (int i = 0; i < Constants.MATRIXDIM; i++) {
             if (!visibleRows.contains(i)) {
@@ -293,27 +343,33 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
+    /**
+     * Initializes the game board UI and related components. This method is called automatically when the FXML file is loaded.
+     */
     public void initialize() {
-        // Inizializzazione degli altri componenti...
-
-        // Aggiungi un gestore eventi al GridPane per deselezionare la carta quando si preme su qualsiasi parte del campo di gioco
+        //  Initialization of other components
+        // Add an event handler to the GridPane to deselect the card when clicking anywhere on the game field
         gameGrid.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            // Verifica se la carta è selezionata e deselezionala se necessario
+            //  Check if the card is selected and deselect it if necessary
             deselectCard();
         });
         deckBox.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            // Verifica se la carta è selezionata e deselezionala se necessario
+            //  Check if the card is selected and deselect it if necessary
             deselectCard();
         });
         handBox.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            // Verifica se il clic non è avvenuto direttamente su una delle carte nella handBox
+            // Check if the click did not occur directly on one of the cards in the handBox
             Node clickedNode = event.getPickResult().getIntersectedNode();
             if (!(clickedNode instanceof ImageView && handBox.getChildren().contains(clickedNode))) {
-                // Se il clic non è su una delle immagini delle carte, deseleziona la carta
+                // Add an event handler to the GridPane to deselect the card when clicking anywhere on the game field
                 deselectCard();
             }
         });
     }
+
+    /**
+     * Deselects the currently selected card in the hand or on the game board.
+     */
     private void deselectCard() {
         handCard1.setStyle("-fx-border-width: 0;");
         handCard2.setStyle("-fx-border-width: 0;");
@@ -321,6 +377,11 @@ public class GameController2 extends GenericSceneController {
         removeAddedImages();
     }
 
+    /**
+     * Handles a click event on the first hand card (`handCard1`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     */
     public void handleCard1Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
@@ -340,8 +401,11 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
-
-
+    /**
+     * Handles a click event on the first hand card (`handCard2`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     */
     public void handleCard2Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
@@ -352,13 +416,19 @@ public class GameController2 extends GenericSceneController {
             handCard2.setImage(card_2_back);
             handCard2.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
             card_2_flip = true;
-        }else{
+        }
+        else{
             handCard2.setImage(card_2_front);
             handCard2.setStyle("-fx-border-color: blue; -fx-border-width: 5px;");
             card_2_flip = false;
         }
     }
 
+    /**
+     * Handles a click event on the third hand card (`handCard3`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     */
     public void handleCard3Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
@@ -375,6 +445,12 @@ public class GameController2 extends GenericSceneController {
             card_3_flip = false;
         }
     }
+
+    /**
+     * Opens a dialog for the user to enter card placement coordinates.
+     *
+     * @param i The index of the selected card (likely 1, 2, or 3).
+     */
     public void openPopup(int i){TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Inserisci le coordinate");
         dialog.setHeaderText(null);
@@ -407,7 +483,7 @@ public class GameController2 extends GenericSceneController {
                     showLoadingPopup();
                     client.getTerminal_interface().manageGame();
                 } catch (NumberFormatException e) {
-                    // Se non è possibile parsare le coordinate come numeri, gestisci l'eccezione
+                    // If it's not possible to parse the coordinates as numbers, handle the exception
                     System.err.println("Errore durante il parsing delle coordinate.");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -417,34 +493,45 @@ public class GameController2 extends GenericSceneController {
                     throw new RuntimeException(e);
                 }
             } else {
-                // Se la stringa delle coordinate non ha il formato corretto, gestisci l'errore
+                // If the coordinate string does not have the correct format, handle the error
                 System.err.println("Formato delle coordinate non valido.");
             }
         }, () -> {
-            // Se l'utente ha premuto "Annulla", non fare nulla
+            // If the user has pressed 'Cancel', do nothing
             System.out.println("Popup chiuso senza inserire coordinate");
         });
     }
 
+    /**
+     * Handles a mouse press event on the first hand card (`handCard1`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the press.
+     */
     public void handleCard1Pressed(MouseEvent mouseEvent) {
-        // Avvia un timer quando il mouse viene premuto sulla carta
+        // Start a timer when the mouse is pressed on the card
         clickTimer = new Timer();
         clickTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Quando il timer scatta, imposta il flag per indicare che il clic è stato mantenuto
+                // When the timer fires, set the flag to indicate that the click is maintained
                 clickHeld = true;
                 just_pressed = true;
             }
-        }, 500); // Imposta il ritardo in millisecondi (ad esempio 500 millisecondi)
+        }, 500); // Set the delay in milliseconds (for example, 500 milliseconds)
     }
 
+    /**
+     * Handles a mouse release event on the first hand card (`handCard1`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the release.
+     * @throws IOException  In case of potential I/O exceptions during error message display (implementation detail).
+     */
     public void handleCard1Released(MouseEvent mouseEvent) throws IOException {
 
-        // Interrompi il timer quando il mouse viene rilasciato
+        // Stop the timer when the mouse is released
         clickTimer.cancel();
 
-        // Se il clic è stato mantenuto, esegui l'azione desiderata
+        // If the click is maintained, perform the desired action
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 removeAddedImages();
@@ -471,35 +558,47 @@ public class GameController2 extends GenericSceneController {
             }else{
                 showError("IS NOT YOUR TURN, WAIT !!! ");
             }*/
-        } else {
-            // Altrimenti, esegui un'altra azione (se necessario)
+        }
+        else {
+            // Otherwise, perform another action (if needed)
         }
 
-        // Reimposta il flag per il prossimo utilizzo
+        // Reset the flag for the next use
         clickHeld = false;
 
     }
 
+    /**
+     * Handles a mouse press event on the second hand card (`handCard2`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the press.
+     */
     @FXML
     public void handleCard2Pressed(MouseEvent mouseEvent) {
-        // Avvia un timer quando il mouse viene premuto sulla carta
+        // Start a timer when the mouse is pressed on the card
         clickTimer = new Timer();
         clickTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Quando il timer scatta, imposta il flag per indicare che il clic è stato mantenuto
+                // When the timer fires, set the flag to indicate that the click is maintained
                 clickHeld = true;
                 just_pressed = true;
             }
-        }, 500); // Imposta il ritardo in millisecondi (ad esempio 500 millisecondi)
+        }, 500); // Set the delay in milliseconds (for example, 500 milliseconds)
     }
 
+    /**
+     * Handles a mouse release event on the second hand card (`handCard2`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the release.
+     * @throws IOException  In case of potential I/O exceptions during error message display (implementation detail).
+     */
     @FXML
     public void handleCard2Released(MouseEvent mouseEvent) throws IOException {
-        // Interrompi il timer quando il mouse viene rilasciato
+        // Stop the timer when the mouse is released
         clickTimer.cancel();
 
-        // Se il clic è stato mantenuto, esegui l'azione desiderata
+        // If the click is maintained, perform the desired action
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 removeAddedImages();
@@ -527,32 +626,43 @@ public class GameController2 extends GenericSceneController {
                 showError("IS NOT YOUR TURN, WAIT !!! ");
             }*/
         } else {
-            // Altrimenti, esegui un'altra azione (se necessario)
+            // Otherwise, perform another action (if needed)
         }
 
-        // Reimposta il flag per il prossimo utilizzo
+        // Reset the flag for the next use
         clickHeld = false;
 
     }
 
+    /**
+     * Handles a mouse press event on the third hand card (`handCard3`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the press.
+     */
     public void handleCard3Pressed(MouseEvent mouseEvent) {
-        // Avvia un timer quando il mouse viene premuto sulla carta
+        // Start a timer when the mouse is pressed on the card
         clickTimer = new Timer();
         clickTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Quando il timer scatta, imposta il flag per indicare che il clic è stato mantenuto
+                // When the timer fires, set the flag to indicate that the click is maintained
                 clickHeld = true;
                 just_pressed = true;
             }
-        }, 500); // Imposta il ritardo in millisecondi (ad esempio 500 millisecondi)
+        }, 500);// Set the delay in milliseconds (for example, 500 milliseconds)
     }
 
+    /**
+     * Handles a mouse release event on the third hand card (`handCard3`).
+     *
+     * @param mouseEvent The MouseEvent object associated with the release.
+     * @throws IOException  In case of potential I/O exceptions during error message display (implementation detail).
+     */
     public void handleCard3Released(MouseEvent mouseEvent) throws IOException {
-        // Interrompi il timer quando il mouse viene rilasciato
+        // Stop the timer when the mouse is released
         clickTimer.cancel();
 
-        // Se il clic è stato mantenuto, esegui l'azione desiderata
+        // If the click is maintained, perform the desired action
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 removeAddedImages();
@@ -579,46 +689,69 @@ public class GameController2 extends GenericSceneController {
                 showError("IS NOT YOUR TURN, WAIT !!! ");
             }*/
         } else {
-            // Altrimenti, esegui un'altra azione (se necessario)
+            // Otherwise, perform another action (if needed)
         }
 
-        // Reimposta il flag per il prossimo utilizzo
+        // Reset the flag for the next use
         clickHeld = false;
 
     }
 
-    // Metodo per mostrare un messaggio di errore
+    /**
+     * Shows an error message to the user.
+     *
+     * @param message The message to display in the error dialog.
+     */
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
         alert.setHeaderText(null);
         alert.showAndWait();
     }
 
+    /**
+     * Shows a temporary loading popup to the user.
+     */
     public void showLoadingPopup() {
-        // Crea un alert di tipo INFORMATION per il loading
+        // Create an INFORMATION type alert for loading
         Alert loadingAlert = new Alert(Alert.AlertType.INFORMATION, "Loading...", ButtonType.OK);
         loadingAlert.setHeaderText(null);
         loadingAlert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false); // Nasconde il pulsante OK
 
-        // Mostra l'alert
+        // show alert
         loadingAlert.show();
 
-        // Crea un timeline per chiudere l'alert dopo 1 secondo
+        // Create a timeline to close the alert after 1 second
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             loadingAlert.close();
         }));
 
-        // Fa partire il timeline
+        // Start the timeline
         timeline.setCycleCount(1);
         timeline.play();
     }
 
+    /**
+     * Sends a function object to the client.
+     *
+     * @param function The SendFunction object to be sent.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     private void sendFunction(SendFunction function) throws IOException, InterruptedException, ClassNotFoundException {
         client.drawCard(function);
         showLoadingPopup();
         client.getTerminal_interface().manageGame();
     }
 
+    /**
+     * Handles a mouse click event on the gold deck UI element.
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     public void handleGoldDeckClick(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
             function = new SendDrawGold(token_client);
@@ -628,8 +761,14 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
-
-
+    /**
+     * Handles a mouse click event on the resource deck UI element.
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     public void handleResourceDeckClick(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
             function = new SendDrawResource(token_client);
@@ -638,6 +777,14 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
+    /**
+     * Handles a mouse click event on the center card at index 0.
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     public void handleCenterCard_0Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(!errorDrawState()){
             function = new SendDrawCenter(token_client, 0);
@@ -646,6 +793,14 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
+    /**
+     * Handles a mouse click event on the center card at index 1.
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     public void handleCenterCard_1Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
             function = new SendDrawCenter(token_client, 1);
@@ -654,6 +809,14 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
+    /**
+     * Handles a mouse click event on the center card at index 2.
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     public void handleCenterCard_2Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
             function = new SendDrawCenter(token_client, 2);
@@ -662,6 +825,14 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
+    /**
+     * Handles a mouse click event on the center card at index 3.
+     *
+     * @param mouseEvent The MouseEvent object associated with the click.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     public void handleCenterCard_3Click(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
             function = new SendDrawCenter(token_client, 3);
@@ -670,7 +841,12 @@ public class GameController2 extends GenericSceneController {
         }
     }
 
-
+    /**
+     * Checks if the current game state allows drawing a card.
+     *
+     * @return True if drawing is not allowed, False otherwise.
+     * @throws IOException  In case of potential I/O exceptions during error message display (implementation detail).
+     */
     private boolean errorDrawState() throws IOException {
         if(! super.client.getMiniModel().getState().equals("DRAW_CARD")){
             showError("IS NOT YOUR TURN, WAIT !!! ");
@@ -679,6 +855,11 @@ public class GameController2 extends GenericSceneController {
         else return false;
     }
 
+    /**
+     * Updates the visual representation of the resource and gold decks based on the game state.
+     *
+     * @throws IOException  In case of potential I/O exceptions during image loading.
+     */
     private void updateDecks() throws IOException {
         if(super.client.getMiniModel().getTop_resource() == null){
             file = new File("src/resources/Card/Bianco.png");
@@ -689,7 +870,6 @@ public class GameController2 extends GenericSceneController {
             image = new Image(file.toURI().toString());
             this.resurce_deck.setImage(image);
         }
-
         if(super.client.getMiniModel().getTop_gold() == null){
             file = new File("src/resources/Card/Bianco.png");
             image = new Image(file.toURI().toString());
@@ -700,13 +880,17 @@ public class GameController2 extends GenericSceneController {
             this.gold_deck.setImage(image);}
     }
 
+    /**
+     * Updates the visual representation of the center cards based on the game state.
+     *
+     * @throws IOException  In case of potential I/O exceptions during image loading.
+     */
     private void updateCardsCenter() throws IOException {
 
         PlayCard card0 = super.client.getMiniModel().getCards_in_center().getGold_list().get(0);
         PlayCard card1 = super.client.getMiniModel().getCards_in_center().getGold_list().get(1);
         PlayCard card2 = super.client.getMiniModel().getCards_in_center().getResource_list().get(0);
         PlayCard card3 = super.client.getMiniModel().getCards_in_center().getResource_list().get(1);
-
 
         file = new File(card0.front_side_path);
         image = new Image(file.toURI().toString());
@@ -725,6 +909,11 @@ public class GameController2 extends GenericSceneController {
         this.center_card_3.setImage(image);
     }
 
+    /**
+     * Updates the visual representation of the cards in the player's hand based on the game state.
+     *
+     * @throws IOException  In case of potential I/O exceptions during image loading.
+     */
     private void updateCardsInHand() throws IOException {
         card_1  = super.client.getMiniModel().getCards_in_hand().get(0);
         if(card_1.front_side_path != null){
@@ -775,12 +964,17 @@ public class GameController2 extends GenericSceneController {
             handCard3.setImage(card_3_front);
         }
 
-
-
-
-
     }
 
+    /**
+     * Adds a clickable card image to the game grid UI at a specific location.
+     *
+     * @param i  An index used for internal tracking.
+     * @param row  The row position in the grid where the image will be placed.
+     * @param col  The column position in the grid where the image will be placed.
+     * @param card  The PlayCard data object associated with the image.
+     * @param imagePath  The path to the image file representing the card.
+     */
     private void addClickableCardImageToGrid(int i, int row, int col, PlayCard card, String imagePath) {
         File file = new File(imagePath);
         Image image = new Image(file.toURI().toString());
@@ -795,10 +989,10 @@ public class GameController2 extends GenericSceneController {
 
         gameGrid.add(stackPane, col, row, 2, 2); // Occupy 2 columns and 2 rows
 
-        // Aggiungi l'imageView alla lista delle immagini aggiunte
+        // Add the imageView to the list of added images
         addedImageViews.add(stackPane);
 
-        // Aggiungi un evento di rilascio del mouse per gestire il clic
+        // Add a mouse release event to handle the click
         imageView.setOnMouseReleased(event -> {
             try {
                 handleCardImageClick(imageView);
@@ -807,7 +1001,7 @@ public class GameController2 extends GenericSceneController {
             }
         });
 
-        // Animazione di fading
+        // fading animation
         FadeTransition fadeIn = new FadeTransition(Duration.millis(1000), stackPane);
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
@@ -815,7 +1009,14 @@ public class GameController2 extends GenericSceneController {
         fadeIn.play();
     }
 
-
+    /**
+     * Handles a click event on a ClickableCardImageView element in the game grid.
+     *
+     * @param imageView  The ClickableCardImageView object representing the clicked card.
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  In case the thread is interrupted while waiting for the client response.
+     * @throws ClassNotFoundException  In case the client sends an unrecognized class type.
+     */
     private void handleCardImageClick(ClickableCardImageView imageView) throws IOException, InterruptedException, ClassNotFoundException {
         int row = imageView.getRow();
         int col = imageView.getCol();
@@ -835,15 +1036,18 @@ public class GameController2 extends GenericSceneController {
         client.selectAndInsertCard(i,row,col,flipped);
         showLoadingPopup();
         client.getTerminal_interface().manageGame();
-        // Qui puoi gestire l'evento di clic sull'immagine, utilizzando le coordinate row e col
+        // Here you can handle the click event on the image, using the row and col coordinates.
         System.out.println("Clicked on image at row: " + row + ", col: " + col);
-        // Puoi anche accedere all'oggetto PlayCard associato all'immagine cliccata
+        // You can also access the PlayCard object associated with the clicked image.
         System.out.println("Associated PlayCard: " + card);
     }
 
+    /**
+     * Removes all previously added card images from the game grid with a fade-out animation.
+     */
     private void removeAddedImages() {
         for (Node node : addedImageViews) {
-            // Animazione di fading inversa prima di rimuovere l'immagine
+            // Reverse fading animation before removing the image
             FadeTransition fadeOut = new FadeTransition(Duration.millis(500), node);
             fadeOut.setFromValue(1.0);
             fadeOut.setToValue(0.0);
@@ -851,8 +1055,7 @@ public class GameController2 extends GenericSceneController {
             fadeOut.setOnFinished(event -> gameGrid.getChildren().remove(node));
             fadeOut.play();
         }
-        addedImageViews.clear(); // Pulisci la lista
+        addedImageViews.clear(); // clear the list
     }
-
 
 }

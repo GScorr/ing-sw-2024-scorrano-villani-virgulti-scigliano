@@ -17,6 +17,10 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class implements the controller for the "Choose Starting Side" scene in the game's GUI.
+ * It allows the player to choose which side (front or back) of their starting card to use.
+ */
 public class ChooseStartingController extends GenericSceneController {
 
     @FXML
@@ -33,7 +37,16 @@ public class ChooseStartingController extends GenericSceneController {
     @FXML
     private AnchorPane HeaderInclude;
 
-
+    /**
+     * Initializes the scene by:
+     *  - Loading the header scene and setting its controller properties.
+     *  - Loading images for both sides of the starting card.
+     *  - If the card placement hasn't been confirmed by the server, shows a buffering message and starts checking the client state.
+     *
+     * @throws IOException If there's an error loading FXML or images.
+     * @throws ClassNotFoundException If there's a class not found exception during header initialization.
+     * @throws InterruptedException If the thread checking client state is interrupted.
+     */
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
 
         //header
@@ -43,8 +56,10 @@ public class ChooseStartingController extends GenericSceneController {
         headerController.setThe_client(super.client);
         System.out.println("--------------------" + scene_controller);
         headerController.setScene(scene_controller);
-        // Aggiungi l'header alla posizione desiderata nel layout principale
-        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+
+        // Add the header to the desired position in the main layout
+        // For example, if headerInclude is an AnchorPane, you can add the header like this:
+
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
 
@@ -63,6 +78,15 @@ public class ChooseStartingController extends GenericSceneController {
         }
     }
 
+    /**
+     * Handles clicking on the card image view representing the front side.
+     * Sends a message to the client indicating choosing the front side.
+     * Shows a buffering message and starts checking the client state.
+     *
+     * @param event The MouseEvent triggered by clicking the card.
+     * @throws IOException If there's an error communicating with the client.
+     * @throws InterruptedException If the thread checking client state is interrupted.
+     */
     @FXML
     private void handleCard1Click(MouseEvent event) throws IOException, InterruptedException {
         System.out.println("Card 1 selected");
@@ -71,6 +95,15 @@ public class ChooseStartingController extends GenericSceneController {
         checkClientState();
     }
 
+    /**
+     * Handles clicking on the card image view representing the back side.
+     * Sends a message to the client indicating choosing the back side.
+     * Shows a buffering message and starts checking the client state.
+     *
+     * @param event The MouseEvent triggered by clicking the card.
+     * @throws IOException If there's an error communicating with the client.
+     * @throws InterruptedException If the thread checking client state is interrupted.
+     */
     @FXML
     private void handleCard2Click(MouseEvent event) throws IOException, InterruptedException {
         System.out.println("Card 2 selected");
@@ -79,13 +112,17 @@ public class ChooseStartingController extends GenericSceneController {
         checkClientState();
     }
 
+    /**
+     * Shows a "Buffering... Please wait." message at the bottom of the scene and disables the card image views.
+     * Also starts an animation that changes the message text slightly every second.
+     */
     private void showBufferingLabel() {
         Platform.runLater(() -> {
             card1.setDisable(true);
             card2.setDisable(true);
             bottomLabel.setText("Buffering... Please wait .");
 
-            // Inizializza l'animazione di buffering dinamico
+            // initialize the dynamic buffering animation
             bufferingTimeline = new Timeline(
                     new KeyFrame(Duration.ZERO, e -> bottomLabel.setText("Buffering... Please wait")),
                     new KeyFrame(Duration.seconds(1), e -> bottomLabel.setText("Buffering. Please wait.")),
@@ -97,6 +134,9 @@ public class ChooseStartingController extends GenericSceneController {
         });
     }
 
+    /**
+     * Hides the buffering message and stops the animation.
+     */
     private void hideBufferingLabel() {
         card1.setDisable(true);
         card2.setDisable(true);
@@ -110,6 +150,11 @@ public class ChooseStartingController extends GenericSceneController {
         });
     }
 
+    /**
+     * Starts a background thread to periodically check the client state.
+     * The thread keeps checking if the game state is still "CHOOSE_SIDE_FIRST_CARD".
+     * If the state changes, the thread stops the buffering animation, hides the message, and calls the `manageGame` method of the terminal interface (likely to handle the next scene).
+     */
     private void checkClientState() {
         new Thread(() -> {
             while (true) {
@@ -124,8 +169,7 @@ public class ChooseStartingController extends GenericSceneController {
                     throw new RuntimeException(e);
                 }
             }
-
-            // Quando lo stato cambia, nascondi l'etichetta di buffering
+            //when the state change, hide the buffering label
             hideBufferingLabel();
             try {
                 super.client.getTerminal_interface().manageGame();
@@ -136,7 +180,8 @@ public class ChooseStartingController extends GenericSceneController {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            // Cambia scena
+            // change scene
         }).start();
     }
+
 }

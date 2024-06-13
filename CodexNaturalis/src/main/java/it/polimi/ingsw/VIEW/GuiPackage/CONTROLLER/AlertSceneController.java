@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * This class implements the controller of a generic Alert Scene.
+ * This class implements the controller for a generic Alert Scene in the game's GUI.
  */
 public class AlertSceneController extends GenericSceneController {
     @FXML
@@ -28,7 +28,12 @@ public class AlertSceneController extends GenericSceneController {
         this.stage = stage;
     }
 
-
+    /**
+     * Handles the click event on the "OK" button.
+     * Closes the alert scene and calls the `emptyField` method on the active controller within the main scene.
+     *
+     * The ActionEvent triggered by clicking the button.
+     */
     @FXML
     private void handleOkAction() {
         if (stage != null) {
@@ -40,4 +45,5 @@ public class AlertSceneController extends GenericSceneController {
     public void setController (SceneController scene){
         this.controller = scene;
     }
+
 }
