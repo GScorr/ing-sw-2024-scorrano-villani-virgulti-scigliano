@@ -143,9 +143,9 @@
             <Label text="Carta 1:" />
             <ImageView fx:id="handCard1" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" onMouseDragged="#handleCard1MouseDragged" onDragDetected="#handleCard1DragDetected" onDragDone="#handleCard1DragDone" preserveRatio="true" />
             <Label text="Carta 2:" />
-            <ImageView fx:id="handCard2" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" preserveRatio="true" />
+            <ImageView fx:id="handCard2" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" onMouseDragged="#handleCard1MouseDragged" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" preserveRatio="true" />
             <Label text="Carta 3:" />
-            <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
+            <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" onMouseDragged="#handleCard1MouseDragged" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" preserveRatio="true" />
          <Label layoutX="89.0" layoutY="515.0" text="num resources" />
         <GridPane fx:id="gridPane" prefHeight="293.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
             <columnConstraints>
