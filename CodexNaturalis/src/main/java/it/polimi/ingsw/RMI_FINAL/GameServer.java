@@ -207,6 +207,10 @@ public class GameServer implements VirtualGameServer, Serializable {
             c.pushBack(message);}
     }
 
+    private void broadcastMessageOneClient( ResponseMessage message, VirtualViewF c) throws IOException {
+        c.pushBack(message);
+    }
+
     /**
      * Adds a function to a queue for later processing.
      *
@@ -320,7 +324,9 @@ public class GameServer implements VirtualGameServer, Serializable {
      * Starts a thread to check for deadlines and handle potential game end scenarios.
      */
     private void checkDeadline() {
+
         new Thread(() -> {
+            VirtualViewF alone_client;
             String tokenalive;
             boolean end = true;
             while(end) {
@@ -330,16 +336,21 @@ public class GameServer implements VirtualGameServer, Serializable {
                     throw new RuntimeException(e);
                 }
                 if(token_to_player.size() >= controller.getGame().getMax_num_player()) {
-
+                        UpdateMessage message_update;
                         int last_man_standing = 0;
                         try{if (controller.isAlone()) {
                             checkEndDisconnect();
                             try {
+                                alone_client = clientsRMI.get(0);
                                 int countdown = 45;
-                                broadcastMessage(new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown));
+                                message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
+                                message_update.isAlone = true;
+                                broadcastMessageOneClient(message_update, alone_client );
                                 Thread.sleep(1500);
                                 while( countdown > 0 && controller.isAlone()) {
-                                    broadcastMessage(new UpdateMessage(countdown + " SECONDS LEFT"));
+                                    message_update = new UpdateMessage(countdown + " SECONDS LEFT");
+                                    message_update.isAlone = true;
+                                    broadcastMessageOneClient(message_update,  alone_client );
                                     checkEndDisconnect();
                                     countdown--;
                                     Thread.sleep(1000);
@@ -348,13 +359,18 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     for (String t : token_to_player.keySet()) {
                                         PState end_game = new EndGame(token_to_player.get(t));
                                         token_to_player.get(t).setPlayer_state(end_game);
-                                        if ( !token_to_player.get(t).isDisconnected() ) broadcastMessage(new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!"));
+                                        message_update = new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!");
+                                        message_update.win = true;
+                                        if ( !token_to_player.get(t).isDisconnected() ) broadcastMessageOneClient(message_update,  alone_client);
                                         end = false;
                                         endConnection();
                                     }
                                 }else{
                                     setAllStates();
-                                    broadcastMessage(new UpdateMessage("PLAYER RECONNECTED CONTINUE YOUR GAME")); }
+                                    message_update = new UpdateMessage("PLAYER RECONNECTED CONTINUE YOUR GAME");
+                                    message_update.isAlone = false;
+                                    broadcastMessageOneClient(message_update,  alone_client );
+                                }
                             } catch (IOException | InterruptedException  e) {
                                 throw new RuntimeException(e);
                             }

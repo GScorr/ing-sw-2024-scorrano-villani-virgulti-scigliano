@@ -2,6 +2,9 @@ package it.polimi.ingsw.RMI_FINAL.MESSAGES;
 
 import it.polimi.ingsw.MODEL.GameField;
 
+import java.io.IOException;
+import java.rmi.NotBoundException;
+
 /**
  * Response message for sending an update message to the client.
  *
@@ -9,6 +12,10 @@ import it.polimi.ingsw.MODEL.GameField;
 public class UpdateMessage extends ResponseMessage{
 
     private String message;
+
+    public boolean isAlone;
+
+    public boolean win = false;
 
     private GameField gamefield;
 
@@ -29,8 +36,9 @@ public class UpdateMessage extends ResponseMessage{
      *
      */
     @Override
-    public void action(){
-        System.out.println(message);
+    public void action() throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
+        virtual_view.getTerminal_interface().printUpdateMessage(this.message);
+        virtual_view.getTerminal_interface().startCountdown(message, isAlone);
     }
 
 }

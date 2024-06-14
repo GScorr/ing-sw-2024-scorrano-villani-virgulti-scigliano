@@ -104,4 +104,5 @@ public interface VirtualViewF extends Remote {
     void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException;
 
 
+
 }

@@ -1,10 +1,12 @@
 package it.polimi.ingsw.RMI_FINAL.MESSAGES;
 
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
+import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.rmi.NotBoundException;
 import java.util.List;
 
 /**
@@ -18,13 +20,17 @@ import java.util.List;
 public abstract class ResponseMessage implements Serializable {
 
     public clientSocket client;
-
+    public VirtualViewF virtual_view;
     List<SocketRmiControllerObject> free_games_Socket;
 
     public void setClient(clientSocket client){
         this.client = client;
     }
-/*
+
+    public void setVirtual_view(VirtualViewF virtual_view) {
+        this.virtual_view = virtual_view;
+    }
+    /*
 da eliminare
     public void setFree_games(List<SocketRmiControllerObject> free_games) {
         this.free_games_Socket = free_games;
@@ -37,6 +43,6 @@ da eliminare
      *
      * @throws IOException  if an I/O error occurs while performing the action
      */
-    public void action() throws IOException {}
+    public void action() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {}
 
 }

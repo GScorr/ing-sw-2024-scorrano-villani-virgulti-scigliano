@@ -13,6 +13,7 @@ import java.rmi.NotBoundException;
 public interface GraficInterterface extends Serializable {
 
     void printError(String a);
+    void printUpdateMessage(String message);
 
     public void setUsername(String username);
     void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException;
@@ -22,10 +23,11 @@ public interface GraficInterterface extends Serializable {
     void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException;
     void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException;
     void manageGame() throws IOException, InterruptedException, ClassNotFoundException;
-
+    void startCountdown(String message, boolean still_alone) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException;
     String getName();
     void setToken(String token);
     public void setNewClient(boolean newClient);
+    public boolean getIsAlone();
 
     void buffering() throws  InterruptedException;
     public void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
