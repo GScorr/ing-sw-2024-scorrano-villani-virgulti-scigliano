@@ -141,6 +141,7 @@
     <left>
         <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" spacing="10" BorderPane.alignment="TOP_LEFT">
             <VBox alignment="CENTER">
+                <Label fx:id="playerNameLabel" text="Player Name" style="-fx-font-weight: bold;" />
                 <Label text="Your color:" />
                 <Circle fx:id="playerColorCircle" radius="10.0" />
             </VBox>

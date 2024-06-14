@@ -406,6 +406,14 @@ public class GameServer implements VirtualGameServer, Serializable {
         return list;
     }
 
+    public List<GameField> getGameFields() throws IOException{
+        List<GameField> list = new ArrayList<>();
+        for ( String t : token_to_player.keySet() )
+            list.add(token_to_player.get(t).getGameField());
+
+        return list;
+    }
+
     /**
      * Handles private chat messages between two players.
      *

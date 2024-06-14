@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="small fixes pt.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualGameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/VirtualGameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,8 +276,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Common_Client" />
+        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Gui_Initialization" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
@@ -318,14 +321,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00140" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1716298608261</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1716298608262</updated>
     </task>
     <task id="LOCAL-00141" summary="agg">
       <option name="closed" value="true" />
@@ -711,7 +706,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718330599808</updated>
     </task>
-    <option name="localTasksCounter" value="189" />
+    <task id="LOCAL-00189" summary="small fixes">
+      <option name="closed" value="true" />
+      <created>1718364488716</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1718364488716</updated>
+    </task>
+    <option name="localTasksCounter" value="190" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -746,7 +749,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="manage game TUI" />
     <MESSAGE value="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)" />
     <MESSAGE value="agiornamento" />
     <MESSAGE value="bug fixing tui, rmi client, game server" />
@@ -771,7 +773,8 @@
     <MESSAGE value="Revisione commenti fine RMI, manca Gameserver" />
     <MESSAGE value="." />
     <MESSAGE value="small fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="small fixes" />
+    <MESSAGE value="small fixes pt.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fixes pt.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
