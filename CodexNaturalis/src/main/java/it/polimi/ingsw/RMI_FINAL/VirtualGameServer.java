@@ -15,6 +15,11 @@ import java.rmi.Remote;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This interface defines methods for a virtual game server used in a Remote Method Invocation (RMI) system.
+ * The server manages game logic, player interactions, and communication for a game session.
+ *
+ */
 public interface VirtualGameServer extends Remote {
     public boolean getFull() throws IOException;
 
@@ -34,17 +39,17 @@ public interface VirtualGameServer extends Remote {
 
     public void insertCard(String token, int index, int x, int y, boolean flipped) throws IOException, ControllerException;
 
-    public void peachFromGoldDeck(String token) throws IOException;
+    public void peachFromGoldDeck(String token) throws IOException, InterruptedException;
 
-    public void peachFromResourceDeck(String token) throws IOException;
+    public void peachFromResourceDeck(String token) throws IOException, InterruptedException;
 
 
     public void showCardsInCenter(String token) throws IOException;
 
 
-    public void wakeUp(String s, VirtualViewF client)throws IOException;
+    public void wakeUp(String s, VirtualViewF client) throws IOException, InterruptedException;
 
-    public void peachFromCardsInCenter(String token, int index) throws IOException;
+    public void peachFromCardsInCenter(String token, int index) throws IOException, InterruptedException;
 
     public void getPoints(String token) throws IOException;
 
@@ -58,4 +63,6 @@ public interface VirtualGameServer extends Remote {
     public Map<String, Integer> getToken_to_index() throws IOException;
 
     public void chattingGlobal(ChatMessage message) throws IOException;
+
+    PlayCard showStartingCardGUI(String token)  throws IOException;
 }

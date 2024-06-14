@@ -7,9 +7,21 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The state where the player chooses a goal.
+ *
+ */
 public class ChooseGoal implements PState, Serializable {
+
+    /**
+     * reference to the player
+     */
     Player player;
 
+    /**
+     *
+     * @param player
+     */
     public ChooseGoal(Player player) {
         this.player = player;
     }
@@ -29,37 +41,77 @@ public class ChooseGoal implements PState, Serializable {
         return false;
     }
 
+    /**
+     * Selects a goal card
+     *
+     * @param i the index of the goal card to select
+     * @return `true` if the goal selection was successful, otherwise `false`
+     */
     @Override
     public boolean selectGoal(int i) {
         this.player.selectGoal(i);
         return true;
     }
 
+    /**
+     * Selects a the side of the card
+     *
+     * @param index the index of the card to select
+     * @param flip whether to flip the card (true) or keep it face down (false)
+     * @return `true` if the card selection was successful, otherwise `false`
+     */
     public boolean selectSideCard(int index, boolean flip){
         player.selectSideCard(index,flip);
         return true;
     }
 
+    /**
+     * the followers method are not implemented in the begin state because no action will be acepted in this state
+     */
+
+    /**
+     * @param flipped whether to flip the starting card (true) or keep it face down (false)
+     * @return always returns `false` as starting card selection orientation is not allowed
+     */
     @Override
     public boolean selectStartingCard(boolean flipped) {
         return false;
     }
 
+    /**
+     * @param index the index of the card to place in the player's hand
+     * @param flipped whether to flip the card (true) or keep it face down (false)
+     * @param x the x-coordinate of the placement location
+     * @param y the y-coordinate of the placement location
+     * @return always returns `false` as card placement is not allowed
+     */
     @Override
     public boolean placeCard(int index, boolean flipped, int x, int y) {
         return false;
     }
 
+    /**
+     * @return always returns `false` as taking a card from the Gold Deck is not allowed
+     */
     @Override
     public boolean peachCardFromGoldDeck() {
         return false;
     }
 
+    /**
+     *
+     * @return always returns `false` as taking a card from the Resources Deck is not allowed
+     */
     @Override
     public boolean peachFromResourcesDeck() {
         return false;
     }
 
+    /**
+     *
+     * @param i the index of the card to take from the center cards
+     * @return always returns `false` as taking a card from the center cards is not allowed
+     */
     @Override
     public boolean peachFromCardsInCenter(int i) {
         return false;
@@ -69,4 +121,5 @@ public class ChooseGoal implements PState, Serializable {
     public String getNameState() {
         return "CHOOSE_GOAL";
     }
+
 }

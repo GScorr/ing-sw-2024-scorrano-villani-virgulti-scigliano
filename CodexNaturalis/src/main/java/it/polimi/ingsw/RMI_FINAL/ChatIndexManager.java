@@ -3,7 +3,15 @@ package it.polimi.ingsw.RMI_FINAL;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Manages chat indexes for efficient retrieval of chat conversations between players.
+ *
+ * This class uses a HashMap to store a mapping between player IDs. Given two player IDs,
+ * it efficiently retrieves the index of the corresponding chat conversation for those players.
+ *
+ */
 public class ChatIndexManager {
+
     private final Map<Integer, Map<Integer, Integer>> chatIndexMap = new HashMap<>();
 
     public ChatIndexManager() {
@@ -38,4 +46,5 @@ public class ChatIndexManager {
         }
         return null;
     }
+
 }

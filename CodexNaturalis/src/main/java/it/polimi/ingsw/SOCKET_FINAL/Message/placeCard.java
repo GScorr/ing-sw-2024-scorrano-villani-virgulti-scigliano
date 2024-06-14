@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * A class representing a message sent from the client to the server
+ * requesting to place a card on the board.
+ *
+ */
 public class placeCard implements Message, Serializable {
 
     public Server server;
@@ -45,8 +50,6 @@ public class placeCard implements Message, Serializable {
         this.token = token;
     }
 
-
-
     public void setServer(Server server) {
         this.server = server;
     }
@@ -55,9 +58,17 @@ public class placeCard implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Sends a request to the RMI controller to place a card on the board
+     * based on the specified parameters. Also sends a temporary response message
+     * to the client (implementation might change).
+     *
+     * @throws IOException if an I/O error occurs while sending the message
+     * @throws ControllerException if a controller error occurs during placement
+     */
     @Override
     public void action() throws IOException, ControllerException {
-        SendFunction function = new SendInsertCard(token, index-1, x,y,flipped);
+        SendFunction function = new SendInsertCard(token, index, x,y,flipped);
         rmi_controller.addQueue(function);
         ResponseMessage message = new placeCardResponse();
         output.writeObject(message);

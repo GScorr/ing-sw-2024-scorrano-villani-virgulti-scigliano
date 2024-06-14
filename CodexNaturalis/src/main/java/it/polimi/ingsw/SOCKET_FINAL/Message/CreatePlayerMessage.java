@@ -7,13 +7,16 @@ import it.polimi.ingsw.SOCKET_FINAL.Server;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to register a new player.
+ * This message likely contains the player's chosen name.
+ */
 public class CreatePlayerMessage implements Message, Serializable {
 
     public Server server;
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -28,22 +31,22 @@ public class CreatePlayerMessage implements Message, Serializable {
     }
 
     public String nome,token;
+    /*
+    da eliminare
     public CreatePlayerMessage(String nome){
         this.nome = nome;
-
     }
 
-
+     */
 
     public void setServer(Server server) {
         this.server = server;
     }
+
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
 
     @Override
-    public void action() {
-
-    }
+    public void action() {}
 }

@@ -7,9 +7,13 @@ import it.polimi.ingsw.SOCKET_FINAL.Server;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+/**
+ * This interface defines the common functionality for messages sent
+ * between the client and the server.
+ */
 public interface Message  {
     static int id = 0;
-    void action() throws IOException, InterruptedException;
+    void action() throws IOException, InterruptedException, ClassNotFoundException;
 
     void setServer(Server server);
     void setOutput(ObjectOutputStream output);

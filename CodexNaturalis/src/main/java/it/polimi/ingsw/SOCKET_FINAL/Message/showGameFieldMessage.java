@@ -7,13 +7,12 @@ import it.polimi.ingsw.SOCKET_FINAL.Server;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
+/*
+da eliminare probabilmente
+ */
 public class showGameFieldMessage implements Message, Serializable {
 
     public String token;
-
-
-
     public Server server;
     public Common_Server common;
 

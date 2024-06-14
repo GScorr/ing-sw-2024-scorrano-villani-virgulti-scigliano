@@ -7,6 +7,13 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class rappresent the state when the game is not initialized
+ * and no action are allowed
+ *
+ * the followers method are not implemented in the begin state because no action will be acepted in this state
+ *
+ */
 public class NotInitialized implements PState, Serializable {
     Player player;
 

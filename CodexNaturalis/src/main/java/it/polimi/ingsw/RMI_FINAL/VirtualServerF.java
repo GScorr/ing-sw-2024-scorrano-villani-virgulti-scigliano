@@ -8,6 +8,10 @@ import java.rmi.Remote;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This interface defines methods for a virtual server used in a Remote Method Invocation (RMI) system.
+ * The server manages game creation, player connections, and access to game servers.
+ */
 public interface VirtualServerF extends Remote {
     public void connect(VirtualViewF client)throws IOException;
     public String createToken(VirtualViewF client ) throws  IOException;
@@ -16,15 +20,12 @@ public interface VirtualServerF extends Remote {
     public Map<String, GameServer> getTtoR() throws IOException;
     public Map<Integer, GameServer> getListRmiController() throws  IOException;
     public int createGame(String game_name, int num_player, String p_token, String player_name,VirtualViewF client) throws IOException, InterruptedException;
- //   public int createGameSocket(String name, int num_player, String p_token, String player_name) throws IOException;
     public boolean addPlayer(Integer game_id, String token, String name,VirtualViewF client) throws IOException, InterruptedException;
-   // public boolean addPlayerSocket(Integer game_id, String p_token, String name) throws IOException;
     public List<VirtualViewF> getListClient() throws IOException;
     public List<GameServer> getFreeGames() throws IOException;
     public List<SocketRmiControllerObject> getFreeGamesSocket() throws IOException;
-    public String checkName(String name, VirtualViewF client) throws IOException;
+    public String checkName(String name, VirtualViewF client) throws IOException, InterruptedException;
     public boolean findRmiController(Integer id, String p_token, String player_name, VirtualViewF client) throws IOException, InterruptedException;
-  //  public boolean findRmiControllerSocket(Integer game_id, String p_token, String player_name) throws IOException;
     public GameServer getRmiController(String token) throws IOException;
     public void receiveHeartbeat(String token) throws IOException;
     int getPort(String token) throws IOException;

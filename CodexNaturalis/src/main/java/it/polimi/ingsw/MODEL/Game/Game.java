@@ -6,34 +6,33 @@ import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
 import it.polimi.ingsw.MODEL.DeckPackage.Deck;
 import it.polimi.ingsw.MODEL.DeckPackage.DeckGoalCard;
 import it.polimi.ingsw.MODEL.Game.State.*;
-import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
-
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /*
-@Davide
-TODO:
+    todo
+        eliminare i metodi commmentati
+ */
 
-
-
-@Fra
-
-TODO:
-     -bisogna definire un END_GAME state
-
-
-
-*/
-
-
+/**
+ * This class manages the overall game state and flow.
+ */
 public class Game implements Serializable {
+
+    /**
+     * creation of the deck
+     */
     DeckCreation creation;
+
+    /**
+     * istantiation of player used during th game
+     */
     private int max_num_player;
     private int num_player;
     private Player player1;
@@ -43,17 +42,28 @@ public class Game implements Serializable {
     private Integer index_game;
     private String name;
 
-
+    /**
+     * this map stores associations between a player's unique index and the corresponding player object
+     */
     private Map<Integer,Player> get_player_index = new HashMap<>();
+
+    /**
+     * common goal for the game
+     */
     private Goal goal1;
     private Goal goal2;
 
+    /**
+     * deck and the center card for the game
+     */
     private CenterCards cards_in_center;
     private Deck gold_deck,resources_deck, starting_cards_deck;
     private DeckGoalCard goal_deck;
     private List<Chat> chats = new ArrayList<>();
 
-
+    /**
+     *
+     */
     private GameState not_initialized = new NotInitialized(this),
               begin = new Begin(this),
               choosing_goal = new CHOOSING_GOAL(this),
@@ -61,8 +71,6 @@ public class Game implements Serializable {
               turn = new Turn(this),
               end_game = new EndGame(this);
     public  GameState actual_state;
-
-
 
 
     public Goal getGoal1() {
@@ -76,6 +84,8 @@ public class Game implements Serializable {
     public int getNumPlayer() {
         return num_player;
     }
+
+    /* da eliminare
     public void setNumPlayer(int num_player) {
         this.num_player = num_player;
     }
@@ -90,6 +100,8 @@ public class Game implements Serializable {
         if( player_index < 0 || player_index > num_player )  System.out.printf("\n ERROR: INDEX EXCEED DOMAIN");
         return get_player_index.get(player_index).getGameField();
     }
+
+     */
 
     public int getMax_num_player() {
         return max_num_player;
@@ -111,19 +123,21 @@ public class Game implements Serializable {
         return resources_deck;
     }
 
-    //crezione dei deck
-    // scelta max_num_player
+    //da cancellare -- chiedere a fra
     public Game( /* DeckGoalCard goal_deck */ int max_num_player) {
         this.creation = new DeckCreation();
+
+        /*  DECK NON MISCHIATO
         this.gold_deck = new Deck(creation.getGoldDeck());
         this.resources_deck = new Deck(creation.getResourcesDeck());
+         */
 
-        /*  -- DECK MISCHIATO NON UTILE PER I TEST, POI BISOGNERÀ TORNARE AL DECK MISCHIATO
 
+        //Deck Mischiato
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
 
-         */
+
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
         this.max_num_player = max_num_player;
@@ -134,12 +148,18 @@ public class Game implements Serializable {
         }
     }
 
-    public Game( /* DeckGoalCard goal_deck */ String name, int max_num_player) {
+    /**
+     * contstructor of the class
+     * @param name
+     * @param max_num_player
+     */
+    public Game(String name, int max_num_player) {
         this.creation = new DeckCreation();
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
+
         this.max_num_player = max_num_player;
         this.actual_state = not_initialized;
         this.index_game = IndexManagerF.getNextIndex();
@@ -149,7 +169,12 @@ public class Game implements Serializable {
         }
     }
 
-
+    /**
+     * Inserts a player into the game.
+     *
+     * @param player the player to insert
+     * @throws IllegalArgumentException if the number of players already reaches the maximum (4)
+     */
     public void insertPlayer(Player player){
             if(num_player == 0){
                 this.player1 = player;
@@ -172,29 +197,48 @@ public class Game implements Serializable {
 
     }
 
-    //prima di chiamare questo metodo devo vedere se i Players sono >= 2 &&  < 4 (non possono mai essere per metodo InsertPlayer)
+    /**
+     *
+     * This method performs several setup tasks to prepare the game for play, including:
+     *  * Distributing starting cards to players
+     *  * Initializing the center cards
+     *  * Distributing three play cards to players
+     *  * Selecting game goals
+     *  * Distributing two goals to each player
+     *  * Setting player decks with resources, gold, and center cards
+     */
     public void initializedGame(){
 
-                distributeStartingCard();
-                initializedCenterCard();
-                distributeThreeCards();
-                selectGoals();
-                distributeTwoGoalsToPlayer();
+        distributeStartingCard();
+        initializedCenterCard();
+        distributeThreeCards();
+        selectGoals();
+        distributeTwoGoalsToPlayer();
 
-                for(int i=0; i<num_player;i++){
-                    get_player_index.get(i).setDeck(resources_deck,gold_deck,cards_in_center);
-                }
+        for(int i=0; i<num_player;i++){
+            get_player_index.get(i).setDeck(resources_deck,gold_deck,cards_in_center);
+        }
 
     }
 
-    // At the beginnig , starting_cards has to be distributed to the player
+    /**
+     * Distributes starting cards to players.
+     *
+     * This method deals one starting card to each player from the starting_cards_deck.
+     */
     private void distributeStartingCard(){
         for(int i=0; i<num_player;i++){
             get_player_index.get(i).setStartingCard(starting_cards_deck.drawCard());
         }
     }
 
-    //4 cards at the center has to be initialized
+    /**
+     * Initializes the center cards for the game.
+     *
+     * This method creates a new CenterCards object with four cards:
+     *  * Two cards drawn from the gold deck
+     *  * Two cards drawn from the resource deck
+     */
     private void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
@@ -207,6 +251,13 @@ public class Game implements Serializable {
         this.cards_in_center = tmp;
     }
 
+    /**
+     * Distributes three additional cards to each player.
+     *
+     * This method deals three cards to each player:
+     *  * One card drawn from the gold deck
+     *  * Two cards drawn from the resource deck
+     */
     private void distributeThreeCards(){
         for (int i = 0; i<num_player;i++){
             List<PlayCard> tmp = new ArrayList<PlayCard>();
@@ -217,17 +268,28 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * set 2 goal for the game
+     */
     private void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
+
     }
 
+    /**
+     * Distributes two random goals to each player.
+     *
+     * This method deals two cards from the goal deck to each player. The cards are added to a temporary list
+     * and then assigned to the player's initial goal cards using `setInitialGoalCards`.
+     */
     private void distributeTwoGoalsToPlayer(){
         for(int i=0;i<num_player;i++){
             List<Goal> tmp = new ArrayList<Goal>();
             tmp.add(goal_deck.drawCard());
             tmp.add(goal_deck.drawCard());
             get_player_index.get(i).setInitialGoalCards(tmp);
+
         }
     }
 
@@ -243,6 +305,17 @@ public class Game implements Serializable {
         return get_player_index;
     }
 
+    /**
+     * Transitions the game to the next state.
+     *
+     * This method progresses the game state based on the current state (`actual_state`).
+     * Here's the flow of transitions:
+     *  * NOT_INITIALIZED -> BEGIN
+     *  * BEGIN -> CHOOSING_GOAL
+     *  * CHOOSING_GOAL -> CHOOSING_STARTING_CARD
+     *  * CHOOSING_STARTING_CARD -> TURN
+     *  * TURN -> END_GAME
+     */
     public void gameNextState(){
         switch(actual_state.getNameState()){
             case "NOT_INITIALIZED":
@@ -260,9 +333,7 @@ public class Game implements Serializable {
             case "TURN":
                 setGame_state( end_game);
                 break;
-
         }
-
     }
 
     public String getName() {
@@ -273,7 +344,15 @@ public class Game implements Serializable {
         return index_game;
     }
 
+    /**
+     * Inserts a chat message into a specific chat conversation.
+     *
+     * @param i the index of the chat conversation in the `chats` list (0-based indexing)
+     * @param message the chat message to insert
+     * @throws IndexOutOfBoundsException if the provided chatIndex is outside the bounds of the `chats` list
+     */
     public void insertMessageinChat(int i, ChatMessage message){
         chats.get(i).addMessage(message);
     }
+
 }

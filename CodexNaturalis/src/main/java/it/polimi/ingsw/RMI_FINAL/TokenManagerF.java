@@ -5,6 +5,10 @@ import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 import java.rmi.Remote;
 import java.util.Map;
 
+/**
+ * This interface defines methods for managing tokens used in a Remote Method Invocation (RMI) system.
+ * Tokens are used for authentication and authorization purposes to control access to remote services.
+ */
 public interface TokenManagerF extends Remote {
     String generateToken(VirtualViewF clientId);
     public String generateTokenSocket( VirtualView client);

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.VIEW;
-
+import it.polimi.ingsw.MODEL.ENUM.PlayerState;
+import org.fusesource.jansi.AnsiConsole;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -16,7 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TUI implements Serializable {
+/**
+ * This class implements the Text User Interface (TUI) for the game.
+ * It extends the `GraficInterterface` to provide text-based interaction with the game.
+ *
+ * @see GraficInterterface
+ */
+public class TUI implements Serializable, GraficInterterface {
+
     private final VirtualViewF client;
 
     private final StringCostant stringcostant = new StringCostant();
@@ -29,8 +37,31 @@ public class TUI implements Serializable {
 
     }
 
+    /**
+     * print an error
+     *
+     * @param error
+     */
+    @Override
+    public void printError(String error) {
+        System.err.println(error);
+    }
 
+    @Override
+    public void setUsername(String username) {
+
+    }
+
+    /**
+     * Runs the command-line interface (CLI) for the game.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws NotBoundException   If the remote object is not bound (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
+        AnsiConsole.systemInstall();
         String player_name = selectNamePlayer();
         gameAccess(player_name);
         waitFullGame();
@@ -39,9 +70,13 @@ public class TUI implements Serializable {
         manageGame();
     }
 
-
-
-    private void waitFullGame() throws IOException, InterruptedException {
+    /**
+     * Waits for other players to join the game and sets the game field model.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
+    public void waitFullGame() throws IOException, InterruptedException {
         if(client.getMiniModel().getState().equals("NOT_INITIALIZED")) {
             System.out.print("[WAIT FOR OTHER PLAYERS]\n");
             while (client.getMiniModel().getState().equals("NOT_INITIALIZED"))
@@ -52,10 +87,16 @@ public class TUI implements Serializable {
         //startCheckingMessages();
     }
 
-    // questa è da mettere all'interno del client (SOCKET or RMI)
-
-
-    private String selectNamePlayer() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    /**
+     * Prompts the user to select a player name and validates it with the server.
+     *
+     * @return The chosen player name as a String.
+     * @throws IOException
+     * @throws NotBoundException
+     * @throws ClassNotFoundException
+     * @throws InterruptedException
+     */
+    public String selectNamePlayer() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         String player_name ;
         int flag;
@@ -78,13 +119,35 @@ public class TUI implements Serializable {
         return player_name;
     }
 
-    private void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public void setNewClient(boolean newClient) {
+        this.newClient = newClient;
+    }
+
+    /**
+     * Handles game access based on whether the player is new or reconnecting.
+     *
+     * @param player_name The chosen player name.
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws NotBoundException   If the remote object is not bound (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
+    public void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if(newClient) {
             makeChoice(player_name);
             System.out.print("[SUCCESS] YOUR PLAYER HAS BEEN CREATED!\n");
         }
     }
 
+    /**
+     * Prompts the user to choose between creating a new game or joining an existing one.
+     *
+     * @param player_name The chosen player name.
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws NotBoundException   If the remote object is not bound (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
 
     private void makeChoice(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if (!client.areThereFreeGames()) {
@@ -108,7 +171,17 @@ public class TUI implements Serializable {
         }
     }
 
-    private void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    /**
+     * Handles creating a new game on the server.
+     *
+     * @param player_name The chosen player name.
+     * @param empty Whether there are existing games available (informs the user).
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws NotBoundException   If the remote object is not bound (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
+    public void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
         System.out.print("\nCHOOSE GAME NAME  > ");
@@ -128,7 +201,16 @@ public class TUI implements Serializable {
         } while(!flag);
     }
 
-    private void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    /**
+     * Prompts the user to choose an existing game to join.
+     *
+     * @param player_name The chosen player name.
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws NotBoundException   If the remote object is not bound (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
+    public void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         boolean check ;
         System.out.println("\nEXISTING GAMES: ");
@@ -147,7 +229,19 @@ public class TUI implements Serializable {
         client.connectGameServer();
     }
 
-    private void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
+    @Override
+    public boolean getInGame() {
+        return false;
+    }
+
+    /**
+     * Waits for the "CHOOSE_GOAL" state and prompts the user to choose a goal card if necessary.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
+    public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
         while( client.getMiniModel().getState().equals("NOT_IN_A_GAME") ){ buffering();}
         if(client.getMiniModel().getState().equals("CHOOSE_GOAL")) {
             boolean checkGoal = client.isGoalCardPlaced();
@@ -162,6 +256,13 @@ public class TUI implements Serializable {
         }
     }
 
+    /**
+     * Prompts the user to choose a goal card from the two available options.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
     private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         int done=0;
@@ -181,7 +282,14 @@ public class TUI implements Serializable {
         }
     }
 
-    private void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
+    /**
+     * Waits for the "CHOOSE_SIDE_FIRST_CARD" state and prompts the user to choose a starting card side if necessary.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
+    public void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
         if(client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             if(!client.isFirstPlaced()) {
                 chooseStartingCard();
@@ -192,6 +300,13 @@ public class TUI implements Serializable {
         }
     }
 
+    /**
+     * Prompts the user to choose a starting card side (front or back) if it's their turn.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
     private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\nCHOOSE STARTING CARD SIDE:\n");
@@ -211,26 +326,45 @@ public class TUI implements Serializable {
         }
     }
 
-
-
-    private void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
+    /**
+     * Manages the game loop, handling different game states and user interactions.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
+    public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
         while( !client.getMiniModel().getState().equals("END_GAME") ){
             while (client.getMiniModel().getState().equals("WAIT_TURN")) {
-                menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());
+                menuChoice("CONTINUE ", client.getMiniModel().getState());
                 buffering();
             }
-            if (client.getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
+
+            if (client.getMiniModel().getState().equals("PLACE_CARD")) {
+                selectAndInsertCard();}
             else if (client.getMiniModel().getState().equals("DRAW_CARD")) {
                 menuChoice("DRAW CARD", client.getMiniModel().getState());
                 drawCard();
+                System.out.println("\n           END OF YOUR TURN !");
             }
-            System.out.println("\nEND OF YOUR TURN !");
+            //System.out.println("YOU CURRENTLY HAVE [ " + client.getMiniModel().getMyGameField().getPlayerPoints() + " ] POINTS !");
             client.manageGame(false);
         }
-        System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         client.manageGame(true);
     }
 
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    /**
+     * Handles selecting and placing a card from the user's deck during their turn.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         int choice=-1,x,y;
@@ -257,6 +391,13 @@ public class TUI implements Serializable {
         }
     }
 
+    /**
+     * Handles drawing a card during the user's turn.
+     *
+     * @throws IOException  If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     private void drawCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\n DRAW A CARD FROM: ");
@@ -295,11 +436,18 @@ public class TUI implements Serializable {
         client.drawCard(function);
     }
 
-
+    /**
+     * Displays a menu based on the current game state and handles user choices.
+     *
+     * @param message  The message to display at the top of the menu.
+     * @param current_state The current state of the game as reported by the server.
+     * @throws IOException If an I/O error occurs during communication.
+     */
     private void menuChoice(String message, String current_state) throws IOException {
         Scanner scan = new Scanner(System.in);
             client.getMiniModel().printMenu(message);
             int choice = scan.nextInt();
+
             switch (choice) {
                 case (0):
                     client.getMiniModel().printNumToField();
@@ -318,6 +466,10 @@ public class TUI implements Serializable {
                     } while (!chatChoice(decision));
                     break;
                 case (3):
+                    if( client.getMiniModel().getState().equals(PlayerState.WAIT_TURN.toString()) ){
+                        System.out.println(" IT'S NOT YOUR TURN YET, WAIT FOR THE NOTIFICATION OF END TURN ");
+                        menuChoice(message, current_state);
+                    }
                     return;
                 default:
                     System.err.println("[ERROR] WRONG INSERT");
@@ -325,7 +477,15 @@ public class TUI implements Serializable {
             menuChoice(message, current_state);
     }
 
+    /**
+     * Handles user interaction within the chat sub-menu.
+     *
+     * @param decision The initial decision passed from the main menu choice.
+     * @return True if the chat sub-menu is closed successfully, false otherwise.
+     * @throws IOException If an I/O error occurs during communication.
+     */
     private boolean chatChoice(int decision) throws IOException {
+        client.getMiniModel().setStop_chat(false);
         Scanner scan = new Scanner(System.in);
         if(!client.getMiniModel().showchat(decision)){
             return false;
@@ -333,9 +493,7 @@ public class TUI implements Serializable {
         int choice = 0;
         while(true) {
             while (choice < 1 || choice > 2) {
-                System.out.println("DO YOU WANT TO SEND A MESSAGE?");
-                System.out.println("1- YES");
-                System.out.println("2- NO [CLOSE CHAT]");
+                System.out.println("DO YOU WANT TO SEND A MESSAGE?     1- YES      2- NO [CLOSE CHAT] ");
                 choice = scan.nextInt();
                 scan.nextLine();
             }
@@ -344,22 +502,35 @@ public class TUI implements Serializable {
                 String message = scan.nextLine();
                 client.ChatChoice(message, decision);
                 System.out.println("[SUCCESS] MESSAGE SENT!");
-                client.getMiniModel().showchat(decision);
                 choice = 0;
-            } else return true;
+            } else {
+                client.getMiniModel().setStop_chat(true);
+                return true;}
         }
-
     }
 
+    /**
+     * This method attempts to display cards in the center of the user's screen.
+     * The specific implementation depends on the type of client object.
+     *
+     * @throws IOException Signals an I/O exception that might occur during communication.
+     * @throws ClassNotFoundException Indicates that a class needed for the operation could not be found.
+     * @throws InterruptedException  If the calling thread is interrupted while waiting.
+     */
     private void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
         if(client instanceof clientSocket){
             client.showCardsInCenter();
         }
         else{
-            client.getGameServer().showCardsInCenter(token);}
+            client.getGameServer().showCardsInCenter(token);
         }
+    }
 
-
+    /**
+     * This method simulates a basic buffering effect
+     *
+     * @throws InterruptedException  If the calling thread is interrupted while waiting.
+     */
     public void buffering() throws  InterruptedException{
         Thread.sleep(1000);
         System.out.print("\b");
@@ -374,6 +545,7 @@ public class TUI implements Serializable {
         System.out.print("\b");
         System.out.print("-");
     }
+
     public void setToken(String token){this.token =token;}
 
 }

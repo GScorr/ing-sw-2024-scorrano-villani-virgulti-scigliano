@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChooseGoalController"  styleClass="choose-goal-scene">
+    <!-- Menu at the top -->
+    <top>
+        <fx:include fx:id="HeaderInclude" source="./header.fxml" />
+    </top>
+    <center>
+    <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  spacing="20" alignment="CENTER" styleClass="choose-goal-scene">
+        <Label text="Choose your goal" styleClass="header"/>
+        <HBox spacing="20" alignment="CENTER">
+            <ImageView fx:id="card1" fitWidth="300" fitHeight="400" preserveRatio="true" onMouseClicked="#handleCard1Click" styleClass="card"/>
+            <ImageView fx:id="card2" fitWidth="300" fitHeight="400" preserveRatio="true" onMouseClicked="#handleCard2Click" styleClass="card"/>
+        </HBox>
+        <Label fx:id="bottomLabel" text="" />
+    </VBox>
+    </center>
+</BorderPane>
+

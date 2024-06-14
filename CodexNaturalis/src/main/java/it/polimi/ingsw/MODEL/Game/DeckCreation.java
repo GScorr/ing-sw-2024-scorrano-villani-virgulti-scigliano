@@ -14,7 +14,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * This class manages the creation and shuffling of decks used in the game.
+ */
 public class DeckCreation implements Serializable {
+
+    /**
+     * file path
+     */
     private String resources_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json";
     private String gold_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/gold.json";
     private String starting_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/starting.json";
@@ -31,6 +38,11 @@ public class DeckCreation implements Serializable {
     public static int getSizeStartingDeck(){ return deck_starting.size();}
     public static int getSizeGoalDeck(){ return deck_goal.size();}
 
+    /**
+     * Creates a Deck instance by reading JSON data from specified files and building the corresponding card decks.
+     *
+     * @throws IOException If any issues occur while reading the JSON files.
+     */
     public DeckCreation() {
         try (BufferedReader reader = new BufferedReader(new FileReader(resources_filePath))) {
             StringBuilder jsonStringBuilder = new StringBuilder();
@@ -78,13 +90,10 @@ public class DeckCreation implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         creteResourceDeck();
         creteGoldDeck();
         creteStartingDeck();
         creteGoalDeck();
-
     }
 
     public static List<GoldCard> getDeck_gold() {
@@ -95,14 +104,12 @@ public class DeckCreation implements Serializable {
         return deck_resources;
     }
 
-    public static List<StartingCard> getDeck_starting() {
-        return deck_starting;
-    }
-    public static List<Goal> getDeck_goal() {
-        return deck_goal;
-    }
-
+    /**
+     * Creates a deck of resource cards by parsing the JSON data in `resources_jsonArray`
+     * and constructing ResourceCard deck.
+     */
     public void creteResourceDeck(){
+        deck_resources.clear();
         for (JsonElement element : resources_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -149,14 +156,31 @@ public class DeckCreation implements Serializable {
             Side back_side = new Side(enum_angleRightUp,enum_angleRightDown,enum_angleLeftUp,enum_angleLeftDown,c_1,c_2,c_3);
             int point = singleCard.get("point").getAsInt();
             ResourceCard tmp = new ResourceCard(front_side,back_side,false,point);
+
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
             deck_resources.add(tmp);
         }
     }
+
+    /**
+     * Shuffles the resource deck by randomizing the order of cards.
+     */
     public void mixUpResouceDeck(){
         Collections.shuffle(deck_resources);
     }
 
+    /**
+     * Creates a deck of gold cards by parsing the JSON data in `golg_jsonArray`
+     * and constructing GoldCard deck.
+     */
     public void creteGoldDeck(){
+        deck_gold.clear();
+
         for (JsonElement element : gold_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -207,14 +231,31 @@ public class DeckCreation implements Serializable {
             BonusEnum bonus = BonusEnum.valueOf(singleCard.get("point_bonus").getAsString());
 
             GoldCard tmp = new GoldCard(front_side,back_side,false,point,costraint,bonus);
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_gold.add(tmp);
         }
     }
+
+    /**
+     * Shuffles the gold deck by randomizing the order of cards.
+     */
     public void mixUpGoldDeck(){
         Collections.shuffle(deck_gold);
     }
 
+    /**
+     * Creates a deck of starting cards by parsing the JSON data in `starting_jsonArray`
+     * and constructing StartingCard deck.
+     */
     public void creteStartingDeck(){
+
+        deck_starting.clear();
         for (JsonElement element : starting_jsonArray) {
             JsonObject singleCard = element.getAsJsonObject();
             //------- front side
@@ -261,11 +302,25 @@ public class DeckCreation implements Serializable {
             Side back_side = new Side(enum_angleRightUp,enum_angleRightDown,enum_angleLeftUp,enum_angleLeftDown,c_1,c_2,c_3);
             int point = singleCard.get("point").getAsInt();
             StartingCard tmp = new StartingCard(front_side,back_side,false);
+
+            //-- GUI file path
+            String front_side_path = singleCard.get("front_img_path").getAsString();
+            String back_side_path = singleCard.get("back_img_path").getAsString();
+
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_starting.add(tmp);
         }
     }
 
+    /**
+     * Creates a deck of goal cards by parsing the JSON data in `goal_jsonArray`
+     * and constructing Goal deck.
+     */
     public void creteGoalDeck(){
+        deck_goal.clear();
+
         for (JsonElement element : goal_jsonArray) {
             JsonObject singlegoal = element.getAsJsonObject();
             String resource = singlegoal.get("resource").getAsString();
@@ -273,7 +328,7 @@ public class DeckCreation implements Serializable {
             int point = singlegoal.get("points").getAsInt();
             String string = singlegoal.get("string").getAsString();
             String strategyString = singlegoal.get("goalType").getAsString();
-            GoalStrategy strategy = new GoalDiagonal(); //inizializzata per evitare errori
+            GoalStrategy strategy = new GoalDiagonal();
             switch(strategyString){
                 case "GoalDiagonal":
                     strategy = new GoalDiagonal();
@@ -292,32 +347,45 @@ public class DeckCreation implements Serializable {
                     break;
             }
             Goal tmp = new Goal(strategy,point,enum_resource,string);
+
+            //-- GUI file path
+            String front_side_path = singlegoal.get("front_img_path").getAsString();
+            String back_side_path = singlegoal.get("back_img_path").getAsString();
+            tmp.setFront_side_path(front_side_path);
+            tmp.setBack_side_path(back_side_path);
+
             deck_goal.add(tmp);
         }
     }
+
+    /**
+     * Shuffles the goal deck by randomizing the order of cards.
+     */
     public void mixUpGoalDeck(){
         Collections.shuffle(deck_goal);
     }
+
+    /**
+     * Shuffles the starting card deck by randomizing the order of cards.
+     */
     public void mixUpStartingDeck(){
         Collections.shuffle(deck_starting);
     }
+
     public Deque<Goal> getGoalDeck(){
-        Deque<Goal> g_deck = new ArrayDeque<Goal>();
-        g_deck.addAll(deck_goal);
-        return g_deck;
+        return new ArrayDeque<Goal>(deck_goal);
     }
+
     public Deque<Goal> getMixGoalDeck(){
-        Deque<Goal> g_deck = new ArrayDeque<Goal>();
         mixUpGoalDeck();
-        g_deck.addAll(deck_goal);
-        return g_deck;
+        return new ArrayDeque<Goal>(deck_goal);
     }
+
     public Deque<PlayCard> getResourcesDeck(){
         Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
         res_deck.addAll(deck_resources);
         return res_deck;
     }
-
 
     public Deque<PlayCard> getMixResourcesDeck(){
         Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
@@ -325,8 +393,6 @@ public class DeckCreation implements Serializable {
         res_deck.addAll(deck_resources);
         return res_deck;
     }
-
-
 
     public Deque<PlayCard> getGoldDeck(){
         Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
@@ -348,27 +414,9 @@ public class DeckCreation implements Serializable {
     }
 
     public Deque<PlayCard> getMixStartingDeck(){
-        Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>();
         mixUpStartingDeck();
-        res_deck.addAll(deck_starting);
+        Deque<PlayCard> res_deck = new ArrayDeque<PlayCard>(deck_starting);
         return res_deck;
     }
-
-    public static void main(String[] args) {
-        // Creazione di un'istanza di DeckCreation
-        DeckCreation deckCreation = new DeckCreation();
-
-
-
-        //lunghezza del deck
-        System.out.println("Size del deck:");
-        System.out.println(getSizeResourcesDeck());
-        System.out.println(getSizeGoldDeck());
-        System.out.println(getSizeStartingDeck());
-        System.out.println(getSizeGoalDeck());
-
-    }
-
-
 
 }

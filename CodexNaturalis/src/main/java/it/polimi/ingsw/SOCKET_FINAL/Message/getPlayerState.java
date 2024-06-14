@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to request the current player state (e.g., planning phase, action phase).
+ */
 public class getPlayerState implements Message, Serializable {
 
     public Server server;
@@ -15,7 +18,6 @@ public class getPlayerState implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -26,16 +28,9 @@ public class getPlayerState implements Message, Serializable {
         this.common = common;
     }
 
-
-    public getPlayerState(){
-
-    }
-
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -45,6 +40,12 @@ public class getPlayerState implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Retrieves the current player state name from the RMI controller and sends a
+     * custom message (MyMessageFinal) containing the state name to the client.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         String state = rmi_controller.getTtoP().get(token).getActual_state().getNameState();

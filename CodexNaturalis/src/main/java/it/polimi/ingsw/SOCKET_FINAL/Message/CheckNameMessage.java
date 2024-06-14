@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to check if a username is available.
+ * This message contains the proposed username and is received by the server.
+ */
 public class CheckNameMessage implements Message, Serializable {
 
     public Server server;
@@ -48,12 +52,19 @@ public class CheckNameMessage implements Message, Serializable {
     public void setToken(String token) {
 
     }
-
-    public String checkNameMessageAction() throws IOException {
+/*
+da eliminare
+    public String checkNameMessageAction() throws IOException, InterruptedException {
         String isnew = common.checkName(nome,null);
         return isnew;
     }
 
+ */
+
+    /**
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
     }

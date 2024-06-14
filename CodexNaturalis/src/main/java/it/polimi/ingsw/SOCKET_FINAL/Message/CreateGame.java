@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to create a new game.
+ * This message contains the desired game name, number of players, and player's name.
+ */
 public class CreateGame implements Message, Serializable {
 
     public Server server;
@@ -47,9 +51,6 @@ public class CreateGame implements Message, Serializable {
         this.game_name = game_name;
     }
 
-
-
-
     public void setServer(Server server) {
         this.server = server;
     }
@@ -58,13 +59,25 @@ public class CreateGame implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    public int actionCreateGameMessage() throws IOException, InterruptedException {
+
+    /**
+     * Sends the create game request to the common server through RMI and retrieves
+     * the assigned port for the game.
+     *
+     * @throws IOException If there is an IO error.
+     * @throws InterruptedException If the thread is interrupted while waiting.
+     * @throws ClassNotFoundException If a class used in the RMI call cannot be found.
+     * @return The assigned port for the game, or -1 if an error occurs.
+     */
+    public int actionCreateGameMessage() throws IOException, InterruptedException, ClassNotFoundException {
         int port;
-        //port = common.createGameSocket(game_name,num_players,token,name_p, clientHandler);
         port = common.createGame(game_name,num_players,token,name_p,clientHandler);
         return port;
     }
 
+    /**
+     *
+     */
     @Override
     public void action() {
         if( server == null){
@@ -72,12 +85,6 @@ public class CreateGame implements Message, Serializable {
             server.broadcastUpdate("Qualcosa è andato storto nell'invio del messaggio, controller == null || server == null");
             return;
         }
-
-        /*
-        * CODICE DA ESEGUIRE IN CLIENT_HANDLER PER L'ESECUZIONE
-        *
-        *
-        * */
-
     }
+
 }

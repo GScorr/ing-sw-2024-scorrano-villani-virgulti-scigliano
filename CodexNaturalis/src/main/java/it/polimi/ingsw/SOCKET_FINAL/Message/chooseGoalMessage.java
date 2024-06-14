@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to choose a goal during gameplay.
+ * This message contains the player's token and the chosen goal index.
+ */
 public class chooseGoalMessage implements Message, Serializable {
 
     public String token;
@@ -48,14 +52,24 @@ public class chooseGoalMessage implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-
+/*
+da eliminare
     public chooseGoalMessage( Integer intero){
         this.intero = intero;
     }
 
+ */
 
+    /**
+     * Sends the chosen goal information (player token and index) to the game logic
+     * through the RMI interface.
+     *
+     * @throws IOException If there is an IO error.
+     * @throws InterruptedException If the thread is interrupted while waiting.
+     * @throws ClassNotFoundException If a class used in the RMI call cannot be found.
+     */
     @Override
-    public void action() throws IOException, InterruptedException {
+    public void action() throws IOException, InterruptedException, ClassNotFoundException {
         rmi_controller.chooseGoal(token,index);
 
     }
