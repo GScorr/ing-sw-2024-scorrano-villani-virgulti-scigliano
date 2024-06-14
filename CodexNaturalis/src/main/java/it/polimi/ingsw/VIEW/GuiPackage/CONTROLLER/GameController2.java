@@ -1140,8 +1140,8 @@ public class GameController2 extends GenericSceneController {
 
         // Imposta l'immagine di drag-and-drop con una dimensione specifica
         // Ottieni le dimensioni della handCard1
-        double width = handCard1.getFitWidth();
-        double height = handCard1.getFitHeight();
+        double width = 100;
+        double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
         db.setDragView(resizedImage, event.getX(), event.getY());
 
@@ -1208,8 +1208,8 @@ public class GameController2 extends GenericSceneController {
 
         // Imposta l'immagine di drag-and-drop con una dimensione specifica
         // Ottieni le dimensioni della handCard1
-        double width = handCard2.getFitWidth();
-        double height = handCard2.getFitHeight();
+        double width = 100;
+        double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
         db.setDragView(resizedImage, event.getX(), event.getY());
 
@@ -1276,8 +1276,8 @@ public class GameController2 extends GenericSceneController {
 
         // Imposta l'immagine di drag-and-drop con una dimensione specifica
         // Ottieni le dimensioni della handCard3
-        double width = handCard3.getFitWidth();
-        double height = handCard3.getFitHeight();
+        double width = 100;
+        double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
         db.setDragView(resizedImage, event.getX(), event.getY());
 
