@@ -165,6 +165,11 @@ public class GUI implements GraficInterterface {
         return false;
     }
 
+    @Override
+    public void endGame() {
+        Platform.runLater(() -> scene.changeRootPane("end_game.fxml"));
+    }
+
     /**
      * Displays a waiting scene while waiting for enough players to join the game.
      *
@@ -263,7 +268,7 @@ public class GUI implements GraficInterterface {
            if( scene.getClient().getMiniModel().getState().equals("PLACE_CARD")  || scene.getClient().getMiniModel().getState().equals("DRAW_CARD") ) this.place_card();
            else this.wait_turn();
         }else{
-            System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
+            endGame();
         }
     }
 

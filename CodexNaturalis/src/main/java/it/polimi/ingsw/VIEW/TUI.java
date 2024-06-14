@@ -235,6 +235,11 @@ public class TUI implements Serializable, GraficInterterface {
         return false;
     }
 
+    @Override
+    public void endGame() {
+
+    }
+
     /**
      * Waits for the "CHOOSE_GOAL" state and prompts the user to choose a goal card if necessary.
      *
