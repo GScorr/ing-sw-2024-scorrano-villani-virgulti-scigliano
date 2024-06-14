@@ -361,6 +361,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                         token_to_player.get(t).setPlayer_state(end_game);
                                         message_update = new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!");
                                         message_update.win = true;
+                                        message_update.isAlone = false;
                                         if ( !token_to_player.get(t).isDisconnected() ) broadcastMessageOneClient(message_update,  alone_client);
                                         end = false;
                                         endConnection();
