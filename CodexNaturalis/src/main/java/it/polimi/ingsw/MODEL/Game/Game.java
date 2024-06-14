@@ -274,10 +274,10 @@ public class Game implements Serializable {
     private void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
-        player1.getGameField().setGlobalGoal(goal1,goal2);
-        player3.getGameField().setGlobalGoal(goal1,goal2);
-        player2.getGameField().setGlobalGoal(goal1,goal2);
-        player4.getGameField().setGlobalGoal(goal1,goal2);
+        player1.setGlobalGoal(goal1,goal2);
+        if( player3 != null )   player3.setGlobalGoal(goal1,goal2);
+        player2.setGlobalGoal(goal1,goal2);
+        if( player4 != null )  player4.setGlobalGoal(goal1,goal2);
     }
 
     /**
