@@ -5,6 +5,7 @@ import it.polimi.ingsw.MODEL.Card.StartingCard;
 import it.polimi.ingsw.MODEL.ENUM.AnglesEnum;
 import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.ENUM.EdgeEnum;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
 
 import java.io.Serializable;
@@ -32,6 +33,8 @@ public class GameField implements Serializable {
     private int num_of_paper;
     private int num_of_pen;
     private int num_of_feather;
+    private Goal global_goal1;
+    private Goal global_goal2;
 
 
     public GameField(GameFieldSingleCell[][] field, Player player) {
@@ -311,12 +314,16 @@ public class GameField implements Serializable {
         addOne( card.getSide().getAngleLeftDown() );
         addOne( card.getSide().getAngleRightDown() );
         addOne( card.getSide().getAngleRightUp() );
-
     }
 
     public int getPlayerPoints(){
         return player.getPlayerPoints();
     }
+
+
+    public void setGlobalGoal(Goal goal1, Goal goal2 ){
+        global_goal1 = goal1;
+        global_goal2 = goal2;}
 
 }
 
@@ -324,15 +331,3 @@ public class GameField implements Serializable {
 
 
 
-
-
-
-
-
-/* Equivalent if
-if( ( !field[x][y].isEmpty() && field[x][y].getValue().equals( AnglesEnum.NONE) ) ||
-        ( !field[x+1][y].isEmpty() && field[x+1][y].getValue().equals( AnglesEnum.NONE) ) ||
-        ( !field[x][y+1].isEmpty() && field[x][y+1].getValue().equals( AnglesEnum.NONE) ) ||
-        ( !field[x+1][y+1].isEmpty() && field[x+1][y+1].getValue().equals( AnglesEnum.NONE) ) ) return false;
-        return true;
- */
