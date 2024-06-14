@@ -151,6 +151,14 @@ public class GameField implements Serializable {
 
     public Player getPlayer(){return  this.player;}
 
+    public Goal getGlobal_goal1() {
+        return global_goal1;
+    }
+
+    public Goal getGlobal_goal2() {
+        return global_goal2;
+    }
+
     /**
      * Insert of a card, it checks if the card can be placed and updates the resources counter and
      * it changes the values of the matrix so that they are coherent with the new placed card
