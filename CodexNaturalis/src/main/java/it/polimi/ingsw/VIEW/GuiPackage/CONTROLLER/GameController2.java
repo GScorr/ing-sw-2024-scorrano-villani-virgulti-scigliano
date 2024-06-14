@@ -17,11 +17,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -33,10 +36,13 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private Button openChatButton;
 
+    private ImageView dragPreview;
+
     private ChatIndexManager chat_manager = new ChatIndexManager();
 
     @FXML
     private Button showChat;
+    private ResizeImage resizer;
 
     @FXML
     private TextField messageInput;
@@ -71,6 +77,9 @@ public class GameController2 extends GenericSceneController {
     public ImageView handCard1;
     public ImageView handCard2;
     public ImageView handCard3;
+    private Image handCard1image;
+    private Image handCard2image;
+    private Image handCard3image;
     public VBox deckBox;
     @FXML
     private GridPane gameGrid;
@@ -779,7 +788,7 @@ public class GameController2 extends GenericSceneController {
         imageView.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;");
         stackPane.getChildren().add(imageView);
 
-        gameGrid.add(stackPane, col, row, 2, 2); // Occupy 2 columns and 2 rows
+        gameGrid.add(stackPane, col, row, 2, 2); // Occupa 2 colonne e 2 righe
 
         // Aggiungi l'imageView alla lista delle immagini aggiunte
         addedImageViews.add(stackPane);
@@ -791,6 +800,34 @@ public class GameController2 extends GenericSceneController {
             } catch (IOException | InterruptedException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+        });
+        imageView.setOnDragOver(event -> {
+            if (event.getGestureSource() != this && event.getDragboard().hasImage()) {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+
+                event.consume();
+            }
+        });
+
+        imageView.setOnDragExited(event -> {
+            // Eventuale codice per gestire l'uscita del drag
+            event.consume();
+        });
+
+        imageView.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasImage()) {
+                // Gestisci il rilascio del drag qui
+                try {
+                    handleCardImageClick(imageView);
+                } catch (IOException | InterruptedException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
         });
 
         // Animazione di fading
@@ -838,6 +875,208 @@ public class GameController2 extends GenericSceneController {
             fadeOut.play();
         }
         addedImageViews.clear(); // Pulisci la lista
+    }
+
+    @FXML
+    private void handleCard1DragDetected(MouseEvent event) throws IOException {
+        if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+            removeAddedImages();
+            for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
+                for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
+                    if (helper.checkPlacing(card_1_flip, client.getMiniModel().getCards_in_hand().get(0), client.getMiniModel().getMyGameField(), i, j)) {
+                        addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "src/resources/Card/Bianco.png");
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        } else {
+            if (super.client.getMiniModel().getState().equals("DRAW_CARD")) {
+                showError("DRAW A CARD !!! ");
+            } else {
+                showError("IS NOT YOUR TURN, WAIT !!! ");
+            }
+        }
+
+        Dragboard db = handCard1.startDragAndDrop(TransferMode.ANY);
+
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(handCard1.getImage());
+        db.setContent(content);
+
+        Image originalImage = handCard1.getImage();
+        handCard1image = originalImage;
+
+        handCard1.setOpacity(1);
+
+        // Imposta l'immagine di drag-and-drop con una dimensione specifica
+        // Ottieni le dimensioni della handCard1
+        double width = handCard1.getFitWidth();
+        double height = handCard1.getFitHeight();
+        Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
+        db.setDragView(resizedImage, event.getX(), event.getY());
+
+
+        // Imposta un'immagine bianca per la carta durante il drag
+        File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());
+        handCard1.setImage(blankImage);
+
+        event.consume();
+    }
+
+
+    @FXML
+    private void handleCard1MouseDragged(MouseEvent event) {
+        // Sposta l'immagine della carta con il mouse
+        handCard1.setLayoutX(event.getSceneX() - handCard1.getBoundsInLocal().getWidth() / 2);
+        handCard1.setLayoutY(event.getSceneY() - handCard1.getBoundsInLocal().getHeight() / 2);
+        event.consume();
+    }
+
+    @FXML
+    private void handleCard1DragDone(DragEvent event) {
+        // Reimposta la posizione dell'immagine della carta alla posizione originale
+        handCard1.setLayoutX(0);
+        handCard1.setLayoutY(0);
+
+        // Reimposta l'immagine originale della carta
+        handCard1.setImage(handCard1image);
+
+        event.consume();
+    }
+
+    @FXML
+    private void handleCard2DragDetected(MouseEvent event) throws IOException {
+        if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+            removeAddedImages();
+            for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
+                for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
+                    if (helper.checkPlacing(card_2_flip, client.getMiniModel().getCards_in_hand().get(1), client.getMiniModel().getMyGameField(), i, j)) {
+                        addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "src/resources/Card/Bianco.png");
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        } else {
+            if (super.client.getMiniModel().getState().equals("DRAW_CARD")) {
+                showError("DRAW A CARD !!! ");
+            } else {
+                showError("IS NOT YOUR TURN, WAIT !!! ");
+            }
+        }
+
+        Dragboard db = handCard2.startDragAndDrop(TransferMode.ANY);
+
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(handCard2.getImage());
+        db.setContent(content);
+
+        Image originalImage = handCard2.getImage();
+        handCard2image = originalImage;
+
+        handCard2.setOpacity(1);
+
+        // Imposta l'immagine di drag-and-drop con una dimensione specifica
+        // Ottieni le dimensioni della handCard1
+        double width = handCard2.getFitWidth();
+        double height = handCard2.getFitHeight();
+        Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
+        db.setDragView(resizedImage, event.getX(), event.getY());
+
+
+        // Imposta un'immagine bianca per la carta durante il drag
+        File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());
+        handCard2.setImage(blankImage);
+
+        event.consume();
+    }
+
+
+    @FXML
+    private void handleCard2MouseDragged(MouseEvent event) {
+        // Sposta l'immagine della carta con il mouse
+        handCard2.setLayoutX(event.getSceneX() - handCard2.getBoundsInLocal().getWidth() / 2);
+        handCard2.setLayoutY(event.getSceneY() - handCard2.getBoundsInLocal().getHeight() / 2);
+        event.consume();
+    }
+
+    @FXML
+    private void handleCard2DragDone(DragEvent event) {
+        // Reimposta la posizione dell'immagine della carta alla posizione originale
+        handCard2.setLayoutX(0);
+        handCard2.setLayoutY(0);
+
+        // Reimposta l'immagine originale della carta
+        handCard2.setImage(handCard2image);
+
+        event.consume();
+    }
+
+    @FXML
+    private void handleCard3DragDetected(MouseEvent event) throws IOException {
+        if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+            removeAddedImages();
+            for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
+                for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
+                    if (helper.checkPlacing(card_3_flip, client.getMiniModel().getCards_in_hand().get(2), client.getMiniModel().getMyGameField(), i, j)) {
+                        addClickableCardImageToGrid(3, i, j, client.getMiniModel().getCards_in_hand().get(2), "src/resources/Card/Bianco.png");
+                        System.out.println(i + " " + j);
+                    }
+                }
+            }
+        } else {
+            if (super.client.getMiniModel().getState().equals("DRAW_CARD")) {
+                showError("DRAW A CARD !!! ");
+            } else {
+                showError("IS NOT YOUR TURN, WAIT !!! ");
+            }
+        }
+
+        Dragboard db = handCard3.startDragAndDrop(TransferMode.ANY);
+
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(handCard3.getImage());
+        db.setContent(content);
+
+        Image originalImage = handCard3.getImage();
+        handCard3image = originalImage;
+
+        handCard3.setOpacity(1);
+
+        // Imposta l'immagine di drag-and-drop con una dimensione specifica
+        // Ottieni le dimensioni della handCard3
+        double width = handCard3.getFitWidth();
+        double height = handCard3.getFitHeight();
+        Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
+        db.setDragView(resizedImage, event.getX(), event.getY());
+
+        // Imposta un'immagine bianca per la carta durante il drag
+        File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());
+        handCard3.setImage(blankImage);
+
+        event.consume();
+    }
+
+    @FXML
+    private void handleCard3MouseDragged(MouseEvent event) {
+        // Sposta l'immagine della carta con il mouse
+        handCard3.setLayoutX(event.getSceneX() - handCard3.getBoundsInLocal().getWidth() / 2);
+        handCard3.setLayoutY(event.getSceneY() - handCard3.getBoundsInLocal().getHeight() / 2);
+        event.consume();
+    }
+
+    @FXML
+    private void handleCard3DragDone(DragEvent event) {
+        // Reimposta la posizione dell'immagine della carta alla posizione originale
+        handCard3.setLayoutX(0);
+        handCard3.setLayoutY(0);
+
+        // Reimposta l'immagine originale della carta
+        handCard3.setImage(handCard3image);
+
+        event.consume();
     }
 
 
