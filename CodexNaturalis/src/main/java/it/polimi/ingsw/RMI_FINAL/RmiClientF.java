@@ -62,6 +62,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         terminal_interface.runCli();
     }
 
+    public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        System.exit(0);
+    }
+
     /**
      * Verifies a player's name with the server and establishes a connection (if valid).
      *

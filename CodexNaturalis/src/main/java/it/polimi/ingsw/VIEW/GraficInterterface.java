@@ -4,7 +4,14 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 
+/**
+ * This interface defines methods for graphical user interface (GUI) interaction within the game.
+ * It extends `Serializable` to allow objects implementing this interface to be passed
+ * through streams.
+ *
+ */
 public interface GraficInterterface extends Serializable {
+
     void printError(String a);
 
     public void setUsername(String username);

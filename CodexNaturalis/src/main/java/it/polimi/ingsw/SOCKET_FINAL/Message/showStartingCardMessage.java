@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/*
+probabilmente da eliminare
+ */
 public class showStartingCardMessage implements Message, Serializable {
 
     /**

@@ -5,14 +5,12 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -21,6 +19,13 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 
+/*
+non commentata perche penso che non venga usata
+ */
+
+/**
+ *
+ */
 public class GameController extends GenericSceneController{
 
     @FXML
@@ -74,6 +79,7 @@ public class GameController extends GenericSceneController{
      * Soglia per distinguere tra clic e trascinamento
      * se trascino per meno di 50 px la carta non viene spostata ma solo si gira
      */
+
     private static final double CLICK_THRESHOLD = 5;
     private boolean dragged;
 

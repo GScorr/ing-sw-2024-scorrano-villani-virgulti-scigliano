@@ -2,8 +2,11 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/*
+da eliminare probabilmente no usage
+ */
 public class ResponseObject implements Serializable {
+
     public String string_message;
     public boolean bool_message;
 
@@ -29,7 +32,6 @@ public class ResponseObject implements Serializable {
     public ArrayList<Object> getArray_list_message() {
         return array_list_message;
     }
-
 
     public void setString_message(String string_message) {
         this.string_message = string_message;

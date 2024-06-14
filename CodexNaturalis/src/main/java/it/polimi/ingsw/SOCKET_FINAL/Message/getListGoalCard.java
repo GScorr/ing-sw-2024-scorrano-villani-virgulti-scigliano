@@ -10,6 +10,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Represents a message sent by the client to request the list of initial goal cards for the game.
+ */
 public class getListGoalCard implements Message, Serializable {
 
     public Server server;
@@ -17,7 +20,6 @@ public class getListGoalCard implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -28,16 +30,11 @@ public class getListGoalCard implements Message, Serializable {
         this.common = common;
     }
 
-
-    public getListGoalCard(){
-
-    }
+    public getListGoalCard(){}
 
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -52,7 +49,5 @@ public class getListGoalCard implements Message, Serializable {
     }
 
     @Override
-    public void action() throws IOException {
-
-    }
+    public void action() throws IOException {}
 }

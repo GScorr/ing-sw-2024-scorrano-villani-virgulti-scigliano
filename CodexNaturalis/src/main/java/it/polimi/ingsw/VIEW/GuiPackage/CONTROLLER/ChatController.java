@@ -1,8 +1,6 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.ChatMessage;
-import it.polimi.ingsw.MODEL.ENUM.ColorsEnum;
-import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import javafx.application.Platform;
@@ -14,11 +12,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class implements the controller for a chat window in the game's GUI.
+ * It manages displaying chat messages, sending new messages, and updating the chat in real-time.
+ */
 public class ChatController extends GenericSceneController {
 
     private int decision;
 
-    private volatile boolean running; // Aggiungere un flag per controllare il thread
+    private volatile boolean running; // add a flag to control the thread
 
     @FXML
     private Label titleLabel;
@@ -57,6 +59,10 @@ public class ChatController extends GenericSceneController {
         this.idx = idx;
     }
 
+    /**
+     * the followers method are used to manage chat message
+     *
+     */
     public void addMessage(String message) {
         chatMessagesListView.getItems().add(message);
     }
@@ -69,13 +75,24 @@ public class ChatController extends GenericSceneController {
         messageInputField.clear();
     }
 
+    /**
+     * Handles closing the chat window.
+     * Stops the chat updater thread and sets the chat open flag in the header to false.
+     */
     @FXML
     private void handleClose() {
-        running = false; // Fermare il thread quando la finestra viene chiusa
+        running = false;
         stage.close();
         header.setChatOpen(false);
     }
 
+    /**
+     * Initializes the chat window by clearing the message list and populating it with existing messages.
+     * Starts the chat updater thread that periodically checks for new messages.
+     * Sets up an action listener for the message input field to handle sending messages.
+     *
+     * @throws IOException If there's an error during communication with the client.
+     */
     public void startInitialize() throws IOException {
         chatMessagesListView.getItems().clear(); // Pulisce la lista
         for (ChatMessage chatMessage : client.getMiniModel().getChat().get(idx).getChat()) {
@@ -92,10 +109,22 @@ public class ChatController extends GenericSceneController {
         });
     }
 
+    /**
+     * Adds a new chat message to the chat window.
+     *
+     * @param chatMessage The ChatMessage object containing message details.
+     */
     public void addMessageToChat(ChatMessage chatMessage) {
         addMessage(chatMessage.player.getName() + ": " + chatMessage.message);
     }
 
+    /**
+     * Handles sending a new chat message.
+     * Retrieves the message from the input field, checks if it's empty, and sends it to the client using the `ChatChoice` method.
+     * Clears the input field after sending the message.
+     *
+     * @throws IOException If there's an error during communication with the client.
+     */
     @FXML
     private void handleSendMessage() throws IOException {
         String message = getMessageInput();
@@ -109,6 +138,10 @@ public class ChatController extends GenericSceneController {
         this.decision = decision;
     }
 
+    /**
+     * Starts a background thread to periodically update the chat with new messages.
+     * The thread fetches new messages, resets the unread message count for this chat window, and sleeps for a second before repeating.
+     */
     public void startChatUpdater() {
         running = true;
         Thread chatUpdater = new Thread(() -> {
@@ -129,6 +162,9 @@ public class ChatController extends GenericSceneController {
         chatUpdater.start();
     }
 
+    /**
+     * Updates the chat window by clearing the message list and refetching messages from the client.
+     */
     private void updateChat() {
         chatMessagesListView.getItems().clear();
         try {
@@ -143,4 +179,5 @@ public class ChatController extends GenericSceneController {
     public void setHeader(HeaderController header) {
         this.header = header;
     }
+
 }

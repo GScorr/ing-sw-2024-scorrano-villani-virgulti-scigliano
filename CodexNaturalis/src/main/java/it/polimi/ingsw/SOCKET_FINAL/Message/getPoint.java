@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to request their current points in the game.
+ */
 public class getPoint implements Message, Serializable {
 
     public Server server;
@@ -17,7 +20,6 @@ public class getPoint implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -28,16 +30,11 @@ public class getPoint implements Message, Serializable {
         this.common = common;
     }
 
-
-    public getPoint(){
-
-    }
+    public getPoint(){}
 
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -47,6 +44,12 @@ public class getPoint implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Retrieves the player's current points from the RMI controller and sends a
+     * PointResponse message containing the points to the client.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         int point = rmi_controller.getTtoP().get(token).getPlayerPoints();
@@ -55,4 +58,5 @@ public class getPoint implements Message, Serializable {
         output.flush();
         output.reset();
     }
+
 }

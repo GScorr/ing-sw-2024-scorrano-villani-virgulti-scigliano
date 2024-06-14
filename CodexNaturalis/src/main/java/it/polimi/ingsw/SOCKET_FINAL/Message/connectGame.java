@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Represents a message sent by the client to join a game.
+ * This message contains the player's name, desired game name, and number of players.
+ */
 public class connectGame implements Message, Serializable {
 
     public Server server;
@@ -23,9 +27,12 @@ public class connectGame implements Message, Serializable {
 
     public VirtualViewF clientHandler;
 
+/* da eliminare
     public void setClientHandler(VirtualViewF clientHandler) {
         this.clientHandler = clientHandler;
     }
+
+ */
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -44,9 +51,6 @@ public class connectGame implements Message, Serializable {
 
     }
 
-
-
-
     public void setServer(Server server) {
         this.server = server;
     }
@@ -55,13 +59,15 @@ public class connectGame implements Message, Serializable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
+    /*
+    da eliminare
     public void actionConnectGame() throws IOException {
         this.rmi_controller.connectSocket(this.clientHandler);
     }
 
+     */
+
     @Override
-    public void action() {
+    public void action() {}
 
-
-    }
 }

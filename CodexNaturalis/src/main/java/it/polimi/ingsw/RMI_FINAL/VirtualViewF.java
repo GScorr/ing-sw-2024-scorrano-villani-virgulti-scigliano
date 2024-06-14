@@ -101,5 +101,7 @@ public interface VirtualViewF extends Remote {
 
     void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException;
 
+    void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException;
+
 
 }

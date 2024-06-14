@@ -1,5 +1,11 @@
 package it.polimi.ingsw;
 
+/**
+ * A class containing various string constants used throughout the application.
+ *
+ * This class provides messages displayed to the user in different scenarios,
+ * such as player creation, game creation/joining, game actions, and errors.
+ */
 public  class StringCostant {
 
     public String choose_name_player = "\nCHOOSE NAME PLAYER > ";

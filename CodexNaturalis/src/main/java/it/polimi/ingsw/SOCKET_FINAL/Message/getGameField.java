@@ -9,6 +9,15 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/*
+forse da eliminare
+ */
+
+/**
+ * This message might be suitable for removal depending on the game's design
+ * and how the game field information is supposed to be retrieved and presented
+ * to the client.
+ */
 public class getGameField implements Message, Serializable {
 
     public Server server;
@@ -16,7 +25,6 @@ public class getGameField implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
@@ -27,7 +35,6 @@ public class getGameField implements Message, Serializable {
         this.common = common;
     }
 
-
     public getGameField(){
 
     }
@@ -35,8 +42,6 @@ public class getGameField implements Message, Serializable {
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     public void setServer(Server server) {
         this.server = server;
@@ -46,6 +51,12 @@ public class getGameField implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Retrieves the game field object from the RMI controller and sends it
+     * to the client.
+     *
+     * @throws IOException If there is an IO error.
+     */
     @Override
     public void action() throws IOException {
         GameField game_field = rmi_controller.getTtoP().get(token).getGameField();
@@ -53,4 +64,5 @@ public class getGameField implements Message, Serializable {
         output.flush();
         output.reset();
     }
+
 }

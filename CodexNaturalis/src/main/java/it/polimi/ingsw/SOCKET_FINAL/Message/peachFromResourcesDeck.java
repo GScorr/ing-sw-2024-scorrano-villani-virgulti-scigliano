@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * A class representing a message sent from the client to the server
+ * requesting a card to be drawn from the resource deck.
+ *
+ */
 public class peachFromResourcesDeck implements Message, Serializable {
 
     public Server server;
@@ -49,6 +54,11 @@ public class peachFromResourcesDeck implements Message, Serializable {
         this.output = output;
     }
 
+    /**
+     * Sends a request to the RMI controller to draw a card from the resource deck.
+     *
+     * @throws IOException if an I/O error occurs while sending the message
+     */
     @Override
     public void action() throws IOException {
         SendFunction function = new SendDrawResource(token);

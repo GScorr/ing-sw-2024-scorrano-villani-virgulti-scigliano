@@ -2,6 +2,10 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import java.io.Serializable;
 
+/**
+ * A class representing a final message.
+ *
+ */
 public class MyMessageFinal implements Serializable {
     private final String content;
 
@@ -12,5 +16,6 @@ public class MyMessageFinal implements Serializable {
     public String getContent() {
         return content;
     }
+
 }
 

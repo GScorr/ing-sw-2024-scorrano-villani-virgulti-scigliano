@@ -29,6 +29,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * this class manage the gui when the game is in waitin state
+ */
 public class GameWait extends GenericSceneController {
 
     private ChatIndexManager chat_manager = new ChatIndexManager();
@@ -44,6 +47,7 @@ public class GameWait extends GenericSceneController {
     public ImageView handCard2;
     public ImageView handCard3;
     public VBox deckBox;
+
     @FXML
     private GridPane gameGrid;
 
@@ -113,12 +117,24 @@ public class GameWait extends GenericSceneController {
         chatsMenu.getItems().add(chatItem);
     }*/
 
+    /**
+     * Updates the total number of unread messages for the client.
+     *
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     */
     private void updateUnreadTotal() throws IOException {
         client.getMiniModel().setUnread_total(0);
         for (Integer i : client.getMiniModel().getNot_read()) {
             client.getMiniModel().setUnread_total(client.getMiniModel().getUnread_total() + i);
         }
     }
+
+    /**
+     * Initializes the scene elements and starts a thread to monitor game state changes.
+     *
+     * @throws IOException  In case of potential I/O exceptions during communication with the client.
+     * @throws InterruptedException  If the thread is interrupted.
+     */
     @FXML
     public void startInitialize() throws IOException, InterruptedException {
 
@@ -128,8 +144,10 @@ public class GameWait extends GenericSceneController {
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
         headerController.setScene(scene_controller);
-        // Aggiungi l'header alla posizione desiderata nel layout principale
-        // Ad esempio, se headerInclude è un AnchorPane, puoi aggiungere l'header così:
+
+        // Add the header to the desired position in the main layout
+        // For example, if headerInclude is an AnchorPane, you can add the header like this:
+
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
 
@@ -208,7 +226,6 @@ public class GameWait extends GenericSceneController {
 
         //startMenuCheck();
 
-
     }
 
     /*private void startMenuCheck() throws IOException {
@@ -237,11 +254,11 @@ public class GameWait extends GenericSceneController {
         menuUpdater.start();
     }*/
 
-    @FXML
-    private void handleChatsMenuClick() throws IOException {
-
-    }
-
+    /**
+     * Handles mouse click events on the first card in the hand.
+     *
+     * @param mouseEvent The mouse event associated with the click.
+     */
     public void handleCard1Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
@@ -256,6 +273,11 @@ public class GameWait extends GenericSceneController {
         }
     }
 
+    /**
+     * Handles mouse click events on the second card in the hand.
+     *
+     * @param mouseEvent The mouse event associated with the click.
+     */
     public void handleCard2Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
@@ -270,6 +292,11 @@ public class GameWait extends GenericSceneController {
         }
     }
 
+    /**
+     * Handles mouse click events on the third card in the hand.
+     *
+     * @param mouseEvent The mouse event associated with the click.
+     */
     public void handleCard3Click(MouseEvent mouseEvent) {
         if (just_pressed){
             just_pressed = false;
@@ -283,29 +310,46 @@ public class GameWait extends GenericSceneController {
             card_3_flip = false;
         }
     }
+
+    /**
+     * Opens a popup window with a message.
+     *
+     * @param i The message to display in the popup.
+     */
     public void openPopup(int i){
         System.out.println("se arriva qua è sbagliato");
     }
 
+    /**
+     * Handles a mouse press event on the first card in the hand, detecting a long press.
+     *
+     * @param mouseEvent The mouse event associated with the press.
+     */
     public void handleCard1Pressed(MouseEvent mouseEvent) {
-        // Avvia un timer quando il mouse viene premuto sulla carta
+        // Start a timer when the mouse is pressed on the card
         clickTimer = new Timer();
         clickTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Quando il timer scatta, imposta il flag per indicare che il clic è stato mantenuto
+                // When the timer fires, set the flag to indicate that the click is maintained
                 clickHeld = true;
                 just_pressed = true;
             }
-        }, 500); // Imposta il ritardo in millisecondi (ad esempio 500 millisecondi)
+        }, 500); // Set the delay in milliseconds (for example, 500 milliseconds)
     }
 
+    /**
+     * Handles a mouse release event on the first card in the hand, performing actions based on click duration (short click vs long press) and game state.
+     *
+     * @param mouseEvent The mouse event associated with the release.
+     * @throws IOException If there's an error opening the popup window (assuming openPopup throws IOException).
+     */
     public void handleCard1Released(MouseEvent mouseEvent) throws IOException {
 
-        // Interrompi il timer quando il mouse viene rilasciato
+        // Stop the timer when the mouse is released
         clickTimer.cancel();
 
-        // Se il clic è stato mantenuto, esegui l'azione desiderata
+        // If the click is maintained, perform the desired action
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 openPopup(1);
@@ -313,34 +357,39 @@ public class GameWait extends GenericSceneController {
                 showError("IS NOT YOUR TURN, WAIT !!! ");
             }
         } else {
-            // Altrimenti, esegui un'altra azione (se necessario)
+            // Otherwise, perform another action (if needed)
         }
-
-        // Reimposta il flag per il prossimo utilizzo
+        //Reset the flag for the next use
         clickHeld = false;
 
     }
 
+    /**
+     * Handles a mouse press event on the second card in the hand, detecting a long press.
+     *
+     * @param mouseEvent The mouse event associated with the press.
+     */
     @FXML
     public void handleCard2Pressed(MouseEvent mouseEvent) {
-        // Avvia un timer quando il mouse viene premuto sulla carta
         clickTimer = new Timer();
         clickTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Quando il timer scatta, imposta il flag per indicare che il clic è stato mantenuto
                 clickHeld = true;
                 just_pressed = true;
             }
-        }, 500); // Imposta il ritardo in millisecondi (ad esempio 500 millisecondi)
+        }, 500);
     }
 
+    /**
+     * Handles a mouse release event on the second card in the hand, performing actions based on click duration (short click vs long press) and game state.
+     *
+     * @param mouseEvent The mouse event associated with the release.
+     * @throws IOException If there's an error opening the popup window (assuming openPopup throws IOException).
+     */
     @FXML
     public void handleCard2Released(MouseEvent mouseEvent) throws IOException {
-        // Interrompi il timer quando il mouse viene rilasciato
         clickTimer.cancel();
-
-        // Se il clic è stato mantenuto, esegui l'azione desiderata
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 openPopup(2);
@@ -348,31 +397,34 @@ public class GameWait extends GenericSceneController {
                 showError("IS NOT YOUR TURN, WAIT !!! ");
             }
         } else {
-            // Altrimenti, esegui un'altra azione (se necessario)
         }
-
-        // Reimposta il flag per il prossimo utilizzo
         clickHeld = false;
     }
 
+    /**
+     * Handles a mouse press event on the third card in the hand, detecting a long press.
+     *
+     * @param mouseEvent The mouse event associated with the press.
+     */
     public void handleCard3Pressed(MouseEvent mouseEvent) {
-        // Avvia un timer quando il mouse viene premuto sulla carta
         clickTimer = new Timer();
         clickTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Quando il timer scatta, imposta il flag per indicare che il clic è stato mantenuto
                 clickHeld = true;
                 just_pressed = true;
             }
-        }, 500); // Imposta il ritardo in millisecondi (ad esempio 500 millisecondi)
+        }, 500);
     }
 
+    /**
+     * Handles a mouse release event on the third card in the hand, performing actions based on click duration (short click vs long press) and game state.
+     *
+     * @param mouseEvent The mouse event associated with the release.
+     * @throws IOException If there's an error opening the popup window (assuming openPopup throws IOException).
+     */
     public void handleCard3Released(MouseEvent mouseEvent) throws IOException {
-        // Interrompi il timer quando il mouse viene rilasciato
         clickTimer.cancel();
-
-        // Se il clic è stato mantenuto, esegui l'azione desiderata
         if (clickHeld) {
             if(super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                 openPopup(3);
@@ -380,53 +432,28 @@ public class GameWait extends GenericSceneController {
                 showError("IS NOT YOUR TURN, WAIT !!! ");
             }
         } else {
-            // Altrimenti, esegui un'altra azione (se necessario)
         }
-
-        // Reimposta il flag per il prossimo utilizzo
         clickHeld = false;
     }
 
-    // Metodo per mostrare un messaggio di errore
+    /**
+     * Displays an error message to the user in a modal dialog window.
+     *
+     * @param message The error message to be displayed.
+     */
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
         alert.setHeaderText(null);
         alert.showAndWait();
     }
 
-
-    @FXML
-    private void handleViewOpponentFields() throws IOException {
-
-            // Create a list of player descriptions from the map
-
-            List<String> playerDescriptions = client.getMiniModel().getNum_to_player().entrySet().stream()
-                    .map(entry -> "Player " + entry.getKey() + " Name: " + entry.getValue())
-                    .collect(Collectors.toList());
-
-            // Initialize the ChoiceDialog with the list of player descriptions
-            ChoiceDialog<String> dialog = new ChoiceDialog<>(playerDescriptions.get(0), playerDescriptions);
-            dialog.setTitle("Visualizza campo da gioco avversari");
-            dialog.setHeaderText("Quale campo vuoi vedere?");
-            dialog.setContentText("Scegli il giocatore:");
-
-            Optional<String> result = dialog.showAndWait();
-            result.ifPresent(description -> {
-                // Extract the player number from the selected description
-                int playerNumber = Integer.parseInt(description.split(" ")[1]);
-                // Load and display the selected player's field
-                try {
-                    showOpponentField(playerNumber);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-    }
-
+    /**
+     * Handles the action of viewing the player's deck cards. This method is presumably triggered by an FXML button click.
+     *
+     * @throws IOException If there's an error loading the card images.
+     */
     @FXML
     private void handleViewDeck() throws IOException {
-
 
         // Create a new stage for the pop-up
         Stage stage = new Stage();
@@ -511,7 +538,8 @@ public class GameWait extends GenericSceneController {
             // Add the label and image view to the VBox
             handBox.getChildren().add(cardLabel);
             handBox.getChildren().add(cardImageView);
-        }else{
+        }
+        else{
             String labelText =  "GOLD DECK is empty:";
             String imagePath = "src/resources/Card/Bianco.png";
 
@@ -525,7 +553,6 @@ public class GameWait extends GenericSceneController {
             File file = new File(imagePath);
             Image image = new Image(file.toURI().toString());
             cardImageView.setImage(image);
-
 
             // Add the label and image view to the VBox
             handBox.getChildren().add(cardLabel);
@@ -551,7 +578,8 @@ public class GameWait extends GenericSceneController {
             // Add the label and image view to the VBox
             handBox.getChildren().add(cardLabel);
             handBox.getChildren().add(cardImageView);
-        }else{
+        }
+        else{
             String labelText =  "RESOURCE DECK is empty:";
             String imagePath = "src/resources/Card/Bianco.png";
 
@@ -582,11 +610,49 @@ public class GameWait extends GenericSceneController {
         // Show the new stage without waiting
         stage.show();
     }
+
+    /**
+     * Handles the action of viewing an opponent's playing field.
+     * This method is presumably triggered by an FXML button click.
+     *
+     * @throws IOException If there's an error loading or displaying the opponent's field.
+     */
     @FXML
-    private void handleChat() {
+    private void handleViewOpponentFields() throws IOException {
+
+            // Create a list of player descriptions from the map
+
+            List<String> playerDescriptions = client.getMiniModel().getNum_to_player().entrySet().stream()
+                    .map(entry -> "Player " + entry.getKey() + " Name: " + entry.getValue())
+                    .collect(Collectors.toList());
+
+            // Initialize the ChoiceDialog with the list of player descriptions
+            ChoiceDialog<String> dialog = new ChoiceDialog<>(playerDescriptions.get(0), playerDescriptions);
+            dialog.setTitle("Visualizza campo da gioco avversari");
+            dialog.setHeaderText("Quale campo vuoi vedere?");
+            dialog.setContentText("Scegli il giocatore:");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(description -> {
+                // Extract the player number from the selected description
+                int playerNumber = Integer.parseInt(description.split(" ")[1]);
+                // Load and display the selected player's field
+                try {
+                    showOpponentField(playerNumber);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
     }
 
+    /**
+     * Handles displaying the playing field of a specified opponent.
+     * This method is presumably called when the user wants to see another player's field.
+     *
+     * @param playerNumber The player number (index) of the opponent whose field to display.
+     * @throws IOException If there's an error loading card images.
+     */
     private void showOpponentField(int playerNumber) throws IOException {
         // Create a new stage for the pop-up
         Stage stage = new Stage();
@@ -621,7 +687,7 @@ public class GameWait extends GenericSceneController {
         Set<Integer> visibleCols = new HashSet<>();
 
         int count = 1;
-        //errore può essere qua
+        //error probably here
         int tmp = 0 ;
         while (count <= client.getMiniModel().game_fields.get(playerNumber - 1).card_inserted) {
             for (int i = 0; i < Constants.MATRIXDIM; i++) {
@@ -667,6 +733,14 @@ public class GameWait extends GenericSceneController {
         stage.show();
     }
 
+    /**
+     * Adds an image to a GridPane at the specified location with a border.
+     *
+     * @param grid the GridPane to add the image to
+     * @param row the row index in the GridPane
+     * @param col the column index in the GridPane
+     * @param imagePath the path to the image file
+     */
     private void addImageToGrid(GridPane grid, int row, int col, String imagePath) {
         File file = new File(imagePath);
         Image image = new Image(file.toURI().toString());
@@ -681,6 +755,18 @@ public class GameWait extends GenericSceneController {
         grid.add(stackPane, row, col);
     }
 
+    /**
+     * Updates the sets of visible rows and columns based on a given cell location.
+     *
+     * This method calculates and adds the visible row and column indices around
+     * the specified cell (`row`, `col`) to the provided sets (`visibleRows` and `visibleCols`).
+     * It considers the boundaries of the matrix defined by `Constants.MATRIXDIM`.
+     *
+     * @param visibleRows the set to store visible row indices
+     * @param visibleCols the set to store visible column indices
+     * @param row the row index of the cell
+     * @param col the column index of the cell
+     */
     private void updateVisibleIndices(Set<Integer> visibleRows, Set<Integer> visibleCols, int row, int col) {
         for (int i = row - 1; i <= row + 2; i++) {
             if (i >= 0 && i < Constants.MATRIXDIM) {
@@ -694,6 +780,13 @@ public class GameWait extends GenericSceneController {
         }
     }
 
+    /**
+     * Hides rows/columns in GridPane based on visible sets.
+     *
+     * @param grid the GridPane to adjust
+     * @param visibleRows rows to show
+     * @param visibleCols cols to show
+     */
     private void adjustGridVisibility(GridPane grid, Set<Integer> visibleRows, Set<Integer> visibleCols) {
         for (int i = 0; i < Constants.MATRIXDIM; i++) {
             if (!visibleRows.contains(i)) {
@@ -710,4 +803,5 @@ public class GameWait extends GenericSceneController {
             }
         }
     }
+
 }

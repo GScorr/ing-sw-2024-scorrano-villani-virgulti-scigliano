@@ -24,9 +24,15 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Abstract base class for scene controllers in the graphical user interface (GUI)
+ * with chat and opponent field functionalities.
+ *
+ */
 public class HeaderController extends GenericSceneController {
 
     @FXML
@@ -53,6 +59,11 @@ public class HeaderController extends GenericSceneController {
         this.the_client = the_client;
     }
 
+    /**
+     * Starts a thread that updates the chat menu header.
+     *
+     * @throws IOException If an I/O error occurs while fetching data.
+     */
     public void startInitializeHeader() throws IOException {
         Thread menuUpdater = new Thread(() -> {
             while (true) {
@@ -84,14 +95,23 @@ public class HeaderController extends GenericSceneController {
         menuUpdater.start();
     }
 
+    /**
+     * Adds a new message to the chat box.
+     *
+     * @param message The message content to be displayed.
+     */
     private void addMessageToChatBox(String message) {
         Label messageLabel = new Label(message);
         messageLabel.setWrapText(true);
         chatBox.getChildren().add(messageLabel);
     }
 
-
-    // Aggiunge un nuovo chat item al menu "Chats"
+    /**
+     * Adds a chat item to the chat menu.
+     *
+     * @param chatName The name of the chat to be displayed.
+     * @param chatId The ID of the chat.
+     */
     public void addChatItem(String chatName, int chatId) {
         MenuItem chatItem = new MenuItem(chatName);
         chatItem.setUserData(chatId);
@@ -105,7 +125,13 @@ public class HeaderController extends GenericSceneController {
         chatsMenu.getItems().add(chatItem);
     }
 
-    // Mostra un popup quando un chat item è premuto
+    /**
+     * Shows the chat window for a specific chat.
+     *
+     * @param chatName The name of the chat to be displayed.
+     * @param chatId The ID of the chat.
+     * @throws IOException If an I/O error occurs while showing the chat.
+     */
     private void showChat(String chatName, int chatId) throws IOException {
         if(!isChatOpen()){
             chatOpen=true;
@@ -129,10 +155,13 @@ public class HeaderController extends GenericSceneController {
         /*chatBox.getChildren().clear();  //
         chatBox.setVisible(true);
         System.out.println("chat is now visible: " + chatBox.isVisible());*/
-
-
     }
 
+    /**
+     * Calculates and sets the total unread message count for the client.
+     *
+     * @throws IOException If an I/O error occurs while fetching data from the client model.
+     */
     private void updateUnreadTotal() throws IOException {
         this.the_client.getMiniModel().setUnread_total(0);
         for (Integer i : this.the_client.getMiniModel().getNot_read()) {
@@ -149,10 +178,21 @@ public class HeaderController extends GenericSceneController {
     }
 
     // Aggiorna il flag e restituisce il suo stato
+
+    /**
+     * Checks if a chat window is currently open.
+     *
+     * @return True if a chat window is open, false otherwise.
+     */
     public boolean isChatOpen() {
         return chatOpen;
     }
 
+    /**
+     * Displays a pop-up window showing the game scoreboard.
+     *
+     * @throws IOException If an I/O error occurs while loading the scoreboard image.
+     */
     @FXML
     private void showScoreboard() throws IOException {
         // Check if the scoreboard popup is already open
@@ -211,11 +251,22 @@ public class HeaderController extends GenericSceneController {
         scoreboardStage.setOnHidden(event -> scoreboardStage = null);
     }
 
-    public void handleDisconnect(ActionEvent actionEvent) {
-       // Platform.exit();
+    /**
+     * Disconnects the client from the server when the disconnect button is pressed.
+     *
+     * @param actionEvent The event triggered by the disconnect button.
+     * @throws IOException If an I/O error occurs during communication with the server.
+     * @throws NotBoundException If the client is not properly connected to the server.
+     * @throws ClassNotFoundException If a class used during communication cannot be found.
+     * @throws InterruptedException If the communication thread is interrupted.
+     */
+    public void handleDisconnect(ActionEvent actionEvent) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException {
+        the_client.disconect();
     }
 
-
+    /**
+     * A simple data class representing information for a circle on the scoreboard.
+     */
     private static class CircleData {
         double x, y, radius;
         Color color;
@@ -228,6 +279,11 @@ public class HeaderController extends GenericSceneController {
         }
     }
 
+    /**
+     * Allows the user to select an opponent's field and displays it in a separate window.
+     *
+     * @throws IOException If an I/O error occurs while fetching data or displaying the field.
+     */
     @FXML
     private void handleViewOpponentFields() throws IOException {
 
@@ -236,7 +292,6 @@ public class HeaderController extends GenericSceneController {
         }
 
         // Create a list of player descriptions from the map
-
         List<String> playerDescriptions = the_client.getMiniModel().getNum_to_player().entrySet().stream()
                 .map(entry -> "Player " + entry.getKey() + " Name: " + entry.getValue())
                 .collect(Collectors.toList());
@@ -260,6 +315,13 @@ public class HeaderController extends GenericSceneController {
         });
 
     }
+
+    /**
+     * Displays a pop-up window showing the selected opponent's game field.
+     *
+     * @param playerNumber The ID of the opponent player.
+     * @throws IOException If an I/O error occurs while fetching data or loading images.
+     */
 
     @FXML
     private void showOpponentField(int playerNumber) throws IOException {
@@ -351,6 +413,14 @@ public class HeaderController extends GenericSceneController {
         opponentFieldStage.setOnHidden(event -> opponentFieldStage = null);
     }
 
+    /**
+     * Adds an image representation of a card to the opponent's game field grid.
+     *
+     * @param grid The GridPane representing the opponent's game field.
+     * @param row The row index in the grid.
+     * @param col The column index in the grid.
+     * @param imagePath The path to the card image.
+     */
     private void addImageToGrid(GridPane grid, int row, int col, String imagePath) {
         File file = new File(imagePath);
         Image image = new Image(file.toURI().toString());
@@ -365,6 +435,14 @@ public class HeaderController extends GenericSceneController {
         grid.add(stackPane, row, col);
     }
 
+    /**
+     * Updates the sets of visible rows and columns based on a cell's position on the game field.
+     *
+     * @param visibleRows The set containing currently visible rows.
+     * @param visibleCols The set containing currently visible columns.
+     * @param row The row index of the cell.
+     * @param col The column index of the cell.
+     */
     private void updateVisibleIndices(Set<Integer> visibleRows, Set<Integer> visibleCols, int row, int col) {
         for (int i = row - 1; i <= row + 2; i++) {
             if (i >= 0 && i < Constants.MATRIXDIM) {
@@ -378,6 +456,14 @@ public class HeaderController extends GenericSceneController {
         }
     }
 
+    /**
+     * Hides rows and columns of the opponent's game field grid that are not
+     * needed to display the visible cards.
+     *
+     * @param grid The GridPane representing the opponent's game field.
+     * @param visibleRows The set containing currently visible rows.
+     * @param visibleCols The set containing currently visible columns.
+     */
     private void adjustGridVisibility(GridPane grid, Set<Integer> visibleRows, Set<Integer> visibleCols) {
         for (int i = 0; i < Constants.MATRIXDIM; i++) {
             if (!visibleRows.contains(i)) {
