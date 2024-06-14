@@ -23,7 +23,7 @@ public interface GraficInterterface extends Serializable {
     void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException;
     void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException;
     void manageGame() throws IOException, InterruptedException, ClassNotFoundException;
-    void startCountdown(String message, boolean still_alone) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException;
+    void startCountdown(String message, boolean still_alone, boolean win) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException;
     String getName();
     void setToken(String token);
     public void setNewClient(boolean newClient);

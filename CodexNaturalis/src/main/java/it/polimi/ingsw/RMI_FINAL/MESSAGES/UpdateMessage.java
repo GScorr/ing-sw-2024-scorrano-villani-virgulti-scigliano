@@ -38,7 +38,7 @@ public class UpdateMessage extends ResponseMessage{
     @Override
     public void action() throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         virtual_view.getTerminal_interface().printUpdateMessage(this.message);
-        virtual_view.getTerminal_interface().startCountdown(message, isAlone);
+        virtual_view.getTerminal_interface().startCountdown(message, isAlone, this.win);
     }
 
 }

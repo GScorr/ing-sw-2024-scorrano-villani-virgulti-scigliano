@@ -370,7 +370,7 @@ public class TUI implements Serializable, GraficInterterface {
     }
 
     @Override
-    public void startCountdown(String message, boolean still_alone)  {
+    public void startCountdown(String message, boolean still_alone, boolean win)  {
 
     }
 

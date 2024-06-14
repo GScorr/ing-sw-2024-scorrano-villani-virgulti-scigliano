@@ -25,6 +25,7 @@ public class GUI implements GraficInterterface {
     SceneController scene;
     String username;
     private String token;
+    private boolean flag_0 = false;
 
     public GUI(SceneController scene) {
         this.scene = scene;
@@ -284,20 +285,27 @@ public class GUI implements GraficInterterface {
     }
 
     @Override
-    public void startCountdown(String message, boolean still_alone) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException {
-        System.out.println(still_alone);
-        if(!isAlone){
-            isAlone = true;
-            Platform.runLater(() -> scene.changeRootPane("alone.fxml"));
-            Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
-        }else{
-            if(still_alone)   Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
-            else {
-                this.isAlone = false;
-                Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
-                Thread.sleep(500);
-                newClient = false;
-                this.gameAccess(null);
+    public void startCountdown(String message, boolean still_alone, boolean win) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException {
+        synchronized (this) {
+            if (!flag_0) {
+                if (!isAlone) {
+                    isAlone = true;
+                    Platform.runLater(() -> scene.changeRootPane("alone.fxml"));
+                    Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                } else {
+                    if (still_alone) {
+                        if (win) {
+                            this.flag_0 = true;
+                        }
+                        Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                    } else {
+                        this.isAlone = false;
+                        Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                        Thread.sleep(1000);
+                        newClient = false;
+                        this.gameAccess(null);
+                    }
+                }
             }
         }
     }
