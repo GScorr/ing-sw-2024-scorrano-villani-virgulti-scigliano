@@ -2,6 +2,7 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +60,10 @@ public class GameWait extends GenericSceneController {
     Image image;
 
     PlayCard card_1;
+
+    @FXML
+    private Label playerNameLabel;
+
     Image card_1_front,card_1_back;
     boolean card_1_flip = false;
     PlayCard card_2;
@@ -77,6 +83,13 @@ public class GameWait extends GenericSceneController {
 
     @FXML
     private AnchorPane HeaderInclude;
+
+    @FXML
+    private Label currentPlayerLabel;
+
+    public void updateCurrentPlayer(String playerName) {
+        currentPlayerLabel.setText("Now is playing: " + playerName);
+    }
 
 
 
@@ -224,8 +237,33 @@ public class GameWait extends GenericSceneController {
             }
         }).start();
 
+        setPlayerName(client.getMiniModel().getMy_player().getName());
+        startUpdatePlaying();
+
         //startMenuCheck();
 
+    }
+
+    private void startUpdatePlaying() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    for(GameField g : client.getGameServer().getGameFields()){
+                        if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")||
+                                g.getPlayer().getActual_state().getNameState().equals("PLACE_CARD")){
+                            Platform.runLater(() -> updateCurrentPlayer(g.getPlayer().getName()));
+                        }
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 
     /*private void startMenuCheck() throws IOException {
@@ -802,6 +840,10 @@ public class GameWait extends GenericSceneController {
                 grid.getColumnConstraints().get(j).setMaxWidth(0);
             }
         }
+    }
+
+    public void setPlayerName(String playerName) {
+        playerNameLabel.setText(playerName);
     }
 
 }

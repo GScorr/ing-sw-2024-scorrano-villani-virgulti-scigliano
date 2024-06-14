@@ -79,6 +79,9 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private ListView<String> chatMessages;
 
+    @FXML
+    private Label playerNameLabel;
+
     public ImageView gold_deck;
     public ImageView resurce_deck;
     public ImageView center_card_0;
@@ -277,7 +280,7 @@ public class GameController2 extends GenericSceneController {
 
         token_client = client.getToken();
         setPlayerColor(helper.fromEnumtoColor(client.getMiniModel().getMy_player().getColor()));
-
+        setPlayerName(client.getMiniModel().getMy_player().getName());
 /*
 
             int i=1;
@@ -1309,5 +1312,8 @@ public class GameController2 extends GenericSceneController {
         event.consume();
     }
 
+    public void setPlayerName(String playerName) {
+        playerNameLabel.setText(playerName);
+    }
 
 }
