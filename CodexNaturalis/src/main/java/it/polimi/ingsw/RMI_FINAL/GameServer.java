@@ -495,6 +495,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                                          controller.getGame().getGold_deck().cards.getFirst());
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
+                token_manager.getVal(t).setGameField(getGameFields(t));
             }
 
         }

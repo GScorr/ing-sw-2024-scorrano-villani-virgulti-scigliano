@@ -31,6 +31,8 @@ public interface GraficInterterface extends Serializable {
     public void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
     public void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
     public boolean getInGame();
-   // public void guiManageGame() throws IOException, InterruptedException;
+
+    void endGame();
+    // public void guiManageGame() throws IOException, InterruptedException;
 
 }

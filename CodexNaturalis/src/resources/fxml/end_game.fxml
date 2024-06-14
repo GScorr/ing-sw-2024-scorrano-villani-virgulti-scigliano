@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.EndGameController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <stylesheets>
+        <URL value="@css/styles.css" />
+    </stylesheets>
+
+    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <Label text="Game Over!" styleClass="title"/>
+        <Label text="Final Standings" styleClass="subtitle"/>
+        <HBox alignment="CENTER">
+            <TableView fx:id="leaderboard" styleClass="table-view" prefWidth="600" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="positionColumn" text="#" prefWidth="47" />
+                    <TableColumn fx:id="playerNameColumn" text="Player" prefWidth="275" />
+                    <TableColumn fx:id="playerScoreColumn" text="Score" prefWidth="275" />
+                </columns>
+            </TableView>
+        </HBox>
+    </VBox>
+
+</AnchorPane>

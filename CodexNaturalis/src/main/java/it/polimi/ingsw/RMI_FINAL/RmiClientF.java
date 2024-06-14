@@ -66,6 +66,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.exit(0);
     }
 
+
     /**
      * Verifies a player's name with the server and establishes a connection (if valid).
      *

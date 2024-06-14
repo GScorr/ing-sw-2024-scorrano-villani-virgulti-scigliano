@@ -8,6 +8,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -227,6 +228,10 @@ public class GameWait extends GenericSceneController {
                         super.client.getTerminal_interface().manageGame();
                         break;
                     };
+                    if (super.client.getMiniModel().getState().equals("END_GAME")) {
+                        super.client.getTerminal_interface().endGame();
+                        break;
+                    };
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } catch (InterruptedException e) {
@@ -253,12 +258,16 @@ public class GameWait extends GenericSceneController {
                     throw new RuntimeException(e);
                 }
                 try {
-                    for(GameField g : client.getGameServer().getGameFields()){
-                        if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")||
-                                g.getPlayer().getActual_state().getNameState().equals("PLACE_CARD")){
-                            Platform.runLater(() -> updateCurrentPlayer(g.getPlayer().getName()));
+
+
+                        for(GameField g : client.getMiniModel().getGame_fields()){
+                            if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")||
+                                    g.getPlayer().getActual_state().getNameState().equals("PLACE_CARD")){
+                                Platform.runLater(() -> updateCurrentPlayer(g.getPlayer().getName()));
+                            }
                         }
-                    }
+
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

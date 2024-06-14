@@ -25,6 +25,7 @@ import java.util.List;
 public class Player implements PlayerObserver, Serializable {
     private String name;
 
+    private int position;
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
@@ -59,7 +60,7 @@ public class Player implements PlayerObserver, Serializable {
     private PlayCard starting_card;
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
-    private int player_points = 19;
+    private int player_points = 20;
 
     private int num_goal_achieve = 0;
 
@@ -385,4 +386,8 @@ public class Player implements PlayerObserver, Serializable {
     public void setGlobalGoal(Goal goal1, Goal goal2 ){
         global_goal1 = goal1;
         global_goal2 = goal2;}
+
+    public void setPosition(int i) {
+        this.position = i;
+    }
 }
