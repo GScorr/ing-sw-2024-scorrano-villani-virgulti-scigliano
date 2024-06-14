@@ -123,8 +123,8 @@ public class EndGameController extends GenericSceneController{
 
         // Animazione di scorrimento e fade-in del testo
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), congratulationsText);
-        translateTransition.setFromX(-200);
-        translateTransition.setToX(150);
+        translateTransition.setFromX(-300);
+        translateTransition.setToX(120);
         translateTransition.setInterpolator(Interpolator.EASE_BOTH);
 
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), congratulationsText);
