@@ -234,7 +234,6 @@
             </children>
         </GridPane>
 
-            <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" onDragDetected="#handleCard3DragDetected" onDragDone="#handleCard3DragDone" preserveRatio="true" />
         </VBox>
     </left>
 
