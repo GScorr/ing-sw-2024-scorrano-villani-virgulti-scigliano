@@ -17,6 +17,7 @@
         <VBox alignment="CENTER" spacing="20" prefHeight="450.0">
             <Label text="Waiting for other players' turn..." styleClass="title" />
             <ProgressIndicator fx:id="progressIndicator" prefWidth="80" prefHeight="80" />
+            <Label fx:id="currentPlayerLabel" text="" style="-fx-font-weight: bold;" />
             <Button text="Visualizza Deck" onAction="#handleViewDeck"/>
         </VBox>
     </center>
@@ -28,6 +29,7 @@
     <!-- VBox for the decks at the right -->
     <left>
         <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" spacing="10">
+            <Label fx:id="playerNameLabel" text="Player Name" style="-fx-font-weight: bold;" />
             <Label text="Cards in HAND:" />
             <Label text="Carta 1:" />
             <ImageView fx:id="handCard1" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard1Click"  onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released"/>
