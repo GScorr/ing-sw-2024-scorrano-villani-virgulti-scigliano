@@ -23,6 +23,10 @@
             <Menu text="Scoreboard">
                 <MenuItem fx:id="scoreboardView" text="View" onAction="#showScoreboard" />
             </Menu>
+            <Menu text="View GOAL">
+                <MenuItem fx:id="PersonalGoal" text="View" onAction="#showPersonalGoal" />
+                <MenuItem fx:id="CommonGoal" text="View" onAction="#showCommonGoal" />
+            </Menu>
         </MenuBar>
 
 </AnchorPane>

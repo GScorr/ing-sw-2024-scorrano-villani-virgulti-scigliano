@@ -3,6 +3,7 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
@@ -262,6 +263,51 @@ public class HeaderController extends GenericSceneController {
      */
     public void handleDisconnect(ActionEvent actionEvent) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException {
         the_client.disconect();
+    }
+
+    public void showPersonalGoal(ActionEvent actionEvent) {
+
+        // Create a new stage for the pop-up
+        Stage stage = new Stage();
+        stage.setTitle("Deck Cards");
+
+        // Create a VBox
+        VBox handBox = new VBox();
+        handBox.setAlignment(javafx.geometry.Pos.CENTER);
+        handBox.setMaxWidth(500.0);
+        handBox.setSpacing(10);
+
+        ImageView cardImageView = new ImageView();
+        cardImageView.setFitHeight(133);
+        cardImageView.setFitWidth(100);
+        cardImageView.setPreserveRatio(true);
+        /*
+        Goal personalGoal = the_client.getMiniModel().getMyGameField().
+
+        // Load and set the image for the ImageView
+        File file = new File(imagePath);
+        Image image = new Image(file.toURI().toString());
+        cardImageView.setImage(image);
+
+
+        // Add the label and image view to the VBox
+        handBox.getChildren().add(cardLabel);
+        handBox.getChildren().add(cardImageView);
+
+        // Set the scene for the new stage
+        Scene scene = new Scene(handBox);
+        stage.setScene(scene);
+
+        // Optionally, explicitly set the popup to be non-modal (if needed)
+        stage.initModality(Modality.NONE); // This line ensures the stage is non-modal
+
+        // Show the new stage without waiting
+        stage.show();
+
+         */
+    }
+
+    public void showCommonGoal(ActionEvent actionEvent) {
     }
 
     /**
