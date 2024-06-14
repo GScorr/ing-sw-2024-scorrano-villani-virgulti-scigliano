@@ -25,6 +25,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -128,6 +129,11 @@ public class GameController2 extends GenericSceneController {
     private AnchorPane HeaderInclude;
 
     private List<Node> addedImageViews = new ArrayList<>();
+    @FXML
+    private Circle playerColorCircle;
+
+    private ColorCoordinatesHelper helper2 = new ColorCoordinatesHelper();
+
 
     // Aggiunge un nuovo chat item al menu "Chats"
     /*public void addChatItem(String chatName, int chatId) {
@@ -270,6 +276,8 @@ public class GameController2 extends GenericSceneController {
          this.num_calamaio.setText(String.valueOf( client.getMiniModel().getMyGameField().getNumOfPen()));
 
         token_client = client.getToken();
+        setPlayerColor(helper.fromEnumtoColor(client.getMiniModel().getMy_player().getColor()));
+
 /*
 
             int i=1;
@@ -284,6 +292,10 @@ public class GameController2 extends GenericSceneController {
  */
   //      scene_controller.getHeader_controller().startInitializeHeader();
 
+    }
+
+    public void setPlayerColor(Color color) {
+        playerColorCircle.setFill(color);
     }
 
     /**
