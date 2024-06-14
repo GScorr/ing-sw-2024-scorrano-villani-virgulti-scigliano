@@ -1,6 +1,6 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
+
 import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -28,7 +28,10 @@ public class MessageSceneController extends GenericSceneController {
         this.stage = stage;
     }
 
-
+    /**
+     * Handles the click on the "OK" button of a popup window.
+     * Closes the current stage (popup window) if it exists.
+     */
     @FXML
     private void handleOkAction() {
         if (stage != null) {

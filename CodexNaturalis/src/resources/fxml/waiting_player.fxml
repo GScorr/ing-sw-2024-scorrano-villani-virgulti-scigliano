@@ -12,5 +12,4 @@
     <Label text="Waiting for Players..." styleClass="title" />
     <ProgressIndicator fx:id="progressIndicator" prefWidth="80" prefHeight="80" />
     <Label fx:id="waitingMessage" text="Currently waiting for other players to join..." wrapText="true" styleClass="message" />
-    <Button text="Cancel" onAction="#handleCancelAction" styleClass="cancel-button" />
 </VBox>

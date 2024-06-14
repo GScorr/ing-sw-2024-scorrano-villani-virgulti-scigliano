@@ -1,10 +1,6 @@
-
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 
-
-
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +17,12 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
+/**
+ * LoginController handles user login functionality and scene transition to the lobby.
+ *
+ */
 public class LoginController extends GenericSceneController {
+
     private String username;
     private SceneController controller;
 
@@ -34,13 +35,21 @@ public class LoginController extends GenericSceneController {
     @FXML
     private ProgressIndicator loadingIndicator;
 
+    /**
+     * Handles the login button click, performing username validation
+     * and initiating game access through the client interface.
+     *
+     * @param event The ActionEvent triggered by the button click.
+     * @throws IOException If an error occurs during communication with the server.
+     * @throws NotBoundException If the client is not properly connected to the server.
+     * @throws ClassNotFoundException If a class used during communication cannot be found.
+     * @throws InterruptedException If the communication thread is interrupted.
+     */
     @FXML
     private void handleLoginButtonAction(ActionEvent event) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
 
         String name = usernameField.getText();
-
        // loadLobby(username);
-
         //loadingIndicator.setVisible(true);
         int flag;
             flag = client.checkName(name);
@@ -60,7 +69,9 @@ public class LoginController extends GenericSceneController {
 
     }
 
-
+    /**
+     * Clears the username text field.
+     */
     public void emptyField(){
         usernameField.clear();
     }
@@ -76,6 +87,8 @@ public class LoginController extends GenericSceneController {
     }
     */
 
+    /*
+    da eliminare
     private void loadLobby(String username) {
         try {
             // Carica la nuova scena
@@ -93,6 +106,8 @@ public class LoginController extends GenericSceneController {
         }
     }
 
+     */
+
     @Override
     public String returnString() {
         return username;
@@ -101,4 +116,5 @@ public class LoginController extends GenericSceneController {
     public void setController(SceneController scene){
         this.controller = scene;
     }
+
 }

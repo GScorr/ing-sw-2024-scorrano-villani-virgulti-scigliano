@@ -5,8 +5,6 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 import it.polimi.ingsw.VIEW.GraficInterterface;
 import javafx.application.Platform;
@@ -15,6 +13,10 @@ import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.util.Scanner;
 
+/**
+ * This class implements the GraficInterterface interface and acts as the bridge between the server communication logic and the JavaFX scene controller.
+ * It handles user interactions, displays messages and updates the scene based on game state and server responses.
+ */
 public class GUI implements GraficInterterface {
 
     public boolean newClient;
@@ -30,11 +32,25 @@ public class GUI implements GraficInterterface {
         this.username = username;
     }
 
+    /**
+     * Displays an error message on the scene using the scene controller.
+     *
+     * @param a The error message to be displayed.
+     */
     @Override
     public void printError(String a) {
         scene.showAlert("ERROR!",a);
     }
 
+    /**
+     * Starts the command-line interface for user interaction.
+     * This method is currently unused as the application utilizes a graphical user interface.
+     *
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws NotBoundException If the RMI registry is not found.
+     * @throws ClassNotFoundException If a class used during communication cannot be found.
+     */
     @Override
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         selectNamePlayer();
@@ -44,12 +60,31 @@ public class GUI implements GraficInterterface {
         this.newClient = newClient;
     }
 
+    /**
+     * Prompts the user to enter a username and initiates the login process.
+     * This method utilizes Platform.runLater to run UI updates on the JavaFX thread.
+     *
+     * @throws IOException If an I/O error occurs during FXML loading.
+     * @throws NotBoundException If the RMI registry is not found (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @return always null
+     */
     @Override
     public String selectNamePlayer() throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Platform.runLater(() -> scene.changeRootPane("login_scene.fxml"));
         return null;
     }
 
+    /**
+     * Handles user access to the game after successful login.
+     *
+     * @param player_name The username of the player.
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws NotBoundException If the RMI registry is not found (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
     @Override
     public void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         System.out.println(player_name + " questo è l'username");
@@ -62,6 +97,16 @@ public class GUI implements GraficInterterface {
         }
     }
 
+    /**
+     * Prompts the user (for new clients only) to choose between creating a new game or joining an existing one.
+     * This method utilizes Platform.runLater to run UI updates on the JavaFX thread.
+     *
+     * @param player_name The username of the player.
+     * @throws IOException If an I/O error occurs during FXML loading.
+     * @throws NotBoundException If the RMI registry is not found (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
     private void makeChoice(String player_name) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException {
         if (!scene.getClient().areThereFreeGames()) {
             newGame(player_name,false);
@@ -85,11 +130,31 @@ public class GUI implements GraficInterterface {
         }*/
     }
 
+    /**
+     * Handles creating a new game.
+     *
+     * @param player_name The username of the player.
+     * @param empty A flag indicating if there are no existing games available (passed from makeChoice).
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws NotBoundException If the RMI registry is not found (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
     public void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if( !empty ) scene.showMessage("Message","There aren't existing games!");
         Platform.runLater(() -> scene.changeRootPane("game_access.fxml"));
     }
 
+    /**
+     * Prompts the user to choose a match to join.
+     * This method utilizes Platform.runLater to run UI updates on the JavaFX thread.
+     *
+     * @param player_name The username of the player.
+     * @throws IOException If an I/O error occurs during FXML loading.
+     * @throws NotBoundException If the RMI registry is not found (relevant for RMI communication).
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
     @Override
     public void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Platform.runLater(() -> scene.changeRootPane("game_list_scene.fxml"));
@@ -100,12 +165,27 @@ public class GUI implements GraficInterterface {
         return false;
     }
 
-
+    /**
+     * Displays a waiting scene while waiting for enough players to join the game.
+     *
+     * @throws IOException If an I/O error occurs during FXML loading.
+     * @throws InterruptedException If the UI thread is interrupted.
+     */
     @Override
     public void waitFullGame() throws IOException, InterruptedException {
         Platform.runLater(() -> scene.changeRootPane("waiting_player.fxml"));
     }
 
+    /**
+     * Handles the "choose goal" state in the game.
+     *
+     * If a goal card has not yet been placed by the server (checkGoal is false), it delegates to `chooseStartingCardState`.
+     * Otherwise, it calls `chooseGoal` to prompt the user (or handle UI updates) to select a goal card.
+     *
+     * @throws IOException If an I/O error occurs during communication or FXML loading.
+     * @throws InterruptedException If the connection or UI thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     @Override
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
         if(scene.getClient().getMiniModel().getState().equals("CHOOSE_GOAL")) {
@@ -115,10 +195,25 @@ public class GUI implements GraficInterterface {
             this.chooseStartingCardState();
         }
     }
+
+    /**
+     * Displays the scene for choosing a goal card.
+     *
+     * @throws IOException If an I/O error occurs during FXML loading.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the UI thread is interrupted.
+     */
     private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
         Platform.runLater(() -> scene.changeRootPane("choose_goal_state.fxml"));
     }
 
+    /**
+     * Handles the "choose starting card" state in the game.
+     *
+     * @throws IOException If an I/O error occurs during communication or FXML loading.
+     * @throws InterruptedException If the connection or UI thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     @Override
     public void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
         if(scene.getClient().getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
@@ -128,19 +223,40 @@ public class GUI implements GraficInterterface {
         }
     }
 
+    /**
+     * Displays the scene for choosing a starting card.
+     *
+     * @throws IOException If an I/O error occurs during FXML loading.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the UI thread is interrupted.
+     */
     private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
         Platform.runLater(() -> scene.changeRootPane("starting_card.fxml"));
     }
 
+    /**
+     * Displays the scene for placing a card in the game.
+     * This method is called when the game state is "PLACE_CARD" or "DRAW_CARD".
+     */
     public void place_card(){
         Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
     }
 
+    /**
+     * Displays the waiting scene while it's another player's turn.
+     *
+     */
     public void wait_turn(){
         Platform.runLater(() -> scene.changeRootPane("game_wait.fxml"));
     }
 
-
+    /**
+     * Manages the main game loop based on the current game state.
+     *
+     * @throws IOException If an I/O error occurs during communication or FXML loading.
+     * @throws InterruptedException If the connection or UI thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
         if(!scene.getClient().getMiniModel().getState().equals("END_GAME") ){
@@ -149,48 +265,17 @@ public class GUI implements GraficInterterface {
         }else{
             System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
         }
-
-//        while( !scene.getClient().getMiniModel().getState().equals("END_GAME") ){
-//
-//
-//            while (scene.getClient().getMiniModel().getState().equals("WAIT_TURN")) {
-//                menuChoice("GO IN WAITING MODE", scene.getClient().getMiniModel().getState());
-//                buffering();
-//            }
-//            if (scene.getClient().getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
-//            else if (scene.getClient().getMiniModel().getState().equals("DRAW_CARD")) {
-//                /*
-//                    menuChoice("DRAW CARD", scene.getClient().getMiniModel().getState());
-//                    drawCard();
-//                 */
-//                Platform.runLater(() -> scene.changeRootPane("game2.fxml"));
-//                while ( scene.getClient().getMiniModel().getState().equals("DRAW_CARD")){
-//                    Thread.sleep(1000);
-//                }
-//        }
-//            System.out.println("\nEND OF YOUR TURN !");
-//            scene.getClient().manageGame(false);
-//        }
-
- //       System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
-  //      scene.getClient().manageGame(true);
-        /*while( !client.getMiniModel().getState().equals("END_GAME") ){
-            while (client.getMiniModel().getState().equals("WAIT_TURN")) {
-                menuChoice("GO IN WAITING MODE", client.getMiniModel().getState());
-                buffering();
-            }
-            if (client.getMiniModel().getState().equals("PLACE_CARD")) {selectAndInsertCard();}
-            else if (client.getMiniModel().getState().equals("DRAW_CARD")) {
-                menuChoice("DRAW CARD", client.getMiniModel().getState());
-                drawCard();
-            }
-            System.out.println("\nEND OF YOUR TURN !");
-            client.manageGame(false);
-        }
-        System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
-        client.manageGame(true);*/
     }
 
+    /**
+     * This method is currently unused due to the graphical user interface implementation.
+     *
+     * It previously handled in-game menu choices for text-based clients.
+     *
+     * @param message The message to be displayed in the menu.
+     * @param current_state The current state of the game.
+     * @throws IOException If an I/O error occurs during communication.
+     */
     private void menuChoice(String message, String current_state) throws IOException {
         Scanner scan = new Scanner(System.in);
         scene.getClient().getMiniModel().printMenu(message);
@@ -220,6 +305,14 @@ public class GUI implements GraficInterterface {
         menuChoice(message, current_state);
     }
 
+    /**
+     *
+     * handle chat interaction within the game for text-based clients.
+     *
+     * @param decision An integer representing the chosen chat channel.
+     * @return Originally indicated successful chat interaction.
+     * @throws IOException If an I/O error occurs during communication.
+     */
     private boolean chatChoice(int decision) throws IOException {
         scene.getClient().getMiniModel().setStop_chat(false);
         Scanner scan = new Scanner(System.in);
@@ -246,7 +339,14 @@ public class GUI implements GraficInterterface {
 
     }
 
-
+    /**
+     *
+     * It  handles in-game card selection and placement for text-based clients.
+     *
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         int choice=-1,x,y;
@@ -273,6 +373,15 @@ public class GUI implements GraficInterterface {
         }
     }
 
+    /**
+     * This method is currently unused due to the graphical user interface implementation.
+     *
+     * It previously handled in-game card drawing selection for text-based clients.
+     *
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     */
     private void drawCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         System.out.println("\n DRAW A CARD FROM: ");
@@ -311,6 +420,15 @@ public class GUI implements GraficInterterface {
         scene.getClient().drawCard(function);
     }
 
+    /**
+     * Shows the cards available in the center deck.
+     *
+     * This method might have different implementations depending on the client type (socket or RMI).
+     *
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
+     * @throws InterruptedException If the connection thread is interrupted.
+     */
     private void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
         if(scene.getClient() instanceof clientSocket){
             scene.getClient().showCardsInCenter();
@@ -326,5 +444,10 @@ public class GUI implements GraficInterterface {
 
     public void setToken(String token){this.token =token;}
 
+    /**
+     *
+     * @throws InterruptedException  If the thread is interrupted while waiting.
+     */
     public void buffering() throws  InterruptedException{}
+
 }

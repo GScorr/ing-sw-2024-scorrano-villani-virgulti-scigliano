@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="revisione commenti">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GenericSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GenericSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/waiting_player.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/waiting_player.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +172,7 @@
       <recent name="it.polimi.ingsw.SOCKET_FINAL" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Server">
+  <component name="RunManager" selected="Application.Common_Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -275,8 +274,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Common_Client" />
+        <item itemvalue="Application.Common_Server" />
         <item itemvalue="Application.Gui_Initialization" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
@@ -286,8 +285,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -321,7 +319,110 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-      <workItem from="1718263902964" duration="11046000" />
+    </task>
+    <task id="LOCAL-00139" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1716298527656</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1716298527656</updated>
+    </task>
+    <task id="LOCAL-00140" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1716298608261</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1716298608262</updated>
+    </task>
+    <task id="LOCAL-00141" summary="agg">
+      <option name="closed" value="true" />
+      <created>1716300695716</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1716300695717</updated>
+    </task>
+    <task id="LOCAL-00142" summary="agg">
+      <option name="closed" value="true" />
+      <created>1716302601957</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1716302601957</updated>
+    </task>
+    <task id="LOCAL-00143" summary="agg">
+      <option name="closed" value="true" />
+      <created>1716303176690</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1716303176690</updated>
+    </task>
+    <task id="LOCAL-00144" summary="agg">
+      <option name="closed" value="true" />
+      <created>1716303498240</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1716303498240</updated>
+    </task>
+    <task id="LOCAL-00145" summary="manage game TUI">
+      <option name="closed" value="true" />
+      <created>1716311294543</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1716311294543</updated>
+    </task>
+    <task id="LOCAL-00146" summary="manage game TUI">
+      <option name="closed" value="true" />
+      <created>1716332851457</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1716332851457</updated>
+    </task>
+    <task id="LOCAL-00147" summary="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)">
+      <option name="closed" value="true" />
+      <created>1716395618858</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1716395618858</updated>
+    </task>
+    <task id="LOCAL-00148" summary="agiornamento">
+      <option name="closed" value="true" />
+      <created>1716477794859</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1716477794859</updated>
+    </task>
+    <task id="LOCAL-00149" summary="bug fixing tui, rmi client, game server">
+      <option name="closed" value="true" />
+      <created>1716503846281</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1716503846281</updated>
+    </task>
+    <task id="LOCAL-00150" summary="fix bugs disconnessione">
+      <option name="closed" value="true" />
+      <created>1716542474003</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1716542474004</updated>
+    </task>
+    <task id="LOCAL-00151" summary="fix bugs disconnessione">
+      <option name="closed" value="true" />
+      <created>1716542679192</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1716542679192</updated>
     </task>
     <task id="LOCAL-00152" summary="fix bugs disconnessione">
       <option name="closed" value="true" />
@@ -587,135 +688,31 @@
       <option name="project" value="LOCAL" />
       <updated>1718212264138</updated>
     </task>
-    <task id="LOCAL-00185" summary="commenti gameserver">
+    <task id="LOCAL-00185" summary=".">
       <option name="closed" value="true" />
-      <created>1718212929787</created>
+      <created>1718328142419</created>
       <option name="number" value="00185" />
       <option name="presentableId" value="LOCAL-00185" />
       <option name="project" value="LOCAL" />
-      <updated>1718212929787</updated>
+      <updated>1718328142419</updated>
     </task>
-    <task id="LOCAL-00186" summary="commenti fino a token manager">
+    <task id="LOCAL-00186" summary=".">
       <option name="closed" value="true" />
-      <created>1718215703638</created>
+      <created>1718328436186</created>
       <option name="number" value="00186" />
       <option name="presentableId" value="LOCAL-00186" />
       <option name="project" value="LOCAL" />
-      <updated>1718215703638</updated>
+      <updated>1718328436186</updated>
     </task>
-    <task id="LOCAL-00187" summary="modifiche al client handler">
+    <task id="LOCAL-00187" summary=".">
       <option name="closed" value="true" />
-      <created>1718224837980</created>
+      <created>1718328653236</created>
       <option name="number" value="00187" />
       <option name="presentableId" value="LOCAL-00187" />
       <option name="project" value="LOCAL" />
-      <updated>1718224837980</updated>
+      <updated>1718328653236</updated>
     </task>
-    <task id="LOCAL-00188" summary="modifiche al client handler">
-      <option name="closed" value="true" />
-      <created>1718224862178</created>
-      <option name="number" value="00188" />
-      <option name="presentableId" value="LOCAL-00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1718224862178</updated>
-    </task>
-    <task id="LOCAL-00189" summary="commentato ClientProxy.java modifiche al Server.java e al ServerProxy.java palese ho scritto qualcosa non giusta">
-      <option name="closed" value="true" />
-      <created>1718227859205</created>
-      <option name="number" value="00189" />
-      <option name="presentableId" value="LOCAL-00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1718227859206</updated>
-    </task>
-    <task id="LOCAL-00190" summary="eliminazione di ClientProxy.java">
-      <option name="closed" value="true" />
-      <created>1718228276123</created>
-      <option name="number" value="00190" />
-      <option name="presentableId" value="LOCAL-00190" />
-      <option name="project" value="LOCAL" />
-      <updated>1718228276124</updated>
-    </task>
-    <task id="LOCAL-00191" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1718228310168</created>
-      <option name="number" value="00191" />
-      <option name="presentableId" value="LOCAL-00191" />
-      <option name="project" value="LOCAL" />
-      <updated>1718228310168</updated>
-    </task>
-    <task id="LOCAL-00192" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1718264299566</created>
-      <option name="number" value="00192" />
-      <option name="presentableId" value="LOCAL-00192" />
-      <option name="project" value="LOCAL" />
-      <updated>1718264299566</updated>
-    </task>
-    <task id="LOCAL-00193" summary="rimozione classe SocketException.java">
-      <option name="closed" value="true" />
-      <created>1718264364686</created>
-      <option name="number" value="00193" />
-      <option name="presentableId" value="LOCAL-00193" />
-      <option name="project" value="LOCAL" />
-      <updated>1718264364686</updated>
-    </task>
-    <task id="LOCAL-00194" summary="revisione commenti + metodi da eliminare in clientSocket.java commentati">
-      <option name="closed" value="true" />
-      <created>1718265913321</created>
-      <option name="number" value="00194" />
-      <option name="presentableId" value="LOCAL-00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1718265913321</updated>
-    </task>
-    <task id="LOCAL-00195" summary="ripristino SocketException.java non andava più nulla senza">
-      <option name="closed" value="true" />
-      <created>1718266089113</created>
-      <option name="number" value="00195" />
-      <option name="presentableId" value="LOCAL-00195" />
-      <option name="project" value="LOCAL" />
-      <updated>1718266089113</updated>
-    </task>
-    <task id="LOCAL-00196" summary="rimozione metodi non usati in clientSocket.java">
-      <option name="closed" value="true" />
-      <created>1718266182646</created>
-      <option name="number" value="00196" />
-      <option name="presentableId" value="LOCAL-00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1718266182646</updated>
-    </task>
-    <task id="LOCAL-00197" summary="rimozione classe Client.java tutta commentata">
-      <option name="closed" value="true" />
-      <created>1718266282870</created>
-      <option name="number" value="00197" />
-      <option name="presentableId" value="LOCAL-00197" />
-      <option name="project" value="LOCAL" />
-      <updated>1718266282870</updated>
-    </task>
-    <task id="LOCAL-00198" summary="revisione commenti in ClientHandler.java">
-      <option name="closed" value="true" />
-      <created>1718267681677</created>
-      <option name="number" value="00198" />
-      <option name="presentableId" value="LOCAL-00198" />
-      <option name="project" value="LOCAL" />
-      <updated>1718267681677</updated>
-    </task>
-    <task id="LOCAL-00199" summary="revisione commenti in VirtualView.java">
-      <option name="closed" value="true" />
-      <created>1718268091415</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1718268091415</updated>
-    </task>
-    <task id="LOCAL-00200" summary="revisione commenti">
-      <option name="closed" value="true" />
-      <created>1718273053863</created>
-      <option name="number" value="00200" />
-      <option name="presentableId" value="LOCAL-00200" />
-      <option name="project" value="LOCAL" />
-      <updated>1718273053863</updated>
-    </task>
-    <option name="localTasksCounter" value="201" />
+    <option name="localTasksCounter" value="188" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -750,32 +747,32 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="agg" />
+    <MESSAGE value="manage game TUI" />
+    <MESSAGE value="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)" />
+    <MESSAGE value="agiornamento" />
+    <MESSAGE value="bug fixing tui, rmi client, game server" />
+    <MESSAGE value="fix bugs disconnessione" />
+    <MESSAGE value="prova" />
+    <MESSAGE value="notreadmesaages" />
+    <MESSAGE value="creazione primo collegamento GUI" />
+    <MESSAGE value="risoluzione problemi riconnessione e riconnessioni multiple:&#10;testati rmi-rmi rmi-soc soc-rmi soc-soc" />
+    <MESSAGE value="startingcard gamefield printed" />
+    <MESSAGE value="qualcosa inizia ad andare" />
+    <MESSAGE value="fix minor bugs" />
+    <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
     <MESSAGE value="aggiornamento fra mi ha hypato" />
     <MESSAGE value="piccolo change per carta trasparente" />
+    <MESSAGE value="aggiornamento" />
     <MESSAGE value="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti" />
     <MESSAGE value=" f" />
     <MESSAGE value="fine chat" />
     <MESSAGE value="inizio coordinate scoreboard" />
-    <MESSAGE value="." />
     <MESSAGE value="scoreboard finita" />
     <MESSAGE value="CD" />
     <MESSAGE value="Revisione commenti fine RMI, manca Gameserver" />
-    <MESSAGE value="commenti gameserver" />
-    <MESSAGE value="commenti fino a token manager" />
-    <MESSAGE value="modifiche al client handler" />
-    <MESSAGE value="commentato ClientProxy.java modifiche al Server.java e al ServerProxy.java palese ho scritto qualcosa non giusta" />
-    <MESSAGE value="eliminazione di ClientProxy.java" />
-    <MESSAGE value="aggiornamento" />
-    <MESSAGE value="rimozione classe SocketException.java" />
-    <MESSAGE value="metodi da eliminare in clientSocket.java commentati" />
-    <MESSAGE value="revisione commenti + metodi da eliminare in clientSocket.java commentati" />
-    <MESSAGE value="ripristino SocketException.java non andava più nulla senza" />
-    <MESSAGE value="rimozione metodi non usati in clientSocket.java" />
-    <MESSAGE value="rimozione classe Client.java tutta commentata" />
-    <MESSAGE value="revisione commenti in ClientHandler.java" />
-    <MESSAGE value="revisione commenti in VirtualView.java" />
-    <MESSAGE value="revisione commenti" />
-    <option name="LAST_COMMIT_MESSAGE" value="revisione commenti" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -800,82 +797,82 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalStrategyTest.ic" NAME="GoalStrategyTest Coverage Results" MODIFIED="1713632012406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameFieldControllerTest.ic" NAME="GameFieldControllerTest Coverage Results" MODIFIED="1713632338601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_statePlaceCard.ic" NAME="GameControllerTest.statePlaceCard Coverage Results" MODIFIED="1713272585536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1713631507351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Player.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$CenterCardsTest.ic" NAME="CenterCardsTest Coverage Results" MODIFIED="1713632061105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckTest.ic" NAME="DeckTest Coverage Results" MODIFIED="1713632114538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalFeatherPenPaperTest.ic" NAME="GoalFeatherPenPaperTest Coverage Results" MODIFIED="1713631975267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createErrorPlayer.ic" NAME="GameControllerTest.createErrorPlayer Coverage Results" MODIFIED="1713780269877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckGoalCardTest.ic" NAME="DeckGoalCardTest Coverage Results" MODIFIED="1713632073555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_EndGame.ic" NAME="GameControllerTest.EndGame Coverage Results" MODIFIED="1713624002757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalLFigureTest.ic" NAME="GoalLFigureTest Coverage Results" MODIFIED="1713631999375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalDoubleGoldTest.ic" NAME="GoalDoubleGoldTest Coverage Results" MODIFIED="1713631638314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest.ic" NAME="GameControllerTest Coverage Results" MODIFIED="1713780295174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalTripleTest.ic" NAME="GoalTripleTest Coverage Results" MODIFIED="1713632028814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromResourcesDeck.ic" NAME="GameControllerTest.playerPeachCardFromResourcesDeck Coverage Results" MODIFIED="1713613769329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromGoldDeck.ic" NAME="GameControllerTest.playerPeachCardFromGoldDeck Coverage Results" MODIFIED="1713272359559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_checkNumPlayer.ic" NAME="GameControllerTest.checkNumPlayer Coverage Results" MODIFIED="1713272531642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerSelectStartingCard.ic" NAME="GameControllerTest.playerSelectStartingCard Coverage Results" MODIFIED="1713272558414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerChooseGoal.ic" NAME="GameControllerTest.playerChooseGoal Coverage Results" MODIFIED="1713272545604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GoalDiagonalTest.ic" NAME="GoalDiagonalTest Coverage Results" MODIFIED="1713631923778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$CenterCardsTest_drawResourceCard.ic" NAME="CenterCardsTest.drawResourceCard Coverage Results" MODIFIED="1713632039355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$CenterCardsTest.ic" NAME="CenterCardsTest Coverage Results" MODIFIED="1713632061105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1713629259313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Game.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameTest_insertPlayer.ic" NAME="GameTest.insertPlayer Coverage Results" MODIFIED="1713632307461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>it.polimi.ingsw.MODEL.Game.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerChooseGoal.ic" NAME="GameControllerTest.playerChooseGoal Coverage Results" MODIFIED="1713272545604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromResourcesDeck.ic" NAME="GameControllerTest.playerPeachCardFromResourcesDeck Coverage Results" MODIFIED="1713613769329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameFieldControllerTest_goldPointsCount.ic" NAME="GameFieldControllerTest.goldPointsCount Coverage Results" MODIFIED="1713274770770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalTripleTest.ic" NAME="GoalTripleTest Coverage Results" MODIFIED="1713632028814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerSelectStartingCard.ic" NAME="GameControllerTest.playerSelectStartingCard Coverage Results" MODIFIED="1713272558414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_EndGame.ic" NAME="GameControllerTest.EndGame Coverage Results" MODIFIED="1713624002757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_statePlaceCard.ic" NAME="GameControllerTest.statePlaceCard Coverage Results" MODIFIED="1713613786847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$CenterCardsTest_drawResourceCard.ic" NAME="CenterCardsTest.drawResourceCard Coverage Results" MODIFIED="1713632039355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalDoubleGoldTest.ic" NAME="GoalDoubleGoldTest Coverage Results" MODIFIED="1713631638314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalStrategyTest.ic" NAME="GoalStrategyTest Coverage Results" MODIFIED="1713632012406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachFromCardsInCenter.ic" NAME="GameControllerTest.playerPeachFromCardsInCenter Coverage Results" MODIFIED="1713613297646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckGoalCardTest.ic" NAME="DeckGoalCardTest Coverage Results" MODIFIED="1713632073555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalFeatherPenPaperTest.ic" NAME="GoalFeatherPenPaperTest Coverage Results" MODIFIED="1713631975267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1713631507351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Player.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GoalLFigureTest.ic" NAME="GoalLFigureTest Coverage Results" MODIFIED="1713631999375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Goal.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createErrorPlayer.ic" NAME="GameControllerTest.createErrorPlayer Coverage Results" MODIFIED="1713780269877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_createPlayer.ic" NAME="GameControllerTest.createPlayer Coverage Results" MODIFIED="1713272515588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest.ic" NAME="GameControllerTest Coverage Results" MODIFIED="1713622274923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1713629259313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Game.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_checkNumPlayer.ic" NAME="GameControllerTest.checkNumPlayer Coverage Results" MODIFIED="1713272531642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$DeckTest.ic" NAME="DeckTest Coverage Results" MODIFIED="1713632114538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.DeckPackage.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameTest_insertPlayer.ic" NAME="GameTest.insertPlayer Coverage Results" MODIFIED="1713632307461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>it.polimi.ingsw.MODEL.Game.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CodexNaturalis$GameControllerTest_playerPeachCardFromGoldDeck.ic" NAME="GameControllerTest.playerPeachCardFromGoldDeck Coverage Results" MODIFIED="1713613777775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.CONTROLLER.*</FILTER>
     </SUITE>
   </component>

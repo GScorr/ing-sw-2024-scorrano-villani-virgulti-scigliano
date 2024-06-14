@@ -4,7 +4,12 @@ import it.polimi.ingsw.MODEL.Card.PlayCard;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * ClickableCardImageView extends ImageView to represent a clickable card on the game board.
+ * Stores additional information about the card's position (row, col), associated PlayCard object, and potentially other data (i).
+ */
 public class ClickableCardImageView extends ImageView {
+
     private int row;
     private int col;
     private PlayCard playCard;
@@ -33,4 +38,5 @@ public class ClickableCardImageView extends ImageView {
     public int getI() {
         return i;
     }
+
 }

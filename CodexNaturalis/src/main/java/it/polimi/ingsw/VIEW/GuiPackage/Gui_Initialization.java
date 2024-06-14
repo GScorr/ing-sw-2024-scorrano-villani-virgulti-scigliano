@@ -1,15 +1,12 @@
 package it.polimi.ingsw.VIEW.GuiPackage;
 
-
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.RMI_FINAL.RmiClientF;
 import it.polimi.ingsw.RMI_FINAL.VirtualServerF;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -19,10 +16,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
-
-import static javafx.application.Application.launch;
-
+/**
+ * Gui_Initialization is the main class for launching the JavaFX GUI application.
+ * It handles user input for choosing between RMI or socket communication
+ * and establishes the connection with the server.
+ */
 public class Gui_Initialization extends Application {
+
     VirtualViewF client;
     Stage stage;
 
@@ -39,16 +39,29 @@ public class Gui_Initialization extends Application {
 
     }
 
-
     public static void main( String[] args ) {
         launch(args);
     }
 
-
+    /**
+     * Prompts user for connection type (RMI/Socket), establishes connection, and sets up client/scene.
+     *
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws NotBoundException If the RMI registry is not found.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found.
+     */
     public void runGui(String[] args){
         launch(args);
     }
 
+    /**
+     *
+     * @throws IOException
+     * @throws NotBoundException
+     * @throws InterruptedException
+     * @throws ClassNotFoundException
+     */
     private void GUISocketOrRmi() throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         String choose="-1";
@@ -89,7 +102,17 @@ public class Gui_Initialization extends Application {
         }while( !choose.equals("0")  && !choose.equals("1"));
     }
 
-
+    /**
+     * Initializes the JavaFX application stage and scene controller.
+     * Prompts the user to choose between RMI and socket communication,
+     * establishes the connection with the server, and sets up the client and scene controller.
+     *
+     * @param primaryStage The primary stage of the JavaFX application.
+     * @throws IOException If an I/O error occurs during communication.
+     * @throws NotBoundException If the RMI registry is not found.
+     * @throws InterruptedException If the connection thread is interrupted.
+     * @throws ClassNotFoundException If a class used during communication cannot be found.
+     */
     @Override
     public void start(Stage primaryStage) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
 /*
@@ -105,10 +128,7 @@ public class Gui_Initialization extends Application {
         primaryStage.setScene(scene); // Imposta la scena nel palcoscenico
 
         primaryStage.show();
-
  */
-
-
         this.stage = primaryStage;
         this.scene = new SceneController();
         scene.setStage(stage);
