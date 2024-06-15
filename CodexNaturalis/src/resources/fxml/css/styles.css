@@ -84,3 +84,17 @@
     -fx-background-color: #007bff; /* Colore di sfondo della riga selezionata */
     -fx-text-fill: white; /* Colore del testo della riga selezionata */
 }
+
+.choose-user-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.choose-game-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}

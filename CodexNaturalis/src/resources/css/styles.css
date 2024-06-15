@@ -38,6 +38,20 @@
     -fx-alignment: center;
 }
 
+.choose-user-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.choose-game-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
 .header {
     -fx-font-size: 20px;
     -fx-font-weight: bold;

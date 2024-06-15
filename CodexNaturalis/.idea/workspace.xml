@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseStartingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseStartingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/choose_goal_state.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/choose_goal_state.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/starting_card.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/starting_card.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_access.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_access.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/login_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/login_scene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,22 +323,6 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00145" summary="manage game TUI">
-      <option name="closed" value="true" />
-      <created>1716311294543</created>
-      <option name="number" value="00145" />
-      <option name="presentableId" value="LOCAL-00145" />
-      <option name="project" value="LOCAL" />
-      <updated>1716311294543</updated>
-    </task>
-    <task id="LOCAL-00146" summary="manage game TUI">
-      <option name="closed" value="true" />
-      <created>1716332851457</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1716332851457</updated>
     </task>
     <task id="LOCAL-00147" summary="clientSocket funziona fino all'inserimento dei Player nel Game&#10;&#10;Problemi:&#10;Una volta che la partita inizia, uno dei due client si disconnette, di conseguenza non è possibile inviare nessun messaggio (penso)">
       <option name="closed" value="true" />
@@ -716,7 +700,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718449432078</updated>
     </task>
-    <option name="localTasksCounter" value="194" />
+    <task id="LOCAL-00194" summary="m">
+      <option name="closed" value="true" />
+      <created>1718452912012</created>
+      <option name="number" value="00194" />
+      <option name="presentableId" value="LOCAL-00194" />
+      <option name="project" value="LOCAL" />
+      <updated>1718452912012</updated>
+    </task>
+    <task id="LOCAL-00195" summary=".">
+      <option name="closed" value="true" />
+      <created>1718452933088</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1718452933088</updated>
+    </task>
+    <option name="localTasksCounter" value="196" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -751,7 +751,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bug fixing tui, rmi client, game server" />
     <MESSAGE value="fix bugs disconnessione" />
     <MESSAGE value="prova" />
     <MESSAGE value="notreadmesaages" />
@@ -771,12 +770,13 @@
     <MESSAGE value="scoreboard finita" />
     <MESSAGE value="CD" />
     <MESSAGE value="Revisione commenti fine RMI, manca Gameserver" />
-    <MESSAGE value="." />
     <MESSAGE value="small fixes" />
     <MESSAGE value="small fixes pt.2" />
     <MESSAGE value="endgame" />
     <MESSAGE value="popup" />
-    <option name="LAST_COMMIT_MESSAGE" value="popup" />
+    <MESSAGE value="m" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

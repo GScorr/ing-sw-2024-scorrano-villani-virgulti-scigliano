@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
@@ -34,6 +35,14 @@ public class LoginController extends GenericSceneController {
 
     @FXML
     private ProgressIndicator loadingIndicator;
+
+    @FXML
+    private Label welcomeLabel;
+
+    public void initialize() {
+        // Imposta il font della Label
+        welcomeLabel.setFont(Font.font("Arial", 25));
+    }
 
     /**
      * Handles the login button click, performing username validation
