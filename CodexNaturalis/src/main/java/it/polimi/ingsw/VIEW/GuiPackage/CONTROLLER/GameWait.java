@@ -224,6 +224,7 @@ public class GameWait extends GenericSceneController {
                     throw new RuntimeException(e);
                 }
                 try {
+                    if (super.client.getTerminal_interface().getIsAlone() == true ) break;
                     if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                         super.client.getTerminal_interface().manageGame();
                         break;

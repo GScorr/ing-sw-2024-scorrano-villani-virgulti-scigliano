@@ -19,10 +19,13 @@ import java.util.Scanner;
  */
 public class GUI implements GraficInterterface {
 
+    private boolean isAlone = false;
+
     public boolean newClient;
     SceneController scene;
     String username;
     private String token;
+    private boolean flag_0 = false;
 
     public GUI(SceneController scene) {
         this.scene = scene;
@@ -42,6 +45,11 @@ public class GUI implements GraficInterterface {
         scene.showAlert("ERROR!",a);
     }
 
+    @Override
+    public void printUpdateMessage(String message) {
+
+    }
+
     /**
      * Starts the command-line interface for user interaction.
      * This method is currently unused as the application utilizes a graphical user interface.
@@ -58,6 +66,11 @@ public class GUI implements GraficInterterface {
 
     public void setNewClient(boolean newClient) {
         this.newClient = newClient;
+    }
+
+    @Override
+    public boolean getIsAlone() {
+        return this.isAlone;
     }
 
     /**
@@ -87,7 +100,6 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
-        System.out.println(player_name + " questo è l'username");
         username = player_name;
         if(newClient) {
             makeChoice(player_name);
@@ -269,6 +281,32 @@ public class GUI implements GraficInterterface {
            else this.wait_turn();
         }else{
             endGame();
+        }
+    }
+
+    @Override
+    public void startCountdown(String message, boolean still_alone, boolean win) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException {
+        synchronized (this) {
+            if (!flag_0) {
+                if (!isAlone) {
+                    isAlone = true;
+                    Platform.runLater(() -> scene.changeRootPane("alone.fxml"));
+                    Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                } else {
+                    if (still_alone) {
+                        if (win) {
+                            this.flag_0 = true;
+                        }
+                        Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                    } else {
+                        this.isAlone = false;
+                        Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                        Thread.sleep(1000);
+                        newClient = false;
+                        this.gameAccess(null);
+                    }
+                }
+            }
         }
     }
 

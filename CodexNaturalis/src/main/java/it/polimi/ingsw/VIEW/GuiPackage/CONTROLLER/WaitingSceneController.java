@@ -36,7 +36,6 @@ public class WaitingSceneController extends GenericSceneController{
      */
     @FXML
     public void initialize() {
-        System.out.println("awa");
         // Start the background task to monitor the variable
         new Thread(() -> {
             while (true) {
@@ -51,11 +50,7 @@ public class WaitingSceneController extends GenericSceneController{
                         client.getTerminal_interface().chooseGoalState();
                         break;
                     };
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | InterruptedException | ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
             }

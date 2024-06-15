@@ -9,7 +9,7 @@ import java.rmi.NotBoundException;
  * Response message for sending an update message to the client.
  *
  */
-public class UpdateMessage extends ResponseMessage{
+public class PrintMessage extends ResponseMessage{
 
     private String message;
 
@@ -19,7 +19,7 @@ public class UpdateMessage extends ResponseMessage{
 
     private GameField gamefield;
 
-    public UpdateMessage(String string) {
+    public PrintMessage(String string) {
         this.message = string;
     }
 
@@ -38,7 +38,6 @@ public class UpdateMessage extends ResponseMessage{
     @Override
     public void action() throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
         virtual_view.getTerminal_interface().printUpdateMessage(this.message);
-        virtual_view.getTerminal_interface().startCountdown(message, isAlone, this.win);
     }
 
 }
