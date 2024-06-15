@@ -308,6 +308,7 @@ public class GUI implements GraficInterterface {
                         Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
                         Thread.sleep(1000);
                         newClient = false;
+                        System.out.println("ciao");
                         this.gameAccess(null);
                     }
                 }
