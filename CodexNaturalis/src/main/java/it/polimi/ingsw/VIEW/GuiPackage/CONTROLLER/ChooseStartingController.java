@@ -98,6 +98,7 @@ public class ChooseStartingController extends GenericSceneController {
         client.chooseStartingCard(false);
         animateCardSelection(card1, card2);
         showBufferingLabel();
+
         checkClientState();
     }
 
@@ -165,6 +166,11 @@ public class ChooseStartingController extends GenericSceneController {
     private void checkClientState() {
         new Thread(() -> {
             while (true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 try {
                     if (!client.getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) break;
                 } catch (IOException e) {

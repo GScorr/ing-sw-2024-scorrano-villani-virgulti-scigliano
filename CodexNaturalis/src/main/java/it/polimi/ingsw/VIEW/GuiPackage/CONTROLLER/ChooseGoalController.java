@@ -92,8 +92,8 @@ public class ChooseGoalController extends GenericSceneController {
     @FXML
     private void handleCard1Click(MouseEvent event) throws IOException, InterruptedException {
         System.out.println("Card 1 selected");
-        client.chooseGoal(0);
         animateCardSelection(card1, card2);
+        client.chooseGoal(0);
         showBufferingLabel();
         checkClientState();
     }
@@ -110,8 +110,8 @@ public class ChooseGoalController extends GenericSceneController {
     @FXML
     private void handleCard2Click(MouseEvent event) throws IOException, InterruptedException {
         System.out.println("Card 2 selected");
-        client.chooseGoal(1);
         animateCardSelection(card2, card1);
+        client.chooseGoal(1);
         showBufferingLabel();
         checkClientState();
     }
@@ -165,6 +165,11 @@ public class ChooseGoalController extends GenericSceneController {
     private void checkClientState() {
         new Thread(() -> {
             while (true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 try {
                     if (!client.getMiniModel().getState().equals("CHOOSE_GOAL")) break;
                 } catch (IOException e) {

@@ -4,6 +4,8 @@ import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.GameFieldController;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -282,7 +284,7 @@ public class GameController2 extends GenericSceneController {
         token_client = client.getToken();
         setPlayerColor(helper.fromEnumtoColor(client.getMiniModel().getMy_player().getColor()));
         setPlayerName(client.getMiniModel().getMy_player().getName());
-        startLastPopup();
+        checkLastTurn();
 /*
 
             int i=1;
@@ -299,6 +301,34 @@ public class GameController2 extends GenericSceneController {
 
     }
 
+    private void checkLastTurn() throws IOException {
+        boolean endgame = false;
+        for(GameField g : client.getMiniModel().getGame_fields()){
+            if(g.getPlayer().getPlayerPoints()>=20){
+                endgame = true;
+            }
+        }
+        if(endgame && getActivePlayer()){
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Game Information");
+                alert.setHeaderText(null);
+                alert.setContentText("Somebody has reached 20 points, last turn of the game!");
+                alert.showAndWait();
+            });
+        }
+    }
+
+    private boolean getActivePlayer() throws IOException {
+        for(GameField g : client.getMiniModel().getGame_fields()){
+            System.out.println(g.getPlayer().getActual_state().getNameState());
+            if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")
+            ){
+                return g.getPlayer().getIsFirst();
+            }
+        }
+        return false;
+    }
     private void startLastPopup() {
         new Thread(() -> {
             while (true) {
@@ -309,7 +339,7 @@ public class GameController2 extends GenericSceneController {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Game Information");
                             alert.setHeaderText(null);
-                            alert.setContentText("Last turn of the game");
+                            alert.setContentText("Somebody has reached 20 points, last turn of the game!");
                             alert.showAndWait();
                         });
                         break;

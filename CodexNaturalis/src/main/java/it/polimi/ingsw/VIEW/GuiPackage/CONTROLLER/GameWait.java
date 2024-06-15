@@ -3,6 +3,7 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -247,7 +248,56 @@ public class GameWait extends GenericSceneController {
         startUpdatePlaying();
 
         //startMenuCheck();
+        checkLastTurn();
 
+    }
+
+    private void checkLastTurn() throws IOException {
+        new Thread(() -> {
+            while(true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                boolean endgame = false;
+                try {
+                    for (GameField g : client.getMiniModel().getGame_fields()) {
+                        if (g.getPlayer().getPlayerPoints() >= 20) {
+                            endgame = true;
+                        }
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    if (endgame && getActivePlayer()) {
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Game Information");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Somebody has reached 20 points, last turn of the game!");
+                            alert.showAndWait();
+                        });
+                        break;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
+    }
+
+    private boolean getActivePlayer() throws IOException {
+        for(GameField g : client.getMiniModel().getGame_fields()){
+            System.out.println(g.getPlayer().getActual_state().getNameState());
+            if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")
+            ){
+                return g.getPlayer().getIsFirst();
+            }
+        }
+        return false;
     }
 
     private void startUpdatePlaying() {
