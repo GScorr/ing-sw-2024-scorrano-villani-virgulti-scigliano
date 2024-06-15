@@ -21,7 +21,7 @@ import java.util.*;
  */
 public class Common_Server {
 
-    private static final long HEARTBEAT_TIMEOUT = 1500;
+    private static final long HEARTBEAT_TIMEOUT = 3000;
     private TokenManagerF token_manager = new TokenManagerImplementF();
     private List<VirtualViewF> clients = new ArrayList<>();
     private static int port;
