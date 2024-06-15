@@ -310,6 +310,16 @@ public class GameServer implements VirtualGameServer, Serializable {
                             if (tmp.getActual_state().getNameState().equals("DRAW_CARD")){
                                 controller.nextStatePlayer();
                                 try {
+                                    boolean placed = false;
+                                    for (PlayCard c : tmp.getCardsInHand()){
+                                        if(c.back_side_path==null){
+                                            placed = true;
+                                        }
+                                    }
+                                    if(placed){
+                                        controller.playerPeachCardFromResourcesDeck(tmp);
+
+                                    }
                                     setAllStates();
                                 } catch (IOException | InterruptedException  e) {}
                             }

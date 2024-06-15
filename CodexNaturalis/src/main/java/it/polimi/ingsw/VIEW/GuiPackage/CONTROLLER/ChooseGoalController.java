@@ -1,5 +1,6 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,6 +23,10 @@ import java.io.IOException;
  *
  */
 public class ChooseGoalController extends GenericSceneController {
+
+    private Goal goal1;
+    private Goal goal2;
+
 
     @FXML
     private ImageView card1;
@@ -66,7 +71,8 @@ public class ChooseGoalController extends GenericSceneController {
 
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
-
+        goal1 = client.getFirstGoalCard();
+        goal2 = client.getSecondGoalCard();
         File file = new File(client.getFirstGoalCard().front_side_path);
         Image image = new Image(file.toURI().toString());
         card1.setImage(image);
@@ -74,6 +80,12 @@ public class ChooseGoalController extends GenericSceneController {
         image = new Image(file.toURI().toString());
         card2.setImage(image);
         if (!super.client.isGoalCardPlaced()) {
+            if(goal1.equals(client.getMiniModel().getMy_player().getGoalCard())){
+                animateCardSelection(card1,card2);
+            }
+            else{
+                animateCardSelection(card2,card1);
+            }
             showBufferingLabel();
             checkClientState();
         }
