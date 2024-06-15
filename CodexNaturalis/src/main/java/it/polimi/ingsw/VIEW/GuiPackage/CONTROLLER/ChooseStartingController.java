@@ -232,7 +232,5 @@ public class ChooseStartingController extends GenericSceneController {
         });
 
 
-
-
-        
+    }
 }
