@@ -60,7 +60,7 @@ public class Player implements PlayerObserver, Serializable {
     private PlayCard starting_card;
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
-    private int player_points = 20;
+    private int player_points = 0;
 
     private int num_goal_achieve = 0;
 

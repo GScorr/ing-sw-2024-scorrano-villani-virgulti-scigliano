@@ -214,9 +214,17 @@ public class ChooseStartingController extends GenericSceneController {
             scaleTransition.setToY(1.5);
 
             // Calcola le coordinate per spostare la carta al centro
-            double centerX = (selectedCard.getParent().getScene().getWidth() / 2) - (selectedCard.getFitWidth() * 1.5 / 2) - 80;
-            double centerY = (selectedCard.getParent().getScene().getHeight() / 2) - (selectedCard.getFitHeight() * 1.5 / 2) - 150;
-
+            double centerX = 0;
+            double centerY = 0;
+            if(selectedCard.equals(card1)) {
+                // Calcola le coordinate per spostare la carta al centro
+                centerX = (selectedCard.getParent().getScene().getWidth() / 2) - (selectedCard.getFitWidth() * 1.5 / 2) - 80;
+                centerY = (selectedCard.getParent().getScene().getHeight() / 2) - (selectedCard.getFitHeight() * 1.5 / 2) - 150;
+            }
+            else{
+                centerX = (selectedCard.getParent().getScene().getWidth() / 2) - (selectedCard.getFitWidth() * 1.5 / 2) + 245;
+                centerY = (selectedCard.getParent().getScene().getHeight() / 2) - (selectedCard.getFitHeight() * 1.5 / 2) - 150;
+            }
             TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), selectedCard);
             translateTransition.setToX(centerX - selectedCard.getLayoutX());
             translateTransition.setToY(centerY - selectedCard.getLayoutY());
