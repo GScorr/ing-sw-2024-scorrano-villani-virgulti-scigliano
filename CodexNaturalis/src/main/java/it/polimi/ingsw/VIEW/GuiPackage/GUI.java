@@ -189,6 +189,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void waitFullGame() throws IOException, InterruptedException {
+        if(isAlone) return;
         Platform.runLater(() -> scene.changeRootPane("waiting_player.fxml"));
     }
 
@@ -204,6 +205,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
+        if(isAlone) return;
         if(scene.getClient().getMiniModel().getState().equals("CHOOSE_GOAL")) {
             boolean checkGoal = scene.getClient().isGoalCardPlaced();
                 chooseGoal();
@@ -220,6 +222,7 @@ public class GUI implements GraficInterterface {
      * @throws InterruptedException If the UI thread is interrupted.
      */
     private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
+        if(isAlone) return;
         Platform.runLater(() -> scene.changeRootPane("choose_goal_state.fxml"));
     }
 
@@ -232,6 +235,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
+        if(isAlone) return;
         if(scene.getClient().getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             chooseStartingCard();
         }else{
@@ -247,6 +251,7 @@ public class GUI implements GraficInterterface {
      * @throws InterruptedException If the UI thread is interrupted.
      */
     private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+        if(isAlone) return;
         Platform.runLater(() -> scene.changeRootPane("starting_card.fxml"));
     }
 
@@ -275,6 +280,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
+        if(isAlone) return;
         if(!scene.getClient().getMiniModel().getState().equals("END_GAME") ){
            if( scene.getClient().getMiniModel().getState().equals("PLACE_CARD")  || scene.getClient().getMiniModel().getState().equals("DRAW_CARD") ) this.place_card();
            else this.wait_turn();
@@ -302,6 +308,7 @@ public class GUI implements GraficInterterface {
                         Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
                         Thread.sleep(1000);
                         newClient = false;
+                        System.out.println("ciao");
                         this.gameAccess(null);
                     }
                 }

@@ -263,7 +263,10 @@ public class GameServer implements VirtualGameServer, Serializable {
                 token_manager.getVal(token).insertId(id);
                 token_manager.getVal(token).insertNumPlayers(getNumPlayersMatch());
                 token_manager.getVal(token).insertPlayer(token_to_player.get(token));
-                token_manager.getVal(token).setCards( token_to_player.get(token).getCardsInHand() );
+                token_manager.getVal(token)
+                        .setCards(
+                        token_to_player.get(token)
+                                .getCardsInHand() );
                 setAllStates();
                 //token_manager.getVal(token).setNumToPlayer(index_to_name);
                 }
@@ -353,7 +356,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                             checkEndDisconnect();
                             try {
                                 alone_client = clientsRMI.get(0);
-                                int countdown = 45;
+                                int countdown = 4;
                                 message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
                                 message_update.isAlone = true;
                                 broadcastMessageOneClient(message_update, alone_client );
@@ -372,7 +375,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                         token_to_player.get(t).setPlayer_state(end_game);
                                         message_update = new UpdateMessage(token_to_player.get(t).getName() + " , YOU ARE THE WINNER DUE TO DISCONNECTIONS!");
                                         message_update.win = true;
-                                        message_update.isAlone = false;
+                                        message_update.isAlone = true;
                                         if ( !token_to_player.get(t).isDisconnected() ) broadcastMessageOneClient(message_update,  alone_client);
                                         end = false;
                                         endConnection();
