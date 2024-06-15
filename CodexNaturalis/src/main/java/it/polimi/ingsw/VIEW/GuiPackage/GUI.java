@@ -103,7 +103,6 @@ public class GUI implements GraficInterterface {
         username = player_name;
         if(newClient) {
             makeChoice(player_name);
-          //  scene.showMessage("Success","YOUR PLAYER HAS BEEN CREATED!");
         }else{
             this.waitFullGame();
         }
@@ -286,7 +285,7 @@ public class GUI implements GraficInterterface {
 
     @Override
     public void startCountdown(String message, boolean still_alone, boolean win) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException {
-        synchronized (this) {
+
             if (!flag_0) {
                 if (!isAlone) {
                     isAlone = true;
@@ -307,7 +306,7 @@ public class GUI implements GraficInterterface {
                     }
                 }
             }
-        }
+
     }
 
     /**
