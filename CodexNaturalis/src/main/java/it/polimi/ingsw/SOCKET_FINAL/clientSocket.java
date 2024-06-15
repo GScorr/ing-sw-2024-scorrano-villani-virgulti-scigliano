@@ -129,7 +129,7 @@ public class clientSocket implements VirtualViewF, Serializable {
         new Thread( () -> {
             ResponseMessage s;
             while(true) {
-                try {Thread.sleep(200);} catch (InterruptedException e) {}
+                try {Thread.sleep(500);} catch (InterruptedException e) {}
                 try {
                     if (((s = (ResponseMessage) input.readObject()) != null)) {
                         s.setVirtual_view(this);
