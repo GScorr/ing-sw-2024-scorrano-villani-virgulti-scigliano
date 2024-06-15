@@ -63,12 +63,12 @@ public class LoginController extends GenericSceneController {
         int flag;
             flag = client.checkName(name);
             if(flag==0){
-
                 controller.showAlert("Error", "Name already selected");
             }
             else if(flag==2) {
                 client.getTerminal_interface().setNewClient(false);
-                controller.showAlert("Coglione ti sei riconnesso", "Suca");
+                controller.showAlert("RECONNECTED", "[Continue your game]");
+                Thread.sleep(500);
                 client.getTerminal_interface().gameAccess(name);
             }
             else{
