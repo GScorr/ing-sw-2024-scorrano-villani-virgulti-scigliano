@@ -801,4 +801,12 @@ public class GameController implements GameSubject, Serializable {
     public void insertMessageinChat(int i, ChatMessage message) {
         game.insertMessageinChat(i,message);
     }
+
+    public boolean isIs_final_state() {
+        return is_final_state;
+    }
+
+    public void setIs_final_state(boolean is_final_state) {
+        this.is_final_state = is_final_state;
+    }
 }

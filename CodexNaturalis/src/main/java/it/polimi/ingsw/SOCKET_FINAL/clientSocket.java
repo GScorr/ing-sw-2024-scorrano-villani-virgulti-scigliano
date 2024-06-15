@@ -379,6 +379,11 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     @Override
+    public void setLastTurn(boolean b) throws IOException {
+        getMiniModel().setFinal_state(b);
+    }
+
+    @Override
     public Goal getFirstGoalCard() throws IOException, InterruptedException {
         server_proxy.getListGoalCard();
         waitResponse();

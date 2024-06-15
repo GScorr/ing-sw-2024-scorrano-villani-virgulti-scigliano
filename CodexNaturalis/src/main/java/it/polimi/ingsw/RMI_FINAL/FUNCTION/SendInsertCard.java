@@ -50,8 +50,14 @@ public class SendInsertCard implements SendFunction{
             server.insertCard(token, index, x , y, flipped);
              message = new GameFieldMessage(server.token_to_player.get(token).getGameField());
             for (String t : server.token_to_player.keySet()){
-                if( server.token_manager.getTokens().containsKey(t) ) server.token_manager.getTokens().get(t).setGameField(server.getGameFields(t));
-                if(server.token_manager.getSocketTokens().containsKey(t)) server.token_manager.getSocketTokens().get(t).setGameField(server.getGameFields(t));
+                if( server.token_manager.getTokens().containsKey(t) ){
+                    server.token_manager.getTokens().get(t).setGameField(server.getGameFields(t));
+                    server.token_manager.getTokens().get(t).setLastTurn(server.getController().isIs_final_state());
+                }
+                if(server.token_manager.getSocketTokens().containsKey(t)){
+                    server.token_manager.getSocketTokens().get(t).setGameField(server.getGameFields(t));
+
+                }
             }
             for (String t : server.token_to_player.keySet()){
                 if( server.token_manager.getTokens().containsKey(t) ) server.token_manager.getTokens().get(t).setState( server.token_to_player.get(t).getActual_state().getNameState() );

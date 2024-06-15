@@ -50,6 +50,8 @@ public class MiniModel implements Serializable {
 
     private ChatIndexManager chat_manager = new ChatIndexManager();
 
+    private boolean final_state = false;
+
     public MiniModel() {
         this.state = "NOT_IN_A_GAME";
         this.menu.add("");
@@ -554,5 +556,13 @@ public class MiniModel implements Serializable {
 
     public HashMap<Integer, String> getNum_to_player() {
         return num_to_player;
+    }
+
+    public boolean isFinal_state() {
+        return final_state;
+    }
+
+    public void setFinal_state(boolean final_state) {
+        this.final_state = final_state;
     }
 }

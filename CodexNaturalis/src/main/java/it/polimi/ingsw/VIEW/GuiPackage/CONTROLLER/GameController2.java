@@ -13,6 +13,7 @@ import it.polimi.ingsw.VIEW.GuiPackage.ClickableCardImageView;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -281,6 +282,7 @@ public class GameController2 extends GenericSceneController {
         token_client = client.getToken();
         setPlayerColor(helper.fromEnumtoColor(client.getMiniModel().getMy_player().getColor()));
         setPlayerName(client.getMiniModel().getMy_player().getName());
+        startLastPopup();
 /*
 
             int i=1;
@@ -295,6 +297,28 @@ public class GameController2 extends GenericSceneController {
  */
   //      scene_controller.getHeader_controller().startInitializeHeader();
 
+    }
+
+    private void startLastPopup() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    if (client.getMiniModel().isFinal_state()) {
+                        // Mostra il pop-up
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Game Information");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Last turn of the game");
+                            alert.showAndWait();
+                        });
+                        break;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 
     public void setPlayerColor(Color color) {

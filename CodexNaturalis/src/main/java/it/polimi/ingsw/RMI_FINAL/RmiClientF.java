@@ -66,6 +66,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         System.exit(0);
     }
 
+    @Override
+    public void setLastTurn(boolean b) {
+        getMiniModel().setFinal_state(b);
+    }
+
 
     /**
      * Verifies a player's name with the server and establishes a connection (if valid).

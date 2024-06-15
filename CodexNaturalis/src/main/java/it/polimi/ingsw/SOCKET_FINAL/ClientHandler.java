@@ -512,6 +512,11 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     @Override
+    public void setLastTurn(boolean b) throws IOException {
+
+    }
+
+    @Override
     public void connectGameServer() throws IOException, NotBoundException, InterruptedException {
 
     }
