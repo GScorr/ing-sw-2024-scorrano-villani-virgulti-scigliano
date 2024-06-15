@@ -322,7 +322,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     }
                                     setAllStates();
                                 } catch (IOException | InterruptedException  e) {}
-                                controller.nextStatePlayer();
+                                //controller.nextStatePlayer();
                             }
                         }
                     }
