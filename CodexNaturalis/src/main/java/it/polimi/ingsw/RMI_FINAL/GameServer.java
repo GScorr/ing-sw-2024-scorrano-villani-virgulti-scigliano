@@ -312,7 +312,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 } catch (IOException | InterruptedException e) {}
                             }
                             if (tmp.getActual_state().getNameState().equals("DRAW_CARD")){
-                                controller.nextStatePlayer();
+
                                 try {
                                     boolean placed = false;
                                     for (PlayCard c : tmp.getCardsInHand()){
@@ -326,6 +326,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     }
                                     setAllStates();
                                 } catch (IOException | InterruptedException  e) {}
+                                controller.nextStatePlayer();
                             }
                         }
                     }
