@@ -1,5 +1,7 @@
 package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
+import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.Card.Side;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,6 +23,9 @@ import java.io.IOException;
  * It allows the player to choose which side (front or back) of their starting card to use.
  */
 public class ChooseStartingController extends GenericSceneController {
+
+    private Side playcard1;
+    private Side playcard2;
 
     @FXML
     private ImageView card1;
@@ -68,8 +73,12 @@ public class ChooseStartingController extends GenericSceneController {
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
 
+        playcard1 = client.showStartingCardGUI().getFrontSide();
+        playcard2 = client.showStartingCardGUI().getBackSide();
+
         System.out.println(client.showStartingCardGUI().front_side_path);
         System.out.println(client.showStartingCardGUI().back_side_path);
+
         File file = new File(client.showStartingCardGUI().front_side_path);
         Image image = new Image(file.toURI().toString());
         card1.setImage(image);
@@ -78,6 +87,12 @@ public class ChooseStartingController extends GenericSceneController {
         card2.setImage(image);
 
         if(super.client.isFirstPlaced()){
+            if(playcard1.equals(client.getMiniModel().getMy_player().getStartingCard().getSide())){
+                animateCardSelection(card1,card2);
+            }
+            else{
+                animateCardSelection(card2,card1);
+            }
             showBufferingLabel();
             checkClientState();
         }
