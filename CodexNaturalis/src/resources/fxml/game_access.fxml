@@ -28,7 +28,7 @@
             </font>
             </TextField>
 
-            <Label fx:id="titleLabel_1" text="Numbero of player" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <Label fx:id="titleLabel_1" text="Number of players" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
             <!-- ComboBox per selezionare il numero di giocatori -->
             <ComboBox fx:id="playerNumberComboBox" prefHeight="35.0" prefWidth="244.0">
                 <items>
