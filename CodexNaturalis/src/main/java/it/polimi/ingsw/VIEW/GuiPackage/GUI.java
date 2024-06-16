@@ -61,7 +61,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
-        selectNamePlayer();
+        Platform.runLater(() -> scene.changeRootPane("IntroductionPage.fxml"));
     }
 
     public void setNewClient(boolean newClient) {

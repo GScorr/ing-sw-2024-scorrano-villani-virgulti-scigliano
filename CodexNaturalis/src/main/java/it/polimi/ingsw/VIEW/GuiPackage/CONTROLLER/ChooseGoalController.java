@@ -24,6 +24,8 @@ import java.io.IOException;
  */
 public class ChooseGoalController extends GenericSceneController {
 
+
+    public Label titleLabel;
     private Goal goal1;
     private Goal goal2;
 
@@ -59,6 +61,16 @@ public class ChooseGoalController extends GenericSceneController {
      * @throws InterruptedException If the thread checking client state is interrupted.
      */
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
+
+
+
+        // Impostare la label del titolo
+        titleLabel.setText("CODEX NATURALIS");
+        titleLabel.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+
+
+
 
         /**
          * header

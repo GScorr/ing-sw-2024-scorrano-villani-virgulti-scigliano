@@ -11,10 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
@@ -24,6 +27,7 @@ import java.rmi.NotBoundException;
  */
 public class LoginController extends GenericSceneController {
 
+    public ImageView backgroundImage;
     private String username;
     private SceneController controller;
 
@@ -40,8 +44,20 @@ public class LoginController extends GenericSceneController {
     private Label welcomeLabel;
 
     public void initialize() {
-        // Imposta il font della Label
-        welcomeLabel.setFont(Font.font("Arial", 25));
+
+
+        // Set the background image
+        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        Image image = new Image(file.toURI().toString());
+        backgroundImage.setImage(image);
+
+        // Bind the background image size to the scene size
+        backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                backgroundImage.fitHeightProperty().bind(newScene.heightProperty());
+                backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
+            }
+        });
     }
 
     /**

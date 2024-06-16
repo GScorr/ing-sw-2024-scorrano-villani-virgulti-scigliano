@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChooseStartingController" styleClass="choose-goal-scene">
+    <!-- Background Image -->
+    <fx:include fx:id="BackGroundImage" source="./BackGroundImagine.fxml" />
     <top>
         <fx:include fx:id="HeaderInclude" source="./header.fxml" />
     </top>

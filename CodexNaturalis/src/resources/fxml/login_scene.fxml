@@ -15,10 +15,14 @@
 
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.LoginController" styleClass="choose-goal-scene">
+    <!-- Background Image -->
+    <ImageView fx:id="backgroundImage" fitHeight="800.0" fitWidth="600.0" preserveRatio="false" />
+
     <center>
         <VBox spacing="20" alignment="CENTER" styleClass="choose-user-scene">
-            <Label fx:id="welcomeLabel" text="Welcome to Codex Naturalis!" />
-            <TextField fx:id="usernameField" promptText="Enter your username"
+            <!-- Text Label -->
+            <Label fx:id="NickName" text="NickName" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <TextField fx:id="usernameField" promptText="Ex : Mario22"
                        maxHeight="30" minHeight="30" maxWidth="250" minWidth="150" /> <!-- Imposta la larghezza massima e minima -->
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Login"
                     prefHeight="27.0" prefWidth="200.0"/>
