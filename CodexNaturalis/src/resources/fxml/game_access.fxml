@@ -12,15 +12,15 @@
 <?import java.lang.String?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameAccessController" styleClass="choose-goal-scene">
+    <!-- Background Image -->
+    <ImageView fx:id="backgroundImage" fitHeight="800.0" fitWidth="600.0" preserveRatio="false" />
     <center>
         <VBox spacing="20" alignment="CENTER">
             <!-- Etichetta "Nome Game" -->
-            <Label fx:id="nomeGame" text="Game Name:" >
-                <font>
-                    <Font name="Arial" size="24.0" />
-                </font>
-            </Label>
+            <!-- Text Label -->
+            <Label fx:id="titleLabel_0" text="GameName" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
             <TextField fx:id="gameNameField" promptText="Enter game name"
                        maxHeight="30" minHeight="30" maxWidth="250" minWidth="150" >
             <font>
@@ -28,13 +28,7 @@
             </font>
             </TextField>
 
-            <Label  text="Number of players:">
-            <!-- Etichetta "Numero di Giocatori" -->
-
-                <font>
-                    <Font name="Arial" size="24.0" />
-                </font>
-            </Label>
+            <Label fx:id="titleLabel_1" text="Numbero of player" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
             <!-- ComboBox per selezionare il numero di giocatori -->
             <ComboBox fx:id="playerNumberComboBox" prefHeight="35.0" prefWidth="244.0">
                 <items>

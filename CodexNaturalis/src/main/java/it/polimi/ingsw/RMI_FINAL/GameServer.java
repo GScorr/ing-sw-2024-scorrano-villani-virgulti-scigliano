@@ -180,7 +180,6 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_to_player.get(token).getCardsInHand().get(index).flipCard(flipped);
         controller.statePlaceCard(token_to_player.get(token), index, x, y);
         token_manager.getVal(token).setCards( token_to_player.get(token).getCardsInHand() );
-
     }
 
     /**
@@ -323,7 +322,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                     }
                                     setAllStates();
                                 } catch (IOException | InterruptedException  e) {}
-                                controller.nextStatePlayer();
+                                //controller.nextStatePlayer();
                             }
                         }
                     }
@@ -354,7 +353,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                             checkEndDisconnect();
                             try {
                                 alone_client = clientsRMI.get(0);
-                                int countdown = 4;
+                                int countdown = 45;
                                 message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
                                 message_update.isAlone = true;
                                 broadcastMessageOneClient(message_update, alone_client );

@@ -24,6 +24,7 @@ import java.io.IOException;
  */
 public class ChooseStartingController extends GenericSceneController {
 
+    public ImageView backgroundImage;
     private Side playcard1;
     private Side playcard2;
 
@@ -46,6 +47,23 @@ public class ChooseStartingController extends GenericSceneController {
 
     @FXML
     private StackPane cardContainer;
+
+    public void initialize() {
+
+        // Set the background image
+        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        Image image = new Image(file.toURI().toString());
+        backgroundImage.setImage(image);
+
+        // Bind the background image size to the scene size
+        backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                backgroundImage.fitHeightProperty().bind(newScene.heightProperty());
+                backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
+            }
+        });
+    }
+
 
     /**
      * Initializes the scene by:

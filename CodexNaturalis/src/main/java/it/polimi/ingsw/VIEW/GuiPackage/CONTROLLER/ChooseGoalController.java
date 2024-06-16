@@ -24,6 +24,9 @@ import java.io.IOException;
  */
 public class ChooseGoalController extends GenericSceneController {
 
+
+    public Label titleLabel;
+    public ImageView backgroundImage;
     private Goal goal1;
     private Goal goal2;
 
@@ -48,6 +51,24 @@ public class ChooseGoalController extends GenericSceneController {
     @FXML
     private StackPane cardContainer;
 
+    public void initialize() {
+
+        // Set the background image
+        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        Image image = new Image(file.toURI().toString());
+        backgroundImage.setImage(image);
+
+        // Bind the background image size to the scene size
+        backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                backgroundImage.fitHeightProperty().bind(newScene.heightProperty());
+                backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
+            }
+        });
+    }
+
+
+
     /**
      * Initializes the scene by:
      *  - Loading the header scene and setting its controller properties.
@@ -59,6 +80,16 @@ public class ChooseGoalController extends GenericSceneController {
      * @throws InterruptedException If the thread checking client state is interrupted.
      */
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
+
+
+
+        // Impostare la label del titolo
+        titleLabel.setText("CODEX NATURALIS");
+        titleLabel.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+
+
+
 
         /**
          * header
@@ -216,7 +247,9 @@ public class ChooseGoalController extends GenericSceneController {
     private void animateCardSelection(ImageView selectedCard, ImageView otherCard) {
         Platform.runLater(() -> {
             // Nascondi il messaggio "Choose your goal"
-            headerLabel.setVisible(false);
+
+         //   headerLabel.setVisible(false);
+
             otherCard.setVisible(false);
 
             // Metti la carta selezionata in primo piano

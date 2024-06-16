@@ -5,8 +5,11 @@ import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.util.List;
@@ -17,10 +20,27 @@ import java.util.List;
  */
 public class GameListController extends GenericSceneController{
 
+    public ImageView backgroundImage;
     @FXML
     private VBox gameListContainer;
 
     private List<SocketRmiControllerObject> games;
+
+    public void initialize() {
+
+        // Set the background image
+        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        Image image = new Image(file.toURI().toString());
+        backgroundImage.setImage(image);
+
+        // Bind the background image size to the scene size
+        backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                backgroundImage.fitHeightProperty().bind(newScene.heightProperty());
+                backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
+            }
+        });
+    }
 
     /**
      * Starts a thread to periodically retrieve available games and update the UI.
