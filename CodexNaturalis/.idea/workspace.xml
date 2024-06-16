@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,14 +319,7 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-    </task>
-    <task id="LOCAL-00152" summary="fix bugs disconnessione">
-      <option name="closed" value="true" />
-      <created>1716544870998</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
-      <option name="project" value="LOCAL" />
-      <updated>1716544870998</updated>
+      <workItem from="1718542741884" duration="147000" />
     </task>
     <task id="LOCAL-00153" summary="fix bugs disconnessione">
       <option name="closed" value="true" />
@@ -712,7 +705,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718467566840</updated>
     </task>
-    <option name="localTasksCounter" value="201" />
+    <task id="LOCAL-00201" summary=".">
+      <option name="closed" value="true" />
+      <created>1718469425718</created>
+      <option name="number" value="00201" />
+      <option name="presentableId" value="LOCAL-00201" />
+      <option name="project" value="LOCAL" />
+      <updated>1718469425718</updated>
+    </task>
+    <option name="localTasksCounter" value="202" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -767,12 +768,12 @@
     <MESSAGE value="endgame" />
     <MESSAGE value="popup" />
     <MESSAGE value="m" />
-    <MESSAGE value="." />
     <MESSAGE value="rifinitura" />
     <MESSAGE value="debug scelta goal e strarting visiva" />
     <MESSAGE value="fix popup end game" />
     <MESSAGE value="fix disconnections" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix disconnections" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
