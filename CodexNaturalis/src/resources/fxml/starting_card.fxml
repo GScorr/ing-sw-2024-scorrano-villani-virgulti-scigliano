@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChooseStartingController" styleClass="choose-goal-scene">
     <!-- Background Image -->
-    <fx:include fx:id="BackGroundImage" source="./BackGroundImagine.fxml" />
+    <ImageView fx:id="backgroundImage" fitHeight="800.0" fitWidth="600.0" preserveRatio="false" />
     <top>
         <fx:include fx:id="HeaderInclude" source="./header.fxml" />
     </top>

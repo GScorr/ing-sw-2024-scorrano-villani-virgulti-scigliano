@@ -4,25 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="problemi disconnessione persistono">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/BackGroundImageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/IntroductionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/BackGroundImaging/BackGround.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/BackGroundImaging/ConnectionLoadind.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/BackGroundImaging/artbreeder-image-2024-06-15T23_27_24.775Z.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/BackGroundImaging/artbreeder-image-2024-06-15T23_29_04.610Z.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/fxml/BackGroundImagine.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/fxml/IntroductionPage.fxml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Mamma mia la ho fatta grossa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseGoalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameAccessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameAccessController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseNewOrOldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseNewOrOldController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseStartingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/ChooseStartingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/WaitingSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/WaitingSceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/fxml/choose_goal_state.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/choose_goal_state.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/fxml/choose_new_or_old.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/choose_new_or_old.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_access.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_access.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/login_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/login_scene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_list_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_list_scene.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/fxml/starting_card.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/starting_card.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/waiting_player.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/waiting_player.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +182,7 @@
       <recent name="it.polimi.ingsw.SOCKET_FINAL" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Server">
+  <component name="RunManager" selected="Application.Common_Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -336,15 +329,7 @@
       <workItem from="1716646297287" duration="2177000" />
       <workItem from="1717229459671" duration="8957000" />
       <workItem from="1717420351528" duration="5305000" />
-      <workItem from="1718493230949" duration="4796000" />
-    </task>
-    <task id="LOCAL-00153" summary="fix bugs disconnessione">
-      <option name="closed" value="true" />
-      <created>1716562143350</created>
-      <option name="number" value="00153" />
-      <option name="presentableId" value="LOCAL-00153" />
-      <option name="project" value="LOCAL" />
-      <updated>1716562143350</updated>
+      <workItem from="1718493230949" duration="7708000" />
     </task>
     <task id="LOCAL-00154" summary="fix bugs disconnessione">
       <option name="closed" value="true" />
@@ -730,7 +715,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718469613745</updated>
     </task>
-    <option name="localTasksCounter" value="202" />
+    <task id="LOCAL-00202" summary="Mamma mia la ho fatta grossa">
+      <option name="closed" value="true" />
+      <created>1718498630106</created>
+      <option name="number" value="00202" />
+      <option name="presentableId" value="LOCAL-00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1718498630107</updated>
+    </task>
+    <option name="localTasksCounter" value="203" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -765,7 +758,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="startingcard gamefield printed" />
     <MESSAGE value="qualcosa inizia ad andare" />
     <MESSAGE value="fix minor bugs" />
     <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
@@ -790,7 +782,8 @@
     <MESSAGE value="fix popup end game" />
     <MESSAGE value="fix disconnections" />
     <MESSAGE value="fix 266" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix 266" />
+    <MESSAGE value="Mamma mia la ho fatta grossa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mamma mia la ho fatta grossa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
