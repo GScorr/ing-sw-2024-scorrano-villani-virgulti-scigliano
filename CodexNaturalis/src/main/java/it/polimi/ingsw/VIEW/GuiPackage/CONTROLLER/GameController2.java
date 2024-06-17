@@ -47,6 +47,8 @@ public class GameController2 extends GenericSceneController {
     public Label num_paper;
     public Label num_piuma;
     public Label num_calamaio;
+    public ImageView playAreaImage;
+    public ScrollPane scrollPane;
 
     @FXML
     private Button openChatButton;
@@ -180,37 +182,6 @@ public class GameController2 extends GenericSceneController {
         messageLabel.setWrapText(true);
         chatBox.getChildren().add(messageLabel);
     }
-
-    /*
-    /**
-     * show a popup when a chat item is pressed
-     * @throws IOException
-     * @throws InterruptedException
-     */
-
-    /*private void showChat(String chatName, int chatId) throws IOException {
-
-        /*chatBox.getChildren().clear();  //
-        chatBox.setVisible(true);
-        System.out.println("chat is now visible: " + chatBox.isVisible());
-
-        if (client.getMiniModel().getNum_players() != 2) {
-            if (chatId == client.getMiniModel().getNum_players() + 1) {
-                client.getMiniModel().getNot_read().set(6, 0);
-                updateUnreadTotal();
-                scene_controller.showChat("Chat", 6, client, chatId);
-            } else {
-                client.getMiniModel().getNot_read().set(chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), 0);
-                updateUnreadTotal();
-                scene_controller.showChat("Chat", chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), client, chatId);
-            }
-        } else {
-            client.getMiniModel().getNot_read().set(6, 0);
-            updateUnreadTotal();
-            scene_controller.showChat("Chat", 6, client, chatId);
-
-        }
-    }*/
 
 
     /**
@@ -443,6 +414,7 @@ public class GameController2 extends GenericSceneController {
                 deselectCard();
             }
         });
+
     }
 
     /**
