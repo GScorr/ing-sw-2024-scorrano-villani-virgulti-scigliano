@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.AloneController">
+<Label styleClass="title" text="You are the only player remained on the GAME, plase wait fot other player reconnection ... " />
+<ProgressIndicator fx:id="progressIndicator" prefHeight="80" prefWidth="80" />
+<Label fx:id="messageLabel" styleClass="message" wrapText="true" />
+   <cursor>
+      <Cursor fx:constant="CROSSHAIR" />
+   </cursor>
+</VBox>

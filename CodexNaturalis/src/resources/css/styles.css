@@ -38,6 +38,20 @@
     -fx-alignment: center;
 }
 
+.choose-user-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.choose-game-scene {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
 .header {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
@@ -57,4 +71,30 @@
     -fx-scale-x: 1.05; /* Ingrandisce leggermente l'immagine su passaggio del mouse */
     -fx-scale-y: 1.05; /* Ingrandisce leggermente l'immagine su passaggio del mouse */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 0);
+}
+
+
+.table-view {
+    -fx-background-color: #f4f4f4; /* Colore di sfondo */
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #007bff; /* Colore di sfondo dell'intestazione delle colonne */
+}
+
+.table-view .column-header {
+    -fx-text-fill: white; /* Colore del testo dell'intestazione delle colonne */
+}
+
+.table-row-cell {
+    -fx-background-color: #ffffff; /* Colore di sfondo delle celle */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9; /* Colore di sfondo alternato per le righe */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #007bff; /* Colore di sfondo della riga selezionata */
+    -fx-text-fill: white; /* Colore del testo della riga selezionata */
 }

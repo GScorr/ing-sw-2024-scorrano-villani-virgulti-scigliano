@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.BackGroundImageController">
+
+    <!-- Background Image -->
+    <ImageView fx:id="backgroundImage" fitHeight="800.0" fitWidth="600.0" preserveRatio="false" />
+
+
+</StackPane>

@@ -2,13 +2,17 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
+import it.polimi.ingsw.SOCKET_FINAL.clientSocket;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +62,10 @@ public class GameWait extends GenericSceneController {
     Image image;
 
     PlayCard card_1;
+
+    @FXML
+    private Label playerNameLabel;
+
     Image card_1_front,card_1_back;
     boolean card_1_flip = false;
     PlayCard card_2;
@@ -77,6 +85,13 @@ public class GameWait extends GenericSceneController {
 
     @FXML
     private AnchorPane HeaderInclude;
+
+    @FXML
+    private Label currentPlayerLabel;
+
+    public void updateCurrentPlayer(String playerName) {
+        currentPlayerLabel.setText("Now is playing: " + playerName);
+    }
 
 
 
@@ -210,8 +225,13 @@ public class GameWait extends GenericSceneController {
                     throw new RuntimeException(e);
                 }
                 try {
+                    if (super.client.getTerminal_interface().getIsAlone() == true ) break;
                     if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
                         super.client.getTerminal_interface().manageGame();
+                        break;
+                    };
+                    if (super.client.getMiniModel().getState().equals("END_GAME")) {
+                        super.client.getTerminal_interface().endGame();
                         break;
                     };
                 } catch (IOException e) {
@@ -224,8 +244,86 @@ public class GameWait extends GenericSceneController {
             }
         }).start();
 
-        //startMenuCheck();
+        setPlayerName(client.getMiniModel().getMy_player().getName());
+        startUpdatePlaying();
 
+        //startMenuCheck();
+        checkLastTurn();
+
+    }
+
+    private void checkLastTurn() throws IOException {
+        new Thread(() -> {
+            while(true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                boolean endgame = false;
+                try {
+                    for (GameField g : client.getMiniModel().getGame_fields()) {
+                        if (g.getPlayer().getPlayerPoints() >= 20) {
+                            endgame = true;
+                        }
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    if (endgame && getActivePlayer()) {
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Game Information");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Somebody has reached 20 points, last turn of the game!");
+                            alert.showAndWait();
+                        });
+                        break;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
+    }
+
+    private boolean getActivePlayer() throws IOException {
+        for(GameField g : client.getMiniModel().getGame_fields()){
+            System.out.println(g.getPlayer().getActual_state().getNameState());
+            if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")
+            ){
+                return g.getPlayer().getIsFirst();
+            }
+        }
+        return false;
+    }
+
+    private void startUpdatePlaying() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+
+
+                        for(GameField g : client.getMiniModel().getGame_fields()){
+                            if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")||
+                                    g.getPlayer().getActual_state().getNameState().equals("PLACE_CARD")){
+                                Platform.runLater(() -> updateCurrentPlayer(g.getPlayer().getName()));
+                            }
+                        }
+
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 
     /*private void startMenuCheck() throws IOException {
@@ -802,6 +900,10 @@ public class GameWait extends GenericSceneController {
                 grid.getColumnConstraints().get(j).setMaxWidth(0);
             }
         }
+    }
+
+    public void setPlayerName(String playerName) {
+        playerNameLabel.setText(playerName);
     }
 
 }

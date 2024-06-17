@@ -2,10 +2,7 @@ package it.polimi.ingsw.RMI_FINAL.FUNCTION;
 
 import it.polimi.ingsw.CONTROLLER.ControllerException;
 import it.polimi.ingsw.RMI_FINAL.GameServer;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ErrorMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.GameFieldMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.UpdateMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.*;
 
 import java.io.IOException;
 
@@ -41,7 +38,7 @@ public class SendDrawCenter implements SendFunction{
         ResponseMessage message;
         try{
             server.peachFromCardsInCenter(token, index);
-            message = new UpdateMessage("Card inserted!");
+            message = new PrintMessage("Card inserted!");
             if(server.token_manager.getTokens().containsKey(token)) server.token_manager.getTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
             else if(server.token_manager.getSocketTokens().containsKey(token)) server.token_manager.getSocketTokens().get(token).setCards(server.token_to_player.get(token).getCardsInHand());
 

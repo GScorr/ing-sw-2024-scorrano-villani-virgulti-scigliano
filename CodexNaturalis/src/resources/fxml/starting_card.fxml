@@ -8,17 +8,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChooseStartingController" styleClass="choose-goal-scene">
+    <!-- Background Image -->
+    <ImageView fx:id="backgroundImage" fitHeight="800.0" fitWidth="600.0" preserveRatio="false" />
     <top>
         <fx:include fx:id="HeaderInclude" source="./header.fxml" />
     </top>
     <center>
     <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  spacing="20" alignment="CENTER" styleClass="choose-goal-scene">
-        <Label text="Choose the orientation of the starting card" styleClass="header"/>
+        <Label fx:id="headerLabel" text="Choose the orientation of the starting card" styleClass="header"/>
+        <StackPane fx:id="cardContainer">
         <HBox spacing="20" alignment="CENTER">
             <ImageView fx:id="card1" fitWidth="300" fitHeight="400" preserveRatio="true" onMouseClicked="#handleCard1Click" styleClass="card"/>
             <ImageView fx:id="card2" fitWidth="300" fitHeight="400" preserveRatio="true" onMouseClicked="#handleCard2Click" styleClass="card"/>
         </HBox>
+        </StackPane>
         <Label fx:id="bottomLabel" text="" />
     </VBox>
     </center>

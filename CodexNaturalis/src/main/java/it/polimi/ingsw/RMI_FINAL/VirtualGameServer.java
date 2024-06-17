@@ -65,4 +65,6 @@ public interface VirtualGameServer extends Remote {
     public void chattingGlobal(ChatMessage message) throws IOException;
 
     PlayCard showStartingCardGUI(String token)  throws IOException;
+
+    public List<GameField> getGameFields() throws IOException;
 }

@@ -5,9 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -16,6 +19,7 @@ import java.io.IOException;
  */
 public class WaitingSceneController extends GenericSceneController{
 
+    public ImageView backgroundImage;
     @FXML
     private ProgressIndicator progressIndicator;
 
@@ -36,7 +40,6 @@ public class WaitingSceneController extends GenericSceneController{
      */
     @FXML
     public void initialize() {
-        System.out.println("awa");
         // Start the background task to monitor the variable
         new Thread(() -> {
             while (true) {
@@ -51,15 +54,24 @@ public class WaitingSceneController extends GenericSceneController{
                         client.getTerminal_interface().chooseGoalState();
                         break;
                     };
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | InterruptedException | ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
             }
         }).start();
+
+        // Set the background image
+        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        Image image = new Image(file.toURI().toString());
+        backgroundImage.setImage(image);
+
+        // Bind the background image size to the scene size
+        backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                backgroundImage.fitHeightProperty().bind(newScene.heightProperty());
+                backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
+            }
+        });
     }
 
     /**

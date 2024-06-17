@@ -129,13 +129,14 @@ public class clientSocket implements VirtualViewF, Serializable {
         new Thread( () -> {
             ResponseMessage s;
             while(true) {
-                try {Thread.sleep(200);} catch (InterruptedException e) {}
+                try {Thread.sleep(500);} catch (InterruptedException e) {}
                 try {
                     if (((s = (ResponseMessage) input.readObject()) != null)) {
+                        s.setVirtual_view(this);
                         s.setClient(this);
                         s.action();
                     }
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     if(! flag_Server_Disconneted){
                         System.err.println("                 [SERVER ERROR]\n" +
                                            "                 TRY NEW LOG IN   "  );
@@ -144,6 +145,8 @@ public class clientSocket implements VirtualViewF, Serializable {
 
                 } catch (ClassNotFoundException e) {
                     System.out.println("errore startCheckingMessagesSocket ");
+                } catch (NotBoundException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();
@@ -376,6 +379,11 @@ public class clientSocket implements VirtualViewF, Serializable {
      */
     public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
         System.exit(0);
+    }
+
+    @Override
+    public void setLastTurn(boolean b) throws IOException {
+        getMiniModel().setFinal_state(b);
     }
 
     @Override
@@ -644,7 +652,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     @Override
     public void reportMessage(String details) throws IOException {
-
+        System.out.println(details);
     }
 
 }

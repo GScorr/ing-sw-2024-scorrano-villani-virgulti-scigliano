@@ -62,7 +62,7 @@ public class ClientHandler  implements VirtualViewF {
         new Thread(() -> {
             while (client_is_connected) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(150);
                     common.receiveHeartbeat(token);
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
@@ -224,7 +224,7 @@ public class ClientHandler  implements VirtualViewF {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(500);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
                         output.writeObject(s);
@@ -508,6 +508,11 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+
+    }
+
+    @Override
+    public void setLastTurn(boolean b) throws IOException {
 
     }
 

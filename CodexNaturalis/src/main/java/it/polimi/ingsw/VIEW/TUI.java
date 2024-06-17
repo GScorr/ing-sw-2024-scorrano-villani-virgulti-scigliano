@@ -1,4 +1,5 @@
 package it.polimi.ingsw.VIEW;
+import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.ENUM.PlayerState;
 import org.fusesource.jansi.AnsiConsole;
 import it.polimi.ingsw.CONSTANTS.Constants;
@@ -45,6 +46,11 @@ public class TUI implements Serializable, GraficInterterface {
     @Override
     public void printError(String error) {
         System.err.println(error);
+    }
+
+    @Override
+    public void printUpdateMessage(String message) {
+        System.out.println(message);
     }
 
     @Override
@@ -121,6 +127,11 @@ public class TUI implements Serializable, GraficInterterface {
 
     public void setNewClient(boolean newClient) {
         this.newClient = newClient;
+    }
+
+    @Override
+    public boolean getIsAlone() {
+        return false;
     }
 
     /**
@@ -232,6 +243,11 @@ public class TUI implements Serializable, GraficInterterface {
     @Override
     public boolean getInGame() {
         return false;
+    }
+
+    @Override
+    public void endGame() {
+
     }
 
     /**
@@ -351,6 +367,11 @@ public class TUI implements Serializable, GraficInterterface {
             client.manageGame(false);
         }
         client.manageGame(true);
+    }
+
+    @Override
+    public void startCountdown(String message, boolean still_alone, boolean win)  {
+
     }
 
     @Override
@@ -518,12 +539,19 @@ public class TUI implements Serializable, GraficInterterface {
      * @throws InterruptedException  If the calling thread is interrupted while waiting.
      */
     private void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
-        if(client instanceof clientSocket){
-            client.showCardsInCenter();
+        int i = 1;
+        for( PlayCard p :  client.getMiniModel().getCards_in_center().getGold_list() ){
+            System.out.println(i +" GOLD  ");
+            client.getMiniModel().showCard(p);
+            i++;
         }
-        else{
-            client.getGameServer().showCardsInCenter(token);
+         i = 1;
+        for( PlayCard p :  client.getMiniModel().getCards_in_center().getResource_list() ){
+            System.out.println(i +" RESOURCE  ");
+            client.getMiniModel().showCard(p);
+            i++;
         }
+
     }
 
     /**
