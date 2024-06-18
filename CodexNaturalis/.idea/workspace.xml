@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="miglioramenti alla GUI">
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="miglioramenti alla GUI + sfondo al gamefiled avversario">
+      <change afterPath="$PROJECT_DIR$/src/resources/BackGroundImaging/4293crock.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/BackGroundImaging/4293.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/IntroductionPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/IntroductionPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/alone.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/alone.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/fxml/css/end_game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/css/end_game.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,8 +279,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.Common_Server" />
+        <item itemvalue="Application.Common_Client" />
         <item itemvalue="Application.Gui_Initialization" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.RmiClientF" />
@@ -326,15 +327,7 @@
       <workItem from="1717420351528" duration="5305000" />
       <workItem from="1718542741884" duration="147000" />
       <workItem from="1718566931904" duration="453000" />
-      <workItem from="1718697539757" duration="27975000" />
-    </task>
-    <task id="LOCAL-00158" summary="prova">
-      <option name="closed" value="true" />
-      <created>1716725802055</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
-      <option name="project" value="LOCAL" />
-      <updated>1716725802056</updated>
+      <workItem from="1718697539757" duration="30267000" />
     </task>
     <task id="LOCAL-00159" summary="notreadmesaages">
       <option name="closed" value="true" />
@@ -720,7 +713,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718724510999</updated>
     </task>
-    <option name="localTasksCounter" value="207" />
+    <task id="LOCAL-00207" summary="miglioramenti alla GUI + sfondo al gamefiled avversario">
+      <option name="closed" value="true" />
+      <created>1718728969275</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1718728969275</updated>
+    </task>
+    <option name="localTasksCounter" value="208" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -755,7 +756,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
     <MESSAGE value="aggiornamento fra mi ha hypato" />
     <MESSAGE value="piccolo change per carta trasparente" />
     <MESSAGE value="aggiornamento" />
@@ -780,7 +780,8 @@
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="test su full screen e piccole modifiche" />
     <MESSAGE value="miglioramenti alla GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="miglioramenti alla GUI" />
+    <MESSAGE value="miglioramenti alla GUI + sfondo al gamefiled avversario" />
+    <option name="LAST_COMMIT_MESSAGE" value="miglioramenti alla GUI + sfondo al gamefiled avversario" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
