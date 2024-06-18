@@ -2,7 +2,7 @@
 .container {
     -fx-background-color: rgba(0, 0, 0, 0.8); /* Aumentato l'opacità del background */
     -fx-padding: 30px; /* Aumentato il padding */
-    -fx-border-radius: 15px; /* Bordo più arrotondato */
+    -fx-border-radius: 20px; /* Bordo più arrotondato */
     -fx-background-radius: 15px;
     -fx-alignment: center;
 }
@@ -60,7 +60,7 @@
 .table-view .table-cell {
     -fx-text-fill: #333333;
     -fx-font-size: 18px; /* Aumentata la dimensione del font */
-    -fx-padding: 10px; /* Aumentato il padding */
+    -fx-padding: 5px; /* Aumentato il padding */
     -fx-alignment: center; /* Centra il testo */
 }
 

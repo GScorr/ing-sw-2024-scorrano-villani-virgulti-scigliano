@@ -899,7 +899,7 @@ public class GameController2 extends GenericSceneController {
      */
     private boolean errorDrawState() throws IOException {
         if(! super.client.getMiniModel().getState().equals("DRAW_CARD")){
-            showError("IS NOT YOUR TURN, WAIT !!! ");
+            showError("YOU CAN'T DRAW NOW !!! ");
             return true;
         }
         else return false;

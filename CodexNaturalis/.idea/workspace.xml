@@ -4,26 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="test su full screen e piccole modifiche">
-      <change afterPath="$PROJECT_DIR$/src/resources/BackGroundImaging/4293.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/BackGroundImaging/abstract-shapes-dark-background.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/fxml/css/end_game.css" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="miglioramenti alla GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/alert_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/alert_scene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/alone.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/alone.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/chat_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/chat_scene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/choose_goal_state.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/choose_goal_state.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/choose_new_or_old.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/choose_new_or_old.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/end_game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/end_game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/css/end_game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/css/end_game.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_list_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_list_scene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/login_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/login_scene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/message_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/message_scene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/starting_card.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/starting_card.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/waiting_player.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/waiting_player.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,15 +326,7 @@
       <workItem from="1717420351528" duration="5305000" />
       <workItem from="1718542741884" duration="147000" />
       <workItem from="1718566931904" duration="453000" />
-      <workItem from="1718697539757" duration="23980000" />
-    </task>
-    <task id="LOCAL-00157" summary="prova">
-      <option name="closed" value="true" />
-      <created>1716649203715</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
-      <option name="project" value="LOCAL" />
-      <updated>1716649203715</updated>
+      <workItem from="1718697539757" duration="27975000" />
     </task>
     <task id="LOCAL-00158" summary="prova">
       <option name="closed" value="true" />
@@ -734,7 +712,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718709017576</updated>
     </task>
-    <option name="localTasksCounter" value="206" />
+    <task id="LOCAL-00206" summary="miglioramenti alla GUI">
+      <option name="closed" value="true" />
+      <created>1718724510999</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1718724510999</updated>
+    </task>
+    <option name="localTasksCounter" value="207" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -769,7 +755,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix minor bugs" />
     <MESSAGE value="aggiunte carte al centro e valore della risorsa dei due deck, nel MiniModel" />
     <MESSAGE value="aggiornamento fra mi ha hypato" />
     <MESSAGE value="piccolo change per carta trasparente" />
@@ -794,7 +779,8 @@
     <MESSAGE value="Miglioramenti alla GUI" />
     <MESSAGE value="Aggiornamento" />
     <MESSAGE value="test su full screen e piccole modifiche" />
-    <option name="LAST_COMMIT_MESSAGE" value="test su full screen e piccole modifiche" />
+    <MESSAGE value="miglioramenti alla GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="miglioramenti alla GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

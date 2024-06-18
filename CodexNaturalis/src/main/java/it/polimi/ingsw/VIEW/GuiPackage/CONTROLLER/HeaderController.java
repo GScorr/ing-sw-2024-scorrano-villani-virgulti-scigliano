@@ -461,7 +461,6 @@ public class HeaderController extends GenericSceneController {
      * @param playerNumber The ID of the opponent player.
      * @throws IOException If an I/O error occurs while fetching data or loading images.
      */
-
     @FXML
     private void showOpponentField(int playerNumber) throws IOException {
         // Check if the opponent field popup is already open
@@ -489,6 +488,15 @@ public class HeaderController extends GenericSceneController {
         gameGrid.setPrefHeight(1500);
         gameGrid.setPrefWidth(1500);
         gameGrid.setVgap(5);
+
+        // Load background image
+        Image backgroundImage = new Image(getClass().getResourceAsStream("/BackGroundImaging/8811189.jpg"));
+        ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(1500);
+        backgroundImageView.setFitHeight(1500);
+
+        // Add background image to GridPane
+        gameGrid.getChildren().add(backgroundImageView);
 
         // Add column and row constraints
         for (int i = 0; i < 45; i++) {
