@@ -129,7 +129,7 @@
                     </rowConstraints>
                      <children>
                         <!-- Background Image -->
-                        <ImageView fx:id="playAreaImage" fitHeight="1802.0" fitWidth="1331.0" preserveRatio="false">
+                        <ImageView fx:id="playAreaImage" fitHeight="2011.0" fitWidth="1331.0" preserveRatio="false">
                            <image>
                               <Image url="@../BackGroundImaging/8811189.jpg" />
                            </image>
@@ -144,36 +144,44 @@
 
     <!-- VBox for the decks at the right -->
     <right>
-        <VBox fx:id="deckBox" alignment="CENTER" maxWidth="500.0" prefHeight="888.0" prefWidth="300.0" spacing="10">
-            <Label alignment="CENTER" prefHeight="39.0" prefWidth="113.0" text="Central Cards:">
-            <font>
-               <Font size="16.0" />
-            </font></Label>
-            <ImageView fx:id="center_card_0" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
-            <ImageView fx:id="center_card_1" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
-            <ImageView fx:id="center_card_2" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
-            <ImageView fx:id="center_card_3" fitHeight="133" fitWidth="100" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="59.0" text="Decks:">
-            <font>
-               <Font size="16.0" />
-            </font></Label>
-            <ImageView fx:id="gold_deck" fitHeight="133" fitWidth="100" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
-            <ImageView fx:id="resurce_deck" fitHeight="133" fitWidth="100" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
-        </VBox>
+        <StackPane>
+            <ImageView fitHeight="1016.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
+                <Image url="@../BackGroundImaging/4293.jpg" />
+            </ImageView>
+            <VBox fx:id="deckBox" alignment="CENTER" fillWidth="false" maxWidth="500.0" prefHeight="985.0" prefWidth="209.0" spacing="10">
+                <Label alignment="CENTER" prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="center_card_0" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_1" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_2" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_3" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_3Click" />
+                <Label alignment="CENTER" prefHeight="30.0" prefWidth="59.0" text="Decks:" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="gold_deck" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
+                <ImageView fx:id="resurce_deck" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
+            </VBox>
+        </StackPane>
     </right>
+
 
     <!-- VBox for the decks at the left -->
     <left>
         <StackPane prefHeight="907.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 
             <!-- Background Image -->
-            <ImageView fx:id="handCardbackground" fitHeight="946.0" fitWidth="457.0">
+            <ImageView fx:id="handCardbackground" fitHeight="1020.0" fitWidth="457.0">
                 <image>
                     <Image url="@../BackGroundImaging/v850-sasi-14.jpg" />
                 </image>
             </ImageView>
 
-            <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" prefHeight="872.0" prefWidth="457.0" spacing="10" BorderPane.alignment="TOP_LEFT">
+            <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" prefHeight="995.0" prefWidth="457.0" spacing="10" BorderPane.alignment="TOP_LEFT">
                 <VBox alignment="CENTER">
                     <Label fx:id="playerNameLabel" style="-fx-font-weight: bold; -fx-text-fill: white;" text="PLAYER NAME">
                   <font>

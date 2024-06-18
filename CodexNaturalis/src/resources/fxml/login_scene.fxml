@@ -3,26 +3,20 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-
-
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.LoginController" styleClass="choose-goal-scene">
+<BorderPane styleClass="choose-goal-scene" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.LoginController">
     <!-- Background Image -->
     <ImageView fx:id="backgroundImage" fitHeight="800.0" fitWidth="600.0" preserveRatio="false" />
 
     <center>
-        <VBox spacing="20" alignment="CENTER" styleClass="choose-user-scene">
+        <VBox alignment="CENTER" prefHeight="242.0" prefWidth="328.0" spacing="20" styleClass="choose-user-scene">
             <!-- Text Label -->
-            <Label fx:id="NickName" text="NickName" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-            <TextField fx:id="usernameField" promptText="Ex : Mario22"
-                       maxHeight="30" minHeight="30" maxWidth="250" minWidth="150" /> <!-- Imposta la larghezza massima e minima -->
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Login"
-                    prefHeight="27.0" prefWidth="200.0"/>
+            <Label fx:id="NickName" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" text="NickName" />
+            <TextField fx:id="usernameField" maxHeight="34.0" maxWidth="263.0" minHeight="30" minWidth="150" prefHeight="34.0" prefWidth="263.0" promptText="Ex : Mario22" /> <!-- Imposta la larghezza massima e minima -->
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="47.0" prefWidth="226.0" text="Login" />
         </VBox>
     </center>
 </BorderPane>
-

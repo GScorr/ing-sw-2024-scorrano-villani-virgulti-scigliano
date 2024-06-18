@@ -24,15 +24,15 @@
                 <Image url="@../BackGroundImaging/8811189.jpg" />
             </ImageView>
             <VBox alignment="CENTER" prefHeight="805.0" prefWidth="1409.0" spacing="20">
-                <Label prefHeight="52.0" prefWidth="267.0" styleClass="title" text="Waiting for other players' turn..." textAlignment="CENTER">
+                <Label alignment="CENTER" prefHeight="52.0" prefWidth="415.0" styleClass="title" text="Waiting for other players' turn..." textAlignment="CENTER">
                <font>
-                  <Font size="18.0" />
+                  <Font size="20.0" />
                </font></Label>
-                <ProgressIndicator fx:id="progressIndicator" prefHeight="67.0" prefWidth="64.0" />
+                <ProgressIndicator fx:id="progressIndicator" prefHeight="63.0" prefWidth="67.0" />
                 <Label fx:id="currentPlayerLabel" style="-fx-font-weight: bold;" text="" />
-                <Button onAction="#handleViewDeck" prefHeight="42.0" prefWidth="138.0" text="Visualizza Deck">
+                <Button alignment="CENTER" onAction="#handleViewDeck" prefHeight="54.0" prefWidth="162.0" text="Visualizza Deck">
                <font>
-                  <Font size="13.0" />
+                  <Font size="14.0" />
                </font></Button>
             </VBox>
         </StackPane>

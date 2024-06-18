@@ -1,0 +1,70 @@
+/* Container VBox */
+.container {
+    -fx-background-color: rgba(0, 0, 0, 0.8); /* Aumentato l'opacità del background */
+    -fx-padding: 30px; /* Aumentato il padding */
+    -fx-border-radius: 15px; /* Bordo più arrotondato */
+    -fx-background-radius: 15px;
+    -fx-alignment: center;
+}
+
+/* Title Label */
+.title {
+    -fx-font-size: 40px; /* Aumentata la dimensione del font */
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.9), 10, 0.5, 0.0, 0.0); /* Aumentato l'effetto ombra */
+}
+
+/* Subtitle Label */
+.subtitle {
+    -fx-font-size: 28px; /* Aumentata la dimensione del font */
+    -fx-font-weight: bold;
+    -fx-text-fill: #eeeeee; /* Colore testo più chiaro */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.3, 0.0, 0.0); /* Aumentato l'effetto ombra */
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #f9f9f9; /* Sfondo più chiaro */
+    -fx-border-color: #bbbbbb; /* Bordo più scuro */
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-table-cell-border-color: transparent;
+}
+
+/* TableColumn headers */
+.table-view .column-header-background {
+    -fx-background-color: #005bb5; /* Colore più scuro per l'intestazione */
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px; /* Aumentata la dimensione del font */
+    -fx-alignment: center; /* Centra il testo */
+}
+
+/* Table rows */
+.table-view .table-row-cell {
+    -fx-border-color: #dddddd;
+    -fx-background-color: #ffffff; /* Sfondo bianco per le righe */
+    -fx-border-width: 0.5px; /* Bordi sottili tra le colonne */
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #333333;
+    -fx-font-size: 18px; /* Aumentata la dimensione del font */
+    -fx-padding: 10px; /* Aumentato il padding */
+    -fx-alignment: center; /* Centra il testo */
+}
+
+/* Adjust column width */
+.table-view .column-header-background .table-column {
+    -fx-pref-width: 200px; /* Aumentata la larghezza delle colonne */
+}
