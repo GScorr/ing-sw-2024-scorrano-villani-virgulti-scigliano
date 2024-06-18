@@ -115,26 +115,11 @@ public class Gui_Initialization extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException, NotBoundException, InterruptedException, ClassNotFoundException {
-/*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login_scene.fxml"));
 
-        System.out.println(loader.getLocation());
-        Parent root;
-        root = loader.load();
-
-        primaryStage.setTitle("CodexNaturalis - Login");
-
-        Scene scene = new Scene(root, 1024, 720); // Crea una nuova scena con il nodo radice
-        primaryStage.setScene(scene); // Imposta la scena nel palcoscenico
-
-        primaryStage.show();
- */
         this.stage = primaryStage;
         this.scene = new SceneController();
         scene.setStage(stage);
         GUISocketOrRmi();
-
-
     }
 
 }

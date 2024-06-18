@@ -45,7 +45,7 @@
     <!-- VBox for the decks at the right -->
     <left>
         <StackPane>
-            <ImageView fitWidth="500.0" preserveRatio="true">
+            <ImageView fitWidth="500.0" opacity="0.69" preserveRatio="true">
                 <Image url="@../BackGroundImaging/v850-sasi-14.jpg" />
             </ImageView>
             <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" prefHeight="889.0" prefWidth="413.0" spacing="10">
