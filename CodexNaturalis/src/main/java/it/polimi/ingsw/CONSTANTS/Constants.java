@@ -2,7 +2,8 @@ package it.polimi.ingsw.CONSTANTS;
 
 public class Constants {
     public final static int MATRIXDIM = 45;
-    public final static String IPV4 = "192.168.162.78";
+    public final static String IPV4 = "127.0.0.1";
+           // "192.168.162.78";
 
     public final static String ANSI_RESET = "\u001B[0m";
     public final static String ANSI_BLACK = "\u001B[30m";

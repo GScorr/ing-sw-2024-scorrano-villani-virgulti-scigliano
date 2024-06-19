@@ -15,7 +15,7 @@
             <Menu text="View GAME FIELDS">
                 <MenuItem text="View" onAction="#handleViewOpponentFields" />
             </Menu>
-            <Menu fx:id="chatsMenu" text="Chats">
+            <Menu fx:id="chatsMenu" text="Chats" onHidden="#handleChatsMenuHidden" onShown="#handleChatsMenuShown">
             </Menu>
             <Menu text="Scoreboard">
                 <MenuItem fx:id="scoreboardView" text="View" onAction="#showScoreboard" />

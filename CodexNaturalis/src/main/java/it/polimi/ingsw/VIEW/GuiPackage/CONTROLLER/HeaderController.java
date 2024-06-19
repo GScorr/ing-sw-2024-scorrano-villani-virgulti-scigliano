@@ -38,6 +38,10 @@ public class HeaderController extends GenericSceneController {
 
     @FXML
     private MenuBar menuBar;
+
+    private final Object menuLock = new Object();
+    private boolean isMenuOpen = false;
+    private Thread menuUpdater;
     @FXML
     private VBox chatBox;
 
@@ -68,8 +72,18 @@ public class HeaderController extends GenericSceneController {
      * @throws IOException If an I/O error occurs while fetching data.
      */
     public void startInitializeHeader() throws IOException {
-        Thread menuUpdater = new Thread(() -> {
+        menuUpdater = new Thread(() -> {
             while (true) {
+                synchronized (menuLock) {
+                    while (isMenuOpen) {
+                        try {
+                            menuLock.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+
                 Platform.runLater(() -> {
                     chatsMenu.getItems().clear();
                     int i = 1;
@@ -88,8 +102,9 @@ public class HeaderController extends GenericSceneController {
                         throw new RuntimeException(e);
                     }
                 });
+
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -617,6 +632,21 @@ public class HeaderController extends GenericSceneController {
                 grid.getColumnConstraints().get(j).setPrefWidth(0);
                 grid.getColumnConstraints().get(j).setMaxWidth(0);
             }
+        }
+    }
+
+    @FXML
+    private void handleChatsMenuHidden() {
+        synchronized (menuLock) {
+            isMenuOpen = false;
+            menuLock.notify();
+        }
+    }
+
+    @FXML
+    private void handleChatsMenuShown() {
+        synchronized (menuLock) {
+            isMenuOpen = true;
         }
     }
 }
