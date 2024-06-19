@@ -148,7 +148,7 @@ public class clientSocket implements VirtualViewF, Serializable {
                                 "                 TRY NEW LOG IN   " + e);
                         flag_Server_Disconneted = true;
                     }
-                } catch (ClassNotFoundException e) {
+                } catch (ClassNotFoundException | ClassCastException e) {
                     System.out.println("Error startCheckingMessagesSocket ");
                 } catch (NotBoundException e) {
                     throw new RuntimeException(e);
