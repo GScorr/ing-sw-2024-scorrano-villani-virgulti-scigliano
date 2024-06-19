@@ -1177,13 +1177,13 @@ public class GameController2 extends GenericSceneController {
         double width = 100;
         double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
-        db.setDragView(resizedImage, event.getX(), event.getY());
+        db.setDragView(resizedImage, 145, 60);
 
 
         // Imposta un'immagine bianca per la carta durante il drag
-        File file = new File("src/resources/Card/Bianco.png");
-        Image blankImage = new Image(file.toURI().toString());
-        handCard1.setImage(blankImage);
+        /*File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());*/
+        handCard1.setImage(null);
 
         event.consume();
     }
@@ -1245,13 +1245,13 @@ public class GameController2 extends GenericSceneController {
         double width = 100;
         double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
-        db.setDragView(resizedImage, event.getX(), event.getY());
+        db.setDragView(resizedImage, 144, 221);
 
 
         // Imposta un'immagine bianca per la carta durante il drag
-        File file = new File("src/resources/Card/Bianco.png");
-        Image blankImage = new Image(file.toURI().toString());
-        handCard2.setImage(blankImage);
+        /*File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());*/
+        handCard2.setImage(null);
 
         event.consume();
     }
@@ -1313,12 +1313,12 @@ public class GameController2 extends GenericSceneController {
         double width = 100;
         double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
-        db.setDragView(resizedImage, event.getX(), event.getY());
+        db.setDragView(resizedImage, 143, 382);
 
         // Imposta un'immagine bianca per la carta durante il drag
-        File file = new File("src/resources/Card/Bianco.png");
-        Image blankImage = new Image(file.toURI().toString());
-        handCard3.setImage(blankImage);
+        /*File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());*/
+        handCard3.setImage(null);
 
         event.consume();
     }

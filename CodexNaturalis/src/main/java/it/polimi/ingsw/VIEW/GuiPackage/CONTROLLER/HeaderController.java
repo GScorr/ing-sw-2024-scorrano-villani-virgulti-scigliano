@@ -36,8 +36,7 @@ import java.util.stream.Collectors;
  */
 public class HeaderController extends GenericSceneController {
 
-    @FXML
-    private MenuBar menuBar;
+    public MenuButton menuBar;
 
     private final Object menuLock = new Object();
     private boolean isMenuOpen = false;
@@ -125,7 +124,22 @@ public class HeaderController extends GenericSceneController {
         Menu goalMenu = new Menu("View GOAL");
         goalMenu.setId("GoalMenu");
 
-        MenuItem personalGoal = new MenuItem("Personal Goal");
+        // Paths to your image files
+        String common_goal = "src/resources/IconUI/focus.png";
+        String personal_goal = "src/resources/IconUI/target.png";
+
+        // Create ImageViews for icons
+        ImageView personalGoalIcon = new ImageView(new Image(new File(personal_goal).toURI().toString()));
+        personalGoalIcon.setFitWidth(20);
+        personalGoalIcon.setFitHeight(20);
+
+        ImageView commonGoalIcon = new ImageView(new Image(new File(common_goal).toURI().toString()));
+        commonGoalIcon.setFitWidth(20);
+        commonGoalIcon.setFitHeight(20);
+
+
+        // Create MenuItems with text and graphics
+        MenuItem personalGoal = new MenuItem("Personal Goal", personalGoalIcon);
         personalGoal.setId("PersonalGoal");
         personalGoal.setOnAction(event -> {
             try {
@@ -135,7 +149,8 @@ public class HeaderController extends GenericSceneController {
             }
         });
 
-        MenuItem commonGoal = new MenuItem("Common Goal");
+
+        MenuItem commonGoal = new MenuItem("Common Goal", commonGoalIcon);
         commonGoal.setId("CommonGoal");
         commonGoal.setOnAction(event -> {
             try {
@@ -148,8 +163,8 @@ public class HeaderController extends GenericSceneController {
         // Add items to GoalMenu
         goalMenu.getItems().addAll(personalGoal, commonGoal);
 
-        // Add GoalMenu to the MenuBar
-        menuBar.getMenus().add(goalMenu);
+        // Set the goalMenu as the graphic for the MenuButton
+        menuBar.getItems().add(goalMenu);
     }
     /**
      * Adds a new message to the chat box.

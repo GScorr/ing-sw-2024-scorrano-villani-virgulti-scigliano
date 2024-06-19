@@ -1,0 +1,23 @@
+/* headerUX.css */
+
+.menu-button {
+    -fx-background-color: transparent; /* Rimuove il colore di sfondo */
+    -fx-padding: 0; /* Rimuove il padding interno */
+
+    /* Rimuove la freccia di default */
+    -fx-mark-highlight-color: transparent;
+    -fx-mark-color: transparent;
+}
+
+.menu-button .arrow {
+    -fx-background-color: transparent; /* Rimuove la freccia */
+}
+
+.menu-button .arrow-button {
+    -fx-padding: 0; /* Rimuove il padding della freccia */
+}
+
+.menu-button .graphic > ImageView {
+    -fx-fit-height: 20;
+    -fx-fit-width: 20;
+}

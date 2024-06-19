@@ -8,6 +8,8 @@ import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.util.*;
 
 import javafx.animation.FadeTransition;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -25,6 +28,9 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class EndGameController extends GenericSceneController{
+
+    @FXML
+    private AnchorPane HeaderInclude;
 
     @FXML
     private TableView<Player> leaderboard;
@@ -45,6 +51,17 @@ public class EndGameController extends GenericSceneController{
 
     @FXML
     public void startInitialize() throws IOException {
+
+        /**
+         * header
+         */
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
+        Parent header = loader.load();
+        HeaderController headerController = loader.getController();
+        headerController.setThe_client(super.client);
+        headerController.setScene(scene_controller);
+        ((AnchorPane) HeaderInclude).getChildren().add(header);
+        headerController.startInitializeHeader();
 
         List<GameField> gameFields = client.getMiniModel().getGame_fields();
         List<Player> finalStanding = new ArrayList<>();
