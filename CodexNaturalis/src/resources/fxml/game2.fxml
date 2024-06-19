@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
+<BorderPane prefHeight="1030.0" prefWidth="1499.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
 
 
     <!-- Menu at the top -->
@@ -144,27 +144,27 @@
 
     <!-- VBox for the decks at the right -->
     <right>
-        <StackPane>
-            <ImageView fitHeight="1016.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
-                <Image url="@../BackGroundImaging/4293.jpg" />
+        <StackPane prefHeight="886.0" prefWidth="300.0">
+            <ImageView fitHeight="1026.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
+                <Image url="@../BackGroundImaging/4293crock.jpg" />
             </ImageView>
-            <VBox fx:id="deckBox" alignment="CENTER" fillWidth="false" maxWidth="500.0" prefHeight="985.0" prefWidth="209.0" spacing="10">
-                <Label alignment="CENTER" prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
+            <VBox fx:id="deckBox" alignment="CENTER" fillWidth="false" maxWidth="500.0" prefHeight="904.0" prefWidth="300.0" spacing="10">
+                <Label prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="center_card_0" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_1" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_2" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_3" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_3Click" />
+                <ImageView fx:id="center_card_0" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_1" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_2" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_3" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="59.0" text="Decks:" textFill="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="gold_deck" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
-                <ImageView fx:id="resurce_deck" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
+                <ImageView fx:id="gold_deck" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
+                <ImageView fx:id="resurce_deck" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
             </VBox>
         </StackPane>
     </right>
