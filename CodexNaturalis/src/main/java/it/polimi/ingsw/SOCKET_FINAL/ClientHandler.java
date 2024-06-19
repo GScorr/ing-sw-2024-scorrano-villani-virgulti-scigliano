@@ -59,11 +59,13 @@ public class ClientHandler  implements VirtualViewF {
      * Starts a thread to periodically send heartbeats to the server.
      */
     public void startSendingHeartbeats() {
+        System.out.println("I'm sending");
         new Thread(() -> {
             while (client_is_connected) {
                 try {
-                    Thread.sleep(150);
+
                     common.receiveHeartbeat(token);
+                    Thread.sleep(150);
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -292,14 +294,16 @@ public class ClientHandler  implements VirtualViewF {
                             output.reset();
                         }
                         else {
+
                             this.token = mayToken;
                             startCheckingMessages();
                             int port = common.getPort(token);
                             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                             client_is_connected = true;
-                            ResponseMessage s = new checkNameResponse(2);
                             startSendingHeartbeats();
+                            ResponseMessage s = new checkNameResponse(2);
+
                             output.writeObject(s);
                             output.flush();
                             output.reset();
