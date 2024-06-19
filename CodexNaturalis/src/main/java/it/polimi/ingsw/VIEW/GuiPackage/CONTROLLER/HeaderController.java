@@ -321,9 +321,7 @@ public class HeaderController extends GenericSceneController {
         cardImageView.setFitWidth(300);
         cardImageView.setPreserveRatio(true);
 
-
         Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getPlayer().getGoalCard();
-
 
         // Load and set the image for the ImageView
         File file = new File(personalGoal_1.front_side_path);
@@ -332,7 +330,6 @@ public class HeaderController extends GenericSceneController {
 
         // Add the label and image view to the VBox
         handBox.getChildren().add(cardImageView);
-
 
         // Set the scene for the new stage
         Scene scene = new Scene(handBox);
@@ -343,7 +340,6 @@ public class HeaderController extends GenericSceneController {
 
         // Show the new stage without waiting
         stage.show();
-
 
     }
 
@@ -379,7 +375,6 @@ public class HeaderController extends GenericSceneController {
         cardImageView_2.setPreserveRatio(true);
 
         Goal personalGoal_2 = the_client.getMiniModel().getMyGameField().getGlobal_goal2();
-
 
         // Load and set the image for the ImageView
         file = new File(personalGoal_2.front_side_path);

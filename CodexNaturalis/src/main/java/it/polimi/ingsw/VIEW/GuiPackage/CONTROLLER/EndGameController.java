@@ -46,8 +46,6 @@ public class EndGameController extends GenericSceneController{
     @FXML
     public void startInitialize() throws IOException {
 
-
-
         List<GameField> gameFields = client.getMiniModel().getGame_fields();
         List<Player> finalStanding = new ArrayList<>();
         for (GameField g : gameFields) {
@@ -75,9 +73,6 @@ public class EndGameController extends GenericSceneController{
             idx++;
         }
 
-
-
-
         // Sort players by points in descending order
 
         leaderboard.getItems().addAll(finalStanding);
@@ -93,7 +88,6 @@ public class EndGameController extends GenericSceneController{
         });
         playerNameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
         playerScoreColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getPlayerPoints()).asObject());
-
 
         int myPlayerIndex = player_to_position.get(client.getMiniModel().getMy_player().getName());
         System.out.println(myPlayerIndex);
@@ -138,6 +132,5 @@ public class EndGameController extends GenericSceneController{
         // Avvia l'animazione
         parallelTransition.play();
     }
-
 
 }
