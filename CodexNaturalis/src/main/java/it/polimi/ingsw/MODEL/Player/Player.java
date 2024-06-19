@@ -176,12 +176,7 @@ public class Player implements PlayerObserver, Serializable {
     public void setStartingCard(PlayCard starting_card) {
         this.starting_card = starting_card;
     }
-    /* da eliminare
-    public void setGoal_card(Goal goal_card) {
-        this.goal_card = goal_card;
-    }
 
-     */
     public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
         game_field.setGlobalGoal(global_goal1,global_goal2);
         this.resources_deck = resources_deck;

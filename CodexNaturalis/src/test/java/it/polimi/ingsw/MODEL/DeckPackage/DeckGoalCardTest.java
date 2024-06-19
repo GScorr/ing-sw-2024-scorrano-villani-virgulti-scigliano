@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-/*
-todo
-    da riprender perche è stato interroto quando mancavano i goal
- */
+
 class DeckGoalCardTest {
 
     DeckCreation creation = new DeckCreation();
