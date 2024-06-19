@@ -528,6 +528,8 @@ public class HeaderController extends GenericSceneController {
             RowConstraints row = new RowConstraints(33.1);
             gameGrid.getRowConstraints().add(row);
         }
+        gameGrid.setHgap(25.5);
+        gameGrid.setVgap(5);
 
         // Populate the GridPane with game data
         Set<Integer> visibleRows = new HashSet<>();
