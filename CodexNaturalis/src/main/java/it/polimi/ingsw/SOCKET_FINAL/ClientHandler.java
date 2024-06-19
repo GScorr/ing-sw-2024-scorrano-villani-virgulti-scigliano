@@ -60,7 +60,6 @@ public class ClientHandler  implements VirtualViewF {
      * Starts a thread to periodically send heartbeats to the server.
      */
     public void startSendingHeartbeats() {
-        System.out.println("I'm sending");
         new Thread(() -> {
             while (client_is_connected) {
                 try {
@@ -204,15 +203,17 @@ public class ClientHandler  implements VirtualViewF {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(500);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
                         sendMessage(s);
                     }
-                } catch (InterruptedException e) {
-
                 } catch (IOException e) {
 
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();
@@ -269,6 +270,7 @@ public class ClientHandler  implements VirtualViewF {
 
                             this.token = mayToken;
                             startCheckingMessages();
+                            System.out.println("1");
                             int port = common.getPort(token);
                             Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                             this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
