@@ -11,11 +11,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class SceneController {
+
+
 
     //path has to change
     public static final String CARD_IMAGE_PREFIX = "/images/cards/...";
@@ -26,6 +31,13 @@ public class SceneController {
     private VirtualViewF client;
 
     private HeaderController header_controller;
+
+    private static MediaPlayer mediaPlayer;
+
+    public SceneController() {
+        BackgroundMusic.initialize();
+    }
+
 
 
     public  void setStage(Stage stage) {
