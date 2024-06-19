@@ -7,6 +7,9 @@ import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MODEL.Player.State.PlaceCard;
 import org.junit.jupiter.api.Test;
 
+/*
+si può togliere
+ */
 
 
 public class PartitaFra {
@@ -15,7 +18,7 @@ public class PartitaFra {
     private String nome_2 = "Mirko";
 
     @Test
-    int main(){
+    void main(){
         Player p1 = controller.createPlayer(nome_1,true);
 
         Player p2 = controller.createPlayer(nome_2, false);
@@ -43,7 +46,6 @@ public class PartitaFra {
             System.out.println(c.getSide().getCentral_resource().name());
         }
 
-
         controller.playerChooseGoal(p1,1);
         controller.playerChooseGoal(p2,1);
 
@@ -59,19 +61,8 @@ public class PartitaFra {
         System.out.println(p1.getResources_deck().cards.size());
         System.out.println(p2.getGold_deck().cards.size());
 
-
         p1.setPlayer_points(20);
 
-
-
-
-
-        return 0;
     }
-
-
-
-
-
 
 }

@@ -43,7 +43,7 @@ class GameTest {
 
     @Test
     void initializedGame() {
-        /*game.insertPlayer(player1);
+        game.insertPlayer(player1);
         game.insertPlayer(player2);
         game.insertPlayer(player3);
         game.distributeStartingCard();
@@ -76,7 +76,7 @@ class GameTest {
             game.getGet_player_index().get(i).selectGoal(1);
             System.out.println(game.getGet_player_index().get(i).getGoalCard().getGoalType());
             System.out.println(game.getGet_player_index().get(i).getGoalCard().getResource());
-            }*/ //tutto commentato perchè i metodi sono stati rimessi a private
+            } //tutto commentato perchè i metodi sono stati rimessi a private
     }
 
     @Test

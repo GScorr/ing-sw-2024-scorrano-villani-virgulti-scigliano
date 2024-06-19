@@ -85,24 +85,6 @@ public class Game implements Serializable {
         return num_player;
     }
 
-    /* da eliminare
-    public void setNumPlayer(int num_player) {
-        this.num_player = num_player;
-    }
-    //Getter of points, given the index of the player
-
-    public int getPoints(int player_index) {
-        if( player_index < 0 || player_index > num_player )  System.out.printf("\n ERROR: INDEX EXCEED DOMAIN");
-        return get_player_index.get(player_index).getPlayerPoints();
-    }
-
-    public GameField getField(int player_index){
-        if( player_index < 0 || player_index > num_player )  System.out.printf("\n ERROR: INDEX EXCEED DOMAIN");
-        return get_player_index.get(player_index).getGameField();
-    }
-
-     */
-
     public int getMax_num_player() {
         return max_num_player;
     }
@@ -132,11 +114,9 @@ public class Game implements Serializable {
         this.resources_deck = new Deck(creation.getResourcesDeck());
          */
 
-
-        //Deck Mischiato
+        //shuffled deck
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
-
 
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());

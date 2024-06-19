@@ -87,8 +87,5 @@ class GameFieldControllerTest {
         player.getGameField().insertCard(cartee.get(4),2,2);
     }
 
-    @Test
-    void getCurrent() {
-        //useless test
-    }
+
 }
