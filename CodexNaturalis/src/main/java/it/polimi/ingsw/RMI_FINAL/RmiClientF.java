@@ -145,7 +145,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
      * @param endgame A flag indicating whether the game has ended.
      * @throws IOException  If an I/O error occurs during communication with the server.
      */
-    public void manageGame(boolean endgame) throws IOException {
+    public void manageGame(boolean endgame) throws IOException, InterruptedException {
         if(!endgame) rmi_controller.getPoints(token);
         else rmi_controller.getFinalStandings(token);
     }
