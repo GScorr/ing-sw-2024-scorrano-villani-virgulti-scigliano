@@ -228,9 +228,10 @@ public class GameServer implements VirtualGameServer, Serializable {
      * @param token The player's token.
      * @throws IOException If there is an IO error.
      */
-    public synchronized void getFinalStandings(String token) throws IOException {
+    public synchronized void getFinalStandings(String token) throws IOException, InterruptedException {
 
         if( !called ){
+            setAllStates();
             called = true;
 
             for( VirtualViewF vw : clientsRMI ){
