@@ -338,13 +338,13 @@ public class ClientHandler  implements VirtualViewF {
                 //e.printStackTrace();
             } catch (NotBoundException e) {
                 client_is_connected = false;
-                disconect();
+                //disconect();
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
-                disconect();
+                //disconect();
                 throw new RuntimeException(e);
             }catch (ClassNotFoundException e){
-                disconect();
+                //disconect();
                 client_is_connected = false;
             }
         }
