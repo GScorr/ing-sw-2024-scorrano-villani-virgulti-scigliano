@@ -81,14 +81,9 @@ public class ChooseGoalController extends GenericSceneController {
      */
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
 
-
-
         // Impostare la label del titolo
-        titleLabel.setText("CODEX NATURALIS");
+        titleLabel.setText("Choose personal goal");
         titleLabel.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;");
-
-
-
 
 
         /**

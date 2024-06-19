@@ -83,6 +83,7 @@ public class GameListController extends GenericSceneController{
         gameListContainer.getChildren().clear(); // Clear existing buttons
         for (SocketRmiControllerObject game : games) {
             Button button = new Button(game.name + " - Players: " + game.num_player + "/" + game.max_num_player);
+            button.setPrefSize(150, 50); // Set the preferred width and height
             button.setOnAction(event -> {
                 try {
                     handleGameButtonClick(game);

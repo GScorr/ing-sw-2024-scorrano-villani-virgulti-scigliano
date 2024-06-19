@@ -355,7 +355,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 if(token_to_player.size() >= controller.getGame().getMax_num_player()) {
                         UpdateMessage message_update;
                         int last_man_standing = 0;
-                        try{if (controller.isAlone()) {
+                        try{if (clientsRMI.size() == 1) {
                             checkEndDisconnect();
                             try {
                                 alone_client = clientsRMI.get(0);
@@ -363,8 +363,8 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
                                 message_update.isAlone = true;
                                 broadcastMessageOneClient(message_update, alone_client );
-                               // Thread.sleep(1500);
-                                while( countdown > 0 && controller.isAlone()) {
+                                Thread.sleep(150);
+                                while( countdown > 0 && clientsRMI.size() == 1) {
                                     message_update = new UpdateMessage(countdown + " SECONDS LEFT");
                                     message_update.isAlone = true;
                                     broadcastMessageOneClient(message_update,  alone_client );
