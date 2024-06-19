@@ -73,7 +73,7 @@ public class GameAccessController extends GenericSceneController {
 
         // Logic to handle game creation with the provided game name and number of players
         client.createGame(gameName,Integer.parseInt(playerNumber), client.getTerminal_interface().getName());
-        super.scene_controller.showMessage("Success", "YOUR PLAYER HAS BEEN CREATED!");
+        super.scene_controller.showMessage("Success", "PLAYER CREATED!");
         super.client.getTerminal_interface().waitFullGame();
         // Add your game creation handling code here
     }
