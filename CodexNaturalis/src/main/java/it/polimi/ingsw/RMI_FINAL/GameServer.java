@@ -306,7 +306,13 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     setAllStates();
                                 } catch (IOException | InterruptedException e) {}
+                                controller.nextStatePlayer();
+                                try {
+                                    setAllStates();
+                                } catch (IOException | InterruptedException e) {}
                             }
+
+
                             if (tmp.getActual_state().getNameState().equals("DRAW_CARD")){
 
                                 try {
@@ -525,7 +531,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
                 token_manager.getVal(t).setGameField(getGameFields(t));
-                token_manager.getVal(t).setLastTurn(controller.isIs_final_state());
+                //token_manager.getVal(t).setLastTurn(controller.isIs_final_state());
             }
 
         }

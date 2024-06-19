@@ -12,10 +12,10 @@
       "central3": "NONE"
     },
     "front_side": {
-      "angle_right_up": "MUSHROOMS",
-      "angle_right_down": "PLANT",
-      "angle_left_up": "INSECTS",
-      "angle_left_down": "ANIMAL",
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "PLANT",
+      "angle_left_down": "INSECTS",
+      "angle_right_down": "ANIMAL",
 
       "central1": "NONE",
       "central2": "NONE",
@@ -38,10 +38,10 @@
       "central3": "NONE"
     },
     "front_side": {
-      "angle_right_up": "PLANT",
-      "angle_right_down": "ANIMAL",
-      "angle_left_up": "MUSHROOMS",
-      "angle_left_down": "INSECTS",
+      "angle_left_up": "PLANT",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "MUSHROOMS",
+      "angle_right_down": "INSECTS",
 
       "central1": "NONE",
       "central2": "NONE",
@@ -64,10 +64,10 @@
       "central3": "NONE"
     },
     "front_side": {
-      "angle_right_up": "INSECTS",
-      "angle_right_down": "ANIMAL",
-      "angle_left_up": "MUSHROOMS",
-      "angle_left_down": "PLANT",
+      "angle_left_up": "INSECTS",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "MUSHROOMS",
+      "angle_right_down": "PLANT",
 
       "central1": "NONE",
       "central2": "NONE",
@@ -90,10 +90,10 @@
       "central3": "NONE"
     },
     "front_side": {
-      "angle_right_up": "PLANT",
-      "angle_right_down": "INSECTS",
-      "angle_left_up": "ANIMAL",
-      "angle_left_down": "MUSHROOMS",
+      "angle_left_up": "PLANT",
+      "angle_right_up": "INSECTS",
+      "angle_left_down": "ANIMAL",
+      "angle_right_down": "MUSHROOMS",
 
       "central1": "NONE",
       "central2": "NONE",
@@ -116,10 +116,10 @@
       "central3": "PLANT"
     },
     "front_side": {
-      "angle_right_up": "INSECTS",
-      "angle_right_down": "MUSHROOMS",
-      "angle_left_up": "PLANT",
-      "angle_left_down": "ANIMAL",
+      "angle_left_up": "INSECTS",
+      "angle_right_up": "MUSHROOMS",
+      "angle_left_down": "PLANT",
+      "angle_right_down": "ANIMAL",
 
       "central1": "NONE",
       "central2": "NONE",
@@ -142,10 +142,10 @@
       "central3": "MUSHROOMS"
     },
     "front_side": {
-      "angle_right_up": "MUSHROOMS",
-      "angle_right_down": "ANIMAL",
-      "angle_left_up": "PLANT",
-      "angle_left_down": "INSECTS",
+      "angle_left_up": "MUSHROOMS",
+      "angle_right_up": "ANIMAL",
+      "angle_left_down": "PLANT",
+      "angle_right_down": "INSECTS",
 
       "central1": "NONE",
       "central2": "NONE",
