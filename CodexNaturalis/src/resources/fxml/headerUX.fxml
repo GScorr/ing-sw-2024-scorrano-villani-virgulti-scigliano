@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.image.ImageView?>
-
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.HeaderUX">
-    <children>
-        <MenuButton fx:id="menuButton" layoutX="10.0" layoutY="10.0">
-            <graphic>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.HeaderUX" stylesheets="@../css/headerUX.css">
+    <children>
+        <MenuButton fx:id="menuBar" layoutX="10.0" layoutY="10.0">
+            <graphic>
+                <ImageView fitWidth="20" fitHeight="20">
+                    <image>
+                        <Image url="@../IconUI/menu.png" />
+                    </image>
+                </ImageView>
             </graphic>
             <items>
-                <MenuItem text="Pizzas">
+                <MenuItem text="Disconnect">
                     <graphic>
-                        <ImageView>
+                        <ImageView fitWidth="20" fitHeight="20">
                             <image>
-                                <Image url="@../IconUI/board-game.png"  />
+                                <Image url="@../IconUI/no-connection.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </MenuItem>
-                <MenuItem text="Burgers">
+                <MenuItem text="View Game Fields">
                     <graphic>
-                        <ImageView>
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <image>
+                                <Image url="@../IconUI/board-game.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
+                <MenuItem text="Chat">
+                    <graphic>
+                        <ImageView fitWidth="20" fitHeight="20">
                             <image>
                                 <Image url="@../IconUI/chat.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </MenuItem>
-                <MenuItem text="Chinese">
+                <MenuItem text="Scoreboard">
                     <graphic>
-                        <ImageView>
+                        <ImageView fitWidth="20" fitHeight="20">
                             <image>
                                 <Image url="@../IconUI/scoreboard.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </MenuItem>
-
             </items>
         </MenuButton>
     </children>
