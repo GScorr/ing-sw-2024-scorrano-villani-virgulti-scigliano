@@ -79,7 +79,7 @@ public class LoginController extends GenericSceneController {
         int flag;
             flag = client.checkName(name);
             if(flag==0){
-             //   controller.showAlert("Error", "Name already selected");
+                controller.showAlert("Error", "Name already selected");
             }
             else if(flag==2) {
                 client.getTerminal_interface().setNewClient(false);
