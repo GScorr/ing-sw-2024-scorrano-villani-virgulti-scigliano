@@ -38,6 +38,10 @@ public class HeaderController extends GenericSceneController {
 
     @FXML
     private MenuBar menuBar;
+
+    private final Object menuLock = new Object();
+    private boolean isMenuOpen = false;
+    private Thread menuUpdater;
     @FXML
     private VBox chatBox;
 
@@ -68,8 +72,18 @@ public class HeaderController extends GenericSceneController {
      * @throws IOException If an I/O error occurs while fetching data.
      */
     public void startInitializeHeader() throws IOException {
-        Thread menuUpdater = new Thread(() -> {
+        menuUpdater = new Thread(() -> {
             while (true) {
+                synchronized (menuLock) {
+                    while (isMenuOpen) {
+                        try {
+                            menuLock.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+
                 Platform.runLater(() -> {
                     chatsMenu.getItems().clear();
                     int i = 1;
@@ -88,8 +102,9 @@ public class HeaderController extends GenericSceneController {
                         throw new RuntimeException(e);
                     }
                 });
+
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -508,22 +523,22 @@ public class HeaderController extends GenericSceneController {
         while (count <= the_client.getMiniModel().game_fields.get(playerNumber - 1).card_inserted) {
             for (int i = 0; i < Constants.MATRIXDIM; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                    if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
+                    if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
-                    } else if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
+                    } else if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
                     }
@@ -617,6 +632,21 @@ public class HeaderController extends GenericSceneController {
                 grid.getColumnConstraints().get(j).setPrefWidth(0);
                 grid.getColumnConstraints().get(j).setMaxWidth(0);
             }
+        }
+    }
+
+    @FXML
+    private void handleChatsMenuHidden() {
+        synchronized (menuLock) {
+            isMenuOpen = false;
+            menuLock.notify();
+        }
+    }
+
+    @FXML
+    private void handleChatsMenuShown() {
+        synchronized (menuLock) {
+            isMenuOpen = true;
         }
     }
 }

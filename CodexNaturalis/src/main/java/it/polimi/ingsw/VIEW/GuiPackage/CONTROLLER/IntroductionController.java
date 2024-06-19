@@ -26,16 +26,11 @@ public class IntroductionController extends GenericSceneController {
     @FXML
     public void initialize() {
         // Adjust the file path as necessary
-        File file = new File("src/resources/BackGroundImaging/ConnectionLoadind.png");
+        File file = new File("src/resources/BackGroundImaging/photo_6023689416893121791_y.jpg");
 
         // Set the background image
         Image image = new Image(file.toURI().toString());
         backgroundImage.setImage(image);
-
-        // Impostare la label del titolo
-        titleLabel.setText("CODEX NATURALIS");
-        titleLabel.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;");
-
 
         // Set up a listener to bind the ImageView properties once the scene is available
         backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
