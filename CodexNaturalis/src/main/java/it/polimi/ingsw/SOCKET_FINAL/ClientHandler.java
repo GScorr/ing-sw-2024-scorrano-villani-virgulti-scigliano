@@ -93,9 +93,6 @@ public class ClientHandler  implements VirtualViewF {
      */
     @Override
     public void pushBack(ResponseMessage message) throws IOException {
-        if(message instanceof UpdateMessage){
-            System.out.println("ClientHandler, fino a qui ci arrivo");
-        }
         miniModel.pushBack(message);
     }
 
