@@ -360,10 +360,11 @@ public class ClientHandler  implements VirtualViewF {
             }
             if (input != null) {
                 input.close();
-            }
+            }/*
             if (client_socket != null) {
                 client_socket.close();
             }
+            */
         } catch (IOException e) {
             e.printStackTrace();
         }
