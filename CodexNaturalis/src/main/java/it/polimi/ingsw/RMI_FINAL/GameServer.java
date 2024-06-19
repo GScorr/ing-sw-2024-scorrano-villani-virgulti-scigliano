@@ -41,6 +41,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public Map<String,Integer> token_to_index = new HashMap<>();
     public Map<Integer,String> index_to_token = new HashMap<>();
     public HashMap<Integer,String> index_to_name = new HashMap<>();
+    public HashMap<String,Integer> name_to_index = new HashMap<>();
     private Common_Server server;
     private int id_game_server = 0;
 
@@ -80,6 +81,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_to_index.put(p_token,id);
         index_to_token.put(id, p_token);
         index_to_name.put(id,name);
+        name_to_index.put(name,id);
         token_manager.getTokens().get(p_token).insertId(id);
         token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
         token_manager.getTokens().get(p_token).insertPlayer(token_to_player.get(p_token));
@@ -259,7 +261,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 System.out.println("Reconnect");
                 token_to_player.get(token).connect();
                 clientsRMI.add(client);
-                token_manager.getVal(token).insertId(id);
+                token_manager.getVal(token).insertId(name_to_index.get(name));
                 token_manager.getVal(token).insertNumPlayers(getNumPlayersMatch());
                 token_manager.getVal(token).insertPlayer(token_to_player.get(token));
                 try{token_manager.getVal(token).setCards( token_to_player.get(token).getCardsInHand() );}catch (NullPointerException ignored){}
@@ -530,6 +532,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                                                          controller.getGame().getGold_deck().cards.getFirst());
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
+
                 token_manager.getVal(t).setGameField(getGameFields(t));
                 //token_manager.getVal(t).setLastTurn(controller.isIs_final_state());
             }
