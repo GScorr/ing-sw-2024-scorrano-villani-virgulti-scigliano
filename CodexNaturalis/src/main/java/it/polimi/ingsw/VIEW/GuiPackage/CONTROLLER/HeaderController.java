@@ -523,22 +523,22 @@ public class HeaderController extends GenericSceneController {
         while (count <= the_client.getMiniModel().game_fields.get(playerNumber - 1).card_inserted) {
             for (int i = 0; i < Constants.MATRIXDIM; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                    if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
+                    if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
-                    } else if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
+                    } else if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
                     }

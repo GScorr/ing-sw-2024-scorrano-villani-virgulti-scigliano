@@ -10,11 +10,8 @@
    <!-- Background Image -->
    <ImageView fx:id="backgroundImage" preserveRatio="false" />
 
-   <!-- Text Label -->
-   <Label fx:id="titleLabel" text="CODEX NATURALIS" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-
    <!-- Loading Bar Container -->
    <AnchorPane>
-      <ProgressBar fx:id="loadingBar" prefWidth="800.0" layoutX="300.0" layoutY="500.0" />
+      <ProgressBar fx:id="loadingBar" prefWidth="800.0" layoutX="350.0" layoutY="500.0" />
    </AnchorPane>
 </StackPane>

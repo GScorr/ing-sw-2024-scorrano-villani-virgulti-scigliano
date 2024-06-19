@@ -47,7 +47,7 @@ public class LoginController extends GenericSceneController {
 
 
         // Set the background image
-        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        File file = new File("src/resources/BackGroundImaging/photo_6023689416893121790_y.jpg");
         Image image = new Image(file.toURI().toString());
         backgroundImage.setImage(image);
 
