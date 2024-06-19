@@ -35,7 +35,7 @@ public class SendDrawCenter implements SendFunction{
      */
     @Override
     public ResponseMessage action(GameServer server) {
-        ResponseMessage message;
+        ResponseMessage message = null;
         try{
             server.peachFromCardsInCenter(token, index);
             message = new PrintMessage("Card inserted!");
@@ -51,9 +51,10 @@ public class SendDrawCenter implements SendFunction{
                     e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        } catch (InterruptedException | NullPointerException ignored) {
+            System.out.println("errore null in send draw card");
+        } 
+        
         return message;
     }
 
