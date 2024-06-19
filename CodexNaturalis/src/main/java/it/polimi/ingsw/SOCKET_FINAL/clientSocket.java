@@ -125,26 +125,29 @@ public class clientSocket implements VirtualViewF, Serializable {
      * @throws IOException If there is an IO error during communication.
      * @throws ClassNotFoundException If a class cannot be found.
      */
-    public void  startCheckingMessagesSocket() throws IOException,ClassNotFoundException{
-        new Thread( () -> {
+    public void startCheckingMessagesSocket() throws IOException, ClassNotFoundException {
+        new Thread(() -> {
             ResponseMessage s;
-            while(true) {
-                try {Thread.sleep(500);} catch (InterruptedException e) {}
+            Object p;
+            while (true) {
                 try {
-                    if (((s = (ResponseMessage) input.readObject()) != null)) {
+                    Thread.sleep(500);
+                    p =  input.readObject();
+                    if ( p instanceof ResponseMessage )
+                    {
+                        s = (ResponseMessage) p;
                         s.setVirtual_view(this);
                         s.setClient(this);
                         s.action();
                     }
                 } catch (IOException | InterruptedException e) {
-                    if(! flag_Server_Disconneted){
+                    if (!flag_Server_Disconneted) {
                         System.err.println("                 [SERVER ERROR]\n" +
-                                           "                 TRY NEW LOG IN   "  );
+                                "                 TRY NEW LOG IN   " );
                         flag_Server_Disconneted = true;
                     }
-
                 } catch (ClassNotFoundException e) {
-                    System.out.println("errore startCheckingMessagesSocket ");
+                    System.out.println("Error startCheckingMessagesSocket ");
                 } catch (NotBoundException e) {
                     throw new RuntimeException(e);
                 }

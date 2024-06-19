@@ -15,9 +15,6 @@
             <Menu text="View GAME FIELDS">
                 <MenuItem text="View" onAction="#handleViewOpponentFields" />
             </Menu>
-            <Menu text="Help">
-                <MenuItem text="AH FIGLIO DI PUTTANA VOLEVI UN AIUTO" />
-            </Menu>
             <Menu fx:id="chatsMenu" text="Chats">
             </Menu>
             <Menu text="Scoreboard">

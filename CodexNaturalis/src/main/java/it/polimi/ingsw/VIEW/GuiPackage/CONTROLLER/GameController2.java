@@ -971,7 +971,7 @@ public class GameController2 extends GenericSceneController {
             file = new File(card_1.front_side_path);
             card_1_front = new Image(file.toURI().toString());
             handCard1.setImage( card_1_front);
-            System.out.println(card_1.front_side_path);
+            //System.out.println(card_1.front_side_path);
             //back
             file = new File(card_1.back_side_path);
             card_1_back = new Image(file.toURI().toString());

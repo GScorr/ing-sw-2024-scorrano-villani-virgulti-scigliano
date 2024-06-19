@@ -17,7 +17,6 @@ public class UpdateMessage extends ResponseMessage{
 
     public boolean win = false;
 
-    private GameField gamefield;
 
     public UpdateMessage(String string) {
         this.message = string;
