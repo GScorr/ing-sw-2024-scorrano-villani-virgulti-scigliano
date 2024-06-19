@@ -50,7 +50,7 @@ public class Common_Client {
                     try{
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
-                        new clientSocket(inputStream, outputStream).runTUI();
+                        new clientSocket(inputStream, outputStream, serverSocket).runTUI();
                     }catch (IOException e) {
                         System.err.println(e.getMessage());
                         return;

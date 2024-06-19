@@ -5,7 +5,6 @@ import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
-import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -23,6 +22,7 @@ import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 
 
 import java.io.*;
+import java.net.Socket;
 import java.rmi.NotBoundException;
 
 import java.rmi.registry.LocateRegistry;
@@ -44,15 +44,16 @@ public class ClientHandler  implements VirtualViewF {
     public Common_Server common;
     public String token;
     public String name;
-
+    private Socket client_socket;
     private VirtualGameServer rmi_controller;
     public boolean client_is_connected = true;
 
-    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common ) throws IOException, NotBoundException {
+    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common , Socket clientsocket) throws IOException, NotBoundException {
         this.server = server;
         this.input = input;
         this.output = output;
         this.common = common;
+        this.client_socket = clientsocket;
     }
 
     /**
@@ -63,7 +64,6 @@ public class ClientHandler  implements VirtualViewF {
         new Thread(() -> {
             while (client_is_connected) {
                 try {
-
                     common.receiveHeartbeat(token);
                     Thread.sleep(150);
                 } catch (IOException | InterruptedException e) {
@@ -82,9 +82,7 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void showCard(PlayCard card) throws IOException {
         ResponseMessage s = new showCenterCardsResponse(card);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     /**
@@ -107,9 +105,7 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void printString(String string) throws IOException {
         ResponseMessage s = new StringResponse(string);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     /**
@@ -121,41 +117,31 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void setGameField(List<GameField> games) throws IOException {
         ResponseMessage s = new setGameFieldResponse(games);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     @Override
     public void setCards(List<PlayCard> cards)throws IOException {
         ResponseMessage s = new setCardsResponse(cards);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     @Override
     public void setNumToPlayer(HashMap<Integer, String> map) throws IOException {
         ResponseMessage s = new NumToPlayerResponse(map);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     @Override
     public void setState(String state) throws IOException {
         ResponseMessage s = new setStateMessage(state);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     @Override
     public void setCenterCards(CenterCards cards, PlayCard res, PlayCard gold) throws IOException {
         ResponseMessage s = new setCenterCardsResponde(cards, res,gold);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     /**
@@ -168,9 +154,7 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void addChat(int idx, ChatMessage message) throws IOException {
         ResponseMessage s = new addChatResponse(idx,message);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     /**
@@ -182,9 +166,7 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void insertId(int id) throws IOException {
         ResponseMessage s = new insertIdResponse(id);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     /**
@@ -196,9 +178,7 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void insertPlayer(Player player) throws IOException {
         ResponseMessage s = new insertPlayerResponse(player);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     /**
@@ -210,9 +190,7 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void insertNumPlayers(int numPlayersMatch) throws IOException {
         ResponseMessage s = new NumPlayerResponse(numPlayersMatch);
-        output.writeObject(s);
-        output.flush();
-        output.reset();
+        sendMessage(s);
     }
 
     /**
@@ -229,9 +207,7 @@ public class ClientHandler  implements VirtualViewF {
                     Thread.sleep(500);
                     ResponseMessage s = miniModel.popOut();
                     if(s!=null){
-                        output.writeObject(s);
-                        output.flush();
-                        output.reset();
+                        sendMessage(s);
                     }
                 } catch (InterruptedException e) {
 
@@ -260,7 +236,7 @@ public class ClientHandler  implements VirtualViewF {
      * @throws IOException If there's an error reading from the input stream.
      * @throws ClassNotFoundException If the received message cannot be deserialized.
      */
-    public void runVirtualView() throws IOException, ClassNotFoundException {
+    public void runVirtualView() throws IOException, ClassNotFoundException, NotBoundException, InterruptedException {
         synchronized (this) {
             try {
                 Message DP_message = null;
@@ -283,15 +259,11 @@ public class ClientHandler  implements VirtualViewF {
                             this.name = ((CheckNameMessage) DP_message).nome;
                             this.token = common.createToken(this);
                             ResponseMessage s = new checkNameResponse(1);
-                            output.writeObject(s);
-                            output.flush();
-                            output.reset();
+                            sendMessage(s);
                         }
                         else if (mayToken.equals("false")) {
                             ResponseMessage s = new checkNameResponse(0);
-                            output.writeObject(s);
-                            output.flush();
-                            output.reset();
+                            sendMessage(s);
                         }
                         else {
 
@@ -303,17 +275,13 @@ public class ClientHandler  implements VirtualViewF {
                             client_is_connected = true;
                             startSendingHeartbeats();
                             ResponseMessage s = new checkNameResponse(2);
-
-                            output.writeObject(s);
-                            output.flush();
-                            output.reset();
+                            sendMessage(s);
                         }
                     }
                     else if ((DP_message instanceof CreateGame)) {
                         ((CreateGame) DP_message).setClientHandler(this);
                         startCheckingMessages();
                         int port = ((CreateGame) DP_message).actionCreateGameMessage();
-
                         Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
                         this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
                         startSendingHeartbeats();
@@ -322,15 +290,11 @@ public class ClientHandler  implements VirtualViewF {
                         ((FindRMIControllerMessage) DP_message).setClientHandler(this);
                         if (((FindRMIControllerMessage) DP_message).actionFindRmi()) {
                             ResponseMessage s = new CheckRmiResponse(true);
-                            output.writeObject(s);
-                            output.flush();
-                            output.reset();
+                            sendMessage(s);
                         }
                         else {
                             ResponseMessage s = new CheckRmiResponse(false);
-                            output.writeObject(s);
-                            output.flush();
-                            output.reset();
+                            sendMessage(s);
                         }
                     }
                     else if (DP_message instanceof connectGame) {
@@ -343,48 +307,66 @@ public class ClientHandler  implements VirtualViewF {
                     else if (DP_message instanceof getGoalCard) {
                         boolean isPresent = ((getGoalCard) DP_message).getGoalCardAction();
                         ResponseMessage s = new checkGoalCardPresent(isPresent);
-                        output.writeObject(s);
-                        output.flush();
-                        output.reset();
+                        sendMessage(s);
                     }
                     else if (DP_message instanceof getListGoalCard) {
                         List<Goal> list_goal_card = ((getListGoalCard) DP_message).actionGetListGoalCard();
                         ResponseMessage s = new getListGoalCardResponse(list_goal_card);
-                        output.writeObject(s);
-                        output.flush();
-                        output.reset();
+                        sendMessage(s);
                     }
                     else if (DP_message instanceof getStartingCard) {
                         PlayCard starting_card = ((getStartingCard) DP_message).getStartingCardAction();
                         ResponseMessage s = new StartingCardResponse(starting_card);
-                        output.writeObject(s);
-                        output.flush();
-                        output.reset();
+                        sendMessage(s);
                     }
                     else if (DP_message instanceof firstCardIsPlaced) {
                         boolean isPlaced = ((firstCardIsPlaced) DP_message).firstCardIsPlacedAction();
                         ResponseMessage s = new checkStartingCardSelected(isPlaced);
-                        output.writeObject(s);
-                        output.flush();
-                        output.reset();
+                        sendMessage(s);
                     }
                     else {
                         DP_message.action();
                     }
                 }
             } catch (EOFException e) {
+                disconect();
                 client_is_connected = false;
-            } catch (ClassNotFoundException | IOException e) {
+            } catch ( IOException e) {
+                disconect();
                 // Gestione generica delle eccezioni durante la deserializzazione
                 client_is_connected = false;
                 //e.printStackTrace();
             } catch (NotBoundException e) {
                 client_is_connected = false;
+                disconect();
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
+                disconect();
                 throw new RuntimeException(e);
+            }catch (ClassNotFoundException e){
+                disconect();
+                client_is_connected = false;
             }
         }
+    }
+
+    @Override
+    public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        try {
+            if (output != null) {
+                output.close();
+            }
+            if (input != null) {
+                input.close();
+            }
+            if (client_socket != null) {
+                client_socket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -430,6 +412,11 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public String getSecondGoal() throws IOException {
         return null;
+    }
+
+    @Override
+    public void chooseGoal(int i) throws IOException, InterruptedException {
+
     }
 
     @Override
@@ -511,10 +498,6 @@ public class ClientHandler  implements VirtualViewF {
 
     }
 
-    public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
-
-    }
-
     @Override
     public void setLastTurn(boolean b) throws IOException {
 
@@ -525,10 +508,7 @@ public class ClientHandler  implements VirtualViewF {
 
     }
 
-    @Override
-    public void chooseGoal(int i) throws IOException {
 
-    }
 
     @Override
     public void showStartingCard() throws IOException, InterruptedException {
@@ -573,6 +553,14 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
 
+    }
+
+    public void sendMessage(ResponseMessage message) throws IOException {
+        synchronized (output) {
+            output.writeObject(message);
+            output.flush();
+            output.reset();
+        }
     }
 
 }

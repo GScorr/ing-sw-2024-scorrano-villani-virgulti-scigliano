@@ -54,10 +54,10 @@ public class Server extends UnicastRemoteObject  {
        Socket clientSocket = null;
         while ((clientSocket = this.listenSocket.accept()) != null) {
             System.out.println("Common_Client connected: " + clientSocket.getInetAddress());
-            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
-            ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
-            ClientHandler handler = new ClientHandler(this, inputStream, outputStream,  common );
+            ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
+            ClientHandler handler = new ClientHandler(this, inputStream, outputStream,  common, clientSocket );
 
             clients.add(handler);
             new Thread(() -> {
@@ -66,6 +66,10 @@ public class Server extends UnicastRemoteObject  {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (NotBoundException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }).start();
