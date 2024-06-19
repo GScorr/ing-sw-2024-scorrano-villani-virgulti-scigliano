@@ -1200,8 +1200,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private void handleCard1DragDone(DragEvent event) {
         // Reimposta la posizione dell'immagine della carta alla posizione originale
-        handCard1.setLayoutX(0);
-        handCard1.setLayoutY(0);
+        handCard1.setLayoutX(145);
+        handCard1.setLayoutY(60);
 
         // Reimposta l'immagine originale della carta
         handCard1.setImage(handCard1image);
@@ -1268,8 +1268,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private void handleCard2DragDone(DragEvent event) {
         // Reimposta la posizione dell'immagine della carta alla posizione originale
-        handCard2.setLayoutX(0);
-        handCard2.setLayoutY(0);
+        handCard2.setLayoutX(144);
+        handCard2.setLayoutY(221);
 
         // Reimposta l'immagine originale della carta
         handCard2.setImage(handCard2image);
@@ -1334,8 +1334,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private void handleCard3DragDone(DragEvent event) {
         // Reimposta la posizione dell'immagine della carta alla posizione originale
-        handCard3.setLayoutX(0);
-        handCard3.setLayoutY(0);
+        handCard3.setLayoutX(143);
+        handCard3.setLayoutY(382);
 
         // Reimposta l'immagine originale della carta
         handCard3.setImage(handCard3image);

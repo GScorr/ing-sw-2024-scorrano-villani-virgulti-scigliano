@@ -393,10 +393,11 @@ public class TUI implements Serializable, GraficInterterface {
         int choice=-1,x,y;
         String flip;
         boolean flipped;
+        boolean wrong = false;
         while ( client.getMiniModel().getState().equals("PLACE_CARD") ){
             menuChoice("PLACE CARD",client.getMiniModel().getState());
             do{
-                if(choice != -1) System.err.println("[ERROR] INCORRECT INSERT");
+                if( wrong ) System.err.println("[ERROR] INCORRECT INSERT");
                 System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
                 String choicestring = scan.nextLine();
                 choice = Integer.parseInt(choicestring);
@@ -407,9 +408,10 @@ public class TUI implements Serializable, GraficInterterface {
                 x = scan.nextInt();
                 y = scan.nextInt();
                 scan.nextLine();
-            }while( !(choice>=1 && choice<=3) ||
-                    !(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f") ) ||
-                    !(x>=0 && x< Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM ));
+                wrong = !(choice>=1 && choice<=3) ||
+                        !(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f") ) ||
+                        !(x>=0 && x< Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM );
+            }while( wrong );
             client.selectAndInsertCard(choice,x,y,flipped);
         }
     }
