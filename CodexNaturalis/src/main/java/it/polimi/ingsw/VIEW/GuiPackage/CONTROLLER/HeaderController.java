@@ -3,6 +3,7 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
@@ -35,6 +36,8 @@ import java.util.stream.Collectors;
  */
 public class HeaderController extends GenericSceneController {
 
+    @FXML
+    private MenuBar menuBar;
     @FXML
     private VBox chatBox;
 
@@ -93,8 +96,46 @@ public class HeaderController extends GenericSceneController {
             }
         });
         menuUpdater.start();
+        if(
+            the_client.getMiniModel().getState().equals("PLACE_CARD")||
+            the_client.getMiniModel().getState().equals("DRAW_CARD") ||
+            the_client.getMiniModel().getState().equals("WAIT_TURN")
+        ){
+            addGoalMenu();
+        }
     }
 
+    private void addGoalMenu() {
+        // Create the GoalMenu and its items
+        Menu goalMenu = new Menu("View GOAL");
+        goalMenu.setId("GoalMenu");
+
+        MenuItem personalGoal = new MenuItem("Personal Goal");
+        personalGoal.setId("PersonalGoal");
+        personalGoal.setOnAction(event -> {
+            try {
+                showPersonalGoal(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        MenuItem commonGoal = new MenuItem("Common Goal");
+        commonGoal.setId("CommonGoal");
+        commonGoal.setOnAction(event -> {
+            try {
+                showCommonGoal(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Add items to GoalMenu
+        goalMenu.getItems().addAll(personalGoal, commonGoal);
+
+        // Add GoalMenu to the MenuBar
+        menuBar.getMenus().add(goalMenu);
+    }
     /**
      * Adds a new message to the chat box.
      *
@@ -264,6 +305,104 @@ public class HeaderController extends GenericSceneController {
         the_client.disconect();
     }
 
+    public void showPersonalGoal(ActionEvent actionEvent) throws IOException {
+        // Create a new stage for the pop-up
+        Stage stage = new Stage();
+        stage.setTitle("Deck Cards");
+
+        // Create a VBox
+        VBox handBox = new VBox();
+        handBox.setAlignment(javafx.geometry.Pos.CENTER);
+        handBox.setMaxWidth(500.0);
+        handBox.setSpacing(10);
+
+        ImageView cardImageView = new ImageView();
+        cardImageView.setFitHeight(133);
+        cardImageView.setFitWidth(100);
+        cardImageView.setPreserveRatio(true);
+
+
+        Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getPlayer().getGoalCard();
+
+
+        // Load and set the image for the ImageView
+        File file = new File(personalGoal_1.front_side_path);
+        Image image = new Image(file.toURI().toString());
+        cardImageView.setImage(image);
+
+        // Add the label and image view to the VBox
+        handBox.getChildren().add(cardImageView);
+
+
+        // Set the scene for the new stage
+        Scene scene = new Scene(handBox);
+        stage.setScene(scene);
+
+        // Optionally, explicitly set the popup to be non-modal (if needed)
+        stage.initModality(Modality.NONE); // This line ensures the stage is non-modal
+
+        // Show the new stage without waiting
+        stage.show();
+
+
+    }
+
+    public void showCommonGoal(ActionEvent actionEvent) throws IOException {
+        // Create a new stage for the pop-up
+        Stage stage = new Stage();
+        stage.setTitle("Deck Cards");
+
+        // Create a VBox
+        VBox handBox = new VBox();
+        handBox.setAlignment(javafx.geometry.Pos.CENTER);
+        handBox.setMaxWidth(500.0);
+        handBox.setSpacing(10);
+
+        ImageView cardImageView = new ImageView();
+        cardImageView.setFitHeight(133);
+        cardImageView.setFitWidth(100);
+        cardImageView.setPreserveRatio(true);
+
+        Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getGlobal_goal1();
+
+
+        // Load and set the image for the ImageView
+        File file = new File(personalGoal_1.front_side_path);
+        Image image = new Image(file.toURI().toString());
+        cardImageView.setImage(image);
+
+        // Add the label and image view to the VBox
+        handBox.getChildren().add(cardImageView);
+
+
+
+        ImageView cardImageView_2 = new ImageView();
+        cardImageView_2.setFitHeight(133);
+        cardImageView_2.setFitWidth(100);
+        cardImageView_2.setPreserveRatio(true);
+
+        Goal personalGoal_2 = the_client.getMiniModel().getMyGameField().getGlobal_goal2();
+
+
+        // Load and set the image for the ImageView
+        file = new File(personalGoal_2.front_side_path);
+        image = new Image(file.toURI().toString());
+        cardImageView_2.setImage(image);
+
+        // Add the label and image view to the VBox
+        handBox.getChildren().add(cardImageView_2);
+
+        // Set the scene for the new stage
+        Scene scene = new Scene(handBox);
+        stage.setScene(scene);
+
+        // Optionally, explicitly set the popup to be non-modal (if needed)
+        stage.initModality(Modality.NONE); // This line ensures the stage is non-modal
+
+        // Show the new stage without waiting
+        stage.show();
+    }
+
     /**
      * A simple data class representing information for a circle on the scoreboard.
      */
@@ -322,7 +461,6 @@ public class HeaderController extends GenericSceneController {
      * @param playerNumber The ID of the opponent player.
      * @throws IOException If an I/O error occurs while fetching data or loading images.
      */
-
     @FXML
     private void showOpponentField(int playerNumber) throws IOException {
         // Check if the opponent field popup is already open
@@ -350,6 +488,15 @@ public class HeaderController extends GenericSceneController {
         gameGrid.setPrefHeight(1500);
         gameGrid.setPrefWidth(1500);
         gameGrid.setVgap(5);
+
+        // Load background image
+        Image backgroundImage = new Image(getClass().getResourceAsStream("/BackGroundImaging/8811189.jpg"));
+        ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(1500);
+        backgroundImageView.setFitHeight(1500);
+
+        // Add background image to GridPane
+        gameGrid.getChildren().add(backgroundImageView);
 
         // Add column and row constraints
         for (int i = 0; i < 45; i++) {

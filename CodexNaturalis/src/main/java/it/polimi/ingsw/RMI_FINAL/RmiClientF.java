@@ -40,6 +40,8 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     private TUI tui;
     private GraficInterterface terminal_interface;
 
+    private boolean flag_0 = false;
+
     @Override
     public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
         this.server.connect(this);
@@ -65,6 +67,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
         System.exit(0);
     }
+
+    @Override
+    public void setLastTurn(boolean b) {
+        getMiniModel().setFinal_state(b);
+    }
+
 
     /**
      * Verifies a player's name with the server and establishes a connection (if valid).
@@ -322,8 +330,16 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             while (true) {
                 try {
                     ResponseMessage s = miniModel.popOut();
-                    if(s!=null) s.action();
-                } catch (IOException e) {throw new RuntimeException(e);}
+                    if(s!=null) {
+                        s.setVirtual_view(this);
+                        s.action();
+                    }
+                } catch (IOException | InterruptedException e) {throw new RuntimeException(e);} catch (
+                        NotBoundException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 try {Thread.sleep(200);} catch (InterruptedException e) {}
             }
         }).start();
@@ -349,7 +365,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
         }).start();
     }
 
-    public void setGameFieldMiniModel() throws IOException {miniModel.setGameField(rmi_controller.getGameFields(token));}
+    public void setGameFieldMiniModel() throws IOException {
+        if( ! flag_0){
+            miniModel.setGameField(rmi_controller.getGameFields(token));
+            flag_0 = true;
+        }
+        }
+
 
     /**
      * setter

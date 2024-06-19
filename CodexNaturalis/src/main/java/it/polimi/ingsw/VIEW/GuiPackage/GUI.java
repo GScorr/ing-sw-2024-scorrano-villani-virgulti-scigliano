@@ -19,10 +19,13 @@ import java.util.Scanner;
  */
 public class GUI implements GraficInterterface {
 
+    private boolean isAlone = false;
+
     public boolean newClient;
     SceneController scene;
     String username;
     private String token;
+    private boolean flag_0 = false;
 
     public GUI(SceneController scene) {
         this.scene = scene;
@@ -42,6 +45,11 @@ public class GUI implements GraficInterterface {
         scene.showAlert("ERROR!",a);
     }
 
+    @Override
+    public void printUpdateMessage(String message) {
+
+    }
+
     /**
      * Starts the command-line interface for user interaction.
      * This method is currently unused as the application utilizes a graphical user interface.
@@ -53,11 +61,16 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
-        selectNamePlayer();
+        Platform.runLater(() -> scene.changeRootPane("IntroductionPage.fxml"));
     }
 
     public void setNewClient(boolean newClient) {
         this.newClient = newClient;
+    }
+
+    @Override
+    public boolean getIsAlone() {
+        return this.isAlone;
     }
 
     /**
@@ -87,11 +100,9 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void gameAccess(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
-        System.out.println(player_name + " questo è l'username");
         username = player_name;
         if(newClient) {
             makeChoice(player_name);
-          //  scene.showMessage("Success","YOUR PLAYER HAS BEEN CREATED!");
         }else{
             this.waitFullGame();
         }
@@ -165,6 +176,11 @@ public class GUI implements GraficInterterface {
         return false;
     }
 
+    @Override
+    public void endGame() {
+        Platform.runLater(() -> scene.changeRootPane("end_game.fxml"));
+    }
+
     /**
      * Displays a waiting scene while waiting for enough players to join the game.
      *
@@ -173,6 +189,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void waitFullGame() throws IOException, InterruptedException {
+        if(isAlone) return;
         Platform.runLater(() -> scene.changeRootPane("waiting_player.fxml"));
     }
 
@@ -188,6 +205,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void chooseGoalState() throws IOException, InterruptedException, ClassNotFoundException {
+        if(isAlone) return;
         if(scene.getClient().getMiniModel().getState().equals("CHOOSE_GOAL")) {
             boolean checkGoal = scene.getClient().isGoalCardPlaced();
                 chooseGoal();
@@ -204,6 +222,7 @@ public class GUI implements GraficInterterface {
      * @throws InterruptedException If the UI thread is interrupted.
      */
     private void chooseGoal() throws IOException, ClassNotFoundException, InterruptedException {
+        if(isAlone) return;
         Platform.runLater(() -> scene.changeRootPane("choose_goal_state.fxml"));
     }
 
@@ -216,6 +235,7 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void chooseStartingCardState() throws IOException, InterruptedException, ClassNotFoundException {
+        if(isAlone) return;
         if(scene.getClient().getMiniModel().getState().equals("CHOOSE_SIDE_FIRST_CARD")) {
             chooseStartingCard();
         }else{
@@ -231,6 +251,7 @@ public class GUI implements GraficInterterface {
      * @throws InterruptedException If the UI thread is interrupted.
      */
     private void chooseStartingCard() throws IOException, ClassNotFoundException, InterruptedException {
+        if(isAlone) return;
         Platform.runLater(() -> scene.changeRootPane("starting_card.fxml"));
     }
 
@@ -259,12 +280,40 @@ public class GUI implements GraficInterterface {
      */
     @Override
     public void manageGame() throws IOException, InterruptedException, ClassNotFoundException {
+        if(isAlone) return;
         if(!scene.getClient().getMiniModel().getState().equals("END_GAME") ){
            if( scene.getClient().getMiniModel().getState().equals("PLACE_CARD")  || scene.getClient().getMiniModel().getState().equals("DRAW_CARD") ) this.place_card();
            else this.wait_turn();
         }else{
-            System.out.println("[END OF THE GAME]!\nFINAL SCORES:\n");
+            endGame();
         }
+    }
+
+    @Override
+    public void startCountdown(String message, boolean still_alone, boolean win) throws InterruptedException, NotBoundException, IOException, ClassNotFoundException {
+
+            if (!flag_0) {
+                if (!isAlone) {
+                    isAlone = true;
+                    Platform.runLater(() -> scene.changeRootPane("alone.fxml"));
+                    Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                } else {
+                    if (still_alone) {
+                        if (win) {
+                            this.flag_0 = true;
+                        }
+                        Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                    } else {
+                        this.isAlone = false;
+                        Platform.runLater(() -> scene.getActiveController().updateMessageServer(message));
+                        Thread.sleep(1000);
+                        newClient = false;
+                        System.out.println("ciao");
+                        this.gameAccess(null);
+                    }
+                }
+            }
+
     }
 
     /**

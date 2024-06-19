@@ -14,6 +14,8 @@ import java.io.IOException;
  */
 public abstract class GenericSceneController {
 
+    boolean flag = false;
+
     VirtualViewF client;
     SceneController scene_controller;
 
@@ -30,4 +32,12 @@ public abstract class GenericSceneController {
     public void emptyField(){}
 
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException{};
+
+    public void  updateMessageServer(String message){
+
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 }

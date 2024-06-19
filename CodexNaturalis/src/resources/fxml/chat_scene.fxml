@@ -4,15 +4,15 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<VBox prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChatController">
-    <Label fx:id="titleLabel" alignment="CENTER" text="Chat Title" />
-    <ListView fx:id="chatMessagesListView" VBox.vgrow="ALWAYS">
+<VBox prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.ChatController" spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15; -fx-border-color: #34495e; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+    <Label fx:id="titleLabel" alignment="CENTER" text="Chat Title" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #ecf0f1;" />
+    <ListView fx:id="chatMessagesListView" VBox.vgrow="ALWAYS" style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5;">
         <VBox.margin>
             <Insets bottom="10.0" />
         </VBox.margin>
     </ListView>
-    <HBox spacing="5.0">
-        <TextField fx:id="messageInputField" HBox.hgrow="ALWAYS" promptText="Type your message..." />
-        <Button fx:id="sendButton" text="Send" onMouseClicked="#handleSendMessage"  />
+    <HBox spacing="10.0">
+        <TextField fx:id="messageInputField" HBox.hgrow="ALWAYS" promptText="Type your message..." style="-fx-background-color: #ffffff; -fx-border-color: #bdc3c7; -fx-border-width: 1px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5;" />
+        <Button fx:id="sendButton" text="Send" onMouseClicked="#handleSendMessage" style="-fx-background-color: #00a4ff; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5 15;" />
     </HBox>
 </VBox>

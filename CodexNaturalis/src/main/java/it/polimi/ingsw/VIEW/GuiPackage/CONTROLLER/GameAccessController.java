@@ -2,12 +2,12 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
@@ -16,6 +16,9 @@ import java.rmi.NotBoundException;
  */
 public class GameAccessController extends GenericSceneController {
 
+    public Label titleLabel_0;
+    public Label titleLabel_1;
+    public ImageView backgroundImage;
     @FXML
     private TextField gameNameField;
 
@@ -24,6 +27,23 @@ public class GameAccessController extends GenericSceneController {
 
     @FXML
     private Button createGameButton;
+
+
+    public void initialize() {
+
+        // Set the background image
+        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        Image image = new Image(file.toURI().toString());
+        backgroundImage.setImage(image);
+
+        // Bind the background image size to the scene size
+        backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                backgroundImage.fitHeightProperty().bind(newScene.heightProperty());
+                backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
+            }
+        });
+    }
 
     /**
      * Handles the click event on the create game button. It retrieves the game name and player number

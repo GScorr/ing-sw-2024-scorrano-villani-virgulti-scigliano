@@ -25,6 +25,7 @@ import java.util.List;
 public class Player implements PlayerObserver, Serializable {
     private String name;
 
+    private int position;
     public PState
             not_initialized = new NotInitialized(this),
             begin = new Begin(this),
@@ -64,6 +65,8 @@ public class Player implements PlayerObserver, Serializable {
     private int num_goal_achieve = 0;
 
     private boolean isDisconnected;
+    private Goal global_goal1;
+    private Goal global_goal2;
 
     /**
      * This deck are use to draw
@@ -180,6 +183,7 @@ public class Player implements PlayerObserver, Serializable {
 
      */
     public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
+        game_field.setGlobalGoal(global_goal1,global_goal2);
         this.resources_deck = resources_deck;
         this.gold_deck = gold_deck;
         this.cards_in_center = cards_in_center;
@@ -379,4 +383,11 @@ public class Player implements PlayerObserver, Serializable {
         this.num_goal_achieve = num_goal_achieve;
     }
 
+    public void setGlobalGoal(Goal goal1, Goal goal2 ){
+        global_goal1 = goal1;
+        global_goal2 = goal2;}
+
+    public void setPosition(int i) {
+        this.position = i;
+    }
 }

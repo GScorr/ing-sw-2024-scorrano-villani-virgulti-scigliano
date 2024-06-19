@@ -4,6 +4,8 @@ import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.CONTROLLER.GameFieldController;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
+import it.polimi.ingsw.MODEL.GameField;
+import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.ChatIndexManager;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawGold;
@@ -13,6 +15,7 @@ import it.polimi.ingsw.VIEW.GuiPackage.ClickableCardImageView;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -44,6 +47,8 @@ public class GameController2 extends GenericSceneController {
     public Label num_paper;
     public Label num_piuma;
     public Label num_calamaio;
+    public ImageView playAreaImage;
+    public ScrollPane scrollPane;
 
     @FXML
     private Button openChatButton;
@@ -78,6 +83,9 @@ public class GameController2 extends GenericSceneController {
     private ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
     @FXML
     private ListView<String> chatMessages;
+
+    @FXML
+    private Label playerNameLabel;
 
     public ImageView gold_deck;
     public ImageView resurce_deck;
@@ -175,37 +183,6 @@ public class GameController2 extends GenericSceneController {
         chatBox.getChildren().add(messageLabel);
     }
 
-    /*
-    /**
-     * show a popup when a chat item is pressed
-     * @throws IOException
-     * @throws InterruptedException
-     */
-
-    /*private void showChat(String chatName, int chatId) throws IOException {
-
-        /*chatBox.getChildren().clear();  //
-        chatBox.setVisible(true);
-        System.out.println("chat is now visible: " + chatBox.isVisible());
-
-        if (client.getMiniModel().getNum_players() != 2) {
-            if (chatId == client.getMiniModel().getNum_players() + 1) {
-                client.getMiniModel().getNot_read().set(6, 0);
-                updateUnreadTotal();
-                scene_controller.showChat("Chat", 6, client, chatId);
-            } else {
-                client.getMiniModel().getNot_read().set(chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), 0);
-                updateUnreadTotal();
-                scene_controller.showChat("Chat", chat_manager.getChatIndex(client.getMiniModel().getMy_index(), chatId), client, chatId);
-            }
-        } else {
-            client.getMiniModel().getNot_read().set(6, 0);
-            updateUnreadTotal();
-            scene_controller.showChat("Chat", 6, client, chatId);
-
-        }
-    }*/
-
 
     /**
      * Initializes the game board UI and player information.
@@ -277,7 +254,8 @@ public class GameController2 extends GenericSceneController {
 
         token_client = client.getToken();
         setPlayerColor(helper.fromEnumtoColor(client.getMiniModel().getMy_player().getColor()));
-
+        setPlayerName(client.getMiniModel().getMy_player().getName());
+        checkLastTurn();
 /*
 
             int i=1;
@@ -292,6 +270,56 @@ public class GameController2 extends GenericSceneController {
  */
   //      scene_controller.getHeader_controller().startInitializeHeader();
 
+    }
+
+    private void checkLastTurn() throws IOException {
+        boolean endgame = false;
+        for(GameField g : client.getMiniModel().getGame_fields()){
+            if(g.getPlayer().getPlayerPoints()>=20){
+                endgame = true;
+            }
+        }
+        if(endgame && getActivePlayer()){
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Game Information");
+                alert.setHeaderText(null);
+                alert.setContentText("Somebody has reached 20 points, last turn of the game!");
+                alert.showAndWait();
+            });
+        }
+    }
+
+    private boolean getActivePlayer() throws IOException {
+        for(GameField g : client.getMiniModel().getGame_fields()){
+            System.out.println(g.getPlayer().getActual_state().getNameState());
+            if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")
+            ){
+                return g.getPlayer().getIsFirst();
+            }
+        }
+        return false;
+    }
+    private void startLastPopup() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    if (client.getMiniModel().isFinal_state()) {
+                        // Mostra il pop-up
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Game Information");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Somebody has reached 20 points, last turn of the game!");
+                            alert.showAndWait();
+                        });
+                        break;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 
     public void setPlayerColor(Color color) {
@@ -386,6 +414,7 @@ public class GameController2 extends GenericSceneController {
                 deselectCard();
             }
         });
+
     }
 
     /**
@@ -870,7 +899,7 @@ public class GameController2 extends GenericSceneController {
      */
     private boolean errorDrawState() throws IOException {
         if(! super.client.getMiniModel().getState().equals("DRAW_CARD")){
-            showError("IS NOT YOUR TURN, WAIT !!! ");
+            showError("YOU CAN'T DRAW NOW !!! ");
             return true;
         }
         else return false;
@@ -1140,8 +1169,8 @@ public class GameController2 extends GenericSceneController {
 
         // Imposta l'immagine di drag-and-drop con una dimensione specifica
         // Ottieni le dimensioni della handCard1
-        double width = handCard1.getFitWidth();
-        double height = handCard1.getFitHeight();
+        double width = 100;
+        double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
         db.setDragView(resizedImage, event.getX(), event.getY());
 
@@ -1208,8 +1237,8 @@ public class GameController2 extends GenericSceneController {
 
         // Imposta l'immagine di drag-and-drop con una dimensione specifica
         // Ottieni le dimensioni della handCard1
-        double width = handCard2.getFitWidth();
-        double height = handCard2.getFitHeight();
+        double width = 100;
+        double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
         db.setDragView(resizedImage, event.getX(), event.getY());
 
@@ -1276,8 +1305,8 @@ public class GameController2 extends GenericSceneController {
 
         // Imposta l'immagine di drag-and-drop con una dimensione specifica
         // Ottieni le dimensioni della handCard3
-        double width = handCard3.getFitWidth();
-        double height = handCard3.getFitHeight();
+        double width = 100;
+        double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
         db.setDragView(resizedImage, event.getX(), event.getY());
 
@@ -1309,5 +1338,8 @@ public class GameController2 extends GenericSceneController {
         event.consume();
     }
 
+    public void setPlayerName(String playerName) {
+        playerNameLabel.setText(playerName);
+    }
 
 }

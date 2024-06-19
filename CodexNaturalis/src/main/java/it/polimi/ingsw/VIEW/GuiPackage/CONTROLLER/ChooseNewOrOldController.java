@@ -4,7 +4,10 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
@@ -17,11 +20,28 @@ da eliminare probabilmente
  */
 public class ChooseNewOrOldController extends GenericSceneController {
 
+    public ImageView backgroundImage;
     @FXML
     private Button createNewGameButton;
 
     @FXML
     private Button joinExistingGameButton;
+
+    public void initialize() {
+
+        // Set the background image
+        File file = new File("src/resources/BackGroundImaging/BackGround.png");
+        Image image = new Image(file.toURI().toString());
+        backgroundImage.setImage(image);
+
+        // Bind the background image size to the scene size
+        backgroundImage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                backgroundImage.fitHeightProperty().bind(newScene.heightProperty());
+                backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
+            }
+        });
+    }
 
     /**
      * Handles clicking the "Create New Game" button.

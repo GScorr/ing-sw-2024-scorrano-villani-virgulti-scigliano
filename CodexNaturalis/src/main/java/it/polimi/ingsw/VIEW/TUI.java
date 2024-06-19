@@ -49,6 +49,11 @@ public class TUI implements Serializable, GraficInterterface {
     }
 
     @Override
+    public void printUpdateMessage(String message) {
+        System.out.println(message);
+    }
+
+    @Override
     public void setUsername(String username) {
 
     }
@@ -122,6 +127,11 @@ public class TUI implements Serializable, GraficInterterface {
 
     public void setNewClient(boolean newClient) {
         this.newClient = newClient;
+    }
+
+    @Override
+    public boolean getIsAlone() {
+        return false;
     }
 
     /**
@@ -233,6 +243,11 @@ public class TUI implements Serializable, GraficInterterface {
     @Override
     public boolean getInGame() {
         return false;
+    }
+
+    @Override
+    public void endGame() {
+
     }
 
     /**
@@ -352,6 +367,11 @@ public class TUI implements Serializable, GraficInterterface {
             client.manageGame(false);
         }
         client.manageGame(true);
+    }
+
+    @Override
+    public void startCountdown(String message, boolean still_alone, boolean win)  {
+
     }
 
     @Override

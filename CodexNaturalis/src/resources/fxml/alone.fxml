@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="380.0" prefWidth="877.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.AloneController">
+
+    <!-- ImageView per l'immagine di sfondo -->
+    <ImageView fitHeight="382.0" fitWidth="439.0" opacity="0.82" scaleX="2.0" smooth="false">
+      <image>
+         <Image url="@../BackGroundImaging/4293crock.jpg" />
+      </image>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
+    </ImageView>
+
+    <VBox alignment="CENTER" fillWidth="false" prefHeight="338.0" prefWidth="787.0">
+        <Label alignment="CENTER" prefHeight="47.0" prefWidth="815.0" styleClass="title" text="You are the only player remained on the GAME," textFill="WHITE">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+      <Label alignment="CENTER" prefHeight="43.0" prefWidth="815.0" styleClass="title" text="please wait for other player reconnection..." textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+
+        <ProgressIndicator fx:id="progressIndicator" prefHeight="80" prefWidth="80">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin></ProgressIndicator>
+
+        <Label fx:id="messageLabel" styleClass="message" wrapText="true" />
+
+        <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+        </cursor>
+    </VBox>
+
+</StackPane>
