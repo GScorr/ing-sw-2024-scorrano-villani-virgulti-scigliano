@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment=".">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="Color player in game wait">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONSTANTS/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CONSTANTS/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/RmiClientF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameWait.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game_wait.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MODEL/Player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/GameController2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,14 +322,6 @@
       <workItem from="1718542741884" duration="147000" />
       <workItem from="1718566931904" duration="453000" />
       <workItem from="1718697539757" duration="30267000" />
-    </task>
-    <task id="LOCAL-00167" summary="qualcosa inizia ad andare">
-      <option name="closed" value="true" />
-      <created>1717845935439</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1717845935439</updated>
     </task>
     <task id="LOCAL-00168" summary="qualcosa inizia ad andare">
       <option name="closed" value="true" />
@@ -718,7 +707,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718820815030</updated>
     </task>
-    <option name="localTasksCounter" value="216" />
+    <task id="LOCAL-00216" summary="Color player in game wait">
+      <option name="closed" value="true" />
+      <created>1718827507421</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1718827507421</updated>
+    </task>
+    <option name="localTasksCounter" value="217" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -753,7 +750,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="piccolo change per carta trasparente" />
     <MESSAGE value="aggiornamento" />
     <MESSAGE value="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti" />
     <MESSAGE value=" f" />
@@ -778,7 +774,8 @@
     <MESSAGE value="miglioramenti alla GUI + sfondo al gamefiled avversario" />
     <MESSAGE value="fix definitivo disocnnessione???????" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="Color player in game wait" />
+    <option name="LAST_COMMIT_MESSAGE" value="Color player in game wait" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
