@@ -5,7 +5,6 @@ import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.MODEL.DeckPackage.CenterCards;
-import it.polimi.ingsw.MODEL.ENUM.CentralEnum;
 import it.polimi.ingsw.MODEL.GameField;
 import it.polimi.ingsw.MODEL.Goal.Goal;
 import it.polimi.ingsw.MODEL.Player.Player;
@@ -375,8 +374,10 @@ public class ClientHandler  implements VirtualViewF {
                     }
                 }
             } catch (EOFException e) {
+                disconect();
                 client_is_connected = false;
-            } catch (ClassNotFoundException | IOException e) {
+            } catch ( IOException e) {
+                disconect();
                 // Gestione generica delle eccezioni durante la deserializzazione
                 client_is_connected = false;
                 //e.printStackTrace();
@@ -387,6 +388,9 @@ public class ClientHandler  implements VirtualViewF {
             } catch (InterruptedException e) {
                 disconect();
                 throw new RuntimeException(e);
+            }catch (ClassNotFoundException e){
+                disconect();
+                client_is_connected = false;
             }
         }
     }
