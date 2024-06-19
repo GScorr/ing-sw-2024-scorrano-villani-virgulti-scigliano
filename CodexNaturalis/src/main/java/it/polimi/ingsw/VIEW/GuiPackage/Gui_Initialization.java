@@ -90,7 +90,7 @@ public class Gui_Initialization extends Application {
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
 
-                        client = new clientSocket(inputStream, outputStream);
+                        client = new clientSocket(inputStream, outputStream, serverSocket);
                         scene.setClient(client);
                                 client.runGUI(this.scene);
                     }catch (IOException e) {

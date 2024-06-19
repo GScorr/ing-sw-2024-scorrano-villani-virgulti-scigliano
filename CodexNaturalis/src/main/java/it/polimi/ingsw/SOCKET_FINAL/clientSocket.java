@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.Socket;
 import java.rmi.NotBoundException;
 
 import java.util.HashMap;
@@ -48,6 +49,8 @@ public class clientSocket implements VirtualViewF, Serializable {
     private ServerProxy server_proxy;
 
     ObjectInputStream input;
+    ObjectOutputStream output;
+    Socket socket;
 
     public boolean flag_check;
     public boolean check;
@@ -70,9 +73,11 @@ public class clientSocket implements VirtualViewF, Serializable {
     public String token;
     private boolean flag_Server_Disconneted = false;
 
-    public clientSocket(ObjectInputStream input, ObjectOutputStream output) throws IOException, ClassNotFoundException {
+    public clientSocket(ObjectInputStream input, ObjectOutputStream output, Socket socket) throws IOException, ClassNotFoundException {
         this.server_proxy = new ServerProxy(output);
         this.input = input;
+        this.output = output;
+        this.socket = socket;
     }
 
     /**
@@ -383,6 +388,20 @@ public class clientSocket implements VirtualViewF, Serializable {
      * @throws NotBoundException If the RMI registry cannot be found.
      */
     public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        try {
+            if (output != null) {
+                output.close();
+            }
+            if (input != null) {
+                input.close();
+            }
+            if (socket != null) {
+                socket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.exit(0);
     }
 
