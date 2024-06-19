@@ -90,9 +90,6 @@ public class clientSocket implements VirtualViewF, Serializable {
      * @throws NotBoundException If the RMI registry cannot be found.
      */
     public void runTUI() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
-
-        terminal_interface = new TUI(this);
-        terminal_interface.runCli();
         new Thread(() -> {
             try {
                 startCheckingMessagesSocket();
@@ -100,6 +97,9 @@ public class clientSocket implements VirtualViewF, Serializable {
                 throw new RuntimeException(e);
             }
         }).start();
+        terminal_interface = new TUI(this);
+        terminal_interface.runCli();
+
     }
 
     /**

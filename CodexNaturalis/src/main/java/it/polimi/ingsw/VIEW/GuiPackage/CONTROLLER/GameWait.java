@@ -24,6 +24,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -65,6 +67,11 @@ public class GameWait extends GenericSceneController {
 
     @FXML
     private Label playerNameLabel;
+
+    @FXML
+    private Circle playerColorCircle;
+
+    private ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
 
     Image card_1_front,card_1_back;
     boolean card_1_flip = false;
@@ -165,6 +172,7 @@ public class GameWait extends GenericSceneController {
 
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
+        setPlayerColor(helper.fromEnumtoColor(client.getMiniModel().getMy_player().getColor()));
 
         card_1  = super.client.getMiniModel().getCards_in_hand().get(0);
         if(card_1.front_side_path != null){
@@ -250,6 +258,10 @@ public class GameWait extends GenericSceneController {
         //startMenuCheck();
         checkLastTurn();
 
+    }
+
+    public void setPlayerColor(Color color) {
+        playerColorCircle.setFill(color);
     }
 
     private void checkLastTurn() throws IOException {
