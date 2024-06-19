@@ -272,14 +272,19 @@ public class GameController2 extends GenericSceneController {
 
     }
 
+    private boolean endgameAlertShown = false;
+
     private void checkLastTurn() throws IOException {
         boolean endgame = false;
-        for(GameField g : client.getMiniModel().getGame_fields()){
-            if(g.getPlayer().getPlayerPoints()>=20){
+        for (GameField g : client.getMiniModel().getGame_fields()) {
+            if (g.getPlayer().getPlayerPoints() >= 20) {
                 endgame = true;
+                break; // Non ha senso continuare a controllare dopo aver trovato un giocatore con >= 20 punti
             }
         }
-        if(endgame && getActivePlayer()){
+
+        if (endgame && !endgameAlertShown && getActivePlayer()) {
+            endgameAlertShown = true; // Imposta la variabile di stato a true per evitare future visualizzazioni dell'alert
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Game Information");
