@@ -94,9 +94,10 @@ public class ChooseGoalController extends GenericSceneController {
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
         headerController.setScene(scene_controller);
-
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
+
+
         goal1 = client.getFirstGoalCard();
         goal2 = client.getSecondGoalCard();
         File file = new File(client.getFirstGoalCard().front_side_path);
