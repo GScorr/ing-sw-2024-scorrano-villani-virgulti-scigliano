@@ -620,7 +620,6 @@ public class GameServer implements VirtualGameServer, Serializable {
         int last_man_standing = 0;
         for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
         if ( last_man_standing == 0 ) {
-            System.out.println("ao");
             server.removeGameServer(this);
         }
     }
