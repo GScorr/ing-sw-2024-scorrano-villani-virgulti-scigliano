@@ -44,8 +44,6 @@ public class Player implements PlayerObserver, Serializable {
 
     public HashMap<Integer,Boolean> side_card_in_hand  = new HashMap<>();
 
-
-
     /**
      * tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
