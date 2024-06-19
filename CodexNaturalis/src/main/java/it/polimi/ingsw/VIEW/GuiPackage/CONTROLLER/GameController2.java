@@ -93,14 +93,14 @@ public class GameController2 extends GenericSceneController {
     public ImageView center_card_1;
     public ImageView center_card_2;
     public ImageView center_card_3;
-    public VBox handBox;
+    public AnchorPane handBox;
     public ImageView handCard1;
     public ImageView handCard2;
     public ImageView handCard3;
     private Image handCard1image;
     private Image handCard2image;
     private Image handCard3image;
-    public VBox deckBox;
+    public AnchorPane deckBox;
 
     @FXML
     private GridPane gameGrid;
@@ -899,7 +899,7 @@ public class GameController2 extends GenericSceneController {
      */
     private boolean errorDrawState() throws IOException {
         if(! super.client.getMiniModel().getState().equals("DRAW_CARD")){
-            showError("IS NOT YOUR TURN, WAIT !!! ");
+            showError("YOU CAN'T DRAW NOW !!! ");
             return true;
         }
         else return false;

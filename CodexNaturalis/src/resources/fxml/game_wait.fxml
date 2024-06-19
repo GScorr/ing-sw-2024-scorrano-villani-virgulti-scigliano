@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.text.Text?>
-<BorderPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameWait">
+<BorderPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameWait">
 
     <!-- Menu at the top -->
     <top>
@@ -14,12 +19,23 @@
 
     <!-- New central menu -->
     <center>
-        <VBox alignment="CENTER" spacing="20" prefHeight="450.0">
-            <Label text="Waiting for other players' turn..." styleClass="title" />
-            <ProgressIndicator fx:id="progressIndicator" prefWidth="80" prefHeight="80" />
-            <Label fx:id="currentPlayerLabel" text="" style="-fx-font-weight: bold;" />
-            <Button text="Visualizza Deck" onAction="#handleViewDeck"/>
-        </VBox>
+        <StackPane>
+            <ImageView fitHeight="887.0" fitWidth="1409.0" preserveRatio="false">
+                <Image url="@../BackGroundImaging/8811189.jpg" />
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="805.0" prefWidth="1409.0" spacing="20">
+                <Label alignment="CENTER" prefHeight="52.0" prefWidth="415.0" styleClass="title" text="Waiting for other players' turn..." textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+                <ProgressIndicator fx:id="progressIndicator" prefHeight="63.0" prefWidth="67.0" />
+                <Label fx:id="currentPlayerLabel" style="-fx-font-weight: bold;" text="" />
+                <Button alignment="CENTER" onAction="#handleViewDeck" prefHeight="54.0" prefWidth="162.0" text="Visualizza Deck">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            </VBox>
+        </StackPane>
     </center>
 
     <!-- VBox for the decks at the right -->
@@ -28,16 +44,35 @@
 
     <!-- VBox for the decks at the right -->
     <left>
-        <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" spacing="10">
-            <Label fx:id="playerNameLabel" text="Player Name" style="-fx-font-weight: bold;" />
-            <Label text="Cards in HAND:" />
-            <Label text="Carta 1:" />
-            <ImageView fx:id="handCard1" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard1Click"  onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released"/>
-            <Label text="Carta 2:" />
-            <ImageView fx:id="handCard2" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard2Click"  onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released"/>
-            <Label text="Carta 3:" />
-            <ImageView fx:id="handCard3" fitHeight="133" fitWidth="100" preserveRatio="true" onMouseClicked="#handleCard3Click"  onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released"/>
-        </VBox>
+        <StackPane>
+            <ImageView fitWidth="500.0" opacity="0.69" preserveRatio="true">
+                <Image url="@../BackGroundImaging/v850-sasi-14.jpg" />
+            </ImageView>
+            <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" prefHeight="889.0" prefWidth="413.0" spacing="10">
+                <Label fx:id="playerNameLabel" alignment="CENTER" prefHeight="38.0" prefWidth="147.0" style="-fx-font-weight: bold;" text="Player Name" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+                <Label alignment="CENTER" prefHeight="38.0" prefWidth="133.0" text="Cards in HAND:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+                <Label alignment="CENTER" prefHeight="31.0" prefWidth="75.0" text="Carta 1:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+                <ImageView fx:id="handCard1" fitHeight="151.0" fitWidth="120.0" onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
+                <Label alignment="CENTER" prefHeight="32.0" prefWidth="77.0" text="Carta 2:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+                <ImageView fx:id="handCard2" fitHeight="160.0" fitWidth="121.0" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
+                <Label alignment="CENTER" prefHeight="34.0" prefWidth="83.0" text="Carta 3:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+                <ImageView fx:id="handCard3" fitHeight="151.0" fitWidth="121.0" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
+            </VBox>
+        </StackPane>
     </left>
-
 </BorderPane>
