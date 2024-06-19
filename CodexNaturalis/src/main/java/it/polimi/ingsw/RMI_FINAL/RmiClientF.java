@@ -94,7 +94,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             this.token = server.createToken(this);}
         else if(isnew.equals("false")){
             flag=0;
-            terminal_interface.printError(stringcostant.name_is_not_valid);
+                if(terminal_interface instanceof TUI) {
+                    terminal_interface.printError(stringcostant.name_is_not_valid);
+                }
             }
         else{
             this.token = isnew;

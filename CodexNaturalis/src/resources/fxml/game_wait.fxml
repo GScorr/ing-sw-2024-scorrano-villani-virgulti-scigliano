@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.shape.Circle?>
 <BorderPane maxHeight="770.0" minHeight="770.0" prefHeight="770.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameWait">
 
     <!-- Menu at the top -->
@@ -48,11 +49,20 @@
             <ImageView fitHeight="730.0" fitWidth="500.0" opacity="0.69" preserveRatio="true">
                 <Image url="@../BackGroundImaging/v850-sasi-14.jpg" />
             </ImageView>
+
             <VBox fx:id="handBox" alignment="CENTER" maxHeight="730.0" maxWidth="500.0" minHeight="730.0" prefHeight="730.0" prefWidth="413.0" spacing="10">
                 <Label fx:id="playerNameLabel" alignment="CENTER" prefHeight="46.0" prefWidth="182.0" style="-fx-font-weight: bold;" text="Player Name" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font></Label>
+                <VBox alignment="CENTER" layoutX="392.0" layoutY="20.0">
+                    <Label alignment="CENTER" style="-fx-text-fill: white;" text="COLOR">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Label>
+                    <Circle fx:id="playerColorCircle" radius="10.0" />
+                </VBox>
                 <Label alignment="CENTER" prefHeight="38.0" prefWidth="133.0" text="Cards in HAND:" textFill="WHITE">
                <font>
                   <Font size="16.0" />

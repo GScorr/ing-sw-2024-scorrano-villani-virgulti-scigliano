@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.HeaderUX">
+    <children>
+        <MenuButton fx:id="menuButton" layoutX="10.0" layoutY="10.0">
+            <graphic>
+
+            </graphic>
+            <items>
+                <MenuItem text="Pizzas">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../IconUI/board-game.png"  />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
+                <MenuItem text="Burgers">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../IconUI/chat.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
+                <MenuItem text="Chinese">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@../IconUI/scoreboard.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </MenuItem>
+
+            </items>
+        </MenuButton>
+    </children>
+</AnchorPane>
