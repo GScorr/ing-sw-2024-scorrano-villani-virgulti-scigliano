@@ -357,12 +357,13 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
                                 message_update.isAlone = true;
                                 broadcastMessageOneClient(message_update, alone_client );
-                                Thread.sleep(1500);
+                               // Thread.sleep(1500);
                                 while( countdown > 0 && controller.isAlone()) {
                                     message_update = new UpdateMessage(countdown + " SECONDS LEFT");
                                     message_update.isAlone = true;
                                     broadcastMessageOneClient(message_update,  alone_client );
                                     checkEndDisconnect();
+
                                     countdown--;
                                     Thread.sleep(1000);
                                 }
@@ -613,6 +614,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         int last_man_standing = 0;
         for(String s: token_to_player.keySet() ) {if( !token_to_player.get(s).isDisconnected() ) last_man_standing++;  }
         if ( last_man_standing == 0 ) {
+            System.out.println("ao");
             server.removeGameServer(this);
         }
     }

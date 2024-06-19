@@ -139,7 +139,7 @@ public class clientSocket implements VirtualViewF, Serializable {
                 } catch (IOException | InterruptedException e) {
                     if(! flag_Server_Disconneted){
                         System.err.println("                 [SERVER ERROR]\n" +
-                                           "                 TRY NEW LOG IN   "  );
+                                           "                 TRY NEW LOG IN   "  + e );
                         flag_Server_Disconneted = true;
                     }
 
