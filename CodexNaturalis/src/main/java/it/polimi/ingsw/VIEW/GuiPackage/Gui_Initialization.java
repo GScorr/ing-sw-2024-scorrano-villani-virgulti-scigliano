@@ -87,6 +87,8 @@ public class Gui_Initialization extends Application {
                     Socket serverSocket = new Socket(Constants.IPV4, port);
                     try{
 
+
+
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
 

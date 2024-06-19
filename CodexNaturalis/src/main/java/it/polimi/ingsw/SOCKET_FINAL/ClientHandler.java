@@ -23,6 +23,7 @@ import it.polimi.ingsw.VIEW.GuiPackage.SceneController;
 
 
 import java.io.*;
+import java.net.Socket;
 import java.rmi.NotBoundException;
 
 import java.rmi.registry.LocateRegistry;
@@ -44,15 +45,16 @@ public class ClientHandler  implements VirtualViewF {
     public Common_Server common;
     public String token;
     public String name;
-
+    private Socket client_socket;
     private VirtualGameServer rmi_controller;
     public boolean client_is_connected = true;
 
-    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common ) throws IOException, NotBoundException {
+    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common , Socket clientsocket) throws IOException, NotBoundException {
         this.server = server;
         this.input = input;
         this.output = output;
         this.common = common;
+        this.client_socket = clientsocket;
     }
 
     /**
@@ -260,7 +262,7 @@ public class ClientHandler  implements VirtualViewF {
      * @throws IOException If there's an error reading from the input stream.
      * @throws ClassNotFoundException If the received message cannot be deserialized.
      */
-    public void runVirtualView() throws IOException, ClassNotFoundException {
+    public void runVirtualView() throws IOException, ClassNotFoundException, NotBoundException, InterruptedException {
         synchronized (this) {
             try {
                 Message DP_message = null;
@@ -380,11 +382,32 @@ public class ClientHandler  implements VirtualViewF {
                 //e.printStackTrace();
             } catch (NotBoundException e) {
                 client_is_connected = false;
+                disconect();
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
+                disconect();
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        try {
+            if (output != null) {
+                output.close();
+            }
+            if (input != null) {
+                input.close();
+            }
+            if (client_socket != null) {
+                client_socket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -430,6 +453,11 @@ public class ClientHandler  implements VirtualViewF {
     @Override
     public String getSecondGoal() throws IOException {
         return null;
+    }
+
+    @Override
+    public void chooseGoal(int i) throws IOException, InterruptedException {
+
     }
 
     @Override
@@ -511,10 +539,6 @@ public class ClientHandler  implements VirtualViewF {
 
     }
 
-    public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
-
-    }
-
     @Override
     public void setLastTurn(boolean b) throws IOException {
 
@@ -525,10 +549,7 @@ public class ClientHandler  implements VirtualViewF {
 
     }
 
-    @Override
-    public void chooseGoal(int i) throws IOException {
 
-    }
 
     @Override
     public void showStartingCard() throws IOException, InterruptedException {
