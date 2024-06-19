@@ -313,12 +313,12 @@ public class HeaderController extends GenericSceneController {
         // Create a VBox
         VBox handBox = new VBox();
         handBox.setAlignment(javafx.geometry.Pos.CENTER);
-        handBox.setMaxWidth(500.0);
-        handBox.setSpacing(10);
+        handBox.setMaxWidth(600);
+        handBox.setSpacing(20);
 
         ImageView cardImageView = new ImageView();
-        cardImageView.setFitHeight(133);
-        cardImageView.setFitWidth(100);
+        cardImageView.setFitHeight(400);
+        cardImageView.setFitWidth(300);
         cardImageView.setPreserveRatio(true);
 
 
@@ -355,16 +355,15 @@ public class HeaderController extends GenericSceneController {
         // Create a VBox
         VBox handBox = new VBox();
         handBox.setAlignment(javafx.geometry.Pos.CENTER);
-        handBox.setMaxWidth(500.0);
-        handBox.setSpacing(10);
+        handBox.setMaxWidth(600);
+        handBox.setSpacing(20);
 
         ImageView cardImageView = new ImageView();
-        cardImageView.setFitHeight(133);
-        cardImageView.setFitWidth(100);
+        cardImageView.setFitHeight(400);
+        cardImageView.setFitWidth(300);
         cardImageView.setPreserveRatio(true);
 
         Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getGlobal_goal1();
-
 
         // Load and set the image for the ImageView
         File file = new File(personalGoal_1.front_side_path);
@@ -374,11 +373,9 @@ public class HeaderController extends GenericSceneController {
         // Add the label and image view to the VBox
         handBox.getChildren().add(cardImageView);
 
-
-
         ImageView cardImageView_2 = new ImageView();
-        cardImageView_2.setFitHeight(133);
-        cardImageView_2.setFitWidth(100);
+        cardImageView_2.setFitHeight(400);
+        cardImageView_2.setFitWidth(300);
         cardImageView_2.setPreserveRatio(true);
 
         Goal personalGoal_2 = the_client.getMiniModel().getMyGameField().getGlobal_goal2();

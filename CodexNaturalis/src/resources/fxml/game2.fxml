@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="800.0" minHeight="800.0" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
+<BorderPane maxHeight="770.0" minHeight="770.0" prefHeight="770.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
 
     <!-- Menu at the top -->
     <top>
@@ -25,12 +25,12 @@
 
     <!-- Play Area in the center -->
     <center>
-        <StackPane maxHeight="776.0" minHeight="770.0" prefHeight="776.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" prefWidth="742.0" BorderPane.alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
             <children>
 
-                <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1160.0" pannable="true" prefHeight="750.0" prefWidth="1109.0">
+                <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="730.0" maxWidth="1160.0" minHeight="730.0" pannable="true" prefHeight="730.0" prefWidth="1109.0" StackPane.alignment="TOP_CENTER">
                     <content>
-                        <GridPane fx:id="gameGrid" alignment="CENTER" hgap="25.5" prefHeight="300.0" prefWidth="3397.0" vgap="5">
+                        <GridPane fx:id="gameGrid" alignment="CENTER" hgap="25.5" minHeight="730.0" prefHeight="730.0" prefWidth="3397.0" vgap="5">
                             <columnConstraints>
                                 <!-- Repeat for 45 columns -->
                                 <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
@@ -144,49 +144,52 @@
                 </ScrollPane>
             </children>
             <BorderPane.margin>
-                <Insets />
+                <Insets top="5.0" />
             </BorderPane.margin>
         </StackPane>
     </center>
 
     <!-- VBox for the decks at the right -->
     <right>
-        <StackPane prefHeight="300.0" prefWidth="300.0">
-            <ImageView fitHeight="776.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
+        <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" prefWidth="300.0">
+            <ImageView fitHeight="730.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
                 <Image url="@../BackGroundImaging/4293crock.jpg" />
             </ImageView>
-            <AnchorPane fx:id="deckBox" maxWidth="500.0" prefHeight="300.0" prefWidth="300.0">
-                <Label layoutX="100.0" layoutY="10.0" prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
+            <AnchorPane fx:id="deckBox" maxHeight="730.0" maxWidth="500.0" minHeight="730.0" prefHeight="730.0" prefWidth="300.0">
+                <Label layoutX="100.0" layoutY="1.0" prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="center_card_0" fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="60.0" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_1" fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="170.0" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_2" fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="280.0" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_3" fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="390.0" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
-                <Label alignment="CENTER" layoutX="127.0" layoutY="500.0" prefHeight="30.0" prefWidth="59.0" text="Decks:" textFill="WHITE">
+                <ImageView fx:id="center_card_0" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="40.0" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_1" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="150.0" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_2" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="260.0" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_3" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="370.0" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
+                <Label alignment="CENTER" layoutX="127.0" layoutY="477.0" prefHeight="30.0" prefWidth="59.0" text="Decks:" textFill="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="gold_deck" fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="540.0" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
-                <ImageView fx:id="resurce_deck" fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="650.0" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
+                <ImageView fx:id="gold_deck" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="506.0" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
+                <ImageView fx:id="resurce_deck" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="616.0" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
             </AnchorPane>
+         <BorderPane.margin>
+            <Insets top="5.0" />
+         </BorderPane.margin>
         </StackPane>
     </right>
 
     <!-- VBox for the decks at the left -->
     <left>
-        <StackPane minHeight="300.0" prefHeight="300.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
             <!-- Immagine di sfondo -->
-            <ImageView fx:id="handCardbackground" fitHeight="776.0" fitWidth="457.0">
+            <ImageView fx:id="handCardbackground" fitHeight="730.0" fitWidth="457.0">
                 <image>
                     <Image url="@../BackGroundImaging/v850-sasi-14.jpg" />
                 </image>
             </ImageView>
 
-            <AnchorPane fx:id="handBox" maxWidth="500.0" minHeight="300.0" prefHeight="766.0" prefWidth="458.0">
+            <AnchorPane fx:id="handBox" maxHeight="730.0" maxWidth="500.0" minHeight="720.0" prefHeight="720.0" prefWidth="458.0">
                 <VBox alignment="CENTER" layoutX="392.0" layoutY="20.0">
                     <Label alignment="CENTER" style="-fx-text-fill: white;" text="COLOR">
                         <font>
@@ -195,10 +198,10 @@
                     </Label>
                     <Circle fx:id="playerColorCircle" radius="10.0" />
                 </VBox>
-                <ImageView fx:id="handCard1" fitHeight="150.0" fitWidth="150.0" layoutX="154.0" layoutY="67.0" onDragDetected="#handleCard1DragDetected" onDragDone="#handleCard1DragDone" onMouseClicked="#handleCard1Click" onMouseDragged="#handleCard1MouseDragged" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
-                <ImageView fx:id="handCard2" fitHeight="150.0" fitWidth="150.0" layoutX="153.0" layoutY="228.0" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" onMouseClicked="#handleCard2Click" onMouseDragged="#handleCard2MouseDragged" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
-                <ImageView fx:id="handCard3" fitHeight="150.0" fitWidth="150.0" layoutX="152.0" layoutY="389.0" onDragDetected="#handleCard3DragDetected" onDragDone="#handleCard3DragDone" onMouseClicked="#handleCard3Click" onMouseDragged="#handleCard3MouseDragged" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
-                <GridPane fx:id="gridPane" layoutX="1.0" layoutY="560.0" prefHeight="199.0" prefWidth="455.0">
+                <ImageView fx:id="handCard1" fitHeight="170.0" fitWidth="170.0" layoutX="145.0" layoutY="60.0" onDragDetected="#handleCard1DragDetected" onDragDone="#handleCard1DragDone" onMouseClicked="#handleCard1Click" onMouseDragged="#handleCard1MouseDragged" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
+                <ImageView fx:id="handCard2" fitHeight="170.0" fitWidth="170.0" layoutX="144.0" layoutY="221.0" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" onMouseClicked="#handleCard2Click" onMouseDragged="#handleCard2MouseDragged" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
+                <ImageView fx:id="handCard3" fitHeight="170.0" fitWidth="170.0" layoutX="143.0" layoutY="382.0" onDragDetected="#handleCard3DragDetected" onDragDone="#handleCard3DragDone" onMouseClicked="#handleCard3Click" onMouseDragged="#handleCard3MouseDragged" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
+                <GridPane fx:id="gridPane" layoutX="1.0" layoutY="529.0" prefHeight="199.0" prefWidth="455.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="68.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="132.0" />
@@ -312,12 +315,18 @@
                         </Label>
                     </children>
                 </GridPane>
-                <Label fx:id="playerNameLabel" alignment="CENTER" layoutX="14.0" layoutY="19.0" prefHeight="49.0" prefWidth="137.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="PLAYER NAME" AnchorPane.bottomAnchor="707.4" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="306.79999999999995" AnchorPane.topAnchor="19.0">
+                <Label fx:id="playerNameLabel" alignment="CENTER" layoutX="14.0" layoutY="19.0" prefHeight="41.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="PLAYER NAME" AnchorPane.bottomAnchor="670.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="285.0" AnchorPane.topAnchor="19.0">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
             </AnchorPane>
+         <BorderPane.margin>
+            <Insets top="5.0" />
+         </BorderPane.margin>
+         <opaqueInsets>
+            <Insets left="2.0" />
+         </opaqueInsets>
         </StackPane>
     </left>
 
