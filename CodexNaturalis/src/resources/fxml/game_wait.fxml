@@ -70,9 +70,9 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="handCard1" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="38.0" onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
-                <ImageView fx:id="handCard2" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="207.0" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
-                <ImageView fx:id="handCard3" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="373.0" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
+                <ImageView fx:id="handCard1" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="55.0" onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
+                <ImageView fx:id="handCard2" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="224.0" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
+                <ImageView fx:id="handCard3" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="390.0" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
             </AnchorPane>
         </StackPane>
     </left>
