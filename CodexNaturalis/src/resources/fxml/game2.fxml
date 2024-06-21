@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,208 +15,193 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
-
+<BorderPane maxHeight="770.0" minHeight="770.0" prefHeight="770.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameController2">
 
     <!-- Menu at the top -->
-        <top>
-            <fx:include fx:id="HeaderInclude" source="./header.fxml" />
-        </top>
+    <top>
+        <fx:include fx:id="HeaderInclude" source="./header.fxml" />
+    </top>
 
 
     <!-- Play Area in the center -->
     <center>
-        <StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" prefWidth="742.0" BorderPane.alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
             <children>
 
-            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxWidth="1160.0" pannable="true" prefHeight="929.0" prefWidth="1109.0">
-            <content>
-                <GridPane fx:id="gameGrid" alignment="CENTER" hgap="25.5" prefHeight="1754.0" prefWidth="3397.0" vgap="5">
-                    <columnConstraints>
-                        <!-- Repeat for 45 columns -->
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                        <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <!-- Repeat for 45 rows -->
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                        <RowConstraints minHeight="33.1" prefHeight="33.1" />
-                    </rowConstraints>
-                     <children>
-                        <!-- Background Image -->
-                        <ImageView fx:id="playAreaImage" fitHeight="2011.0" fitWidth="1331.0" preserveRatio="false">
-                           <image>
-                              <Image url="@../BackGroundImaging/8811189.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                </GridPane>
-            </content>
-        </ScrollPane>
+                <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="730.0" maxWidth="1160.0" minHeight="730.0" pannable="true" prefHeight="730.0" prefWidth="1109.0" StackPane.alignment="TOP_CENTER">
+                    <content>
+                        <GridPane fx:id="gameGrid" alignment="CENTER" hgap="25.5" minHeight="730.0" prefHeight="730.0" prefWidth="3397.0" vgap="5">
+                            <columnConstraints>
+                                <!-- Repeat for 45 columns -->
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                                <ColumnConstraints minWidth="49.65" prefWidth="49.65" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <!-- Repeat for 45 rows -->
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                                <RowConstraints minHeight="33.1" prefHeight="33.1" />
+                            </rowConstraints>
+                            <children>
+                                <!-- Background Image -->
+                                <ImageView fx:id="playAreaImage" fitHeight="4000.0" fitWidth="3397.0" preserveRatio="false">
+                                    <image>
+                                        <Image url="@../BackGroundImaging/8811189.jpg" />
+                                    </image>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </ImageView>
+                            </children>
+                        </GridPane>
+                    </content>
+                </ScrollPane>
             </children>
+            <BorderPane.margin>
+                <Insets top="5.0" />
+            </BorderPane.margin>
         </StackPane>
     </center>
 
     <!-- VBox for the decks at the right -->
     <right>
-        <StackPane>
-            <ImageView fitHeight="1016.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
-                <Image url="@../BackGroundImaging/4293.jpg" />
+        <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" prefWidth="300.0">
+            <ImageView fitHeight="730.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
+                <Image url="@../BackGroundImaging/4239crock.jpg" />
             </ImageView>
-            <VBox fx:id="deckBox" alignment="CENTER" fillWidth="false" maxWidth="500.0" prefHeight="985.0" prefWidth="209.0" spacing="10">
-                <Label alignment="CENTER" prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
+            <AnchorPane fx:id="deckBox" maxHeight="730.0" maxWidth="500.0" minHeight="730.0" prefHeight="730.0" prefWidth="300.0">
+                <Label layoutX="100.0" layoutY="1.0" prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="center_card_0" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_1" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_2" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
-                <ImageView fx:id="center_card_3" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCenterCard_3Click" />
-                <Label alignment="CENTER" prefHeight="30.0" prefWidth="59.0" text="Decks:" textFill="WHITE">
+                <ImageView fx:id="center_card_0" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="40.0" onMouseClicked="#handleCenterCard_0Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_1" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="150.0" onMouseClicked="#handleCenterCard_1Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_2" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="260.0" onMouseClicked="#handleCenterCard_2Click" preserveRatio="true" />
+                <ImageView fx:id="center_card_3" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="370.0" onMouseClicked="#handleCenterCard_3Click" preserveRatio="true" />
+                <Label alignment="CENTER" layoutX="127.0" layoutY="477.0" prefHeight="30.0" prefWidth="59.0" text="Decks:" textFill="WHITE">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <ImageView fx:id="gold_deck" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
-                <ImageView fx:id="resurce_deck" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
-            </VBox>
+                <ImageView fx:id="gold_deck" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="506.0" onMouseClicked="#handleGoldDeckClick" preserveRatio="true" />
+                <ImageView fx:id="resurce_deck" fitHeight="100.0" fitWidth="100.0" layoutX="107.0" layoutY="616.0" onMouseClicked="#handleResourceDeckClick" preserveRatio="true" />
+            </AnchorPane>
+         <BorderPane.margin>
+            <Insets top="5.0" />
+         </BorderPane.margin>
         </StackPane>
     </right>
 
-
     <!-- VBox for the decks at the left -->
     <left>
-        <StackPane prefHeight="907.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-            <!-- Background Image -->
-            <ImageView fx:id="handCardbackground" fitHeight="1020.0" fitWidth="457.0">
+        <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+            <!-- Immagine di sfondo -->
+            <ImageView fx:id="handCardbackground" fitHeight="730.0" fitWidth="457.0">
                 <image>
                     <Image url="@../BackGroundImaging/v850-sasi-14.jpg" />
                 </image>
             </ImageView>
 
-            <VBox fx:id="handBox" alignment="CENTER" maxWidth="500.0" prefHeight="995.0" prefWidth="457.0" spacing="10" BorderPane.alignment="TOP_LEFT">
-                <VBox alignment="CENTER">
-                    <Label fx:id="playerNameLabel" style="-fx-font-weight: bold; -fx-text-fill: white;" text="PLAYER NAME">
-                  <font>
-                     <Font size="20.0" />
-                  </font></Label>
+            <AnchorPane fx:id="handBox" maxHeight="730.0" maxWidth="500.0" minHeight="720.0" prefHeight="720.0" prefWidth="458.0">
+                <VBox alignment="CENTER" layoutX="392.0" layoutY="20.0">
                     <Label alignment="CENTER" style="-fx-text-fill: white;" text="COLOR">
-                  <font>
-                     <Font size="16.0" />
-                  </font></Label>
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Label>
                     <Circle fx:id="playerColorCircle" radius="10.0" />
                 </VBox>
-                <Label alignment="CENTER" style="-fx-text-fill: white;" text="Cards in HAND:">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-                <Label alignment="CENTER" style="-fx-text-fill: white;" text="Carta 1:">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-                <ImageView fx:id="handCard1" fitHeight="150.0" fitWidth="150.0" onDragDetected="#handleCard1DragDetected" onDragDone="#handleCard1DragDone" onMouseClicked="#handleCard1Click" onMouseDragged="#handleCard1MouseDragged" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
-                <Label alignment="CENTER" style="-fx-text-fill: white;" text="Carta 2:">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-                <ImageView fx:id="handCard2" fitHeight="150.0" fitWidth="150.0" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" onMouseClicked="#handleCard2Click" onMouseDragged="#handleCard2MouseDragged" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
-                <Label alignment="CENTER" style="-fx-text-fill: white;" text="Carta 3:">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-                <ImageView fx:id="handCard3" fitHeight="150.0" fitWidth="150.0" onDragDetected="#handleCard3DragDetected" onDragDone="#handleCard3DragDone" onMouseClicked="#handleCard3Click" onMouseDragged="#handleCard3MouseDragged" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
-                <Label alignment="CENTER" style="-fx-text-fill: white;" text="num resources">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-                <GridPane fx:id="gridPane" prefHeight="293.0" prefWidth="200.0">
+                <ImageView fx:id="handCard1" fitHeight="170.0" fitWidth="170.0" layoutX="145.0" layoutY="60.0" onDragDetected="#handleCard1DragDetected" onDragDone="#handleCard1DragDone" onMouseClicked="#handleCard1Click" onMouseDragged="#handleCard1MouseDragged" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
+                <ImageView fx:id="handCard2" fitHeight="170.0" fitWidth="170.0" layoutX="144.0" layoutY="221.0" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" onMouseClicked="#handleCard2Click" onMouseDragged="#handleCard2MouseDragged" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
+                <ImageView fx:id="handCard3" fitHeight="170.0" fitWidth="170.0" layoutX="143.0" layoutY="382.0" onDragDetected="#handleCard3DragDetected" onDragDone="#handleCard3DragDone" onMouseClicked="#handleCard3Click" onMouseDragged="#handleCard3MouseDragged" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
+                <GridPane fx:id="gridPane" layoutX="1.0" layoutY="529.0" prefHeight="199.0" prefWidth="455.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="68.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="132.0" />
@@ -238,9 +224,10 @@
                             </GridPane.margin>
                         </ImageView>
                         <Label fx:id="num_animal" alignment="CENTER" style="-fx-text-fill: white;" text="Label 1" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
 
                         <ImageView fx:id="imageView1" fitHeight="40.0" fitWidth="40.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                             <GridPane.margin>
@@ -251,9 +238,10 @@
                             </image>
                         </ImageView>
                         <Label fx:id="num_mushroom" alignment="CENTER" style="-fx-text-fill: white;" text="Label 1" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
 
                         <ImageView fx:id="imageView2" fitHeight="40.0" fitWidth="40.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
                             <GridPane.margin>
@@ -264,9 +252,10 @@
                             </image>
                         </ImageView>
                         <Label fx:id="num_insect" alignment="CENTER" style="-fx-text-fill: white;" text="Label 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
 
                         <ImageView fx:id="imageView3" fitHeight="40.0" fitWidth="40.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
                             <GridPane.margin>
@@ -277,9 +266,10 @@
                             </image>
                         </ImageView>
                         <Label fx:id="num_plant" alignment="CENTER" style="-fx-text-fill: white;" text="Label 1" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
 
                         <ImageView fx:id="imageView4" fitHeight="40.0" fitWidth="40.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
                             <GridPane.margin>
@@ -290,9 +280,10 @@
                             </image>
                         </ImageView>
                         <Label fx:id="num_paper" alignment="CENTER" style="-fx-text-fill: white;" text="Label 1" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
 
                         <ImageView fx:id="imageView5" fitHeight="40.0" fitWidth="40.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <GridPane.margin>
@@ -303,11 +294,13 @@
                             </image>
                         </ImageView>
                         <Label fx:id="num_piuma" alignment="CENTER" style="-fx-text-fill: white;" text="Label 1" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
 
                         <ImageView fx:id="imageView6" fitHeight="40.0" fitWidth="40.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+
                             <GridPane.margin>
                                 <Insets left="10.0" />
                             </GridPane.margin>
@@ -316,18 +309,25 @@
                             </image>
                         </ImageView>
                         <Label fx:id="num_calamaio" alignment="CENTER" style="-fx-text-fill: white;" text="Label 1" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
                     </children>
                 </GridPane>
-
-            </VBox>
+                <Label fx:id="playerNameLabel" alignment="CENTER" layoutX="14.0" layoutY="19.0" prefHeight="41.0" prefWidth="158.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="PLAYER NAME" AnchorPane.bottomAnchor="670.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="285.0" AnchorPane.topAnchor="19.0">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+            </AnchorPane>
+         <BorderPane.margin>
+            <Insets top="5.0" />
+         </BorderPane.margin>
+         <opaqueInsets>
+            <Insets left="2.0" />
+         </opaqueInsets>
         </StackPane>
-
     </left>
-
-
-
 
 </BorderPane>

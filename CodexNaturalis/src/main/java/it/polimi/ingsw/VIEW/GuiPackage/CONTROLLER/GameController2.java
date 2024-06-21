@@ -93,14 +93,14 @@ public class GameController2 extends GenericSceneController {
     public ImageView center_card_1;
     public ImageView center_card_2;
     public ImageView center_card_3;
-    public VBox handBox;
+    public AnchorPane handBox;
     public ImageView handCard1;
     public ImageView handCard2;
     public ImageView handCard3;
     private Image handCard1image;
     private Image handCard2image;
     private Image handCard3image;
-    public VBox deckBox;
+    public AnchorPane deckBox;
 
     @FXML
     private GridPane gameGrid;
@@ -272,14 +272,19 @@ public class GameController2 extends GenericSceneController {
 
     }
 
+    private boolean endgameAlertShown = false;
+
     private void checkLastTurn() throws IOException {
         boolean endgame = false;
-        for(GameField g : client.getMiniModel().getGame_fields()){
-            if(g.getPlayer().getPlayerPoints()>=20){
+        for (GameField g : client.getMiniModel().getGame_fields()) {
+            if (g.getPlayer().getPlayerPoints() >= 20) {
                 endgame = true;
+                break; // Non ha senso continuare a controllare dopo aver trovato un giocatore con >= 20 punti
             }
         }
-        if(endgame && getActivePlayer()){
+
+        if (endgame && !endgameAlertShown && getActivePlayer()) {
+            endgameAlertShown = true; // Imposta la variabile di stato a true per evitare future visualizzazioni dell'alert
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Game Information");
@@ -971,7 +976,7 @@ public class GameController2 extends GenericSceneController {
             file = new File(card_1.front_side_path);
             card_1_front = new Image(file.toURI().toString());
             handCard1.setImage( card_1_front);
-            System.out.println(card_1.front_side_path);
+            //System.out.println(card_1.front_side_path);
             //back
             file = new File(card_1.back_side_path);
             card_1_back = new Image(file.toURI().toString());
@@ -1172,13 +1177,13 @@ public class GameController2 extends GenericSceneController {
         double width = 100;
         double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
-        db.setDragView(resizedImage, event.getX(), event.getY());
+        db.setDragView(resizedImage, 145, 60);
 
 
         // Imposta un'immagine bianca per la carta durante il drag
-        File file = new File("src/resources/Card/Bianco.png");
-        Image blankImage = new Image(file.toURI().toString());
-        handCard1.setImage(blankImage);
+        /*File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());*/
+        handCard1.setImage(null);
 
         event.consume();
     }
@@ -1195,8 +1200,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private void handleCard1DragDone(DragEvent event) {
         // Reimposta la posizione dell'immagine della carta alla posizione originale
-        handCard1.setLayoutX(0);
-        handCard1.setLayoutY(0);
+        handCard1.setLayoutX(145);
+        handCard1.setLayoutY(60);
 
         // Reimposta l'immagine originale della carta
         handCard1.setImage(handCard1image);
@@ -1240,13 +1245,13 @@ public class GameController2 extends GenericSceneController {
         double width = 100;
         double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
-        db.setDragView(resizedImage, event.getX(), event.getY());
+        db.setDragView(resizedImage, 144, 221);
 
 
         // Imposta un'immagine bianca per la carta durante il drag
-        File file = new File("src/resources/Card/Bianco.png");
-        Image blankImage = new Image(file.toURI().toString());
-        handCard2.setImage(blankImage);
+        /*File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());*/
+        handCard2.setImage(null);
 
         event.consume();
     }
@@ -1263,8 +1268,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private void handleCard2DragDone(DragEvent event) {
         // Reimposta la posizione dell'immagine della carta alla posizione originale
-        handCard2.setLayoutX(0);
-        handCard2.setLayoutY(0);
+        handCard2.setLayoutX(144);
+        handCard2.setLayoutY(221);
 
         // Reimposta l'immagine originale della carta
         handCard2.setImage(handCard2image);
@@ -1308,12 +1313,12 @@ public class GameController2 extends GenericSceneController {
         double width = 100;
         double height = 75;
         Image resizedImage = new Image(originalImage.getUrl(), width, height, true, true);
-        db.setDragView(resizedImage, event.getX(), event.getY());
+        db.setDragView(resizedImage, 143, 382);
 
         // Imposta un'immagine bianca per la carta durante il drag
-        File file = new File("src/resources/Card/Bianco.png");
-        Image blankImage = new Image(file.toURI().toString());
-        handCard3.setImage(blankImage);
+        /*File file = new File("src/resources/Card/Bianco.png");
+        Image blankImage = new Image(file.toURI().toString());*/
+        handCard3.setImage(null);
 
         event.consume();
     }
@@ -1329,8 +1334,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private void handleCard3DragDone(DragEvent event) {
         // Reimposta la posizione dell'immagine della carta alla posizione originale
-        handCard3.setLayoutX(0);
-        handCard3.setLayoutY(0);
+        handCard3.setLayoutX(143);
+        handCard3.setLayoutY(382);
 
         // Reimposta l'immagine originale della carta
         handCard3.setImage(handCard3image);

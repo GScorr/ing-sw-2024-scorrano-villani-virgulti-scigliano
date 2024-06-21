@@ -94,7 +94,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
             this.token = server.createToken(this);}
         else if(isnew.equals("false")){
             flag=0;
-            terminal_interface.printError(stringcostant.name_is_not_valid);
+                if(terminal_interface instanceof TUI) {
+                    terminal_interface.printError(stringcostant.name_is_not_valid);
+                }
             }
         else{
             this.token = isnew;
@@ -145,7 +147,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
      * @param endgame A flag indicating whether the game has ended.
      * @throws IOException  If an I/O error occurs during communication with the server.
      */
-    public void manageGame(boolean endgame) throws IOException {
+    public void manageGame(boolean endgame) throws IOException, InterruptedException {
         if(!endgame) rmi_controller.getPoints(token);
         else rmi_controller.getFinalStandings(token);
     }

@@ -53,7 +53,7 @@ public interface VirtualViewF extends Remote {
     public boolean areThereFreeGames () throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
 
     public void createGame(String gameName, int numplayers, String playerName) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
-    public void manageGame(boolean endgame) throws IOException;
+    public void manageGame(boolean endgame) throws IOException, InterruptedException;
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException;
     public void drawCard(SendFunction function) throws IOException, InterruptedException;
     public void ChatChoice(String message, int decision) throws IOException;

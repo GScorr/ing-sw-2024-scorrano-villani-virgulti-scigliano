@@ -41,24 +41,7 @@ public class WaitingSceneController extends GenericSceneController{
     @FXML
     public void initialize() {
         // Start the background task to monitor the variable
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    if (!super.client.getMiniModel().getState().equals("NOT_INITIALIZED") && !client.getMiniModel().getState().equals("NOT_IN_A_GAME")) {
-                        client.setGameFieldMiniModel();
-                        client.getTerminal_interface().chooseGoalState();
-                        break;
-                    };
-                } catch (IOException | InterruptedException | ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).start();
+
 
         // Set the background image
         File file = new File("src/resources/BackGroundImaging/BackGround.png");
@@ -72,6 +55,28 @@ public class WaitingSceneController extends GenericSceneController{
                 backgroundImage.fitWidthProperty().bind(newScene.widthProperty());
             }
         });
+    }
+
+    @Override
+    public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    if (!client.getMiniModel().getState().equals("NOT_INITIALIZED") && !client.getMiniModel().getState().equals("NOT_IN_A_GAME")) {
+                        client.setGameFieldMiniModel();
+                        client.getTerminal_interface().chooseGoalState();
+                        break;
+                    };
+                } catch (IOException | InterruptedException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 
     /**

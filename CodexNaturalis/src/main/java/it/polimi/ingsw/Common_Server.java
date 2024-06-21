@@ -21,7 +21,7 @@ import java.util.*;
  */
 public class Common_Server {
 
-    private static final long HEARTBEAT_TIMEOUT = 4000;
+    private static final long HEARTBEAT_TIMEOUT = 6000;
     private TokenManagerF token_manager = new TokenManagerImplementF();
     private List<VirtualViewF> clients = new ArrayList<>();
     private static int port;
@@ -213,11 +213,13 @@ public class Common_Server {
         long currentTime = System.currentTimeMillis();
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
-            if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT) {
+            if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT && lastHeartbeatTime.get(key)!=0) {
+                System.out.println("lastheartbeat is " + lastHeartbeatTime.get(key) + " currenttime is " + currentTime + "and the difference is " + (currentTime - lastHeartbeatTime.get(key)));
                 try{
                     if(token_to_rmi.get(key)!=null ){if( token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                     token_to_rmi.get(key).getTtoP().get(key).disconnect();
-                    System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " disconnected");
+                    lastHeartbeatTime.put(key,0L);
+                    System.out.println(token_to_rmi.get(key).getTtoP().get(key).getName() + " just disconnected");
                     token_manager.deleteVW(key);}
                         if(token_to_rmi.get(key)!=null ){try{token_to_rmi.get(key).checkEndDisconnect();}catch (ConcurrentModificationException ignored){}
                     token_to_rmi.get(key).clientsRMI.remove( token_to_rmi.get(key).token_manager.getTokens().get(key)  );

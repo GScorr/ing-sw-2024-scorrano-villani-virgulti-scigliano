@@ -85,24 +85,6 @@ public class Game implements Serializable {
         return num_player;
     }
 
-    /* da eliminare
-    public void setNumPlayer(int num_player) {
-        this.num_player = num_player;
-    }
-    //Getter of points, given the index of the player
-
-    public int getPoints(int player_index) {
-        if( player_index < 0 || player_index > num_player )  System.out.printf("\n ERROR: INDEX EXCEED DOMAIN");
-        return get_player_index.get(player_index).getPlayerPoints();
-    }
-
-    public GameField getField(int player_index){
-        if( player_index < 0 || player_index > num_player )  System.out.printf("\n ERROR: INDEX EXCEED DOMAIN");
-        return get_player_index.get(player_index).getGameField();
-    }
-
-     */
-
     public int getMax_num_player() {
         return max_num_player;
     }
@@ -132,11 +114,9 @@ public class Game implements Serializable {
         this.resources_deck = new Deck(creation.getResourcesDeck());
          */
 
-
-        //Deck Mischiato
+        //shuffled deck
         this.gold_deck = new Deck(creation.getMixGoldDeck());
         this.resources_deck = new Deck(creation.getMixResourcesDeck());
-
 
         this.starting_cards_deck = new Deck(creation.getMixStartingDeck());
         this.goal_deck = new DeckGoalCard(creation.getMixGoalDeck());
@@ -226,7 +206,7 @@ public class Game implements Serializable {
      *
      * This method deals one starting card to each player from the starting_cards_deck.
      */
-    private void distributeStartingCard(){
+    public void distributeStartingCard(){
         for(int i=0; i<num_player;i++){
             get_player_index.get(i).setStartingCard(starting_cards_deck.drawCard());
         }
@@ -239,7 +219,7 @@ public class Game implements Serializable {
      *  * Two cards drawn from the gold deck
      *  * Two cards drawn from the resource deck
      */
-    private void initializedCenterCard(){
+    public void initializedCenterCard(){
         List<PlayCard> gold_list = new ArrayList<PlayCard>();
         List<PlayCard> resource_list= new ArrayList<PlayCard>();;
         gold_list.add(gold_deck.drawCard());
@@ -258,7 +238,7 @@ public class Game implements Serializable {
      *  * One card drawn from the gold deck
      *  * Two cards drawn from the resource deck
      */
-    private void distributeThreeCards(){
+    public void distributeThreeCards(){
         for (int i = 0; i<num_player;i++){
             List<PlayCard> tmp = new ArrayList<PlayCard>();
             tmp.add(gold_deck.drawCard());
@@ -271,7 +251,7 @@ public class Game implements Serializable {
     /**
      * set 2 goal for the game
      */
-    private void selectGoals(){
+    public void selectGoals(){
         goal1 = goal_deck.drawCard();
         goal2 = goal_deck.drawCard();
         player1.setGlobalGoal(goal1,goal2);
@@ -286,7 +266,7 @@ public class Game implements Serializable {
      * This method deals two cards from the goal deck to each player. The cards are added to a temporary list
      * and then assigned to the player's initial goal cards using `setInitialGoalCards`.
      */
-    private void distributeTwoGoalsToPlayer(){
+    public void distributeTwoGoalsToPlayer(){
         for(int i=0;i<num_player;i++){
             List<Goal> tmp = new ArrayList<Goal>();
             tmp.add(goal_deck.drawCard());

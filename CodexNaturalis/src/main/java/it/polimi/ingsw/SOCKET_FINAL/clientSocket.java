@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.Socket;
 import java.rmi.NotBoundException;
 
 import java.util.HashMap;
@@ -48,6 +49,8 @@ public class clientSocket implements VirtualViewF, Serializable {
     private ServerProxy server_proxy;
 
     ObjectInputStream input;
+    ObjectOutputStream output;
+    Socket socket;
 
     public boolean flag_check;
     public boolean check;
@@ -70,9 +73,11 @@ public class clientSocket implements VirtualViewF, Serializable {
     public String token;
     private boolean flag_Server_Disconneted = false;
 
-    public clientSocket(ObjectInputStream input, ObjectOutputStream output) throws IOException, ClassNotFoundException {
+    public clientSocket(ObjectInputStream input, ObjectOutputStream output, Socket socket) throws IOException, ClassNotFoundException {
         this.server_proxy = new ServerProxy(output);
         this.input = input;
+        this.output = output;
+        this.socket = socket;
     }
 
     /**
@@ -94,6 +99,7 @@ public class clientSocket implements VirtualViewF, Serializable {
         }).start();
         terminal_interface = new TUI(this);
         terminal_interface.runCli();
+
     }
 
     /**
@@ -107,6 +113,9 @@ public class clientSocket implements VirtualViewF, Serializable {
      * @throws NotBoundException If the RMI registry cannot be found.
      */
     public void runGUI(SceneController scene) throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+
+        terminal_interface = new GUI(scene);
+        terminal_interface.runCli();
         new Thread(() -> {
             try {
                 startCheckingMessagesSocket();
@@ -114,8 +123,6 @@ public class clientSocket implements VirtualViewF, Serializable {
                 throw new RuntimeException(e);
             }
         }).start();
-        terminal_interface = new GUI(scene);
-        terminal_interface.runCli();
     }
 
     /**
@@ -125,26 +132,31 @@ public class clientSocket implements VirtualViewF, Serializable {
      * @throws IOException If there is an IO error during communication.
      * @throws ClassNotFoundException If a class cannot be found.
      */
-    public void  startCheckingMessagesSocket() throws IOException,ClassNotFoundException{
-        new Thread( () -> {
+    public void startCheckingMessagesSocket() throws IOException, ClassNotFoundException {
+        new Thread(() -> {
             ResponseMessage s;
-            while(true) {
-                try {Thread.sleep(500);} catch (InterruptedException e) {}
+            Object p;
+            while (true) {
                 try {
-                    if (((s = (ResponseMessage) input.readObject()) != null)) {
+                    Thread.sleep(500);
+                    p =  input.readObject();
+                    if ( p instanceof ResponseMessage )
+                    {
+                        s = (ResponseMessage) p;
                         s.setVirtual_view(this);
                         s.setClient(this);
                         s.action();
+                    }else {
+                        System.err.println("Unexpected object received: " + p.getClass().getName());
                     }
                 } catch (IOException | InterruptedException e) {
-                    if(! flag_Server_Disconneted){
+                    if (!flag_Server_Disconneted) {
                         System.err.println("                 [SERVER ERROR]\n" +
-                                           "                 TRY NEW LOG IN   "  );
+                                "                 TRY NEW LOG IN   " + e);
                         flag_Server_Disconneted = true;
                     }
-
-                } catch (ClassNotFoundException e) {
-                    System.out.println("errore startCheckingMessagesSocket ");
+                } catch (ClassNotFoundException | ClassCastException e) {
+                    System.out.println("Error startCheckingMessagesSocket ");
                 } catch (NotBoundException e) {
                     throw new RuntimeException(e);
                 }
@@ -378,6 +390,20 @@ public class clientSocket implements VirtualViewF, Serializable {
      * @throws NotBoundException If the RMI registry cannot be found.
      */
     public void disconect() throws IOException, ClassNotFoundException, InterruptedException, NotBoundException {
+        try {
+            if (output != null) {
+                output.close();
+            }
+            if (input != null) {
+                input.close();
+            }
+            if (socket != null) {
+                socket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.exit(0);
     }
 

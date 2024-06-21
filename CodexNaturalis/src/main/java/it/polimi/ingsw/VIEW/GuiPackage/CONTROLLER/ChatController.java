@@ -149,7 +149,6 @@ public class ChatController extends GenericSceneController {
                 try {
                     Platform.runLater(this::updateChat);
                     client.getMiniModel().getNot_read().set(idx, 0);
-                    System.out.println("resetto");
                     Thread.sleep(1000); // Aggiorna la chat ogni secondo
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();

@@ -36,8 +36,11 @@ import java.util.stream.Collectors;
  */
 public class HeaderController extends GenericSceneController {
 
-    @FXML
-    private MenuBar menuBar;
+    public MenuButton menuBar;
+
+    private final Object menuLock = new Object();
+    private boolean isMenuOpen = false;
+    private Thread menuUpdater;
     @FXML
     private VBox chatBox;
 
@@ -68,8 +71,18 @@ public class HeaderController extends GenericSceneController {
      * @throws IOException If an I/O error occurs while fetching data.
      */
     public void startInitializeHeader() throws IOException {
-        Thread menuUpdater = new Thread(() -> {
+        menuUpdater = new Thread(() -> {
             while (true) {
+                synchronized (menuLock) {
+                    while (isMenuOpen) {
+                        try {
+                            menuLock.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+
                 Platform.runLater(() -> {
                     chatsMenu.getItems().clear();
                     int i = 1;
@@ -88,8 +101,9 @@ public class HeaderController extends GenericSceneController {
                         throw new RuntimeException(e);
                     }
                 });
+
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -110,7 +124,22 @@ public class HeaderController extends GenericSceneController {
         Menu goalMenu = new Menu("View GOAL");
         goalMenu.setId("GoalMenu");
 
-        MenuItem personalGoal = new MenuItem("Personal Goal");
+        // Paths to your image files
+        String common_goal = "src/resources/IconUI/focus.png";
+        String personal_goal = "src/resources/IconUI/target.png";
+
+        // Create ImageViews for icons
+        ImageView personalGoalIcon = new ImageView(new Image(new File(personal_goal).toURI().toString()));
+        personalGoalIcon.setFitWidth(20);
+        personalGoalIcon.setFitHeight(20);
+
+        ImageView commonGoalIcon = new ImageView(new Image(new File(common_goal).toURI().toString()));
+        commonGoalIcon.setFitWidth(20);
+        commonGoalIcon.setFitHeight(20);
+
+
+        // Create MenuItems with text and graphics
+        MenuItem personalGoal = new MenuItem("Personal Goal", personalGoalIcon);
         personalGoal.setId("PersonalGoal");
         personalGoal.setOnAction(event -> {
             try {
@@ -120,7 +149,8 @@ public class HeaderController extends GenericSceneController {
             }
         });
 
-        MenuItem commonGoal = new MenuItem("Common Goal");
+
+        MenuItem commonGoal = new MenuItem("Common Goal", commonGoalIcon);
         commonGoal.setId("CommonGoal");
         commonGoal.setOnAction(event -> {
             try {
@@ -133,8 +163,8 @@ public class HeaderController extends GenericSceneController {
         // Add items to GoalMenu
         goalMenu.getItems().addAll(personalGoal, commonGoal);
 
-        // Add GoalMenu to the MenuBar
-        menuBar.getMenus().add(goalMenu);
+        // Set the goalMenu as the graphic for the MenuButton
+        menuBar.getItems().add(goalMenu);
     }
     /**
      * Adds a new message to the chat box.
@@ -313,17 +343,15 @@ public class HeaderController extends GenericSceneController {
         // Create a VBox
         VBox handBox = new VBox();
         handBox.setAlignment(javafx.geometry.Pos.CENTER);
-        handBox.setMaxWidth(500.0);
-        handBox.setSpacing(10);
+        handBox.setMaxWidth(600);
+        handBox.setSpacing(20);
 
         ImageView cardImageView = new ImageView();
-        cardImageView.setFitHeight(133);
-        cardImageView.setFitWidth(100);
+        cardImageView.setFitHeight(400);
+        cardImageView.setFitWidth(300);
         cardImageView.setPreserveRatio(true);
 
-
         Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getPlayer().getGoalCard();
-
 
         // Load and set the image for the ImageView
         File file = new File(personalGoal_1.front_side_path);
@@ -332,7 +360,6 @@ public class HeaderController extends GenericSceneController {
 
         // Add the label and image view to the VBox
         handBox.getChildren().add(cardImageView);
-
 
         // Set the scene for the new stage
         Scene scene = new Scene(handBox);
@@ -344,7 +371,6 @@ public class HeaderController extends GenericSceneController {
         // Show the new stage without waiting
         stage.show();
 
-
     }
 
     public void showCommonGoal(ActionEvent actionEvent) throws IOException {
@@ -355,16 +381,15 @@ public class HeaderController extends GenericSceneController {
         // Create a VBox
         VBox handBox = new VBox();
         handBox.setAlignment(javafx.geometry.Pos.CENTER);
-        handBox.setMaxWidth(500.0);
-        handBox.setSpacing(10);
+        handBox.setMaxWidth(600);
+        handBox.setSpacing(20);
 
         ImageView cardImageView = new ImageView();
-        cardImageView.setFitHeight(133);
-        cardImageView.setFitWidth(100);
+        cardImageView.setFitHeight(400);
+        cardImageView.setFitWidth(300);
         cardImageView.setPreserveRatio(true);
 
         Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getGlobal_goal1();
-
 
         // Load and set the image for the ImageView
         File file = new File(personalGoal_1.front_side_path);
@@ -374,15 +399,12 @@ public class HeaderController extends GenericSceneController {
         // Add the label and image view to the VBox
         handBox.getChildren().add(cardImageView);
 
-
-
         ImageView cardImageView_2 = new ImageView();
-        cardImageView_2.setFitHeight(133);
-        cardImageView_2.setFitWidth(100);
+        cardImageView_2.setFitHeight(400);
+        cardImageView_2.setFitWidth(300);
         cardImageView_2.setPreserveRatio(true);
 
         Goal personalGoal_2 = the_client.getMiniModel().getMyGameField().getGlobal_goal2();
-
 
         // Load and set the image for the ImageView
         file = new File(personalGoal_2.front_side_path);
@@ -506,6 +528,8 @@ public class HeaderController extends GenericSceneController {
             RowConstraints row = new RowConstraints(33.1);
             gameGrid.getRowConstraints().add(row);
         }
+        gameGrid.setHgap(25.5);
+        gameGrid.setVgap(5);
 
         // Populate the GridPane with game data
         Set<Integer> visibleRows = new HashSet<>();
@@ -516,22 +540,22 @@ public class HeaderController extends GenericSceneController {
         while (count <= the_client.getMiniModel().game_fields.get(playerNumber - 1).card_inserted) {
             for (int i = 0; i < Constants.MATRIXDIM; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                    if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
+                    if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
-                    } else if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
+                    } else if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().getMyGameField().getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
+                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
                     }
@@ -625,6 +649,21 @@ public class HeaderController extends GenericSceneController {
                 grid.getColumnConstraints().get(j).setPrefWidth(0);
                 grid.getColumnConstraints().get(j).setMaxWidth(0);
             }
+        }
+    }
+
+    @FXML
+    private void handleChatsMenuHidden() {
+        synchronized (menuLock) {
+            isMenuOpen = false;
+            menuLock.notify();
+        }
+    }
+
+    @FXML
+    private void handleChatsMenuShown() {
+        synchronized (menuLock) {
+            isMenuOpen = true;
         }
     }
 }

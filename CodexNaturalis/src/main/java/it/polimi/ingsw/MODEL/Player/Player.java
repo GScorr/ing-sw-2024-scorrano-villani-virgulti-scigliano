@@ -44,8 +44,6 @@ public class Player implements PlayerObserver, Serializable {
 
     public HashMap<Integer,Boolean> side_card_in_hand  = new HashMap<>();
 
-
-
     /**
      * tc -> transparent card, used when a card is removed from cards_in_hands to set the value
      */
@@ -60,7 +58,7 @@ public class Player implements PlayerObserver, Serializable {
     private PlayCard starting_card;
     private List<Goal> initial_goal_cards;
     private Goal goal_card;
-    private int player_points = 19;
+    private int player_points = 15;
 
     private int num_goal_achieve = 0;
 
@@ -176,12 +174,7 @@ public class Player implements PlayerObserver, Serializable {
     public void setStartingCard(PlayCard starting_card) {
         this.starting_card = starting_card;
     }
-    /* da eliminare
-    public void setGoal_card(Goal goal_card) {
-        this.goal_card = goal_card;
-    }
 
-     */
     public void setDeck(Deck resources_deck, Deck gold_deck,CenterCards cards_in_center){
         game_field.setGlobalGoal(global_goal1,global_goal2);
         this.resources_deck = resources_deck;

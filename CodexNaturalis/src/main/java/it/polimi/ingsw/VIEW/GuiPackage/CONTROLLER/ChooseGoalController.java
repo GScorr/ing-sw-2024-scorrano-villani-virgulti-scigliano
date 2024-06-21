@@ -81,14 +81,9 @@ public class ChooseGoalController extends GenericSceneController {
      */
     public void startInitialize() throws IOException, ClassNotFoundException, InterruptedException {
 
-
-
         // Impostare la label del titolo
-        titleLabel.setText("CODEX NATURALIS");
+        titleLabel.setText("Choose personal goal");
         titleLabel.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;");
-
-
-
 
 
         /**
@@ -99,9 +94,10 @@ public class ChooseGoalController extends GenericSceneController {
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
         headerController.setScene(scene_controller);
-
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
+
+
         goal1 = client.getFirstGoalCard();
         goal2 = client.getSecondGoalCard();
         File file = new File(client.getFirstGoalCard().front_side_path);

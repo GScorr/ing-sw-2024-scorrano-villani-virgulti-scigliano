@@ -50,7 +50,7 @@ public class Common_Client {
                     try{
                         ObjectOutputStream outputStream = new ObjectOutputStream(serverSocket.getOutputStream());
                         ObjectInputStream inputStream = new ObjectInputStream(serverSocket.getInputStream());
-                        new clientSocket(inputStream, outputStream).runTUI();
+                        new clientSocket(inputStream, outputStream, serverSocket).runTUI();
                     }catch (IOException e) {
                         System.err.println(e.getMessage());
                         return;
@@ -69,7 +69,7 @@ public class Common_Client {
 
         do{
             if( !choose.equals("-1") ) System.err.println("[INSERT ERROR]");
-            System.out.println("CHOOSE A INTERFACE  : \n 0 -> TUI \n 1 -> Gui_Initialization ");
+            System.out.println("CHOOSE A INTERFACE  : \n 0 -> TUI \n 1 -> Gui [FULL SCREEN IS NOT SUPPORTED] ");
             choose = scan.nextLine();
             switch (choose) {
                 case("0"):

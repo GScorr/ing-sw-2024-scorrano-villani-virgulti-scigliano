@@ -53,7 +53,7 @@ public interface VirtualGameServer extends Remote {
 
     public void getPoints(String token) throws IOException;
 
-    public void getFinalStandings(String token) throws IOException;
+    public void getFinalStandings(String token) throws IOException, InterruptedException;
 
     public List<GameField> getGameFields(String token) throws IOException;
 

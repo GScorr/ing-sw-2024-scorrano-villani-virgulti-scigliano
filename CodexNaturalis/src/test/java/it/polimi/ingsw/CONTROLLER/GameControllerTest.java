@@ -15,11 +15,6 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
-todo
-    test sulla gestione degli errori
- */
-
 class GameControllerTest {
 
     String nomePlayer = "nome_giocatore";
@@ -108,7 +103,6 @@ void createErrorPlayer(){
     }
 
 
-
     @Test
     void playerSelectStartingCard() {
 
@@ -176,13 +170,6 @@ void createErrorPlayer(){
         System.out.println(p3.actual_state.getNameState());
         System.out.println(p4.actual_state.getNameState());
 
-       // System.out.println("adesso stampo l'assert");
-
-       // System.out.println(p1.getGameField().getCell(22,22,45).getCard());
-       // System.out.println(p1.getGameField().getCell(23,23,45).getCard());
-        /*
-        assert controlla che sia la stessa carta in posizione 22,22 e 23,23 prima id piazzare la carta
-         */
         assertEquals(p1.getGameField().getCell(22,22,45).getCard(),p1.getGameField().getCell(23,23,45).getCard());
 
         System.out.println(p1.getCardsInHand());
@@ -204,12 +191,6 @@ void createErrorPlayer(){
         controller.playerPeachCardFromGoldDeck(p1); //devo pescare dopo aver giocato una carta altrimenti non cambia lo stato dei giocatori successivi che rimangono in wait
         System.out.println("p1: " + p1.actual_state.getNameState());
         System.out.println("p2: " + p2.actual_state.getNameState());
-        /*
-        funziona il cambio di stato e il posizionamento della carta
-        testo solo per un giocatore, test su tutto il gioco in una classe a parte
-         */
-
-
 
     }
 
@@ -282,8 +263,6 @@ void createErrorPlayer(){
                 System.out.println(e.getId() + e.getMessage());
             }
         }
-
-
 
         controller.statePlaceCard(p1, 1, 23, 23);
         controller.playerPeachCardFromResourcesDeck(p1);
@@ -1045,17 +1024,6 @@ test sull'errore
         for(int i=0; i<gioco.getNum_player(); i++){
             System.err.println(gioco.getGet_player_index().get(i).getName());
         }
-      /*
-        while(!gioco.getGet_player_index().get(3).actual_state.getNameState().equals(gioco.getGet_player_index().get(3).draw_card)){
-            for(int i=0; i<gioco.getNum_player(); i++){
 
-            }
-            controller.playerChooseGoal(gioco.);
-        }
-
-
-       */
     }
-
-
 }

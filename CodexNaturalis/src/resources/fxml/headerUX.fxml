@@ -1,0 +1,61 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+
+<!--<?import javafx.scene.control.MenuButton?>-->
+<!--<?import javafx.scene.control.MenuItem?>-->
+<!--<?import javafx.scene.image.Image?>-->
+<!--<?import javafx.scene.image.ImageView?>-->
+<!--<?import javafx.scene.layout.AnchorPane?>-->
+
+<!--<?import javafx.scene.control.Menu?>-->
+
+<!--<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.HeaderController" stylesheets="@../css/headerUX.css">-->
+<!--    <children>-->
+<!--        <MenuButton fx:id="menuBar" layoutX="10.0" layoutY="10.0">-->
+<!--            <graphic>-->
+<!--                <ImageView fitWidth="20" fitHeight="20">-->
+<!--                    <image>-->
+<!--                        <Image url="@../IconUI/menu.png" />-->
+<!--                    </image>-->
+<!--                </ImageView>-->
+<!--            </graphic>-->
+<!--            <items>-->
+<!--                <MenuItem text="Disconnect" onAction="#handleDisconnect">-->
+<!--                    <graphic>-->
+<!--                        <ImageView fitWidth="20" fitHeight="20">-->
+<!--                            <image>-->
+<!--                                <Image url="@../IconUI/no-connection.png" />-->
+<!--                            </image>-->
+<!--                        </ImageView>-->
+<!--                    </graphic>-->
+<!--                </MenuItem>-->
+<!--                <MenuItem text="View Game Fields" onAction="#handleViewOpponentFields">-->
+<!--                    <graphic>-->
+<!--                        <ImageView fitWidth="20" fitHeight="20">-->
+<!--                            <image>-->
+<!--                                <Image url="@../IconUI/board-game.png" />-->
+<!--                            </image>-->
+<!--                        </ImageView>-->
+<!--                    </graphic>-->
+<!--                </MenuItem>-->
+<!--                <Menu text="Chat" onHidden="#handleChatsMenuHidden" onShown="#handleChatsMenuShown">-->
+<!--                    <graphic>-->
+<!--                        <ImageView fitWidth="20" fitHeight="20">-->
+<!--                            <image>-->
+<!--                                <Image url="@../IconUI/chat.png" />-->
+<!--                            </image>-->
+<!--                        </ImageView>-->
+<!--                    </graphic>-->
+<!--                </Menu>-->
+<!--                <MenuItem text="Scoreboard" onAction="#showScoreboard">-->
+<!--                    <graphic>-->
+<!--                        <ImageView fitWidth="20" fitHeight="20">-->
+<!--                            <image>-->
+<!--                                <Image url="@../IconUI/scoreboard.png" />-->
+<!--                            </image>-->
+<!--                        </ImageView>-->
+<!--                    </graphic>-->
+<!--                </MenuItem>-->
+<!--            </items>-->
+<!--        </MenuButton>-->
+<!--    </children>-->
+<!--</AnchorPane>-->

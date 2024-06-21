@@ -41,6 +41,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     public Map<String,Integer> token_to_index = new HashMap<>();
     public Map<Integer,String> index_to_token = new HashMap<>();
     public HashMap<Integer,String> index_to_name = new HashMap<>();
+    public HashMap<String,Integer> name_to_index = new HashMap<>();
     private Common_Server server;
     private int id_game_server = 0;
 
@@ -80,6 +81,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         token_to_index.put(p_token,id);
         index_to_token.put(id, p_token);
         index_to_name.put(id,name);
+        name_to_index.put(name,id);
         token_manager.getTokens().get(p_token).insertId(id);
         token_manager.getTokens().get(p_token).insertNumPlayers(getNumPlayersMatch());
         token_manager.getTokens().get(p_token).insertPlayer(token_to_player.get(p_token));
@@ -226,9 +228,10 @@ public class GameServer implements VirtualGameServer, Serializable {
      * @param token The player's token.
      * @throws IOException If there is an IO error.
      */
-    public synchronized void getFinalStandings(String token) throws IOException {
+    public synchronized void getFinalStandings(String token) throws IOException, InterruptedException {
 
         if( !called ){
+            setAllStates();
             called = true;
 
             for( VirtualViewF vw : clientsRMI ){
@@ -259,7 +262,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 System.out.println("Reconnect");
                 token_to_player.get(token).connect();
                 clientsRMI.add(client);
-                token_manager.getVal(token).insertId(id);
+                token_manager.getVal(token).insertId(name_to_index.get(name));
                 token_manager.getVal(token).insertNumPlayers(getNumPlayersMatch());
                 token_manager.getVal(token).insertPlayer(token_to_player.get(token));
                 try{token_manager.getVal(token).setCards( token_to_player.get(token).getCardsInHand() );}catch (NullPointerException ignored){}
@@ -306,7 +309,13 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 try {
                                     setAllStates();
                                 } catch (IOException | InterruptedException e) {}
+                                controller.nextStatePlayer();
+                                try {
+                                    setAllStates();
+                                } catch (IOException | InterruptedException e) {}
                             }
+
+
                             if (tmp.getActual_state().getNameState().equals("DRAW_CARD")){
 
                                 try {
@@ -349,7 +358,7 @@ public class GameServer implements VirtualGameServer, Serializable {
                 if(token_to_player.size() >= controller.getGame().getMax_num_player()) {
                         UpdateMessage message_update;
                         int last_man_standing = 0;
-                        try{if (controller.isAlone()) {
+                        try{if (clientsRMI.size() == 1) {
                             checkEndDisconnect();
                             try {
                                 alone_client = clientsRMI.get(0);
@@ -357,12 +366,13 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
                                 message_update.isAlone = true;
                                 broadcastMessageOneClient(message_update, alone_client );
-                                Thread.sleep(1500);
-                                while( countdown > 0 && controller.isAlone()) {
+                                Thread.sleep(150);
+                                while( countdown > 0 && clientsRMI.size() == 1) {
                                     message_update = new UpdateMessage(countdown + " SECONDS LEFT");
                                     message_update.isAlone = true;
                                     broadcastMessageOneClient(message_update,  alone_client );
                                     checkEndDisconnect();
+
                                     countdown--;
                                     Thread.sleep(1000);
                                 }
@@ -523,8 +533,9 @@ public class GameServer implements VirtualGameServer, Serializable {
                                                          controller.getGame().getGold_deck().cards.getFirst());
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
+
                 token_manager.getVal(t).setGameField(getGameFields(t));
-                token_manager.getVal(t).setLastTurn(controller.isIs_final_state());
+                //token_manager.getVal(t).setLastTurn(controller.isIs_final_state());
             }
 
         }
