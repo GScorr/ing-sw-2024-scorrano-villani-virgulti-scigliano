@@ -153,7 +153,7 @@
     <right>
         <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" prefWidth="300.0">
             <ImageView fitHeight="730.0" fitWidth="300.0" opacity="0.85" preserveRatio="false">
-                <Image url="@../BackGroundImaging/4293crock.jpg" />
+                <Image url="@../BackGroundImaging/4239crock.jpg" />
             </ImageView>
             <AnchorPane fx:id="deckBox" maxHeight="730.0" maxWidth="500.0" minHeight="730.0" prefHeight="730.0" prefWidth="300.0">
                 <Label layoutX="100.0" layoutY="1.0" prefHeight="39.0" prefWidth="113.0" text="Central Cards:" textFill="WHITE">
