@@ -192,8 +192,7 @@ public class GameController2 extends GenericSceneController {
      */
     @FXML
     public void startInitialize() throws IOException, InterruptedException {
-        Set<Integer> visibleRows = new HashSet<>();
-        Set<Integer> visibleCols = new HashSet<>();
+
 
         //header
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
@@ -208,6 +207,35 @@ public class GameController2 extends GenericSceneController {
 
         ((AnchorPane) HeaderInclude).getChildren().add(header);
         headerController.startInitializeHeader();
+
+        gameGrid.setHgap(25.5);
+        gameGrid.setPrefHeight(730.0);
+        gameGrid.setPrefWidth(730.0);
+        gameGrid.setVgap(5);
+
+        // Load background image
+        Image backgroundImage = new Image(getClass().getResourceAsStream("/BackGroundImaging/8811189.jpg"));
+        ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView.setFitWidth(1500);
+        backgroundImageView.setFitHeight(1500);
+
+        // Add background image to GridPane
+        gameGrid.getChildren().add(backgroundImageView);
+
+        // Add column and row constraints
+        for (int i = 0; i < 45; i++) {
+            ColumnConstraints col = new ColumnConstraints(49.65);
+            gameGrid.getColumnConstraints().add(col);
+
+            RowConstraints row = new RowConstraints(33.1);
+            gameGrid.getRowConstraints().add(row);
+        }
+        gameGrid.setHgap(25.5);
+        gameGrid.setVgap(5);
+
+        // Populate the GridPane with game data
+        Set<Integer> visibleRows = new HashSet<>();
+        Set<Integer> visibleCols = new HashSet<>();
 
         int count = 1;
         int tmp = 0;
