@@ -132,7 +132,7 @@
                                 <!-- Background Image -->
                                 <ImageView fx:id="playAreaImage" fitHeight="4000.0" fitWidth="3397.0" preserveRatio="false">
                                     <image>
-                                        <Image url="@../BackGroundImaging/8811189.jpg" />
+                                        <Image url="@../BackGroundImaging/green-textile-texture.jpg" />
                                     </image>
                                     <GridPane.margin>
                                         <Insets />
