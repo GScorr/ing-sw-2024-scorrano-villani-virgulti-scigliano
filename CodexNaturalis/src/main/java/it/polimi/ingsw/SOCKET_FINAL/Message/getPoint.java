@@ -4,6 +4,7 @@ import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.PointResponse;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
+import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
@@ -20,6 +21,13 @@ public class getPoint implements Message, Serializable {
     ObjectOutputStream output;
     public Common_Server common;
     public VirtualGameServer rmi_controller;
+
+
+    private ClientHandler clientHandler;
+    @Override
+    public void setClientHandler(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
+    }
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {

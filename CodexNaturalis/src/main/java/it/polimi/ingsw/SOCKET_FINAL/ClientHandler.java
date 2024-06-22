@@ -45,7 +45,7 @@ public class ClientHandler  implements VirtualViewF {
     public String token;
     public String name;
     private Socket client_socket;
-    private VirtualGameServer rmi_controller;
+    public VirtualGameServer rmi_controller;
     public boolean client_is_connected = true;
 
     public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common , Socket clientsocket) throws IOException, NotBoundException {
@@ -252,83 +252,9 @@ public class ClientHandler  implements VirtualViewF {
                     DP_message.setServer(server);
                     DP_message.setOutput(output);
                     DP_message.setCommonServer(this.common);
+                    DP_message.setClientHandler(this);
+                    DP_message.action();
 
-                    if ((DP_message instanceof CheckNameMessage)) {
-                        String nome = ((CheckNameMessage) DP_message).nome;
-                        String mayToken =  common.checkName(nome,this);
-                        if (mayToken.equals("true")) {
-                            this.name = ((CheckNameMessage) DP_message).nome;
-                            this.token = common.createToken(this);
-                            ResponseMessage s = new checkNameResponse(1);
-                            sendMessage(s);
-                        }
-                        else if (mayToken.equals("false")) {
-                            ResponseMessage s = new checkNameResponse(0);
-                            sendMessage(s);
-                        }
-                        else {
-
-                            this.token = mayToken;
-                            startCheckingMessages();
-                            System.out.println("1");
-                            int port = common.getPort(token);
-                            Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
-                            this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                            client_is_connected = true;
-                            startSendingHeartbeats();
-                            ResponseMessage s = new checkNameResponse(2);
-                            sendMessage(s);
-                        }
-                    }
-                    else if ((DP_message instanceof CreateGame)) {
-                        ((CreateGame) DP_message).setClientHandler(this);
-                        startCheckingMessages();
-                        int port = ((CreateGame) DP_message).actionCreateGameMessage();
-                        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
-                        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                        startSendingHeartbeats();
-                    }
-                    else if (DP_message instanceof FindRMIControllerMessage) {
-                        ((FindRMIControllerMessage) DP_message).setClientHandler(this);
-                        if (((FindRMIControllerMessage) DP_message).actionFindRmi()) {
-                            ResponseMessage s = new CheckRmiResponse(true);
-                            sendMessage(s);
-                        }
-                        else {
-                            ResponseMessage s = new CheckRmiResponse(false);
-                            sendMessage(s);
-                        }
-                    }
-                    else if (DP_message instanceof connectGame) {
-                        startCheckingMessages();
-                        int port = common.getPort(token);
-                        Registry registry = LocateRegistry.getRegistry(Constants.IPV4, port);
-                        this.rmi_controller = (VirtualGameServer) registry.lookup(String.valueOf(port));
-                        startSendingHeartbeats();
-                    }
-                    else if (DP_message instanceof getGoalCard) {
-                        boolean isPresent = ((getGoalCard) DP_message).getGoalCardAction();
-                        ResponseMessage s = new checkGoalCardPresent(isPresent);
-                        sendMessage(s);
-                    }
-                    else if (DP_message instanceof getListGoalCard) {
-                        List<Goal> list_goal_card = ((getListGoalCard) DP_message).actionGetListGoalCard();
-                        ResponseMessage s = new getListGoalCardResponse(list_goal_card);
-                        sendMessage(s);
-                    }
-                    else if (DP_message instanceof getStartingCard) {
-                        PlayCard starting_card = ((getStartingCard) DP_message).getStartingCardAction();
-                        ResponseMessage s = new StartingCardResponse(starting_card);
-                        sendMessage(s);
-                    }
-                    else if (DP_message instanceof firstCardIsPlaced) {
-                        boolean isPlaced = ((firstCardIsPlaced) DP_message).firstCardIsPlacedAction();
-                        ResponseMessage s = new checkStartingCardSelected(isPlaced);
-                        sendMessage(s);
-                    }
-                    else {
-                        DP_message.action();
-                    }
                 }
             } catch (EOFException e) {
                 disconect();

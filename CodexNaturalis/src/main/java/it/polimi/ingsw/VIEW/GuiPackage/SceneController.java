@@ -35,7 +35,7 @@ public class SceneController {
     private static MediaPlayer mediaPlayer;
 
     public SceneController() {
-        BackgroundMusic.initialize();
+       // BackgroundMusic.initialize();
     }
 
 

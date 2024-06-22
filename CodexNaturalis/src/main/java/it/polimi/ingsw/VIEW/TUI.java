@@ -108,9 +108,9 @@ public class TUI implements Serializable, GraficInterterface {
         int flag;
         do{
             System.out.print(stringcostant.choose_name_player);
-            System.out.println("arrivo qua");
+
             player_name = scan.nextLine();
-            System.out.println("arrivo quaa");
+
             flag = client.checkName(player_name);
             if(flag==0){
                 System.out.println(stringcostant.name_is_not_valid);

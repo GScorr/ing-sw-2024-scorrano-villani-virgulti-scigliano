@@ -73,6 +73,8 @@ public class clientSocket implements VirtualViewF, Serializable {
     public String token;
     private boolean flag_Server_Disconneted = false;
 
+    private boolean isPlacingCard = false;
+
     public clientSocket(ObjectInputStream input, ObjectOutputStream output, Socket socket) throws IOException, ClassNotFoundException {
         this.server_proxy = new ServerProxy(output);
         this.input = input;
@@ -275,9 +277,13 @@ public class clientSocket implements VirtualViewF, Serializable {
     @Override
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException {
         server_proxy.placeCard(choice - 1,x,y,flipped);
+        isPlacingCard = true;
         waitResponse();
+
+       /* buffering();
         buffering();
-        buffering();
+
+        */
     }
 
     /**
@@ -291,9 +297,8 @@ public class clientSocket implements VirtualViewF, Serializable {
     @Override
     public void drawCard(SendFunction function) throws IOException, InterruptedException {
         server_proxy.drawCard(function);
-        while (this.miniModel.getState().equals("DRAW_CARD")){
-            buffering();
-        }
+        isPlacingCard = true;
+        waitResponse();
     }
 
     /**
@@ -584,8 +589,10 @@ public class clientSocket implements VirtualViewF, Serializable {
     public void waitResponse() throws InterruptedException {
         flag_check = true;
         while(flag_check){
-            Thread.sleep(200);
+            Thread.sleep(400);
         }
+
+        if (isPlacingCard) Thread.sleep(1500); isPlacingCard = false;
     }
 
     /**

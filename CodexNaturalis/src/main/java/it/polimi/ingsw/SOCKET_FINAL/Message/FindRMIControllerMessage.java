@@ -1,8 +1,11 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.CheckRmiResponse;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
+import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 
@@ -26,7 +29,11 @@ public class FindRMIControllerMessage implements Message, Serializable {
 
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-    public VirtualViewF clientHandler;
+    private ClientHandler clientHandler;
+    @Override
+    public void setClientHandler(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
+    }
 
 
     @Override
@@ -41,9 +48,7 @@ public class FindRMIControllerMessage implements Message, Serializable {
         this.token = token;
     }
 
-    public void setClientHandler(VirtualViewF clientHandler) {
-        this.clientHandler = clientHandler;
-    }
+
 
     public void setServer(Server server) {
         this.server = server;
@@ -73,6 +78,15 @@ public class FindRMIControllerMessage implements Message, Serializable {
     }
 
     @Override
-    public void action() throws IOException {}
+    public void action() throws IOException, InterruptedException {
+        if (this.actionFindRmi()) {
+            ResponseMessage s = new CheckRmiResponse(true);
+            clientHandler.sendMessage(s);
+        }
+        else {
+            ResponseMessage s = new CheckRmiResponse(false);
+            clientHandler.sendMessage(s);
+        }
+    }
 
 }

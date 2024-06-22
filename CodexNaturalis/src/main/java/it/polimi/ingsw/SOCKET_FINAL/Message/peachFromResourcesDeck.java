@@ -4,6 +4,7 @@ import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawResource;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
+import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
 import it.polimi.ingsw.SOCKET_FINAL.Server;
 
 import java.io.IOException;
@@ -26,6 +27,12 @@ public class peachFromResourcesDeck implements Message, Serializable {
     public int x;
     public int y;
     public boolean flipped;
+
+    private ClientHandler clientHandler;
+    @Override
+    public void setClientHandler(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
+    }
 
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
