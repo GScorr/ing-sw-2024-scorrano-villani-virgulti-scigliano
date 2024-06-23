@@ -469,10 +469,11 @@ public class HeaderController extends GenericSceneController {
         result.ifPresent(description -> {
             // Extract the player number from the selected description
             int playerNumber = Integer.parseInt(description.split(" ")[1]);
-            System.out.println(playerNumber);
+            // Extract the player name from the selected description
+            String playerName = description.split(" Name: ")[1];
             // Load and display the selected player's field
             try {
-                showOpponentField(playerNumber);
+                showOpponentField(playerName );
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -483,17 +484,24 @@ public class HeaderController extends GenericSceneController {
     /**
      * Displays a pop-up window showing the selected opponent's game field.
      *
-     * @param playerNumber The ID of the opponent player.
      * @throws IOException If an I/O error occurs while fetching data or loading images.
      */
     @FXML
-    private void showOpponentField(int playerNumber) throws IOException {
+    private void showOpponentField( String playerName) throws IOException {
+        System.out.println(playerName);
         // Check if the opponent field popup is already open
+        int playerNumber = 5;
 
+        for(int i = 0; i <  the_client.getMiniModel().getGame_fields().size() ; i++){
+            if(playerName.compareTo( the_client.getMiniModel().getGame_fields().get(i).getPlayer().getName()) == 0) playerNumber = i;
+        }
+
+        if(playerNumber == 5) System.out.println("non va bene questa cosa, Header Controller riga 498");
 
         // Create a new stage for the pop-up
         opponentFieldStage = new Stage();
-        opponentFieldStage.setTitle("Campo da gioco di Player " + playerNumber + " - " + the_client.getMiniModel().getNum_to_player().get(playerNumber));
+
+        opponentFieldStage.setTitle("Campo da gioco di Player " + playerName + " - " + the_client.getMiniModel().getNum_to_player().get(playerNumber));
         opponentFieldStage.setResizable(false); // Make the window non-resizable
 
         // Set the owner of the popup stage to the main stage
@@ -541,25 +549,25 @@ public class HeaderController extends GenericSceneController {
         int count = 1;
         int tmp = 0;
 
-        while (count <= the_client.getMiniModel().game_fields.get(playerNumber - 1).card_inserted) {
+        while (count <= the_client.getMiniModel().game_fields.get(playerNumber).card_inserted) {
             for (int i = 0; i < Constants.MATRIXDIM; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                    if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
+                    if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
-                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
                         } else {
-                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
-                    } else if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
+                    } else if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
-                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
                         } else {
-                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
                     }
