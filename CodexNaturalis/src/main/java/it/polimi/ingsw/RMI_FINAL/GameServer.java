@@ -366,13 +366,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
                                 message_update.isAlone = true;
                                 broadcastMessageOneClient(message_update, alone_client );
-                                Thread.sleep(150);
+                                Thread.sleep(1500);
                                 while( countdown > 0 && clientsRMI.size() == 1) {
                                     message_update = new UpdateMessage(countdown + " SECONDS LEFT");
                                     message_update.isAlone = true;
                                     broadcastMessageOneClient(message_update,  alone_client );
                                     checkEndDisconnect();
-
                                     countdown--;
                                     Thread.sleep(1000);
                                 }

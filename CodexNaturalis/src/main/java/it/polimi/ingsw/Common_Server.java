@@ -214,7 +214,6 @@ public class Common_Server {
         Set<String> keys = lastHeartbeatTime.keySet();
         for (String key : keys) {
             if (currentTime - lastHeartbeatTime.get(key) > HEARTBEAT_TIMEOUT && lastHeartbeatTime.get(key)!=0) {
-                System.out.println("lastheartbeat is " + lastHeartbeatTime.get(key) + " currenttime is " + currentTime + "and the difference is " + (currentTime - lastHeartbeatTime.get(key)));
                 try{
                     if(token_to_rmi.get(key)!=null ){if( token_to_rmi.get(key).getTtoP().get(key).isDisconnected()) continue;
                     token_to_rmi.get(key).getTtoP().get(key).disconnect();
