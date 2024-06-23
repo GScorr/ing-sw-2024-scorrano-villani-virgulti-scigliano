@@ -126,8 +126,12 @@ public class MiniModel implements Serializable {
 
     public void printNumToField(){
         System.out.println("WHICH PLAYER'S GAME FIELD YOU WANT TO SEE?");
-        for( Integer i : num_to_player.keySet() ){
-            System.out.println("-" + i + " Name:  " + num_to_player.get(i) );
+        num_to_player.clear();
+        int i = 1;
+        for( GameField g : game_fields){
+            System.out.println("-" + i + " Name:  " + g.getPlayer().getName() );
+            num_to_player.put(i, g.getPlayer().getName() );
+            i++;
         }
     }
 

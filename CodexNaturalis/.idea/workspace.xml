@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="View gameField opponents sistemato">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/MiniModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/RMI_FINAL/GameServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +172,7 @@
       <recent name="it.polimi.ingsw.SOCKET_FINAL" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Common_Client">
+  <component name="RunManager" selected="Application.Common_Server">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.SOCKET_FINAL.Client" />
       <module name="PSP30" />
@@ -750,7 +751,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="scoreboard finita" />
     <MESSAGE value="CD" />
     <MESSAGE value="Revisione commenti fine RMI, manca Gameserver" />
     <MESSAGE value="small fixes" />
@@ -775,7 +775,8 @@
     <MESSAGE value="fix al game wait" />
     <MESSAGE value="pulizia Socket, miglioramente prestazioni in PlaceCard e DrawCard da Socket&#10;Piccolo errore in TUI : il campo viene stampato dopo che viene fatto il print del &quot;scegli da che mazzo stampare&quot;" />
     <MESSAGE value="View gameField opponents sistemato" />
-    <option name="LAST_COMMIT_MESSAGE" value="View gameField opponents sistemato" />
+    <MESSAGE value="small fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

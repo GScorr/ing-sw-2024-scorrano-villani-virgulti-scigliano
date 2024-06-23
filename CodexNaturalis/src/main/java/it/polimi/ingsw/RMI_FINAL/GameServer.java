@@ -51,7 +51,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         playDisconnected();
-        checkDeadline();
+
         this.port = port;
         this.server = commonServer;
     }
@@ -88,6 +88,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         setAllStates();
         //--riga aggiunta da Fra
         clientsRMI.add(client);
+        if (clientsRMI.size() == controller.getGame().getMax_num_player()) checkDeadline();
         return true;
     }
 
