@@ -7,7 +7,6 @@
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/VIEW/GuiPackage/CONTROLLER/HeaderController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,14 +321,7 @@
       <workItem from="1718542741884" duration="147000" />
       <workItem from="1718566931904" duration="453000" />
       <workItem from="1718697539757" duration="30267000" />
-    </task>
-    <task id="LOCAL-00169" summary="qualcosa inizia ad andare">
-      <option name="closed" value="true" />
-      <created>1717856728416</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1717856728416</updated>
+      <workItem from="1719280709888" duration="360000" />
     </task>
     <task id="LOCAL-00170" summary="qualcosa inizia ad andare">
       <option name="closed" value="true" />
@@ -715,7 +707,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718833593869</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL-00218" summary="L'HO FATTA GROSSA PT 2 header.fxml">
+      <option name="closed" value="true" />
+      <created>1718836063608</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1718836063608</updated>
+    </task>
+    <option name="localTasksCounter" value="219" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
