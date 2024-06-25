@@ -12,13 +12,13 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * RMI server implementation that manages game creation, player connections, and communication between clients and game logic.
- * This server interacts with a Common_Server object to handle core game logic and provides methods for clients to:
+ * RMI serverSocket implementation that manages game creation, player connections, and communication between clients and game logic.
+ * This serverSocket interacts with a Common_Server object to handle core game logic and provides methods for clients to:
  * Connect and authenticate
  * Create and join games
  * Access information about games and players
  * Receive game updates
- * The server also handles heartbeats from clients to monitor connections.
+ * The serverSocket also handles heartbeats from clients to monitor connections.
  */
 public class RmiServerF implements VirtualServerF {
 

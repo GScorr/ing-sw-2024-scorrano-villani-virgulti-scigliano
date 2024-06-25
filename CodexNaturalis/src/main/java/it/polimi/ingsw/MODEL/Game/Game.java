@@ -199,6 +199,25 @@ public class Game implements Serializable {
             get_player_index.get(i).setDeck(resources_deck,gold_deck,cards_in_center);
         }
 
+/*
+
+       //     TRY ( GAME ENDS GOLDS AND RESORCES CARD )
+
+
+        int num_gold_deck = this.gold_deck.cards.size();
+        int num_resorce_deck = this.resources_deck.cards.size();
+
+
+        for(int i = 0; i < num_gold_deck - 1   ; i ++){
+            this.gold_deck.drawCard();
+        }
+
+        for(int i = 0; i < num_resorce_deck - 1   ; i ++){
+            this.resources_deck.drawCard();
+        }
+
+*/
+
     }
 
     /**

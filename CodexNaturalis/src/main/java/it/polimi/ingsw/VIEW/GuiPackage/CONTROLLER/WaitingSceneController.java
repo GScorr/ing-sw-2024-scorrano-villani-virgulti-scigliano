@@ -36,7 +36,7 @@ public class WaitingSceneController extends GenericSceneController{
      * the game state through the client's MiniModel. Once the game state transitions out
      * of "NOT_INITIALIZED" or "NOT_IN_A_GAME", it sets the game field MiniModel and initiates
      * the goal selection process through the client interface. Handles potential exceptions
-     * during communication with the server.
+     * during communication with the serverSocket.
      */
     @FXML
     public void initialize() {

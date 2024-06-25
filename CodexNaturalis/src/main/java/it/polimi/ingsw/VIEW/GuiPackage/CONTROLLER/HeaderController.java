@@ -51,6 +51,8 @@ public class HeaderController extends GenericSceneController {
     private Menu chatsMenu;
     private ChatIndexManager chat_manager = new ChatIndexManager();
     private VirtualViewF the_client;
+    GridPane gameGrid;
+
     GenericSceneController upper_controller ;
     SceneController scene_controller;
     ColorCoordinatesHelper helper;
@@ -323,11 +325,11 @@ public class HeaderController extends GenericSceneController {
     }
 
     /**
-     * Disconnects the client from the server when the disconnect button is pressed.
+     * Disconnects the client from the serverSocket when the disconnect button is pressed.
      *
      * @param actionEvent The event triggered by the disconnect button.
-     * @throws IOException If an I/O error occurs during communication with the server.
-     * @throws NotBoundException If the client is not properly connected to the server.
+     * @throws IOException If an I/O error occurs during communication with the serverSocket.
+     * @throws NotBoundException If the client is not properly connected to the serverSocket.
      * @throws ClassNotFoundException If a class used during communication cannot be found.
      * @throws InterruptedException If the communication thread is interrupted.
      */
@@ -467,9 +469,11 @@ public class HeaderController extends GenericSceneController {
         result.ifPresent(description -> {
             // Extract the player number from the selected description
             int playerNumber = Integer.parseInt(description.split(" ")[1]);
+            // Extract the player name from the selected description
+            String playerName = description.split(" Name: ")[1];
             // Load and display the selected player's field
             try {
-                showOpponentField(playerNumber);
+                showOpponentField(playerName );
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -480,17 +484,24 @@ public class HeaderController extends GenericSceneController {
     /**
      * Displays a pop-up window showing the selected opponent's game field.
      *
-     * @param playerNumber The ID of the opponent player.
      * @throws IOException If an I/O error occurs while fetching data or loading images.
      */
     @FXML
-    private void showOpponentField(int playerNumber) throws IOException {
+    private void showOpponentField( String playerName) throws IOException {
+        System.out.println(playerName);
         // Check if the opponent field popup is already open
+        int playerNumber = 5;
 
+        for(int i = 0; i <  the_client.getMiniModel().getGame_fields().size() ; i++){
+            if(playerName.compareTo( the_client.getMiniModel().getGame_fields().get(i).getPlayer().getName()) == 0) playerNumber = i;
+        }
+
+        if(playerNumber == 5) System.out.println("non va bene questa cosa, Header Controller riga 498");
 
         // Create a new stage for the pop-up
         opponentFieldStage = new Stage();
-        opponentFieldStage.setTitle("Campo da gioco di Player " + playerNumber + " - " + the_client.getMiniModel().getNum_to_player().get(playerNumber));
+
+        opponentFieldStage.setTitle("Campo da gioco di Player " + playerName + " - " + the_client.getMiniModel().getNum_to_player().get(playerNumber));
         opponentFieldStage.setResizable(false); // Make the window non-resizable
 
         // Set the owner of the popup stage to the main stage
@@ -505,7 +516,7 @@ public class HeaderController extends GenericSceneController {
         scrollPane.setPrefHeight(450.0);
 
         // Create the GridPane
-        GridPane gameGrid = new GridPane();
+        gameGrid = new GridPane();
         gameGrid.setHgap(20);
         gameGrid.setPrefHeight(1500);
         gameGrid.setPrefWidth(1500);
@@ -537,25 +548,26 @@ public class HeaderController extends GenericSceneController {
 
         int count = 1;
         int tmp = 0;
-        while (count <= the_client.getMiniModel().game_fields.get(playerNumber - 1).card_inserted) {
+
+        while (count <= the_client.getMiniModel().game_fields.get(playerNumber).card_inserted) {
             for (int i = 0; i < Constants.MATRIXDIM; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM; j++) {
-                    if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
+                    if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getOrder_above() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCard().flipped) {
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCard().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCard().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
-                    } else if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
+                    } else if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getOrder_below() == count) {
                         tmp = count;
                         count = 1500;
-                        if (the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
+                        if (the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCardDown().flipped) {
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCardDown().back_side_path);
                         } else {
-                            addImageToGrid(gameGrid, i, j, the_client.getMiniModel().game_fields.get(playerNumber - 1).getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
+                            addImageToGrid(i, j, the_client.getMiniModel().game_fields.get(playerNumber).getCell(i, j, Constants.MATRIXDIM).getCardDown().front_side_path);
                         }
                         updateVisibleIndices(visibleRows, visibleCols, i, j);
                     }
@@ -565,7 +577,7 @@ public class HeaderController extends GenericSceneController {
             count++;
         }
 
-        adjustGridVisibility(gameGrid, visibleRows, visibleCols);
+        adjustGridVisibility(visibleRows, visibleCols);
 
         // Set the GridPane as the content of the ScrollPane
         scrollPane.setContent(gameGrid);
@@ -587,14 +599,14 @@ public class HeaderController extends GenericSceneController {
     /**
      * Adds an image representation of a card to the opponent's game field grid.
      *
-     * @param grid The GridPane representing the opponent's game field.
+
      * @param row The row index in the grid.
      * @param col The column index in the grid.
      * @param imagePath The path to the card image.
      */
-    private void addImageToGrid(GridPane grid, int row, int col, String imagePath) {
-        File file = new File(imagePath);
-        Image image = new Image(file.toURI().toString());
+    private void addImageToGrid(int row, int col, String imagePath) {
+       File file = new File(imagePath);
+       Image image = new Image(file.toURI().toString());
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(49.65 * 2);
@@ -603,7 +615,8 @@ public class HeaderController extends GenericSceneController {
         StackPane stackPane = new StackPane();
         imageView.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;");
         stackPane.getChildren().add(imageView);
-        grid.add(stackPane, row, col);
+
+        gameGrid.add(stackPane, col, row, 2, 2); // Occupy 2 columns and 2 rows
     }
 
     /**
@@ -630,24 +643,22 @@ public class HeaderController extends GenericSceneController {
     /**
      * Hides rows and columns of the opponent's game field grid that are not
      * needed to display the visible cards.
-     *
-     * @param grid The GridPane representing the opponent's game field.
      * @param visibleRows The set containing currently visible rows.
      * @param visibleCols The set containing currently visible columns.
      */
-    private void adjustGridVisibility(GridPane grid, Set<Integer> visibleRows, Set<Integer> visibleCols) {
+    private void adjustGridVisibility(Set<Integer> visibleRows, Set<Integer> visibleCols) {
         for (int i = 0; i < Constants.MATRIXDIM; i++) {
             if (!visibleRows.contains(i)) {
-                grid.getRowConstraints().get(i).setMinHeight(0);
-                grid.getRowConstraints().get(i).setPrefHeight(0);
-                grid.getRowConstraints().get(i).setMaxHeight(0);
+                gameGrid.getRowConstraints().get(i).setMinHeight(0);
+                gameGrid.getRowConstraints().get(i).setPrefHeight(0);
+                gameGrid.getRowConstraints().get(i).setMaxHeight(0);
             }
         }
         for (int j = 0; j < Constants.MATRIXDIM; j++) {
             if (!visibleCols.contains(j)) {
-                grid.getColumnConstraints().get(j).setMinWidth(0);
-                grid.getColumnConstraints().get(j).setPrefWidth(0);
-                grid.getColumnConstraints().get(j).setMaxWidth(0);
+                gameGrid.getColumnConstraints().get(j).setMinWidth(0);
+                gameGrid.getColumnConstraints().get(j).setPrefWidth(0);
+                gameGrid.getColumnConstraints().get(j).setMaxWidth(0);
             }
         }
     }

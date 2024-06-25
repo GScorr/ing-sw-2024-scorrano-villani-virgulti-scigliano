@@ -2,7 +2,8 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -13,10 +14,16 @@ da eliminare probabilmente
 public class showGameFieldMessage implements Message, Serializable {
 
     public String token;
-    public Server server;
+    public ServerSocket serverSocket;
     public Common_Server common;
 
     public VirtualGameServer rmi_controller;
+
+    private ClientHandler clientHandler;
+    @Override
+    public void setClientHandler(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
+    }
 
 
     @Override
@@ -36,8 +43,8 @@ public class showGameFieldMessage implements Message, Serializable {
 
 
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {

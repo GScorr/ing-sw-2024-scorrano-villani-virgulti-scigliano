@@ -2,21 +2,21 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * Represents a global chat message sent by a player. This message is received by the server
+ * Represents a global chat message sent by a player. This message is received by the serverSocket
  * and forwarded to the game logic.
  */
 public class chatGlobal implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
@@ -25,10 +25,18 @@ public class chatGlobal implements Message, Serializable {
 
     public boolean flipped;
 
+    private ClientHandler clientHandler;
+    @Override
+    public void setClientHandler(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
+    }
+
     @Override
     public void setRmiController(VirtualGameServer rmi_controller) {
         this.rmi_controller = rmi_controller;
     }
+
+
 
     public void setCommonServer(Common_Server common){
         this.common = common;
@@ -43,8 +51,8 @@ public class chatGlobal implements Message, Serializable {
     }
 
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {

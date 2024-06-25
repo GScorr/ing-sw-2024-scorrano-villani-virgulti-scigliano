@@ -94,7 +94,7 @@ public class TUI implements Serializable, GraficInterterface {
     }
 
     /**
-     * Prompts the user to select a player name and validates it with the server.
+     * Prompts the user to select a player name and validates it with the serverSocket.
      *
      * @return The chosen player name as a String.
      * @throws IOException
@@ -108,9 +108,9 @@ public class TUI implements Serializable, GraficInterterface {
         int flag;
         do{
             System.out.print(stringcostant.choose_name_player);
-            System.out.println("arrivo qua");
+
             player_name = scan.nextLine();
-            System.out.println("arrivo quaa");
+
             flag = client.checkName(player_name);
             if(flag==0){
                 System.out.println(stringcostant.name_is_not_valid);
@@ -185,7 +185,7 @@ public class TUI implements Serializable, GraficInterterface {
     }
 
     /**
-     * Handles creating a new game on the server.
+     * Handles creating a new game on the serverSocket.
      *
      * @param player_name The chosen player name.
      * @param empty Whether there are existing games available (informs the user).
@@ -465,7 +465,7 @@ public class TUI implements Serializable, GraficInterterface {
      * Displays a menu based on the current game state and handles user choices.
      *
      * @param message  The message to display at the top of the menu.
-     * @param current_state The current state of the game as reported by the server.
+     * @param current_state The current state of the game as reported by the serverSocket.
      * @throws IOException If an I/O error occurs during communication.
      */
     private void menuChoice(String message, String current_state) throws IOException {
@@ -475,9 +475,9 @@ public class TUI implements Serializable, GraficInterterface {
 
             switch (choice) {
                 case (0):
-                    client.getMiniModel().printNumToField();
-                    int i = scan.nextInt();
-                    client.getMiniModel().showGameField(i);
+                    String player_name = client.getMiniModel().printNumToField();
+                    if (player_name == null) System.out.println("Player not found");
+                    else client.getMiniModel().showGameField(player_name);
                     break;
                 case (1):
                     client.getMiniModel().showCards();

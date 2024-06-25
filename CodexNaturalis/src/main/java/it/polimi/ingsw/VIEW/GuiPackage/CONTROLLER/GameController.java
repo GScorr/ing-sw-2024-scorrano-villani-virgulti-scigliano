@@ -96,7 +96,7 @@ public class GameController extends GenericSceneController{
         String message = messageInput.getText();
         if (!message.isEmpty()) {
             addMessageToChat("You: " + message);
-            // Qui potresti gestire l'invio del messaggio al server o ad altri giocatori
+            // Qui potresti gestire l'invio del messaggio al serverSocket o ad altri giocatori
             messageInput.clear(); // Pulisce il campo di input del messaggio dopo l'invio
         }
     }
@@ -245,7 +245,7 @@ public class GameController extends GenericSceneController{
     }
 
     /**
-     * da sistemare con la chiamata a server per il caricamento delle immagini
+     * da sistemare con la chiamata a serverSocket per il caricamento delle immagini
      * e per la carta selezionata
      */
     @FXML

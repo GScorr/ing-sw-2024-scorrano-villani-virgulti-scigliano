@@ -73,7 +73,7 @@ public class ChooseGoalController extends GenericSceneController {
      * Initializes the scene by:
      *  - Loading the header scene and setting its controller properties.
      *  - Loading images for the two goal cards.
-     *  - If the goal card hasn't been placed yet (by the server), shows a buffering message and starts checking the client state.
+     *  - If the goal card hasn't been placed yet (by the serverSocket), shows a buffering message and starts checking the client state.
      *
      * @throws IOException If there's an error loading FXML or images.
      * @throws ClassNotFoundException If there's a class not found exception during header initialization.

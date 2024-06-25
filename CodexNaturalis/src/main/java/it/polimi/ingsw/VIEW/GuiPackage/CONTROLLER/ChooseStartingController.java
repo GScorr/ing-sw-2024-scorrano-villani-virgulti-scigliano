@@ -69,7 +69,7 @@ public class ChooseStartingController extends GenericSceneController {
      * Initializes the scene by:
      *  - Loading the header scene and setting its controller properties.
      *  - Loading images for both sides of the starting card.
-     *  - If the card placement hasn't been confirmed by the server, shows a buffering message and starts checking the client state.
+     *  - If the card placement hasn't been confirmed by the serverSocket, shows a buffering message and starts checking the client state.
      *
      * @throws IOException If there's an error loading FXML or images.
      * @throws ClassNotFoundException If there's a class not found exception during header initialization.

@@ -1,9 +1,11 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
+import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.CheckRmiResponse;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 
 import java.io.IOException;
@@ -11,7 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * Represents a message sent by the client to find a specific RMI game server controller.
+ * Represents a message sent by the client to find a specific RMI game serverSocket controller.
  * This message likely contains an identifier for the desired controller and the player's information.
  */
 public class FindRMIControllerMessage implements Message, Serializable {
@@ -20,13 +22,17 @@ public class FindRMIControllerMessage implements Message, Serializable {
 
     public String player_name;
     public  String token;
-    public Server server;
+    public ServerSocket serverSocket;
 
     ObjectOutputStream output;
 
     public Common_Server common;
     public VirtualGameServer rmi_controller;
-    public VirtualViewF clientHandler;
+    private ClientHandler clientHandler;
+    @Override
+    public void setClientHandler(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
+    }
 
 
     @Override
@@ -41,12 +47,10 @@ public class FindRMIControllerMessage implements Message, Serializable {
         this.token = token;
     }
 
-    public void setClientHandler(VirtualViewF clientHandler) {
-        this.clientHandler = clientHandler;
-    }
 
-    public void setServer(Server server) {
-        this.server = server;
+
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {
@@ -60,7 +64,7 @@ public class FindRMIControllerMessage implements Message, Serializable {
     }
 
     /**
-     * Sends a request to the common server to find the RMI game server controller
+     * Sends a request to the common serverSocket to find the RMI game serverSocket controller
      * with the specified identifier. It also provides the player's token and name
      * for authentication and association. Returns true if the controller is found,
      * false otherwise.
@@ -73,6 +77,15 @@ public class FindRMIControllerMessage implements Message, Serializable {
     }
 
     @Override
-    public void action() throws IOException {}
+    public void action() throws IOException, InterruptedException {
+        if (this.actionFindRmi()) {
+            ResponseMessage s = new CheckRmiResponse(true);
+            clientHandler.sendMessage(s);
+        }
+        else {
+            ResponseMessage s = new CheckRmiResponse(false);
+            clientHandler.sendMessage(s);
+        }
+    }
 
 }

@@ -88,4 +88,34 @@ class GameFieldControllerTest {
     }
 
 
+    @Test
+    void getPlayer() {
+    }
+
+    @Test
+    void getPlayer_field() {
+    }
+
+    @Test
+    void checkPlacing() {
+    }
+
+    @Test
+    void testGoldPointsCount() {
+    }
+
+    @Test
+    void testResourcePointsCount() {
+    }
+
+    @Test
+    void testResourcePointsChange() {
+    }
+
+    @Test
+    void getCurrent() {
+    }
+
+
+
 }

@@ -5,13 +5,14 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.shape.Circle?>
-<BorderPane maxHeight="770.0" minHeight="770.0" prefHeight="770.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameWait">
+<BorderPane maxHeight="770.0" minHeight="770.0" prefHeight="770.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.GameWait">
 
     <!-- Menu at the top -->
     <top>
@@ -25,7 +26,7 @@
                 <Image url="@../BackGroundImaging/8811189.jpg" />
             </ImageView>
             <VBox alignment="CENTER" maxHeight="750.0" minHeight="750.0" prefHeight="750.0" prefWidth="1409.0">
-                <Label alignment="CENTER" prefHeight="52.0" prefWidth="415.0" styleClass="title" text="Waiting for other players' turn..." textAlignment="CENTER">
+                <Label alignment="CENTER" prefHeight="52.0" prefWidth="415.0" styleClass="title" text="Waiting for other players' turn..." textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font></Label>
@@ -46,16 +47,17 @@
     <!-- VBox for the decks at the right -->
     <left>
         <StackPane maxHeight="730.0" minHeight="730.0" prefHeight="730.0" BorderPane.alignment="TOP_CENTER">
-            <ImageView fitHeight="730.0" fitWidth="500.0" opacity="0.69" preserveRatio="true">
+            <ImageView fitHeight="730.0" fitWidth="500.0" preserveRatio="true">
                 <Image url="@../BackGroundImaging/v850-sasi-14.jpg" />
             </ImageView>
 
-            <VBox fx:id="handBox" alignment="CENTER" maxHeight="730.0" maxWidth="500.0" minHeight="730.0" prefHeight="730.0" prefWidth="413.0" spacing="10">
-                <Label fx:id="playerNameLabel" alignment="CENTER" prefHeight="46.0" prefWidth="182.0" style="-fx-font-weight: bold;" text="Player Name" textFill="WHITE">
-               <font>
-                  <Font size="22.0" />
-               </font></Label>
-                <VBox alignment="CENTER" layoutX="392.0" layoutY="20.0">
+            <AnchorPane maxHeight="730.0" maxWidth="500.0" minHeight="730.0" prefHeight="730.0" prefWidth="413.0">
+                <Label fx:id="playerNameLabel" alignment="CENTER" layoutX="74.0" layoutY="646.0" style="-fx-font-weight: bold;" text="Player Name" textFill="WHITE">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <VBox alignment="CENTER" layoutX="326.0" layoutY="640.0">
                     <Label alignment="CENTER" style="-fx-text-fill: white;" text="COLOR">
                         <font>
                             <Font size="16.0" />
@@ -63,14 +65,16 @@
                     </Label>
                     <Circle fx:id="playerColorCircle" radius="10.0" />
                 </VBox>
-                <Label alignment="CENTER" prefHeight="38.0" prefWidth="133.0" text="Cards in HAND:" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-                <ImageView fx:id="handCard1" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
-                <ImageView fx:id="handCard2" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
-                <ImageView fx:id="handCard3" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
-            </VBox>
+                <Label alignment="CENTER" layoutX="165.0" layoutY="-5.0" prefHeight="38.0" prefWidth="133.0" text="Cards in HAND:" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="handCard1" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="55.0" onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
+                <ImageView fx:id="handCard2" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="224.0" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
+                <ImageView fx:id="handCard3" fitHeight="150.0" fitWidth="150.0" layoutX="157.0" layoutY="390.0" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
+            </AnchorPane>
         </StackPane>
     </left>
+
 </BorderPane>

@@ -35,7 +35,7 @@ public class SceneController {
     private static MediaPlayer mediaPlayer;
 
     public SceneController() {
-        BackgroundMusic.initialize();
+       // BackgroundMusic.initialize();
     }
 
 
@@ -158,7 +158,7 @@ public class SceneController {
      *
      * @param title The title of the chat window.
      * @param idx An index (purpose unclear, requires clarification).
-     * @param client The client object for communication with the server.
+     * @param client The client object for communication with the serverSocket.
      * @param decision A decision value (purpose unclear, requires clarification).
      * @param header The header controller associated with the chat scene.
      * @throws IOException If an I/O error occurs during FXML loading.

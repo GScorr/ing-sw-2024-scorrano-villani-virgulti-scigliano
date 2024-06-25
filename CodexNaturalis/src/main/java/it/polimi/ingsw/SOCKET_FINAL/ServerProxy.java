@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * A class for interacting with the server through messages.
+ * A class for interacting with the serverSocket through messages.
  *
  */
 public class ServerProxy implements  Serializable {
@@ -25,10 +25,10 @@ public class ServerProxy implements  Serializable {
         this.output = output;
     }
 
-    // this function send the Message Object to the server
+    // this function send the Message Object to the serverSocket
 
     /**
-     * Sends a message object to the server.
+     * Sends a message object to the serverSocket.
      *
      * @param DP_Message the message to send
      * @throws IOException if an I/O error occurs
@@ -40,7 +40,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server to check if the provided name is available for a new player.
+     * Sends a message to the serverSocket to check if the provided name is available for a new player.
      *
      * @param name the name to check for availability
      * @throws IOException if an I/O error occurs while sending the message
@@ -58,7 +58,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server to create a new game with the specified details.
+     * Sends a message to the serverSocket to create a new game with the specified details.
      *
      * @param game_name the name of the game to create
      * @param num_players the desired number of players in the game
@@ -73,7 +73,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server to retrieve the RMI controller for the game with the given ID.
+     * Sends a message to the serverSocket to retrieve the RMI controller for the game with the given ID.
      *
      * @param id the ID of the game to join
      * @param player_name the player's name who wants to join the game
@@ -96,7 +96,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server indicating the chosen goal card by its index.
+     * Sends a message to the serverSocket indicating the chosen goal card by its index.
      *
      * @param index the zero-based index of the chosen goal card
      * @throws IOException if an I/O error occurs while sending the message
@@ -112,7 +112,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server indicating that the starting card has been placed.
+     * Sends a message to the serverSocket indicating that the starting card has been placed.
      *
      * @throws IOException if an I/O error occurs while sending the message
      */
@@ -122,7 +122,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server indicating whether the client wants to choose
+     * Sends a message to the serverSocket indicating whether the client wants to choose
      * a starting card or keep the random selection.
      *
      * @param check a flag indicating the player's choice
@@ -134,7 +134,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server indicating the placement of a card.
+     * Sends a message to the serverSocket indicating the placement of a card.
      *
      * @param index the index of the card to place
      * @param x the x-coordinate of the desired placement location on the board
@@ -149,7 +149,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server to inquire about the presence of the gold card deck.
+     * Sends a message to the serverSocket to inquire about the presence of the gold card deck.
      *
      * @throws IOException if an I/O error occurs while sending the message
      * @throws ClassNotFoundException if a received message object cannot be found (unexpected)
@@ -160,7 +160,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server to inquire about the presence of the resource card deck.
+     * Sends a message to the serverSocket to inquire about the presence of the resource card deck.
      *
      * @throws IOException if an I/O error occurs while sending the message
      * @throws ClassNotFoundException if a received message object cannot be found
@@ -177,9 +177,9 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server requesting to draw a card.
+     * Sends a message to the serverSocket requesting to draw a card.
      *
-     * @param function a callback function to handle the server's response about the drawn card
+     * @param function a callback function to handle the serverSocket's response about the drawn card
      * @throws IOException if an I/O error occurs while sending the message
      */
     public void drawCard(SendFunction function) throws IOException {
@@ -188,7 +188,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a message to the server indicating the client's intent to connect to the game.
+     * Sends a message to the serverSocket indicating the client's intent to connect to the game.
      *
      * @throws IOException if an I/O error occurs while sending the message
      */
@@ -203,7 +203,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a global chat message to the server. This message will be broadcast to all players in the game.
+     * Sends a global chat message to the serverSocket. This message will be broadcast to all players in the game.
      *
      * @param chatMessage the chat message to send
      * @throws IOException if an I/O error occurs while sending the message
@@ -214,7 +214,7 @@ public class ServerProxy implements  Serializable {
     }
 
     /**
-     * Sends a chat message to the server related to a specific moment in the game.
+     * Sends a chat message to the serverSocket related to a specific moment in the game.
      *
      * @param myIndex the zero-based index of the worker card associated with the message (optional)
      * @param decision the game decision this message is related to (optional, meaning depends on the game)

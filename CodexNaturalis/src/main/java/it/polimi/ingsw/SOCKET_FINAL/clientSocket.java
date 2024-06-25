@@ -34,8 +34,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * This class represents the client-side socket connection to the server.
- * It handles communication between the client and server, updates the local
+ * This class represents the client-side socket connection to the serverSocket.
+ * It handles communication between the client and serverSocket, updates the local
  * game state, and interacts with the user interface (TUI or GUI).
  *
  */
@@ -44,7 +44,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     public MiniModel miniModel = new MiniModel();
 
     /**
-     * Server Proxy is used to sending message from client to server through the output socket
+     * ServerSocket Proxy is used to sending message from client to serverSocket through the output socket
      */
     private ServerProxy server_proxy;
 
@@ -73,6 +73,8 @@ public class clientSocket implements VirtualViewF, Serializable {
     public String token;
     private boolean flag_Server_Disconneted = false;
 
+    private boolean isPlacingCard = false;
+
     public clientSocket(ObjectInputStream input, ObjectOutputStream output, Socket socket) throws IOException, ClassNotFoundException {
         this.server_proxy = new ServerProxy(output);
         this.input = input;
@@ -82,7 +84,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     /**
      * Starts the TUI and runs the client in a separate thread
-     * to receive messages from the server.
+     * to receive messages from the serverSocket.
      *
      * @throws IOException If there is an IO error during communication.
      * @throws ClassNotFoundException If a class cannot be found.
@@ -104,7 +106,7 @@ public class clientSocket implements VirtualViewF, Serializable {
 
     /**
      * Starts the GUI and runs the client in a separate thread
-     * to receive messages from the server.
+     * to receive messages from the serverSocket.
      *
      * @param scene The scene controller for the GUI.
      * @throws IOException If there is an IO error during communication.
@@ -126,7 +128,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Continuously receives messages from the server in a separate thread and updates the
+     * Continuously receives messages from the serverSocket in a separate thread and updates the
      * local game state accordingly.
      *
      * @throws IOException If there is an IO error during communication.
@@ -170,7 +172,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Sends a request to the server to check if the provided player name is valid.
+     * Sends a request to the serverSocket to check if the provided player name is valid.
      *
      * @param playerName The name chosen by the player.
      * @return An integer representing the result of the name check
@@ -187,7 +189,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Checks if there are any free games available on the server.
+     * Checks if there are any free games available on the serverSocket.
      *
      * @return True if there are free games, false otherwise.
      * @throws IOException If there is an IO error during communication.
@@ -209,7 +211,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Attempts to create a new game on the server with the specified name, number of players,
+     * Attempts to create a new game on the serverSocket with the specified name, number of players,
      * and the player's name. This method waits until the player joins the game successfully.
      *
      *
@@ -247,7 +249,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Attempts to connect to the game server. This method waits until the player joins a game successfully.
+     * Attempts to connect to the game serverSocket. This method waits until the player joins a game successfully.
      *
      * @throws IOException If there is an IO error during communication.
      * @throws NotBoundException If the RMI registry cannot be found.
@@ -262,7 +264,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Sends a request to the server to select and insert a card at a specified location on the game board.
+     * Sends a request to the serverSocket to select and insert a card at a specified location on the game board.
      *
      * @param choice The index of the card to select from the player's hand.
      * @param x The x-coordinate of the target location on the board.
@@ -275,13 +277,17 @@ public class clientSocket implements VirtualViewF, Serializable {
     @Override
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException, ClassNotFoundException {
         server_proxy.placeCard(choice - 1,x,y,flipped);
+        isPlacingCard = true;
         waitResponse();
+
+       /* buffering();
         buffering();
-        buffering();
+
+        */
     }
 
     /**
-     * Sends a request to the server to draw a card. This method waits until the player's
+     * Sends a request to the serverSocket to draw a card. This method waits until the player's
      * `miniModel` state changes from "DRAW_CARD".
      *
      * @param function The function to execute after drawing the card.
@@ -291,13 +297,12 @@ public class clientSocket implements VirtualViewF, Serializable {
     @Override
     public void drawCard(SendFunction function) throws IOException, InterruptedException {
         server_proxy.drawCard(function);
-        while (this.miniModel.getState().equals("DRAW_CARD")){
-            buffering();
-        }
+        isPlacingCard = true;
+        waitResponse();
     }
 
     /**
-     * Sends a chat message to the server based on the current number of players and the provided decision.
+     * Sends a chat message to the serverSocket based on the current number of players and the provided decision.
      *
      * @param message The message content to be sent.
      * @param decision An integer representing the target recipient of the message.
@@ -343,7 +348,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Requests the starting card from the server and returns it.
+     * Requests the starting card from the serverSocket and returns it.
      *
      * @return The starting PlayCard object.
      * @throws IOException If there is an IO error during communication.
@@ -370,7 +375,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Sets the chosen goal card and sends the selection to the server.
+     * Sets the chosen goal card and sends the selection to the serverSocket.
      *
      * @param i The index of the chosen goal card in the local list.
      * @throws IOException If there is an IO error during communication.
@@ -382,7 +387,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Disconnects from the server and exits the application.
+     * Disconnects from the serverSocket and exits the application.
      *
      * @throws IOException If there is an IO error during communication.
      * @throws ClassNotFoundException If a class cannot be found.
@@ -430,7 +435,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Requests the starting card from the server and displays it using an internal helper method.
+     * Requests the starting card from the serverSocket and displays it using an internal helper method.
      *
      * @throws IOException If there is an IO error during communication.
      * @throws InterruptedException If the thread is interrupted while waiting for a response.
@@ -443,7 +448,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Sends the player's decision about the starting card to the server.
+     * Sends the player's decision about the starting card to the serverSocket.
      *
      * @param b True if the player wants to keep the starting card, false otherwise.
      * @throws IOException If there is an IO error during communication.
@@ -475,7 +480,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Checks if the gold deck is still present on the server.
+     * Checks if the gold deck is still present on the serverSocket.
      *
      * @return True if the gold deck is present (not empty), false otherwise.
      * @throws IOException If there is an IO error during communication.
@@ -490,7 +495,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Checks if the resource deck is still present on the server.
+     * Checks if the resource deck is still present on the serverSocket.
      *
      * @return True if the resource deck is present (not empty), false otherwise.
      * @throws IOException If there is an IO error during communication.
@@ -505,7 +510,7 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Requests information about the cards currently displayed in the center of the game board from the server.
+     * Requests information about the cards currently displayed in the center of the game board from the serverSocket.
      *
      * @throws IOException If there is an IO error during communication.
      * @throws ClassNotFoundException If a class cannot be found.
@@ -577,15 +582,17 @@ public class clientSocket implements VirtualViewF, Serializable {
     }
 
     /**
-     * Waits for a signal indicating a server response has been received.
+     * Waits for a signal indicating a serverSocket response has been received.
      *
      * @throws InterruptedException If the thread is interrupted while waiting.
      */
     public void waitResponse() throws InterruptedException {
         flag_check = true;
         while(flag_check){
-            Thread.sleep(200);
+            Thread.sleep(400);
         }
+
+        if (isPlacingCard) Thread.sleep(1500); isPlacingCard = false;
     }
 
     /**

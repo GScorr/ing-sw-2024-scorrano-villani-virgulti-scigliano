@@ -13,6 +13,7 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 
 import java.io.IOException;
 import java.io.Serializable;import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This class represents a mini-model containing information relevant to the client's view of the game state.
@@ -124,29 +125,55 @@ public class MiniModel implements Serializable {
         return messages.poll();
     }
 
-    public void printNumToField(){
+    public String printNumToField(){
         System.out.println("WHICH PLAYER'S GAME FIELD YOU WANT TO SEE?");
-        for( Integer i : num_to_player.keySet() ){
-            System.out.println("-" + i + " Name:  " + num_to_player.get(i) );
+
+        // Create a list of player descriptions from the map
+        List<String> playerDescriptions = getNum_to_player().entrySet().stream()
+                .map(entry -> "-" + entry.getKey() + " Name: " + entry.getValue())
+                .collect(Collectors.toList());
+
+        // Print each player description
+        playerDescriptions.forEach(System.out::println);
+
+        // Read input from the user
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the player's ID:");
+        int playerId = scanner.nextInt();
+
+        // Return the name of the selected player
+        String playerName = num_to_player.get(playerId);
+
+        if (playerName != null) {
+            return playerName;
+        } else {
+            return null;
         }
     }
+
 
     /**
      * Displays the game field of a specified player.
      *
-     * @param pos The 1-based index of the player whose game field to show.
+     * @param playerName The name of the player whose game field to show.
      * @throws IOException If an I/O error occurs while printing to the console.
      */
-    public void showGameField(int pos) throws IOException {
-        pos = pos -1 ;
-        System.out.println("#ANIMALS : " + game_fields.get(pos).getNumOfAnimal());
-        System.out.println("#PLANTS : " + game_fields.get(pos).getNumOfPlant());
-        System.out.println("#INSECTS : " + game_fields.get(pos).getNumOfInsect());
-        System.out.println("#MUSHROOMS : " + game_fields.get(pos).getNumOfMushroom());
-        System.out.println("###PAPERS : " + game_fields.get(pos).getNumOfPaper());
-        System.out.println("###FEATHERS : " + game_fields.get(pos).getNumOfFeather());
-        System.out.println("###INKS : " + game_fields.get(pos).getNumOfPen());
-        showField(game_fields.get(pos));
+    public void showGameField(String playerName) throws IOException {
+
+        // Check if the opponent field popup is already open
+        int playerNumber = 5;
+
+        for(int i = 0; i <  this.getGame_fields().size() ; i++){
+            if(playerName.compareTo( getGame_fields().get(i).getPlayer().getName()) == 0) playerNumber = i;
+        }
+        System.out.println("#ANIMALS : " + game_fields.get(playerNumber).getNumOfAnimal());
+        System.out.println("#PLANTS : " + game_fields.get(playerNumber).getNumOfPlant());
+        System.out.println("#INSECTS : " + game_fields.get(playerNumber).getNumOfInsect());
+        System.out.println("#MUSHROOMS : " + game_fields.get(playerNumber).getNumOfMushroom());
+        System.out.println("###PAPERS : " + game_fields.get(playerNumber).getNumOfPaper());
+        System.out.println("###FEATHERS : " + game_fields.get(playerNumber).getNumOfFeather());
+        System.out.println("###INKS : " + game_fields.get(playerNumber).getNumOfPen());
+        showField(game_fields.get(playerNumber));
     }
 
     /**

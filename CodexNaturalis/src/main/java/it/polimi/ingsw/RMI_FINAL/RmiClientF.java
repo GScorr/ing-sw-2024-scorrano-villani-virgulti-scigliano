@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Connects to the RMI server and provides an interface for client-side game interactions.
+ * Connects to the RMI serverSocket and provides an interface for client-side game interactions.
  */
 public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     final VirtualServerF server;
@@ -75,14 +75,14 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
 
 
     /**
-     * Verifies a player's name with the server and establishes a connection (if valid).
+     * Verifies a player's name with the serverSocket and establishes a connection (if valid).
      *
      * @param player_name The name of the player to be checked.
      * @return An integer flag indicating the connection status:
      *         - 1: New player - name is valid and a new token is created.
      *         - 0: Existing player with invalid name.
      *         - 2: Existing player with valid name - connection is established and heartbeats begin.
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      * @throws NotBoundException If the name cannot be bound to a remote object.
      * @throws InterruptedException If the heartbeating thread is interrupted.
      */
@@ -113,10 +113,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Checks if there are any free games available on the server.
+     * Checks if there are any free games available on the serverSocket.
      *
      * @return True if there are free games available, false otherwise.
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      */
     public boolean areThereFreeGames () throws IOException {
         return server.getFreeGames() != null && !server.getFreeGames().isEmpty();
@@ -125,12 +125,12 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public List<SocketRmiControllerObject> getFreeGames() throws IOException {return server.getFreeGamesSocket();}
 
     /**
-     * Attempts to create a new game on the server.
+     * Attempts to create a new game on the serverSocket.
      *
      * @param game_name The name of the game to be created.
      * @param numplayers The desired number of players for the game.
      * @param player_name The name of the player creating the game.
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      * @throws NotBoundException If the name cannot be bound to a remote object.
      * @throws InterruptedException If the message checking thread is interrupted.
      */    public void createGame(String game_name, int numplayers, String player_name) throws IOException, NotBoundException, InterruptedException {
@@ -142,10 +142,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Requests game information from the server based on the game state.
+     * Requests game information from the serverSocket based on the game state.
      *
      * @param endgame A flag indicating whether the game has ended.
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      */
     public void manageGame(boolean endgame) throws IOException, InterruptedException {
         if(!endgame) rmi_controller.getPoints(token);
@@ -153,13 +153,13 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Sends a request to the server to insert a card into the game.
+     * Sends a request to the serverSocket to insert a card into the game.
      *
      * @param choice The chosen card index (presumably adjusted by -1).
      * @param x The X-coordinate for the card placement (optional).
      * @param y The Y-coordinate for the card placement (optional).
      * @param flipped Whether the card should be placed face down (flipped).
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      * @throws InterruptedException If the sleep thread is interrupted.
      */
     public void selectAndInsertCard(int choice, int x, int y, boolean flipped) throws IOException, InterruptedException {
@@ -169,10 +169,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Sends a request to the server to draw a card in the game.
+     * Sends a request to the serverSocket to draw a card in the game.
      *
      * @param function A pre-constructed SendFunction object for drawing a card.
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      * @throws InterruptedException If the sleep thread is interrupted.
      */
     public void drawCard(SendFunction function) throws IOException, InterruptedException {
@@ -186,7 +186,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
      * @param id The identifier of the game to find.
      * @param player_name The player's name.
      * @return True if the RMI controller is found, false otherwise.
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      * @throws InterruptedException If the process is interrupted.
      */
     public boolean findRmiController(int id, String player_name) throws IOException, InterruptedException {
@@ -194,9 +194,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Establishes an RMI connection to the game server based on the player's token.
+     * Establishes an RMI connection to the game serverSocket based on the player's token.
      *
-     * @throws IOException  If an I/O error occurs during communication with the server.
+     * @throws IOException  If an I/O error occurs during communication with the serverSocket.
      * @throws NotBoundException If the name cannot be bound to a remote object (RMI lookup issue).
      */
     public void connectGameServer() throws IOException, NotBoundException {
@@ -210,7 +210,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
      * Checks if the player with the current token has placed a goal card.
      *
      * @return True if no goal card is placed, false otherwise.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      */
     public boolean isGoalCardPlaced() throws IOException {
         return rmi_controller.getTtoP().get(token).getGoalCard() == null;
@@ -242,10 +242,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Sends a request to the server to choose a goal for the player.
+     * Sends a request to the serverSocket to choose a goal for the player.
      *
      * @param i The index of the chosen goal.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      * @throws InterruptedException If the process is interrupted.
      */
     @Override
@@ -254,9 +254,9 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Sends a request to the server to reveal the starting card for the player.
+     * Sends a request to the serverSocket to reveal the starting card for the player.
      *
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      */
     @Override
     public void showStartingCard() throws IOException {
@@ -264,20 +264,20 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Requests the starting card information from the server.
+     * Requests the starting card information from the serverSocket.
      *
      * @return A PlayCard object containing information about the starting card (if successful), or null otherwise.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      */
     public PlayCard showStartingCardGUI() throws IOException{
        return rmi_controller.showStartingCardGUI(token);
     }
 
     /**
-     * Sends a request to the server indicating the player's choice regarding the starting card.
+     * Sends a request to the serverSocket indicating the player's choice regarding the starting card.
      *
      * @param b A boolean value representing the player's decision.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      * @throws InterruptedException If the process is interrupted.
      */
     @Override
@@ -289,7 +289,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
      * Checks if the player with the current token is the first player to place a card.
      *
      * @return True if the player is the first to place a card, false otherwise.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      */
     @Override
     public boolean isFirstPlaced() throws IOException {
@@ -302,10 +302,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Checks if there are any cards remaining in the gold deck on the server.
+     * Checks if there are any cards remaining in the gold deck on the serverSocket.
      *
      * @return True if there are cards in the gold deck, false otherwise.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      */
     @Override
     public boolean isGoldDeckPresent() throws IOException {
@@ -313,10 +313,10 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Checks if there are any cards remaining in the resource deck on the server.
+     * Checks if there are any cards remaining in the resource deck on the serverSocket.
      *
      * @return True if there are cards in the resource deck, false otherwise.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      */
     @Override
     public boolean isResourceDeckPresent() throws IOException {
@@ -324,7 +324,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Continuously checks for incoming messages from the game server and executes their actions.
+     * Continuously checks for incoming messages from the game serverSocket and executes their actions.
      *
      */
     public void startCheckingMessages() {
@@ -348,7 +348,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     }
 
     /**
-     * Sends periodic heartbeats to the server to maintain connection and monitors for disconnection.
+     * Sends periodic heartbeats to the serverSocket to maintain connection and monitors for disconnection.
      */
     public void startSendingHeartbeats() {
         new Thread(() -> {
@@ -392,11 +392,11 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
     public void setNumToPlayer(HashMap<Integer, String> map){miniModel.setNumToPlayer(map);}
 
     /**
-     * Sends a chat message to the server based on the number of players and the chosen recipient.
+     * Sends a chat message to the serverSocket based on the number of players and the chosen recipient.
      *
      * @param message The text content of the chat message.
      * @param decision An integer representing the chosen recipient.
-     * @throws IOException  If an I/O error occurs during communication with the RMI server.
+     * @throws IOException  If an I/O error occurs during communication with the RMI serverSocket.
      */
     public void ChatChoice(String message, int decision) throws IOException {
         if(miniModel.getNum_players()!=2) {

@@ -58,7 +58,7 @@ public interface VirtualView extends Serializable {
     public void showCard(PlayCard card) throws IOException;
 
     /**
-     * Pushes a response message back to the client or server.
+     * Pushes a response message back to the client or serverSocket.
      *
      * @param message The response message to be sent.
      * @throws IOException If there's an error writing to the output stream.

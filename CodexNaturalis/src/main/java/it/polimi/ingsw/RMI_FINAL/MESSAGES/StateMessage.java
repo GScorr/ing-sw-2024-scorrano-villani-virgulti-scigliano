@@ -5,7 +5,7 @@ package it.polimi.ingsw.RMI_FINAL.MESSAGES;
  *
  * This class provides methods for setting and retrieving a state string,
  * which could be used to track the current game phase, player turn, or other
- * relevant server-side information.
+ * relevant serverSocket-side information.
  *
  */
 public class StateMessage {
