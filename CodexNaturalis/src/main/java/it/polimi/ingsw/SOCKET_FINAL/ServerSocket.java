@@ -21,12 +21,6 @@ public class ServerSocket extends UnicastRemoteObject  {
 
     final List<ClientHandler> clients = new ArrayList<>();
 
-    //da eliminare
-    public ArrayList<String> names = new ArrayList<>();
-
-    //da eliminare
-    public TokenManager token_manager = new TokenManager();
-
     public Common_Server common;
 
     public ServerSocket(java.net.ServerSocket listenSocket, Common_Server common) throws IOException {

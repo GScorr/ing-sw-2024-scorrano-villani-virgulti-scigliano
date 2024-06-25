@@ -528,9 +528,18 @@ public class GameServer implements VirtualGameServer, Serializable {
         for (String t : token_to_player.keySet()){
             if( token_manager.getTokens().containsKey(t) && token_to_player.containsKey(t) ) {
                 if( token_to_player.get(t).getPlayerState().equals(PlayerState.PLACE_CARD) ) token_manager.getVal(t).printString(" [ IT'S YOUR TURN TO PLACE A CARD ]");
+                PlayCard goldDeck, resourceDeck;
+
+                if(controller.getGame().getResources_deck().cards.isEmpty()) resourceDeck = null ;
+                else resourceDeck = controller.getGame().getResources_deck().cards.getFirst();
+
+                if(controller.getGame().getGold_deck().cards.isEmpty()) goldDeck = null ;
+                else goldDeck = controller.getGame().getGold_deck().cards.getFirst();
+
+
                 token_manager.getVal(t).setCenterCards(controller.getGame().getCars_in_center(),
-                                                        controller.getGame().getResources_deck().cards.getFirst() ,
-                                                         controller.getGame().getGold_deck().cards.getFirst());
+                                                        resourceDeck ,
+                                                        goldDeck);
                 token_manager.getVal(t).setState(token_to_player.get(t).getActual_state().getNameState());
                 token_manager.getVal(t).setNumToPlayer(index_to_name);
 

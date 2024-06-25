@@ -837,10 +837,13 @@ public class GameController2 extends GenericSceneController {
      */
     public void handleGoldDeckClick(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
-            function = new SendDrawGold(token_client);
-            sendFunction(function);
-            updateDecks();
-
+            if(super.client.getMiniModel().getTop_gold() == null) {
+                errorEmptyDeck();
+            }else {
+                function = new SendDrawGold(token_client);
+                sendFunction(function);
+                updateDecks();
+            }
         }
     }
 
@@ -854,9 +857,13 @@ public class GameController2 extends GenericSceneController {
      */
     public void handleResourceDeckClick(MouseEvent mouseEvent) throws IOException, InterruptedException, ClassNotFoundException {
         if(errorDrawState() == false){
-            function = new SendDrawResource(token_client);
-            sendFunction(function);
-            updateDecks();
+            if(super.client.getMiniModel().getTop_resource() == null) {
+                errorEmptyDeck();
+            }else {
+                function = new SendDrawResource(token_client);
+                sendFunction(function);
+                updateDecks();
+            }
         }
     }
 
@@ -936,6 +943,10 @@ public class GameController2 extends GenericSceneController {
             return true;
         }
         else return false;
+    }
+
+    private void errorEmptyDeck() throws IOException {
+            showError("DECK IS EMPTY");
     }
 
     /**
