@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This interface defines methods for a virtual server used in a Remote Method Invocation (RMI) system.
- * The server manages game creation, player connections, and access to game servers.
+ * This interface defines methods for a virtual serverSocket used in a Remote Method Invocation (RMI) system.
+ * The serverSocket manages game creation, player connections, and access to game servers.
  */
 public interface VirtualServerF extends Remote {
     public void connect(VirtualViewF client)throws IOException;

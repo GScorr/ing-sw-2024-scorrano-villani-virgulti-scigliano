@@ -4,7 +4,7 @@ import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class getCardsInHand implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
@@ -45,8 +45,8 @@ public class getCardsInHand implements Message, Serializable {
         this.token = token;
     }
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {

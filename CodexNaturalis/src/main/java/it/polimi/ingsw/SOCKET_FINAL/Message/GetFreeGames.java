@@ -6,7 +6,7 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.freeGamesResponse;
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class GetFreeGames implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
@@ -48,8 +48,8 @@ public class GetFreeGames implements Message, Serializable {
         this.token = token;
     }
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {
@@ -58,7 +58,7 @@ public class GetFreeGames implements Message, Serializable {
 
     /**
      * Retrieves the list of available game lobbies using the getFreeGamesSocket() method
-     * of the common server and sends a response message containing the list to the client
+     * of the common serverSocket and sends a response message containing the list to the client
      * through the output stream.
      *
      * @throws IOException If there is an IO error.
@@ -66,7 +66,7 @@ public class GetFreeGames implements Message, Serializable {
     @Override
     public void action() throws IOException {
         List<SocketRmiControllerObject> games = common.getFreeGamesSocket();
-        if( server == null){
+        if( serverSocket == null){
             System.out.println("error");
             return;
         }

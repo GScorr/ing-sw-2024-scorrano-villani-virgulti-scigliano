@@ -14,8 +14,8 @@ import java.rmi.NotBoundException;
 import java.util.Scanner;
 
 /**
- * This class implements the GraficInterterface interface and acts as the bridge between the server communication logic and the JavaFX scene controller.
- * It handles user interactions, displays messages and updates the scene based on game state and server responses.
+ * This class implements the GraficInterterface interface and acts as the bridge between the serverSocket communication logic and the JavaFX scene controller.
+ * It handles user interactions, displays messages and updates the scene based on game state and serverSocket responses.
  */
 public class GUI implements GraficInterterface {
 
@@ -183,7 +183,7 @@ public class GUI implements GraficInterterface {
     /**
      * Handles the "choose goal" state in the game.
      *
-     * If a goal card has not yet been placed by the server (checkGoal is false), it delegates to `chooseStartingCardState`.
+     * If a goal card has not yet been placed by the serverSocket (checkGoal is false), it delegates to `chooseStartingCardState`.
      * Otherwise, it calls `chooseGoal` to prompt the user (or handle UI updates) to select a goal card.
      *
      * @throws IOException If an I/O error occurs during communication or FXML loading.

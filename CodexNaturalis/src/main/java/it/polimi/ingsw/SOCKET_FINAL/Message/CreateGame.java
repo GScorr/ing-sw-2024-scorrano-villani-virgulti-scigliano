@@ -3,10 +3,8 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
-import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -21,7 +19,7 @@ import java.rmi.registry.Registry;
  */
 public class CreateGame implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public String token;
     public String name_p;
     ObjectOutputStream output;
@@ -56,8 +54,8 @@ public class CreateGame implements Message, Serializable {
         this.game_name = game_name;
     }
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     @Override
@@ -66,7 +64,7 @@ public class CreateGame implements Message, Serializable {
     }
 
     /**
-     * Sends the create game request to the common server through RMI and retrieves
+     * Sends the create game request to the common serverSocket through RMI and retrieves
      * the assigned port for the game.
      *
      * @throws IOException If there is an IO error.

@@ -6,7 +6,7 @@ import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.checkNameResponse;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -17,11 +17,11 @@ import java.rmi.registry.Registry;
 
 /**
  * Represents a message sent by the client to check if a username is available.
- * This message contains the proposed username and is received by the server.
+ * This message contains the proposed username and is received by the serverSocket.
  */
 public class CheckNameMessage implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public Common_Server common;
     ObjectOutputStream output;
 
@@ -48,8 +48,8 @@ public class CheckNameMessage implements Message, Serializable {
     }
 
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {

@@ -20,7 +20,7 @@ public class StringResponse extends ResponseMessage {
     /**
      * Prints the string message to the console (likely for debugging purposes).
      *
-     * This implementation currently prints the message to the server console.
+     * This implementation currently prints the message to the serverSocket console.
      */
     public void action(){
         System.out.println(string);

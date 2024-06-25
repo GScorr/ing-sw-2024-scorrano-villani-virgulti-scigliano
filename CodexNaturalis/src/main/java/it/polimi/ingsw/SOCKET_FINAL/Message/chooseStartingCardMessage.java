@@ -3,7 +3,7 @@ package it.polimi.ingsw.SOCKET_FINAL.Message;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -19,7 +19,7 @@ public class chooseStartingCardMessage implements Message, Serializable {
     public boolean flipped;
 
 
-    public Server server;
+    public ServerSocket serverSocket;
 
     ObjectOutputStream output;
 
@@ -51,8 +51,8 @@ public class chooseStartingCardMessage implements Message, Serializable {
         this.flipped = flipped;
     }
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {

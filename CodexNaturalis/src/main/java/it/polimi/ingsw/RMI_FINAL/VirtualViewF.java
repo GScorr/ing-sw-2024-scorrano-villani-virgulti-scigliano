@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * This interface defines methods for a virtual view used in a Remote Method Invocation (RMI) system.
- * The virtual view acts as a client-side interface, receiving updates and interacting with the game server.
+ * The virtual view acts as a client-side interface, receiving updates and interacting with the game serverSocket.
  *
  */
 public interface VirtualViewF extends Remote {

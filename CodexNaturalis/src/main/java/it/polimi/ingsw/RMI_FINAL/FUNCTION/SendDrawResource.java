@@ -31,7 +31,7 @@ public class SendDrawResource implements SendFunction{
      * associated with the provided token. It then updates the game state by marking the
      * player's turn as ended and broadcasts player state updates to all connected clients.
      *
-     * @param server the game server instance
+     * @param server the game serverSocket instance
      * @return a response message containing either a success message or an error message
      * @throws RuntimeException if an IOException or InterruptedException occurs
      */

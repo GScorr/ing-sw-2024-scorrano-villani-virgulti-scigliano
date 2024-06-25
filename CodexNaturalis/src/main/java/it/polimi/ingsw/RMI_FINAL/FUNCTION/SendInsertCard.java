@@ -39,7 +39,7 @@ public class SendInsertCard implements SendFunction{
      * at the specified coordinates (x, y) and flipped state. It updates the game state
      * accordingly and broadcasts updates to all connected clients.
      *
-     * @param server the game server instance
+     * @param server the game serverSocket instance
      * @return a response message containing the game field update or an error message
      * @throws RuntimeException if an IOException occurs
      */
@@ -52,7 +52,7 @@ public class SendInsertCard implements SendFunction{
             for (String t : server.token_to_player.keySet()){
                 if( server.token_manager.getTokens().containsKey(t) ){
                     server.token_manager.getTokens().get(t).setGameField(server.getGameFields(t));
-                    //server.token_manager.getTokens().get(t).setLastTurn(server.getController().isIs_final_state());
+                    //serverSocket.token_manager.getTokens().get(t).setLastTurn(serverSocket.getController().isIs_final_state());
                 }
                 if(server.token_manager.getSocketTokens().containsKey(t)){
                     server.token_manager.getSocketTokens().get(t).setGameField(server.getGameFields(t));

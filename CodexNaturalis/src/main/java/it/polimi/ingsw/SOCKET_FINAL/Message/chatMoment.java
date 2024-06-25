@@ -4,7 +4,7 @@ import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -13,11 +13,11 @@ import java.io.Serializable;
 /**
  * Represents a private chat message sent by a player to another player during their turn
  * in the game. This message also includes the player's decision (related to gameplay)
- * and is received by the server and forwarded to the game logic
+ * and is received by the serverSocket and forwarded to the game logic
  */
 public class chatMoment implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
@@ -54,8 +54,8 @@ public class chatMoment implements Message, Serializable {
     }
 
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {

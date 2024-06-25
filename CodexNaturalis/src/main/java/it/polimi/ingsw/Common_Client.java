@@ -16,14 +16,14 @@ import java.util.Scanner;
 /**
  * This class represents the entry point for the client application. It provides a user interface
  * to choose between a Text-based User Interface (TUI) and a Graphical User Interface (GUI). It
- * also establishes the connection with the server using either RMI or Socket communication based
+ * also establishes the connection with the serverSocket using either RMI or Socket communication based
  * on user selection.
  */
 public class Common_Client {
 
     /**
      * This method prompts the user to choose between RMI and Socket connection for communication
-     * with the server. It establishes the connection and starts the client functionality based on
+     * with the serverSocket. It establishes the connection and starts the client functionality based on
      * the chosen option.
      *
      * @throws IOException Signals an I/O exception that might occur during communication or stream operations.

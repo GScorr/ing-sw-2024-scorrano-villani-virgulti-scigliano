@@ -65,8 +65,8 @@ public class LoginController extends GenericSceneController {
      * and initiating game access through the client interface.
      *
      * @param event The ActionEvent triggered by the button click.
-     * @throws IOException If an error occurs during communication with the server.
-     * @throws NotBoundException If the client is not properly connected to the server.
+     * @throws IOException If an error occurs during communication with the serverSocket.
+     * @throws NotBoundException If the client is not properly connected to the serverSocket.
      * @throws ClassNotFoundException If a class used during communication cannot be found.
      * @throws InterruptedException If the communication thread is interrupted.
      */

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
-import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
 import it.polimi.ingsw.MODEL.Card.PlayCard;
@@ -25,19 +24,17 @@ import java.io.*;
 import java.net.Socket;
 import java.rmi.NotBoundException;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * A class that handles communication between a client and the server in the SOCKET_FINAL package.
+ * A class that handles communication between a client and the serverSocket in the SOCKET_FINAL package.
  *
  */
 public class ClientHandler  implements VirtualViewF {
 
     private MiniModel miniModel =  new MiniModel();
-    final Server server;
+    final ServerSocket serverSocket;
     final ObjectInputStream input;
     final ObjectOutputStream output;
 
@@ -48,8 +45,8 @@ public class ClientHandler  implements VirtualViewF {
     public VirtualGameServer rmi_controller;
     public boolean client_is_connected = true;
 
-    public ClientHandler(Server server, ObjectInputStream input, ObjectOutputStream output, Common_Server common , Socket clientsocket) throws IOException, NotBoundException {
-        this.server = server;
+    public ClientHandler(ServerSocket serverSocket, ObjectInputStream input, ObjectOutputStream output, Common_Server common , Socket clientsocket) throws IOException, NotBoundException {
+        this.serverSocket = serverSocket;
         this.input = input;
         this.output = output;
         this.common = common;
@@ -57,7 +54,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     /**
-     * Starts a thread to periodically send heartbeats to the server.
+     * Starts a thread to periodically send heartbeats to the serverSocket.
      */
     public void startSendingHeartbeats() {
         new Thread(() -> {
@@ -85,7 +82,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     /**
-     * Pushes a response message back to the client or server.
+     * Pushes a response message back to the client or serverSocket.
      *
      * @param message The message to be pushed back.
      * @throws IOException if there is an error writing to the output stream.
@@ -96,7 +93,7 @@ public class ClientHandler  implements VirtualViewF {
     }
 
     /**
-     * Prints a string message to the client or server.
+     * Prints a string message to the client or serverSocket.
      *
      * @param string The string to be printed.
      * @throws IOException if there is an error writing to the output stream.
@@ -249,7 +246,7 @@ public class ClientHandler  implements VirtualViewF {
                     if (rmi_controller != null) {
                         DP_message.setRmiController(this.rmi_controller);
                     }
-                    DP_message.setServer(server);
+                    DP_message.setServer(serverSocket);
                     DP_message.setOutput(output);
                     DP_message.setCommonServer(this.common);
                     DP_message.setClientHandler(this);
@@ -286,11 +283,7 @@ public class ClientHandler  implements VirtualViewF {
             }
             if (input != null) {
                 input.close();
-            }/*
-            if (client_socket != null) {
-                client_socket.close();
             }
-            */
         } catch (IOException e) {
             e.printStackTrace();
         }

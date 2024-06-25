@@ -1,31 +1,23 @@
 package it.polimi.ingsw.SOCKET_FINAL;
 
-import it.polimi.ingsw.ChatMessage;
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.MODEL.Card.PlayCard;
-import it.polimi.ingsw.MODEL.GameField;
-import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.MiniModel;
-import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
-import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
 import it.polimi.ingsw.SOCKET_FINAL.TokenManager.TokenManager;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.NotBoundException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
- * A class representing the server application in the SOCKET_FINAL package.
+ * A class representing the serverSocket application in the SOCKET_FINAL package.
  *
  */
-public class Server extends UnicastRemoteObject  {
+public class ServerSocket extends UnicastRemoteObject  {
 
-    final ServerSocket listenSocket;
+    final java.net.ServerSocket listenSocket;
 
     final List<ClientHandler> clients = new ArrayList<>();
 
@@ -37,14 +29,14 @@ public class Server extends UnicastRemoteObject  {
 
     public Common_Server common;
 
-    public Server(ServerSocket listenSocket, Common_Server common) throws IOException {
+    public ServerSocket(java.net.ServerSocket listenSocket, Common_Server common) throws IOException {
         this.common = common;
         this.listenSocket = listenSocket;
         common.startHeartbeatChecker();
     }
 
     /**
-     * Starts the server, listens for incoming client connections, and creates separate threads to handle each client.
+     * Starts the serverSocket, listens for incoming client connections, and creates separate threads to handle each client.
      *
      * @throws IOException if an I/O error occurs while accepting client connections
      * @throws NotBoundException if the RMI registry cannot be found
@@ -90,7 +82,7 @@ public class Server extends UnicastRemoteObject  {
     }
 
     /**
-     * Gets the server's MiniModel object.
+     * Gets the serverSocket's MiniModel object.
      *
      * @return the MiniModel object (may throw IOException)
      * @throws IOException if an I/O error occurs

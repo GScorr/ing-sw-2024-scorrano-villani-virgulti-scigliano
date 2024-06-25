@@ -2,11 +2,10 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.*;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
@@ -15,7 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 /**
- * This class represents the server-side application. It manages game creation, player connections,
+ * This class represents the serverSocket-side application. It manages game creation, player connections,
  * communication with clients (both RMI and Socket), and disconnections.
  * It also implements a heartbeat to detect inactive clients.
  */
@@ -50,7 +49,7 @@ public class Common_Server {
      * @param p_token The token of the player creating the game.
      * @param player_name The name of the player creating the game.
      * @param client The client requesting game creation.
-     * @return The port number where the game server is listening.
+     * @return The port number where the game serverSocket is listening.
      * @throws IOException If an I/O error occurs.
      * @throws InterruptedException If the thread is interrupted.
      */
@@ -76,8 +75,8 @@ public class Common_Server {
      * @param name The name of the player to be added.
      * @param client A reference to the player's virtual view object, likely used for rendering game information to the player.
      * @return  `true` if the player was successfully added to the game, `false` otherwise. (implementation specific)
-     * @throws IOException  If an I/O error occurs while communicating with the remote game server.
-     * @throws InterruptedException If the calling thread is interrupted while waiting for a response from the server.
+     * @throws IOException  If an I/O error occurs while communicating with the remote game serverSocket.
+     * @throws InterruptedException If the calling thread is interrupted while waiting for a response from the serverSocket.
      */
     public boolean addPlayer(Integer game_id, String p_token, String name, VirtualViewF client) throws IOException, InterruptedException {
         rmi_controllers.get(game_id).addPlayer(p_token,name, client,false);
@@ -146,10 +145,10 @@ public class Common_Server {
     }
 
     /**
-     * Removes a game server from the server list.
+     * Removes a game serverSocket from the serverSocket list.
      *
      * @param gs The GameServer object to remove.
-     * @throws NoSuchObjectException If the game server is not found in the registry.
+     * @throws NoSuchObjectException If the game serverSocket is not found in the registry.
      */
     public synchronized void  removeGameServer(GameServer gs) throws NoSuchObjectException {
 
@@ -250,7 +249,7 @@ public class Common_Server {
      *
      * @param client The VirtualViewF object representing the client to connect.
      * @throws IOException If there's an error during the connection process.
-     * @throws IllegalStateException If the connection is attempted after the server has been stopped.
+     * @throws IllegalStateException If the connection is attempted after the serverSocket has been stopped.
      */
     public synchronized void connect(VirtualViewF client)throws IOException{
         this.clients.add(client);
@@ -265,12 +264,12 @@ public class Common_Server {
         VirtualServerF stub = (VirtualServerF) UnicastRemoteObject.exportObject(server,0);
         Registry registry = LocateRegistry.createRegistry(1234);
         registry.rebind(serverName,stub);
-        System.out.println("[SUCCESSFUL] : RMI server connected. ");
+        System.out.println("[SUCCESSFUL] : RMI serverSocket connected. ");
 
 
         int port = 12345;
-        ServerSocket listenSocket = new ServerSocket(port);
-        System.out.println("[SUCCESSFUL] : SOCKET server is running...");
-        new Server(listenSocket,  common).runServer();
+        java.net.ServerSocket listenSocket = new java.net.ServerSocket(port);
+        System.out.println("[SUCCESSFUL] : SOCKET serverSocket is running...");
+        new ServerSocket(listenSocket,  common).runServer();
     }
 }

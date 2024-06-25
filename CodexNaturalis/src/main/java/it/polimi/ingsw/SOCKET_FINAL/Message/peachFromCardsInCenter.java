@@ -5,20 +5,20 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * A class representing a message sent from the client to the server
+ * A class representing a message sent from the client to the serverSocket
  * requesting a card to be drawn from the center decks.
  *
  */
 public class peachFromCardsInCenter implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
@@ -50,8 +50,8 @@ public class peachFromCardsInCenter implements Message, Serializable {
         this.token = token;
     }
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {

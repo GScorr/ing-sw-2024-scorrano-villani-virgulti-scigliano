@@ -22,7 +22,7 @@ import java.rmi.NoSuchObjectException;
 import java.util.*;
 
 /**
- * This class represents a game server for a multiplayer game.
+ * This class represents a game serverSocket for a multiplayer game.
  * It manages players, the game state, and communication between clients.
  */
 public class GameServer implements VirtualGameServer, Serializable {
@@ -58,7 +58,7 @@ public class GameServer implements VirtualGameServer, Serializable {
 
 
     /**
-     * Adds a player to the game server.
+     * Adds a player to the game serverSocket.
      *
      * @param p_token The player's token.
      * @param name The player's name.
@@ -108,7 +108,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     /**
-     * Adds a player to the game server using a socket connection.
+     * Adds a player to the game serverSocket using a socket connection.
      *
      * @param p_token The player's token.
      * @param name The player's name.
@@ -637,7 +637,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     /**
-     * Registers a client connected via a socket with the game server.
+     * Registers a client connected via a socket with the game serverSocket.
      *
      * @param clientSocket The virtual view object representing the client's connection.
      * @throws IOException If there is an IO error.
@@ -647,7 +647,7 @@ public class GameServer implements VirtualGameServer, Serializable {
     }
 
     /**
-     * Registers a client connected via RMI with the game server.
+     * Registers a client connected via RMI with the game serverSocket.
      *
      * @param client The virtual view object representing the client's connection.
      * @throws IOException If there is an IO error.

@@ -19,7 +19,7 @@ import java.util.Scanner;
 /**
  * Gui_Initialization is the main class for launching the JavaFX GUI application.
  * It handles user input for choosing between RMI or socket communication
- * and establishes the connection with the server.
+ * and establishes the connection with the serverSocket.
  */
 public class Gui_Initialization extends Application {
 
@@ -107,7 +107,7 @@ public class Gui_Initialization extends Application {
     /**
      * Initializes the JavaFX application stage and scene controller.
      * Prompts the user to choose between RMI and socket communication,
-     * establishes the connection with the server, and sets up the client and scene controller.
+     * establishes the connection with the serverSocket, and sets up the client and scene controller.
      *
      * @param primaryStage The primary stage of the JavaFX application.
      * @throws IOException If an I/O error occurs during communication.

@@ -10,9 +10,9 @@ import java.rmi.NotBoundException;
 import java.util.List;
 
 /**
- * Abstract base class for response messages sent from the server to the client.
+ * Abstract base class for response messages sent from the serverSocket to the client.
  *
- * This abstract class defines the foundation for messages sent by the server
+ * This abstract class defines the foundation for messages sent by the serverSocket
  * in response to client actions. Subclasses represent specific types of responses
  * with their own data and functionalities.
 

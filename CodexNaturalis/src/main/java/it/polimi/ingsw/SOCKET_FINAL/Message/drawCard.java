@@ -1,13 +1,12 @@
 package it.polimi.ingsw.SOCKET_FINAL.Message;
 
 import it.polimi.ingsw.Common_Server;
-import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendDrawCenter;
 import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.ResponseMessage;
 import it.polimi.ingsw.RMI_FINAL.MESSAGES.SocketResponseMess.placeCardResponse;
 import it.polimi.ingsw.RMI_FINAL.VirtualGameServer;
 import it.polimi.ingsw.SOCKET_FINAL.ClientHandler;
-import it.polimi.ingsw.SOCKET_FINAL.Server;
+import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -20,7 +19,7 @@ import java.io.Serializable;
  */
 public class drawCard implements Message, Serializable {
 
-    public Server server;
+    public ServerSocket serverSocket;
     public String token;
     ObjectOutputStream output;
     public Common_Server common;
@@ -53,8 +52,8 @@ public class drawCard implements Message, Serializable {
     }
 
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServer(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void setOutput(ObjectOutputStream output) {
@@ -63,7 +62,7 @@ public class drawCard implements Message, Serializable {
 
     /**
      * Adds the draw card function object
-     * to the RMI queue, triggering the card drawing logic on the server-side.
+     * to the RMI queue, triggering the card drawing logic on the serverSocket-side.
      *
      * @throws IOException If there is an IO error.
      */

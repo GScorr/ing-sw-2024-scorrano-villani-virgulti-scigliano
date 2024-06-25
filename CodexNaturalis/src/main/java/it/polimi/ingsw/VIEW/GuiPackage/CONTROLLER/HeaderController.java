@@ -325,11 +325,11 @@ public class HeaderController extends GenericSceneController {
     }
 
     /**
-     * Disconnects the client from the server when the disconnect button is pressed.
+     * Disconnects the client from the serverSocket when the disconnect button is pressed.
      *
      * @param actionEvent The event triggered by the disconnect button.
-     * @throws IOException If an I/O error occurs during communication with the server.
-     * @throws NotBoundException If the client is not properly connected to the server.
+     * @throws IOException If an I/O error occurs during communication with the serverSocket.
+     * @throws NotBoundException If the client is not properly connected to the serverSocket.
      * @throws ClassNotFoundException If a class used during communication cannot be found.
      * @throws InterruptedException If the communication thread is interrupted.
      */

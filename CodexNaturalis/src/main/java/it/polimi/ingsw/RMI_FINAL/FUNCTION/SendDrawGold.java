@@ -27,7 +27,7 @@ public class SendDrawGold implements SendFunction{
      * This method attempts to draw a card from the gold deck and updates the game state accordingly.
      * It broadcasts player state updates to all connected clients.
      *
-     * @param server the game server instance
+     * @param server the game serverSocket instance
      * @return a response message containing either a success message or an error message
      * @throws RuntimeException if an IOException or InterruptedException occurs
      */
