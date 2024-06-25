@@ -51,7 +51,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         this.controller = new GameController(name, numPlayer);
         checkQueue();
         playDisconnected();
-        checkDeadline();
+
         this.port = port;
         this.server = commonServer;
     }
@@ -88,6 +88,7 @@ public class GameServer implements VirtualGameServer, Serializable {
         setAllStates();
         //--riga aggiunta da Fra
         clientsRMI.add(client);
+        if (clientsRMI.size() == controller.getGame().getMax_num_player()) checkDeadline();
         return true;
     }
 
@@ -366,13 +367,12 @@ public class GameServer implements VirtualGameServer, Serializable {
                                 message_update = new UpdateMessage("YOU ARE THE ONLY ONE IN LOBBY: \nCOUNTDOWN STARTED! " + controller.isAlone() + " " + countdown);
                                 message_update.isAlone = true;
                                 broadcastMessageOneClient(message_update, alone_client );
-                                Thread.sleep(150);
+                                Thread.sleep(1500);
                                 while( countdown > 0 && clientsRMI.size() == 1) {
                                     message_update = new UpdateMessage(countdown + " SECONDS LEFT");
                                     message_update.isAlone = true;
                                     broadcastMessageOneClient(message_update,  alone_client );
                                     checkEndDisconnect();
-
                                     countdown--;
                                     Thread.sleep(1000);
                                 }
