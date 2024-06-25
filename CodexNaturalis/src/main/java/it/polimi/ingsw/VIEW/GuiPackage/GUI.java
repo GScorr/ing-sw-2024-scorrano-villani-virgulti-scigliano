@@ -62,7 +62,7 @@ public class GUI implements GraficInterterface {
     @Override
     public void runCli() throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
         Platform.runLater(() -> scene.changeRootPane("IntroductionPage.fxml"));
-        // Platform.runLater(() -> scene.changeRootPane("headerUX.fxml"));
+
     }
 
     public void setNewClient(boolean newClient) {
@@ -126,20 +126,6 @@ public class GUI implements GraficInterterface {
         }
         int done=0;
         Platform.runLater(() -> scene.changeRootPane("choose_new_or_old.fxml"));
-
-        /*while(done==0) {
-            System.out.println("\n-'new' CREATE NEW GAME \n-'old' JOIN EXISTING GAME");
-            String decision = scan.nextLine();
-            if (decision.equalsIgnoreCase("old")) {
-                done = 1;
-                chooseMatch(player_name);
-            } else if (decision.equalsIgnoreCase("new")) {
-                done=1;
-                newGame(player_name,true);
-            } else {
-                System.out.println("\n[ERROR] WRONG INSERT!");
-            }
-        }*/
     }
 
     /**
@@ -317,175 +303,6 @@ public class GUI implements GraficInterterface {
 
     }
 
-    /**
-     * This method is currently unused due to the graphical user interface implementation.
-     *
-     * It previously handled in-game menu choices for text-based clients.
-     *
-     * @param message The message to be displayed in the menu.
-     * @param current_state The current state of the game.
-     * @throws IOException If an I/O error occurs during communication.
-     */
-    private void menuChoice(String message, String current_state) throws IOException {
-        Scanner scan = new Scanner(System.in);
-        scene.getClient().getMiniModel().printMenu(message);
-        int choice = scan.nextInt();
-        switch (choice) {
-            case (0):
-                scene.getClient().getMiniModel().printNumToField();
-                int i = scan.nextInt();
-                scene.getClient().getMiniModel().showGameField(i);
-                break;
-            case (1):
-                scene.getClient().getMiniModel().showCards();
-                break;
-            case (2):
-                scene.getClient().getMiniModel().uploadChat();
-                int decision;
-                do {
-                    decision = scan.nextInt();
-                    scan.nextLine();
-                } while (!chatChoice(decision));
-                break;
-            case (3):
-                return;
-            default:
-                System.err.println("[ERROR] WRONG INSERT");
-        }
-        menuChoice(message, current_state);
-    }
-
-    /**
-     *
-     * handle chat interaction within the game for text-based clients.
-     *
-     * @param decision An integer representing the chosen chat channel.
-     * @return Originally indicated successful chat interaction.
-     * @throws IOException If an I/O error occurs during communication.
-     */
-    private boolean chatChoice(int decision) throws IOException {
-        scene.getClient().getMiniModel().setStop_chat(false);
-        Scanner scan = new Scanner(System.in);
-        if(!scene.getClient().getMiniModel().showchat(decision)){
-            return false;
-        }
-        int choice = 0;
-        while(true) {
-            while (choice < 1 || choice > 2) {
-                System.out.println("DO YOU WANT TO SEND A MESSAGE?     1- YES      2- NO [CLOSE CHAT] ");
-                choice = scan.nextInt();
-                scan.nextLine();
-            }
-            if (choice == 1) {
-                System.out.println("INSERT MESSAGE: ");
-                String message = scan.nextLine();
-                scene.getClient().ChatChoice(message, decision);
-                System.out.println("[SUCCESS] MESSAGE SENT!");
-                choice = 0;
-            } else {
-                scene.getClient().getMiniModel().setStop_chat(true);
-                return true;}
-        }
-
-    }
-
-    /**
-     *
-     * It  handles in-game card selection and placement for text-based clients.
-     *
-     * @throws IOException If an I/O error occurs during communication.
-     * @throws InterruptedException If the connection thread is interrupted.
-     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
-     */
-    private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
-        Scanner scan = new Scanner(System.in);
-        int choice=-1,x,y;
-        String flip;
-        boolean flipped;
-        while ( scene.getClient().getMiniModel().getState().equals("PLACE_CARD") ){
-            menuChoice("PLACE CARD",scene.getClient().getMiniModel().getState());
-            do{
-                if(choice != -1) System.err.println("[ERROR] INCORRECT INSERT");
-                System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
-                String choicestring = scan.nextLine();
-                choice = Integer.parseInt(choicestring);
-                System.out.println("\nCHOOSE SIDE (B,F): ");
-                flip = scan.nextLine();
-                flipped = (flip.equals("B") || flip.equals("b"));
-                System.out.println("\nCHOOSE COORDINATES: ");
-                x = scan.nextInt();
-                y = scan.nextInt();
-                scan.nextLine();
-            }while( !(choice>=1 && choice<=3) ||
-                    !(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f") ) ||
-                    !(x>=0 && x< Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM ));
-            scene.getClient().selectAndInsertCard(choice,x,y,flipped);
-        }
-    }
-
-    /**
-     * This method is currently unused due to the graphical user interface implementation.
-     *
-     * It previously handled in-game card drawing selection for text-based clients.
-     *
-     * @throws IOException If an I/O error occurs during communication.
-     * @throws InterruptedException If the connection thread is interrupted.
-     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
-     */
-    private void drawCard() throws IOException, InterruptedException, ClassNotFoundException {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("\n DRAW A CARD FROM: ");
-        boolean goldDeck_present = scene.getClient().isGoldDeckPresent();
-        boolean resourceDeck_present = scene.getClient().isResourceDeckPresent();
-
-        if(goldDeck_present){System.out.println("1. GOLD DECK");}
-        if (resourceDeck_present){System.out.println("2. RESOURCE DECK");}
-        System.out.println("3. CENTRAL CARDS DECK");
-        int num = -1;
-        SendFunction function = null;
-        String token_client;
-        do{
-            if(num != -1) System.err.println("[ERROR] OUT OF BOUND");
-            String numstring = scan.nextLine();
-            num = Integer.parseInt(numstring);
-            if(scene.getClient() instanceof clientSocket) token_client = scene.getClient().getToken();
-            else token_client = token;
-            switch (num) {
-                case (1):
-                    function = new SendDrawGold(token_client);
-                    break;
-                case (2):
-                    function = new SendDrawResource(token_client);
-                    break;
-                case (3):
-                    showCardsInCenter();
-                    System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
-                    String choicestr = scan.nextLine();
-                    int index = Integer.parseInt(choicestr);
-                    function = new SendDrawCenter(token_client, index - 1);
-                    break;
-            }
-
-        }while ( num < 0 || num > 3);
-        scene.getClient().drawCard(function);
-    }
-
-    /**
-     * Shows the cards available in the center deck.
-     *
-     * This method might have different implementations depending on the client type (socket or RMI).
-     *
-     * @throws IOException If an I/O error occurs during communication.
-     * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
-     * @throws InterruptedException If the connection thread is interrupted.
-     */
-    private void showCardsInCenter() throws IOException, ClassNotFoundException, InterruptedException {
-        if(scene.getClient() instanceof clientSocket){
-            scene.getClient().showCardsInCenter();
-        }
-        else{
-            scene.getClient().getGameServer().showCardsInCenter(token);}
-    }
 
     @Override
     public String getName() {

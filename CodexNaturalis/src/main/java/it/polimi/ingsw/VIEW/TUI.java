@@ -475,9 +475,9 @@ public class TUI implements Serializable, GraficInterterface {
 
             switch (choice) {
                 case (0):
-                    client.getMiniModel().printNumToField();
-                    int i = scan.nextInt();
-                    client.getMiniModel().showGameField(i);
+                    String player_name = client.getMiniModel().printNumToField();
+                    if (player_name == null) System.out.println("Player not found");
+                    else client.getMiniModel().showGameField(player_name);
                     break;
                 case (1):
                     client.getMiniModel().showCards();
