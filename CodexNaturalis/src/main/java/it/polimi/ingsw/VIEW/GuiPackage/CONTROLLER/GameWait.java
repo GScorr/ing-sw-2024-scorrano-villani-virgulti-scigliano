@@ -74,6 +74,8 @@ public class GameWait extends GenericSceneController {
 
     private ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
 
+    private boolean useless = false;
+
     Image card_1_front,card_1_back;
     boolean card_1_flip = false;
     PlayCard card_2;
@@ -237,10 +239,12 @@ public class GameWait extends GenericSceneController {
                 try {
                     if (super.client.getTerminal_interface().getIsAlone() == true ) break;
                     if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+                        useless = true;
                         super.client.getTerminal_interface().manageGame();
                         break;
                     };
                     if (super.client.getMiniModel().getState().equals("END_GAME")) {
+                        useless = true;
                         super.client.getTerminal_interface().endGame();
                         break;
                     };
@@ -268,7 +272,9 @@ public class GameWait extends GenericSceneController {
 
     private void checkLastTurn() throws IOException {
         new Thread(() -> {
-            while(true) {
+            boolean superendgame = false;
+            while(!superendgame && !useless) {
+                System.out.println("yes");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -286,6 +292,8 @@ public class GameWait extends GenericSceneController {
                 }
                 try {
                     if (endgame && getActivePlayer()) {
+                        superendgame = true;
+                        System.out.println(this);
                         Platform.runLater(() -> {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Game Information");
@@ -293,7 +301,7 @@ public class GameWait extends GenericSceneController {
                             alert.setContentText("Somebody has reached 20 points, last turn of the game!");
                             alert.showAndWait();
                         });
-                        break;
+
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);

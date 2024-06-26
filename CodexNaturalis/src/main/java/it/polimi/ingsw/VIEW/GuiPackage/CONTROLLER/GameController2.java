@@ -132,6 +132,7 @@ public class GameController2 extends GenericSceneController {
     private boolean just_pressed = false;
     String token_client;
     private SendFunction function;
+    private boolean useless = false;
     @FXML
     private ToggleButton chatToggleButton;
 
@@ -254,22 +255,27 @@ public class GameController2 extends GenericSceneController {
 
     private void checkLastTurn() throws IOException {
         boolean endgame = false;
-        for (GameField g : client.getMiniModel().getGame_fields()) {
-            if (g.getPlayer().getPlayerPoints() >= 20) {
-                endgame = true;
-                break; // Non ha senso continuare a controllare dopo aver trovato un giocatore con >= 20 punti
-            }
-        }
+        if(!useless) {
 
-        if (endgame && !endgameAlertShown && getActivePlayer()) {
-            endgameAlertShown = true; // Imposta la variabile di stato a true per evitare future visualizzazioni dell'alert
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Game Information");
-                alert.setHeaderText(null);
-                alert.setContentText("Somebody has reached 20 points, last turn of the game!");
-                alert.showAndWait();
-            });
+
+            for (GameField g : client.getMiniModel().getGame_fields()) {
+                if (g.getPlayer().getPlayerPoints() >= 20) {
+                    endgame = true;
+                    break; // Non ha senso continuare a controllare dopo aver trovato un giocatore con >= 20 punti
+                }
+            }
+
+            if (endgame && !endgameAlertShown && getActivePlayer()) {
+                System.out.println(this);
+                endgameAlertShown = true; // Imposta la variabile di stato a true per evitare future visualizzazioni dell'alert
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Game Information");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Somebody has reached 20 points, last turn of the game!");
+                    alert.showAndWait();
+                });
+            }
         }
     }
 
@@ -514,6 +520,7 @@ public class GameController2 extends GenericSceneController {
                     System.out.println( i);
                     client.selectAndInsertCard(i,x,y,flipped);
                     showLoadingPopup();
+                    useless = true;
                     client.getTerminal_interface().manageGame();
                 } catch (NumberFormatException e) {
                     // If it's not possible to parse the coordinates as numbers, handle the exception
@@ -774,6 +781,7 @@ public class GameController2 extends GenericSceneController {
     private void sendFunction(SendFunction function) throws IOException, InterruptedException, ClassNotFoundException {
         client.drawCard(function);
         showLoadingPopup();
+        useless = true;
         client.getTerminal_interface().manageGame();
     }
 
@@ -1108,6 +1116,7 @@ public class GameController2 extends GenericSceneController {
 
         client.selectAndInsertCard(i,row,col,flipped);
         showLoadingPopup();
+        useless = true;
         client.getTerminal_interface().manageGame();
         // Here you can handle the click event on the image, using the row and col coordinates.
         System.out.println("Clicked on image at row: " + row + ", col: " + col);
