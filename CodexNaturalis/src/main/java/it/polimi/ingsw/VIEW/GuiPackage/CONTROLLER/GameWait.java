@@ -266,7 +266,9 @@ public class GameWait extends GenericSceneController {
 
     private void checkLastTurn() throws IOException {
         new Thread(() -> {
-            while(true) {
+            boolean superendgame = false;
+            while(!superendgame) {
+                System.out.println("yes");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -284,6 +286,8 @@ public class GameWait extends GenericSceneController {
                 }
                 try {
                     if (endgame && getActivePlayer()) {
+                        superendgame = true;
+                        System.out.println(this);
                         Platform.runLater(() -> {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Game Information");
@@ -291,7 +295,7 @@ public class GameWait extends GenericSceneController {
                             alert.setContentText("Somebody has reached 20 points, last turn of the game!");
                             alert.showAndWait();
                         });
-                        break;
+
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);

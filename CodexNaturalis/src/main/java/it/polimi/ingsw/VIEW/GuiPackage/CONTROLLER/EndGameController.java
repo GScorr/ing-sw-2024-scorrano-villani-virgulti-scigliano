@@ -126,7 +126,7 @@ public class EndGameController extends GenericSceneController{
         congratulationsText.setFont(Font.font("Georgia", FontWeight.BOLD, 54));
 
         // Posizionamento del testo al di fuori del leaderboard
-        congratulationsText.setTranslateY(-50);
+        congratulationsText.setTranslateY(-130);
         congratulationsText.setOpacity(0);
 
         // Aggiunta del testo al contenitore principale

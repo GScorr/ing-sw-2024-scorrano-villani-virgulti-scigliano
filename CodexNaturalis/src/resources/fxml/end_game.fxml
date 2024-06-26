@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.text.Text?>
-<?import java.net.URL?>
-
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.EndGameController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER.EndGameController">
 
     <stylesheets>
         <URL value="@../fxml/css/end_game.css" />
@@ -24,18 +14,20 @@
         <fx:include fx:id="HeaderInclude" source="./header.fxml" />
     </top>
 
-    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" styleClass="container">
-        <Label text="Game Over!" styleClass="title"/>
-        <Label text="Final Standings" styleClass="subtitle"/>
-        <HBox alignment="CENTER">
-            <TableView fx:id="leaderboard" styleClass="table-view" prefWidth="700" prefHeight="250">
-                <columns>
-                    <TableColumn fx:id="positionColumn" text="#" prefWidth="100" />
-                    <TableColumn fx:id="playerNameColumn" text="Player" prefWidth="300" />
-                    <TableColumn fx:id="playerScoreColumn" text="Score" prefWidth="300" />
-                </columns>
-            </TableView>
-        </HBox>
-    </VBox>
+    <center>
+        <StackPane alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+            <VBox alignment="CENTER" spacing="20" styleClass="container">
+                <Label styleClass="title" text="Game Over!" />
+                <Label styleClass="subtitle" text="Final Standings" />
+                <TableView fx:id="leaderboard" prefHeight="180.0" prefWidth="533.0" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="positionColumn" prefWidth="100" text="#" />
+                        <TableColumn fx:id="playerNameColumn" prefWidth="300" text="Player" />
+                        <TableColumn fx:id="playerScoreColumn" prefWidth="200" text="Score" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </StackPane>
+    </center>
 
 </BorderPane>
