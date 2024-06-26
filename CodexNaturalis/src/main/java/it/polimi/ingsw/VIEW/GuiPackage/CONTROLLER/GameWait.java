@@ -73,6 +73,8 @@ public class GameWait extends GenericSceneController {
 
     private ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
 
+    private boolean useless = false;
+
     Image card_1_front,card_1_back;
     boolean card_1_flip = false;
     PlayCard card_2;
@@ -235,10 +237,12 @@ public class GameWait extends GenericSceneController {
                 try {
                     if (super.client.getTerminal_interface().getIsAlone() == true ) break;
                     if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+                        useless = true;
                         super.client.getTerminal_interface().manageGame();
                         break;
                     };
                     if (super.client.getMiniModel().getState().equals("END_GAME")) {
+                        useless = true;
                         super.client.getTerminal_interface().endGame();
                         break;
                     };
@@ -267,7 +271,7 @@ public class GameWait extends GenericSceneController {
     private void checkLastTurn() throws IOException {
         new Thread(() -> {
             boolean superendgame = false;
-            while(!superendgame) {
+            while(!superendgame && !useless) {
                 System.out.println("yes");
                 try {
                     Thread.sleep(1000);
