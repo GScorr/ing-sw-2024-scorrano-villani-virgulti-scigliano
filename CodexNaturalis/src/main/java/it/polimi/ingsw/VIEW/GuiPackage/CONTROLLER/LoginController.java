@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.NotBoundException;
 
 /**
@@ -44,11 +45,8 @@ public class LoginController extends GenericSceneController {
     private Label welcomeLabel;
 
     public void initialize() {
-
-
-        // Set the background image
-        File file = new File("src/resources/BackGroundImaging/photo_6023689416893121790_y.jpg");
-        Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("BackGroundImaging/photo_6023689416893121790_y.jpg");
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Bind the background image size to the scene size

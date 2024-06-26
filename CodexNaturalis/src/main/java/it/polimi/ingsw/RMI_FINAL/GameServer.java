@@ -214,6 +214,15 @@ public class GameServer implements VirtualGameServer, Serializable {
         c.pushBack(message);
     }
 
+
+    public boolean isGoldDeckPresent() throws IOException{
+        return this.controller.getGame().getGold_deck().getNumber() > 0 ;
+    }
+
+    public boolean isResourceDeckPresent() throws IOException{
+        return this.controller.getGame().getResources_deck().getNumber() > 0 ;
+    }
+
     /**
      * Adds a function to a queue for later processing.
      *

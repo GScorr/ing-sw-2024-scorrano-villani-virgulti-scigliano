@@ -61,10 +61,7 @@ public class getResourcesDeckSize implements Message, Serializable {
      */
     @Override
     public void action() throws IOException {
-        int size = rmi_controller.getController().getGame().getResources_deck().getNumber();
-        boolean check;
-        if (size > 0 ) check = true;
-        else check = false;
+        boolean check = rmi_controller.isResourceDeckPresent();
         ResponseMessage s = new CheckResourcesDeckSize(check);
         output.writeObject(s);
         output.flush();

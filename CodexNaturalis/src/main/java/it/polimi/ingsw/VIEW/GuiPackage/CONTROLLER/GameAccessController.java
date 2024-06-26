@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.NotBoundException;
 
 /**
@@ -30,10 +31,8 @@ public class GameAccessController extends GenericSceneController {
 
 
     public void initialize() {
-
-        // Set the background image
-        File file = new File("src/resources/BackGroundImaging/BackGround.png");
-        Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("BackGroundImaging/BackGround.png");
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Bind the background image size to the scene size

@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.NotBoundException;
 import java.util.List;
 
@@ -27,10 +28,10 @@ public class GameListController extends GenericSceneController{
     private List<SocketRmiControllerObject> games;
 
     public void initialize() {
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("BackGroundImaging/BackGround.png");
 
         // Set the background image
-        File file = new File("src/resources/BackGroundImaging/BackGround.png");
-        Image image = new Image(file.toURI().toString());
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Bind the background image size to the scene size

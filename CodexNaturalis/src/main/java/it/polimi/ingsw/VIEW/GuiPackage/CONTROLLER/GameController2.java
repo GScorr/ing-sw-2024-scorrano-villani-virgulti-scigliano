@@ -33,6 +33,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -105,7 +106,8 @@ public class GameController2 extends GenericSceneController {
     @FXML
     private GridPane gameGrid;
 
-    File file;
+
+    InputStream resourceStream;
     Image image;
 
     PlayCard card_1;
@@ -143,45 +145,6 @@ public class GameController2 extends GenericSceneController {
     private ColorCoordinatesHelper helper2 = new ColorCoordinatesHelper();
 
 
-    // Aggiunge un nuovo chat item al menu "Chats"
-    /*public void addChatItem(String chatName, int chatId) {
-        MenuItem chatItem = new MenuItem(chatName);
-        chatItem.setUserData(chatId);
-        chatItem.setOnAction(event -> {
-            try {
-                showChat(chatName, chatId);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        chatsMenu.getItems().add(chatItem);
-    }*/
-
-    /**
-     * Updates the total unread message count (`unread_total`) in the client's `MiniModel` by iterating through
-     * individual unread message counts from the `not_read` list and accumulating them into a single value.
-     *
-     * @throws IOException If an I/O error occurs during communication (implementation-dependent).
-     */
-    private void updateUnreadTotal() throws IOException {
-        client.getMiniModel().setUnread_total(0);
-        for (Integer i : client.getMiniModel().getNot_read()) {
-            client.getMiniModel().setUnread_total(client.getMiniModel().getUnread_total() + i);
-        }
-    }
-
-    // Aggiunge un messaggio alla chat box
-
-    /**
-     * Adds a new message (`message`) to the chat box UI element.
-     *
-     * @param message The text content of the message to be added.
-     */
-    private void addMessageToChatBox(String message) {
-        Label messageLabel = new Label(message);
-        messageLabel.setWrapText(true);
-        chatBox.getChildren().add(messageLabel);
-    }
 
 
     /**
@@ -193,13 +156,12 @@ public class GameController2 extends GenericSceneController {
     @FXML
     public void startInitialize() throws IOException, InterruptedException {
 
-
         //header
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/header.fxml"));
         Parent header = loader.load();
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
-        System.out.println("--------------------" + scene_controller);
+
         headerController.setScene(scene_controller);
 
         // Add the header to the desired position in the main layout
@@ -284,19 +246,7 @@ public class GameController2 extends GenericSceneController {
         setPlayerColor(helper.fromEnumtoColor(client.getMiniModel().getMy_player().getColor()));
         setPlayerName(client.getMiniModel().getMy_player().getName());
         checkLastTurn();
-/*
 
-            int i=1;
-            if(client.getMiniModel().getNum_players() > 2){
-                for( i = 1; i<=client.getMiniModel().getNum_players(); ++i){
-                    if( i!=client.getMiniModel().getMy_index() ) addChatItem("-CHAT WITH PLAYER " + client.getMiniModel().getNum_to_player().get(i) + " - New messages (" + client.getMiniModel().getNot_read().get(chat_manager.getChatIndex(client.getMiniModel().getMy_index(),i)) + ")", i);}
-                addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
-            }else{ addChatItem("PUBLIC CHAT" + " - New messages (" + client.getMiniModel().getNot_read().get(6) + ")", i);
-            }
-
-            //this.chatmenu.set(5, "5- WRITE MESSAGE 1 PLAYER");
- */
-  //      scene_controller.getHeader_controller().startInitializeHeader();
 
     }
 
@@ -367,9 +317,9 @@ public class GameController2 extends GenericSceneController {
      * @param imagePath The path to the image file to be displayed.
      */
     private void addImageToGrid(int row, int col, String imagePath) {
-         file = new File(imagePath);
-         image = new Image(file.toURI().toString());
+        resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
 
+         image = new Image(resourceStream);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(49.65 * 2);
         imageView.setFitHeight(33.1 * 2);
@@ -621,7 +571,7 @@ public class GameController2 extends GenericSceneController {
                 for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
                     for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                         if (helper.checkPlacing(card_1_flip, client.getMiniModel().getCards_in_hand().get(0), client.getMiniModel().getMyGameField(), i, j)) {
-                            addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "src/resources/Card/Bianco.png");
+                            addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "Card/Bianco.png");
                             System.out.println(i + " " + j);
                         }
 
@@ -688,7 +638,7 @@ public class GameController2 extends GenericSceneController {
                 for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
                     for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                         if (helper.checkPlacing(card_2_flip, client.getMiniModel().getCards_in_hand().get(1), client.getMiniModel().getMyGameField(), i, j)) {
-                            addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "src/resources/Card/Bianco.png");
+                            addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "Card/Bianco.png");
                             System.out.println(i + " " + j);
                         }
 
@@ -752,7 +702,7 @@ public class GameController2 extends GenericSceneController {
                 for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
                     for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                         if (helper.checkPlacing(card_3_flip,client.getMiniModel().getCards_in_hand().get(2), client.getMiniModel().getMyGameField(), i, j)) {
-                            addClickableCardImageToGrid(3, i, j, client.getMiniModel().getCards_in_hand().get(2), "src/resources/Card/Bianco.png");
+                            addClickableCardImageToGrid(3, i, j, client.getMiniModel().getCards_in_hand().get(2), "Card/Bianco.png");
                         }
 
                     }
@@ -956,21 +906,21 @@ public class GameController2 extends GenericSceneController {
      */
     private void updateDecks() throws IOException {
         if(super.client.getMiniModel().getTop_resource() == null){
-            file = new File("src/resources/Card/Bianco.png");
-            image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            image = new Image(resourceStream);
             this.resurce_deck.setImage(image);
         }else{
-            file = new File(super.client.getMiniModel().getTop_resource().back_side_path);
-            image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(super.client.getMiniModel().getTop_resource().back_side_path);
+            image = new Image(resourceStream);
             this.resurce_deck.setImage(image);
         }
         if(super.client.getMiniModel().getTop_gold() == null){
-            file = new File("src/resources/Card/Bianco.png");
-            image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            image = new Image(resourceStream);
             this.gold_deck.setImage(image);
         }else{
-            file = new File(super.client.getMiniModel().getTop_gold().back_side_path);
-            image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(super.client.getMiniModel().getTop_gold().back_side_path);
+            image = new Image(resourceStream);
             this.gold_deck.setImage(image);}
     }
 
@@ -986,20 +936,20 @@ public class GameController2 extends GenericSceneController {
         PlayCard card2 = super.client.getMiniModel().getCards_in_center().getResource_list().get(0);
         PlayCard card3 = super.client.getMiniModel().getCards_in_center().getResource_list().get(1);
 
-        file = new File(card0.front_side_path);
-        image = new Image(file.toURI().toString());
+        resourceStream = getClass().getClassLoader().getResourceAsStream(card0.front_side_path);
+        image = new Image(resourceStream);
         this.center_card_0.setImage(image);
 
-        file = new File(card1.front_side_path);
-        image = new Image(file.toURI().toString());
+        resourceStream = getClass().getClassLoader().getResourceAsStream(card1.front_side_path);
+        image = new Image(resourceStream);
         this.center_card_1.setImage(image);
 
-        file = new File(card2.front_side_path);
-        image = new Image(file.toURI().toString());
+        resourceStream = getClass().getClassLoader().getResourceAsStream(card2.front_side_path);
+        image = new Image(resourceStream);
         this.center_card_2.setImage(image);
 
-        file = new File(card3.front_side_path);
-        image = new Image(file.toURI().toString());
+        resourceStream = getClass().getClassLoader().getResourceAsStream(card3.front_side_path);
+        image = new Image(resourceStream);
         this.center_card_3.setImage(image);
     }
 
@@ -1011,50 +961,51 @@ public class GameController2 extends GenericSceneController {
     private void updateCardsInHand() throws IOException {
         card_1  = super.client.getMiniModel().getCards_in_hand().get(0);
         if(card_1.front_side_path != null){
+
             //front
-            file = new File(card_1.front_side_path);
-            card_1_front = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_1.front_side_path);
+            card_1_front = new Image(resourceStream);
             handCard1.setImage( card_1_front);
             //System.out.println(card_1.front_side_path);
             //back
-            file = new File(card_1.back_side_path);
-            card_1_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_1.back_side_path);
+            card_1_back = new Image(resourceStream);
         }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_1_front = new Image(file.toURI().toString());
-            card_1_back= new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            card_1_front = new Image(resourceStream);
+            card_1_back= new Image(resourceStream);
             handCard1.setImage( card_1_back);
         }
 
         card_2  = super.client.getMiniModel().getCards_in_hand().get(1);
         if(card_2.front_side_path != null){
             //front
-            file = new File(card_2.front_side_path);
-            card_2_front = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_2.front_side_path);
+            card_2_front = new Image(resourceStream);
             handCard2.setImage(card_2_front);
             //back
-            file = new File(card_2.back_side_path);
-            card_2_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_2.back_side_path);
+            card_2_back = new Image(resourceStream);
         }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_2_front = new Image(file.toURI().toString());
-            card_2_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            card_2_front = new Image(resourceStream);
+            card_2_back = new Image(resourceStream);
             handCard2.setImage(card_2_front);
         }
         card_3  = super.client.getMiniModel().getCards_in_hand().get(2);
         if(card_3.front_side_path != null){
             //front
-            file = new File(card_3.front_side_path);
-            card_3_front = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_3.front_side_path);
+            card_3_front = new Image(resourceStream);
             handCard3.setImage(card_3_front);
 
             //back
-            file = new File(card_3.back_side_path);
-            card_3_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_3.back_side_path);
+            card_3_back = new Image(resourceStream);
         }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_3_front = new Image(file.toURI().toString());
-            card_3_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            card_3_front = new Image(resourceStream);
+            card_3_back = new Image(resourceStream);
             handCard3.setImage(card_3_front);
         }
 
@@ -1070,8 +1021,8 @@ public class GameController2 extends GenericSceneController {
      * @param imagePath  The path to the image file representing the card.
      */
     private void addClickableCardImageToGrid(int i, int row, int col, PlayCard card, String imagePath) {
-        File file = new File(imagePath);
-        Image image = new Image(file.toURI().toString());
+        resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+        Image image = new Image(resourceStream);
 
         ClickableCardImageView imageView = new ClickableCardImageView(image, card, row, col, i);
         imageView.setFitWidth(49.65 * 2);
@@ -1187,7 +1138,7 @@ public class GameController2 extends GenericSceneController {
             for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                     if (helper.checkPlacing(card_1_flip, client.getMiniModel().getCards_in_hand().get(0), client.getMiniModel().getMyGameField(), i, j)) {
-                        addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "src/resources/Card/Bianco.png");
+                        addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "Card/Bianco.png");
                         System.out.println(i + " " + j);
                     }
                 }
@@ -1220,7 +1171,7 @@ public class GameController2 extends GenericSceneController {
 
 
         // Imposta un'immagine bianca per la carta durante il drag
-        /*File file = new File("src/resources/Card/Bianco.png");
+        /*File file = new File("Card/Bianco.png");
         Image blankImage = new Image(file.toURI().toString());*/
         handCard1.setImage(null);
 
@@ -1255,7 +1206,7 @@ public class GameController2 extends GenericSceneController {
             for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                     if (helper.checkPlacing(card_2_flip, client.getMiniModel().getCards_in_hand().get(1), client.getMiniModel().getMyGameField(), i, j)) {
-                        addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "src/resources/Card/Bianco.png");
+                        addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "Card/Bianco.png");
                         System.out.println(i + " " + j);
                     }
                 }
@@ -1288,7 +1239,7 @@ public class GameController2 extends GenericSceneController {
 
 
         // Imposta un'immagine bianca per la carta durante il drag
-        /*File file = new File("src/resources/Card/Bianco.png");
+        /*File file = new File("Card/Bianco.png");
         Image blankImage = new Image(file.toURI().toString());*/
         handCard2.setImage(null);
 
@@ -1323,7 +1274,7 @@ public class GameController2 extends GenericSceneController {
             for (int i = 0; i < Constants.MATRIXDIM - 1; i++) {
                 for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                     if (helper.checkPlacing(card_3_flip, client.getMiniModel().getCards_in_hand().get(2), client.getMiniModel().getMyGameField(), i, j)) {
-                        addClickableCardImageToGrid(3, i, j, client.getMiniModel().getCards_in_hand().get(2), "src/resources/Card/Bianco.png");
+                        addClickableCardImageToGrid(3, i, j, client.getMiniModel().getCards_in_hand().get(2), "Card/Bianco.png");
                         System.out.println(i + " " + j);
                     }
                 }
@@ -1355,7 +1306,7 @@ public class GameController2 extends GenericSceneController {
         db.setDragView(resizedImage, 143, 382);
 
         // Imposta un'immagine bianca per la carta durante il drag
-        /*File file = new File("src/resources/Card/Bianco.png");
+        /*File file = new File("Card/Bianco.png");
         Image blankImage = new Image(file.toURI().toString());*/
         handCard3.setImage(null);
 

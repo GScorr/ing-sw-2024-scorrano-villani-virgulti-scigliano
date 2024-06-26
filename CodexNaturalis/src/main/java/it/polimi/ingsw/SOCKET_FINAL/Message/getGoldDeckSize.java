@@ -59,10 +59,7 @@ public class getGoldDeckSize implements Message, Serializable {
      */
     @Override
     public void action() throws IOException {
-        int size = rmi_controller.getController().getGame().getGold_deck().getNumber();
-        boolean check;
-        if(size > 0 ) check = true;
-        else check = false;
+       boolean check = rmi_controller.isGoldDeckPresent();
         ResponseMessage s = new CheckGoldDeckSize(check);
         output.writeObject(s);
         output.flush();

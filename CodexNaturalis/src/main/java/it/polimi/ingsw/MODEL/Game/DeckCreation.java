@@ -19,13 +19,20 @@ import java.io.IOException;
  */
 public class DeckCreation implements Serializable {
 
-    /**
+
+    InputStream resources_filePath = getClass().getClassLoader().getResourceAsStream("JSON/resources.json");
+    InputStream gold_filePath = getClass().getClassLoader().getResourceAsStream("JSON/gold.json");
+    InputStream starting_filePath = getClass().getClassLoader().getResourceAsStream("JSON/starting.json");
+    InputStream goal_filePath = getClass().getClassLoader().getResourceAsStream("JSON/goals.json");
+
+    /*
      * file path
-     */
+
     private String resources_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/resources.json";
     private String gold_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/gold.json";
     private String starting_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/starting.json";
     private String goal_filePath = "src/main/java/it/polimi/ingsw/MODEL/Game/INITIALIZED/goals.json";
+     */
 
     private transient JsonArray resources_jsonArray, gold_jsonArray,starting_jsonArray, goal_jsonArray;
     public static List<ResourceCard> deck_resources = new ArrayList<>();
@@ -44,7 +51,7 @@ public class DeckCreation implements Serializable {
      * @throws IOException If any issues occur while reading the JSON files.
      */
     public DeckCreation() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(resources_filePath))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(resources_filePath))) {
             StringBuilder jsonStringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -56,7 +63,7 @@ public class DeckCreation implements Serializable {
             e.printStackTrace();
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(gold_filePath))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(gold_filePath))) {
             StringBuilder jsonStringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -68,7 +75,7 @@ public class DeckCreation implements Serializable {
             e.printStackTrace();
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(starting_filePath))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(starting_filePath))) {
             StringBuilder jsonStringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -79,7 +86,7 @@ public class DeckCreation implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(goal_filePath))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(goal_filePath))) {
             StringBuilder jsonStringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
