@@ -141,12 +141,14 @@ public class GameListController extends GenericSceneController{
         // Create a timeline to close the alert after 2 second
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
             try {
-                client.getTerminal_interface().manageGame();
+                client.getTerminal_interface().makeChoice(client.getTerminal_interface().getName());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (NotBoundException e) {
                 throw new RuntimeException(e);
             }
             loadingAlert.close();

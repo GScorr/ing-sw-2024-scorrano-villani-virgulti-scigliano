@@ -162,7 +162,7 @@ public class TUI implements Serializable, GraficInterterface {
      * @throws InterruptedException If the connection thread is interrupted.
      */
 
-    private void makeChoice(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
+    public void makeChoice(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         if (!client.areThereFreeGames()) {
             newGame(player_name,false);
             return;
