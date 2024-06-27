@@ -225,7 +225,7 @@ public class TUI implements Serializable, GraficInterterface {
      */
     public void chooseMatch(String player_name) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException {
         Scanner scan = new Scanner(System.in);
-        boolean check ;
+        boolean check = true;
         System.out.println("\nEXISTING GAMES: ");
         List<SocketRmiControllerObject> games = client.getFreeGames();
         for (SocketRmiControllerObject r : games) {
@@ -234,11 +234,13 @@ public class TUI implements Serializable, GraficInterterface {
             id_games.add(r.ID);
         }
         do {
-            System.out.println("\nINSERT GAME ID > ");
-            int ID = scan.nextInt();
-            check = client.findRmiController(ID, player_name);
+            if( !check ) {makeChoice(player_name); check = true;}
+            else{System.out.println("\nINSERT GAME ID > ");
+                int ID = scan.nextInt();
+                check = client.findRmiController(ID, player_name);
+                }
         }while(!check);
-        //qui c'è un errore ( anche in Socket non è gestito il caso di errore )
+
         client.connectGameServer();
     }
 
