@@ -770,6 +770,36 @@ public class GameController2 extends GenericSceneController {
         timeline.play();
     }
 
+
+    public void showLoadingPopupDrawCard() {
+        // Create an INFORMATION type alert for loading
+        Alert loadingAlert = new Alert(Alert.AlertType.INFORMATION, "Loading...", ButtonType.OK);
+        loadingAlert.setHeaderText(null);
+        loadingAlert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false); // Nasconde il pulsante OK
+
+        // show alert
+        loadingAlert.show();
+
+        // Create a timeline to close the alert after 1 second
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            loadingAlert.close();
+            useless = true;
+            try {
+                client.getTerminal_interface().manageGame();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }));
+
+        // Start the timeline
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
     /**
      * Sends a function object to the client.
      *
@@ -780,9 +810,8 @@ public class GameController2 extends GenericSceneController {
      */
     private void sendFunction(SendFunction function) throws IOException, InterruptedException, ClassNotFoundException {
         client.drawCard(function);
-        showLoadingPopup();
-        useless = true;
-        client.getTerminal_interface().manageGame();
+        showLoadingPopupDrawCard();
+
     }
 
     /**
