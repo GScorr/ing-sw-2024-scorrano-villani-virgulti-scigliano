@@ -89,9 +89,9 @@
                     </Label>
                     <Circle fx:id="playerColorCircle" radius="10.0" />
                 </VBox>
-                <ImageView fx:id="handCard1" fitHeight="170.0" fitWidth="170.0" layoutX="145.0" layoutY="60.0" onDragDetected="#handleCard1DragDetected" onDragDone="#handleCard1DragDone" onMouseClicked="#handleCard1Click" onMouseDragged="#handleCard1MouseDragged" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
-                <ImageView fx:id="handCard2" fitHeight="170.0" fitWidth="170.0" layoutX="144.0" layoutY="221.0" onDragDetected="#handleCard2DragDetected" onDragDone="#handleCard2DragDone" onMouseClicked="#handleCard2Click" onMouseDragged="#handleCard2MouseDragged" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
-                <ImageView fx:id="handCard3" fitHeight="170.0" fitWidth="170.0" layoutX="143.0" layoutY="382.0" onDragDetected="#handleCard3DragDetected" onDragDone="#handleCard3DragDone" onMouseClicked="#handleCard3Click" onMouseDragged="#handleCard3MouseDragged" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
+                <ImageView fx:id="handCard1" fitHeight="170.0" fitWidth="170.0" layoutX="145.0" layoutY="60.0"  onMouseClicked="#handleCard1Click" onMousePressed="#handleCard1Pressed" onMouseReleased="#handleCard1Released" preserveRatio="true" />
+                <ImageView fx:id="handCard2" fitHeight="170.0" fitWidth="170.0" layoutX="144.0" layoutY="221.0" onMouseClicked="#handleCard2Click" onMousePressed="#handleCard2Pressed" onMouseReleased="#handleCard2Released" preserveRatio="true" />
+                <ImageView fx:id="handCard3" fitHeight="170.0" fitWidth="170.0" layoutX="143.0" layoutY="382.0" onMouseClicked="#handleCard3Click" onMousePressed="#handleCard3Pressed" onMouseReleased="#handleCard3Released" preserveRatio="true" />
                 <GridPane fx:id="gridPane" layoutX="1.0" layoutY="529.0" prefHeight="199.0" prefWidth="455.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="68.0" />

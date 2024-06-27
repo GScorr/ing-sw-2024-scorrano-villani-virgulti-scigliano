@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fxml/game2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,14 +330,6 @@
       <workItem from="1719160482878" duration="1821000" />
       <workItem from="1719363761470" duration="442000" />
       <workItem from="1719482671956" duration="6430000" />
-    </task>
-    <task id="LOCAL-00178" summary=" f">
-      <option name="closed" value="true" />
-      <created>1718049644296</created>
-      <option name="number" value="00178" />
-      <option name="presentableId" value="LOCAL-00178" />
-      <option name="project" value="LOCAL" />
-      <updated>1718049644297</updated>
     </task>
     <task id="LOCAL-00179" summary="fine chat">
       <option name="closed" value="true" />
@@ -723,7 +715,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719489057947</updated>
     </task>
-    <option name="localTasksCounter" value="227" />
+    <task id="LOCAL-00227" summary="drag and drop tolto">
+      <option name="closed" value="true" />
+      <created>1719503267604</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1719503267604</updated>
+    </task>
+    <option name="localTasksCounter" value="228" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -758,7 +758,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="endgame" />
     <MESSAGE value="popup" />
     <MESSAGE value="m" />
     <MESSAGE value="rifinitura" />
@@ -783,7 +782,8 @@
     <MESSAGE value="fix end game" />
     <MESSAGE value="fix last popup" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="drag and drop tolto" />
+    <option name="LAST_COMMIT_MESSAGE" value="drag and drop tolto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
