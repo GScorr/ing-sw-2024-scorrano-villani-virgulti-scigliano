@@ -50,7 +50,7 @@ public class EndGameController extends GenericSceneController{
     private int lastindex = 1;
 
     @FXML
-    public void startInitialize() throws IOException {
+    public void startInitialize() throws IOException, InterruptedException {
         boolean end = false;
         while(!end){
             end = true;
@@ -59,6 +59,7 @@ public class EndGameController extends GenericSceneController{
                     end = false;
                 }
             }
+            Thread.sleep(1000);
         }
 
         /**
