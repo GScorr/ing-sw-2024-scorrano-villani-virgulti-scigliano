@@ -1167,7 +1167,7 @@ public class GameController2 extends GenericSceneController {
         }
         addedImageViews.clear(); // clear the list
     }
-
+/*
     @FXML
     private void handleCard1DragDetected(MouseEvent event) throws IOException {
         if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
@@ -1210,7 +1210,7 @@ public class GameController2 extends GenericSceneController {
         // Imposta un'immagine bianca per la carta durante il drag
         /*File file = new File("Card/Bianco.png");
         Image blankImage = new Image(file.toURI().toString());*/
-        handCard1.setImage(null);
+        /*handCard1.setImage(null);
 
         event.consume();
     }
@@ -1277,7 +1277,7 @@ public class GameController2 extends GenericSceneController {
         // Imposta un'immagine bianca per la carta durante il drag
         /*File file = new File("Card/Bianco.png");
         Image blankImage = new Image(file.toURI().toString());*/
-        handCard2.setImage(null);
+        /*handCard2.setImage(null);
 
         event.consume();
     }
@@ -1343,7 +1343,7 @@ public class GameController2 extends GenericSceneController {
         // Imposta un'immagine bianca per la carta durante il drag
         /*File file = new File("Card/Bianco.png");
         Image blankImage = new Image(file.toURI().toString());*/
-        handCard3.setImage(null);
+        /*handCard3.setImage(null);
 
         event.consume();
     }
@@ -1367,7 +1367,7 @@ public class GameController2 extends GenericSceneController {
 
         event.consume();
     }
-
+*/
     public void setPlayerName(String playerName) {
         playerNameLabel.setText(playerName);
     }
