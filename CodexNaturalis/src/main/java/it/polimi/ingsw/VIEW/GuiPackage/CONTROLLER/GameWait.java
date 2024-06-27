@@ -30,8 +30,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -53,6 +53,7 @@ public class GameWait extends GenericSceneController {
     public ImageView handCard2;
     public ImageView handCard3;
     public VBox deckBox;
+    InputStream resourceStream;
 
     @FXML
     private GridPane gameGrid;
@@ -60,7 +61,7 @@ public class GameWait extends GenericSceneController {
     @FXML
     private Menu chatsMenu;
 
-    File file;
+
     Image image;
 
     PlayCard card_1;
@@ -72,6 +73,8 @@ public class GameWait extends GenericSceneController {
     private Circle playerColorCircle;
 
     private ColorCoordinatesHelper helper = new ColorCoordinatesHelper();
+
+    private boolean useless = false;
 
     Image card_1_front,card_1_back;
     boolean card_1_flip = false;
@@ -98,6 +101,7 @@ public class GameWait extends GenericSceneController {
 
     public void updateCurrentPlayer(String playerName) {
         currentPlayerLabel.setText("Now is playing: " + playerName);
+        currentPlayerLabel.setStyle("-fx-text-fill: white;");
     }
 
 
@@ -176,50 +180,51 @@ public class GameWait extends GenericSceneController {
 
         card_1  = super.client.getMiniModel().getCards_in_hand().get(0);
         if(card_1.front_side_path != null){
+
             //front
-            file = new File(card_1.front_side_path);
-            card_1_front = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_1.front_side_path);
+            card_1_front = new Image(resourceStream);
             handCard1.setImage( card_1_front);
-            System.out.println(card_1.front_side_path);
+            //System.out.println(card_1.front_side_path);
             //back
-            file = new File(card_1.back_side_path);
-            card_1_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_1.back_side_path);
+            card_1_back = new Image(resourceStream);
         }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_1_front = new Image(file.toURI().toString());
-            card_1_back= new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            card_1_front = new Image(resourceStream);
+            card_1_back= new Image(resourceStream);
             handCard1.setImage( card_1_back);
         }
 
         card_2  = super.client.getMiniModel().getCards_in_hand().get(1);
         if(card_2.front_side_path != null){
             //front
-            file = new File(card_2.front_side_path);
-            card_2_front = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_2.front_side_path);
+            card_2_front = new Image(resourceStream);
             handCard2.setImage(card_2_front);
             //back
-            file = new File(card_2.back_side_path);
-            card_2_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_2.back_side_path);
+            card_2_back = new Image(resourceStream);
         }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_2_front = new Image(file.toURI().toString());
-            card_2_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            card_2_front = new Image(resourceStream);
+            card_2_back = new Image(resourceStream);
             handCard2.setImage(card_2_front);
         }
         card_3  = super.client.getMiniModel().getCards_in_hand().get(2);
         if(card_3.front_side_path != null){
             //front
-            file = new File(card_3.front_side_path);
-            card_3_front = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_3.front_side_path);
+            card_3_front = new Image(resourceStream);
             handCard3.setImage(card_3_front);
 
             //back
-            file = new File(card_3.back_side_path);
-            card_3_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(card_3.back_side_path);
+            card_3_back = new Image(resourceStream);
         }else{
-            file = new File("src/resources/Card/Bianco.png");
-            card_3_front = new Image(file.toURI().toString());
-            card_3_back = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream("Card/Bianco.png");
+            card_3_front = new Image(resourceStream);
+            card_3_back = new Image(resourceStream);
             handCard3.setImage(card_3_front);
         }
 
@@ -235,10 +240,12 @@ public class GameWait extends GenericSceneController {
                 try {
                     if (super.client.getTerminal_interface().getIsAlone() == true ) break;
                     if (super.client.getMiniModel().getState().equals("PLACE_CARD")) {
+                        useless = true;
                         super.client.getTerminal_interface().manageGame();
                         break;
                     };
                     if (super.client.getMiniModel().getState().equals("END_GAME")) {
+                        useless = true;
                         super.client.getTerminal_interface().endGame();
                         break;
                     };
@@ -266,7 +273,8 @@ public class GameWait extends GenericSceneController {
 
     private void checkLastTurn() throws IOException {
         new Thread(() -> {
-            while(true) {
+            boolean superendgame = false;
+            while(!superendgame && !useless) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -284,6 +292,7 @@ public class GameWait extends GenericSceneController {
                 }
                 try {
                     if (endgame && getActivePlayer()) {
+                        superendgame = true;
                         Platform.runLater(() -> {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Game Information");
@@ -291,7 +300,7 @@ public class GameWait extends GenericSceneController {
                             alert.setContentText("Somebody has reached 20 points, last turn of the game!");
                             alert.showAndWait();
                         });
-                        break;
+
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -591,8 +600,8 @@ public class GameWait extends GenericSceneController {
             cardImageView.setPreserveRatio(true);
 
             // Load and set the image for the ImageView
-            File file = new File(imagePath);
-            Image image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+            Image image = new Image(resourceStream);
             cardImageView.setImage(image);
 
 
@@ -615,8 +624,8 @@ public class GameWait extends GenericSceneController {
             cardImageView.setPreserveRatio(true);
 
             // Load and set the image for the ImageView
-            File file = new File(imagePath);
-            Image image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+            Image image = new Image(resourceStream);
             cardImageView.setImage(image);
 
             // Add the label and image view to the VBox
@@ -640,8 +649,8 @@ public class GameWait extends GenericSceneController {
             cardImageView.setPreserveRatio(true);
 
             // Load and set the image for the ImageView
-            File file = new File(imagePath);
-            Image image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+            Image image = new Image(resourceStream);
             cardImageView.setImage(image);
 
 
@@ -660,8 +669,8 @@ public class GameWait extends GenericSceneController {
             cardImageView.setPreserveRatio(true);
 
             // Load and set the image for the ImageView
-            File file = new File(imagePath);
-            Image image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+            Image image = new Image(resourceStream);
             cardImageView.setImage(image);
 
             // Add the label and image view to the VBox
@@ -680,8 +689,8 @@ public class GameWait extends GenericSceneController {
             cardImageView.setPreserveRatio(true);
 
             // Load and set the image for the ImageView
-            File file = new File(imagePath);
-            Image image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+            Image image = new Image(resourceStream);
             cardImageView.setImage(image);
 
 
@@ -700,8 +709,8 @@ public class GameWait extends GenericSceneController {
             cardImageView.setPreserveRatio(true);
 
             // Load and set the image for the ImageView
-            File file = new File(imagePath);
-            Image image = new Image(file.toURI().toString());
+            resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+            Image image = new Image(resourceStream);
             cardImageView.setImage(image);
 
 
@@ -852,8 +861,8 @@ public class GameWait extends GenericSceneController {
      * @param imagePath the path to the image file
      */
     private void addImageToGrid(GridPane grid, int row, int col, String imagePath) {
-        File file = new File(imagePath);
-        Image image = new Image(file.toURI().toString());
+        resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+        Image image = new Image(resourceStream);
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(49.65 * 2);

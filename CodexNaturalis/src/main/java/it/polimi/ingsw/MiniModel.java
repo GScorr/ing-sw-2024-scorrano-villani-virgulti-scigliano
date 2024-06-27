@@ -126,29 +126,33 @@ public class MiniModel implements Serializable {
     }
 
     public String printNumToField(){
-        System.out.println("WHICH PLAYER'S GAME FIELD YOU WANT TO SEE?");
+        boolean wrong = false;
+            while(!wrong){
+            System.out.println("WHICH PLAYER'S GAME FIELD YOU WANT TO SEE?");
+            // Create a list of player descriptions from the map
+            List<String> playerDescriptions = getNum_to_player().entrySet().stream()
+                    .map(entry -> "-" + entry.getKey() + " Name: " + entry.getValue())
+                    .collect(Collectors.toList());
 
-        // Create a list of player descriptions from the map
-        List<String> playerDescriptions = getNum_to_player().entrySet().stream()
-                .map(entry -> "-" + entry.getKey() + " Name: " + entry.getValue())
-                .collect(Collectors.toList());
+            // Print each player description
+            playerDescriptions.forEach(System.out::println);
 
-        // Print each player description
-        playerDescriptions.forEach(System.out::println);
-
-        // Read input from the user
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the player's ID:");
-        int playerId = scanner.nextInt();
-
-        // Return the name of the selected player
-        String playerName = num_to_player.get(playerId);
-
-        if (playerName != null) {
-            return playerName;
-        } else {
-            return null;
+            // Read input from the user
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter the player's ID:");
+            int playerId = 0;
+            try{
+                    String pi = scanner.nextLine();
+                    playerId = Integer.parseInt(pi);
+                    // Return the name of the selected player
+                    String playerName = num_to_player.get(playerId);
+                    return playerName;
+                }
+            catch (NumberFormatException | InputMismatchException e){
+                wrong = false;
+            }
         }
+        return null;
     }
 
 

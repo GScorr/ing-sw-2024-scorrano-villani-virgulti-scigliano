@@ -309,7 +309,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
      */
     @Override
     public boolean isGoldDeckPresent() throws IOException {
-        return rmi_controller.getController().getGame().getGold_deck().getNumber()>0;
+        return rmi_controller.isGoldDeckPresent();
     }
 
     /**
@@ -320,7 +320,7 @@ public class RmiClientF extends UnicastRemoteObject implements VirtualViewF {
      */
     @Override
     public boolean isResourceDeckPresent() throws IOException {
-        return rmi_controller.getController().getGame().getResources_deck().getNumber()>0;
+        return rmi_controller.isResourceDeckPresent();
     }
 
     /**

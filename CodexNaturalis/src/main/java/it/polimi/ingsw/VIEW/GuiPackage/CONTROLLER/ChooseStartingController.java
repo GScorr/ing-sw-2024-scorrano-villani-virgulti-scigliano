@@ -17,6 +17,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * This class implements the controller for the "Choose Starting Side" scene in the game's GUI.
@@ -49,10 +50,9 @@ public class ChooseStartingController extends GenericSceneController {
     private StackPane cardContainer;
 
     public void initialize() {
-
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("BackGroundImaging/BackGround.png");
         // Set the background image
-        File file = new File("src/resources/BackGroundImaging/BackGround.png");
-        Image image = new Image(file.toURI().toString());
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Bind the background image size to the scene size
@@ -82,7 +82,7 @@ public class ChooseStartingController extends GenericSceneController {
         Parent header = loader.load();
         HeaderController headerController = loader.getController();
         headerController.setThe_client(super.client);
-        System.out.println("--------------------" + scene_controller);
+
         headerController.setScene(scene_controller);
 
         // Add the header to the desired position in the main layout
@@ -94,14 +94,12 @@ public class ChooseStartingController extends GenericSceneController {
         playcard1 = client.showStartingCardGUI().getFrontSide();
         playcard2 = client.showStartingCardGUI().getBackSide();
 
-        System.out.println(client.showStartingCardGUI().front_side_path);
-        System.out.println(client.showStartingCardGUI().back_side_path);
-
-        File file = new File(client.showStartingCardGUI().front_side_path);
-        Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(client.showStartingCardGUI().front_side_path);
+        Image image = new Image(resourceStream);
         card1.setImage(image);
-        file = new File(client.showStartingCardGUI().back_side_path);
-        image = new Image(file.toURI().toString());
+
+         resourceStream = getClass().getClassLoader().getResourceAsStream(client.showStartingCardGUI().back_side_path);
+        image = new Image(resourceStream);
         card2.setImage(image);
 
         if(super.client.isFirstPlaced()){
@@ -127,11 +125,9 @@ public class ChooseStartingController extends GenericSceneController {
      */
     @FXML
     private void handleCard1Click(MouseEvent event) throws IOException, InterruptedException {
-        System.out.println("Card 1 selected");
         client.chooseStartingCard(false);
         animateCardSelection(card1, card2);
         showBufferingLabel();
-
         checkClientState();
     }
 
@@ -146,7 +142,6 @@ public class ChooseStartingController extends GenericSceneController {
      */
     @FXML
     private void handleCard2Click(MouseEvent event) throws IOException, InterruptedException {
-        System.out.println("Card 2 selected");
         client.chooseStartingCard(true);
         animateCardSelection(card2, card1);
         showBufferingLabel();

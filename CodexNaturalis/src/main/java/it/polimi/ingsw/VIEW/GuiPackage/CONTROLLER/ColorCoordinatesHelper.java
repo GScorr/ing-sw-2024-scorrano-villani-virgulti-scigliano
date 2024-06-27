@@ -225,7 +225,6 @@ public class ColorCoordinatesHelper {
                 (player_field.getField()[x][y].getCard().equals(player_field.getField()[x + 1][y].getCard()) && player_field.getField()[x][y].isFilled()) ||
                 (player_field.getField()[x + 1][y].getCard().equals(player_field.getField()[x + 1][y + 1].getCard()) && player_field.getField()[x + 1][y].isFilled()) ||
                 (player_field.getField()[x][y + 1].getCard().equals(player_field.getField()[x + 1][y + 1].getCard()) && player_field.getField()[x][y + 1].isFilled())) {
-            System.out.println("a");
             return false;
         }
         // Check that there is at least one card in the space ( you can't place a card in an empty space )
@@ -238,14 +237,12 @@ public class ColorCoordinatesHelper {
                     (!player_field.getField()[x + 1][y].isEmpty() && player_field.getField()[x + 1][y].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x][y + 1].isEmpty() && player_field.getField()[x][y + 1].getValue().equals(AnglesEnum.NONE)) ||
                     (!player_field.getField()[x + 1][y + 1].isEmpty() && player_field.getField()[x + 1][y + 1].getValue().equals(AnglesEnum.NONE))) {
-                System.out.println("b");
                 return false;
             }
             else {
                 if (card instanceof GoldCard) {
                     if(!flipped){
                         if (!checkGoldConstraints(player_field, card.getCostraint())) {
-                            System.out.println("c");
                             return false;
                         }
                     }
@@ -254,7 +251,6 @@ public class ColorCoordinatesHelper {
         } else {
             return false;
         }
-        System.out.println("e");
         return true;
     }
 

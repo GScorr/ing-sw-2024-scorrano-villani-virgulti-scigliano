@@ -2,15 +2,21 @@ package it.polimi.ingsw.VIEW.GuiPackage.CONTROLLER;
 
 import it.polimi.ingsw.RMI_FINAL.SocketRmiControllerObject;
 import it.polimi.ingsw.RMI_FINAL.VirtualViewF;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.NotBoundException;
 import java.util.List;
 
@@ -27,10 +33,10 @@ public class GameListController extends GenericSceneController{
     private List<SocketRmiControllerObject> games;
 
     public void initialize() {
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("BackGroundImaging/BackGround.png");
 
         // Set the background image
-        File file = new File("src/resources/BackGroundImaging/BackGround.png");
-        Image image = new Image(file.toURI().toString());
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Bind the background image size to the scene size
@@ -111,9 +117,46 @@ public class GameListController extends GenericSceneController{
      * @throws ClassNotFoundException
      */
     private void handleGameButtonClick(SocketRmiControllerObject game) throws IOException, InterruptedException, NotBoundException, ClassNotFoundException {
-        super.client.findRmiController(game.ID, super.client.getTerminal_interface().getName());
-        super.client.connectGameServer();
-        super.client.getTerminal_interface().waitFullGame();
+        boolean check = client.findRmiController(game.ID, super.client.getTerminal_interface().getName());
+        if(check) {
+            super.client.connectGameServer();
+            super.client.getTerminal_interface().waitFullGame();
+        }else{
+            showLoadingPopup();
+
+        }
+
+
+    }
+
+    private void showLoadingPopup() {
+        // Create an INFORMATION type alert for loading
+        Alert loadingAlert = new Alert(Alert.AlertType.INFORMATION, "Game is full, you are being redirect to the Entry Page ...", ButtonType.OK);
+        loadingAlert.setHeaderText(null);
+        loadingAlert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false); // Nasconde il pulsante OK
+
+        // show alert
+        loadingAlert.show();
+
+        // Create a timeline to close the alert after 2 second
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+            try {
+                client.getTerminal_interface().makeChoice(client.getTerminal_interface().getName());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (NotBoundException e) {
+                throw new RuntimeException(e);
+            }
+            loadingAlert.close();
+        }));
+
+        // Start the timeline
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
 }

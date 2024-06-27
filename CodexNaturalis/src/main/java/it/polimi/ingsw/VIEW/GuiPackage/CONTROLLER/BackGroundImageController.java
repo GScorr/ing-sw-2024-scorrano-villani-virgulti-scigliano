@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.NotBoundException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,11 +39,11 @@ public class BackGroundImageController extends GenericSceneController {
 
     @FXML
     public void initialize() {
-        // Adjust the file path as necessary
-        File file = new File("src/resources/BackGroundImaging/ConnectionLoadind.png");
 
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("src/resources/BackGroundImaging/ConnectionLoadind.png");
+        // Adjust the file path as necessary
         // Set the background image
-        Image image = new Image(file.toURI().toString());
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Set up a listener to bind the ImageView properties once the scene is available

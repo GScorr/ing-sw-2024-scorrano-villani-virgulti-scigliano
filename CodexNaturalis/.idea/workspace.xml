@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="t" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="changeName from Server to ServerSocket">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62a81d7-7170-4f90-a1ea-6c685175bd80" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,9 +137,9 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -323,38 +328,8 @@
       <workItem from="1718566931904" duration="453000" />
       <workItem from="1718697539757" duration="30267000" />
       <workItem from="1719160482878" duration="1821000" />
-    </task>
-    <task id="LOCAL-00174" summary="piccolo change per carta trasparente">
-      <option name="closed" value="true" />
-      <created>1717884569652</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1717884569653</updated>
-    </task>
-    <task id="LOCAL-00175" summary="aggiornamento">
-      <option name="closed" value="true" />
-      <created>1717930063282</created>
-      <option name="number" value="00175" />
-      <option name="presentableId" value="LOCAL-00175" />
-      <option name="project" value="LOCAL" />
-      <updated>1717930063282</updated>
-    </task>
-    <task id="LOCAL-00176" summary="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti">
-      <option name="closed" value="true" />
-      <created>1718033176347</created>
-      <option name="number" value="00176" />
-      <option name="presentableId" value="LOCAL-00176" />
-      <option name="project" value="LOCAL" />
-      <updated>1718033176347</updated>
-    </task>
-    <task id="LOCAL-00177" summary="chat public a due funziona le altre non so, da aggiornare numero messaggi non letti">
-      <option name="closed" value="true" />
-      <created>1718033354308</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1718033354308</updated>
+      <workItem from="1719363761470" duration="442000" />
+      <workItem from="1719482671956" duration="6430000" />
     </task>
     <task id="LOCAL-00178" summary=" f">
       <option name="closed" value="true" />
@@ -716,7 +691,39 @@
       <option name="project" value="LOCAL" />
       <updated>1719308535579</updated>
     </task>
-    <option name="localTasksCounter" value="223" />
+    <task id="LOCAL-00223" summary="fix end game">
+      <option name="closed" value="true" />
+      <created>1719363577600</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1719363577601</updated>
+    </task>
+    <task id="LOCAL-00224" summary="fix last popup">
+      <option name="closed" value="true" />
+      <created>1719364000038</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1719364000040</updated>
+    </task>
+    <task id="LOCAL-00225" summary=".">
+      <option name="closed" value="true" />
+      <created>1719482715748</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1719482715748</updated>
+    </task>
+    <task id="LOCAL-00226" summary=".">
+      <option name="closed" value="true" />
+      <created>1719489057947</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1719489057947</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -751,9 +758,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Revisione commenti fine RMI, manca Gameserver" />
-    <MESSAGE value="small fixes" />
-    <MESSAGE value="small fixes pt.2" />
     <MESSAGE value="endgame" />
     <MESSAGE value="popup" />
     <MESSAGE value="m" />
@@ -767,7 +771,6 @@
     <MESSAGE value="miglioramenti alla GUI" />
     <MESSAGE value="miglioramenti alla GUI + sfondo al gamefiled avversario" />
     <MESSAGE value="fix definitivo disocnnessione???????" />
-    <MESSAGE value="." />
     <MESSAGE value="chatprova" />
     <MESSAGE value="L'HO FATTA GROSSA PT 2 header.fxml" />
     <MESSAGE value="small fixesseseseseseseseesssesesessseseses" />
@@ -776,7 +779,11 @@
     <MESSAGE value="View gameField opponents sistemato" />
     <MESSAGE value="small fix" />
     <MESSAGE value="changeName from Server to ServerSocket" />
-    <option name="LAST_COMMIT_MESSAGE" value="changeName from Server to ServerSocket" />
+    <MESSAGE value="aaa" />
+    <MESSAGE value="fix end game" />
+    <MESSAGE value="fix last popup" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

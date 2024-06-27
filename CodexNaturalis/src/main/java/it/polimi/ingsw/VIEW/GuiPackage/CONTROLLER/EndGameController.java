@@ -50,7 +50,17 @@ public class EndGameController extends GenericSceneController{
     private int lastindex = 1;
 
     @FXML
-    public void startInitialize() throws IOException {
+    public void startInitialize() throws IOException, InterruptedException {
+        boolean end = false;
+        while(!end){
+            end = true;
+            for (GameField g : client.getMiniModel().getGame_fields()){
+                if(!g.getPlayer().getActual_state().getNameState().equals("END_GAME")){
+                    end = false;
+                }
+            }
+            Thread.sleep(1000);
+        }
 
         /**
          * header
@@ -126,7 +136,7 @@ public class EndGameController extends GenericSceneController{
         congratulationsText.setFont(Font.font("Georgia", FontWeight.BOLD, 54));
 
         // Posizionamento del testo al di fuori del leaderboard
-        congratulationsText.setTranslateY(-50);
+        congratulationsText.setTranslateY(-130);
         congratulationsText.setOpacity(0);
 
         // Aggiunta del testo al contenitore principale

@@ -16,6 +16,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * This class implements the controller for the "Choose Goal" scene in the game's GUI.
@@ -52,10 +53,8 @@ public class ChooseGoalController extends GenericSceneController {
     private StackPane cardContainer;
 
     public void initialize() {
-
-        // Set the background image
-        File file = new File("src/resources/BackGroundImaging/BackGround.png");
-        Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("BackGroundImaging/BackGround.png");
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Bind the background image size to the scene size
@@ -100,12 +99,15 @@ public class ChooseGoalController extends GenericSceneController {
 
         goal1 = client.getFirstGoalCard();
         goal2 = client.getSecondGoalCard();
-        File file = new File(client.getFirstGoalCard().front_side_path);
-        Image image = new Image(file.toURI().toString());
+
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(client.getFirstGoalCard().front_side_path);
+        Image image = new Image(resourceStream);
         card1.setImage(image);
-        file = new File(client.getSecondGoalCard().front_side_path);
-        image = new Image(file.toURI().toString());
+
+        resourceStream = getClass().getClassLoader().getResourceAsStream(client.getSecondGoalCard().front_side_path);
+        image = new Image(resourceStream);
         card2.setImage(image);
+
         if (!super.client.isGoalCardPlaced()) {
             if(goal1.equals(client.getMiniModel().getMy_player().getGoalCard())){
                 animateCardSelection(card1,card2);
@@ -130,7 +132,7 @@ public class ChooseGoalController extends GenericSceneController {
      */
     @FXML
     private void handleCard1Click(MouseEvent event) throws IOException, InterruptedException {
-        System.out.println("Card 1 selected");
+
         animateCardSelection(card1, card2);
         client.chooseGoal(0);
         showBufferingLabel();
@@ -148,7 +150,7 @@ public class ChooseGoalController extends GenericSceneController {
      */
     @FXML
     private void handleCard2Click(MouseEvent event) throws IOException, InterruptedException {
-        System.out.println("Card 2 selected");
+
         animateCardSelection(card2, card1);
         client.chooseGoal(1);
         showBufferingLabel();
@@ -162,7 +164,6 @@ public class ChooseGoalController extends GenericSceneController {
     private void showBufferingLabel() {
         Platform.runLater(() -> {
             bottomLabel.setText("Buffering... Please wait.");
-
             // Disable the ImageView elements
             card1.setDisable(true);
             card2.setDisable(true);

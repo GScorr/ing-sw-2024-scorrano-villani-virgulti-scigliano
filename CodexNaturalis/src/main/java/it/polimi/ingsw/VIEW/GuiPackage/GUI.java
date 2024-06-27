@@ -22,6 +22,7 @@ public class GUI implements GraficInterterface {
     private boolean isAlone = false;
 
     public boolean newClient;
+
     SceneController scene;
     String username;
     private String token;
@@ -119,12 +120,12 @@ public class GUI implements GraficInterterface {
      * @throws ClassNotFoundException If a class used during communication cannot be found (relevant for RMI communication).
      * @throws InterruptedException If the connection thread is interrupted.
      */
-    private void makeChoice(String player_name) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException {
+    public void makeChoice(String player_name) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException {
         if (!scene.getClient().areThereFreeGames()) {
             newGame(player_name,false);
             return;
         }
-        int done=0;
+
         Platform.runLater(() -> scene.changeRootPane("choose_new_or_old.fxml"));
     }
 

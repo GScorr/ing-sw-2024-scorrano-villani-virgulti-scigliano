@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.CONSTANTS.Constants;
 import it.polimi.ingsw.MODEL.Player.Player;
 import it.polimi.ingsw.RMI_FINAL.*;
 import it.polimi.ingsw.SOCKET_FINAL.ServerSocket;
@@ -256,6 +257,18 @@ public class Common_Server {
     }
 
     public static void main(String[] args) throws IOException, NotBoundException {
+
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Choose the correct IP address, if you click 'y' (or 'Y') you will be asked to insert the IP address, if you click any other button you will continue.");
+        String ipChoice = scan.nextLine();
+        if (ipChoice.equalsIgnoreCase("y")) {
+            System.out.println("Please enter the IP address:");
+            String ipAddress = scan.nextLine();
+            System.out.println("IP address set to: " + ipAddress);
+            Constants.IPV4 = ipAddress;
+        }
 
         Common_Server common = new Common_Server();
 

@@ -28,6 +28,7 @@ public interface GraficInterterface extends Serializable {
     void setToken(String token);
     public void setNewClient(boolean newClient);
     public boolean getIsAlone();
+    public void makeChoice(String player_name) throws NotBoundException, IOException, ClassNotFoundException, InterruptedException;
 
     void buffering() throws  InterruptedException;
     public void newGame(String player_name, boolean empty) throws IOException, NotBoundException, ClassNotFoundException, InterruptedException;
