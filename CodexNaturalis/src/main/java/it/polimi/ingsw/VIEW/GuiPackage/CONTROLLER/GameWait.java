@@ -101,6 +101,7 @@ public class GameWait extends GenericSceneController {
 
     public void updateCurrentPlayer(String playerName) {
         currentPlayerLabel.setText("Now is playing: " + playerName);
+        currentPlayerLabel.setStyle("-fx-text-fill: white;");
     }
 
 
