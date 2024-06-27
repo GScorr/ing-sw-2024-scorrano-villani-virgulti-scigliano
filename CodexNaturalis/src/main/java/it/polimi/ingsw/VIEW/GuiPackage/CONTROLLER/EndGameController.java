@@ -51,6 +51,15 @@ public class EndGameController extends GenericSceneController{
 
     @FXML
     public void startInitialize() throws IOException {
+        boolean end = false;
+        while(!end){
+            end = true;
+            for (GameField g : client.getMiniModel().getGame_fields()){
+                if(!g.getPlayer().getActual_state().getNameState().equals("END_GAME")){
+                    end = false;
+                }
+            }
+        }
 
         /**
          * header

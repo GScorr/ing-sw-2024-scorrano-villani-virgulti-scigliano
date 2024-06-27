@@ -275,7 +275,6 @@ public class GameWait extends GenericSceneController {
         new Thread(() -> {
             boolean superendgame = false;
             while(!superendgame && !useless) {
-                System.out.println("yes");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -294,7 +293,6 @@ public class GameWait extends GenericSceneController {
                 try {
                     if (endgame && getActivePlayer()) {
                         superendgame = true;
-                        System.out.println(this);
                         Platform.runLater(() -> {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Game Information");

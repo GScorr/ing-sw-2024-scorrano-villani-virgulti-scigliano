@@ -154,6 +154,7 @@ public class GameController2 extends GenericSceneController {
      * @throws IOException If an I/O error occurs during FXML loading.
      * @throws InterruptedException If the initialization process is interrupted.
      */
+
     @FXML
     public void startInitialize() throws IOException, InterruptedException {
 
@@ -266,7 +267,6 @@ public class GameController2 extends GenericSceneController {
             }
 
             if (endgame && !endgameAlertShown && getActivePlayer()) {
-                System.out.println(this);
                 endgameAlertShown = true; // Imposta la variabile di stato a true per evitare future visualizzazioni dell'alert
                 Platform.runLater(() -> {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -385,6 +385,7 @@ public class GameController2 extends GenericSceneController {
      * Initializes the game board UI and related components. This method is called automatically when the FXML file is loaded.
      */
     public void initialize() {
+
         //  Initialization of other components
         // Add an event handler to the GridPane to deselect the card when clicking anywhere on the game field
         gameGrid.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
@@ -579,7 +580,6 @@ public class GameController2 extends GenericSceneController {
                     for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                         if (helper.checkPlacing(card_1_flip, client.getMiniModel().getCards_in_hand().get(0), client.getMiniModel().getMyGameField(), i, j)) {
                             addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "Card/Bianco.png");
-                            System.out.println(i + " " + j);
                         }
 
                     }
@@ -646,7 +646,6 @@ public class GameController2 extends GenericSceneController {
                     for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                         if (helper.checkPlacing(card_2_flip, client.getMiniModel().getCards_in_hand().get(1), client.getMiniModel().getMyGameField(), i, j)) {
                             addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "Card/Bianco.png");
-                            System.out.println(i + " " + j);
                         }
 
                     }
@@ -1177,7 +1176,7 @@ public class GameController2 extends GenericSceneController {
                 for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                     if (helper.checkPlacing(card_1_flip, client.getMiniModel().getCards_in_hand().get(0), client.getMiniModel().getMyGameField(), i, j)) {
                         addClickableCardImageToGrid(1, i, j, client.getMiniModel().getCards_in_hand().get(0), "Card/Bianco.png");
-                        System.out.println(i + " " + j);
+
                     }
                 }
             }
@@ -1245,7 +1244,6 @@ public class GameController2 extends GenericSceneController {
                 for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                     if (helper.checkPlacing(card_2_flip, client.getMiniModel().getCards_in_hand().get(1), client.getMiniModel().getMyGameField(), i, j)) {
                         addClickableCardImageToGrid(2, i, j, client.getMiniModel().getCards_in_hand().get(1), "Card/Bianco.png");
-                        System.out.println(i + " " + j);
                     }
                 }
             }
@@ -1313,7 +1311,6 @@ public class GameController2 extends GenericSceneController {
                 for (int j = 0; j < Constants.MATRIXDIM - 1; j++) {
                     if (helper.checkPlacing(card_3_flip, client.getMiniModel().getCards_in_hand().get(2), client.getMiniModel().getMyGameField(), i, j)) {
                         addClickableCardImageToGrid(3, i, j, client.getMiniModel().getCards_in_hand().get(2), "Card/Bianco.png");
-                        System.out.println(i + " " + j);
                     }
                 }
             }
