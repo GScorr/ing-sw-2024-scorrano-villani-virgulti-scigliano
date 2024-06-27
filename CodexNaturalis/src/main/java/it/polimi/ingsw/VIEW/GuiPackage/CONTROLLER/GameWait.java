@@ -312,7 +312,7 @@ public class GameWait extends GenericSceneController {
 
     private boolean getActivePlayer() throws IOException {
         for(GameField g : client.getMiniModel().getGame_fields()){
-            System.out.println(g.getPlayer().getActual_state().getNameState());
+
             if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")
             ){
                 return g.getPlayer().getIsFirst();

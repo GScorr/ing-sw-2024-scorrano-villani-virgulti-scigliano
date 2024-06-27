@@ -281,7 +281,7 @@ public class GameController2 extends GenericSceneController {
 
     private boolean getActivePlayer() throws IOException {
         for(GameField g : client.getMiniModel().getGame_fields()){
-            System.out.println(g.getPlayer().getActual_state().getNameState());
+
             if(g.getPlayer().getActual_state().getNameState().equals("DRAW_CARD")
             ){
                 return g.getPlayer().getIsFirst();
@@ -505,9 +505,6 @@ public class GameController2 extends GenericSceneController {
                     int y = Integer.parseInt(parts[0].trim());
                     int x = Integer.parseInt(parts[1].trim());
 
-                    // Ora puoi utilizzare le coordinate x e y come desideri
-                    System.out.println("Coordinate X: " + x);
-                    System.out.println("Coordinate Y: " + y);
                     boolean flipped;
                     if(i == 1){
                         flipped = card_1_flip;
@@ -517,8 +514,7 @@ public class GameController2 extends GenericSceneController {
                     }else{
                         flipped = card_3_flip;
                     }
-                    System.out.println("Index of card insert is :");
-                    System.out.println( i);
+
                     client.selectAndInsertCard(i,x,y,flipped);
                     showLoadingPopup();
                     useless = true;
@@ -534,12 +530,10 @@ public class GameController2 extends GenericSceneController {
                     throw new RuntimeException(e);
                 }
             } else {
-                // If the coordinate string does not have the correct format, handle the error
-                System.err.println("Formato delle coordinate non valido.");
+
             }
         }, () -> {
-            // If the user has pressed 'Cancel', do nothing
-            System.out.println("Popup chiuso senza inserire coordinate");
+
         });
     }
 
@@ -1146,10 +1140,7 @@ public class GameController2 extends GenericSceneController {
         showLoadingPopup();
         useless = true;
         client.getTerminal_interface().manageGame();
-        // Here you can handle the click event on the image, using the row and col coordinates.
-        System.out.println("Clicked on image at row: " + row + ", col: " + col);
-        // You can also access the PlayCard object associated with the clicked image.
-        System.out.println("Associated PlayCard: " + card);
+
     }
 
     /**
