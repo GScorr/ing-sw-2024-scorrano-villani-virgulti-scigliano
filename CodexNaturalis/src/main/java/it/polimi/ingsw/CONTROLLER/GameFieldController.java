@@ -175,7 +175,7 @@ public class GameFieldController implements Serializable {
                     for(int j=y; j<y+2; j++)
                         if( !player_field.getCell(i, j, 45).isEmpty() ) num_of_touch++;
 
-                return num_of_touch * card.getPoint();
+                return num_of_touch ;
             }
             case PAPER: return player_field.getNumOfPaper();
             case FEATHER: return player_field.getNumOfFeather();
