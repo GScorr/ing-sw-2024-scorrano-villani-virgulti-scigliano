@@ -393,6 +393,7 @@ public class TUI implements Serializable, GraficInterterface {
     private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         int choice=-1,x,y;
+        String xx,yy;
         String flip;
         boolean flipped;
         boolean wrong = false;
@@ -406,10 +407,12 @@ public class TUI implements Serializable, GraficInterterface {
                 System.out.println("\nCHOOSE SIDE (B,F): ");
                 flip = scan.nextLine();
                 flipped = (flip.equals("B") || flip.equals("b"));
-                System.out.println("\nCHOOSE COORDINATES: ");
-                x = scan.nextInt();
-                y = scan.nextInt();
-                scan.nextLine();
+                System.out.println("\nCHOOSE COORDINATES \n" +
+                                    "[the card will be placed with the TOP-LEFT corner in the coordinates inserted]: ");
+                System.out.print ("\nINSERT X : "); xx = scan.nextLine();
+                System.out.print ("\nINSERT Y : "); yy = scan.nextLine();
+                x = Integer.parseInt(xx);
+                y = Integer.parseInt(yy);
                 wrong = !(choice>=1 && choice<=3) ||
                         !(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f") ) ||
                         !(x>=0 && x< Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM );
@@ -452,7 +455,7 @@ public class TUI implements Serializable, GraficInterterface {
                     break;
                 case (3):
                     showCardsInCenter();
-                    System.out.println("CHOSE CARD FROM CENTER (1/2/3 ) : ");
+                    System.out.println("CHOSE CARD FROM CENTER (1-2-3-4) : ");
                     String choicestr = scan.nextLine();
                     int index = Integer.parseInt(choicestr);
                     function = new SendDrawCenter(token_client, index - 1);
