@@ -23,8 +23,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.NotBoundException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -127,15 +127,17 @@ public class HeaderController extends GenericSceneController {
         goalMenu.setId("GoalMenu");
 
         // Paths to your image files
-        String common_goal = "src/resources/IconUI/focus.png";
-        String personal_goal = "src/resources/IconUI/target.png";
+        String common_goal = "IconUI/focus.png";
+        String personal_goal = "IconUI/target.png";
+
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(personal_goal);
 
         // Create ImageViews for icons
-        ImageView personalGoalIcon = new ImageView(new Image(new File(personal_goal).toURI().toString()));
+        ImageView personalGoalIcon = new ImageView(new Image(resourceStream));
         personalGoalIcon.setFitWidth(20);
         personalGoalIcon.setFitHeight(20);
-
-        ImageView commonGoalIcon = new ImageView(new Image(new File(common_goal).toURI().toString()));
+        resourceStream = getClass().getClassLoader().getResourceAsStream(common_goal);
+        ImageView commonGoalIcon = new ImageView(new Image(resourceStream));
         commonGoalIcon.setFitWidth(20);
         commonGoalIcon.setFitHeight(20);
 
@@ -280,9 +282,8 @@ public class HeaderController extends GenericSceneController {
 
         // Set the owner of the popup stage to the main stage
         scoreboardStage.initOwner(scene_controller.getActiveScene().getWindow()); // Adjust according to how you access the main stage
-
-        File file = new File("src/resources/imgMirk/scoreTable.png");
-        Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("imgMirk/scoreTable.png");
+        Image image = new Image(resourceStream);
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(315); // Max width
@@ -356,8 +357,8 @@ public class HeaderController extends GenericSceneController {
         Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getPlayer().getGoalCard();
 
         // Load and set the image for the ImageView
-        File file = new File(personalGoal_1.front_side_path);
-        Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(personalGoal_1.front_side_path);
+        Image image = new Image(resourceStream);
         cardImageView.setImage(image);
 
         // Add the label and image view to the VBox
@@ -394,8 +395,8 @@ public class HeaderController extends GenericSceneController {
         Goal personalGoal_1 = the_client.getMiniModel().getMyGameField().getGlobal_goal1();
 
         // Load and set the image for the ImageView
-        File file = new File(personalGoal_1.front_side_path);
-        Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(personalGoal_1.front_side_path);
+        Image image = new Image(resourceStream);
         cardImageView.setImage(image);
 
         // Add the label and image view to the VBox
@@ -409,8 +410,8 @@ public class HeaderController extends GenericSceneController {
         Goal personalGoal_2 = the_client.getMiniModel().getMyGameField().getGlobal_goal2();
 
         // Load and set the image for the ImageView
-        file = new File(personalGoal_2.front_side_path);
-        image = new Image(file.toURI().toString());
+         resourceStream = getClass().getClassLoader().getResourceAsStream(personalGoal_2.front_side_path);
+        image = new Image(resourceStream);
         cardImageView_2.setImage(image);
 
         // Add the label and image view to the VBox
@@ -605,8 +606,9 @@ public class HeaderController extends GenericSceneController {
      * @param imagePath The path to the card image.
      */
     private void addImageToGrid(int row, int col, String imagePath) {
-       File file = new File(imagePath);
-       Image image = new Image(file.toURI().toString());
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(imagePath);
+
+       Image image = new Image(resourceStream);
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(49.65 * 2);

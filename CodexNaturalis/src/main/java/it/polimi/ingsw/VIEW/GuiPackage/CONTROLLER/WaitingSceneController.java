@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * WaitingSceneController manages the waiting scene UI and monitors game state changes in the background.
@@ -42,10 +43,10 @@ public class WaitingSceneController extends GenericSceneController{
     public void initialize() {
         // Start the background task to monitor the variable
 
-
+        InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("BackGroundImaging/BackGround.png");
         // Set the background image
-        File file = new File("src/resources/BackGroundImaging/BackGround.png");
-        Image image = new Image(file.toURI().toString());
+        assert resourceStream != null;
+        Image image = new Image(resourceStream);
         backgroundImage.setImage(image);
 
         // Bind the background image size to the scene size

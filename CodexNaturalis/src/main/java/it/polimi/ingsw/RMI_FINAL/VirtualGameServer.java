@@ -10,6 +10,7 @@ import it.polimi.ingsw.RMI_FINAL.FUNCTION.SendFunction;
 import it.polimi.ingsw.SOCKET_FINAL.VirtualView;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.rmi.Remote;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Map;
  * The serverSocket manages game logic, player interactions, and communication for a game session.
  *
  */
-public interface VirtualGameServer extends Remote {
+public interface VirtualGameServer extends Remote, Serializable {
     public boolean getFull() throws IOException;
 
     public void connectSocket(VirtualViewF clientSocket) throws IOException;
@@ -56,6 +57,8 @@ public interface VirtualGameServer extends Remote {
     public void getFinalStandings(String token) throws IOException, InterruptedException;
 
     public List<GameField> getGameFields(String token) throws IOException;
+    boolean isGoldDeckPresent() throws IOException;
+    boolean isResourceDeckPresent() throws IOException;
 
 
     public void chattingMoment(int i1, int i2, ChatMessage message) throws IOException;

@@ -65,7 +65,21 @@ public class Common_Client {
         printLogo();
 
         Scanner scan = new Scanner(System.in);
+
+        System.out.println("Choose the correct IP address, if you click 'y' (or 'Y') you will be asked to insert the IP address, if you click any other button you will continue.");
+        String ipChoice = scan.nextLine();
+        if (ipChoice.equalsIgnoreCase("y")) {
+            System.out.println("Please enter the IP address:");
+            String ipAddress = scan.nextLine();
+            System.out.println("IP address set to: " + ipAddress);
+            Constants.IPV4 = ipAddress;
+        }
+
+
+
         String choose="-1";
+
+
 
         do{
             if( !choose.equals("-1") ) System.err.println("[INSERT ERROR]");

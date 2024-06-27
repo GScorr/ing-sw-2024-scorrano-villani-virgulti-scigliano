@@ -39,7 +39,8 @@
             <Insets top="30.0" />
          </VBox.margin></ProgressIndicator>
 
-        <Label fx:id="messageLabel" styleClass="message" wrapText="true" />
+        <Label fx:id="messageLabel" styleClass="message" wrapText="true" style="-fx-text-fill: white;" />
+
 
         <cursor>
             <Cursor fx:constant="CROSSHAIR" />
