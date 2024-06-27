@@ -199,11 +199,16 @@ public class TUI implements Serializable, GraficInterterface {
         if( !empty ) System.out.println("\nTHERE AREN'T EXISTING GAMES");
         System.out.print("\nCHOOSE GAME NAME  > ");
         String game_name = scan.nextLine();
-        int numplayers;
+        int numplayers = 0;
         boolean flag = false;
         do {
             System.out.print("\nCHOOSE NUMBER OF PLAYERS ( 2 - 4 ) > ");
-            numplayers = scan.nextInt();
+            try{
+            String n = scan.nextLine();
+            numplayers = Integer.parseInt(n);}
+            catch (NumberFormatException e){
+                flag = false;
+            }
             if(numplayers>=2 && numplayers<=4){
                 client.createGame(game_name,numplayers, player_name);
                 flag=true;
@@ -236,7 +241,13 @@ public class TUI implements Serializable, GraficInterterface {
         do {
             if( !check ) {makeChoice(player_name); check = true;}
             else{System.out.println("\nINSERT GAME ID > ");
-                int ID = scan.nextInt();
+                int ID = 0;
+                try{
+                    String id = scan.nextLine();
+                    ID = Integer.parseInt(id);}
+                catch (NumberFormatException e){
+                    ID = 1;
+                }
                 check = client.findRmiController(ID, player_name);
                 }
         }while(!check);
@@ -392,30 +403,46 @@ public class TUI implements Serializable, GraficInterterface {
      */
     private void selectAndInsertCard() throws IOException, InterruptedException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
-        int choice=-1,x,y;
+        int choice=-1,x = 22,y = 22;
         String xx,yy;
         String flip;
-        boolean flipped;
+        boolean flipped = false;
         boolean wrong = false;
         while ( client.getMiniModel().getState().equals("PLACE_CARD") ){
             menuChoice("PLACE CARD",client.getMiniModel().getState());
             do{
+
                 if( wrong ) System.err.println("[ERROR] INCORRECT INSERT");
+                wrong = false;
                 System.out.println("\nCHOOSE CARD FROM YOUR DECK (1,2,3): ");
-                String choicestring = scan.nextLine();
-                choice = Integer.parseInt(choicestring);
-                System.out.println("\nCHOOSE SIDE (B,F): ");
-                flip = scan.nextLine();
-                flipped = (flip.equals("B") || flip.equals("b"));
-                System.out.println("\nCHOOSE COORDINATES \n" +
-                                    "[the card will be placed with the TOP-LEFT corner in the coordinates inserted]: ");
-                System.out.print ("\nINSERT X : "); xx = scan.nextLine();
-                System.out.print ("\nINSERT Y : "); yy = scan.nextLine();
-                x = Integer.parseInt(xx);
-                y = Integer.parseInt(yy);
-                wrong = !(choice>=1 && choice<=3) ||
-                        !(flip.equals("B") || flip.equals("F")||flip.equals("b")||flip.equals("f") ) ||
-                        !(x>=0 && x< Constants.MATRIXDIM && y>=0 && y<Constants.MATRIXDIM );
+
+                try{
+                    String choicestring = scan.nextLine();
+                    choice = Integer.parseInt(choicestring);}
+                catch (NumberFormatException e){
+                    wrong = true;
+                }
+                if( !wrong ) {
+                    System.out.println("\nCHOOSE SIDE (B,F): ");
+                    flip = scan.nextLine();
+                    flipped = (flip.equals("B") || flip.equals("b"));
+                    System.out.println("\nCHOOSE COORDINATES \n" +
+                            "[the card will be placed with the TOP-LEFT corner in the coordinates inserted]: ");
+                    System.out.print("\nINSERT X : ");
+                    xx = scan.nextLine();
+                    System.out.print("\nINSERT Y : ");
+                    yy = scan.nextLine();
+                    try{
+                        x = Integer.parseInt(xx);
+                        y = Integer.parseInt(yy);
+                        wrong = !(choice >= 1 && choice <= 3) ||
+                                !(flip.equals("B") || flip.equals("F") || flip.equals("b") || flip.equals("f")) ||
+                                !(x >= 0 && x < Constants.MATRIXDIM && y >= 0 && y < Constants.MATRIXDIM);
+                       }
+                    catch (NumberFormatException e){
+                        wrong = true;
+                    }
+                }
             }while( wrong );
             client.selectAndInsertCard(choice,x,y,flipped);
         }
@@ -441,27 +468,38 @@ public class TUI implements Serializable, GraficInterterface {
         SendFunction function = null;
         String token_client;
         do{
-            if(num != -1) System.err.println("[ERROR] OUT OF BOUND");
+            if(num != -1) System.err.println("[ERROR] INSERT ERROR");
             String numstring = scan.nextLine();
-            num = Integer.parseInt(numstring);
-            if(client instanceof clientSocket) token_client = client.getToken();
-            else token_client = token;
-            switch (num) {
-                case (1):
-                    function = new SendDrawGold(token_client);
-                    break;
-                case (2):
-                    function = new SendDrawResource(token_client);
-                    break;
-                case (3):
-                    showCardsInCenter();
-                    System.out.println("CHOSE CARD FROM CENTER (1-2-3-4) : ");
-                    String choicestr = scan.nextLine();
-                    int index = Integer.parseInt(choicestr);
-                    function = new SendDrawCenter(token_client, index - 1);
-                    break;
+            try{
+                num = Integer.parseInt(numstring);
+                if(client instanceof clientSocket) token_client = client.getToken();
+                else token_client = token;
+                switch (num) {
+                    case (1):
+                        function = new SendDrawGold(token_client);
+                        break;
+                    case (2):
+                        function = new SendDrawResource(token_client);
+                        break;
+                    case (3):
+                        showCardsInCenter();
+                        int index = -1;
+                        do {
+                            System.out.println("CHOSE CARD FROM CENTER (1-2-3-4) : ");
+                            String choicestr = scan.nextLine();
+                            try {
+                                index = Integer.parseInt(choicestr);
+                            } catch (NumberFormatException e) {
+                                index = -1;
+                            }
+                        }while( index == -1 );
+                        function = new SendDrawCenter(token_client, index - 1);
+                        break;
+                }
             }
-
+            catch (NumberFormatException e){
+                num = -2;
+            }
         }while ( num < 0 || num > 3);
         client.drawCard(function);
     }
@@ -476,8 +514,14 @@ public class TUI implements Serializable, GraficInterterface {
     private void menuChoice(String message, String current_state) throws IOException {
         Scanner scan = new Scanner(System.in);
             client.getMiniModel().printMenu(message);
-            int choice = scan.nextInt();
-
+            String c = scan.nextLine();
+            int choice = 0;
+            try{
+                 choice = Integer.parseInt(c);
+                }
+            catch (NumberFormatException e){
+                choice = 5;
+            }
             switch (choice) {
                 case (0):
                     String player_name = client.getMiniModel().printNumToField();
@@ -491,8 +535,14 @@ public class TUI implements Serializable, GraficInterterface {
                     client.getMiniModel().uploadChat();
                     int decision;
                     do {
-                        decision = scan.nextInt();
-                        scan.nextLine();
+                        String d = scan.nextLine();
+                        try{
+                            decision = Integer.parseInt(d);
+                            }
+                        catch (NumberFormatException e){
+                            decision = 9;
+                        }
+
                     } while (!chatChoice(decision));
                     break;
                 case (3):
@@ -524,8 +574,13 @@ public class TUI implements Serializable, GraficInterterface {
         while(true) {
             while (choice < 1 || choice > 2) {
                 System.out.println("DO YOU WANT TO SEND A MESSAGE?     1- YES      2- NO [CLOSE CHAT] ");
-                choice = scan.nextInt();
-                scan.nextLine();
+                String c = scan.nextLine();
+                try{
+                    choice = Integer.parseInt(c);
+                   }
+                catch (NumberFormatException e){
+                    choice = 0;
+                }
             }
             if (choice == 1) {
                 System.out.println("INSERT MESSAGE: ");
